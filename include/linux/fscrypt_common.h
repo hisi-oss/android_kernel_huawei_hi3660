@@ -155,7 +155,7 @@ struct fscrypt_operations {
 	int (*set_context)(struct inode *, const void *, size_t, void *);
 	int (*set_verify_context)(struct inode *, const void *, size_t,
 				  void *, int);
-	int (*dummy_context)(struct inode *);
+	bool (*dummy_context)(struct inode *);
 	bool (*is_encrypted)(struct inode *);
 	bool (*is_inline_encrypted)(struct inode *);
 	void (*set_encrypted_corrupt)(struct inode *);
