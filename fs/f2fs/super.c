@@ -2264,9 +2264,6 @@ static const struct fscrypt_operations f2fs_cryptops = {
 	.get_hwaa_flags		= f2fs_get_hwaa_flags,
 #endif
 };
-#else
-static const struct fscrypt_operations f2fs_cryptops = {
-};
 #endif
 
 static struct inode *f2fs_nfs_get_inode(struct super_block *sb,
@@ -3206,7 +3203,9 @@ try_onemore:
 #endif
 
 	sb->s_op = &f2fs_sops;
+#ifdef CONFIG_F2FS_FS_ENCRYPTION
 	sb->s_cop = &f2fs_cryptops;
+#endif
 	sb->s_xattr = f2fs_xattr_handlers;
 	sb->s_export_op = &f2fs_export_ops;
 	sb->s_magic = F2FS_SUPER_MAGIC;
