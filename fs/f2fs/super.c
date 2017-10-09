@@ -2249,7 +2249,6 @@ static const struct fscrypt_operations f2fs_cryptops = {
 	.get_verify_context	= f2fs_get_verify_context,
 	.set_context		= f2fs_set_context,
 	.set_verify_context	= f2fs_set_verify_context,
-	.is_encrypted		= f2fs_encrypted_inode,
 	.is_inline_encrypted	= f2fs_inline_encrypted_inode,
 	.set_encrypted_corrupt	= f2fs_set_encrypted_corrupt_inode,
 	.is_encrypted_fixed	= f2fs_encrypted_fixed_inode,
@@ -2267,7 +2266,6 @@ static const struct fscrypt_operations f2fs_cryptops = {
 };
 #else
 static const struct fscrypt_operations f2fs_cryptops = {
-	.is_encrypted	= f2fs_encrypted_inode,
 };
 #endif
 
