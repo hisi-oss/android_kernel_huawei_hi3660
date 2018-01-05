@@ -129,37 +129,6 @@ struct fscrypt_name {
 #define fname_name(p)		((p)->disk_name.name)
 #define fname_len(p)		((p)->disk_name.len)
 
-/*
- * fscrypt superblock flags
- */
-#define FS_CFLG_OWN_PAGES (1U << 1)
-
-/*
- * crypto opertions for filesystems
- */
-struct fscrypt_operations {
-	unsigned int flags;
-	const char *key_prefix;
-	int (*get_context)(struct inode *, void *, size_t, int *);
-	int (*get_verify_context)(struct inode *, void *, size_t);
-	int (*set_context)(struct inode *, const void *, size_t, void *);
-	int (*set_verify_context)(struct inode *, const void *, size_t,
-				  void *, int);
-	bool (*dummy_context)(struct inode *);
-	bool (*is_inline_encrypted)(struct inode *);
-	void (*set_encrypted_corrupt)(struct inode *);
-	bool (*is_encrypted_fixed)(struct inode *);
-	bool (*empty_dir)(struct inode *);
-	unsigned (*max_namelen)(struct inode *);
-	int (*get_keyinfo)(struct inode *, void *, int *);
-	int (*is_permitted_context)(struct inode *, struct inode *);
-#ifdef CONFIG_HWAA
-	int (*update_hwaa_attr)(struct inode *, const void *, size_t, void *);
-	int (*get_hwaa_attr)(struct inode *, void *, size_t);
-	int (*get_hwaa_flags)(struct inode *, void *, u32 *);
-#endif
-};
-
 static inline bool fscrypt_valid_enc_modes(u32 contents_mode,
 					u32 filenames_mode)
 {
