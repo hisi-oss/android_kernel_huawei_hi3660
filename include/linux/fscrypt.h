@@ -28,6 +28,8 @@
 #define FS_KEY_DERIVATION_IV_SIZE		16
 #define FS_KEY_DERIVATION_CIPHER_SIZE		(64 + 16) /* nonce + tag */
 
+struct fscrypt_ctx;
+
 /**
  * Encryption context for inode
  *
@@ -99,21 +101,6 @@ static inline int fscrypt_ci_key_index(struct inode *inode)
 	return -1;
 #endif
 }
-
-struct fscrypt_ctx {
-	union {
-		struct {
-			struct page *bounce_page;	/* Ciphertext page */
-			struct page *control_page;	/* Original page  */
-		} w;
-		struct {
-			struct bio *bio;
-			struct work_struct work;
-		} r;
-		struct list_head free_list;	/* Free list */
-	};
-	u8 flags;				/* Flags */
-};
 
 /**
  * For encrypted symlinks, the ciphertext length is stored at the beginning
