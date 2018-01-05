@@ -33,6 +33,12 @@ extern int fscrypt_decrypt_dio_page(struct inode *, struct page *,
 extern void fscrypt_decrypt_bio_pages(struct fscrypt_ctx *, struct bio *);
 extern void fscrypt_decrypt_dio_bio_pages(struct fscrypt_ctx *, struct bio *,
 					  work_func_t func);
+
+static inline struct page *fscrypt_control_page(struct page *page)
+{
+	return ((struct fscrypt_ctx *)page_private(page))->w.control_page;
+}
+
 extern void fscrypt_restore_control_page(struct page *);
 
 extern const struct dentry_operations fscrypt_d_ops;
