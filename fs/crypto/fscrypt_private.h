@@ -29,6 +29,15 @@
 
 #define FS_ENCRYPTION_CONTEXT_FORMAT_V2		2
 
+/**
+ * For encrypted symlinks, the ciphertext length is stored at the beginning
+ * of the string in little-endian format.
+ */
+struct fscrypt_symlink_data {
+	__le16 len;
+	char encrypted_path[1];
+} __packed;
+
 typedef enum {
 	FS_DECRYPT = 0,
 	FS_ENCRYPT,
