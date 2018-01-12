@@ -126,7 +126,7 @@ extern int fscrypt_derive_gcm_key(struct crypto_aead *,
 				u8 *, u8 *, u8 *, int);
 extern struct key *fscrypt_request_key(u8 *, const u8 *, int);
 extern int fscrypt_get_encryption_info(struct inode *);
-extern void fscrypt_put_encryption_info(struct inode *, struct fscrypt_info *);
+extern void fscrypt_put_encryption_info(struct inode *);
 #ifdef CONFIG_HWAA
 extern int hwaa_get_context(struct inode *);
 #endif

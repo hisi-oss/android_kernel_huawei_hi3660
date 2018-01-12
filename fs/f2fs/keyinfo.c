@@ -878,7 +878,7 @@ int f2fs_change_to_sdp_crypto(struct inode *inode, void *fs_data)
 
 	return 0;
 out:
-	fscrypt_put_encryption_info(inode, ci_info);
+	fscrypt_put_encryption_info(inode);
 	return res;
 }
 
