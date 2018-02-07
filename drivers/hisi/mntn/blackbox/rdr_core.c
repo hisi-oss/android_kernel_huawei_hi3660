@@ -527,7 +527,9 @@ bool rdr_init_done()
 static s32 __init rdr_init(void)
 {
 	struct task_struct *rdr_main = NULL;
+#ifdef CONFIG_USE_BOOTFAIL_RECOVERY_SOLUTION
 	struct task_struct *rdr_bootcheck = NULL;
+#endif
 	struct task_struct *rdr_cleartext = NULL;
 	struct sched_param   param;
 	int ret;
@@ -566,6 +568,7 @@ static s32 __init rdr_init(void)
 		wake_lock_destroy(&blackbox_wl);
 		return -1;
 	}
+#ifdef CONFIG_USE_BOOTFAIL_RECOVERY_SOLUTION
 	rdr_bootcheck =
 	    kthread_run(rdr_bootcheck_thread_body, NULL, "bbox_bootcheck");
 	if (!rdr_bootcheck) {
@@ -574,6 +577,7 @@ static s32 __init rdr_init(void)
 		wake_lock_destroy(&blackbox_wl);
 		return -1;
 	}
+#endif
 	if (!kthread_run(rdr_dump_init, NULL, "bbox_dump_init")) {
 		BB_PRINT_ERR("create thread rdr_dump_init faild.\n");
 		kthread_stop(rdr_main);

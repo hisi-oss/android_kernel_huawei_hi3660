@@ -207,7 +207,9 @@ void rdr_field_baseinfo_reinit(void);
 int rdr_get_sr_state(void);
 int rdr_get_reboot_state(void);
 
+#ifdef CONFIG_USE_BOOTFAIL_RECOVERY_SOLUTION
 int rdr_bootcheck_thread_body(void *arg);
+#endif
 u32 get_reboot_reason_map_size(void);
 char *rdr_get_reboot_reason(void);
 u32 rdr_get_reboot_type(void);
