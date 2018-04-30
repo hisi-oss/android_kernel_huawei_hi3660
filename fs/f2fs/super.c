@@ -2237,12 +2237,6 @@ static int f2fs_set_verify_context(struct inode *inode, const void *ctx,
 	return err;
 }
 
-static unsigned f2fs_max_namelen(struct inode *inode)
-{
-	return S_ISLNK(inode->i_mode) ?
-			inode->i_sb->s_blocksize : F2FS_NAME_LEN;
-}
-
 static const struct fscrypt_operations f2fs_cryptops = {
 	.key_prefix		= "f2fs:",
 	.get_context		= f2fs_get_context,
@@ -2253,7 +2247,7 @@ static const struct fscrypt_operations f2fs_cryptops = {
 	.set_encrypted_corrupt	= f2fs_set_encrypted_corrupt_inode,
 	.is_encrypted_fixed	= f2fs_encrypted_fixed_inode,
 	.empty_dir		= f2fs_empty_dir,
-	.max_namelen		= f2fs_max_namelen,
+	.max_namelen		= F2FS_NAME_LEN,
 #if DEFINE_F2FS_FS_SDP_ENCRYPTION
 	.get_keyinfo          = f2fs_get_crypt_keyinfo,
 	.is_permitted_context = f2fs_is_permitted_context,

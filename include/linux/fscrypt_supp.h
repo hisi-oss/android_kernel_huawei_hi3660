@@ -34,7 +34,7 @@ struct fscrypt_operations {
 	void (*set_encrypted_corrupt)(struct inode *);
 	bool (*is_encrypted_fixed)(struct inode *);
 	bool (*empty_dir)(struct inode *);
-	unsigned (*max_namelen)(struct inode *);
+	unsigned int max_namelen;
 	int (*get_keyinfo)(struct inode *, void *, int *);
 	int (*is_permitted_context)(struct inode *, struct inode *);
 #ifdef CONFIG_HWAA
