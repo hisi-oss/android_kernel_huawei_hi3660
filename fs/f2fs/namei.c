@@ -84,7 +84,7 @@ static struct inode *f2fs_new_inode(struct inode *dir, umode_t mode)
 		goto fail_drop;
 
 	/* If the directory encrypted, then we should encrypt the inode. */
-	if (f2fs_encrypted_inode(dir) && f2fs_may_encrypt(inode))
+	if (IS_ENCRYPTED(dir) && f2fs_may_encrypt(inode))
 		f2fs_set_encrypted_inode(inode);
 
 	set_inode_flag(inode, FI_NEW_INODE);
@@ -599,7 +599,7 @@ static int f2fs_create(struct inode *dir, struct dentry *dentry, umode_t mode,
 	if (err)
 		return err;
 
-	if (f2fs_encrypted_inode(dir) && f2fs_encrypted_fixed_inode(dir))
+	if (IS_ENCRYPTED(dir) && f2fs_encrypted_fixed_inode(dir))
 		return -EPERM;
 
 	inode = f2fs_new_inode(dir, mode);
@@ -651,7 +651,7 @@ static int f2fs_link(struct dentry *old_dentry, struct inode *dir,
 	if (unlikely(f2fs_cp_error(sbi)))
 		return -EIO;
 
-	if (f2fs_encrypted_inode(dir) &&
+	if (IS_ENCRYPTED(dir) &&
 			!fscrypt_has_permitted_context(dir, inode))
 		return -EPERM;
 
@@ -664,7 +664,7 @@ static int f2fs_link(struct dentry *old_dentry, struct inode *dir,
 	if (err)
 		return err;
 
-	if (f2fs_encrypted_inode(dir) && f2fs_encrypted_fixed_inode(dir))
+	if (IS_ENCRYPTED(dir) && f2fs_encrypted_fixed_inode(dir))
 		return -EPERM;
 
 	f2fs_balance_fs(sbi, true);
@@ -772,7 +772,7 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
 
 	trace_f2fs_lookup_start(dir, dentry, flags);
 
-	if (f2fs_encrypted_inode(dir)) {
+	if (IS_ENCRYPTED(dir)) {
 		err = fscrypt_get_encryption_info(dir);
 
 		/*
@@ -822,7 +822,7 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
 		if (err)
 			goto out_iput;
 	}
-	if (f2fs_encrypted_inode(dir) &&
+	if (IS_ENCRYPTED(dir) &&
 	    (S_ISDIR(inode->i_mode) || S_ISLNK(inode->i_mode)) &&
 	    !fscrypt_has_permitted_context(dir, inode)) {
 		f2fs_msg(inode->i_sb, KERN_WARNING,
@@ -840,7 +840,7 @@ out_splice:
 	new = d_splice_alias(inode, dentry);
 	if (IS_ERR(new))
 		err = PTR_ERR(new);
-	else if (new && f2fs_encrypted_inode(dir) &&
+	else if (new && IS_ENCRYPTED(dir) &&
 		   fscrypt_has_encryption_key(dir) &&
 		   !(new->d_flags & DCACHE_ENCRYPTED_WITH_KEY))
 		fscrypt_set_encrypted_dentry(new);
@@ -1009,7 +1009,7 @@ static int f2fs_mkdir(struct inode *dir, struct dentry *dentry, umode_t mode)
 	struct inode *inode;
 	int err;
 
-	if (f2fs_encrypted_inode(dir) && f2fs_encrypted_fixed_inode(dir))
+	if (IS_ENCRYPTED(dir) && f2fs_encrypted_fixed_inode(dir))
 		return -EPERM;
 
 	if (unlikely(f2fs_cp_error(sbi)))
@@ -1072,7 +1072,7 @@ static int f2fs_mknod(struct inode *dir, struct dentry *dentry,
 	struct inode *inode;
 	int err = 0;
 
-	if (f2fs_encrypted_inode(dir) && f2fs_encrypted_fixed_inode(dir))
+	if (IS_ENCRYPTED(dir) && f2fs_encrypted_fixed_inode(dir))
 		return -EPERM;
 
 	if (unlikely(f2fs_cp_error(sbi)))
@@ -1174,7 +1174,7 @@ static int f2fs_tmpfile(struct inode *dir, struct dentry *dentry, umode_t mode)
 	if (unlikely(f2fs_cp_error(F2FS_I_SB(dir))))
 		return -EIO;
 
-	if (f2fs_encrypted_inode(dir)) {
+	if (IS_ENCRYPTED(dir)) {
 		int err;
 
 		if (f2fs_encrypted_fixed_inode(dir))
@@ -1215,13 +1215,13 @@ static int f2fs_rename(struct inode *old_dir, struct dentry *old_dentry,
 	if (unlikely(f2fs_cp_error(sbi)))
 		return -EIO;
 
-	if ((f2fs_encrypted_inode(old_dir) &&
+	if ((IS_ENCRYPTED(old_dir) &&
 			!fscrypt_has_encryption_key(old_dir)) ||
-			(f2fs_encrypted_inode(new_dir) &&
+			(IS_ENCRYPTED(new_dir) &&
 			!fscrypt_has_encryption_key(new_dir)))
 		return -ENOKEY;
 
-	if ((old_dir != new_dir) && f2fs_encrypted_inode(new_dir) &&
+	if ((old_dir != new_dir) && IS_ENCRYPTED(new_dir) &&
 			!fscrypt_has_permitted_context(new_dir, old_inode)) {
 		err = -EPERM;
 		goto out;
@@ -1422,13 +1422,13 @@ static int f2fs_cross_rename(struct inode *old_dir, struct dentry *old_dentry,
 	if (unlikely(f2fs_cp_error(sbi)))
 		return -EIO;
 
-	if ((f2fs_encrypted_inode(old_dir) &&
+	if ((IS_ENCRYPTED(old_dir) &&
 			!fscrypt_has_encryption_key(old_dir)) ||
-			(f2fs_encrypted_inode(new_dir) &&
+			(IS_ENCRYPTED(new_dir) &&
 			!fscrypt_has_encryption_key(new_dir)))
 		return -ENOKEY;
 
-	if ((f2fs_encrypted_inode(old_dir) || f2fs_encrypted_inode(new_dir)) &&
+	if ((IS_ENCRYPTED(old_dir) || IS_ENCRYPTED(new_dir)) &&
 			(old_dir != new_dir) &&
 			(!fscrypt_has_permitted_context(new_dir, old_inode) ||
 			 !fscrypt_has_permitted_context(old_dir, new_inode)))

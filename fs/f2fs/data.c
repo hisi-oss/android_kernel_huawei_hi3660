@@ -1361,7 +1361,7 @@ next:
 	}
 
 	if (size) {
-		if (f2fs_encrypted_inode(inode))
+		if (IS_ENCRYPTED(inode))
 			flags |= FIEMAP_EXTENT_DATA_ENCRYPTED;
 
 		ret = fiemap_fill_next_extent(fieinfo, logical,
@@ -1500,7 +1500,7 @@ got_it:
 		 */
 		if (bio && (last_block_in_bio != block_nr - 1 ||
 			!__same_bdev(F2FS_I_SB(inode), block_nr, bio) ||
-			(f2fs_encrypted_inode(inode) &&
+			(IS_ENCRYPTED(inode) &&
 				f2fs_inline_encrypted_inode(inode) &&
 				last_index_in_bio != block_in_file - 1))) {
 submit_and_realloc:
@@ -2727,7 +2727,7 @@ static ssize_t f2fs_direct_IO(struct kiocb *iocb, struct iov_iter *iter)
 
 	down_read(&F2FS_I(inode)->dio_rwsem[rw]);
 #ifdef CONFIG_FS_ENCRYPTION
-	if (f2fs_encrypted_inode(inode) && S_ISREG(inode->i_mode) &&
+	if (IS_ENCRYPTED(inode) && S_ISREG(inode->i_mode) &&
 		!f2fs_inline_encrypted_inode(inode)) {
 		err = __blockdev_direct_IO(iocb, inode, inode->i_sb->s_bdev,
 					   iter, get_data_block_dio,
