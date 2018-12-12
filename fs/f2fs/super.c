@@ -2122,7 +2122,7 @@ static const struct super_operations f2fs_sops = {
 #endif
 };
 
-#ifdef CONFIG_F2FS_FS_ENCRYPTION
+#ifdef CONFIG_FS_ENCRYPTION
 static int f2fs_get_context(struct inode *inode, void *ctx, size_t len,
 			    int *has_crc)
 {
@@ -3197,7 +3197,7 @@ try_onemore:
 #endif
 
 	sb->s_op = &f2fs_sops;
-#ifdef CONFIG_F2FS_FS_ENCRYPTION
+#ifdef CONFIG_FS_ENCRYPTION
 	sb->s_cop = &f2fs_cryptops;
 #endif
 	sb->s_xattr = f2fs_xattr_handlers;

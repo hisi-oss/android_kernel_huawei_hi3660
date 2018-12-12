@@ -27,7 +27,6 @@
 #include <linux/quotaops.h>
 #include <crypto/hash.h>
 
-#define __FS_HAS_ENCRYPTION IS_ENABLED(CONFIG_F2FS_FS_ENCRYPTION)
 #include <linux/fscrypt.h>
 
 #include <linux/reboot.h>
@@ -3911,7 +3910,7 @@ static inline bool f2fs_encrypted_file(struct inode *inode)
 
 static inline void f2fs_set_encrypted_inode(struct inode *inode)
 {
-#ifdef CONFIG_F2FS_FS_ENCRYPTION
+#ifdef CONFIG_FS_ENCRYPTION
 	file_set_encrypt(inode);
 	inode->i_flags |= S_ENCRYPTED;
 #endif
@@ -4037,7 +4036,7 @@ static inline void set_opt_mode(struct f2fs_sb_info *sbi, unsigned int mt)
 
 static inline bool f2fs_may_encrypt(struct inode *inode)
 {
-#ifdef CONFIG_F2FS_FS_ENCRYPTION
+#ifdef CONFIG_FS_ENCRYPTION
 	umode_t mode = inode->i_mode;
 
 	return (S_ISREG(mode) || S_ISDIR(mode) || S_ISLNK(mode));
