@@ -769,6 +769,7 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
 	int err = 0;
 	unsigned int root_ino = F2FS_ROOT_INO(F2FS_I_SB(dir));
 	struct f2fs_sb_info *sbi = F2FS_I_SB(dir);
+	struct fscrypt_name fname;
 
 	trace_f2fs_lookup_start(dir, dentry, flags);
 
@@ -792,7 +793,14 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
 		goto out;
 	}
 
-	de = f2fs_find_entry(dir, &dentry->d_name, &page);
+	err = fscrypt_prepare_lookup(dir, dentry, &fname);
+	if (err == -ENOENT)
+		goto out_splice;
+	if (err)
+		goto out;
+	de = __f2fs_find_entry(dir, &fname, &page);
+	fscrypt_free_filename(&fname);
+
 	if (!de) {
 		if (IS_ERR(page)) {
 			err = PTR_ERR(page);
@@ -838,12 +846,7 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
 		set_file_temperature(sbi, inode, dentry->d_name.name);
 out_splice:
 	new = d_splice_alias(inode, dentry);
-	if (IS_ERR(new))
-		err = PTR_ERR(new);
-	else if (new && IS_ENCRYPTED(dir) &&
-		   fscrypt_has_encryption_key(dir) &&
-		   !(new->d_flags & DCACHE_ENCRYPTED_WITH_KEY))
-		fscrypt_set_encrypted_dentry(new);
+	err = PTR_ERR_OR_ZERO(new);
 	trace_f2fs_lookup_end(dir, dentry, ino, err);
 	return new;
 out_iput:
