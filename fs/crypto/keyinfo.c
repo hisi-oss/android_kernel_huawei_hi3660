@@ -389,7 +389,7 @@ int fscrypt_get_encryption_info(struct inode *inode)
 
 	/* TicketNo:AR000B5MB3 -- HWAA file needs to check access control */
 	/* TicketNo:AR0009DF3P -- SDP file needs to check master key */
-	if (inode->i_crypt_info && !inode->i_crypt_info->ci_hw_enc_flag)
+	if (fscrypt_has_encryption_key(inode) && !inode->i_crypt_info->ci_hw_enc_flag)
 		return 0;
 	/* TicketNo:AR0009DF3P END */
 	/* TicketNo:AR000B5MB3 END */
@@ -532,7 +532,7 @@ int fscrypt_get_encryption_info(struct inode *inode)
 			goto out;
 		}
 	}
-	if (cmpxchg(&inode->i_crypt_info, NULL, crypt_info) == NULL)
+	if (cmpxchg_release(&inode->i_crypt_info, NULL, crypt_info) == NULL)
 		crypt_info = NULL;
 	fscrypt_set_verify_context(inode, &ctx, sizeof(ctx), NULL, has_crc);
 
