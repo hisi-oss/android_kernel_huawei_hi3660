@@ -286,6 +286,9 @@ cmd_minigzip = (cat $(filter-out FORCE,$^) | minigzip > $@) > /dev/null 2>&1 || 
 # ---------------------------------------------------------------------------
 DTC ?= $(objtree)/scripts/dtc/dtc
 
+# Silence warnings
+DTC_FLAGS += -q
+
 # Disable noisy checks by default
 ifeq ($(KBUILD_ENABLE_EXTRA_GCC_CHECKS),)
 DTC_FLAGS += -Wno-unit_address_vs_reg
