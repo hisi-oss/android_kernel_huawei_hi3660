@@ -435,7 +435,7 @@ hisi_blk_dump_request:
 	mov	x2, x27
 	add	x0, x29, 120
 	sxtw	x1, w1
-	add	x0, x0, x21, sxtw
+	add	x0, x0, w21, sxtw
 	add	x19, x19, 8
 	add	x20, x20, 16
 	bl	snprintf
@@ -708,7 +708,7 @@ hisi_blk_dump_bio:
 	add	x2, x2, :lo12:.LC1
 	ldr	x3, [x0,#:lo12:bio_stage_cfg+16]
 	sxtw	x1, w1
-	add	x0, x22, x20, sxtw
+	add	x0, x22, w20, sxtw
 	bl	snprintf
 .LVL52:
 	add	w20, w20, w0
@@ -724,7 +724,7 @@ hisi_blk_dump_bio:
 	add	x2, x2, :lo12:.LC1
 	ldr	x3, [x0,#:lo12:bio_stage_cfg+32]
 	sxtw	x1, w1
-	add	x0, x22, x20, sxtw
+	add	x0, x22, w20, sxtw
 	bl	snprintf
 .LVL53:
 	add	w20, w20, w0
@@ -740,7 +740,7 @@ hisi_blk_dump_bio:
 	add	x2, x2, :lo12:.LC1
 	ldr	x3, [x0,#:lo12:bio_stage_cfg+48]
 	sxtw	x1, w1
-	add	x0, x22, x20, sxtw
+	add	x0, x22, w20, sxtw
 	bl	snprintf
 .LVL54:
 	.loc 1 130 0
@@ -828,7 +828,7 @@ hisi_blk_dump_queue_status2:
 	add	x2, x2, :lo12:.LC12
 	bl	snprintf
 .LVL63:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 .L93:
 	.loc 1 190 0
 	cbnz	w22, .L112
@@ -850,7 +850,7 @@ hisi_blk_dump_queue_status2:
 	add	x2, x2, :lo12:.LC14
 	bl	snprintf
 .LVL64:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 	.loc 1 199 0 is_stmt 1
 	cbnz	w22, .L113
 .L96:
@@ -871,7 +871,7 @@ hisi_blk_dump_queue_status2:
 	add	x2, x2, :lo12:.LC15
 	bl	snprintf
 .LVL65:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 	.loc 1 208 0 is_stmt 1
 	cbnz	w22, .L114
 .L91:
@@ -905,7 +905,7 @@ hisi_blk_dump_queue_status2:
 	add	x2, x2, :lo12:.LC13
 	bl	snprintf
 .LVL70:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 	b	.L93
 .L99:
 	.loc 1 197 0 discriminator 1
@@ -1153,7 +1153,7 @@ hisi_blk_dump_lld_status:
 	add	x2, x2, :lo12:.LC20
 	bl	snprintf
 .LVL91:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 	.loc 1 260 0 is_stmt 1
 	cbnz	w22, .L181
 .L131:
@@ -1171,7 +1171,7 @@ hisi_blk_dump_lld_status:
 	add	x2, x2, :lo12:.LC12
 	bl	snprintf
 .LVL92:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 .L133:
 	.loc 1 273 0
 	cbnz	w22, .L182
@@ -1194,7 +1194,7 @@ hisi_blk_dump_lld_status:
 	add	x2, x2, :lo12:.LC14
 	bl	snprintf
 .LVL93:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 	.loc 1 282 0 is_stmt 1
 	cbnz	w22, .L183
 .L136:
@@ -1216,7 +1216,7 @@ hisi_blk_dump_lld_status:
 	add	x2, x2, :lo12:.LC21
 	bl	snprintf
 .LVL94:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 	.loc 1 291 0 is_stmt 1
 	cmp	x20, x19
 	bls	.L163
@@ -1232,7 +1232,7 @@ hisi_blk_dump_lld_status:
 	add	x2, x2, :lo12:.LC23
 	bl	snprintf
 .LVL95:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 .L140:
 	.loc 1 303 0
 	cmp	x19, x20
@@ -1253,7 +1253,7 @@ hisi_blk_dump_lld_status:
 	bl	snprintf
 .LVL96:
 	.loc 1 305 0 is_stmt 0 discriminator 5
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 	.loc 1 306 0 is_stmt 1
 	cbnz	w22, .L184
 .L141:
@@ -1275,7 +1275,7 @@ hisi_blk_dump_lld_status:
 	add	x2, x2, :lo12:.LC15
 	bl	snprintf
 .LVL97:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 	.loc 1 315 0 is_stmt 1
 	cbnz	w22, .L185
 .L143:
@@ -1297,7 +1297,7 @@ hisi_blk_dump_lld_status:
 	add	x2, x2, :lo12:.LC25
 	bl	snprintf
 .LVL98:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 	.loc 1 324 0 is_stmt 1
 	cbnz	w22, .L186
 	.loc 1 328 0
@@ -1310,7 +1310,7 @@ hisi_blk_dump_lld_status:
 	add	x2, x2, :lo12:.LC28
 	bl	snprintf
 .LVL99:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 .L149:
 	.loc 1 336 0
 	cmp	x20, x19
@@ -1325,7 +1325,7 @@ hisi_blk_dump_lld_status:
 	add	x2, x2, :lo12:.LC26
 	bl	snprintf
 .LVL100:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 .L148:
 	.loc 1 342 0
 	cbz	w22, .L163
@@ -1374,7 +1374,7 @@ hisi_blk_dump_lld_status:
 	add	x2, x2, :lo12:.LC13
 	bl	snprintf
 .LVL106:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 	b	.L133
 .L153:
 	.loc 1 280 0 discriminator 1
@@ -1394,7 +1394,7 @@ hisi_blk_dump_lld_status:
 	add	x2, x2, :lo12:.LC22
 	bl	snprintf
 .LVL107:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 	.loc 1 296 0
 	b	.L140
 .L155:
@@ -1415,7 +1415,7 @@ hisi_blk_dump_lld_status:
 	add	x2, x2, :lo12:.LC27
 	bl	snprintf
 .LVL108:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 	b	.L148
 .L180:
 	.loc 1 252 0
@@ -1501,7 +1501,7 @@ hisi_blk_dump_lld_status:
 	mov	x0, x26
 	bl	snprintf
 .LVL116:
-	add	x24, x19, x0, sxtw
+	add	x24, x19, w0, sxtw
 	.loc 1 333 0
 	mov	x1, x26
 	mov	x0, x25

@@ -1059,7 +1059,7 @@ hisi_blk_account_io_completion:
 	mov	w0, 0
 .LVL111:
 	.loc 1 356 0
-	add	x1, x2, x1, uxtw
+	add	x1, x2, w1, uxtw
 .LVL112:
 	str	x1, [x3,1304]
 	.loc 1 360 0
@@ -1068,7 +1068,7 @@ hisi_blk_account_io_completion:
 .L148:
 	.loc 1 353 0
 	ldr	x2, [x3,1312]
-	add	x2, x2, x1, uxtw
+	add	x2, x2, w1, uxtw
 	str	x2, [x3,1312]
 	ldr	x2, [x0,88]
 	lsr	x2, x2, 61
@@ -1926,7 +1926,7 @@ hisi_blk_request_update:
 	.cfi_restore_state
 	.loc 1 508 0
 	ldr	x0, [x3,1312]
-	add	x0, x0, x2, uxtw
+	add	x0, x0, w2, uxtw
 	str	x0, [x3,1312]
 	ldr	x0, [x19,88]
 	lsr	x0, x0, 61
@@ -1936,7 +1936,7 @@ hisi_blk_request_update:
 .L237:
 	.loc 1 511 0
 	ldr	x0, [x3,1304]
-	add	x2, x0, x2, uxtw
+	add	x2, x0, w2, uxtw
 .LVL179:
 	str	x2, [x3,1304]
 	ldr	x0, [x19,88]

@@ -2797,7 +2797,7 @@ hisi_queue_busy_idle_statistic_show:
 	add	x0, x20, x19
 	bl	snprintf
 .LVL287:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 	.loc 1 576 0
 	adrp	x2, .LC18
 	sub	x1, x21, x19
@@ -2805,7 +2805,7 @@ hisi_queue_busy_idle_statistic_show:
 	add	x0, x20, x19
 	bl	snprintf
 .LVL288:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 	.loc 1 577 0
 	ldr	x3, [x24,528]
 	adrp	x2, .LC19
@@ -2814,7 +2814,7 @@ hisi_queue_busy_idle_statistic_show:
 	add	x0, x20, x19
 	bl	snprintf
 .LVL289:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 	.loc 1 578 0
 	ldr	x3, [x24,456]
 	adrp	x2, .LC20
@@ -2823,7 +2823,7 @@ hisi_queue_busy_idle_statistic_show:
 	add	x0, x20, x19
 	bl	snprintf
 .LVL290:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 	.loc 1 579 0
 	ldr	x3, [x24,464]
 	adrp	x2, .LC21
@@ -2832,7 +2832,7 @@ hisi_queue_busy_idle_statistic_show:
 	add	x0, x20, x19
 	bl	snprintf
 .LVL291:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 	.loc 1 580 0
 	ldr	x3, [x24,472]
 	adrp	x2, .LC22
@@ -2841,7 +2841,7 @@ hisi_queue_busy_idle_statistic_show:
 	add	x0, x20, x19
 	bl	snprintf
 .LVL292:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 	.loc 1 581 0
 	ldr	x3, [x24,480]
 	adrp	x2, .LC23
@@ -2850,7 +2850,7 @@ hisi_queue_busy_idle_statistic_show:
 	add	x0, x20, x19
 	bl	snprintf
 .LVL293:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 	.loc 1 582 0
 	ldr	x3, [x24,488]
 	adrp	x2, .LC24
@@ -2859,7 +2859,7 @@ hisi_queue_busy_idle_statistic_show:
 	add	x0, x20, x19
 	bl	snprintf
 .LVL294:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 	.loc 1 583 0
 	ldr	x3, [x24,496]
 	adrp	x2, .LC25
@@ -2868,7 +2868,7 @@ hisi_queue_busy_idle_statistic_show:
 	add	x0, x20, x19
 	bl	snprintf
 .LVL295:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 	.loc 1 584 0
 	ldr	x3, [x24,504]
 	adrp	x2, .LC26
@@ -2877,7 +2877,7 @@ hisi_queue_busy_idle_statistic_show:
 	add	x0, x20, x19
 	bl	snprintf
 .LVL296:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 	.loc 1 585 0
 	ldr	x3, [x24,512]
 	adrp	x2, .LC27
@@ -2886,7 +2886,7 @@ hisi_queue_busy_idle_statistic_show:
 	add	x0, x20, x19
 	bl	snprintf
 .LVL297:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 	.loc 1 586 0
 	ldr	x3, [x24,520]
 	adrp	x2, .LC28
@@ -2895,7 +2895,7 @@ hisi_queue_busy_idle_statistic_show:
 	add	x0, x20, x19
 	bl	snprintf
 .LVL298:
-	add	x19, x19, x0, sxtw
+	add	x19, x19, w0, sxtw
 	.loc 1 587 0
 	ldr	x3, [x24,376]
 	adrp	x2, .LC29
@@ -2905,7 +2905,7 @@ hisi_queue_busy_idle_statistic_show:
 	bl	snprintf
 .LVL299:
 	.loc 1 589 0
-	add	x0, x19, x0, sxtw
+	add	x0, x19, w0, sxtw
 	ldr	x2, [x29,88]
 	ldr	x1, [x22,#:lo12:__stack_chk_guard]
 	cmp	x2, x1
@@ -3108,7 +3108,7 @@ hisi_queue_idle_state_show:
 	bl	snprintf
 .LVL319:
 	.loc 1 608 0
-	add	x0, x19, x0, sxtw
+	add	x0, x19, w0, sxtw
 	ldp	x19, x20, [sp,16]
 	.cfi_remember_state
 	.cfi_restore 20

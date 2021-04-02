@@ -2458,7 +2458,7 @@ ufs_tagset_bt_for_each:
 	.loc 12 221 0
 	mov	x19, x0
 	.loc 12 222 0
-	cmp	x1, x0, uxtw
+	cmp	x1, w0, uxtw
 	bls	.L178
 .L177:
 .LBB1947:
@@ -2511,7 +2511,7 @@ ufs_tagset_bt_for_each:
 	mov	x19, x0
 	.loc 12 222 0
 	ldr	x1, [x27,8]
-	cmp	x1, x0, uxtw
+	cmp	x1, w0, uxtw
 	bhi	.L177
 .L178:
 	ldr	w2, [x24,8]
@@ -2799,7 +2799,7 @@ ufs_tagset_bt_tags_for_each:
 .LBE1975:
 .LBE1977:
 	.loc 12 222 0
-	cmp	x0, x19, uxtw
+	cmp	x0, w19, uxtw
 	bls	.L224
 	.loc 12 225 0
 	add	w4, w21, w19

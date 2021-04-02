@@ -892,7 +892,7 @@ hisi_bkops_query.constprop.4:
 	ldr	w1, [x19,192]
 	cmp	w0, w1
 	bcs	.L82
-	add	x0, x23, x0, uxtw 2
+	add	x0, x23, w0, uxtw 2
 	.loc 1 83 0 is_stmt 1
 	ldr	w1, [x0,480]
 	add	w1, w1, 1

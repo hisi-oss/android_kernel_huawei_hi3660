@@ -542,7 +542,7 @@ hisi_queue_io_latency_statistic_result_display:
 	bl	snprintf
 .LVL51:
 	.loc 1 562 0 is_stmt 0 discriminator 5
-	add	x26, x26, x0, sxtw
+	add	x26, x26, w0, sxtw
 	.loc 1 561 0 is_stmt 1 discriminator 1
 	cmp	x25, x23
 	beq	.L55
@@ -566,7 +566,7 @@ hisi_queue_io_latency_statistic_result_display:
 	.loc 1 561 0 is_stmt 1 discriminator 1
 	cmp	x25, x23
 	.loc 1 562 0 discriminator 5
-	add	x26, x26, x0, sxtw
+	add	x26, x26, w0, sxtw
 	.loc 1 561 0 discriminator 1
 	bne	.L42
 .L55:
@@ -602,7 +602,7 @@ hisi_queue_io_latency_statistic_result_display:
 	str	x24, [x29,120]
 	bl	snprintf
 .LVL54:
-	add	x26, x26, x0, sxtw
+	add	x26, x26, w0, sxtw
 .L43:
 	.loc 1 567 0
 	ldr	x3, [x27],8
@@ -612,7 +612,7 @@ hisi_queue_io_latency_statistic_result_display:
 	mov	x21, 4096
 	bl	snprintf
 .LVL55:
-	add	x26, x26, x0, sxtw
+	add	x26, x26, w0, sxtw
 	.loc 1 566 0 discriminator 1
 	cmp	x20, x27
 	bne	.L43
@@ -624,7 +624,7 @@ hisi_queue_io_latency_statistic_result_display:
 	mov	x27, x20
 	bl	snprintf
 .LVL56:
-	add	x26, x26, x0, sxtw
+	add	x26, x26, w0, sxtw
 	.loc 1 564 0 discriminator 1
 	ldr	x1, [x29,120]
 	ldrb	w1, [x1,8]
@@ -645,7 +645,7 @@ hisi_queue_io_latency_statistic_result_display:
 	.loc 1 570 0
 	bl	snprintf
 .LVL57:
-	add	x20, x26, x0, sxtw
+	add	x20, x26, w0, sxtw
 .L46:
 	.loc 1 572 0
 	ldr	x0, [x29,112]
@@ -665,7 +665,7 @@ hisi_queue_io_latency_statistic_result_display:
 	add	x4, x7, x4, lsl 1
 	bl	snprintf
 .LVL60:
-	add	x20, x20, x0, sxtw
+	add	x20, x20, w0, sxtw
 	.loc 1 571 0 discriminator 1
 	ldrb	w1, [x24,8]
 	cbnz	w1, .L46
@@ -968,7 +968,7 @@ hisi_blk_queue_latency_statistic_calc.isra.3:
 .LVL82:
 	.loc 1 366 0
 	sbfiz	x6, x24, 7, 32
-	add	x6, x6, x20, sxtw 3
+	add	x6, x6, w20, sxtw 3
 	ldr	x10, [x22,x6]
 .LBB232:
 .LBB233:
