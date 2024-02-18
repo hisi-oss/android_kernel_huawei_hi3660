@@ -64,7 +64,7 @@ DIAG_APPLOG_PROC_FUN_STRU g_DiagAppLogFunc[] = {
   
 /*****************************************************************************
  Function Name   : diag_AppLogMsgProc
- Description     : APPLOG  消息处理
+ Description     : APPLOG  ????????
  Input           : None
  Output          : None
  Return          : None
@@ -88,7 +88,7 @@ VOS_UINT32 diag_AppLogDataConfig(VOS_UINT8* pstReq)
 
     stAppLog.ulRc  = mdrv_applog_cfg(plogcfg->enable,plogcfg->level);
 
-    /*组包给FW回复*/
+    /*??????FW????*/
     ulRet = DIAG_MsgReport(&stDiagInfo, &stAppLog, sizeof(stAppLog));
     if(ulRet)
     {
@@ -98,7 +98,7 @@ VOS_UINT32 diag_AppLogDataConfig(VOS_UINT8* pstReq)
 }
 /*****************************************************************************
  Function Name   : diag_AppLogMsgProc
- Description     : APPLOG处理消息处理
+ Description     : APPLOG????????????
  Input           : None
  Output          : None
  Return          : None
@@ -130,7 +130,7 @@ VOS_UINT32 diag_AppLogMsgProc(DIAG_FRAME_INFO_STRU *pData)
 
 /*****************************************************************************
  Function Name   : diag_AppLogMsgInit
- Description     : APP LOG初始化
+ Description     : APP LOG??????
  Input           : None
  Output          : None
  Return          : None
@@ -139,7 +139,7 @@ VOS_UINT32 diag_AppLogMsgProc(DIAG_FRAME_INFO_STRU *pData)
 *****************************************************************************/
 VOS_VOID diag_AppLogMsgInit(VOS_VOID)
 {
-    /*注册message消息回调*/
+    /*????message????????*/
     DIAG_MsgProcReg(DIAG_MSG_TYPE_APP,diag_AppLogMsgProc);
 }
 

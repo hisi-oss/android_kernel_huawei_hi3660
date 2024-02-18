@@ -8,7 +8,7 @@
 #if defined(_PRE_PRODUCT_ID_HI110X_HOST)
 
 /*****************************************************************************
-  1 篓陋隆陇???t隆茫篓鹿o?
+  1 ???????????t????????o?
 *****************************************************************************/
 #include "hmac_cali_mgmt.h"
 #include "oal_kernel_file.h"
@@ -19,7 +19,7 @@
 
 extern oal_uint32 wlan_pm_close_etc(oal_void);
 
-/*  大小:16bit * 15 * 32 = 960 Byte */
+/*  ????:16bit * 15 * 32 = 960 Byte */
 oal_int16 g_as_rxiq_h_comp_80M[HI1103_CALI_RXIQ_LS_FILTER_TAP_NUM_80M][HI1103_CALI_RXIQ_LS_FILTER_FEQ_NUM_80M] =
 {
     {-400,1138,-1703,2009,-2009,1703,-1138,400,400,-1138,1703,-2009,2009,-1703,1138,-400,-722,417,148,-887,1686,-2424,2989,-3295,3295,-2989,2424,-1686,887,-148,-417,722,},
@@ -39,7 +39,7 @@ oal_int16 g_as_rxiq_h_comp_80M[HI1103_CALI_RXIQ_LS_FILTER_TAP_NUM_80M][HI1103_CA
     {-400,1138,-1703,2009,-2009,1703,-1138,400,400,-1138,1703,-2009,2009,-1703,1138,-400,722,-417,-148,887,-1686,2424,-2989,3295,-3295,2989,-2424,1686,-887,148,417,-722,},
 };
 
-/*  大小:16bit * 17 * 128 = 4352 Byte */
+/*  ????:16bit * 17 * 128 = 4352 Byte */
 oal_int16 g_as_rxiq_h_comp_320M[HI1103_CALI_RXIQ_LS_FILTER_TAP_NUM_320M][HI1103_CALI_RXIQ_LS_FILTER_FEQ_NUM_320M] =
 {
     {147,75,-33,-125,-156,-112,-16,86,147,141,76,-15,-91,-124,-108,-63,-1416,1448,1684,213,-1328,-1694,-716,780,1671,1335,48,-1262,-1678,-922,472,1537,1537,472,-922,-1678,-1262,48,1335,1671,780,-716,-1694,-1328,213,1684,1448,-1416,-63,-108,-124,-91,-15,76,141,147,86,-16,-112,-156,-125,-33,75,147,55,139,156,99,-5,-106,-159,-140,-59,46,133,171,155,102,42,0,-1295,-510,846,1413,781,-475,-1368,-1245,-217,966,1468,946,-231,-1249,-1411,-609,609,1411,1249,231,-946,-1468,-966,217,1245,1368,475,-781,-1413,-846,510,1295,0,-42,-102,-155,-171,-133,-46,59,140,159,106,5,-99,-156,-139,-55,},
@@ -82,7 +82,7 @@ oal_int16 g_as_rxiq_BW80M_siso_h_comp_320M[HI1103_CALI_RXIQ_LS_FILTER_TAP_NUM_32
     {272,123,-92,-257,-282,-154,58,238,289,185,-17,-209,-291,-220,-37,163,279,258,117,-71,-218,-267,-218,-114,-1801,2917,2340,-787,-2956,-2318,367,2704,2704,367,-2318,-2956,-787,2340,2917,-1801,-114,-218,-267,-218,-71,117,258,279,163,-37,-220,-291,-209,-17,185,289,238,58,-154,-282,-257,-92,123,272,-100,-245,-259,-133,64,227,268,167,-22,-200,-273,-204,-31,158,268,246,108,-79,-230,-289,-248,-147,-44,18,2636,245,-2149,-2364,-444,1837,2564,1175,-1175,-2564,-1837,444,2364,2149,-245,-2636,-18,44,147,248,289,230,79,-108,-246,-268,-158,31,204,273,200,22,-167,-268,-227,-64,133,259,245,100,},
 };
 
-/*  大小:16bit * 15 * 64 = 1920 Byte */
+/*  ????:16bit * 15 * 64 = 1920 Byte */
 oal_int16 g_as_txiq_h_comp_160M[HI1103_CALI_TXIQ_LS_FILTER_TAP_NUM][HI1103_CALI_TXIQ_LS_FILTER_FEQ_NUM_160M] =
 {
     {-461,225,577,75,-540,-371,334,578,40,-571,-585,-197,2975,-1251,-3952,3124,3124,-3952,-1251,2975,-197,-585,-571,40,578,334,-371,-540,75,577,225,-461,-345,-519,81,558,209,-440,-448,169,534,208,-274,-307,-3004,7375,-3550,-5239,5239,3550,-7375,3004,307,274,-208,-534,-169,448,440,-209,-558,-81,519,345,},
@@ -102,7 +102,7 @@ oal_int16 g_as_txiq_h_comp_160M[HI1103_CALI_TXIQ_LS_FILTER_TAP_NUM][HI1103_CALI_
     {-461,225,577,75,-540,-371,334,578,40,-571,-585,-197,2975,-1251,-3952,3124,3124,-3952,-1251,2975,-197,-585,-571,40,578,334,-371,-540,75,577,225,-461,345,519,-81,-558,-209,440,448,-169,-534,-208,274,307,3004,-7375,3550,5239,-5239,-3550,7375,-3004,-307,-274,208,534,169,-448,-440,209,558,81,-519,-345,},
 };
 
-/*  大小:16bit * 15 * 128 = 3840 Byte */
+/*  ????:16bit * 15 * 128 = 3840 Byte */
 oal_int16 g_as_txiq_h_comp_320M[HI1103_CALI_TXIQ_LS_FILTER_TAP_NUM][HI1103_CALI_TXIQ_LS_FILTER_FEQ_NUM_320M] =
 {
     {-274,-160,20,192,285,260,127,-57,-219,-291,-246,-103,82,234,297,248,107,-72,-228,-313,-311,-240,-138,-46,871,2043,422,-1684,-2444,-1361,709,2290,2290,709,-1361,-2444,-1684,422,2043,871,-46,-138,-240,-311,-313,-228,-72,107,248,297,234,82,-103,-246,-291,-219,-57,127,260,285,192,20,-160,-274,-87,-224,-269,-202,-53,118,240,264,180,25,-139,-247,-257,-168,-17,136,237,252,187,75,-38,-111,-126,-92,-3496,1339,3320,2265,-403,-2642,-2978,-1278,1278,2978,2642,403,-2265,-3320,-1339,3496,92,126,111,38,-75,-187,-252,-237,-136,17,168,257,247,139,-25,-180,-264,-240,-118,53,202,269,224,87,},
@@ -122,7 +122,7 @@ oal_int16 g_as_txiq_h_comp_320M[HI1103_CALI_TXIQ_LS_FILTER_TAP_NUM][HI1103_CALI_
     {-274,-160,20,192,285,260,127,-57,-219,-291,-246,-103,82,234,297,248,107,-72,-228,-313,-311,-240,-138,-46,871,2043,422,-1684,-2444,-1361,709,2290,2290,709,-1361,-2444,-1684,422,2043,871,-46,-138,-240,-311,-313,-228,-72,107,248,297,234,82,-103,-246,-291,-219,-57,127,260,285,192,20,-160,-274,87,224,269,202,53,-118,-240,-264,-180,-25,139,247,257,168,17,-136,-237,-252,-187,-75,38,111,126,92,3496,-1339,-3320,-2265,403,2642,2978,1278,-1278,-2978,-2642,-403,2265,3320,1339,-3496,-92,-126,-111,-38,75,187,252,237,136,-17,-168,-257,-247,-139,25,180,264,240,118,-53,-202,-269,-224,-87,},
 };
 
-/*  大小:16bit * 15 * 256 = 7680 Byte */
+/*  ????:16bit * 15 * 256 = 7680 Byte */
 oal_int16 g_as_txiq_h_comp_640M[HI1103_CALI_TXIQ_LS_FILTER_TAP_NUM][HI1103_CALI_TXIQ_LS_FILTER_FEQ_NUM_640M] =
 {
     {-143,-127,-99,-59,-14,33,77,112,136,145,138,117,84,42,-5,-51,-92,-123,-141,-145,-134,-109,-72,-29,18,62,101,129,145,147,134,109,74,32,-13,-57,-96,-127,-149,-159,-158,-148,-129,-106,-80,-55,-32,-13,50,827,1085,926,486,-82,-630,-1040,-1234,-1181,-898,-445,92,611,1019,1243,1243,1019,611,92,-445,-898,-1181,
@@ -243,7 +243,7 @@ oal_int16 gas_640M_tone_lut[NUM_640M_SNGL_TONE_1_4_CIRCLE + 1] = {
                                                                     443 , 417 , 390 , 363 , 336 , 309 , 281 , 254 , 226 , 198 , 170 , 142 , 114 , 85  , 57  , 28  , 0
                                                                };
 #ifdef _PRE_WLAN_ONLINE_DPD
-/*  大小:32bit * 512 = 2048 Byte */
+/*  ????:32bit * 512 = 2048 Byte */
 oal_uint32 gul_corram_data_20M[DPD_CORRAM_DATA_NUM] =
 {
     //#if 0
@@ -2826,11 +2826,11 @@ oal_uint32 gul_corram_data_80M[DPD_CORRAM_DATA_NUM] =
 
 #endif
 /*****************************************************************************
-  2 o隆楼篓潞y篓娄篓麓?隆脗
+  2 o????????y?????????????
 *****************************************************************************/
 
 /*****************************************************************************
-  3 o隆楼篓潞y篓潞娄脤??
+  3 o????????y??????????
 *****************************************************************************/
 oal_void hmac_add_bound_etc(oal_uint32 *pul_number, oal_uint32 ul_bound)
 {
@@ -3047,7 +3047,7 @@ oal_void hmac_dump_cali_result_etc(oal_void)
 
     OAM_INFO_LOG0(0, OAM_SF_CALIBRATE, "{hmac_dump_cali_result_etc::START.}");
 
-    /* OTA上报 */
+    /* OTA???? */
     pc_print_buff = (oal_int8 *)OAL_MEM_ALLOC(OAL_MEM_POOL_ID_LOCAL, OAM_REPORT_MAX_STRING_LEN, OAL_TRUE);
     if (OAL_PTR_NULL == pc_print_buff)
     {
@@ -3088,7 +3088,7 @@ oal_void hmac_dump_cali_result_etc(oal_void)
 
         /*TBD: new_txiq_comp_val_stru TO BE ADDED*/
 
-        /* 2.4g 不超过ota上报最大字节分3次输出 */
+        /* 2.4g ??????ota??????????????3?????? */
         for (uc_cali_chn_idx_1 = 0; uc_cali_chn_idx_1 < OAL_2G_CHANNEL_NUM; uc_cali_chn_idx_1++)
         {
             l_string_tmp_len = hmac_print_2g_cail_result(uc_cali_chn_idx_1, pc_print_buff + ul_string_len,
@@ -3112,7 +3112,7 @@ oal_void hmac_dump_cali_result_etc(oal_void)
             continue;
         }
 
-        /* 5g 不超过ota上报最大字节分3次输出 */
+        /* 5g ??????ota??????????????3?????? */
         for (uc_cali_chn_idx_1 = 0; uc_cali_chn_idx_1 <= OAL_5G_CHANNEL_NUM/2; uc_cali_chn_idx_1++)
         {
 
@@ -3184,21 +3184,21 @@ oal_uint32 hmac_send_cali_matrix_data(mac_vap_stru *pst_mac_vap)
 
     oal_uint32                aul_matrix_data_size[HI1103_CALI_MATRIX_DATA_NUMS]
                                               = {
-                                                 960,   /*  大小:16bit * 15 * 32 = 960 Byte */
-                                                 4352,  /*  大小:16bit * 17 * 128 = 4352 Byte */
-                                                 4352,  /*  大小:16bit * 17 * 128 = 4352 Byte */
-                                                 1920,  /*  大小:16bit * 15 * 64 = 1920 Byte */
-                                                 3840,  /*  大小:16bit * 15 * 128 = 3840 Byte */
-                                                 7680,  /*  大小:16bit * 15 * 256 = 7680 Byte */
-                                                 2048,  /*  大小:32bit * 512 = 2048 Byte */
-                                                 2048,  /*  大小:32bit * 512 = 2048 Byte */
-                                                 2048,  /*  大小:32bit * 512 = 2048 Byte */
-                                                 130,   /*  大小:16bit *65 = 130 Byte */
-                                                 258,   /*  大小:16bit *129 = 258 Byte */
-                                                 514,   /*  大小:16bit *257 = 514 Byte */
-                                                 34,   /*  大小:16bit *17 = 34 Byte */
-                                                 66,   /*  大小:16bit *33 = 66 Byte */
-                                                 130,   /*  大小:16bit *65 = 130 Byte */
+                                                 960,   /*  ????:16bit * 15 * 32 = 960 Byte */
+                                                 4352,  /*  ????:16bit * 17 * 128 = 4352 Byte */
+                                                 4352,  /*  ????:16bit * 17 * 128 = 4352 Byte */
+                                                 1920,  /*  ????:16bit * 15 * 64 = 1920 Byte */
+                                                 3840,  /*  ????:16bit * 15 * 128 = 3840 Byte */
+                                                 7680,  /*  ????:16bit * 15 * 256 = 7680 Byte */
+                                                 2048,  /*  ????:32bit * 512 = 2048 Byte */
+                                                 2048,  /*  ????:32bit * 512 = 2048 Byte */
+                                                 2048,  /*  ????:32bit * 512 = 2048 Byte */
+                                                 130,   /*  ????:16bit *65 = 130 Byte */
+                                                 258,   /*  ????:16bit *129 = 258 Byte */
+                                                 514,   /*  ????:16bit *257 = 514 Byte */
+                                                 34,   /*  ????:16bit *17 = 34 Byte */
+                                                 66,   /*  ????:16bit *33 = 66 Byte */
+                                                 130,   /*  ????:16bit *65 = 130 Byte */
                                                  };
 
     pst_netbuf_matrix_data = OAL_MEM_NETBUF_ALLOC(OAL_NORMAL_NETBUF, WLAN_LARGE_NETBUF_SIZE, OAL_NETBUF_PRIORITY_MID);
@@ -3240,7 +3240,7 @@ oal_uint32 hmac_send_cali_matrix_data(mac_vap_stru *pst_mac_vap)
             OAL_MEMZERO(oal_netbuf_cb(pst_netbuf_matrix_data), OAL_TX_CB_LEN);
             puc_matrix_data_dst = (oal_uint8 *)(OAL_NETBUF_DATA(pst_netbuf_matrix_data));
 
-            /* netbuf len 不能超过1544字节 */
+            /* netbuf len ????????1544???? */
             us_frame_len = (oal_uint16)OAL_MIN(WLAN_LARGE_NETBUF_SIZE - 104, l_remain_len);
             /*lint -e662*/
             oal_memcopy(puc_matrix_data_dst, puc_param - l_remain_len, (oal_uint32)us_frame_len);
@@ -3304,12 +3304,12 @@ oal_uint32 hmac_send_cali_data_etc(mac_vap_stru *pst_mac_vap)
 
     for (uc_chan_idx = 0; uc_chan_idx < WLAN_RF_CHANNEL_NUMS; uc_chan_idx++)
     {
-        l_remain_len  = RF_SINGLE_CHAN_CALI_DATA_BUF_LEN; /* 单通道下发wifi校准长度 */
+        l_remain_len  = RF_SINGLE_CHAN_CALI_DATA_BUF_LEN; /* ??????????wifi???????? */
         pst_cali_data += uc_chan_idx;
 
         if (OAL_FALSE == pst_cali_data->en_save_all)
         {
-            /* FPGA上校准数据不做上传下发，直接返回 */
+            /* FPGA???????????????????????????????? */
             OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_CALIBRATE, "hmac_send_cali_data_etc::ch[%d] no cali data is delivered to host yet", uc_chan_idx);
             return OAL_FAIL;
         }
@@ -3339,7 +3339,7 @@ oal_uint32 hmac_send_cali_data_etc(mac_vap_stru *pst_mac_vap)
             OAL_MEMZERO(oal_netbuf_cb(pst_netbuf_cali_data), OAL_TX_CB_LEN);
             puc_cali_data = (oal_uint8 *)(OAL_NETBUF_DATA(pst_netbuf_cali_data));
 
-            /* netbuf len 不能超过1544字节 */
+            /* netbuf len ????????1544???? */
             us_frame_len = (oal_uint16)OAL_MIN(WLAN_LARGE_NETBUF_SIZE - 104, l_remain_len);
             /*lint -e662*/
             oal_memcopy(puc_cali_data, puc_param - l_remain_len, (oal_uint32)us_frame_len);
@@ -3382,7 +3382,7 @@ oal_uint32 hmac_save_cali_event_etc(frw_event_mem_stru *pst_event_mem)
     oal_uint32                       ul_copy_len;
     hi1103_update_cali_channel_stru *pst_update_cali_channel;
     hi1103_cali_param_stru          *pst_cali_data;
-    oal_uint32                       ul_remain_len;         /* 每个通道剩余的校准长度 */
+    oal_uint32                       ul_remain_len;         /* ?????????????????????? */
     oal_uint32                       ul_frame_netbuf_len;
     OAL_STATIC oal_uint32            ul_cali_data_len = 0;
     //oal_uint8  *puc_content;
@@ -3401,7 +3401,7 @@ oal_uint32 hmac_save_cali_event_etc(frw_event_mem_stru *pst_event_mem)
 
     if (RF_SINGLE_CHAN_CALI_DATA_BUF_LEN <= ul_cali_data_len)
     {
-        /* 通道1的校准数据 */
+        /* ????1?????????? */
         pst_cali_data++;
         ul_remain_len  = RF_CALI_DATA_BUF_LEN - ul_cali_data_len;
         OAM_INFO_LOG2(0, OAM_SF_CALIBRATE, "hmac_save_cali_event_etc:goto chn1[%p]remain len[%d]!", pst_cali_data,

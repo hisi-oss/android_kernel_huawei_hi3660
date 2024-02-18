@@ -32,8 +32,8 @@ typedef oal_uint8 oal_pcie_aspm_enum;
 #define  PCI_L1SS_CTRL2		0xC	        /* LSSS CONTROL 2 Regist */
 
 #define OAL_PCIE_RC_SYS_BASE        (0x10100000)          /* SYSCTRL */
-#define OAL_DBI_RC_BASE_ADDR_0      (0x10A00000)        /* IO空间 64k */
-#define OAL_DBI_RC_BASE_ADDR_1      (0x10A02000)        /* IO空间 64k */
+#define OAL_DBI_RC_BASE_ADDR_0      (0x10A00000)        /* IO???? 64k */
+#define OAL_DBI_RC_BASE_ADDR_1      (0x10A02000)        /* IO???? 64k */
 #define OAL_PERI_W_PCIE0	     (0xBC)
 #define OAL_PERI_R_PCIE0         (0xC0)
 #define OAL_PERI_W_PCIE1         (0xEC)
@@ -84,8 +84,8 @@ typedef oal_uint8 oal_pcie_comp_timeout_enum;
 #define PCIE_PL_ASPM_CTRL_OFFSET     (PCIE_PORT_LOGIC_BASE+0xc)
 
 
-/* 将var中[pos, pos + bits-1]比特设置为val,  pos从0开始编号
-   e.g BDOM_SET_BITS(var, 4, 2, 2) 表示将Bit5~4设置为b'10 */
+/* ??var??[pos, pos + bits-1]??????????val,  pos??0????????
+   e.g BDOM_SET_BITS(var, 4, 2, 2) ??????Bit5~4??????b'10 */
 #define REG32_SETBITS(reg, pos, bits, val)do {\
     (reg) = ((oal_uint32)(reg) & (~((((oal_uint32)1 << (bits)) - 1) << (pos)))) \
                             | ((oal_uint32)((val) & (((oal_uint32)1 << (bits)) - 1)) << (pos));\

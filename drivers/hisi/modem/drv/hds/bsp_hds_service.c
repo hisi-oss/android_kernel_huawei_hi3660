@@ -65,7 +65,7 @@ void bsp_hds_cmd_register(u32 cmdid, bsp_hds_func fn)
     struct list_head *me;
     bsp_hds_cmd_stru *pstDiag = NULL;
 
-    /*判断cmdid是否重复注册*/
+    /*????cmdid????????????*/
     list_for_each(me,&g_hds_cmd_list_head.list)
     {
         pstDiag = list_entry(me, bsp_hds_cmd_stru, list);
@@ -85,7 +85,7 @@ void bsp_hds_cmd_register(u32 cmdid, bsp_hds_func fn)
     hds_list->ulCmdId = cmdid;
     hds_list->pFunc = fn;
 
-    /*将注册的cmdid和回调函数添加到链表中*/
+    /*????????cmdid??????????????????????*/
     list_add(&hds_list->list, &g_hds_cmd_list_head.list);
     //printk(KERN_ERR"registered cmdid:0x%x\n",hds_list->ulCmdId);
 }
@@ -104,7 +104,7 @@ int bsp_hds_msg_proc(diag_frame_head_stru *pData)
         return BSP_ERROR;
     }
 
-    /*遍历链表，根据注册的cmdid，跳到对应的回调中处理*/
+    /*????????????????????cmdid??????????????????????*/
     list_for_each(me,&g_hds_cmd_list_head.list)
     {
         pstDiag = list_entry(me, bsp_hds_cmd_stru, list);
@@ -117,7 +117,7 @@ int bsp_hds_msg_proc(diag_frame_head_stru *pData)
         }
     }
 
-    /*未注册此cmdid，返回对应的错误码*/
+    /*????????cmdid??????????????????*/
     printk(KERN_ERR"cmdid is not register:%d\n",pData->u32CmdId);
 
     return HDS_CMD_ERROR;

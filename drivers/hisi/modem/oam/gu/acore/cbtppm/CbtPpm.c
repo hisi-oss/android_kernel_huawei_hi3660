@@ -49,7 +49,7 @@
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 **************************************************************************** */
 #include "AtAppVcomInterface.h"
 #include "CbtPpm.h"
@@ -63,17 +63,17 @@
 #define    THIS_FILE_ID        PS_FILE_ID_CBT_PPM_C
 
 /* ****************************************************************************
-  2 全局变量定义
+  2 ????????????
 **************************************************************************** */
-VOS_SEM                            g_ulCbtUsbPseudoSyncSemId;   /* 伪造为同步接口需使用的信号量 */
+VOS_SEM                            g_ulCbtUsbPseudoSyncSemId;   /* ???????????????????????????? */
 
 CBT_ACPU_VCOM_DEBUG_INFO           g_stCbtVComAcpuDebugInfo;
 
-/* 用于ACPU上CBT端口的UDI句柄 */
+/* ????ACPU??CBT??????UDI???? */
 UDI_HANDLE                         g_ulCbtPortUDIHandle    = VOS_ERROR;
 
 /*****************************************************************************
-  3 外部引用声明
+  3 ????????????
 *****************************************************************************/
 extern  CBTCPM_RCV_FUNC                 g_pCbtRcvFunc;
 extern  CBTCPM_SEND_FUNC                g_pCbtSndFunc;
@@ -81,7 +81,7 @@ extern  CBTCPM_SEND_FUNC                g_pCbtSndFunc;
 extern VOS_UINT32 CBTSCM_SoftDecodeDataRcv(VOS_UINT8 *pucBuffer, VOS_UINT32 ulLen);
 
 /*****************************************************************************
-  4 函数实现
+  4 ????????
 *****************************************************************************/
 
 
@@ -110,7 +110,7 @@ VOS_UINT32 CBTPPM_OamUsbCbtSendData(VOS_UINT8 *pucVirAddr, VOS_UINT8 *pucPhyAddr
 
     if ((VOS_NULL_PTR == pucVirAddr) || (VOS_NULL_PTR == pucPhyAddr))
     {
-        /* 打印错误 */
+        /* ???????? */
         LogPrint("\r\n CBTPPM_OamUsbCbtSendData: Vir or Phy Addr is Null \n");
 
         return CBTCPM_SEND_PARA_ERR;
@@ -146,7 +146,7 @@ VOS_UINT32 CBTPPM_OamUsbCbtSendData(VOS_UINT8 *pucVirAddr, VOS_UINT8 *pucPhyAddr
     }*/
 
 
-    if (MDRV_OK == lRet)     /*当前发送成功*/
+    if (MDRV_OK == lRet)     /*????????????*/
     {
         if (VOS_OK != VOS_SmP(g_ulCbtUsbPseudoSyncSemId, 0))
         {
@@ -156,9 +156,9 @@ VOS_UINT32 CBTPPM_OamUsbCbtSendData(VOS_UINT8 *pucVirAddr, VOS_UINT8 *pucPhyAddr
 
         return VOS_OK;
     }
-    else if (MDRV_OK > lRet)    /*临时错误*/
+    else if (MDRV_OK > lRet)    /*????????*/
     {
-        /*打印信息，调用UDI接口的错误信息*/
+        /*??????????????UDI??????????????*/
         LogPrint1("\r\n CBTPPM_OamUsbCbtSendData: mdrv_udi_ioctl Send Data return Error %d\n", lRet);
 
 
@@ -167,11 +167,11 @@ VOS_UINT32 CBTPPM_OamUsbCbtSendData(VOS_UINT8 *pucVirAddr, VOS_UINT8 *pucPhyAddr
         g_stAcpuDebugInfo.astPortInfo[OM_USB_CBT_PORT_HANDLE].ulUSBWriteErrValue  = (VOS_UINT32)lRet;
         g_stAcpuDebugInfo.astPortInfo[OM_USB_CBT_PORT_HANDLE].ulUSBWriteErrTime   = OM_GetSlice();*/
 
-        return VOS_ERR; /*对于临时错误，需要返回NULL丢弃数据*/
+        return VOS_ERR; /*??????????????????????NULL????????*/
     }
-    else    /*其他错误需要复位单板*/
+    else    /*????????????????????*/
     {
-        /*打印信息，调用UDI接口*/
+        /*??????????????UDI????*/
         LogPrint1("\r\n CBTPPM_OamUsbCbtSendData: mdrv_udi_ioctl Send Data return Error %d\n", lRet);
 
         VOS_ProtectionReboot(OAM_USB_SEND_ERROR, (VOS_INT)THIS_FILE_ID, (VOS_INT)__LINE__,
@@ -194,7 +194,7 @@ VOS_VOID CBTPPM_OamUsbCbtPortClose(VOS_VOID)
 
     g_ulCbtPortUDIHandle = VOS_ERROR;
 
-    /* CBT端口从USB或VCOM切换到UART时接收函数指针为空，收到USB状态变更时不做断开处理 */
+    /* CBT??????USB??VCOM??????UART????????????????????????USB?????????????????????? */
     if (VOS_NULL_PTR == CBTCPM_GetRcvFunc())
     {
         return;
@@ -213,7 +213,7 @@ VOS_VOID CBTPPM_OamUsbCbtWriteDataCB(VOS_UINT8* pucVirData, VOS_UINT8* pucPhyDat
         LogPrint("\r\n CBTPPM_OamUsbCbtWriteDataCB: lLen < 0. \n");
     }
 
-    /* 伪同步接口，释放信号量 */
+    /* ?????????????????????? */
     (VOS_VOID)VOS_SmV(g_ulCbtUsbPseudoSyncSemId);
 
     return;
@@ -222,13 +222,13 @@ VOS_VOID CBTPPM_OamUsbCbtWriteDataCB(VOS_UINT8* pucVirData, VOS_UINT8* pucPhyDat
 
 VOS_VOID CBTPPM_OamUsbCbtStatusCB(ACM_EVT_E enPortState)
 {
-    /* CBT端口从USB或VCOM切换到UART时接收函数指针为空，收到USB状态变更时不做断开处理 */
+    /* CBT??????USB??VCOM??????UART????????????????????????USB?????????????????????? */
     if (VOS_NULL_PTR == CBTCPM_GetRcvFunc())
     {
         return;
     }
 
-    /* CBT端口只处理GU的端口断开 */
+    /* CBT??????????GU?????????? */
     (VOS_VOID)PPM_DisconnectGUPort(OM_LOGIC_CHANNEL_CBT);
 
     return;
@@ -260,7 +260,7 @@ VOS_INT32 CBTPPM_OamUsbCbtReadDataCB(VOS_VOID)
 
     PAM_MEM_SET_S(&stInfo, sizeof(stInfo), 0, sizeof(stInfo));
 
-    /* 获取USB的IO CTRL口的读缓存 */
+    /* ????USB??IO CTRL?????????? */
     if (VOS_OK != mdrv_udi_ioctl(g_ulCbtPortUDIHandle, UDI_ACM_IOCTL_GET_READ_BUFFER_CB, &stInfo))
     {
         LogPrint("\r\n CBTPPM_OamUsbCbtReadDataCB:Call mdrv_udi_ioctl is Failed\n");
@@ -272,14 +272,14 @@ VOS_INT32 CBTPPM_OamUsbCbtReadDataCB(VOS_VOID)
     CBT_ACPU_DEBUG_TRACE((VOS_UINT8*)stInfo.pVirAddr, stInfo.u32Size, CBT_ACPU_USB_CB);
     /*lint +e40*/
 
-    /* 数据接收函数 */
+    /* ???????????? */
     pFunc = CBTCPM_GetRcvFunc();
 
     if (VOS_NULL_PTR != pFunc)
     {
         if (VOS_OK != pFunc((VOS_UINT8 *)stInfo.pVirAddr, stInfo.u32Size))
         {
-            /* 增加可维可测计数 */
+            /* ???????????????? */
         }
     }
 
@@ -319,7 +319,7 @@ VOS_VOID CBTPPM_OamCbtPortDataInit(OM_PROT_HANDLE_ENUM_UINT32          enHandle,
         return;
     }
 
-    /* 打开CBT使用的USB通道 */
+    /* ????CBT??????USB???? */
     g_ulCbtPortUDIHandle = mdrv_udi_open(&stUdiPara);
 
     if (VOS_ERROR == g_ulCbtPortUDIHandle)
@@ -333,7 +333,7 @@ VOS_VOID CBTPPM_OamCbtPortDataInit(OM_PROT_HANDLE_ENUM_UINT32          enHandle,
     /*g_stAcpuDebugInfo.astPortInfo[enHandle].ulUSBOpenOkNum++;
     g_stAcpuDebugInfo.astPortInfo[enHandle].ulUSBOpenOkSlice = OM_GetSlice();*/
 
-    /* 配置CBT使用的USB通道缓存 */
+    /* ????CBT??????USB???????? */
     if (VOS_OK != mdrv_udi_ioctl(g_ulCbtPortUDIHandle, ACM_IOCTL_RELLOC_READ_BUFF, &stReadBuffInfo))
     {
         LogPrint("\r\n CBTPPM_OamCbtPortDataInit, mdrv_udi_ioctl ACM_IOCTL_RELLOC_READ_BUFF Failed\r\n");
@@ -341,7 +341,7 @@ VOS_VOID CBTPPM_OamCbtPortDataInit(OM_PROT_HANDLE_ENUM_UINT32          enHandle,
         return;
     }
 
-    /* 注册OM使用的USB读数据回调函数 */
+    /* ????OM??????USB?????????????? */
     if (VOS_OK != mdrv_udi_ioctl(g_ulCbtPortUDIHandle, UDI_ACM_IOCTL_SET_READ_CB, pReadCB))
     {
         LogPrint("\r\n CBTPPM_OamCbtPortDataInit, mdrv_udi_ioctl UDI_ACM_IOCTL_SET_READ_CB Failed\r\n");
@@ -380,13 +380,13 @@ VOS_VOID CBTPPM_OamCbtPortDataInit(OM_PROT_HANDLE_ENUM_UINT32          enHandle,
 
 VOS_UINT32 CBTPPM_OamUsbCbtPortInit(VOS_VOID)
 {
-    /* CBT端口与PCVOICE复用，动态注册数据接收函数 */
+    /* CBT??????PCVOICE?????????????????????????? */
     CBTCPM_PortRcvReg(CBTSCM_SoftDecodeDataRcv);
 
-    /* 动态注册数据发送函数 */
+    /* ???????????????????? */
     CBTCPM_PortSndReg(CBTPPM_OamUsbCbtSendData);
 
-    /* USB承载的CBT端口，调用底软的异步接口发送数据，现在需要伪造成同步接口，申请信号量 */
+    /* USB??????CBT???????????????????????????????????????????????????????????????????? */
     if(VOS_OK != VOS_SmCCreate("UCBT", 0, VOS_SEMA4_FIFO, &g_ulCbtUsbPseudoSyncSemId))
     {
         LogPrint("\r\n CBTPPM_OamUsbCbtPortInit: create g_ulCbtUsbPseudoSyncSemId failedd\r\n");
@@ -394,10 +394,10 @@ VOS_UINT32 CBTPPM_OamUsbCbtPortInit(VOS_VOID)
         return VOS_ERR;
     }
 
-    /* USB承载的CBT端口初始化UDI设备句柄 */
+    /* USB??????CBT??????????UDI???????? */
     g_ulCbtPortUDIHandle = VOS_ERROR;
 
-    /* CBT端口通过CBT的CPM管理，不注册物理发送函数 */
+    /* CBT????????CBT??CPM???????????????????????? */
     (VOS_VOID)mdrv_usb_reg_enablecb((USB_UDI_ENABLE_CB_T)CBTPPM_OamUsbCbtPortOpen);
 
     (VOS_VOID)mdrv_usb_reg_disablecb((USB_UDI_DISABLE_CB_T)CBTPPM_OamUsbCbtPortClose);
@@ -433,7 +433,7 @@ VOS_INT CBTPPM_OamVComCbtReadData(VOS_UINT8 ucDevIndex, VOS_UINT8 *pData, VOS_UI
 
     pFunc = CBTCPM_GetRcvFunc();
 
-    /* 数据接收函数 */
+    /* ???????????? */
     if (VOS_NULL_PTR == pFunc)
     {
         return VOS_ERR;
@@ -472,10 +472,10 @@ VOS_UINT32 CBTPPM_OamVComCbtSendData(VOS_UINT8 *pucVirAddr, VOS_UINT8 *pucPhyAdd
 
 VOS_VOID CBTPPM_OamVComCbtPortInit(VOS_VOID)
 {
-    /* CBT端口与PCVOICE复用，动态注册数据接收函数 */
+    /* CBT??????PCVOICE?????????????????????????? */
     CBTCPM_PortRcvReg(CBTSCM_SoftDecodeDataRcv);
 
-    /* 校准走VCOM28，会有数据下发，数据的回复不走CPM，直接发送 */
+    /* ??????VCOM28??????????????????????????????CPM?????????? */
     (VOS_VOID)APP_VCOM_RegDataCallback(APP_VCOM_DEV_INDEX_LOG, CBTPPM_OamVComCbtReadData);
 
     CBTCPM_PortSndReg(CBTPPM_OamVComCbtSendData);
@@ -488,13 +488,13 @@ VOS_VOID CBTPPM_OamCbtPortInit(VOS_VOID)
 {
     OM_CHANNLE_PORT_CFG_STRU            stPortCfg = {0};
 
-    /* 初始化变量 */
+    /* ?????????? */
     PAM_MEM_SET_S(&g_stCbtVComAcpuDebugInfo,
                    sizeof(g_stCbtVComAcpuDebugInfo),
                    0,
                    sizeof(g_stCbtVComAcpuDebugInfo));
 
-    /* 读取OM的物理输出通道 */
+    /* ????OM?????????????? */
     if (NV_OK != NV_Read(en_NV_Item_Om_Port_Type, &stPortCfg, sizeof(OM_CHANNLE_PORT_CFG_STRU)))
     {
         stPortCfg.enCbtPortNum = CPM_CBT_PORT_VCOM;
@@ -502,17 +502,17 @@ VOS_VOID CBTPPM_OamCbtPortInit(VOS_VOID)
 
     if (CPM_CBT_PORT_USB == stPortCfg.enCbtPortNum)
     {
-        /* USB 承载的CBT端口的初始化 */
+        /* USB ??????CBT???????????? */
         (VOS_VOID)CBTPPM_OamUsbCbtPortInit();
     }
     else if (CPM_CBT_PORT_SOCKET == stPortCfg.enCbtPortNum)
     {
         CBTPPM_SocketPortInit();
     }
-    /* 默认都走VCOM做CBT */
+    /* ????????VCOM??CBT */
     else
     {
-        /* Vcom 口CBT通道的初始化 */
+        /* Vcom ??CBT???????????? */
         CBTPPM_OamVComCbtPortInit();
     }
 

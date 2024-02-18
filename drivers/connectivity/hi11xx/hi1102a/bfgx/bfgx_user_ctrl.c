@@ -831,7 +831,7 @@ STATIC int8 **get_bin_file_path(int32 *bin_file_num)
         return NULL;
     }
     *bin_file_num = 0;
-    /* 找到全局变量中储存的文件的个数 */
+    /* ?????????????????????????????? */
     for (loop = 0; loop < g_st_cfg_info.al_count[BFGX_AND_WIFI_CFG]; loop++)
     {
         if (FILE_TYPE_CMD == g_st_cfg_info.apst_cmd[BFGX_AND_WIFI_CFG][loop].cmd_type)
@@ -839,16 +839,16 @@ STATIC int8 **get_bin_file_path(int32 *bin_file_num)
             (*bin_file_num)++;
         }
     }
-    /* 为存放bin文件路径的指针数组申请空间 */
+    /* ??????bin?????????????????????????? */
     path = (int8 **)OS_KMALLOC_GFP((*bin_file_num) * OAL_SIZEOF(int8 *));
     if (unlikely(NULL == path))
     {
         PS_PRINT_ERR("malloc path space fail!\n");
         return NULL;
     }
-    /* 保证没有使用的数组元素全都指向NULL,防止错误释放 */
+    /* ??????????????????????????????NULL,???????????? */
     OS_MEM_SET((void *)path, 0, (*bin_file_num) * OAL_SIZEOF(int8 *));
-    /* 将bin文件的路径全部拷贝到一个指针数组中 */
+    /* ??bin?????????????????????????????????? */
     for (loop = 0; loop < g_st_cfg_info.al_count[BFGX_AND_WIFI_CFG]; loop++)
     {
         if (FILE_TYPE_CMD == g_st_cfg_info.apst_cmd[BFGX_AND_WIFI_CFG][loop].cmd_type && index < *bin_file_num)
@@ -898,28 +898,28 @@ STATIC ssize_t dev_version_show(struct device *dev, struct kobj_attribute *attr,
         return -FAILURE;
     }
 
-    /* 非1103系统暂时不支持device软件版本号 */
+    /* ??1103??????????????device?????????? */
     if (hi110x_board_info->chip_nr != BOARD_VERSION_HI1103)
     {
         return snprintf(buf, PAGE_SIZE, "%s.\n%s.\n""NOTE:\n"
                         "     device software version only support on hi1103 now!!!\n",
                         hi110x_board_info->chip_type, g_param_version.param_version);
     }
-    /* 检查device是否打开过，cfg配置文件是否解析过, 否则全局变量里没有数据, 提示用户加载一下frimware */
+    /* ????device????????????cfg??????????????????, ??????????????????????, ????????????????frimware */
     if (0 == g_st_cfg_info.al_count[BFGX_AND_WIFI_CFG])
     {
         return snprintf(buf, PAGE_SIZE, "%s.\n%s.\n""NOTE:\n"
                         "You need open bt or wifi once to download frimware to get device bin file path to parse!\n",
                         hi110x_board_info->chip_type, g_param_version.param_version);
     }
-    /* 从全局变量中获取bin文件的路径返回指向bin文件绝对路径的指针数组 */
+    /* ????????????????bin??????????????????bin?????????????????????? */
     pca_bin_file_path = get_bin_file_path(&bin_file_num);
     if (unlikely(NULL == pca_bin_file_path))
     {
         PS_PRINT_ERR("get bin file path from g_st_cfg_info fail\n");
         return -FAILURE;
     }
-    /* 遍历找到的所有的bin文件查找device软件版本号 */
+    /* ????????????????bin????????device?????????? */
     for (loop = 0; loop < bin_file_num; loop++)
     {
         dev_version_bfgx = get_str_from_file(pca_bin_file_path[loop], DEV_SW_MARK_STR_BFGX, DEV_SW_VERSION_HEAD5BYTE);
@@ -940,7 +940,7 @@ STATIC ssize_t dev_version_show(struct device *dev, struct kobj_attribute *attr,
                         "%s.\n%s.\nBFGX DEVICE VERSION:%s.\nWIFI DEVICE VERSION:%s.\n",
                         hi110x_board_info->chip_type, g_param_version.param_version,
                         dev_version_bfgx,dev_version_wifi);
-    /* 释放申请的所有内存空间 */
+    /* ?????????????????????? */
     for (loop = 0; loop < bin_file_num; loop++)
     {
         USERCTL_KFREE(pca_bin_file_path[loop]);
@@ -1041,7 +1041,7 @@ STATIC int32 gnss_sync_convert_mode_modem2(int32 rat_mode)
 }
 
 /* ************************************************************** */
-/* Driver与Host接口定义为以下几个参数，每个参数之间用‘,’分割    */
+/* Driver??Host????????????????????????????????????????,??????    */
 /* "modem_id,rat_mode"                                            */
 /* ************************************************************** */
 STATIC int32 gnss_sync_convert_mode(const int8* rcv_data, int32* set_mode)
@@ -1358,7 +1358,7 @@ STATIC ssize_t store_exception_dbg(struct device *dev, struct kobj_attribute *at
                 return ret;
             }
             pst_exception_data->debug_beat_flag = 0;
-            /*等待dfr完成，等待进入dfr流程，防止睡眠*/
+            /*????dfr??????????????dfr??????????????*/
            while(PLAT_EXCEPTION_RESET_IDLE == atomic_read(&pst_exception_data->is_reseting_device));
             post_to_visit_node(ps_core_d);
             PS_PRINT_INFO("[dfr_test]bfgx device timeout cause --\n");

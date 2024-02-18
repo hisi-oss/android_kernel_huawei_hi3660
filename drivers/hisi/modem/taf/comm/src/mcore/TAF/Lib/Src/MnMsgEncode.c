@@ -47,16 +47,16 @@
 */
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include  "PsTypeDef.h"
 #include  "PsCommonDef.h"
 #include  "MnErrorCode.h"
 #include  "MnMsgApi.h"
 #include  "MnMsgTs.h"
-/* Added by f62575 for V9R1 STK升级, 2013-6-26, begin */
+/* Added by f62575 for V9R1 STK????, 2013-6-26, begin */
 #include "TafStdlib.h"
-/* Added by f62575 for V9R1 STK升级, 2013-6-26, end */
+/* Added by f62575 for V9R1 STK????, 2013-6-26, end */
 
 
 VOS_UINT32 MSG_EncodeUserData(
@@ -68,20 +68,20 @@ VOS_UINT32 MSG_EncodeUserData(
 );
 
 /*****************************************************************************
-  2 常量定义
+  2 ????????
 *****************************************************************************/
 #define THIS_FILE_ID                                        PS_FILE_ID_MNMSG_ENCODE_C
 
 /*****************************************************************************
-  3 宏定义
+  3 ??????
 *****************************************************************************/
 
 /*****************************************************************************
-  4 变量定义
+  4 ????????
 *****************************************************************************/
 
 /*****************************************************************************
-  5 函数实现
+  5 ????????
 *****************************************************************************/
 /* Added by f62575 for AT Project, 2011-10-24, begin */
 
@@ -128,7 +128,7 @@ VOS_UINT32 MN_MSG_ChkDate(
         ucInvalidType |= MN_MSG_DATE_INVALID_YEAR;
     }
 
-    /*将BCD码表示的月日小时分钟秒转换成十进制数进行有效性检查；*/
+    /*??BCD????????????????????????????????????????????????????*/
     ulRet = TAF_STD_ConvertBcdToDeciDigit(pstTimeStamp->ucMonth, VOS_FALSE, &ucMonth);
     if ((MN_ERR_NO_ERROR != ulRet)
      || (ucMonth > MN_MSG_MONTHS_IN_A_YEAR))
@@ -208,15 +208,15 @@ LOCAL VOS_UINT32 MSG_EncodeTimeStamp(
         MN_WARN_LOG("MSG_EncodeTimeStamp: Date is invalid.");
     }
 
-    /*时区有效性检查，根据协议27005 <dt>示例可知(1hour <-> 4)必须在-48-48之间；*/
+    /*????????????????????????27005 <dt>????????(1hour <-> 4)??????-48-48??????*/
     if ((pstTimeStamp->cTimezone > MN_MSG_MAX_TIMEZONE_VALUE)
      || (pstTimeStamp->cTimezone < ((-1)*MN_MSG_MAX_TIMEZONE_VALUE)))
     {
         MN_WARN_LOG("MSG_EncodeTimeStamp: Time zone is invalid.");
     }
 
-    /*根据协议23040 9.2.3.11和9.1.2.3 在VP中BCD码是反序放置的，
-      所以将结构中BCD码反序后赋给输出 */
+    /*????????23040 9.2.3.11??9.1.2.3 ??VP??BCD????????????????
+      ????????????BCD???????????????? */
     MN_MSG_REVERSE_BCD(pucValidPeriod[0], pstTimeStamp->ucYear);
     MN_MSG_REVERSE_BCD(pucValidPeriod[1], pstTimeStamp->ucMonth);
     MN_MSG_REVERSE_BCD(pucValidPeriod[2], pstTimeStamp->ucDay);
@@ -224,7 +224,7 @@ LOCAL VOS_UINT32 MSG_EncodeTimeStamp(
     MN_MSG_REVERSE_BCD(pucValidPeriod[4], pstTimeStamp->ucMinute);
     MN_MSG_REVERSE_BCD(pucValidPeriod[5], pstTimeStamp->ucSecond);
 
-    /*时区在协议23040 9.2.3.11中需要将绝对值转换成反序BCD码再或上表示负数的符号*/
+    /*??????????23040 9.2.3.11????????????????????????BCD??????????????????????*/
     if (pstTimeStamp->cTimezone < 0)
     {
         ucAbsTimeZone = (VOS_UINT8)((-1)*pstTimeStamp->cTimezone);
@@ -300,33 +300,33 @@ VOS_UINT32  MN_MSG_EncodeRelatTime(
         return MN_ERR_NULLPTR;
     }
 
-    /*将BCD码表示的月日小时分钟秒转换成十进制数进行有效性检查；*/
+    /*??BCD????????????????????????????????????????????????????*/
     ulRet = MN_MSG_ChkDate(pstRelatTime, &ucDateInvalidType);
     if (MN_ERR_NO_ERROR != ulRet)
     {
         return ulRet;
     }
 
-    /*将pstRelatTime转换成usTotalDay和ucTotalMinute*/
+    /*??pstRelatTime??????usTotalDay??ucTotalMinute*/
     usTotalDay      = (VOS_UINT16)(MN_MSG_DAYS_IN_A_YEAR * pstRelatTime->ucYear);
     usTotalDay     += (VOS_UINT16)(MN_MSG_DAYS_IN_A_MONTH * pstRelatTime->ucMonth);
     usTotalDay     += pstRelatTime->ucDay;
 
-    /*TP-VP最多只能表示441天的有效期*/
+    /*TP-VP????????????441??????????*/
     if (usTotalDay > MN_MSG_MAX_RELAT_VP_DAYS)
     {
         MN_WARN_LOG("MN_MSG_EncodeRelatTime: Parameter of the function is invalid.");
         return MN_ERR_CLASS_SMS_INVALID_RELATTTIME;
     }
 
-    /*197～255：（VP–192）*1 周，表示时间范围为31天(约为5周) － 441天(196-166)*/
+    /*197??255????VP?C192??*1 ??????????????????31??(????5??) ?? 441??(196-166)*/
     if (usTotalDay > MN_MSG_DAYS_IN_A_MONTH)
     {
         *pucRelatTime = (VOS_UINT8)(((usTotalDay + 6)/7) + 192);
         return MN_ERR_NO_ERROR;
     }
 
-    /*168～196：（VP–166）*1 日,表示时间范围为2(168-166)天 － 30天(196-166)*/
+    /*168??196????VP?C166??*1 ??,??????????????2(168-166)?? ?? 30??(196-166)*/
     if (usTotalDay > 1)
     {
         *pucRelatTime = (VOS_UINT8)(usTotalDay + 166);
@@ -343,14 +343,14 @@ VOS_UINT32  MN_MSG_EncodeRelatTime(
         return MN_ERR_NO_ERROR;
     }
 
-    /*144～167：12 小时+（VP–143）*30 分钟,表示时间范围为12小时 -> 1天*/
+    /*144??167??12 ????+??VP?C143??*30 ????,??????????????12???? -> 1??*/
     if (ulTotalMinute > (12 * MN_MSG_MINUTES_IN_AN_HOUR))
     {
         *pucRelatTime = (VOS_UINT8)((((ulTotalMinute - (12 * MN_MSG_MINUTES_IN_AN_HOUR)) + 29)/30) + 143);
         return MN_ERR_NO_ERROR;
     }
 
-    /* 0～143：（VP+1）* 5 分钟,表示时间范围为5分钟 － 12小时*/
+    /* 0??143????VP+1??* 5 ????,??????????????5???? ?? 12????*/
     *pucRelatTime = (VOS_UINT8)(((ulTotalMinute + 4)/5) - 1);
     return MN_ERR_NO_ERROR;
 }
@@ -363,8 +363,8 @@ VOS_UINT32 MN_MSG_EncodeAddress(
     VOS_UINT32                          *pulLen
 )
 {
-    VOS_UINT32                          ulNumLen;                               /*号码长度*/
-    VOS_UINT8                           *pucNum;                                /*指向实际号码（不包括+号）的指针*/
+    VOS_UINT32                          ulNumLen;                               /*????????*/
+    VOS_UINT8                           *pucNum;                                /*????????????????????+??????????*/
     VOS_UINT32                          ulPos               = 0;
     VOS_UINT8                           ucAddrBcdLen;
     VOS_UINT32                          ulAlphaNumLen;
@@ -394,7 +394,7 @@ VOS_UINT32 MN_MSG_EncodeAddress(
         return MN_ERR_NO_ERROR;
     }
 
-    /*如果号码的首字符是'+'号，表示国际号码*/
+    /*??????????????????'+'????????????????*/
     if ('+' == pstAsciiAddr->aucAsciiNum[0])
     {
         if (MN_MSG_TON_INTERNATIONAL != pstAsciiAddr->enNumType)
@@ -412,8 +412,8 @@ VOS_UINT32 MN_MSG_EncodeAddress(
         ulNumLen = pstAsciiAddr->ulLen;
     }
 
-    /*号码长度应该在范围1 - 20之间，参考协议24011 8.2.5.1和8.2.5.2
-                                            23040 9.2.2 和 9.1.2.5*/
+    /*??????????????????1 - 20??????????????24011 8.2.5.1??8.2.5.2
+                                            23040 9.2.2 ?? 9.1.2.5*/
     if ((ulNumLen > MN_MSG_MAX_ADDR_LEN)
      || (ulNumLen < MN_MSG_MIN_ADDR_LEN))
     {
@@ -421,7 +421,7 @@ VOS_UINT32 MN_MSG_EncodeAddress(
         return MN_ERR_CLASS_SMS_INVALID_ADDRLEN;
     }
 
-    /*号码类型,拨号计划类型有效性检查*/
+    /*????????,??????????????????????*/
     ulRet = MN_ChkNumPlan(pstAsciiAddr->enNumPlan);
     if (MN_ERR_NO_ERROR != ulRet)
     {
@@ -434,9 +434,9 @@ VOS_UINT32 MN_MSG_EncodeAddress(
         MN_WARN_LOG("MN_MSG_EncodeAddress: Number type is invalid");
         return ulRet;
     }
-    /*第0个字节为号码（包括号码类型）的字节长度:
-    根据协议24011 8.2.5.1 8.2.5.2 和24008 10.5.4.9 RP层的地址IE中长度指BCD号码长度，包含地址类型的占位
-    根据协议23040 9.1.2.5 TP层的地址长度为有效号码字符个数*/
+    /*??0??????????????????????????????????????:
+    ????????24011 8.2.5.1 8.2.5.2 ??24008 10.5.4.9 RP????????IE????????BCD????????????????????????????
+    ????????23040 9.1.2.5 TP??????????????????????????????*/
     if (VOS_TRUE == bRpAddr)
     {
         pucAddr[ulPos++] = (VOS_UINT8)(((ulNumLen + 1)/2) + 1);
@@ -453,7 +453,7 @@ VOS_UINT32 MN_MSG_EncodeAddress(
         }
     }
 
-    /* 根据协议23040 9.1.2.5 地址类型域格式如下所示
+    /* ????????23040 9.1.2.5 ??????????????????????
         bit7   bit6    -   bit4             bit3    -   bit0
          1      type of number      Numbering-plan-identification */
     pucAddr[ulPos]      = 0x80;
@@ -464,7 +464,7 @@ VOS_UINT32 MN_MSG_EncodeAddress(
     if ((VOS_TRUE != bRpAddr)
      && (MN_MSG_TON_ALPHANUMERIC == pstAsciiAddr->enNumType))
     {
-        /* Modified by f62575 for V9R1 STK升级, 2013-6-26, begin */
+        /* Modified by f62575 for V9R1 STK????, 2013-6-26, begin */
         ulRet = TAF_STD_Pack7Bit(pstAsciiAddr->aucAsciiNum,
                                  pstAsciiAddr->ulLen,
                                  0,
@@ -474,7 +474,7 @@ VOS_UINT32 MN_MSG_EncodeAddress(
         {
             return MN_ERR_CLASS_INVALID_TP_ADDRESS;
         }
-        /* Modified by f62575 for V9R1 STK升级, 2013-6-26, end */
+        /* Modified by f62575 for V9R1 STK????, 2013-6-26, end */
         ucAddrBcdLen = (VOS_UINT8)ulAlphaNumLen;
     }
     else
@@ -964,7 +964,7 @@ LOCAL VOS_UINT8 MSG_EncodeUdhVarPic(
     pucUdh[ucLen++] = (VOS_UINT8)(ucPduNum + 3);
     /*position indicating in the SM data the instant the picture shall be displayed in the SM data*/
     pucUdh[ucLen++] = pstVarPic->ucPos;
-    /*Horizontal dimension of the picture: 一行中象素个数需要转换成占用OCTET数，1OCTET可表示8个象素*/
+    /*Horizontal dimension of the picture: ????????????????????????????OCTET????1OCTET??????8??????*/
     pucUdh[ucLen++] = pstVarPic->ucHorDim/MN_MSG_PIXELS_IN_A_OCTET;
     /*Vertical dimension of the picture*/
     pucUdh[ucLen++] = pstVarPic->ucVertDim;
@@ -1556,7 +1556,7 @@ VOS_UINT32 MSG_EncodeUserData(
     {
         if (0 != pstUserData->ucNumofHeaders)
         {
-            /*填充UDHL和UDH数据区并输出UDHL数值*/
+            /*????UDHL??UDH????????????UDHL????*/
             ulRet = MSG_EncodeUdh(pstUserData->ucNumofHeaders,
                                   pstUserData->astUserDataHeader,
                                   &(pucUserData[ulPos]),
@@ -1568,10 +1568,10 @@ VOS_UINT32 MSG_EncodeUserData(
             }
             ucFillBit      = (7 - (((ucUdhl + 1) * 8) % 7)) % 7;
 
-            /*pucUserData[0]存储UDL*/
+            /*pucUserData[0]????UDL*/
             pucUserData[0] = (VOS_UINT8)(pstUserData->ulLen + ((((ucUdhl + 1) * 8) + ucFillBit)/7));
 
-            /*将数据区数组下标移至UDHL UDH之后 */
+            /*????????????????????UDHL UDH???? */
             ulPos         += (ucUdhl + 1);
         }
         else
@@ -1584,15 +1584,15 @@ VOS_UINT32 MSG_EncodeUserData(
             }
         }
 
-        /*用户数据越界检查*/
+        /*????????????????*/
         if (pucUserData[0] > MN_MSG_MAX_7_BIT_LEN)
         {
             MN_WARN_LOG("MSG_EncodeUserData: The length of 7 bit encoded user data is overflow.");
             return MN_ERR_CLASS_SMS_MSGLEN_OVERFLOW;
         }
 
-        /*字符转换为GSM 7 bit default alphabet，填充UD中的FillBit SM数据区，并输出FillBit SM占用的字节数*/
-        /* Modified by f62575 for V9R1 STK升级, 2013-6-26, begin */
+        /*??????????GSM 7 bit default alphabet??????UD????FillBit SM??????????????FillBit SM????????????*/
+        /* Modified by f62575 for V9R1 STK????, 2013-6-26, begin */
         ulRet   = TAF_STD_Pack7Bit(pstUserData->aucOrgData,
                                    pstUserData->ulLen,
                                    ucFillBit,
@@ -1602,16 +1602,16 @@ VOS_UINT32 MSG_EncodeUserData(
         {
             return MN_ERR_CLASS_INVALID_TP_UD;
         }
-        /* Modified by f62575 for V9R1 STK升级, 2013-6-26, end */
+        /* Modified by f62575 for V9R1 STK????, 2013-6-26, end */
 
-        /*计算UDL UD总共占用的字节数*/
+        /*????UDL UD????????????????*/
         *pucLen = 1 + (((pucUserData[0] * 7) + 7)/8);
     }
     else
     {
         if (0 != pstUserData->ucNumofHeaders)
         {
-            /*填充UDHL和UDH数据区并输出UDHL数值*/
+            /*????UDHL??UDH????????????UDHL????*/
             ulRet = MSG_EncodeUdh(pstUserData->ucNumofHeaders,
                                   pstUserData->astUserDataHeader,
                                   &(pucUserData[ulPos]),
@@ -1622,18 +1622,18 @@ VOS_UINT32 MSG_EncodeUserData(
                 return ulRet;
             }
 
-            /*pucUserData[0]存储UDL*/
+            /*pucUserData[0]????UDL*/
             pucUserData[0] = (VOS_UINT8)((ucUdhl + 1) + pstUserData->ulLen);
-            /*将数据区数组下标移至UDHL UDH之后 */
+            /*????????????????????UDHL UDH???? */
             ulPos         += (ucUdhl + 1);
         }
         else
         {
-            /*pucUserData[0]存储UDL*/
+            /*pucUserData[0]????UDL*/
             pucUserData[0]     = (VOS_UINT8)pstUserData->ulLen;/*UDL*/
         }
 
-        /*用户数据越界检查*/
+        /*????????????????*/
         if (pucUserData[0] > MN_MSG_MAX_8_BIT_LEN)
         {
             MN_WARN_LOG("MSG_EncodeUserData: The length of 8 bit encoded user data is overflow.");
@@ -1647,7 +1647,7 @@ VOS_UINT32 MSG_EncodeUserData(
 
         TAF_MEM_CPY_S(&(pucUserData[ulPos]), ulMaxMemLength - ulPos, pstUserData->aucOrgData, pstUserData->ulLen);
 
-        /*计算UDL UD总共占用的字节数*/
+        /*????UDL UD????????????????*/
         *pucLen = 1 + pucUserData[0];
     }
 
@@ -2101,7 +2101,7 @@ LOCAL VOS_UINT32   MSG_EncodeSubmit(
       RP  UDHI SRR  VPF      RD  MTI
       0   0    0    2        1   2
       TP MTI TP RD TP VPF TP RP TP UDHI TP SRR*/
-    /*TP MTI 23040 9.2.3.1 填写bit0bit1:MIT     0011 0001 */
+    /*TP MTI 23040 9.2.3.1 ????bit0bit1:MIT     0011 0001 */
     /*TP RD  23040 9.2.3.25*/
     /*TP VPF 23040 9.2.3.3*/
     /*TP SRR 23040 9.2.3.5*/
@@ -2256,7 +2256,7 @@ LOCAL VOS_UINT32   MSG_EncodeSubmitRptErr(
     MN_MSG_RAW_TS_DATA_STRU             *pstSmsRawDataInfo
 )
 {
-    /* 根据23040 9.2.2.2a SMS SUBMIT REPORT type对SMS SUBMIT REPORT for RP ERROR的短信进行编码*/
+    /* ????23040 9.2.2.2a SMS SUBMIT REPORT type??SMS SUBMIT REPORT for RP ERROR??????????????*/
     VOS_UINT32                          ulPos               = 0;
     VOS_UINT32                          ulRet;
     VOS_UINT32                          ulLen;
@@ -2368,7 +2368,7 @@ VOS_UINT32  MN_MSG_EncodeDcs(
             MSG_SET_COMPRESSED(ucDcs, pstDcs->bCompressed);
             /* Bit 3 Bit2 Character set:*/
             MSG_SET_CHARSET(ucDcs, pstDcs->enMsgCoding);
-            /* Bit 1 Bit 0 Message Class 数据损失引入点*/
+            /* Bit 1 Bit 0 Message Class ??????????????*/
             if (MN_MSG_MSG_CLASS_NONE != pstDcs->enMsgClass)
             {
                 /* Bit 4, if set to 0, indicates that bits 1 to 0 are reserved and have no message class*/
@@ -2382,7 +2382,7 @@ VOS_UINT32  MN_MSG_EncodeDcs(
 
             /*Bits 3 indicates Indication Sense*/
             MSG_SET_INDSENSE(ucDcs, pstDcs->bWaitingIndiActive);
-            /*Bits 2 默认为0,数据损失引入点*/
+            /*Bits 2 ??????0,??????????????*/
             /*Bit 1 Bit 0 Indication Type*/
             MSG_SET_INDTYPE(ucDcs, pstDcs->enMsgWaitingKind);
             break;
@@ -2399,14 +2399,14 @@ VOS_UINT32  MN_MSG_EncodeDcs(
 
             /*Bits 3 indicates Indication Sense*/
             MSG_SET_INDSENSE(ucDcs, pstDcs->bWaitingIndiActive);
-            /*Bits 2 默认为0,数据损失引入点*/
+            /*Bits 2 ??????0,??????????????*/
             /*Bit 1 Bit 0 Indication Type*/
             MSG_SET_INDTYPE(ucDcs, pstDcs->enMsgWaitingKind);
             break;
         case MN_MSG_MSG_WAITING_NONE_1111:/*1111 */
             /*bit7 bit6 bit5 bit4*/
             ucDcs = 0xf0;
-            /*Bits 3 默认为0，数据损失引入点*/
+            /*Bits 3 ??????0????????????????*/
             /*Bits 2 message coding , only be 7bit or 8bit*/
             if (MN_MSG_MSG_CODING_UCS2 == pstDcs->enMsgCoding)
             {
@@ -2506,7 +2506,7 @@ VOS_UINT32   MSG_RequireSegment(
     {
         if (VOS_TRUE == pstLongSubmit->bUserDataHeaderInd)
         {
-            /*计算初始消息包头长度*/
+            /*????????????????????*/
             MSG_GetUdhl(pstLongSubmit->stLongUserData.ucNumofHeaders,
                         pstLongSubmit->stLongUserData.astUserDataHeader,
                         &ulUdhl);
@@ -2522,7 +2522,7 @@ VOS_UINT32   MSG_RequireSegment(
     {
         if (VOS_TRUE == pstLongSubmit->bUserDataHeaderInd)
         {
-            /*计算初始消息包头长度*/
+            /*????????????????????*/
             MSG_GetUdhl(pstLongSubmit->stLongUserData.ucNumofHeaders,
                         pstLongSubmit->stLongUserData.astUserDataHeader,
                         &ulUdhl);
@@ -2563,7 +2563,7 @@ VOS_UINT32   MN_MSG_Segment(
         return MN_ERR_NULLPTR;
     }
 
-    /*分段消息的属性填充并根据分段属性按submit TPDU格式编码*/
+    /*??????????????????????????????????submit TPDU????????*/
     pstSubmit = (MN_MSG_SUBMIT_STRU *)PS_MEM_ALLOC(WUEPS_PID_TAF, sizeof(MN_MSG_SUBMIT_STRU));
     if (VOS_NULL_PTR == pstSubmit)
     {
@@ -2595,7 +2595,7 @@ VOS_UINT32   MN_MSG_Segment(
                MN_MSG_MAX_UDH_NUM * sizeof(MN_MSG_USER_HEADER_TYPE_STRU));
 
     bSegmentFlag = MSG_RequireSegment(pstLongSubmit);
-    /*对于不需要分段的消息，直接编码退出流程*/
+    /*??????????????????????????????????????*/
     if (VOS_TRUE != bSegmentFlag)
     {
         *pucNum = 1;
@@ -2609,18 +2609,18 @@ VOS_UINT32   MN_MSG_Segment(
         return ulRet;
     }
 
-    /*对于需要分段的消息，*/
-    /*1.直接编码填充Concatenated short messages消息头部*/
+    /*????????????????????*/
+    /*1.????????????Concatenated short messages????????*/
     ulConcatUdhPos              = pstLongSubmit->stLongUserData.ucNumofHeaders;
     pstUserHeader               = &pstSubmit->stUserData.astUserDataHeader[ulConcatUdhPos];
-    pstUserHeader->enHeaderID   = MN_MSG_UDH_CONCAT_8;/*存在Extended Object IE时用MN_MSG_UDH_CONCAT_16*/
+    pstUserHeader->enHeaderID   = MN_MSG_UDH_CONCAT_8;/*????Extended Object IE????MN_MSG_UDH_CONCAT_16*/
     pstConcat_8                 = (MN_MSG_UDH_CONCAT_8_STRU *)&(pstUserHeader->u.stConcat_8);
     pstConcat_8->ucSeqNum       = 1;
     pstConcat_8->ucMr           = pstLongSubmit->ucMr;
     pstSubmit->stUserData.ucNumofHeaders++;
     pstSubmit->bUserDataHeaderInd   = VOS_TRUE;
 
-    /*2.计算分段后消息包头长度*/
+    /*2.??????????????????????*/
     MSG_GetUdhl(pstSubmit->stUserData.ucNumofHeaders,
                 pstSubmit->stUserData.astUserDataHeader,
                 &ulUdhl);
@@ -2631,7 +2631,7 @@ VOS_UINT32   MN_MSG_Segment(
         return MN_ERR_CLASS_SMS_MSGLEN_OVERFLOW;
     }
 
-    /*3.计算分段后每个消息段中SM的长度: UDL最大长度去除UDHL和UDH的长度*/
+    /*3.??????????????????????SM??????: UDL????????????UDHL??UDH??????*/
     if (MN_MSG_MSG_CODING_7_BIT == pstLongSubmit->stDcs.enMsgCoding)
     {
         ulLen = MN_MSG_MAX_7_BIT_LEN - ((((ulUdhl + 1) * 8) + 6)/7);
@@ -2641,7 +2641,7 @@ VOS_UINT32   MN_MSG_Segment(
         ulLen = MN_MSG_MAX_8_BIT_LEN - (ulUdhl + 1);
     }
 
-    /*计算分段后分段的个数并填充各分段的MN_MSG_SUBMIT_STRU结构数据*/
+    /*??????????????????????????????????MN_MSG_SUBMIT_STRU????????*/
     *pucNum = (VOS_UINT8)((pstLongSubmit->stLongUserData.ulLen + (ulLen - 1))/ulLen);
     pstConcat_8->ucTotalNum     = (*pucNum);
     for (ulLoop = 0; ulLoop < (*pucNum); ulLoop++)
@@ -2698,7 +2698,7 @@ VOS_UINT32   MN_MSG_BuildDefSubmitMsg(
         return MN_ERR_NOMEM;
     }
     pstSubmit->bRejectDuplicates = VOS_FALSE;
-    /*pstServPara->stAlphaIdInfo对应手机上的预置模式,此处因为结构中已经是用户指定数据,所以不使用*/
+    /*pstServPara->stAlphaIdInfo????????????????????,????????????????????????????????,??????????*/
     pstSubmit->bReplayPath       = pstDefSubmit->bReplayPath;
     pstSubmit->bStaRptReq        = pstDefSubmit->bStaRptReq;
     pstSubmit->bUserDataHeaderInd= pstDefSubmit->bUserDataHeaderInd;
@@ -2726,7 +2726,7 @@ VOS_VOID MN_MSG_EncodeTpRd(
     VOS_UINT8                          *pucTpFo
 )
 {
-    /* 设置TP-RD为入参中的bRejectDuplicates */
+    /* ????TP-RD??????????bRejectDuplicates */
     MSG_SET_TP_RD(*pucTpFo, bRejectDuplicates);
 
     return;

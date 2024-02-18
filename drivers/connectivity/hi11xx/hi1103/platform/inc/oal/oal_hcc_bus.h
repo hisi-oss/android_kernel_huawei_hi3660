@@ -10,7 +10,7 @@ extern "C" {
 #endif
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 #include "oal_sdio_comm.h"
 #include "oal_mem.h"
@@ -21,14 +21,14 @@ extern "C" {
 #include "oal_workqueue.h"
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
 #define OAL_BUS_RX_THREAD_NICE    (-20)
 #define OAL_BUS_RX_THREAD_POLICY             SCHED_NORMAL
 #define OAL_BUS_RXDATA_THREAD_PRIORITY       (0)
 #define OAL_BUS_DISPOSE_THREAD_PRIORITY      (10)
 
-/*高性能CPU，默认值*/
+/*??????CPU????????*/
 #define OAL_BUS_HPCPU_NUM   (4)
 #define OAL_BUS_HPCPU_NUM_1 (5)
 
@@ -37,7 +37,7 @@ extern "C" {
 #define OAL_BUS_STATE_ALL       (OAL_BUS_STATE_TX|OAL_BUS_STATE_RX)
 
 /*****************************************************************************
-  3 枚举定义
+  3 ????????
 *****************************************************************************/
 
 typedef struct pm_callback
@@ -68,27 +68,27 @@ struct bus_msg_stru
 };
 
 /*****************************************************************************
-  4 全局变量声明
+  4 ????????????
 *****************************************************************************/
 
 
 
 /*****************************************************************************
-  5 消息头定义
+  5 ??????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  6 消息定义
+  6 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  7 STRUCT定义
+  7 STRUCT????
 *****************************************************************************/
 
-/*一种类型对应一种IP驱动，
-  PCIE驱动不同SOC架构驱动差异较大*/
+/*????????????????IP??????
+  PCIE????????SOC????????????????*/
 #define HCC_BUS_SDIO    (0)
 #define HCC_BUS_PCIE    (1) /*110x PCIE*/
 #define HCC_BUS_PCIE2   (2) /*reserved for 118x's PCIE*/
@@ -109,7 +109,7 @@ struct bus_msg_stru
 
 #define HCC_BUS_PPS_COUNT_TIMEOUT       (100) /*100ms*/
 
-/*队列优先级*/
+/*??????????*/
 typedef enum _HCC_BUS_Q_PRIO_
 {
     HCC_BUS_Q_HIGH,
@@ -169,9 +169,9 @@ typedef struct _hcc_bus_opt_ops{
     oal_int32 (*lock)(hcc_bus *pst_bus);
     oal_int32 (*unlock)(hcc_bus *pst_bus);
 
-    oal_int32 (*sleep_request)(hcc_bus *pst_bus);/*硬件行为 通知DEV睡眠*/
-    oal_int32 (*sleep_request_host)(hcc_bus *pst_bus);/*检查Host是否满足睡眠条件*/
-    oal_int32 (*wakeup_request)(hcc_bus *pst_bus);/*硬件行为 唤醒DEV*/
+    oal_int32 (*sleep_request)(hcc_bus *pst_bus);/*???????? ????DEV????*/
+    oal_int32 (*sleep_request_host)(hcc_bus *pst_bus);/*????Host????????????????*/
+    oal_int32 (*wakeup_request)(hcc_bus *pst_bus);/*???????? ????DEV*/
     oal_int32 (*get_sleep_state)(hcc_bus *pst_bus);
     oal_int32 (*wakeup_complete)(hcc_bus *pst_bus);
 
@@ -196,7 +196,7 @@ typedef struct _hcc_bus_opt_ops{
     oal_int32 (*patch_read)(hcc_bus *pst_bus, oal_uint8* buff, oal_int32 len, oal_uint32 timeout);
     oal_int32 (*patch_write)(hcc_bus *pst_bus, oal_uint8* buff, oal_int32 len);
 
-    oal_int32 (*bindcpu)(hcc_bus *pst_bus, oal_uint32 chan, oal_int32 is_bind);/*绑定相关任务，提高处理能力*/
+    oal_int32 (*bindcpu)(hcc_bus *pst_bus, oal_uint32 chan, oal_int32 is_bind);/*??????????????????????????*/
 
     oal_int32 (*voltage_bias_init)(hcc_bus *pst_bus);
 
@@ -204,19 +204,19 @@ typedef struct _hcc_bus_opt_ops{
 
     oal_void  (*print_trans_info)(hcc_bus *pst_bus, oal_uint64 print_flag);
     oal_void  (*reset_trans_info)(hcc_bus *pst_bus);
-    oal_int32 (*pending_signal_check)(hcc_bus *pst_bus);/*调度中检查process条件是否符合, 0:不符合   非0:符合*/
-    oal_int32 (*pending_signal_process)(hcc_bus *pst_bus);/*process中要清掉调度标记，否者会死循环*/
+    oal_int32 (*pending_signal_check)(hcc_bus *pst_bus);/*??????????process????????????, 0:??????   ??0:????*/
+    oal_int32 (*pending_signal_process)(hcc_bus *pst_bus);/*process??????????????????????????????*/
 }hcc_bus_opt_ops;
 
 typedef struct _hcc_bus_cap_
 {
-    /*接口是否为全双工,全双工软件收发不能相互阻塞*/
-    oal_int32                   is_full_duplex;/*预留*/
+    /*????????????????,??????????????????????????*/
+    oal_int32                   is_full_duplex;/*????*/
 
-    /*TX/RX 长度对齐要求，业务使用*/
+    /*TX/RX ??????????????????????*/
     oal_uint32                  align_size[HCC_DIR_COUNT];/*bus align request*/
 
-    oal_uint32                  max_trans_size;           /*IP层一次可以传输的最大长度*/
+    oal_uint32                  max_trans_size;           /*IP????????????????????????*/
 }hcc_bus_cap;
 
 struct _hcc_bus_{
@@ -231,7 +231,7 @@ struct _hcc_bus_{
 
     char                        name[50];
 
-    /*IP 私有结构体索引*/
+    /*IP ??????????????*/
     oal_void	                *data;                      /*dev driver strut reference, sdio~usb*/
 
     oal_void                    *hcc;                       /*reference to hcc*/
@@ -281,10 +281,10 @@ struct _hcc_bus_dev_
 
     oal_uint32 pcie_bugfix_enable;        /* 1 for enable */
     oal_uint32 bus_switch_enable;         /* 1 for enable */
-    oal_uint32 bus_auto_switch;           /* 自动切换 */
+    oal_uint32 bus_auto_switch;           /* ???????? */
     oal_wakelock_stru st_switch_wakelock; /* wake lock for switch */
 
-    oal_uint32                  bus_auto_bindcpu;             /*动态绑核*/
+    oal_uint32                  bus_auto_bindcpu;             /*????????*/
 
     oal_ulong                   bus_pps_start_time;
     oal_timer_list_stru         bus_pps_timer;
@@ -341,17 +341,17 @@ typedef struct _hcc_switch_response_
 }hcc_switch_response;
 
 /*****************************************************************************
-  8 UNION定义
+  8 UNION????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  9 OTHERS定义
+  9 OTHERS????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  10 函数声明
+  10 ????????
 *****************************************************************************/
 extern hcc_bus* hcc_get_current_110x_bus(oal_void);
 extern oal_int32 hcc_bus_resource_alloc(hcc_bus* pst_bus);
@@ -877,7 +877,7 @@ OAL_STATIC OAL_INLINE oal_int32 hcc_bus_check_tx_condition(hcc_bus* hi_bus, hcc_
 
     if(OAL_UNLIKELY(NULL == hi_bus->opt_ops->tx_condition))
     {
-        /*没有回调说明 发送不受限制 直接返回1*/
+        /*???????????? ???????????? ????????1*/
         return OAL_TRUE;
     }
 
@@ -1005,7 +1005,7 @@ OAL_STATIC OAL_INLINE oal_void hcc_bus_print_trans_info(hcc_bus *hi_bus, oal_uin
         return;
     }
 
-    /*打印device信息要保证打印过程中 不会进入深睡*/
+    /*????device???????????????????? ????????????*/
     hi_bus->opt_ops->print_trans_info(hi_bus, print_flag);
 }
 

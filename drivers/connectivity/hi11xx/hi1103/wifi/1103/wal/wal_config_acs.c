@@ -9,7 +9,7 @@ extern "C" {
 #ifdef _PRE_SUPPORT_ACS
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "oam_ext_if.h"
 #include "frw_ext_if.h"
@@ -27,14 +27,14 @@ extern "C" {
 #define THIS_FILE_ID OAM_FILE_ID_WAL_CONFIG_ACS_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 extern oal_void  oam_netlink_ops_register_etc(oam_nl_cmd_enum_uint8 en_type, oal_uint32 (*p_func)(oal_uint8 *puc_data, oal_uint32 ul_len));
 extern oal_void  oam_netlink_ops_unregister_etc(oam_nl_cmd_enum_uint8 en_type);
 extern oal_int32  oam_netlink_kernel_send_etc(oal_uint8 *puc_data, oal_uint32 ul_data_len, oam_nl_cmd_enum_uint8 en_type);
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 #ifdef _PRE_SUPPORT_ACS
 
@@ -54,30 +54,30 @@ oal_uint32  wal_acs_netlink_recv_handle(frw_event_mem_stru *pst_event_mem)
 
     pst_acs_cmd_hdr = (mac_acs_cmd_stru *)frw_get_event_payload(pst_event_mem);
 
-    /* 向所有DEVICE广播一份 */
+    /* ??????DEVICE???????? */
     for (ul_device_num = 0; ul_device_num < MAC_RES_MAX_DEV_NUM; ul_device_num++)
     {
         pst_mac_dev = mac_res_get_dev_etc(ul_device_num);
 
-        /* 设备不存在 */
+        /* ?????????? */
         if (OAL_PTR_NULL == pst_mac_dev)
         {
             continue;
         }
 
-        /* 设备未初始化 */
+        /* ???????????? */
         if (OAL_FALSE == pst_mac_dev->en_device_state)
         {
             continue;
         }
 
-        /* ACS未使能 */
+        /* ACS?????? */
         if (OAL_PTR_NULL == pst_mac_dev->pst_acs)
         {
             continue;
         }
 
-        // note:假如没有任何业务VAP，则驱动收不到应用层的请求。
+        // note:????????????????VAP????????????????????????????
         pst_mac_vap = (mac_vap_stru *)mac_res_get_mac_vap(pst_mac_dev->auc_vap_id[0]);
         if (OAL_PTR_NULL == pst_mac_vap)
         {
@@ -103,24 +103,24 @@ oal_uint32  wal_acs_netlink_recv(oal_uint8 *puc_data, oal_uint32 ul_len)
     frw_event_mem_stru     *pst_event_mem;
     frw_event_stru         *pst_event;
 
-    //随便获取一个dev
+    //????????????dev
     pst_mac_dev = mac_res_get_dev_etc(0);
 
-    /* 设备不存在 */
+    /* ?????????? */
     if (OAL_PTR_NULL == pst_mac_dev)
     {
         OAM_ERROR_LOG0(0, OAM_SF_ANY, "{wal_acs_netlink_recv:: pst_mac_dev NULL}\r\n");
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 设备未初始化 */
+    /* ???????????? */
     if (OAL_FALSE == pst_mac_dev->en_device_state)
     {
         OAM_ERROR_LOG0(0, OAM_SF_ANY, "{wal_acs_netlink_recv:: mac_dev not init}\r\n");
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    // note:假如没有任何业务VAP，则驱动收不到应用层的请求。
+    // note:????????????????VAP????????????????????????????
     pst_mac_vap = (mac_vap_stru *)mac_res_get_mac_vap(pst_mac_dev->auc_vap_id[0]);
     if (OAL_PTR_NULL == pst_mac_vap)
     {
@@ -129,7 +129,7 @@ oal_uint32  wal_acs_netlink_recv(oal_uint8 *puc_data, oal_uint32 ul_len)
     }
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     pst_event_mem = FRW_EVENT_ALLOC(OAL_SIZEOF(mac_acs_cmd_stru));
     if (OAL_PTR_NULL == pst_event_mem)
@@ -138,7 +138,7 @@ oal_uint32  wal_acs_netlink_recv(oal_uint8 *puc_data, oal_uint32 ul_len)
         return OAL_FAIL;
     }
 
-    /* 填写事件 */
+    /* ???????? */
     pst_event = (frw_event_stru *)pst_event_mem->puc_data;
 
     FRW_EVENT_HDR_INIT(&(pst_event->st_event_hdr),

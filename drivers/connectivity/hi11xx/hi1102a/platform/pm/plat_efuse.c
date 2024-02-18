@@ -7,18 +7,18 @@ extern "C" {
 #endif
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "plat_efuse.h"
 #include "board.h"
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 uint8 g_uc_hi110x_ec_version = V100;
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 void read_efuse_ec_version(void)
@@ -53,8 +53,8 @@ void read_efuse_ec_version(void)
         PS_PRINT_DBG("ec version[%d]=0x%x\n", i , buff[i]);
     }
 
-    uc_ec_version  = buff[1];        //Byte24(0x50000771)对应bit[191:184]
-    uc_ec_version &= ((uint8)0x03);  //bit[185:184]标示EC version
+    uc_ec_version  = buff[1];        //Byte24(0x50000771)????bit[191:184]
+    uc_ec_version &= ((uint8)0x03);  //bit[185:184]????EC version
 
     if (V100 == uc_ec_version)
     {
@@ -159,7 +159,7 @@ static int32 store_efuse_into_file(uint32* buff)
     mask_bits(buff, DIEID_BIT_53, DIEID_BIT_53);
     mask_bits(buff, DIEID_BIT_79, DIEID_BIT_95);
 
-    memset(&fs, 0x00, sizeof(fs));    /* [false alarm]:fortify误报  */
+    memset(&fs, 0x00, sizeof(fs));    /* [false alarm]:fortify????  */
 
     fp = filp_open(EFUSE_FILE_PATH, O_CREAT|O_RDWR, 0644);
     if (IS_ERR(fp))

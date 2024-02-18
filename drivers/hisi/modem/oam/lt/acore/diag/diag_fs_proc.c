@@ -63,7 +63,7 @@
   2 Declare the Global Variable
 *****************************************************************************/
 const VOS_CHAR g_acDiagRootPath[] = "/";
-const VOS_CHAR g_acDiagLockedRootPath[] = "/modem_log"; /* 锁定状态下的根目录 */
+const VOS_CHAR g_acDiagLockedRootPath[] = "/modem_log"; /* ?????????????????? */
 const VOS_CHAR g_acDiagDumpDir[] = "/modem_log";
 const VOS_CHAR g_acDiagLogDir[] = "/modem_log";
 
@@ -108,7 +108,7 @@ VOS_UINT32  diag_FsGetDirInfo(VOS_CHAR *pDirName, VOS_UINT32 *pulTotalNum)
     old_fs = get_fs();
     set_fs(KERNEL_DS);
 
-    /*打开目录*/
+    /*????????*/
     if((dir_handle = DIAG_FS_OPENDIR((VOS_CHAR*)pDirName,DIAG_FS_RDONLY|DIAG_FS_DIRECTORY,0))< 0)
     {
         set_fs(old_fs);
@@ -162,7 +162,7 @@ VOS_UINT32  diag_FsGetDirInfo(VOS_CHAR *pDirName, VOS_UINT32 *pulTotalNum)
 
     *pulTotalNum = nCount;
 
-     /*关闭目录*/
+     /*????????*/
     if (DIAG_FS_ERROR == DIAG_FS_CLOSEDIR(dir_handle))
     {
         VOS_MemFree(MSP_PID_DIAG_APP_AGENT, buf);
@@ -193,7 +193,7 @@ VOS_UINT32 diag_FsGetItemInfo(VOS_CHAR *pDirectory,DIAG_DIR_FILE_INFO_STRU *pstD
     old_fs = get_fs();
     set_fs(KERNEL_DS);
 
-    /*再次打开目录*/
+    /*????????????*/
     if((dir_handle = DIAG_FS_OPENDIR(pDirectory,DIAG_FS_RDONLY|DIAG_FS_DIRECTORY,0))< 0)
     {
         diag_printf( "[%s]DIAG_FS_OPENDIR error!",__FUNCTION__);
@@ -220,7 +220,7 @@ VOS_UINT32 diag_FsGetItemInfo(VOS_CHAR *pDirectory,DIAG_DIR_FILE_INFO_STRU *pstD
         return VOS_ERR;
     }
 
-    /*轮询文件夹将所有文件名保存至全局变量*/
+    /*????????????????????????????????????*/
     for(i=0; i<nRead; )
     {
         pstTmpDirent = (DIAG_DIRENT_STRU*)(buf + i);
@@ -251,7 +251,7 @@ VOS_UINT32 diag_FsGetItemInfo(VOS_CHAR *pDirectory,DIAG_DIR_FILE_INFO_STRU *pstD
         
         (VOS_VOID)VOS_MemCpy_s((ucDirName+len), ((MSP_DF_DIR_MAX_LEN-1)-len), pstTmpDirent->d_name, VOS_StrLen(pstTmpDirent->d_name));
 
-        /*通过stat获取文件或文件夹的信息*/
+        /*????stat??????????????????????*/
         if (DIAG_FS_ERROR == DIAG_FS_STAT((VOS_CHAR *)ucDirName, &stStat))
         {
             diag_printf("DIAG_FS_STAT: error!\n");
@@ -264,26 +264,26 @@ VOS_UINT32 diag_FsGetItemInfo(VOS_CHAR *pDirectory,DIAG_DIR_FILE_INFO_STRU *pstD
         }
         else
         {
-            /*目录*/
+            /*????*/
 
             if (0 != (DIAG_IF_DIR&stStat.mode))
             {
 
                 pstDirFileInfo->ulItemType = DIAG_FS_ITEM_FOLDER;
             }
-            /*文件*/
+            /*????*/
             else
             {
                 pstDirFileInfo->ulItemType = DIAG_FS_ITEM_FILE;
             }
-            pstDirFileInfo->st_size   = (stStat.size & 0xFFFFFFFF);/* 目前文件大小不会超过32位大小 */
+            pstDirFileInfo->st_size   = (stStat.size & 0xFFFFFFFF);/* ????????????????????32?????? */
             pstDirFileInfo->st_atime  = stStat.atime.tv_sec;
             pstDirFileInfo->st_mtime  = stStat.mtime.tv_sec;
             pstDirFileInfo->st_ctime  = stStat.ctime.tv_sec;
             pstDirFileInfo->st_mode   = stStat.mode;
         }
 
-        /*文件或文件夹名*/
+        /*??????????????*/
         (VOS_VOID)VOS_MemSet_s(pstDirFileInfo->aucDirName,DIAG_CMD_FILE_NAME_LEN, 0,DIAG_CMD_FILE_NAME_LEN);
         (VOS_VOID)VOS_MemCpy_s(pstDirFileInfo->aucDirName, (DIAG_CMD_FILE_NAME_LEN-1), pstTmpDirent->d_name, VOS_StrLen(pstTmpDirent->d_name));
 
@@ -330,7 +330,7 @@ VOS_UINT32 diag_FsQueryProc(VOS_UINT8* pstReq)
 
     if (DIAG_FS_ROOT_FOLDER == pstFsReq->ulFolderType)
     {
-        /* 锁定状态下，根目录受限制 */
+        /* ???????????????????????? */
         if(g_bAtDataLocked)
         {
             stFsCnf.ulLength = VOS_StrLen((VOS_CHAR*)g_acDiagLockedRootPath);
@@ -350,7 +350,7 @@ VOS_UINT32 diag_FsQueryProc(VOS_UINT8* pstReq)
         (VOS_VOID)VOS_MemCpy_s(stFsCnf.aucDirPath, sizeof(stFsCnf.aucDirPath), g_acDiagLogDir, stFsCnf.ulLength);
         g_stDiagFileInfo.ulFileType = DIAG_FS_LOG_FOLDER;
     }
-    /*临终遗言文件所在的路径*/
+    /*??????????????????????*/
     else if (DIAG_FS_DUMP_FOLDER == pstFsReq->ulFolderType)
     {
         stFsCnf.ulLength = VOS_StrLen((VOS_CHAR*)g_acDiagDumpDir);
@@ -386,13 +386,13 @@ VOS_UINT32 diag_FsScanProc(VOS_UINT8* pstReq)
 
     pstFsReq = (DIAG_CMD_FS_SCAN_DIR_REQ*)(pstReq + DIAG_MESSAGE_DATA_HEADER_LEN);
 
-   /*得到目录内，文件和文件夹的总个数、总的名字长度*/
+   /*??????????????????????????????????????????????*/
     if(VOS_OK != diag_FsGetDirInfo(pstFsReq->szDirectory,&ulTotalNum))
     {
         return VOS_ERR;
     }
 
-    /*计算返回给工具侧消息包的长度*/
+    /*????????????????????????????*/
     ulTotalSize = (ulTotalNum* sizeof(DIAG_DIR_FILE_INFO_STRU)+ sizeof(DIAG_CMD_FS_SCAN_DIR_CNF));
 
     pstFsCnf = (DIAG_CMD_FS_SCAN_DIR_CNF*)VOS_MemAlloc(MSP_PID_DIAG_APP_AGENT, DYNAMIC_MEM_PT, ulTotalSize);
@@ -401,7 +401,7 @@ VOS_UINT32 diag_FsScanProc(VOS_UINT8* pstReq)
         return VOS_ERR;
     }
 
-    /*获取每个文件和文件夹的信息*/
+    /*??????????????????????????*/
     if(ulTotalNum>0)
     {
         ret = diag_FsGetItemInfo(pstFsReq->szDirectory,pstFsCnf->stDirInfo);
@@ -467,10 +467,10 @@ VOS_UINT32 diag_FsOpenProc(VOS_UINT8* pstReq)
 
     pstFsReq = (DIAG_CMD_FS_OPEN_REQ*)(pstReq + DIAG_MESSAGE_DATA_HEADER_LEN);
 
-    /*不支持操作文件的重入操作*/
+    /*????????????????????????*/
     if (DIAG_FILE_NULL != g_stDiagFileInfo.lFile)
     {
-        /* 文件导出过程中可能文件size还在增加，导致上一个文件没读完工具就开始新的文件导出 */
+        /* ??????????????????????size???????????????????????????????????????????????????? */
         diag_FsClose();
     }
     diag_fs_log();
@@ -517,12 +517,12 @@ VOS_UINT32 diag_FsImportProc(VOS_UINT8* pstReq)
     }
     diag_fs_log();
 
-    /*写文件完毕，关闭文件*/
+    /*????????????????????*/
     if (0 == pstFsReq->ulSize)
     {
         diag_fs_log();
         diag_FsClose();
-        /*打包回复给FW*/
+        /*??????????FW*/
         stFsCnf.ulRet = ERR_MSP_SUCCESS;
 
         DIAG_MSG_COMMON_PROC(stDiagInfo, stFsCnf, pstDiagHead);
@@ -591,7 +591,7 @@ VOS_UINT32 diag_FsExportProc(VOS_UINT8* pstReq)
 
     set_fs(old_fs);
 
-    /*读取文件出现错误*/
+    /*????????????????*/
     if (DIAG_FS_ERROR == (VOS_INT32)ulReadSize)
     {
         diag_fs_log();
@@ -600,7 +600,7 @@ VOS_UINT32 diag_FsExportProc(VOS_UINT8* pstReq)
         return ERR_MSP_FAILURE;
     }
 
-    /*表明已经没有内容可以读取，文件内容全部读完*/
+    /*??????????????????????????????????????????*/
     if (0 == ulReadSize)
     {
         diag_fs_log();

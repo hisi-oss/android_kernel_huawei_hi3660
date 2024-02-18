@@ -83,12 +83,12 @@
 #include "v_iddef.h"
 #include "mdrv.h"
 
- /* LINUX 不支持 */
+ /* LINUX ?????? */
 
 
 
 /*****************************************************************************
-    协议栈打印打点方式下的.C文件宏定义
+    ??????????????????????.C??????????
 *****************************************************************************/
 #define    THIS_FILE_ID        PS_FILE_ID_V_MSG_C
 
@@ -124,11 +124,11 @@ typedef struct
     VOS_UINT32 ulRcvSlice;
 }VOS_ICC_DEBUG_INFO_STRU;
 
-/*用于ICC通道UDI控制数据片结构*/
+/*????ICC????UDI??????????????*/
 typedef struct
 {
-    VOS_UINT32                      ulICCId;        /*底软定义的当前通道号*/
-    ICC_CHAN_ATTR_S                 stICCAttr;      /*当前通道属性*/
+    VOS_UINT32                      ulICCId;        /*????????????????????*/
+    ICC_CHAN_ATTR_S                 stICCAttr;      /*????????????*/
 }VOS_ICC_UDI_CTRL_STRU;
 
 
@@ -154,7 +154,7 @@ enum
     VOS_HIFI_TO_CCPU_VOS_MSG_URGENT
 };
 
-/* DSP上移后提供强制唤醒功能 */
+/* DSP?????????????????????? */
 Msg_Fun_Type    g_pfnVosAwakeFunHook[MODEM_ID_BUTT] = {VOS_NULL_PTR};
 
 VOS_UINT32 g_msglpm = VOS_FALSE;
@@ -360,7 +360,7 @@ VOS_UINT32 VOS_SendMsgByDrvMB(VOS_PID                 Pid,
 
     (VOS_VOID)VOS_FreeMsg(Pid, *ppMsg ); /* need free the Msg memory */
 
-    /* 由于HIFI复位，写 mailbox通道失败会返回一个特殊值，不能复位单板 */
+    /* ????HIFI???????? mailbox?????????????????????????????????????? */
     if (MAILBOX_TARGET_NOT_READY == ulResult )
     {
         LogPrint3("\n# VOS_SendMsgByDrvMB Error,HIFI Reset, File  %d. line %d. Size %d.\n",
@@ -503,7 +503,7 @@ MsgBlock * V_AllocMsg(VOS_PID Pid, VOS_UINT32 ulLength,
         return((MsgBlock*)VOS_NULL_PTR);
     }
 
-    /* 如果申请的空间大小超过0x7FFFFFFF个Byte，直接返回空指针 */
+    /* ??????????????????????0x7FFFFFFF??Byte???????????????? */
     if (0x7FFFFFFF < (ulLength + VOS_MSG_BLOCK_HEAD_AND_RESERVED_LENGTH))
     {
         LogPrint2("# V_AllocMsg size over 0x7FFFFFFF,FileID: %d LineNo: %d.\r\n", ulFileID, usLineNo);
@@ -737,7 +737,7 @@ VOS_UINT32 V_UnreserveMsg( VOS_PID Pid, MsgBlock * pMsg,
 
 VOS_BOOL VOS_CheckMsgCPUId( VOS_UINT32 ulCPUId )
 {
-    /* ACPU的id为1，如果消息接收的cpuid不为acpu id，则为跨核消息 */
+    /* ACPU??id??1????????????????cpuid????acpu id?????????????? */
     if (OSA_CPU_ACPU != ulCPUId)
     {
         return VOS_TRUE;
@@ -1101,7 +1101,7 @@ VOS_UINT32 V_SendMsgByICC(VOS_PID Pid, VOS_VOID **ppMsg,
 
     (VOS_VOID)VOS_FreeMsg( Pid, *ppMsg ); /*need free the Msg memory*/
 
-    /* 由于C核复位，写ICC通道失败会返回一个特殊值，不能复位单板 */
+    /* ????C??????????ICC?????????????????????????????????????? */
     if (BSP_ERR_ICC_CCORE_RESETTING == lResult )
     {
         LogPrint3("\n# V_SendMsgByICC Error,Ccore Reset, File  %d. line %d. Size %d .\n",
@@ -1110,7 +1110,7 @@ VOS_UINT32 V_SendMsgByICC(VOS_PID Pid, VOS_VOID **ppMsg,
         return VOS_ERRNO_MSG_CCORE_RESET;
     }
 
-    /* 写ICC邮箱满，OSA发起主动复位 */
+    /* ??ICC????????OSA???????????? */
     if ( ICC_INVALID_NO_FIFO_SPACE == lResult )
     {
         (VOS_VOID)VOS_SetErrorNo(VOS_ERRNO_MSG_ICC_WRITEMSGFULL);
@@ -1186,7 +1186,7 @@ VOS_UINT32 V_SendMsg(VOS_PID Pid, VOS_VOID **ppMsg,
 
     ulSpanMsg = VOS_CheckMsgCPUId(ulCpuID);
 
-    /* 中断中发送跨核消息，返回错误 */
+    /* ???????????????????????????? */
     if ( (VOS_TRUE == ulSpanMsg)
         && (VOS_FALSE != VOS_CheckInterrupt()) )
     {
@@ -1195,7 +1195,7 @@ VOS_UINT32 V_SendMsg(VOS_PID Pid, VOS_VOID **ppMsg,
         return (VOS_ERRNO_MSG_INT_MSGERROR);
     }
 
-    /* 跨核消息 勾子函数不为空 */
+    /* ???????? ?????????????? */
     if ( (VOS_NULL_PTR != vos_MsgHook)
         && (VOS_TRUE == ulSpanMsg))
     {
@@ -1279,7 +1279,7 @@ VOS_UINT V_ICC_OSAMsg_CB(VOS_UINT ulChannelID,VOS_INT lLen)
         g_msglpm = VOS_FALSE;
 
         (VOS_VOID)vos_printf("[C SR] v_msg senderpid %d, receivepid %d, msgid 0x%x.\n",
-            pMsgCtrlBlk->ulSenderPid, pMsgCtrlBlk->ulReceiverPid, *((VOS_UINT32*)(pMsgCtrlBlk->aucValue))); /* [false alarm]: 屏蔽Fortify错误 */
+            pMsgCtrlBlk->ulSenderPid, pMsgCtrlBlk->ulReceiverPid, *((VOS_UINT32*)(pMsgCtrlBlk->aucValue))); /* [false alarm]: ????Fortify???? */
     }
 
     VOS_ModifyMsgInfo( (VOS_VOID *)pMsgCtrlBlk, pMsgCtrlBlk->ulSenderPid );
@@ -1294,7 +1294,7 @@ VOS_UINT32 VOS_ICC_Init(VOS_VOID)
 
     stICCCtrlTable.ulICCId                  = UDI_ICC_GUOM4;
     stICCCtrlTable.stICCAttr.read_cb        = V_ICC_OSAMsg_CB;
-    stICCCtrlTable.stICCAttr.u32Priority    = VOS_ICC_CHANNEL_PRIORITY;  /* 统一使用最高优先级 */
+    stICCCtrlTable.stICCAttr.u32Priority    = VOS_ICC_CHANNEL_PRIORITY;  /* ?????????????????? */
     stICCCtrlTable.stICCAttr.u32TimeOut     = VOS_ICC_HANDSHAKE_TIME_MAX;
     stICCCtrlTable.stICCAttr.u32FIFOInSize  = OSA_ICC_BUFFER_SIZE;
     stICCCtrlTable.stICCAttr.u32FIFOOutSize = OSA_ICC_BUFFER_SIZE;
@@ -1304,12 +1304,12 @@ VOS_UINT32 VOS_ICC_Init(VOS_VOID)
 
     if (VOS_ERROR == DRV_ICC_OPEN(stICCCtrlTable.ulICCId, &stICCCtrlTable.stICCAttr))
     {
-        /* 打开失败时记录当前ICC通道信息 */
+        /* ??????????????????ICC???????? */
         VOS_ProtectionReboot(OM_APP_ICC_INIT_ERROR, THIS_FILE_ID, __LINE__, VOS_NULL_PTR,0);
         return VOS_ERR;
     }
 
-    /* 注册icc 唤醒A核时的钩子函数，AP在睡眠状态下被CP唤醒 */
+    /* ????icc ????A????????????????AP??????????????CP???? */
     if (VOS_OK != mdrv_icc_register_resume_cb(UDI_ICC_GUOM4, VOS_MsgLpmCb, 0))
     {
         return VOS_ERR;

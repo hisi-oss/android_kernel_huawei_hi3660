@@ -49,7 +49,7 @@
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "TafAgent.h"
 #include "TafAgentCtx.h"
@@ -59,7 +59,7 @@
 
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 extern VOS_UINT32 AT_GetDestPid(
     MN_CLIENT_ID_T                      usClientId,
@@ -67,7 +67,7 @@ extern VOS_UINT32 AT_GetDestPid(
 );
 
 /*****************************************************************************
-3 函数实现
+3 ????????
 *****************************************************************************/
 
 
@@ -121,7 +121,7 @@ VOS_UINT32 TAF_AGENT_IsValidMsg(MsgBlock* pstMsg)
 
 VOS_VOID TAF_AGENT_ClearAllSem(VOS_VOID)
 {
-    /* 如果有锁的存在 */
+    /* ?????????????? */
     if (VOS_TRUE == TAF_AGENT_GET_ACPU_CNF_SEM_LOCK_FLG())
     {
         VOS_SmV(TAF_AGENT_GetTafAcpuCnfSem());
@@ -150,19 +150,19 @@ VOS_VOID TAF_AGENT_ProcMsg(MsgBlock* pstMsg)
             return;
         }
 
-        /* 判断消息是否被释放 */
+        /* ?????????????????? */
         if (VOS_NULL_PTR == TAF_AGENT_GetTafAcpuCnfMsg())
         {
             TAFAGENT_NORMAL_LOG(ACPU_PID_TAFAGENT, "TAF_AGENT_ProcMsg: TafAcpuCnfMsg is VOS_NULL_PTR!");
 
-            /* 备份回复消息 */
+            /* ???????????? */
             pucMsg = TAF_AGENT_SaveMsg((VOS_UINT8*)pstMsg,pstMsg->ulLength);
 
             TAF_AGENT_SetTafAcpuCnfMsg(pucMsg);
 
             TAF_AGENT_SET_ACPU_CNF_SEM_LOCK_FLG(VOS_FALSE);
 
-            /* 释放信号量，使得调用API任务继续运行 */
+            /* ????????????????????API???????????? */
             ulResult = VOS_SmV(TAF_AGENT_GetTafAcpuCnfSem());
 
             TAFAGENT_NORMAL_LOG1(ACPU_PID_TAFAGENT, "TAF_AGENT_ProcMsg: VOS_SmV result is %x\n", ulResult);
@@ -188,7 +188,7 @@ VOS_UINT32 TAF_AGENT_FindCidForDial(
 
     TAFAGENT_NORMAL_LOG(ACPU_PID_TAFAGENT, "ENTER TAF_AGENT_FindCidForDial!");
 
-    /* 如果同步信号量已锁，挂起任务，依次进入等待队列；如果同步信号量未锁，锁信号量。*/
+    /* ??????????????????????????????????????????????????????????????????????????????*/
     ulResult = VOS_SmP(TAF_AGENT_GetTafAcpuSyncSem(), 0);
     if (VOS_OK != ulResult)
     {
@@ -198,7 +198,7 @@ VOS_UINT32 TAF_AGENT_FindCidForDial(
         return VOS_ERR;
     }
 
-    /* 构造消息 */
+    /* ???????? */
     pstMsg = (TAFAGENT_APS_FIND_CID_FOR_DIAL_REQ_STRU*)PS_ALLOC_MSG_WITH_HEADER_LEN(ACPU_PID_TAFAGENT,
                                                                                     sizeof(TAFAGENT_APS_FIND_CID_FOR_DIAL_REQ_STRU));
     if (VOS_NULL_PTR == pstMsg)
@@ -210,18 +210,18 @@ VOS_UINT32 TAF_AGENT_FindCidForDial(
         return VOS_ERR;
     }
 
-    /* 填写消息头 */
+    /* ?????????? */
     pstMsg->ulReceiverPid               = AT_GetDestPid(usClientId, I0_WUEPS_PID_TAF);
     pstMsg->enMsgId                     = ID_TAFAGENT_APS_FIND_CID_FOR_DIAL_REQ;
 
-     /* 设置信号量 */
+     /* ?????????? */
     TAF_AGENT_SetTafAcpuCnfMsg(VOS_NULL_PTR);
 
     TAF_AGENT_ClearMsg();
 
     TAF_AGENT_SET_ACPU_CNF_SEM_LOCK_FLG(VOS_TRUE);
 
-    /* 将请求消息发送给CCPU */
+    /* ????????????????CCPU */
     ulResult = PS_SEND_MSG(ACPU_PID_TAFAGENT, pstMsg);
     if (VOS_OK != ulResult)
     {
@@ -233,7 +233,7 @@ VOS_UINT32 TAF_AGENT_FindCidForDial(
         return VOS_ERR;
     }
 
-    /* 等待回复信号量初始为锁状态，等待CCPU的回复后信号量解锁。 */
+    /* ????????????????????????????????CCPU???????????????????? */
     ulResult = VOS_SmP(TAF_AGENT_GetTafAcpuCnfSem(), PS_SYNC_CNF_TIMEOUT_LEN);
     if (VOS_OK != ulResult)
     {
@@ -298,7 +298,7 @@ VOS_UINT32 TAF_AGENT_SetPdpCidPara(
 
     TAFAGENT_NORMAL_LOG(ACPU_PID_TAFAGENT, "ENTER TAF_AGENT_SetPdpCidPara!");
 
-    /* 如果同步信号量已锁，挂起任务，依次进入等待队列；如果同步信号量未锁，锁信号量。*/
+    /* ??????????????????????????????????????????????????????????????????????????????*/
     ulResult = VOS_SmP(TAF_AGENT_GetTafAcpuSyncSem(), 0);
     if (VOS_OK != ulResult)
     {
@@ -308,7 +308,7 @@ VOS_UINT32 TAF_AGENT_SetPdpCidPara(
         return VOS_ERR;
     }
 
-    /* 构造消息 */
+    /* ???????? */
     pstMsg = (TAFAGENT_APS_SET_CID_PARA_REQ_STRU*)PS_ALLOC_MSG_WITH_HEADER_LEN(ACPU_PID_TAFAGENT,
                                                                                sizeof(TAFAGENT_APS_SET_CID_PARA_REQ_STRU));
     if (VOS_NULL_PTR == pstMsg)
@@ -320,7 +320,7 @@ VOS_UINT32 TAF_AGENT_SetPdpCidPara(
         return VOS_ERR;
     }
 
-    /* 填写消息头 */
+    /* ?????????? */
     pstMsg->ulReceiverPid               = AT_GetDestPid(usClientId, I0_WUEPS_PID_TAF);
     pstMsg->enMsgId                     = ID_TAFAGENT_APS_SET_CID_PARA_REQ;
 
@@ -328,14 +328,14 @@ VOS_UINT32 TAF_AGENT_SetPdpCidPara(
 
     TAF_MEM_CPY_S((VOS_VOID*)&(pstMsg->stPdpPrimContextExt), sizeof(pstMsg->stPdpPrimContextExt), (VOS_VOID*)pstPdpPrimContextExt,sizeof(TAF_PDP_PRIM_CONTEXT_EXT_STRU));
 
-    /* 设置信号量 */
+    /* ?????????? */
     TAF_AGENT_SetTafAcpuCnfMsg(VOS_NULL_PTR);
 
     TAF_AGENT_ClearMsg();
 
     TAF_AGENT_SET_ACPU_CNF_SEM_LOCK_FLG(VOS_TRUE);
 
-    /* 将请求消息发送给CCPU */
+    /* ????????????????CCPU */
     ulResult = PS_SEND_MSG(ACPU_PID_TAFAGENT, pstMsg);
     if (VOS_OK != ulResult)
     {
@@ -347,7 +347,7 @@ VOS_UINT32 TAF_AGENT_SetPdpCidPara(
         return VOS_ERR;
     }
 
-    /* 等待回复信号量初始为锁状态，等待CCPU的回复后信号量解锁。 */
+    /* ????????????????????????????????CCPU???????????????????? */
     ulResult = VOS_SmP(TAF_AGENT_GetTafAcpuCnfSem(), PS_SYNC_CNF_TIMEOUT_LEN);
     if (VOS_OK != ulResult)
     {
@@ -413,7 +413,7 @@ VOS_UINT32 TAF_AGENT_GetPdpCidPara(
 
     TAFAGENT_NORMAL_LOG(ACPU_PID_TAFAGENT, "ENTER TAF_AGENT_GetPdpCidPara!");
 
-    /* 如果同步信号量已锁，挂起任务，依次进入等待队列；如果同步信号量未锁，锁信号量。*/
+    /* ??????????????????????????????????????????????????????????????????????????????*/
     ulResult = VOS_SmP(TAF_AGENT_GetTafAcpuSyncSem(), 0);
     if (VOS_OK != ulResult)
     {
@@ -423,7 +423,7 @@ VOS_UINT32 TAF_AGENT_GetPdpCidPara(
         return VOS_ERR;
     }
 
-    /* 构造消息 */
+    /* ???????? */
     pstMsg = (TAFAGENT_APS_GET_CID_PARA_REQ_STRU*)PS_ALLOC_MSG_WITH_HEADER_LEN(ACPU_PID_TAFAGENT,
                                                                                sizeof(TAFAGENT_APS_GET_CID_PARA_REQ_STRU));
     if (VOS_NULL_PTR == pstMsg)
@@ -435,20 +435,20 @@ VOS_UINT32 TAF_AGENT_GetPdpCidPara(
         return VOS_ERR;
     }
 
-    /* 填写消息头 */
+    /* ?????????? */
     pstMsg->ulReceiverPid               = AT_GetDestPid(usClientId, I0_WUEPS_PID_TAF);
     pstMsg->enMsgId                     = ID_TAFAGENT_APS_GET_CID_PARA_REQ;
 
     pstMsg->ucCid                       = ucCid;
 
-    /* 设置信号量 */
+    /* ?????????? */
     TAF_AGENT_SetTafAcpuCnfMsg(VOS_NULL_PTR);
 
     TAF_AGENT_ClearMsg();
 
     TAF_AGENT_SET_ACPU_CNF_SEM_LOCK_FLG(VOS_TRUE);
 
-    /* 将请求消息发送给CCPU */
+    /* ????????????????CCPU */
     ulResult = PS_SEND_MSG(ACPU_PID_TAFAGENT, pstMsg);
     if (VOS_OK != ulResult)
     {
@@ -460,7 +460,7 @@ VOS_UINT32 TAF_AGENT_GetPdpCidPara(
         return VOS_ERR;
     }
 
-    /* 等待回复信号量初始为锁状态，等待CCPU的回复后信号量解锁。 */
+    /* ????????????????????????????????CCPU???????????????????? */
     ulResult = VOS_SmP(TAF_AGENT_GetTafAcpuCnfSem(), PS_SYNC_CNF_TIMEOUT_LEN);
     if (VOS_OK != ulResult)
     {
@@ -527,7 +527,7 @@ VOS_UINT32 TAF_AGENT_SetPdpCidQosPara(
 
     TAFAGENT_NORMAL_LOG(ACPU_PID_TAFAGENT, "ENTER TAF_AGENT_SetPdpCidQosPara!");
 
-    /* 如果同步信号量已锁，挂起任务，依次进入等待队列；如果同步信号量未锁，锁信号量。*/
+    /* ??????????????????????????????????????????????????????????????????????????????*/
     ulResult = VOS_SmP(TAF_AGENT_GetTafAcpuSyncSem(), 0);
     if (VOS_OK != ulResult)
     {
@@ -537,7 +537,7 @@ VOS_UINT32 TAF_AGENT_SetPdpCidQosPara(
         return VOS_ERR;
     }
 
-    /* 构造消息 */
+    /* ???????? */
     pstMsg = (TAFAGENT_APS_SET_CID_QOS_PARA_REQ_STRU*)PS_ALLOC_MSG_WITH_HEADER_LEN(ACPU_PID_TAFAGENT,
                                                                                sizeof(TAFAGENT_APS_SET_CID_QOS_PARA_REQ_STRU));
     if (VOS_NULL_PTR == pstMsg)
@@ -549,7 +549,7 @@ VOS_UINT32 TAF_AGENT_SetPdpCidQosPara(
         return VOS_ERR;
     }
 
-    /* 填写消息头 */
+    /* ?????????? */
     pstMsg->ulReceiverPid               = AT_GetDestPid(usClientId, I0_WUEPS_PID_TAF);
     pstMsg->ulMsgId                     = ID_TAFAGENT_APS_SET_CID_QOS_PARA_REQ;
 
@@ -557,14 +557,14 @@ VOS_UINT32 TAF_AGENT_SetPdpCidQosPara(
 
     TAF_MEM_CPY_S((VOS_VOID*)&(pstMsg->stQosPara), sizeof(pstMsg->stQosPara), (VOS_VOID*)pstQosPara, sizeof(TAF_PS_PDP_QOS_SET_PARA_STRU));
 
-    /* 设置信号量 */
+    /* ?????????? */
     TAF_AGENT_SetTafAcpuCnfMsg(VOS_NULL_PTR);
 
     TAF_AGENT_ClearMsg();
 
     TAF_AGENT_SET_ACPU_CNF_SEM_LOCK_FLG(VOS_TRUE);
 
-    /* 将请求消息发送给CCPU */
+    /* ????????????????CCPU */
     ulResult = PS_SEND_MSG(ACPU_PID_TAFAGENT, pstMsg);
     if (VOS_OK != ulResult)
     {
@@ -576,7 +576,7 @@ VOS_UINT32 TAF_AGENT_SetPdpCidQosPara(
         return VOS_ERR;
     }
 
-    /* 等待回复信号量初始为锁状态，等待CCPU的回复后信号量解锁。 */
+    /* ????????????????????????????????CCPU???????????????????? */
     ulResult = VOS_SmP(TAF_AGENT_GetTafAcpuCnfSem(), PS_SYNC_CNF_TIMEOUT_LEN);
     if (VOS_OK != ulResult)
     {
@@ -642,7 +642,7 @@ VOS_UINT32 TAF_AGENT_GetPdpCidQosPara(
 
     TAFAGENT_NORMAL_LOG(ACPU_PID_TAFAGENT, "ENTER TAF_AGENT_GetPdpCidQosPara!");
 
-    /* 如果同步信号量已锁，挂起任务，依次进入等待队列；如果同步信号量未锁，锁信号量。*/
+    /* ??????????????????????????????????????????????????????????????????????????????*/
     ulResult = VOS_SmP(TAF_AGENT_GetTafAcpuSyncSem(), 0);
     if (VOS_OK != ulResult)
     {
@@ -652,7 +652,7 @@ VOS_UINT32 TAF_AGENT_GetPdpCidQosPara(
         return VOS_ERR;
     }
 
-    /* 构造消息 */
+    /* ???????? */
     pstMsg = (TAFAGENT_APS_GET_CID_QOS_PARA_REQ_STRU*)PS_ALLOC_MSG_WITH_HEADER_LEN(ACPU_PID_TAFAGENT,
                                                                                sizeof(TAFAGENT_APS_GET_CID_QOS_PARA_REQ_STRU));
     if (VOS_NULL_PTR == pstMsg)
@@ -664,19 +664,19 @@ VOS_UINT32 TAF_AGENT_GetPdpCidQosPara(
         return VOS_ERR;
     }
 
-    /* 填写消息头 */
+    /* ?????????? */
     pstMsg->ulReceiverPid               = AT_GetDestPid(usClientId, I0_WUEPS_PID_TAF);
     pstMsg->ulMsgId                     = ID_TAFAGENT_APS_GET_CID_QOS_PARA_REQ;
     pstMsg->ucCid                       = ucCid;
 
-    /* 设置信号量 */
+    /* ?????????? */
     TAF_AGENT_SetTafAcpuCnfMsg(VOS_NULL_PTR);
 
     TAF_AGENT_ClearMsg();
 
     TAF_AGENT_SET_ACPU_CNF_SEM_LOCK_FLG(VOS_TRUE);
 
-    /* 将请求消息发送给CCPU */
+    /* ????????????????CCPU */
     ulResult = PS_SEND_MSG(ACPU_PID_TAFAGENT, pstMsg);
     if (VOS_OK != ulResult)
     {
@@ -688,7 +688,7 @@ VOS_UINT32 TAF_AGENT_GetPdpCidQosPara(
         return VOS_ERR;
     }
 
-    /* 等待回复信号量初始为锁状态，等待CCPU的回复后信号量解锁。 */
+    /* ????????????????????????????????CCPU???????????????????? */
     ulResult = VOS_SmP(TAF_AGENT_GetTafAcpuCnfSem(), PS_SYNC_CNF_TIMEOUT_LEN);
     if (VOS_OK != ulResult)
     {
@@ -755,7 +755,7 @@ VOS_UINT32 TAF_AGENT_GetCallInfoReq(
 
     TAFAGENT_NORMAL_LOG(ACPU_PID_TAFAGENT, "ENTER TAF_AGENT_GetCallInfoReq!");
 
-    /* 如果同步信号量已锁，挂起任务，依次进入等待队列；如果同步信号量未锁，锁信号量。*/
+    /* ??????????????????????????????????????????????????????????????????????????????*/
     ulResult = VOS_SmP(TAF_AGENT_GetTafAcpuSyncSem(), 0);
     if (VOS_OK != ulResult)
     {
@@ -765,14 +765,14 @@ VOS_UINT32 TAF_AGENT_GetCallInfoReq(
         return VOS_ERR;
     }
 
-    /* 设置信号量 */
+    /* ?????????? */
     TAF_AGENT_SetTafAcpuCnfMsg(VOS_NULL_PTR);
 
     TAF_AGENT_ClearMsg();
 
     TAF_AGENT_SET_ACPU_CNF_SEM_LOCK_FLG(VOS_TRUE);
 
-    /* 发送异步应用请求 */
+    /* ???????????????? */
     /* Modified by l60609 for DSDA PhaseIII, 2013-3-13, begin */
     ulResult = MN_CALL_SendAppRequest(ID_TAFAGENT_MN_GET_CALL_INFO_REQ,
                                       usClientId, 0, 0,
@@ -788,7 +788,7 @@ VOS_UINT32 TAF_AGENT_GetCallInfoReq(
         return VOS_ERR;
     }
 
-    /* 等待回复信号量初始为锁状态，等待CCPU的回复后信号量解锁。 */
+    /* ????????????????????????????????CCPU???????????????????? */
     ulResult = VOS_SmP(TAF_AGENT_GetTafAcpuCnfSem(), PS_SYNC_CNF_TIMEOUT_LEN);
     if (VOS_OK != ulResult)
     {
@@ -860,7 +860,7 @@ VOS_UINT32 TAF_AGENT_GetSysMode(
 
     TAFAGENT_NORMAL_LOG(ACPU_PID_TAFAGENT, "ENTER TAF_AGENT_GetSysMode!");
 
-    /* 如果同步信号量已锁，挂起任务，依次进入等待队列；如果同步信号量未锁，锁信号量。*/
+    /* ??????????????????????????????????????????????????????????????????????????????*/
     ulResult = VOS_SmP(TAF_AGENT_GetTafAcpuSyncSem(), 0);
     if (VOS_OK != ulResult)
     {
@@ -870,7 +870,7 @@ VOS_UINT32 TAF_AGENT_GetSysMode(
         return VOS_ERR;
     }
 
-    /* 构造消息 */
+    /* ???????? */
     pstMsg = (TAFAGENT_MTA_GET_SYSMODE_REQ_STRU*)PS_ALLOC_MSG_WITH_HEADER_LEN(ACPU_PID_TAFAGENT,
                                                                                sizeof(TAFAGENT_MTA_GET_SYSMODE_REQ_STRU));
     if (VOS_NULL_PTR == pstMsg)
@@ -882,19 +882,19 @@ VOS_UINT32 TAF_AGENT_GetSysMode(
         return VOS_ERR;
     }
 
-    /* 填写消息头 */
+    /* ?????????? */
     pstMsg->ulReceiverPid               = AT_GetDestPid(usClientId, I0_UEPS_PID_MTA);
 
     pstMsg->enMsgId                     = ID_TAFAGENT_MTA_GET_SYSMODE_REQ;
 
-    /* 设置信号量 */
+    /* ?????????? */
     TAF_AGENT_SetTafAcpuCnfMsg(VOS_NULL_PTR);
 
     TAF_AGENT_ClearMsg();
 
     TAF_AGENT_SET_ACPU_CNF_SEM_LOCK_FLG(VOS_TRUE);
 
-    /* 将请求消息发送给CCPU */
+    /* ????????????????CCPU */
     ulResult = PS_SEND_MSG(ACPU_PID_TAFAGENT, pstMsg);
     if (VOS_OK != ulResult)
     {
@@ -906,7 +906,7 @@ VOS_UINT32 TAF_AGENT_GetSysMode(
         return VOS_ERR;
     }
 
-    /* 等待回复信号量初始为锁状态，等待CCPU的回复后信号量解锁。 */
+    /* ????????????????????????????????CCPU???????????????????? */
     ulResult = VOS_SmP(TAF_AGENT_GetTafAcpuCnfSem(), PS_SYNC_CNF_TIMEOUT_LEN);
     if (VOS_OK != ulResult)
     {
@@ -970,7 +970,7 @@ VOS_UINT32 TAF_AGENT_GetAntState(
 
     TAFAGENT_NORMAL_LOG(ACPU_PID_TAFAGENT, "ENTER TAF_AGENT_GetAntState!");
 
-    /* 如果同步信号量已锁，挂起任务，依次进入等待队列；如果同步信号量未锁，锁信号量。*/
+    /* ??????????????????????????????????????????????????????????????????????????????*/
     ulResult = VOS_SmP(TAF_AGENT_GetTafAcpuSyncSem(), 0);
     if (VOS_OK != ulResult)
     {
@@ -980,7 +980,7 @@ VOS_UINT32 TAF_AGENT_GetAntState(
         return VOS_ERR;
     }
 
-    /* 构造消息 */
+    /* ???????? */
     pstMsg = (TAFAGENT_MTA_GET_ANT_STATE_REQ_STRU*)PS_ALLOC_MSG_WITH_HEADER_LEN(ACPU_PID_TAFAGENT,
                                                                                sizeof(TAFAGENT_MTA_GET_ANT_STATE_REQ_STRU));
     if (VOS_NULL_PTR == pstMsg)
@@ -992,18 +992,18 @@ VOS_UINT32 TAF_AGENT_GetAntState(
         return VOS_ERR;
     }
 
-    /* 填写消息头 */
+    /* ?????????? */
     pstMsg->ulReceiverPid               = AT_GetDestPid(usClientId, I0_UEPS_PID_MTA);
     pstMsg->enMsgId                     = ID_TAFAGENT_MTA_GET_ANT_STATE_REQ;
 
-    /* 设置信号量 */
+    /* ?????????? */
     TAF_AGENT_SetTafAcpuCnfMsg(VOS_NULL_PTR);
 
     TAF_AGENT_ClearMsg();
 
     TAF_AGENT_SET_ACPU_CNF_SEM_LOCK_FLG(VOS_TRUE);
 
-    /* 将请求消息发送给CCPU */
+    /* ????????????????CCPU */
     ulResult = PS_SEND_MSG(ACPU_PID_TAFAGENT, pstMsg);
     if (VOS_OK != ulResult)
     {
@@ -1015,7 +1015,7 @@ VOS_UINT32 TAF_AGENT_GetAntState(
         return VOS_ERR;
     }
 
-    /* 等待回复信号量初始为锁状态，等待CCPU的回复后信号量解锁。 */
+    /* ????????????????????????????????CCPU???????????????????? */
     ulResult = VOS_SmP(TAF_AGENT_GetTafAcpuCnfSem(), PS_SYNC_CNF_TIMEOUT_LEN);
     if (VOS_OK != ulResult)
     {
@@ -1074,7 +1074,7 @@ VOS_UINT32 TAF_AGENT_FidInit (enum VOS_INIT_PHASE_DEFINE enPhase)
     {
         case VOS_IP_LOAD_CONFIG:
 
-            /* 网卡模块注册PID */
+            /* ????????????PID */
             ulRslt = VOS_RegisterPIDInfo(ACPU_PID_TAFAGENT,
                                         (Init_Fun_Type)TAF_AGENT_PidInit,
                                         (Msg_Fun_Type)TAF_AGENT_ProcMsg);

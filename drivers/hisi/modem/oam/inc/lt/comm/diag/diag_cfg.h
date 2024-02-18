@@ -77,7 +77,7 @@ extern "C" {
 #define DIAG_CFG_MODULE_IS_VALID(ulModuleId)    ((ulModuleId < VOS_PID_BUTT)&&(ulModuleId >= VOS_PID_DOPRAEND))
 #define DIAG_CFG_MODULE_IS_INVALID(ulModuleId)  ((ulModuleId >= VOS_PID_BUTT)||(ulModuleId < VOS_PID_DOPRAEND))
 
-/*层间消息模块ID合法性检查*/
+/*????????????ID??????????*/
 #define DIAG_CFG_LAYER_MODULE_IS_ACORE(ulModuleId) ((ulModuleId >= VOS_PID_CPU_ID_1_DOPRAEND)&&(ulModuleId < VOS_CPU_ID_1_PID_BUTT))
 #define DIAG_CFG_LAYER_MODULE_IS_CCORE(ulModuleId) ((ulModuleId >= VOS_PID_CPU_ID_0_DOPRAEND)&&(ulModuleId < VOS_CPU_ID_0_PID_BUTT))
 
@@ -85,22 +85,22 @@ extern "C" {
 #define DIAG_CFG_LAYER_MODULE_CCORE_OFFSET(ulModuleId)  (ulModuleId - VOS_PID_CPU_ID_0_DOPRAEND)
 
 
-/* DIAG已初始化 */
+/* DIAG???????? */
 #define DIAG_CFG_INIT                0x00000001
 
-/* HSO已连接 */
+/* HSO?????? */
 #define DIAG_CFG_CONN                0x00000002
 
-/* LT空口消息已打开 */
+/* LT?????????????? */
 #define DIAG_CFG_LT_AIR              0x00000004
 
-/* GU空口消息已打开 */
+/* GU?????????????? */
 #define DIAG_CFG_GU_AIR              0x00000008
 
-/* EVENT开关已打开 */
+/* EVENT?????????? */
 #define DIAG_CFG_EVT                 0x00000010
 
-/* 开机log开关已打开 */
+/* ????log?????????? */
 #define DIAG_CFG_POWERONLOG          0x00010000
 
 #define DIAG_CMD_DATA_MAX_LEN                       (4096)
@@ -114,13 +114,13 @@ extern "C" {
 
 #define DIAG_GET_CFG_SWT(swt)   ((DIAG_CMD_CFG_SWT_OPEN == swt) ? DIAG_CFG_SWT_OPEN : DIAG_CFG_SWT_CLOSE )
 
-#define DIAG_EVENT_MODID(id)    (id & 0x7fffffff)   /* 低31 bits是PID */
-#define DIAG_EVENT_SWT(id)      (id >> 31)          /* 最高bit是开关 */
+#define DIAG_EVENT_MODID(id)    (id & 0x7fffffff)   /* ??31 bits??PID */
+#define DIAG_EVENT_SWT(id)      (id >> 31)          /* ????bit?????? */
 
 #define DIAG_CFG_PRINT_TOTAL_MODULE_SWT_NOT_USE     (0xFFFFFFFF)
 #define DIAG_CFG_PRINT_TOTAL_MODULE                 (0xFFFFFFFF)
 
-/* 层间消息模块类型定义*/
+/* ????????????????????*/
 #define DIAG_CMD_LAYER_MOD_SRC                      (0)
 #define DIAG_CMD_LAYER_MOD_DST                      (1)
 
@@ -145,7 +145,7 @@ enum ENUM_DIAG_CFG_BIT
 };
 typedef VOS_UINT32 ENUM_DIAG_CFG_BIT_U32 ;
 
-/*层间、空口、用户面数据的开关采用如下宏定义，注意由U32改成U8*/
+/*??????????????????????????????????????????????????U32????U8*/
 enum ENUM_DIAG_CFG_SWT
 {
     DIAG_CFG_SWT_CLOSE  = 0,
@@ -161,7 +161,7 @@ typedef enum
     SYSVIEW_TASK_INFO       = 3,
     SYSVIEW_INT_LOCK_INFO   = 4,
     SYSVIEW_SWT_ALL         = 0xff,
-    SYSVIEW_SWT_MAX         /* 边界值 */
+    SYSVIEW_SWT_MAX         /* ?????? */
 } BSP_SYSVIEW_TYPE_E;
 
 
@@ -171,35 +171,35 @@ typedef enum
 
 
 /*****************************************************************************
- 描述 : HSO连接UE设备
+ ???? : HSO????UE????
 ID   : DIAG_CMD_HOST_CONNECT
 REQ  : DIAG_CMD_HOST_CONNECT_REQ_STRU
 CNF  : DIAG_CMD_HOST_CONNECT_CNF_STRU
 *****************************************************************************/
 typedef struct
 {
-    VOS_UINT32 ulMajorMinorVersion; /* 主版本号.次版本号*/
-    VOS_UINT32 ulRevisionVersion;   /* 修正版本号*/
-    VOS_UINT32 ulBuildVersion;      /* 内部版本号*/
+    VOS_UINT32 ulMajorMinorVersion; /* ????????.????????*/
+    VOS_UINT32 ulRevisionVersion;   /* ??????????*/
+    VOS_UINT32 ulBuildVersion;      /* ??????????*/
 } DIAG_CMD_UE_SOFT_VERSION_STRU;
 
 typedef struct
 {
-    VOS_UINT16 usVVerNo;           /* V部分*/
-    VOS_UINT16 usRVerNo;           /* R部分*/
-    VOS_UINT16 usCVerNo;           /* C部分*/
-    VOS_UINT16 usBVerNo;           /* B部分*/
-    VOS_UINT16 usSpcNo;            /* SPC部分*/
-    VOS_UINT16 usHardwareVerNo;    /* 硬件PCB号和印制板版本号*/
-    VOS_UINT32 ulProductNo;        /* 产品类型编号，即不同外设组合的硬件平台*/
-} DIAG_CMD_UE_BUILD_VER_STRU; /* 内部版本*/
+    VOS_UINT16 usVVerNo;           /* V????*/
+    VOS_UINT16 usRVerNo;           /* R????*/
+    VOS_UINT16 usCVerNo;           /* C????*/
+    VOS_UINT16 usBVerNo;           /* B????*/
+    VOS_UINT16 usSpcNo;            /* SPC????*/
+    VOS_UINT16 usHardwareVerNo;    /* ????PCB????????????????*/
+    VOS_UINT32 ulProductNo;        /* ??????????????????????????????????????*/
+} DIAG_CMD_UE_BUILD_VER_STRU; /* ????????*/
 
 typedef struct
 {
-    /* 010: OM通道融合的版本        */
-    /* 110: OM融合GU未融合的版本    */
-    /* 100: OM完全融合的版本        */
-    VOS_UINT32  ulDrxControlFlag:1; /* DRX部分*/
+    /* 010: OM??????????????        */
+    /* 110: OM????GU????????????    */
+    /* 100: OM??????????????        */
+    VOS_UINT32  ulDrxControlFlag:1; /* DRX????*/
     VOS_UINT32  ulPortFlag      :1; /* OM Port flag 0:old,1:new */
     VOS_UINT32  ulOmUnifyFlag   :1; /* OM */
     VOS_UINT32  ulReserved      :29;
@@ -207,10 +207,10 @@ typedef struct
 
 typedef struct
 {
-    VOS_UINT32 ulAuid;          /* 原AUID*/
-    VOS_UINT32 ulSn;            /* HSO分发，插件命令管理*/
+    VOS_UINT32 ulAuid;          /* ??AUID*/
+    VOS_UINT32 ulSn;            /* HSO??????????????????*/
 
-    VOS_UINT32 ulRc;            /* 结果码*/
+    VOS_UINT32 ulRc;            /* ??????*/
     VOS_CHAR szImei[16];
     DIAG_CMD_UE_SOFT_VERSION_STRU stUeSoftVersion;
     DIAG_CMD_UE_BUILD_VER_STRU stBuildVersion;
@@ -219,57 +219,57 @@ typedef struct
     {
         VOS_UINT32              UintValue;
         DIAG_CONTROLFLAG_STRU   CtrlFlag;
-    } diag_cfg;/* B135新增，标示低功耗特性版本: 1:低功耗版本；0：正常版本；0xFFFFFFFF:MSP读取NV项失败，HSO会认为连接不成功并给出提示，要求重新进行连接*/
+    } diag_cfg;/* B135????????????????????????: 1:????????????0????????????0xFFFFFFFF:MSP????NV????????HSO????????????????????????????????????????????*/
     VOS_UINT32 ulLpdMode;
     NV_ITEM_AGENT_FLAG_STRU stAgentFlag;
     VOS_CHAR szProduct[64];
 } DIAG_CMD_HOST_CONNECT_CNF_STRU;
 
-/* 断开连接 */
+/* ???????? */
 typedef struct
 {
-    VOS_UINT32 ulAuid;          /* 原AUID*/
-    VOS_UINT32 ulSn;            /* HSO分发，插件命令管理*/
-    VOS_UINT32 ulRc;            /* 结果码*/
+    VOS_UINT32 ulAuid;          /* ??AUID*/
+    VOS_UINT32 ulSn;            /* HSO??????????????????*/
+    VOS_UINT32 ulRc;            /* ??????*/
 } DIAG_CMD_HOST_DISCONNECT_CNF_STRU;
 
 
-/* 获取单板信息 */
+/* ???????????? */
 typedef struct
 {
-    VOS_UINT32 ulAuid;          /* 原AUID */
-    VOS_UINT32 ulSn;            /* HSO分发，插件命令管理 */
-    VOS_UINT32 ulInfo;          /* 查询信息 */
+    VOS_UINT32 ulAuid;          /* ??AUID */
+    VOS_UINT32 ulSn;            /* HSO?????????????????? */
+    VOS_UINT32 ulInfo;          /* ???????? */
 } DIAG_CMD_GET_MDM_INFO_REQ_STRU;
 
 
-/* disconnect 通知结构体 */
+/* disconnect ?????????? */
 typedef struct
 {
     VOS_UINT32                  ulRsv;
 } DIAG_MSG_TO_OTHERCPU_DISCONN_STRU;
 
 /*****************************************************************************
- 描述 : 针对模块的打印开关命令,支持多个命令参数
+ ???? : ??????????????????????,????????????????
 ID   : DIAG_CMD_REPLAY_SET_CNF_STRU
 REQ : DIAG_CMD_REPLAY_SET_REQ_STRU
 CNF : DIAG_CMD_REPLAY_SET_CNF_STRU
 *****************************************************************************/
 typedef struct
 {
-    VOS_UINT32 ulReserved;/*保留*/
+    VOS_UINT32 ulReserved;/*????*/
 } DIAG_CMD_REPLAY_SET_REQ_STRU;
 
 typedef struct
 {
-    VOS_UINT32 ulAuid;          /* 原AUID*/
-    VOS_UINT32 ulSn;            /* HSO分发，插件命令管理*/
+    VOS_UINT32 ulAuid;          /* ??AUID*/
+    VOS_UINT32 ulSn;            /* HSO??????????????????*/
     VOS_UINT32 ulRet;
 } DIAG_CMD_REPLAY_SET_CNF_STRU;
 
 
 /*****************************************************************************
- 描述 : 针对模块的打印开关命令,支持多个命令参数
+ ???? : ??????????????????????,????????????????
 ID   : DIAG_CMD_LOG_CAT_PRINT
 REQ : DIAG_CMD_LOG_CAT_PRINT_REQ_STRU
 CNF : DIAG_CMD_LOG_CAT_PRINT_CNF_STRU
@@ -278,44 +278,44 @@ IND : DIAG_CMD_LOG_PRINT_RAW_TXT_IND_STRU
 
 typedef struct
 {
-    VOS_UINT32 ulModuleId;      /* 如果为0xFFFFFFFF表示为所有模块的Level开关*/
+    VOS_UINT32 ulModuleId;      /* ??????0xFFFFFFFF????????????????Level????*/
     VOS_UINT32 ulLevelFilter;   /* (0|ERROR|WARNING|NORMAL|INFO|0|0|0) 1:OPEN, 0:CLOSE*/
 } DIAG_CMD_LOG_CAT_PRINT_REQ_STRU;
 
 typedef struct
 {
-    VOS_UINT32 ulAuid;          /* 原AUID*/
-    VOS_UINT32 ulSn;            /* HSO分发，插件命令管理*/
-    VOS_UINT32 ulRc;            /* 结果码*/
+    VOS_UINT32 ulAuid;          /* ??AUID*/
+    VOS_UINT32 ulSn;            /* HSO??????????????????*/
+    VOS_UINT32 ulRc;            /* ??????*/
     VOS_UINT32 ulModuleId;
 } DIAG_CMD_LOG_CAT_PRINT_CNF_STRU;
 
 /*****************************************************************************
-描述 : 针对模块的层间开关,支持多个命令参数
+???? : ??????????????????,????????????????
 ID   : DIAG_CMD_LOG_CAT_LAYER
 REQ : DIAG_CMD_LOG_CAT_LAYER_REQ_STRU
 CNF : DIAG_CMD_LOG_CAT_LAYER_CNF_STRU
-说明: 如果多包命令参数的情况，一个模块错误，就会返回失败，但是正确的模块参数依然会存储
+????: ????????????????????????????????????????????????????????????????????????????????
 IND : DIAG_CMD_LOG_LAYER_IND_STRU
 *****************************************************************************/
 
 typedef struct
 {
-    VOS_UINT32 ulModuleId;       /* 模块ID*/
-    VOS_UINT32 ulIsDestModule;   /* 0: 表示Source Module， 1：表示Dest Module*/
-    VOS_UINT32 ulSwitch;         /* (0x00000000): 关；(0x80000000)：开*/
+    VOS_UINT32 ulModuleId;       /* ????ID*/
+    VOS_UINT32 ulIsDestModule;   /* 0: ????Source Module?? 1??????Dest Module*/
+    VOS_UINT32 ulSwitch;         /* (0x00000000): ????(0x80000000)????*/
 } DIAG_CMD_LOG_CAT_LAYER_REQ_STRU;
 
 typedef struct
 {
-    VOS_UINT32 ulAuid;          /* 原AUID*/
-    VOS_UINT32 ulSn;            /* HSO分发，插件命令管理*/
-    VOS_UINT32 ulRc;            /* 结果码*/
+    VOS_UINT32 ulAuid;          /* ??AUID*/
+    VOS_UINT32 ulSn;            /* HSO??????????????????*/
+    VOS_UINT32 ulRc;            /* ??????*/
     VOS_UINT32 ulModuleId;
 } DIAG_CMD_LOG_CAT_LAYER_CNF_STRU;
 
 /*****************************************************************************
-描述 : 针对AIR的总开关,支持多个命令参数
+???? : ????AIR????????,????????????????
 ID   : DIAG_CMD_LOG_CAT_AIR
 REQ : DIAG_CMD_LOG_CAT_AIR_REQ_STRU
 CNF : DIAG_CMD_LOG_CAT_AIR_CNF_STRU
@@ -323,19 +323,19 @@ IND : DIAG_CMD_LOG_AIR_IND_STRU
 *****************************************************************************/
 typedef struct
 {
-    VOS_UINT32 ulSwitch;        /* (0x00000000): 关；(0x80000000)：开*/
-    VOS_UINT32 ulGuSwitch;      /*  1开，0关*/
+    VOS_UINT32 ulSwitch;        /* (0x00000000): ????(0x80000000)????*/
+    VOS_UINT32 ulGuSwitch;      /*  1????0??*/
 } DIAG_CMD_LOG_CAT_AIR_REQ_STRU;
 
 typedef struct
 {
-    VOS_UINT32 ulAuid;          /* 原AUID*/
-    VOS_UINT32 ulSn;            /* HSO分发，插件命令管理*/
-    VOS_UINT32 ulRc;            /* 结果码*/
+    VOS_UINT32 ulAuid;          /* ??AUID*/
+    VOS_UINT32 ulSn;            /* HSO??????????????????*/
+    VOS_UINT32 ulRc;            /* ??????*/
 } DIAG_CMD_LOG_CAT_AIR_CNF_STRU;
 
 /*****************************************************************************
-描述 : 针对EVENT的总开关,支持多个命令参数
+???? : ????EVENT????????,????????????????
 ID   : DIAG_CMD_LOG_CAT_EVENT
 REQ : DIAG_CMD_LOG_CAT_EVENT_REQ_STRU
 CNF : DIAG_CMD_LOG_CAT_EVENT_CNF_STRU
@@ -350,38 +350,38 @@ typedef struct
 
 typedef struct
 {
-    VOS_UINT32 ulAuid;          /* 原AUID*/
-    VOS_UINT32 ulSn;            /* HSO分发，插件命令管理*/
-    VOS_UINT32 ulRc;            /* 结果码*/
+    VOS_UINT32 ulAuid;          /* ??AUID*/
+    VOS_UINT32 ulSn;            /* HSO??????????????????*/
+    VOS_UINT32 ulRc;            /* ??????*/
 } DIAG_CMD_LOG_CAT_EVENT_CNF_STRU;
 
 /*****************************************************************************
-描述 : 针对消息ID/命令ID开关,支持多个命令参数
+???? : ????????ID/????ID????,????????????????
 ID   : DIAG_CMD_LOG_CAT_CFG
 REQ : DIAG_CMD_LOG_CAT_CFG_REQ_STRU
 CNF : DIAG_CMD_LOG_CAT_CFG_CNF_STRU
-说明:   如果多包命令参数的情况，一包MSG ID错误，就会返回失败,但是正确的参数依然会存储;
+????:   ????????????????????????????MSG ID??????????????????,????????????????????????;
 *****************************************************************************/
 typedef struct
 {
-    VOS_UINT32 ulId;            /* 消息ID/命令ID*/
-    VOS_UINT32 ulCategory;      /* 取值为 DIAG_CMD_LOG_CATETORY_XXX*/
+    VOS_UINT32 ulId;            /* ????ID/????ID*/
+    VOS_UINT32 ulCategory;      /* ?????? DIAG_CMD_LOG_CATETORY_XXX*/
     VOS_UINT32 ulSwitch;
 } DIAG_CMD_LOG_CAT_CFG_REQ_STRU;
 
 typedef struct
 {
-    VOS_UINT32 ulAuid;          /* 原AUID*/
-    VOS_UINT32 ulSn;            /* HSO分发，插件命令管理*/
-    VOS_UINT32 ulRc;            /* 结果码*/
-    VOS_UINT32 ulId;            /* 消息ID/命令ID*/
+    VOS_UINT32 ulAuid;          /* ??AUID*/
+    VOS_UINT32 ulSn;            /* HSO??????????????????*/
+    VOS_UINT32 ulRc;            /* ??????*/
+    VOS_UINT32 ulId;            /* ????ID/????ID*/
 } DIAG_CMD_LOG_CAT_CFG_CNF_STRU;
 
 
 
 typedef struct
 {
-    VOS_UINT32 ulId;           // 消息ID
+    VOS_UINT32 ulId;           // ????ID
     VOS_UINT32 ulSwt;
 }DIAG_CFG_LOG_CAT_MSG_CFG_STRU;
 
@@ -393,17 +393,17 @@ typedef struct
 }DIAG_CFG_LOG_CAT_CFG_STRU;
 
 /*****************************************************************************
-描述 : 针对获取时间戳的参数
+???? : ????????????????????
 CNF : DIAG_TIMESTAMP_CNF_STRU
 *****************************************************************************/
 
 typedef struct
 {
-    VOS_UINT32  ulAuid;                     /* 原AUID*/
-    VOS_UINT32  ulSn;                       /* HSO分发，插件命令管理*/
-    VOS_UINT    ulErrcode;                  /* 0:成功 1:64位时间戳获取失败 2:32位时间戳获取失败*/
-    VOS_UINT    ulGuTimeStampInitValue;     /* 32位时间戳 */
-    VOS_UINT64  ulTLTimeStampInitValue;     /* 64位时间戳 */
+    VOS_UINT32  ulAuid;                     /* ??AUID*/
+    VOS_UINT32  ulSn;                       /* HSO??????????????????*/
+    VOS_UINT    ulErrcode;                  /* 0:???? 1:64???????????????? 2:32????????????????*/
+    VOS_UINT    ulGuTimeStampInitValue;     /* 32???????? */
+    VOS_UINT64  ulTLTimeStampInitValue;     /* 64???????? */
 }DIAG_TIMESTAMP_CNF_STRU;
 
 /*****************************************************************************

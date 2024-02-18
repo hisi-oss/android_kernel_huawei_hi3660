@@ -316,7 +316,7 @@ int32 hi1102_bfgx_dev_power_off(void)
     {
         if (SUCCESS != release_tty_drv_etc(ps_core_d->pm_data))
         {
-           /*代码执行到此处，说明六合一所有业务都已经关闭，无论tty是否关闭成功，device都要下电*/
+           /*??????????????????????????????????????????????????tty??????????????device????????*/
            PS_PRINT_ERR("wifi off, close tty is err!");
         }
 
@@ -331,14 +331,14 @@ int32 hi1102_bfgx_dev_power_off(void)
     {
         if(SUCCESS != uart_bfgx_close_cmd_etc())
         {
-           /*bfgx self close fail 了，后面也要通过wifi shutdown bcpu*/
+           /*bfgx self close fail ????????????????wifi shutdown bcpu*/
            PS_PRINT_ERR("bfgx self close fail\n");
            CHR_EXCEPTION(CHR_GNSS_DRV(CHR_GNSS_DRV_EVENT_PLAT, CHR_PLAT_DRV_ERROR_CLOSE_BCPU));
         }
 
         if (SUCCESS != release_tty_drv_etc(ps_core_d->pm_data))
         {
-           /*代码执行到此处，说明bfgx所有业务都已经关闭，无论tty是否关闭成功，都要关闭bcpu*/
+           /*????????????????????bfgx????????????????????????tty??????????????????????bcpu*/
            PS_PRINT_ERR("wifi on, close tty is err!");
         }
 
@@ -373,13 +373,13 @@ int32 hi1102_wlan_power_off(void)
     }
     else
     {
-        /*先关闭SDIO TX通道*/
+        /*??????SDIO TX????*/
         hcc_bus_disable_state(hcc_get_current_110x_bus(), OAL_BUS_STATE_TX);
 
         /*wakeup dev,send poweroff cmd to wifi*/
         if(OAL_SUCC != wlan_pm_poweroff_cmd_etc())
         {
-            /*wifi self close 失败了也继续往下执行，uart关闭WCPU，异常恢复推迟到wifi下次open的时候执行*/
+            /*wifi self close ??????????????????????uart????WCPU????????????????wifi????open??????????*/
             DECLARE_DFT_TRACE_KEY_INFO("wlan_poweroff_by_sdio_fail",OAL_DFT_TRACE_FAIL);
             CHR_EXCEPTION(CHR_WIFI_DRV(CHR_WIFI_DRV_EVENT_PLAT, CHR_PLAT_DRV_ERROR_CLOSE_WCPU));
 #ifdef PLATFORM_DEBUG_ENABLE
@@ -392,7 +392,7 @@ int32 hi1102_wlan_power_off(void)
         /*power off cmd execute succ,send shutdown wifi cmd to BFGN */
         if(OAL_SUCC != uart_wifi_close_etc())
         {
-            /*uart关闭WCPU失败也继续执行，DFR推迟到wifi下次open的时候执行*/
+            /*uart????WCPU????????????????DFR??????wifi????open??????????*/
             DECLARE_DFT_TRACE_KEY_INFO("wlan_poweroff_uart_cmd_fail",OAL_DFT_TRACE_FAIL);
             CHR_EXCEPTION(CHR_WIFI_DRV(CHR_WIFI_DRV_EVENT_PLAT, CHR_PLAT_DRV_ERROR_CLOSE_WCPU));
         }
@@ -500,7 +500,7 @@ int32 hi1102_board_power_on(uint32 ul_subsystem)
 
     //if(hcc_get_current_110x_bus())
     {
-        /*第一次枚举时BUS 还未初始化*/
+        /*????????????BUS ??????????*/
         ret = hcc_bus_power_ctrl_register(hcc_get_current_110x_bus(), HCC_BUS_CTRL_POWER_UP, board_wlan_gpio_power_on, (void*)(long)gpio);
         hcc_bus_power_action(hcc_get_current_110x_bus(), HCC_BUS_POWER_UP);
     }
@@ -563,7 +563,7 @@ int32 hi1102_get_board_uart_port(void)
             return BOARD_FAIL;
         }
 
-        /*使用uart4，需要在dts里新增DTS_PROP_UART_PCLK项，指明uart4不依赖sensorhub*/
+        /*????uart4????????dts??????DTS_PROP_UART_PCLK????????uart4??????sensorhub*/
         if (of_property_read_bool(np, DTS_PROP_UART_PCLK))
         {
             PS_PRINT_INFO("uart pclk normal\n");
@@ -785,8 +785,8 @@ int32 hi1102_board_get_power_pinctrl(struct platform_device *pdev)
     struct pinctrl_state *pinctrl_def;
     struct pinctrl_state *pinctrl_idle;
 
-    /* 检查是否需要prepare before board power on */
-    /* JTAG SELECT 拉低，XLDO MODE选择2.8v */
+    /* ????????????prepare before board power on */
+    /* JTAG SELECT ??????XLDO MODE????2.8v */
     ret = get_board_dts_node_etc(&np, DTS_NODE_HI110X);
     if(BOARD_SUCC != ret)
     {

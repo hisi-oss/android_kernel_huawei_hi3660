@@ -9,7 +9,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "oal_profiling.h"
 #include "oal_net.h"
@@ -20,7 +20,7 @@ extern "C" {
 #include "mac_data.h"
 #include "hmac_frag.h"
 #include "hmac_11i.h"
-#ifdef _PRE_WLAN_FEATURE_MCAST /* 组播转单播 */
+#ifdef _PRE_WLAN_FEATURE_MCAST /* ?????????? */
 #include "hmac_m2u.h"
 #endif
 
@@ -82,13 +82,13 @@ extern "C" {
 #define PPS_LEVEL_BUSY      (1)
 #define PSM_PPS_LEVEL_SUCCESSIVE_DOWN_CNT    (3)
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 #if defined(_PRE_PRODUCT_ID_HI110X_HOST)
 OAL_STATIC oal_uint8 g_uc_ac_new = 0;
 #endif
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC != _PRE_MULTI_CORE_MODE)
-static oal_uint16 us_noqos_frag_seqnum= 0; /*保存非qos分片帧seqnum*/
+static oal_uint16 us_noqos_frag_seqnum= 0; /*??????qos??????seqnum*/
 #endif
 
 mac_rx_dyn_bypass_extlna_stru g_st_rx_dyn_bypass_extlna_switch = {0};
@@ -96,9 +96,9 @@ mac_rx_dyn_bypass_extlna_stru g_st_rx_dyn_bypass_extlna_switch = {0};
 mac_small_amsdu_switch_stru g_st_small_amsdu_switch = {0};
 
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
-/* 用于测试命令配置 */
-/* STA模式下值为OAL_TRUE时建立BA的条件是从发送第一个单播数据帧(关键数据帧不算)开始收到5个帧后建立聚合
-   值为OAL_FALSE时在100ms内连续发送5个单播数据帧(关键数据帧不算)后才开始建立聚合*/
+/* ???????????????? */
+/* STA??????????OAL_TRUE??????BA??????????????????????????????(??????????????)????????5??????????????
+   ????OAL_FALSE????100ms??????????5????????????(??????????????)????????????????*/
 oal_uint32  g_ul_tx_ba_policy_select = OAL_TRUE;
 #endif
 
@@ -106,16 +106,16 @@ oal_uint32  g_ul_tx_ba_policy_select = OAL_TRUE;
 oal_uint8 g_wlan_fast_check_cnt;
 #endif
 
-/* 用来标记性能统计传来的pps是否和上次传来的属于同一个等级 */
+/* ??????????????????????pps?????????????????????????????? */
 OAL_STATIC oal_uint8 g_uc_pps_level = 0;
-/* 用来记录是否连续3个周期会降低到低pps,才启动快睡模式 */
+/* ????????????????3????????????????pps,?????????????? */
 OAL_STATIC oal_uint8 g_uc_pps_level_adjust_cnt = 0;
 
-/* device每20ms检查一次如果检查g_wlan_fast_check_cnt依旧无数据收发则进入低功耗模式 */
+/* device??20ms????????????????g_wlan_fast_check_cnt?????????????????????????????? */
 extern oal_uint8 g_wlan_fast_check_cnt;
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC != _PRE_MULTI_CORE_MODE)
 oal_uint32 hmac_tx_data(hmac_vap_stru *pst_hmac_vap, oal_netbuf_stru *pst_netbuf);
@@ -201,13 +201,13 @@ oal_uint32  hmac_tx_report_eth_frame(mac_vap_stru   *pst_mac_vap,
 
 #endif
 
-    /* 统计以太网下来的数据包统计 */
+    /* ?????????????????????????? */
     //HMAC_VAP_DFT_STATS_PKT_INCR(pst_hmac_vap->st_query_stats.ul_rx_pkt_to_lan,1);
     //HMAC_VAP_DFT_STATS_PKT_INCR(pst_hmac_vap->st_query_stats.ul_rx_pkt_to_lan,OAL_NETBUF_LEN(pst_netbuf));
     //OAM_STAT_VAP_INCR(pst_mac_vap->uc_vap_id, tx_pkt_num_from_lan, 1);
     //OAM_STAT_VAP_INCR(pst_mac_vap->uc_vap_id, tx_bytes_from_lan, OAL_NETBUF_LEN(pst_netbuf));
 
-    /* 获取目的用户资源池id和用户MAC地址，用于过滤 */
+    /* ??????????????????id??????MAC?????????????? */
     if (WLAN_VAP_MODE_BSS_AP == pst_mac_vap->en_vap_mode)
     {
         pst_ether_hdr = (mac_ether_header_stru *)oal_netbuf_data(pst_netbuf);
@@ -226,7 +226,7 @@ oal_uint32  hmac_tx_report_eth_frame(mac_vap_stru   *pst_mac_vap,
 
         if (OAL_FAIL == ul_ret)
         {
-            /* 如果找不到用户，该帧可能是dhcp或者arp request，需要上报 */
+            /* ??????????????????????????dhcp????arp request?????????? */
             hmac_tx_report_dhcp_and_arp(pst_mac_vap, pst_ether_hdr, (oal_uint16)OAL_NETBUF_LEN(pst_netbuf));
             return OAL_SUCC;
         }
@@ -247,7 +247,7 @@ oal_uint32  hmac_tx_report_eth_frame(mac_vap_stru   *pst_mac_vap,
             OAM_ERROR_LOG0(0, OAM_SF_TX, "{hmac_tx_report_eth_frame::ether_hdr is null!\r\n");
             return OAL_ERR_CODE_PTR_NULL;
         }
-        /* 如果找不到用户，该帧可能是dhcp或者arp request，需要上报 */
+        /* ??????????????????????????dhcp????arp request?????????? */
         hmac_tx_report_dhcp_and_arp(pst_mac_vap, pst_ether_hdr, (oal_uint16)OAL_NETBUF_LEN(pst_netbuf));
 
 #endif
@@ -255,7 +255,7 @@ oal_uint32  hmac_tx_report_eth_frame(mac_vap_stru   *pst_mac_vap,
         oal_set_mac_addr(auc_user_macaddr, pst_mac_vap->auc_bssid);
     }
 
-    /* 检查打印以太网帧的开关 */
+    /* ?????????????????????? */
     ul_ret = oam_report_eth_frame_get_switch(us_user_idx, OAM_OTA_FRAME_DIRECTION_TYPE_TX, &en_eth_switch);
     if (OAL_SUCC != ul_ret)
     {
@@ -265,7 +265,7 @@ oal_uint32  hmac_tx_report_eth_frame(mac_vap_stru   *pst_mac_vap,
 
     if (OAL_SWITCH_ON == en_eth_switch)
     {
-        /* 将以太网下来的帧上报 */
+        /* ???????????????????? */
         ul_ret = oam_report_eth_frame(auc_user_macaddr,
                              oal_netbuf_data(pst_netbuf),
                              (oal_uint16)OAL_NETBUF_LEN(pst_netbuf),
@@ -329,11 +329,11 @@ OAL_STATIC oal_void hmac_tx_classify_wlan_to_wlan(mac_tx_ctl_stru *pst_tx_ctl, o
     OAM_INFO_LOG0(0, OAM_SF_TX, "{hmac_tx_classify_wlan_to_wlan::enter func.}");
     pst_frame_header = pst_tx_ctl->pst_frame_header;
 
-    /* 由帧头判断是否是QoS data帧，如果是则从Qos字段取出tid值 */
+    /* ????????????????QoS data??????????????Qos????????tid?? */
     if (WLAN_DATA_BASICTYPE == pst_frame_header->st_frame_control.bit_type
         && WLAN_QOS_DATA == pst_frame_header->st_frame_control.bit_sub_type)
     {
-        if (OAL_TRUE == pst_tx_ctl->en_use_4_addr)                /* 使用4地址 */
+        if (OAL_TRUE == pst_tx_ctl->en_use_4_addr)                /* ????4???? */
         {
             pst_qos_addr4_headder = (mac_ieee80211_qos_frame_addr4_stru *)pst_frame_header;
 
@@ -347,7 +347,7 @@ OAL_STATIC oal_void hmac_tx_classify_wlan_to_wlan(mac_tx_ctl_stru *pst_tx_ctl, o
         }
     }
 
-    /* 出参赋值 */
+    /* ???????? */
     *puc_tid = uc_tid;
 
 }
@@ -367,10 +367,10 @@ oal_void hmac_tx_set_qos_map(oal_netbuf_stru *pst_buf, oal_uint8 *puc_tid)
     pst_tx_ctl = (mac_tx_ctl_stru *)oal_netbuf_cb(pst_buf);
     pst_hmac_vap     = (hmac_vap_stru *)mac_res_get_hmac_vap(MAC_GET_CB_TX_VAP_INDEX(pst_tx_ctl));
 
-    /* 获取以太网头 */
+    /* ???????????? */
     pst_ether_header = (mac_ether_header_stru *)oal_netbuf_data(pst_buf);
 
-    /* 参数合法性检查 */
+    /* ?????????????? */
     if ((OAL_PTR_NULL == pst_hmac_vap) || (OAL_PTR_NULL == pst_ether_header))
     {
         OAM_ERROR_LOG0(0, OAM_SF_HS20,
@@ -378,15 +378,15 @@ oal_void hmac_tx_set_qos_map(oal_netbuf_stru *pst_buf, oal_uint8 *puc_tid)
         return;
     }
 
-    /* 从IP TOS字段寻找DSCP优先级 */
+    /* ??IP TOS????????DSCP?????? */
     /*---------------------------------
-      tos位定义
+      tos??????
       ---------------------------------
     |    bit7~bit2      | bit1~bit0 |
-    |    DSCP优先级     | 保留      |
+    |    DSCP??????     | ????      |
     ---------------------------------*/
 
-    /* 偏移一个以太网头，取ip头 */
+    /* ????????????????????ip?? */
     pst_ip = (mac_ip_header_stru *)(pst_ether_header + 1);
     uc_dscp = pst_ip->uc_tos >> WLAN_DSCP_PRI_SHIFT;
     OAM_INFO_LOG2(0, OAM_SF_HS20, "{hmac_tx_set_qos_map::tos = %d, uc_dscp=%d.}", pst_ip->uc_tos, uc_dscp);
@@ -475,12 +475,12 @@ OAL_STATIC OAL_INLINE oal_void  hmac_tx_classify_lan_to_wlan(oal_netbuf_stru *ps
     }
 #endif
 
-    /* 获取以太网头 */
+    /* ???????????? */
     pst_ether_header = (mac_ether_header_stru *)oal_netbuf_data(pst_buf);
 
     switch (pst_ether_header->us_ether_type)
     {
-        /*lint -e778*//* 屏蔽Info -- Constant expression evaluates to 0 in operation '&' */
+        /*lint -e778*//* ????Info -- Constant expression evaluates to 0 in operation '&' */
         case OAL_HOST2NET_SHORT(ETHER_TYPE_IP):
             OAM_INFO_LOG0(0, OAM_SF_TX, "{hmac_tx_classify_lan_to_wlan::ETHER_TYPE_IP.}");
 
@@ -493,14 +493,14 @@ OAL_STATIC OAL_INLINE oal_void  hmac_tx_classify_lan_to_wlan(oal_netbuf_stru *ps
             }
         #endif //_PRE_WLAN_FEATURE_HS20
 
-            /* 从IP TOS字段寻找优先级 */
+            /* ??IP TOS?????????????? */
             /*----------------------------------------------------------------------
-                tos位定义
+                tos??????
              ----------------------------------------------------------------------
             | bit7~bit5 | bit4 |  bit3  |  bit2  |   bit1   | bit0 |
-            | 包优先级  | 时延 | 吞吐量 | 可靠性 | 传输成本 | 保留 |
+            | ????????  | ???? | ?????? | ?????? | ???????? | ???? |
              ----------------------------------------------------------------------*/
-            pst_ip = (mac_ip_header_stru *)(pst_ether_header + 1);      /* 偏移一个以太网头，取ip头 */
+            pst_ip = (mac_ip_header_stru *)(pst_ether_header + 1);      /* ????????????????????ip?? */
 
             uc_tid = pst_ip->uc_tos >> WLAN_IP_PRI_SHIFT;
 
@@ -512,7 +512,7 @@ OAL_STATIC OAL_INLINE oal_void  hmac_tx_classify_lan_to_wlan(oal_netbuf_stru *ps
                     break;
                 }
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
-                /* RTP RTSP 限制只在 P2P上才开启识别功能 */
+                /* RTP RTSP ???????? P2P???????????????? */
                 if (!IS_LEGACY_VAP(&(pst_hmac_vap->st_vap_base_info)))
 #endif
                 {
@@ -522,7 +522,7 @@ OAL_STATIC OAL_INLINE oal_void  hmac_tx_classify_lan_to_wlan(oal_netbuf_stru *ps
         #endif  /* _PRE_WLAN_FEATURE_TX_CLASSIFY_LAN_TO_WLAN */
 
             OAM_INFO_LOG2(0, OAM_SF_TX, "{hmac_tx_classify_lan_to_wlan::tos = %d, uc_tid=%d.}", pst_ip->uc_tos, uc_tid);
-            /* 如果是DHCP帧，则进入VO队列发送 */
+            /* ??????DHCP??????????VO???????? */
             if (OAL_TRUE == mac_is_dhcp_port(pst_ip))
             {
                 uc_tid = WLAN_DATA_VIP_TID;
@@ -531,7 +531,7 @@ OAL_STATIC OAL_INLINE oal_void  hmac_tx_classify_lan_to_wlan(oal_netbuf_stru *ps
                 pst_tx_ctl->bit_data_frame_type = MAC_DATA_DHCP;
             }
 #ifdef _PRE_WLAN_FEATURE_SCHEDULE
-            /* 对于chariot信令报文进行特殊处理，防止断流 */
+            /* ????chariot?????????????????????????????? */
             else if (MAC_TCP_PROTOCAL == pst_ip->uc_protocol)
             {
                 pst_tcp = (mac_tcp_header_stru *)(pst_ip + 1);
@@ -547,7 +547,7 @@ OAL_STATIC OAL_INLINE oal_void  hmac_tx_classify_lan_to_wlan(oal_netbuf_stru *ps
             }
 #endif
 
-            /* 对于chariot信令报文进行特殊处理，防止断流 */
+            /* ????chariot?????????????????????????????? */
             if (MAC_TCP_PROTOCAL == pst_ip->uc_protocol)
             {
                 pst_tcp_hdr = (mac_tcp_header_stru *)(pst_ip + 1);
@@ -555,7 +555,7 @@ OAL_STATIC OAL_INLINE oal_void  hmac_tx_classify_lan_to_wlan(oal_netbuf_stru *ps
                 if(OAL_TRUE == oal_netbuf_is_tcp_ack((oal_ip_header_stru *)pst_ip))
                 {
 
-                    /*option3:SYN FIN RST URG有为1的时候不缓存*/
+                    /*option3:SYN FIN RST URG????1????????????*/
                     if ((pst_tcp_hdr->uc_flags) & (FIN_FLAG_BIT | RESET_FLAG_BIT | URGENT_FLAG_BIT))
                     {
                         pst_tx_ctl->bit_data_frame_type = MAC_DATA_URGENT_TCP_ACK;
@@ -584,7 +584,7 @@ OAL_STATIC OAL_INLINE oal_void  hmac_tx_classify_lan_to_wlan(oal_netbuf_stru *ps
 
             if ((OAL_TRUE == pst_hmac_vap->uc_edca_opt_flag_ap) && (WLAN_VAP_MODE_BSS_AP == pst_hmac_vap->st_vap_base_info.en_vap_mode))
             {
-                /* mips优化:解决开启业务统计性能差10M问题 */
+                /* mips????:??????????????????????10M???? */
                 if (((MAC_UDP_PROTOCAL == pst_ip->uc_protocol) && (pst_hmac_user->aaul_txrx_data_stat[WLAN_WME_TID_TO_AC(uc_tid)][WLAN_TX_UDP_DATA] < (HMAC_EDCA_OPT_PKT_NUM + 10)))
                     || ((MAC_TCP_PROTOCAL == pst_ip->uc_protocol) && (pst_hmac_user->aaul_txrx_data_stat[WLAN_WME_TID_TO_AC(uc_tid)][WLAN_TX_TCP_DATA] < (HMAC_EDCA_OPT_PKT_NUM + 10))))
                 {
@@ -596,28 +596,28 @@ OAL_STATIC OAL_INLINE oal_void  hmac_tx_classify_lan_to_wlan(oal_netbuf_stru *ps
 
         case OAL_HOST2NET_SHORT(ETHER_TYPE_IPV6):
             OAM_INFO_LOG0(0, OAM_SF_TX, "{hmac_tx_classify_lan_to_wlan::ETHER_TYPE_IPV6.}");
-            /* 从IPv6 traffic class字段获取优先级 */
+            /* ??IPv6 traffic class?????????????? */
             /*----------------------------------------------------------------------
-                IPv6包头 前32为定义
+                IPv6???? ??32??????
              -----------------------------------------------------------------------
-            | 版本号 | traffic class   | 流量标识 |
-            | 4bit   | 8bit(同ipv4 tos)|  20bit   |
+            | ?????? | traffic class   | ???????? |
+            | 4bit   | 8bit(??ipv4 tos)|  20bit   |
             -----------------------------------------------------------------------*/
-            ul_ipv6_hdr = *((oal_uint32 *)(pst_ether_header + 1));  /* 偏移一个以太网头，取ip头 */
+            ul_ipv6_hdr = *((oal_uint32 *)(pst_ether_header + 1));  /* ????????????????????ip?? */
 
             ul_pri = (OAL_NET2HOST_LONG(ul_ipv6_hdr) & WLAN_IPV6_PRIORITY_MASK) >> WLAN_IPV6_PRIORITY_SHIFT;
 
             uc_tid = (oal_uint8)(ul_pri >> WLAN_IP_PRI_SHIFT);
             OAM_INFO_LOG1(0, OAM_SF_TX, "{hmac_tx_classify_lan_to_wlan::uc_tid=%d.}", uc_tid);
 
-            /* 如果是ND帧，则进入VO队列发送 */
+            /* ??????ND??????????VO???????? */
             if (OAL_TRUE == mac_is_nd((oal_ipv6hdr_stru *)(pst_ether_header + 1)))
             {
                 uc_tid = WLAN_DATA_VIP_TID;
                 pst_tx_ctl->bit_is_vipframe  = OAL_TRUE;
                 pst_tx_ctl->bit_is_needretry = OAL_TRUE;
             }
-            /* 如果是DHCPV6帧，则进入VO队列发送 */
+            /* ??????DHCPV6??????????VO???????? */
             else if (OAL_TRUE == mac_is_dhcp6((oal_ipv6hdr_stru *)(pst_ether_header + 1)))
             {
                 OAM_INFO_LOG0(0, OAM_SF_TX, "{hmac_tx_classify_lan_to_wlan::ETHER_TYPE_DHCP6.}");
@@ -630,14 +630,14 @@ OAL_STATIC OAL_INLINE oal_void  hmac_tx_classify_lan_to_wlan(oal_netbuf_stru *ps
             break;
 
         case OAL_HOST2NET_SHORT(ETHER_TYPE_PAE):
-            /* 如果是EAPOL帧，则进入VO队列发送 */
+            /* ??????EAPOL??????????VO???????? */
             OAM_INFO_LOG0(0, OAM_SF_TX, "{hmac_tx_classify_lan_to_wlan::ETHER_TYPE_PAE.}");
             uc_tid = WLAN_DATA_VIP_TID;
             pst_tx_ctl->bit_is_vipframe  = OAL_TRUE;
             pst_tx_ctl->bit_is_needretry = OAL_TRUE;
 
             pst_tx_ctl->bit_data_frame_type = MAC_DATA_EAPOL;
-            /* 如果是4 次握手设置单播密钥，则设置tx cb 中bit_is_eapol_key_ptk 置一，dmac 发送不加密 */
+            /* ??????4 ??????????????????????????tx cb ??bit_is_eapol_key_ptk ??????dmac ?????????? */
             if (OAL_TRUE == mac_is_eapol_key_ptk((mac_eapol_header_stru *)(pst_ether_header + 1)))
             {
                 pst_tx_ctl->bit_is_eapol_key_ptk = OAL_TRUE;
@@ -646,14 +646,14 @@ OAL_STATIC OAL_INLINE oal_void  hmac_tx_classify_lan_to_wlan(oal_netbuf_stru *ps
             OAM_INFO_LOG1(0, OAM_SF_TX, "{hmac_tx_classify_lan_to_wlan::uc_tid=%d.}", uc_tid);
             break;
 
-        /* TDLS帧处理，建链保护，入高优先级TID队列 */
+        /* TDLS????????????????????????????TID???? */
         case OAL_HOST2NET_SHORT(ETHER_TYPE_TDLS):
             OAM_INFO_LOG0(0, OAM_SF_TX, "{hmac_tx_classify_lan_to_wlan::ETHER_TYPE_TDLS.}");
             uc_tid = WLAN_DATA_VIP_TID;
             OAM_INFO_LOG1(0, OAM_SF_TX, "{hmac_tx_classify_lan_to_wlan::uc_tid=%d.}", uc_tid);
             break;
 
-		/* PPPOE帧处理，建链保护(发现阶段, 会话阶段)，入高优先级TID队列 */
+		/* PPPOE????????????????(????????, ????????)????????????TID???? */
         case OAL_HOST2NET_SHORT(ETHER_TYPE_PPP_DISC):
         case OAL_HOST2NET_SHORT(ETHER_TYPE_PPP_SES):
             OAM_INFO_LOG0(0, OAM_SF_TX, "{hmac_tx_classify_lan_to_wlan::ETHER_TYPE_PPP_DISC, ETHER_TYPE_PPP_SES.}");
@@ -675,24 +675,24 @@ OAL_STATIC OAL_INLINE oal_void  hmac_tx_classify_lan_to_wlan(oal_netbuf_stru *ps
 
         case OAL_HOST2NET_SHORT(ETHER_TYPE_VLAN):
             OAM_INFO_LOG0(0, OAM_SF_TX, "{hmac_tx_classify_lan_to_wlan::ETHER_TYPE_VLAN.}");
-            /* 获取vlan tag的优先级 */
+            /* ????vlan tag???????? */
             pst_vlan_ethhdr = (oal_vlan_ethhdr_stru *)oal_netbuf_data(pst_buf);
 
             /*------------------------------------------------------------------
-                802.1Q(VLAN) TCI(tag control information)位定义
+                802.1Q(VLAN) TCI(tag control information)??????
              -------------------------------------------------------------------
             |Priority | DEI  | Vlan Identifier |
             | 3bit    | 1bit |      12bit      |
              ------------------------------------------------------------------*/
             us_vlan_tci = OAL_NET2HOST_SHORT(pst_vlan_ethhdr->h_vlan_TCI);
 
-            uc_tid = us_vlan_tci >> OAL_VLAN_PRIO_SHIFT;    /* 右移13位，提取高3位优先级 */
+            uc_tid = us_vlan_tci >> OAL_VLAN_PRIO_SHIFT;    /* ????13??????????3???????? */
             OAM_INFO_LOG1(0, OAM_SF_TX, "{hmac_tx_classify_lan_to_wlan::uc_tid=%d.}", uc_tid);
 
             break;
 
         case OAL_HOST2NET_SHORT(ETHER_TYPE_ARP):
-            /* 如果是ARP帧，则进入VO队列发送 */
+            /* ??????ARP??????????VO???????? */
             uc_tid = WLAN_DATA_VIP_TID;
             pst_tx_ctl->bit_is_vipframe  = OAL_TRUE;
             uc_arp_type = mac_get_arp_type_by_arphdr((oal_eth_arphdr_stru *)(pst_ether_header + 1));
@@ -706,7 +706,7 @@ OAL_STATIC OAL_INLINE oal_void  hmac_tx_classify_lan_to_wlan(oal_netbuf_stru *ps
             break;
     }
 
-    /* 出参赋值 */
+    /* ???????? */
     *puc_tid = uc_tid;
 }
 
@@ -714,11 +714,11 @@ OAL_STATIC OAL_INLINE oal_void  hmac_tx_classify_lan_to_wlan(oal_netbuf_stru *ps
 OAL_STATIC OAL_INLINE oal_void hmac_tx_update_tid(oal_bool_enum_uint8  en_wmm, oal_uint8 *puc_tid)
 {
 
-    if (OAL_LIKELY(OAL_TRUE == en_wmm)) /*wmm使能*/
+    if (OAL_LIKELY(OAL_TRUE == en_wmm)) /*wmm????*/
     {
         *puc_tid = (*puc_tid < WLAN_TIDNO_BUTT) ? WLAN_TOS_TO_TID(*puc_tid): WLAN_TIDNO_BCAST;
     }
-    else   /*wmm不使能*/
+    else   /*wmm??????*/
     {
         *puc_tid = MAC_WMM_SWITCH_TID;
     }
@@ -781,7 +781,7 @@ OAL_STATIC OAL_INLINE oal_void  hmac_tx_classify(
 
     hmac_tx_classify_lan_to_wlan(pst_buf, &uc_tid);
 
-    /* 非QoS站点，直接返回 */
+    /* ??QoS?????????????? */
     if (OAL_UNLIKELY(OAL_TRUE != pst_user->st_cap_info.bit_qos))
     {
         OAM_INFO_LOG0(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_TX, "{hmac_tx_classify::user is a none QoS station.}");
@@ -802,7 +802,7 @@ OAL_STATIC OAL_INLINE oal_void  hmac_tx_classify(
     {
         oal_uint8               uc_ac_num;
         uc_ac_num = WLAN_WME_TID_TO_AC(uc_tid);
-        /* 如果ACM位为1，且对应AC的TS没有建立成功，则将该AC的数据全部放到BE队列发送 */
+        /* ????ACM????1????????AC??TS????????????????????AC??????????????BE???????? */
         if((OAL_TRUE == pst_hmac_vap->st_vap_base_info.pst_mib_info->st_wlan_mib_qap_edac[uc_ac_num].en_dot11QAPEDCATableMandatory)
            && (pst_user->st_ts_info[uc_ac_num].en_ts_status != MAC_TS_SUCCESS))
         {
@@ -832,13 +832,13 @@ OAL_STATIC OAL_INLINE oal_void  hmac_tx_classify(
         }
     }
 
-    /* 如果使能了vap流等级，则采用设置的vap流等级 */
+    /* ??????????vap????????????????????vap?????? */
     if (OAL_TRUE == pst_mac_dev->en_vap_classify)
     {
         uc_tid = pst_hmac_vap->uc_classify_tid;
     }
 
-    /* 设置ac和tid到cb字段 */
+    /* ????ac??tid??cb???? */
     pst_tx_ctl->uc_tid  = uc_tid;
     pst_tx_ctl->uc_ac   = WLAN_WME_TID_TO_AC(uc_tid);
 
@@ -862,13 +862,13 @@ OAL_STATIC OAL_INLINE oal_uint32 hmac_tx_filter_security(hmac_vap_stru     *pst_
     pst_mac_vap  = &(pst_hmac_vap->st_vap_base_info);
     pst_mac_user = &(pst_hmac_user->st_user_base_info);
 
-    if (OAL_TRUE == mac_mib_get_rsnaactivated(pst_mac_vap))/* 判断是否使能WPA/WPA2 */
+    if (OAL_TRUE == mac_mib_get_rsnaactivated(pst_mac_vap))/* ????????????WPA/WPA2 */
     {
-        if (pst_mac_user->en_port_valid != OAL_TRUE)/* 判断端口是否打开 */
+        if (pst_mac_user->en_port_valid != OAL_TRUE)/* ???????????????? */
         {
-            /* 获取以太网头 */
+            /* ???????????? */
             pst_ether_header = (mac_ether_header_stru *)oal_netbuf_data(pst_buf);
-            /* 发送数据时，针对非EAPOL 的数据帧做过滤 */
+            /* ??????????????????EAPOL ?????????????? */
 
             if (oal_byteorder_host_to_net_uint16(ETHER_TYPE_PAE) != pst_ether_header->us_ether_type)
             {
@@ -891,37 +891,37 @@ oal_void  hmac_tx_ba_setup(
                 hmac_user_stru   *pst_user,
                 oal_uint8         uc_tidno)
 {
-    mac_action_mgmt_args_stru   st_action_args;   /* 用于填写ACTION帧的参数 */
+    mac_action_mgmt_args_stru   st_action_args;   /* ????????ACTION???????? */
     oal_bool_enum_uint8         en_ampdu_support = OAL_FALSE;
 
-    /* 建立BA会话，是否需要判断VAP的AMPDU的支持情况，因为需要实现建立BA会话时，一定发AMPDU */
+    /* ????BA??????????????????VAP??AMPDU????????????????????????????BA??????????????AMPDU */
     en_ampdu_support = hmac_user_xht_support(pst_user);
 
     if (en_ampdu_support)
     {
         /*
-        建立BA会话时，st_action_args结构各个成员意义如下
-        (1)uc_category:action的类别
-        (2)uc_action:BA action下的类别
-        (3)ul_arg1:BA会话对应的TID
-        (4)ul_arg2:BUFFER SIZE大小
-        (5)ul_arg3:BA会话的确认策略
-        (6)ul_arg4:TIMEOUT时间
+        ????BA????????st_action_args????????????????????
+        (1)uc_category:action??????
+        (2)uc_action:BA action????????
+        (3)ul_arg1:BA??????????TID
+        (4)ul_arg2:BUFFER SIZE????
+        (5)ul_arg3:BA??????????????
+        (6)ul_arg4:TIMEOUT????
         */
         st_action_args.uc_category = MAC_ACTION_CATEGORY_BA;
         st_action_args.uc_action   = MAC_BA_ACTION_ADDBA_REQ;
-        st_action_args.ul_arg1     = uc_tidno;                     /* 该数据帧对应的TID号 */
+        st_action_args.ul_arg1     = uc_tidno;                     /* ??????????????TID?? */
 #ifdef _PRE_PLAT_FEATURE_CUSTOMIZE
-        st_action_args.ul_arg2     = (oal_uint32)g_st_wlan_customize.ul_ampdu_tx_max_num;       /* ADDBA_REQ中，buffer_size的默认大小 */
+        st_action_args.ul_arg2     = (oal_uint32)g_st_wlan_customize.ul_ampdu_tx_max_num;       /* ADDBA_REQ????buffer_size?????????? */
         OAM_WARNING_LOG1(0, OAM_SF_TX, "hisi_customize_wifi::[ba buffer size:%d]", st_action_args.ul_arg2);
 #else
-        st_action_args.ul_arg2     = WLAN_AMPDU_TX_MAX_BUF_SIZE;       /* ADDBA_REQ中，buffer_size的默认大小 */
+        st_action_args.ul_arg2     = WLAN_AMPDU_TX_MAX_BUF_SIZE;       /* ADDBA_REQ????buffer_size?????????? */
 #endif /* #ifdef _PRE_PLAT_FEATURE_CUSTOMIZE */
 
-        st_action_args.ul_arg3     = MAC_BA_POLICY_IMMEDIATE;     /* BA会话的确认策略 */
-        st_action_args.ul_arg4     = 0;                            /* BA会话的超时时间设置为0 */
+        st_action_args.ul_arg3     = MAC_BA_POLICY_IMMEDIATE;     /* BA?????????????? */
+        st_action_args.ul_arg4     = 0;                            /* BA????????????????????0 */
 
-        /* 建立BA会话 */
+        /* ????BA???? */
         hmac_mgmt_tx_action(pst_hmac_vap, pst_user, &st_action_args);
     }
     else
@@ -930,12 +930,12 @@ oal_void  hmac_tx_ba_setup(
         {
             st_action_args.uc_category = MAC_ACTION_CATEGORY_BA;
             st_action_args.uc_action   = MAC_BA_ACTION_DELBA;
-            st_action_args.ul_arg1     = uc_tidno;                                         /* 该数据帧对应的TID号 */
-            st_action_args.ul_arg2     = MAC_ORIGINATOR_DELBA;                             /* 发送端删除ba */
-            st_action_args.ul_arg3     = MAC_UNSPEC_REASON;                                /* BA会话删除原因 */
-            st_action_args.puc_arg5     = pst_user->st_user_base_info.auc_user_mac_addr;   /* 用户mac地址 */
+            st_action_args.ul_arg1     = uc_tidno;                                         /* ??????????????TID?? */
+            st_action_args.ul_arg2     = MAC_ORIGINATOR_DELBA;                             /* ??????????ba */
+            st_action_args.ul_arg3     = MAC_UNSPEC_REASON;                                /* BA???????????? */
+            st_action_args.puc_arg5     = pst_user->st_user_base_info.auc_user_mac_addr;   /* ????mac???? */
 
-            /* 删除BA会话 */
+            /* ????BA???? */
             hmac_mgmt_tx_action(pst_hmac_vap, pst_user, &st_action_args);
         }
     }
@@ -951,7 +951,7 @@ oal_uint32 hmac_tx_ucast_process(
 {
     oal_uint32         ul_ret = HMAC_TX_PASS;
 
-   /*安全过滤*/
+   /*????????*/
 #if defined(_PRE_WLAN_FEATURE_WPA) || defined(_PRE_WLAN_FEATURE_WPA2)
     if (OAL_UNLIKELY(OAL_SUCC != hmac_tx_filter_security(pst_hmac_vap, pst_buf, pst_user)))
     {
@@ -960,7 +960,7 @@ oal_uint32 hmac_tx_ucast_process(
     }
 #endif
 
-    /*以太网业务识别*/
+    /*??????????????*/
 #ifdef _PRE_WLAN_FEATURE_CLASSIFY
     hmac_tx_classify(pst_hmac_vap, &(pst_user->st_user_base_info), pst_buf);
 #endif
@@ -970,13 +970,13 @@ oal_uint32 hmac_tx_ucast_process(
 #endif
 
     OAL_MIPS_TX_STATISTIC(HMAC_PROFILING_FUNC_TRAFFIC_CLASSIFY);
-    /* 如果是EAPOL、DHCP帧，则不允许主动建立BA会话 */
+    /* ??????EAPOL??DHCP????????????????????BA???? */
     if (OAL_FALSE == pst_tx_ctl->bit_is_vipframe)
     {
 #ifdef _PRE_WLAN_FEATURE_AMPDU
         if (OAL_TRUE == hmac_tid_need_ba_session(pst_hmac_vap, pst_user, pst_tx_ctl->uc_tid, pst_buf))
         {
-            /* 自动触发建立BA会话，设置AMPDU聚合参数信息在DMAC模块的处理addba rsp帧的时刻后面 */
+            /* ????????????BA??????????AMPDU??????????????DMAC??????????addba rsp???????????? */
             hmac_tx_ba_setup(pst_hmac_vap, pst_user, pst_tx_ctl->uc_tid);
         }
 #endif
@@ -1008,12 +1008,12 @@ OAL_STATIC oal_bool_enum_uint8  hmac_tx_is_need_frag(hmac_vap_stru *pst_hmac_vap
 {
     oal_uint32        ul_threshold;
 	oal_uint32        uc_last_frag;
-    /* 判断报文是否需要进行分片 */
-    /* 1、长度大于门限          */
-    /* 2、是legac协议模式       */
-    /* 3、不是广播帧            */
-    /* 4、不是聚合帧            */
-    /* 6、DHCP帧不进行分片      */
+    /* ???????????????????????? */
+    /* 1??????????????          */
+    /* 2????legac????????       */
+    /* 3????????????            */
+    /* 4????????????            */
+    /* 6??DHCP????????????      */
 
     if (OAL_TRUE == pst_tx_ctl->bit_is_vipframe)
     {
@@ -1022,7 +1022,7 @@ OAL_STATIC oal_bool_enum_uint8  hmac_tx_is_need_frag(hmac_vap_stru *pst_hmac_vap
 
     ul_threshold = pst_hmac_vap->st_vap_base_info.pst_mib_info->st_wlan_mib_operation.ul_dot11FragmentationThreshold;
     ul_threshold = (ul_threshold & (~(BIT0|BIT1))) + 2;
-	/* 规避1151硬件bug,调整分片门限：TKIP加密时，当最后一个分片的payload长度小于等于8时，无法进行加密 */
+	/* ????1151????bug,??????????????TKIP????????????????????????payload????????????8???????????????? */
 	if (WLAN_80211_CIPHER_SUITE_TKIP == pst_hmac_user->st_user_base_info.st_key_info.en_cipher_type)
 	{
 		uc_last_frag = (OAL_NETBUF_LEN(pst_netbuf) + 8) % (ul_threshold - pst_tx_ctl->uc_frame_header_length - (WEP_IV_FIELD_SIZE + EXT_IV_FIELD_SIZE));
@@ -1039,7 +1039,7 @@ OAL_STATIC oal_bool_enum_uint8  hmac_tx_is_need_frag(hmac_vap_stru *pst_hmac_vap
                      && (OAL_FALSE == MAC_GET_CB_HAS_EHTER_HEAD(pst_tx_ctl))
                 #endif
                      && (pst_hmac_user->st_user_base_info.en_cur_protocol_mode < WLAN_HT_MODE || pst_hmac_vap->st_vap_base_info.en_protocol < WLAN_HT_MODE)
-                     &&(OAL_FALSE == hmac_vap_ba_is_setup(pst_hmac_user, pst_tx_ctl->uc_tid)));/* [false alarm]:返回值是oal_bool_enum_uint8 和函数类型一致*/
+                     &&(OAL_FALSE == hmac_vap_ba_is_setup(pst_hmac_user, pst_tx_ctl->uc_tid)));/* [false alarm]:????????oal_bool_enum_uint8 ??????????????*/
 
 }
 
@@ -1050,12 +1050,12 @@ OAL_STATIC oal_bool_enum_uint8  hmac_tx_is_need_frag(hmac_vap_stru *pst_hmac_vap
 OAL_STATIC oal_bool_enum_uint8  hmac_tx_is_need_frag(hmac_vap_stru *pst_hmac_vap, hmac_user_stru *pst_hmac_user, oal_netbuf_stru *pst_netbuf, mac_tx_ctl_stru *pst_tx_ctl)
 {
     oal_uint32        ul_threshold;
-    /* 判断报文是否需要进行分片 */
-    /* 1、长度大于门限          */
-    /* 2、是legac协议模式       */
-    /* 3、不是广播帧            */
-    /* 4、不是聚合帧            */
-    /* 6、DHCP帧不进行分片      */
+    /* ???????????????????????? */
+    /* 1??????????????          */
+    /* 2????legac????????       */
+    /* 3????????????            */
+    /* 4????????????            */
+    /* 6??DHCP????????????      */
 
     if (OAL_TRUE == pst_tx_ctl->bit_is_vipframe)
     {
@@ -1068,7 +1068,7 @@ OAL_STATIC oal_bool_enum_uint8  hmac_tx_is_need_frag(hmac_vap_stru *pst_hmac_vap
                      && (!pst_tx_ctl->en_ismcast)
                      && (!pst_tx_ctl->en_is_amsdu)
                      && (pst_hmac_user->st_user_base_info.en_avail_protocol_mode < WLAN_HT_MODE || pst_hmac_vap->st_vap_base_info.en_protocol < WLAN_HT_MODE)
-                     &&(OAL_FALSE == hmac_vap_ba_is_setup(pst_hmac_user, pst_tx_ctl->uc_tid)));/* [false alarm]:返回值是oal_bool_enum_uint8 和函数类型一致*/
+                     &&(OAL_FALSE == hmac_vap_ba_is_setup(pst_hmac_user, pst_tx_ctl->uc_tid)));/* [false alarm]:????????oal_bool_enum_uint8 ??????????????*/
 
 }
 
@@ -1084,7 +1084,7 @@ oal_void hmac_set_psm_activity_timer(oal_uint32 ul_total_pps)
     mac_vap_stru                    *pst_mac_vap;
     mac_cfg_ps_params_stru          st_ps_params;
 
-    /* 只分两档忙或闲，避免档位太多，来回抖动 */
+    /* ?????????????????????????????????????? */
     if(ul_total_pps < PSM_PPS_VALUE_LOW)
     {
         uc_current_pps_level = PPS_LEVEL_IDLE;
@@ -1100,14 +1100,14 @@ oal_void hmac_set_psm_activity_timer(oal_uint32 ul_total_pps)
         ul_pm_timer_restart_cnt = HMAC_PSM_TIMER_BUSY_CNT;
     }
 
-    /* 如果目前的吞吐率和上一次统计的吞吐率属于同一个等级，则不需要将结果下发 */
+    /* ?????????????????????????????????????????????????????????????????????? */
     if(uc_current_pps_level == g_uc_pps_level)
     {
         g_uc_pps_level_adjust_cnt = 0;
         return;
     }
 
-    /* 为保证性能，pps从高到低时，只有连续3个周期都低于门限，才启动快睡模式 */
+    /* ????????????pps????????????????????3???????????????????????????????? */
     if(uc_current_pps_level < g_uc_pps_level)
     {
         g_uc_pps_level_adjust_cnt++;
@@ -1116,13 +1116,13 @@ oal_void hmac_set_psm_activity_timer(oal_uint32 ul_total_pps)
             return;
         }
     }
-    /* 为保证性能，如果pps升高超过门限，立即增大pm定时器重启次数 */
-    g_uc_pps_level_adjust_cnt = 0;/* 此清零操作是pps从高到低门限超过3次，以及从低到高立即下发时的计数清零 */
+    /* ????????????????pps??????????????????????pm?????????????? */
+    g_uc_pps_level_adjust_cnt = 0;/* ????????????pps????????????????3???????????????????????????????????? */
     g_uc_pps_level = uc_current_pps_level;
 
-    /* 需要切换时，满足条件后通知device操作 */
+    /* ??????????????????????????device???? */
     pst_mac_device = mac_res_get_dev(0);
-    /* 如果非单VAP,则不处理 */
+    /* ????????VAP,???????? */
     if (1 != mac_device_calc_up_vap_num(pst_mac_device))
     {
         return;
@@ -1157,46 +1157,46 @@ oal_void  hmac_tx_small_amsdu_switch(oal_uint32 ul_rx_throughput_mbps,oal_uint32
     oal_uint32                       ul_ret;
     oal_bool_enum_uint8              en_small_amsdu;
 
-    /* 如果定制化不支持小包聚合 */
+    /* ???????????????????????? */
     if (OAL_FALSE == g_st_small_amsdu_switch.uc_ini_small_amsdu_en)
     {
         return;
     }
 
-    /* 每秒吞吐量门限 */
+    /* ?????????????? */
     ul_limit_throughput_high = g_st_small_amsdu_switch.us_small_amsdu_throughput_high;
     ul_limit_throughput_low  = g_st_small_amsdu_switch.us_small_amsdu_throughput_low;
 
-    /* 每秒PPS门限 */
+    /* ????PPS???? */
     ul_limit_pps_high = g_st_small_amsdu_switch.us_small_amsdu_pps_high;
     ul_limit_pps_low  = g_st_small_amsdu_switch.us_small_amsdu_pps_low;
 
 
     if ((ul_rx_throughput_mbps > ul_limit_throughput_high) || (ul_tx_pps > ul_limit_pps_high))
     {
-        /* rx吞吐量高于150M或者tx pps大于12500,打开小包amsdu聚合 */
+        /* rx??????????150M????tx pps????12500,????????amsdu???? */
         en_small_amsdu = OAL_TRUE;
     }
     else if ((ul_rx_throughput_mbps < ul_limit_throughput_low) && (ul_tx_pps < ul_limit_pps_low))
     {
-        /* rx吞吐量低于100M且tx pps小于7500,关闭小包amsdu聚合，避免来回切换 */
+        /* rx??????????100M??tx pps????7500,????????amsdu?????????????????? */
         en_small_amsdu = OAL_FALSE;
     }
     else
     {
-        /* 介于100M-150M之间,不作切换 */
+        /* ????100M-150M????,???????? */
         return;
     }
 
 
-     /* 当前聚合方式相同,不处理 */
+     /* ????????????????,?????? */
     if (g_st_small_amsdu_switch.uc_cur_small_amsdu_en == en_small_amsdu)
     {
         return;
     }
 
     pst_mac_device = mac_res_get_dev(0);
-    /* 如果非单VAP,则不切换 */
+    /* ????????VAP,???????? */
     if (1 != mac_device_calc_up_vap_num(pst_mac_device))
     {
         return;
@@ -1227,14 +1227,14 @@ oal_void  hmac_tx_tcp_ack_buf_switch(oal_uint32 ul_rx_throughput_mbps)
     oal_uint32      ul_ret;
     oal_bool_enum_uint8   en_tcp_ack_buf;
 
-    /* 如果定制化不支持tcp_ack_buf */
+    /* ????????????????tcp_ack_buf */
     if (OAL_FALSE == g_st_tcp_ack_buf_switch.uc_ini_tcp_ack_buf_en)
     {
         return;
     }
 
     pst_mac_device = mac_res_get_dev(0);
-    /* 如果非单VAP,则不切换 */
+    /* ????????VAP,???????? */
     if (mac_device_calc_up_vap_num(pst_mac_device) != 1)
     {
         return;
@@ -1246,7 +1246,7 @@ oal_void  hmac_tx_tcp_ack_buf_switch(oal_uint32 ul_rx_throughput_mbps)
         return;
     }
 
-    /* 非STA模式不切换 */
+    /* ??STA?????????? */
     if ( WLAN_VAP_MODE_BSS_STA != pst_mac_vap->en_vap_mode)
     {
         return;
@@ -1254,14 +1254,14 @@ oal_void  hmac_tx_tcp_ack_buf_switch(oal_uint32 ul_rx_throughput_mbps)
 
     if (pst_mac_vap->st_channel.en_bandwidth == WLAN_BAND_WIDTH_20M)
     {
-        /* 每秒吞吐量门限 */
+        /* ?????????????? */
         ul_limit_throughput_high = g_st_tcp_ack_buf_switch.us_tcp_ack_buf_throughput_high;
         ul_limit_throughput_low  = g_st_tcp_ack_buf_switch.us_tcp_ack_buf_throughput_low;
     }
     else if ((pst_mac_vap->st_channel.en_bandwidth == WLAN_BAND_WIDTH_40PLUS)
             || (pst_mac_vap->st_channel.en_bandwidth == WLAN_BAND_WIDTH_40MINUS))
     {
-        /* 每秒吞吐量门限 */
+        /* ?????????????? */
         ul_limit_throughput_high = g_st_tcp_ack_buf_switch.us_tcp_ack_buf_throughput_high_40M;
         ul_limit_throughput_low  = g_st_tcp_ack_buf_switch.us_tcp_ack_buf_throughput_low_40M;
     }
@@ -1286,11 +1286,11 @@ oal_void  hmac_tx_tcp_ack_buf_switch(oal_uint32 ul_rx_throughput_mbps)
     }
     else
     {
-        /* 介于low-high之间,不作切换 */
+        /* ????low-high????,???????? */
         return;
     }
 
-     /* 当前聚合方式相同,不处理 */
+     /* ????????????????,?????? */
     if (g_st_tcp_ack_buf_switch.uc_cur_tcp_ack_buf_en == en_tcp_ack_buf)
     {
         return;
@@ -1321,36 +1321,36 @@ oal_void hmac_rx_dyn_bypass_extlna_switch(oal_uint32 ul_tx_throughput_mbps, oal_
     oal_uint32      ul_ret;
     oal_bool_enum_uint8   en_is_pm_test;
 
-    /* 如果定制化不支持根据吞吐bypass外置LNA */
+    /* ????????????????????????bypass????LNA */
     if (OAL_FALSE == g_st_rx_dyn_bypass_extlna_switch.uc_ini_en)
     {
         return;
     }
 
-    /* 每秒吞吐量门限 */
+    /* ?????????????? */
     ul_limit_throughput_high = g_st_rx_dyn_bypass_extlna_switch.us_throughput_high;
     ul_limit_throughput_low  = g_st_rx_dyn_bypass_extlna_switch.us_throughput_low;
 
     if (ul_throughput_mbps > ul_limit_throughput_high)
     {
-        /* 高于100M,非低功耗测试场景 */
+        /* ????100M,???????????????? */
         en_is_pm_test = OAL_FALSE;
     }
     else if (ul_throughput_mbps < ul_limit_throughput_low)
     {
-        /* 低于50M,低功耗测试场景 */
+        /* ????50M,?????????????? */
         en_is_pm_test = OAL_TRUE;
     }
     else
     {
-        /* 介于50M-100M之间,不作切换 */
+        /* ????50M-100M????,???????? */
         return;
     }
 
-    /* 需要切换时，满足条件后通知device操作 */
+    /* ??????????????????????????device???? */
     pst_mac_device = mac_res_get_dev(0);
 
-    /* 如果非单VAP,则不处理 */
+    /* ????????VAP,???????? */
     if (1 != mac_device_calc_up_vap_num(pst_mac_device))
     {
         return;
@@ -1362,7 +1362,7 @@ oal_void hmac_rx_dyn_bypass_extlna_switch(oal_uint32 ul_tx_throughput_mbps, oal_
         return;
     }
 
-    /* 当前方式相同,不处理 */
+    /* ????????????,?????? */
     if (g_st_rx_dyn_bypass_extlna_switch.uc_cur_status == en_is_pm_test)
     {
         return;
@@ -1385,13 +1385,13 @@ OAL_INLINE oal_uint32  hmac_tx_encap(
                 hmac_user_stru   *pst_user,
                 oal_netbuf_stru  *pst_buf)
 {
-    mac_ieee80211_qos_htc_frame_addr4_stru   *pst_hdr;           /* 802.11头 */
+    mac_ieee80211_qos_htc_frame_addr4_stru   *pst_hdr;           /* 802.11?? */
     mac_ether_header_stru                    *pst_ether_hdr;
     oal_uint32                                ul_qos = HMAC_TX_BSS_NOQOS;
     mac_tx_ctl_stru                          *pst_tx_ctl;
     oal_uint16                                us_ether_type = 0;
-    oal_uint8                                 auc_saddr[ETHER_ADDR_LEN];   /* 原地址指针 */
-    oal_uint8                                 auc_daddr[ETHER_ADDR_LEN];   /* 目的地址指针 */
+    oal_uint8                                 auc_saddr[ETHER_ADDR_LEN];   /* ?????????? */
+    oal_uint8                                 auc_daddr[ETHER_ADDR_LEN];   /* ???????????? */
     oal_uint32                                ul_ret;
     mac_llc_snap_stru                        *pst_snap_hdr;
 
@@ -1403,7 +1403,7 @@ OAL_INLINE oal_uint32  hmac_tx_encap(
     }
 #endif
 
-    /* 获取CB */
+    /* ????CB */
     pst_tx_ctl = (mac_tx_ctl_stru *)(oal_netbuf_cb(pst_buf));
     pst_tx_ctl->bit_align_padding_offset = 0;
 
@@ -1418,15 +1418,15 @@ OAL_INLINE oal_uint32  hmac_tx_encap(
     }
 #endif
 
-    /*如果skb中data指针前预留的空间大于802.11 mac head len，则不需要格外申请内存存放802.11头,3为pading最大值 */
+    /*????skb??data????????????????????802.11 mac head len??????????????????????????802.11??,3??pading?????? */
     if (oal_netbuf_headroom(pst_buf) >=  MAC_80211_QOS_HTC_4ADDR_FRAME_LEN + SNAP_LLC_FRAME_LEN + MAC_MAX_MSDU_ADDR_ALIGN)
     {
         pst_hdr = (mac_ieee80211_qos_htc_frame_addr4_stru *)(OAL_NETBUF_HEADER(pst_buf)- MAC_80211_QOS_HTC_4ADDR_FRAME_LEN - SNAP_LLC_FRAME_LEN -2);
-        pst_tx_ctl->bit_80211_mac_head_type = 1;  /*指示mac头部在skb中*/
+        pst_tx_ctl->bit_80211_mac_head_type = 1;  /*????mac??????skb??*/
     }
     else
     {
-        /* 申请最大的80211头 */
+        /* ??????????80211?? */
         pst_hdr = (mac_ieee80211_qos_htc_frame_addr4_stru *)OAL_MEM_ALLOC(OAL_MEM_POOL_ID_SHARED_DATA_PKT,
                                                                           MAC_80211_QOS_HTC_4ADDR_FRAME_LEN,
                                                                           OAL_FALSE);
@@ -1437,39 +1437,39 @@ OAL_INLINE oal_uint32  hmac_tx_encap(
             return OAL_ERR_CODE_PTR_NULL;
         }
 
-        pst_tx_ctl->bit_80211_mac_head_type = 0;  /*指示mac头部不在skb中，申请了额外内存存放的*/
+        pst_tx_ctl->bit_80211_mac_head_type = 0;  /*????mac????????skb????????????????????????*/
     }
 
-    /* 获取以太网头, 原地址，目的地址, 以太网类型 */
+    /* ????????????, ????????????????, ?????????? */
     pst_ether_hdr = (mac_ether_header_stru *)oal_netbuf_data(pst_buf);
     oal_set_mac_addr((oal_uint8 *)auc_daddr, pst_ether_hdr->auc_ether_dhost);
     oal_set_mac_addr((oal_uint8 *)auc_saddr, pst_ether_hdr->auc_ether_shost);
 
-    /*非amsdu帧*/
+    /*??amsdu??*/
     if (OAL_FALSE == pst_tx_ctl->en_is_amsdu)
     {
         us_ether_type = pst_ether_hdr->us_ether_type;
     }
     else
     {
-       /* 如果是AMSDU的第一个子帧，需要从snap头中获取以太网类型，如果是以太网帧，可以
-          直接从以太网头中获取*/
+       /* ??????AMSDU????????????????????snap????????????????????????????????????????
+          ????????????????????*/
         pst_snap_hdr  = (mac_llc_snap_stru *)((oal_uint8 *)pst_ether_hdr + ETHER_HDR_LEN);
         us_ether_type = pst_snap_hdr->us_ether_type;
     }
 
-    /* 非组播帧，获取用户的QOS能力位信息 */
+    /* ????????????????????QOS?????????? */
     if (OAL_FALSE == pst_tx_ctl->en_ismcast)
     {
-        /* 根据用户结构体的cap_info，判断是否是QOS站点 */
+        /* ????????????????cap_info????????????QOS???? */
         ul_qos                      = pst_user->st_user_base_info.st_cap_info.bit_qos;
         pst_tx_ctl->en_is_qosdata   = pst_user->st_user_base_info.st_cap_info.bit_qos;
     }
 
-    /* 设置帧控制 */
+    /* ?????????? */
     hmac_tx_set_frame_ctrl(ul_qos, pst_tx_ctl, pst_hdr);
 
-    /* 设置地址 */
+    /* ???????? */
     ul_ret = hmac_tx_set_addresses(pst_vap, pst_user, pst_tx_ctl, auc_saddr, auc_daddr, pst_hdr, us_ether_type);
     if (OAL_UNLIKELY(OAL_SUCC != ul_ret))
     {
@@ -1481,7 +1481,7 @@ OAL_INLINE oal_uint32  hmac_tx_encap(
         return ul_ret;
     }
 
-    /* 对于LAN to WLAN的非AMSDU聚合帧，填充LLC SNAP头 */
+    /* ????LAN to WLAN????AMSDU????????????LLC SNAP?? */
     if (OAL_FALSE == pst_tx_ctl->en_is_amsdu)
     {
 
@@ -1495,7 +1495,7 @@ OAL_INLINE oal_uint32  hmac_tx_encap(
 
            if (MAC_GET_CB_HAS_EHTER_HEAD(pst_tx_ctl))
            {
-               /* 恢复data指针到ETHER HEAD - LLC HEAD */
+               /* ????data??????ETHER HEAD - LLC HEAD */
                oal_netbuf_pull(pst_buf, SNAP_LLC_FRAME_LEN);
            }
 #endif
@@ -1504,9 +1504,9 @@ OAL_INLINE oal_uint32  hmac_tx_encap(
 #ifdef _PRE_WLAN_FEATURE_MULTI_NETBUF_AMSDU
         if (MAC_GET_CB_HAS_EHTER_HEAD(pst_tx_ctl))
         {
-            /* 恢复data指针到ETHER HEAD */
+            /* ????data??????ETHER HEAD */
             oal_netbuf_push(pst_buf, ETHER_HDR_LEN);
-            /* 保证4bytes对齐 */
+            /* ????4bytes???? */
             if((oal_uint)oal_netbuf_data(pst_buf) != OAL_ROUND_DOWN((oal_uint)oal_netbuf_data(pst_buf), 4))
             {
                 pst_tx_ctl->bit_align_padding_offset = (oal_uint)oal_netbuf_data(pst_buf)- OAL_ROUND_DOWN((oal_uint)oal_netbuf_data(pst_buf), 4);
@@ -1517,10 +1517,10 @@ OAL_INLINE oal_uint32  hmac_tx_encap(
 #ifdef _PRE_WLAN_CHIP_TEST
         }
 #endif
-        /* 更新frame长度 */
+        /* ????frame???? */
         pst_tx_ctl->us_mpdu_len = (oal_uint16) oal_netbuf_get_len(pst_buf);
 
-        /* 非amsdu聚合帧，记录mpdu字节数，不包括snap */
+        /* ??amsdu????????????mpdu??????????????snap */
         pst_tx_ctl->us_mpdu_bytes = pst_tx_ctl->us_mpdu_len - SNAP_LLC_FRAME_LEN;
 #ifdef _PRE_WLAN_FEATURE_SNIFFER
 		proc_sniffer_write_file((const oal_uint8*)pst_hdr, MAC_80211_QOS_FRAME_LEN,
@@ -1529,17 +1529,17 @@ OAL_INLINE oal_uint32  hmac_tx_encap(
     }
 
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
-    /* mac头部在skb中时，netbuf的data指针指向mac头。但是mac_set_snap函数中已经将data指针指向了llc头。因此这里要重新push到mac头。  */
+    /* mac??????skb??????netbuf??data????????mac????????mac_set_snap????????????data??????????llc??????????????????push??mac????  */
     if (pst_tx_ctl->bit_80211_mac_head_type == 1)
     {
         oal_netbuf_push(pst_buf, MAC_80211_QOS_HTC_4ADDR_FRAME_LEN);
     }
 #endif
 
-    /* 挂接802.11头 */
+    /* ????802.11?? */
     pst_tx_ctl->pst_frame_header = (mac_ieee80211_frame_stru *)pst_hdr;
 
-    /* 分片处理 */
+    /* ???????? */
     if (OAL_TRUE == hmac_tx_is_need_frag(pst_vap, pst_user, pst_buf, pst_tx_ctl))
     {
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC != _PRE_MULTI_CORE_MODE)
@@ -1557,8 +1557,8 @@ OAL_STATIC oal_uint32  hmac_tx_lan_mpdu_process_sta(
                 oal_netbuf_stru    *pst_buf,
                 mac_tx_ctl_stru    *pst_tx_ctl)
 {
-    hmac_user_stru          *pst_user;      /* 目标STA结构体 */
-    mac_ether_header_stru   *pst_ether_hdr; /* 以太网头 */
+    hmac_user_stru          *pst_user;      /* ????STA?????? */
+    mac_ether_header_stru   *pst_ether_hdr; /* ???????? */
     oal_uint32              ul_ret;
     oal_uint16              us_user_idx;
     oal_uint8               *puc_ether_payload;
@@ -1598,7 +1598,7 @@ OAL_STATIC oal_uint32  hmac_tx_lan_mpdu_process_sta(
         return ul_ret;
     }
 
-    /* 封装802.11头 */
+    /* ????802.11?? */
     ul_ret = hmac_tx_encap(pst_vap, pst_user, pst_buf);
     if (OAL_UNLIKELY((OAL_SUCC != ul_ret) ))
     {
@@ -1628,18 +1628,18 @@ OAL_STATIC OAL_INLINE oal_uint32  hmac_tx_lan_mpdu_process_ap(
                 oal_netbuf_stru    *pst_buf,
                 mac_tx_ctl_stru    *pst_tx_ctl)
 {
-    hmac_user_stru          *pst_user;      /* 目标STA结构体 */
-    mac_ether_header_stru   *pst_ether_hdr; /* 以太网头 */
-    oal_uint8               *puc_addr;      /* 目的地址 */
+    hmac_user_stru          *pst_user;      /* ????STA?????? */
+    mac_ether_header_stru   *pst_ether_hdr; /* ???????? */
+    oal_uint8               *puc_addr;      /* ???????? */
     oal_uint32               ul_ret;
     oal_uint16               us_user_idx;
 
-    /* 判断是组播或单播,对于lan to wlan的单播帧，返回以太网地址 */
+    /* ????????????????,????lan to wlan???????????????????????? */
     pst_ether_hdr   = (mac_ether_header_stru *)oal_netbuf_data(pst_buf);
     puc_addr        = pst_ether_hdr->auc_ether_dhost;
 
 #ifdef _PRE_WLAN_FEATURE_PROXY_ARP
-    /*确认proxy arp 是否使能*/
+    /*????proxy arp ????????*/
     if (OAL_TRUE == hmac_tx_proxyarp_is_en(pst_vap))
     {
         if(OAL_TRUE == hmac_proxy_arp_proc(pst_vap, pst_buf))
@@ -1649,7 +1649,7 @@ OAL_STATIC OAL_INLINE oal_uint32  hmac_tx_lan_mpdu_process_ap(
     }
 #endif
 
-    /*单播数据帧*/
+    /*??????????*/
 #ifdef _PRE_WLAN_CHIP_TEST
     if (OAL_LIKELY(!ETHER_IS_MULTICAST(puc_addr)) && pst_vap->st_vap_base_info.bit_al_tx_flag != OAL_SWITCH_ON)
 #else
@@ -1665,7 +1665,7 @@ OAL_STATIC OAL_INLINE oal_uint32  hmac_tx_lan_mpdu_process_ap(
             return HMAC_TX_DROP_USER_UNKNOWN;
         }
 
-        /* 转成HMAC的USER结构体 */
+        /* ????HMAC??USER?????? */
         pst_user = (hmac_user_stru *)mac_res_get_hmac_user(us_user_idx);
         if (OAL_UNLIKELY(OAL_PTR_NULL == pst_user))
         {
@@ -1673,14 +1673,14 @@ OAL_STATIC OAL_INLINE oal_uint32  hmac_tx_lan_mpdu_process_ap(
             return HMAC_TX_DROP_USER_NULL;
         }
 
-        /* 用户状态判断 */
+        /* ???????????? */
         if (OAL_UNLIKELY(MAC_USER_STATE_ASSOC != pst_user->st_user_base_info.en_user_asoc_state))
         {
              OAM_STAT_VAP_INCR(pst_vap->st_vap_base_info.uc_vap_id, tx_abnormal_msdu_dropped, 1);
              return HMAC_TX_DROP_USER_INACTIVE;
         }
 
-        /* 目标user指针 */
+        /* ????user???? */
         pst_tx_ctl->us_tx_user_idx = us_user_idx;
 
         ul_ret = hmac_tx_ucast_process(pst_vap, pst_buf, pst_user, pst_tx_ctl);
@@ -1689,15 +1689,15 @@ OAL_STATIC OAL_INLINE oal_uint32  hmac_tx_lan_mpdu_process_ap(
             return ul_ret;
         }
     }
-    else /* 组播 or 广播 */
+    else /* ???? or ???? */
     {
-        /* 设置组播标识位 */
+        /* ?????????????? */
         pst_tx_ctl->en_ismcast = OAL_TRUE;
 
-        /* 更新ACK策略 */
+        /* ????ACK???? */
         pst_tx_ctl->en_ack_policy = WLAN_TX_NO_ACK;
 
-        /* 获取组播用户 */
+        /* ???????????? */
         pst_user = mac_res_get_hmac_user(pst_vap->st_vap_base_info.us_multi_user_idx);
 
         if (OAL_UNLIKELY(OAL_PTR_NULL == pst_user))
@@ -1713,7 +1713,7 @@ OAL_STATIC OAL_INLINE oal_uint32  hmac_tx_lan_mpdu_process_ap(
 
         pst_tx_ctl->uc_ac   = WLAN_WME_TID_TO_AC(pst_tx_ctl->uc_tid);
 
-        #ifdef _PRE_WLAN_FEATURE_MCAST /* 组播转单播 */
+        #ifdef _PRE_WLAN_FEATURE_MCAST /* ?????????? */
             if ((ETHER_IS_IPV4_MULTICAST(puc_addr)) && (!ETHER_IS_BROADCAST(puc_addr)) && (OAL_PTR_NULL != pst_vap->pst_m2u))
             {
                 ul_ret = hmac_m2u_snoop_convert(pst_vap, pst_buf);
@@ -1725,7 +1725,7 @@ OAL_STATIC OAL_INLINE oal_uint32  hmac_tx_lan_mpdu_process_ap(
         #endif
     }
 
-    /* 封装802.11头 */
+    /* ????802.11?? */
     ul_ret = hmac_tx_encap(pst_vap, pst_user, pst_buf);
     if (OAL_UNLIKELY((OAL_SUCC != ul_ret) ))
     {
@@ -1740,9 +1740,9 @@ OAL_STATIC OAL_INLINE oal_uint32  hmac_tx_lan_mpdu_process_ap(
 
 OAL_INLINE oal_uint32  hmac_tx_lan_to_wlan_no_tcp_opt(mac_vap_stru *pst_vap, oal_netbuf_stru *pst_buf)
 {
-    frw_event_stru        *pst_event;        /* 事件结构体 */
+    frw_event_stru        *pst_event;        /* ?????????? */
     frw_event_mem_stru    *pst_event_mem;
-    hmac_vap_stru         *pst_hmac_vap;     /* VAP结构体 */
+    hmac_vap_stru         *pst_hmac_vap;     /* VAP?????? */
     mac_tx_ctl_stru       *pst_tx_ctl;       /* SKB CB */
     oal_uint32             ul_ret = HMAC_TX_PASS;
     dmac_tx_event_stru    *pst_dtx_stru;
@@ -1763,7 +1763,7 @@ OAL_INLINE oal_uint32  hmac_tx_lan_to_wlan_no_tcp_opt(mac_vap_stru *pst_vap, oal
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* VAP模式判断 */
+    /* VAP???????? */
     if (OAL_UNLIKELY(WLAN_VAP_MODE_BSS_AP != pst_vap->en_vap_mode && WLAN_VAP_MODE_BSS_STA != pst_vap->en_vap_mode))
     {
         OAM_WARNING_LOG1(pst_vap->uc_vap_id, OAM_SF_TX, "{hmac_tx_lan_to_wlan::en_vap_mode=%d.}", pst_vap->en_vap_mode);
@@ -1771,14 +1771,14 @@ OAL_INLINE oal_uint32  hmac_tx_lan_to_wlan_no_tcp_opt(mac_vap_stru *pst_vap, oal
         return OAL_ERR_CODE_CONFIG_UNSUPPORT;
     }
 
-    /* 如果关联用户数量为0，则丢弃报文 */
+    /* ??????????????????0???????????? */
     if (OAL_UNLIKELY(0 == pst_hmac_vap->st_vap_base_info.us_user_nums))
     {
         OAM_STAT_VAP_INCR(pst_vap->uc_vap_id, tx_abnormal_msdu_dropped, 1);
         return OAL_FAIL;
     }
 #ifdef _PRE_WLAN_FEATURE_ALWAYS_TX
-    /* 发数据，只发一次，避免反复申请tx描述符地址 */
+    /* ??????????????????????????????tx?????????? */
     if (OAL_SWITCH_ON == pst_vap->bit_al_tx_flag)
     {
         if (OAL_FALSE != pst_vap->bit_first_run)
@@ -1789,7 +1789,7 @@ OAL_INLINE oal_uint32  hmac_tx_lan_to_wlan_no_tcp_opt(mac_vap_stru *pst_vap, oal
     }
 #endif
 
-    /* 初始化CB tx rx字段 , CB字段在前面已经被清零， 在这里不需要重复对某些字段赋零值*/
+    /* ??????CB tx rx???? , CB?????????????????????? ????????????????????????????????*/
     pst_tx_ctl = (mac_tx_ctl_stru *)oal_netbuf_cb(pst_buf);
     pst_tx_ctl->uc_mpdu_num               = 1;
     pst_tx_ctl->uc_netbuf_num             = 1;
@@ -1801,10 +1801,10 @@ OAL_INLINE oal_uint32  hmac_tx_lan_to_wlan_no_tcp_opt(mac_vap_stru *pst_vap, oal
 #endif
     pst_tx_ctl->uc_tx_vap_index           = pst_vap->uc_vap_id;
     pst_tx_ctl->us_tx_user_idx            = 0xffff;
-    pst_tx_ctl->uc_ac                     = WLAN_WME_AC_BE;                  /* 初始化入BE队列 */
+    pst_tx_ctl->uc_ac                     = WLAN_WME_AC_BE;                  /* ????????BE???? */
 
-    /* 由于LAN TO WLAN和WLAN TO WLAN的netbuf都走这个函数，为了区分，需要先判断
-       到底是哪里来的netbuf然后再对CB的事件类型字段赋值
+    /* ????LAN TO WLAN??WLAN TO WLAN??netbuf??????????????????????????????????
+       ??????????????netbuf????????CB??????????????????
     */
     if (FRW_EVENT_TYPE_WLAN_DTX != pst_tx_ctl->en_event_type)
     {
@@ -1813,9 +1813,9 @@ OAL_INLINE oal_uint32  hmac_tx_lan_to_wlan_no_tcp_opt(mac_vap_stru *pst_vap, oal
     }
 
 
-    /* 此处数据可能从内核而来，也有可能由dev报上来再通过空口转出去，注意一下 */
+    /* ??????????????????????????????????dev???????????????????????????????? */
     uc_data_type =  mac_get_data_type_from_8023((oal_uint8 *)oal_netbuf_data(pst_buf), MAC_NETBUFF_PAYLOAD_ETH);
-    /* 维测，输出一个关键帧打印 */
+    /* ???????????????????????? */
     if((MAC_DATA_DHCP == uc_data_type) ||
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_HMAC == _PRE_MULTI_CORE_MODE)
     (MAC_DATA_ARP_REQ == uc_data_type)||
@@ -1833,15 +1833,15 @@ OAL_INLINE oal_uint32  hmac_tx_lan_to_wlan_no_tcp_opt(mac_vap_stru *pst_vap, oal
     hmac_wifi_statistic_tx_bytes(OAL_NETBUF_LEN(pst_buf));
 #endif
 
-    /*发数据包计数统计*/
+    /*????????????????*/
     hmac_wifi_statistic_tx_packets(1);
 
     if (WLAN_VAP_MODE_BSS_AP == pst_hmac_vap->st_vap_base_info.en_vap_mode)
     {
-        /*  处理当前 MPDU */
+        /*  ???????? MPDU */
         if( OAL_FALSE == pst_vap->pst_mib_info->st_wlan_mib_sta_config.en_dot11QosOptionImplemented )
         {
-            pst_tx_ctl->uc_ac                     = WLAN_WME_AC_VO;            /*AP模式 关WMM 入VO队列 */
+            pst_tx_ctl->uc_ac                     = WLAN_WME_AC_VO;            /*AP???? ??WMM ??VO???? */
             pst_tx_ctl->uc_tid =  WLAN_WME_AC_TO_TID(pst_tx_ctl->uc_ac);
         }
 
@@ -1849,8 +1849,8 @@ OAL_INLINE oal_uint32  hmac_tx_lan_to_wlan_no_tcp_opt(mac_vap_stru *pst_vap, oal
     }
     else if (WLAN_VAP_MODE_BSS_STA == pst_hmac_vap->st_vap_base_info.en_vap_mode)
     {
-        /* 处理当前MPDU */
-        pst_tx_ctl->uc_ac                     = WLAN_WME_AC_VO;                  /* STA模式 非qos帧入VO队列 */
+        /* ????????MPDU */
+        pst_tx_ctl->uc_ac                     = WLAN_WME_AC_VO;                  /* STA???? ??qos????VO???? */
         pst_tx_ctl->uc_tid =  WLAN_WME_AC_TO_TID(pst_tx_ctl->uc_ac);
 
         OAL_MIPS_TX_STATISTIC(HMAC_PROFILING_FUNC_CB_INIT);
@@ -1869,7 +1869,7 @@ OAL_INLINE oal_uint32  hmac_tx_lan_to_wlan_no_tcp_opt(mac_vap_stru *pst_vap, oal
                 return HMAC_TX_DROP_USER_NULL;
             }
 
-            /* 获取wapi对象 组播/单播 */
+            /* ????wapi???? ????/???? */
             pst_mac_hdr = ((mac_tx_ctl_stru *)OAL_NETBUF_CB(pst_buf))->pst_frame_header;
             en_is_mcast = ETHER_IS_MULTICAST(pst_mac_hdr->auc_address1);
 /*lint -e730*/
@@ -1889,7 +1889,7 @@ OAL_INLINE oal_uint32  hmac_tx_lan_to_wlan_no_tcp_opt(mac_vap_stru *pst_vap, oal
                     oal_spin_unlock_bh(&pst_hmac_vap->st_lock_state);
                     return OAL_ERR_CODE_PTR_NULL;
                 }
-                /*  由于wapi可能修改netbuff，此处需要重新获取一下cb */
+                /*  ????wapi????????netbuff??????????????????????cb */
                 pst_tx_ctl = (mac_tx_ctl_stru *)oal_netbuf_cb(pst_buf);
             }
         }
@@ -1902,7 +1902,7 @@ OAL_INLINE oal_uint32  hmac_tx_lan_to_wlan_no_tcp_opt(mac_vap_stru *pst_vap, oal
 
     if (OAL_LIKELY(HMAC_TX_PASS == ul_ret))
     {
-        /* 抛事件，传给DMAC */
+        /* ????????????DMAC */
         pst_event_mem = FRW_EVENT_ALLOC(OAL_SIZEOF(dmac_tx_event_stru));
         if (OAL_UNLIKELY(OAL_PTR_NULL == pst_event_mem))
         {
@@ -1912,7 +1912,7 @@ OAL_INLINE oal_uint32  hmac_tx_lan_to_wlan_no_tcp_opt(mac_vap_stru *pst_vap, oal
 
         pst_event = (frw_event_stru *)pst_event_mem->puc_data;
 
-        /* 填写事件头 */
+        /* ?????????? */
         FRW_EVENT_HDR_INIT(&(pst_event->st_event_hdr),
                             FRW_EVENT_TYPE_HOST_DRX,
                             DMAC_TX_HOST_DRX,
@@ -1927,7 +1927,7 @@ OAL_INLINE oal_uint32  hmac_tx_lan_to_wlan_no_tcp_opt(mac_vap_stru *pst_vap, oal
         //pst_dtx_stru->us_frame_len = (oal_uint16)oal_netbuf_get_len(pst_buf);
         pst_dtx_stru->us_frame_len = pst_tx_ctl->us_mpdu_len;
 
-        /* 调度事件 */
+        /* ???????? */
         ul_ret = frw_event_dispatch_event(pst_event_mem);
         if (OAL_UNLIKELY(OAL_SUCC != ul_ret))
         {
@@ -1935,7 +1935,7 @@ OAL_INLINE oal_uint32  hmac_tx_lan_to_wlan_no_tcp_opt(mac_vap_stru *pst_vap, oal
             OAM_STAT_VAP_INCR(pst_vap->uc_vap_id, tx_abnormal_msdu_dropped, 1);
         }
 
-         /* 释放事件 */
+         /* ???????? */
         FRW_EVENT_FREE(pst_event_mem);
 
         OAL_MIPS_TX_STATISTIC(HMAC_PROFILING_FUNC_TX_EVENT_TO_DMAC);
@@ -1953,7 +1953,7 @@ OAL_INLINE oal_uint32  hmac_tx_lan_to_wlan_no_tcp_opt(mac_vap_stru *pst_vap, oal
     }
     else if ((HMAC_TX_DROP_MTOU_FAIL == ul_ret))
     {
-        /* 组播报文没有对应的STA可以转成单播，所以丢弃，属正常行为 */
+        /* ??????????????????STA?????????????????????????????????? */
         OAM_INFO_LOG1(pst_vap->uc_vap_id, OAM_SF_TX, "{hmac_tx_lan_to_wlan_no_tcp_opt::HMAC_TX_DROP.reason[%d]!}", ul_ret);
     }
     else
@@ -1978,7 +1978,7 @@ OAL_STATIC  oal_uint32 hmac_transfer_tx_handler(hmac_device_stru * hmac_device,h
         oal_spin_lock_bh(&hmac_vap->ast_hmac_tcp_ack[HCC_TX].data_queue_lock[HMAC_TCP_ACK_QUEUE]);
         oal_netbuf_list_tail(&hmac_vap->ast_hmac_tcp_ack[HCC_TX].data_queue[HMAC_TCP_ACK_QUEUE], netbuf);
 
-        /* 单纯TCP ACK等待调度, 特殊报文马上发送 */
+        /* ????TCP ACK????????, ???????????????? */
         if(hmac_judge_tx_netbuf_is_tcp_ack((oal_ether_header_stru *)oal_netbuf_data(netbuf)))
         {
             oal_spin_unlock_bh(&hmac_vap->ast_hmac_tcp_ack[HCC_TX].data_queue_lock[HMAC_TCP_ACK_QUEUE]);
@@ -2002,20 +2002,20 @@ OAL_STATIC  oal_uint32 hmac_transfer_tx_handler(hmac_device_stru * hmac_device,h
 
 oal_uint32  hmac_tx_wlan_to_wlan_ap(oal_mem_stru *pst_event_mem)
 {
-    frw_event_stru         *pst_event;        /* 事件结构体 */
+    frw_event_stru         *pst_event;        /* ?????????? */
     mac_vap_stru           *pst_mac_vap;
-    oal_netbuf_stru        *pst_buf;          /* 从netbuf链上取下来的指向netbuf的指针 */
-    oal_netbuf_stru        *pst_buf_tmp;      /* 暂存netbuf指针，用于while循环 */
+    oal_netbuf_stru        *pst_buf;          /* ??netbuf????????????????netbuf?????? */
+    oal_netbuf_stru        *pst_buf_tmp;      /* ????netbuf??????????while???? */
     mac_tx_ctl_stru        *pst_tx_ctl;
     oal_uint32              ul_ret;
 
-    /* 入参判断 */
+    /* ???????? */
     if (OAL_UNLIKELY(OAL_PTR_NULL == pst_event_mem))
     {
         OAM_ERROR_LOG0(0, OAM_SF_TX, "{hmac_tx_wlan_to_wlan_ap::pst_event_mem null.}");
         return OAL_ERR_CODE_PTR_NULL;
     }
-    /* 获取事件 */
+    /* ???????? */
     pst_event = (frw_event_stru *)pst_event_mem->puc_data;
     if (OAL_UNLIKELY(OAL_PTR_NULL == pst_event))
     {
@@ -2023,7 +2023,7 @@ oal_uint32  hmac_tx_wlan_to_wlan_ap(oal_mem_stru *pst_event_mem)
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 获取PAYLOAD中的netbuf链 */
+    /* ????PAYLOAD????netbuf?? */
     pst_buf = (oal_netbuf_stru *)(*((oal_uint *)(pst_event->auc_event_data)));
 
     ul_ret = hmac_tx_get_mac_vap(pst_event->st_event_hdr.uc_vap_id, &pst_mac_vap);
@@ -2038,7 +2038,7 @@ oal_uint32  hmac_tx_wlan_to_wlan_ap(oal_mem_stru *pst_event_mem)
         return ul_ret;
     }
 
-    /* 循环处理每一个netbuf，按照以太网帧的方式处理 */
+    /* ??????????????netbuf???????????????????????? */
     while (OAL_PTR_NULL != pst_buf)
     {
         pst_buf_tmp = OAL_NETBUF_NEXT(pst_buf);
@@ -2060,7 +2060,7 @@ oal_uint32  hmac_tx_wlan_to_wlan_ap(oal_mem_stru *pst_event_mem)
 
         ul_ret = hmac_tx_lan_to_wlan(pst_mac_vap, pst_buf);
 
-        /* 调用失败，自己调用自己释放netbuff内存 */
+        /* ??????????????????????????netbuff???? */
         if(OAL_SUCC != ul_ret)
         {
             hmac_free_netbuf_list(pst_buf);
@@ -2078,7 +2078,7 @@ OAL_INLINE oal_uint32  hmac_tx_lan_to_wlan(mac_vap_stru *pst_vap, oal_netbuf_str
     oal_uint32             ul_ret = HMAC_TX_PASS;
 #ifdef _PRE_WLAN_TCP_OPT
     hmac_device_stru    *pst_hmac_device;
-    hmac_vap_stru         *pst_hmac_vap;     /* VAP结构体 */
+    hmac_vap_stru         *pst_hmac_vap;     /* VAP?????? */
 #endif
 
 
@@ -2134,10 +2134,10 @@ oal_net_dev_tx_enum  hmac_bridge_vap_xmit(oal_netbuf_stru *pst_buf, oal_net_devi
         return OAL_NETDEV_TX_OK;
     }
 
-    /* 获取VAP结构体 */
+    /* ????VAP?????? */
     pst_vap = (mac_vap_stru *)OAL_NET_DEV_PRIV(pst_dev);
 
-    /* 如果VAP结构体不存在，则丢弃报文 */
+    /* ????VAP???????????????????????? */
     if (OAL_UNLIKELY(OAL_PTR_NULL == pst_vap))
     {
         /* will find vap fail when receive a pkt from
@@ -2179,7 +2179,7 @@ oal_net_dev_tx_enum  hmac_bridge_vap_xmit(oal_netbuf_stru *pst_buf, oal_net_devi
         return OAL_NETDEV_TX_OK;
     }
 
-    /*代码待整改，pst_device_stru指针切换未状态, 长发长收切换未本地状态*/
+    /*????????????pst_device_stru??????????????, ??????????????????????*/
     if ((OAL_SWITCH_ON == pst_vap->bit_al_tx_flag)
     || ((pst_mac_device->pst_device_stru != OAL_PTR_NULL) && (HAL_ALWAYS_TX_AMPDU_ENABLE == pst_mac_device->pst_device_stru->bit_al_tx_flag)))
     //|| (HAL_ALWAYS_RX_DISABLE != pst_mac_device->pst_device_stru->bit_al_rx_flag))
@@ -2197,14 +2197,14 @@ oal_net_dev_tx_enum  hmac_bridge_vap_xmit(oal_netbuf_stru *pst_buf, oal_net_devi
         return OAL_NETDEV_TX_OK;
     }
 
-    /* 统计以太网下来的数据包统计 */
+    /* ?????????????????????????? */
     HMAC_VAP_DFT_STATS_PKT_INCR(pst_hmac_vap->st_query_stats.ul_tx_pkt_num_from_lan, 1);
     HMAC_VAP_DFT_STATS_PKT_INCR(pst_hmac_vap->st_query_stats.ul_tx_bytes_from_lan, OAL_NETBUF_LEN(pst_buf));
     OAM_STAT_VAP_INCR(pst_vap->uc_vap_id, tx_pkt_num_from_lan, 1);
     OAM_STAT_VAP_INCR(pst_vap->uc_vap_id, tx_bytes_from_lan, OAL_NETBUF_LEN(pst_buf));
 
 #ifdef _PRE_WLAN_DFT_DUMP_FRAME
-    /* 将以太网过来的帧上报SDT */
+    /* ????????????????????SDT */
     //hmac_tx_report_eth_frame(pst_vap, pst_buf);
 #endif /* _PRE_WLAN_DFT_DUMP_FRAME */
 
@@ -2215,10 +2215,10 @@ oal_net_dev_tx_enum  hmac_bridge_vap_xmit(oal_netbuf_stru *pst_buf, oal_net_devi
         return OAL_NETDEV_TX_OK;
     }
 
-    /* 考虑VAP状态与控制面互斥，需要加锁保护 */
+    /* ????VAP?????????????????????????????? */
     oal_spin_lock_bh(&pst_hmac_vap->st_lock_state);
 
-    /* 判断VAP的状态，如果ROAM，则丢弃报文 MAC_DATA_DHCP/MAC_DATA_ARP */
+    /* ????VAP????????????ROAM???????????? MAC_DATA_DHCP/MAC_DATA_ARP */
 #ifdef _PRE_WLAN_FEATURE_ROAM
     if(MAC_VAP_STATE_ROAMING == pst_vap->en_vap_state)
     {
@@ -2233,7 +2233,7 @@ oal_net_dev_tx_enum  hmac_bridge_vap_xmit(oal_netbuf_stru *pst_buf, oal_net_devi
     else
     {
 #endif  //_PRE_WLAN_FEATURE_ROAM
-    /* 判断VAP的状态，如果没有UP/PAUSE，则丢弃报文 */
+    /* ????VAP????????????????UP/PAUSE???????????? */
     if (OAL_UNLIKELY(!((MAC_VAP_STATE_UP == pst_vap->en_vap_state) || (MAC_VAP_STATE_PAUSE == pst_vap->en_vap_state))))
     {
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
@@ -2265,7 +2265,7 @@ oal_net_dev_tx_enum  hmac_bridge_vap_xmit(oal_netbuf_stru *pst_buf, oal_net_devi
     OAL_MEMZERO(OAL_NETBUF_CB(pst_buf), OAL_NETBUF_CB_SIZE());
 
 #ifdef _PRE_WLAN_FEATURE_PROXYSTA
-    /* ARP、DHCP、ICMPv6等数据包的地址转换 (只有proxy STA的发送的包才需要地址转换)*/
+    /* ARP??DHCP??ICMPv6?????????????????? (????proxy STA????????????????????????)*/
     if (mac_vap_is_vsta(pst_vap))
     {
         ul_ret = hmac_psta_tx_mat(pst_buf, pst_hmac_vap);
@@ -2279,7 +2279,7 @@ oal_net_dev_tx_enum  hmac_bridge_vap_xmit(oal_netbuf_stru *pst_buf, oal_net_devi
 #endif
 
 #ifdef _PRE_WLAN_FEATURE_BTCOEX
-    /* 发送方向的arp_req 统计和删ba的处理 */
+    /* ??????????arp_req ????????ba?????? */
     hmac_btcoex_arp_fail_delba_process(pst_buf, &(pst_hmac_vap->st_vap_base_info));
 #endif
 
@@ -2289,7 +2289,7 @@ oal_net_dev_tx_enum  hmac_bridge_vap_xmit(oal_netbuf_stru *pst_buf, oal_net_devi
     ul_ret = hmac_tx_lan_to_wlan(pst_vap, pst_buf);
     if (OAL_UNLIKELY(OAL_SUCC != ul_ret))
     {
-        /* 调用失败，要释放内核申请的netbuff内存池 */
+        /* ??????????????????????????netbuff?????? */
         oal_netbuf_free(pst_buf);
     }
 
@@ -2317,7 +2317,7 @@ oal_uint32 hmac_tx_data(hmac_vap_stru *pst_hmac_vap, oal_netbuf_stru *pst_netbuf
     }
 #endif
 
-    /* 将以太网过来的帧上报SDT */
+    /* ????????????????????SDT */
     hmac_tx_report_eth_frame(pst_vap, pst_netbuf);
 #if 0
 #ifdef _PRE_WLAN_DFT_STAT
@@ -2329,10 +2329,10 @@ oal_uint32 hmac_tx_data(hmac_vap_stru *pst_hmac_vap, oal_netbuf_stru *pst_netbuf
     }
 #endif
 #endif
-    /* 考虑VAP状态与控制面互斥，需要加锁保护 */
+    /* ????VAP?????????????????????????????? */
     //oal_spin_lock(&pst_vap->st_lock_state);
 
-     /* 判断VAP的状态，如果没有UP，则丢弃报文 */
+     /* ????VAP????????????????UP???????????? */
     if (OAL_UNLIKELY(!((MAC_VAP_STATE_UP == pst_vap->en_vap_state) || (MAC_VAP_STATE_PAUSE == pst_vap->en_vap_state))))
     {
         OAM_WARNING_LOG1(pst_vap->uc_vap_id, OAM_SF_TX, "{hmac_tx_data::vap state[%d] != MAC_VAP_STATE_{UP|PAUSE}!}\r\n", pst_vap->en_vap_state);
@@ -2351,7 +2351,7 @@ oal_uint32 hmac_tx_data(hmac_vap_stru *pst_hmac_vap, oal_netbuf_stru *pst_netbuf
     OAL_MEMZERO(OAL_NETBUF_CB(pst_netbuf), OAL_NETBUF_CB_SIZE());
 
 #ifdef _PRE_WLAN_FEATURE_PROXYSTA
-    /* ARP、DHCP、ICMPv6等数据包的地址转换 (只有proxy STA的发送的包才需要地址转换)*/
+    /* ARP??DHCP??ICMPv6?????????????????? (????proxy STA????????????????????????)*/
     if (mac_vap_is_vsta(pst_vap))
     {
         ul_ret = hmac_psta_tx_mat(pst_netbuf, pst_hmac_vap);
@@ -2369,7 +2369,7 @@ oal_uint32 hmac_tx_data(hmac_vap_stru *pst_hmac_vap, oal_netbuf_stru *pst_netbuf
 
     ul_ret = hmac_tx_lan_to_wlan(pst_vap, pst_netbuf);
 
-    /* 调用失败，要释放内核申请的netbuff内存池 */
+    /* ??????????????????????????netbuff?????? */
     if (OAL_UNLIKELY(OAL_SUCC != ul_ret))
     {
         hmac_free_netbuf_list(pst_netbuf);
@@ -2384,7 +2384,7 @@ oal_uint32 hmac_tx_data(hmac_vap_stru *pst_hmac_vap, oal_netbuf_stru *pst_netbuf
 OAL_STATIC oal_void  hmac_lock_resource(oal_spin_lock_stru *pst_lock, oal_uint *pui_flags)
 {
 #ifdef _PRE_WLAN_SPE_SUPPORT
-    oal_spin_lock_irq_save(pst_lock, pui_flags);        //主要在E5产品上使用
+    oal_spin_lock_irq_save(pst_lock, pui_flags);        //??????E5??????????
 #else
     oal_spin_lock_bh(pst_lock);
 #endif
@@ -2393,7 +2393,7 @@ OAL_STATIC oal_void  hmac_lock_resource(oal_spin_lock_stru *pst_lock, oal_uint *
 OAL_STATIC oal_void  hmac_unlock_resource(oal_spin_lock_stru *pst_lock, oal_uint *pui_flags)
 {
 #ifdef _PRE_WLAN_SPE_SUPPORT
-    oal_spin_unlock_irq_restore(pst_lock, pui_flags);   //主要在E5产品上使用
+    oal_spin_unlock_irq_restore(pst_lock, pui_flags);   //??????E5??????????
 #else
     oal_spin_unlock_bh(pst_lock);
 #endif
@@ -2414,10 +2414,10 @@ oal_net_dev_tx_enum  hmac_vap_start_xmit(oal_netbuf_stru *pst_buf, oal_net_devic
         return OAL_NETDEV_TX_OK;
     }
 
-    /* 获取VAP结构体 */
+    /* ????VAP?????? */
     pst_vap = (mac_vap_stru *)OAL_NET_DEV_PRIV(pst_dev);
 
-    /* 如果VAP结构体不存在，则丢弃报文 */
+    /* ????VAP???????????????????????? */
     if (OAL_UNLIKELY(OAL_PTR_NULL == pst_vap))
     {
         OAM_ERROR_LOG0(0, OAM_SF_TX, "{hmac_vap_start_xmit::pst_vap = OAL_PTR_NULL!}\r\n");
@@ -2454,10 +2454,10 @@ oal_net_dev_tx_enum  hmac_vap_start_xmit(oal_netbuf_stru *pst_buf, oal_net_devic
         return OAL_NETDEV_TX_OK;
     }
 
-    /* 防止下行来包太多，造成软件处理来不及，造成软件积累包太多，skb内存不能及时释放，入队限制修改为300，MIPS降低后，这个值可以抬高 */
+    /* ??????????????????????????????????????????????????????????skb????????????????????????????????300??MIPS?????????????????????? */
     if(OAL_NETBUF_LIST_NUM(&pst_hmac_vap->st_tx_queue_head[pst_hmac_vap->uc_in_queue_id])>=300)
     {
-        /* 关键帧做100个缓存，保证关键帧的正常发送 */
+        /* ????????100???????????????????????????? */
         if(OAL_NETBUF_LIST_NUM(&pst_hmac_vap->st_tx_queue_head[pst_hmac_vap->uc_in_queue_id]) < 400)
         {
             oal_uint8   uc_data_type;
@@ -2481,7 +2481,7 @@ oal_net_dev_tx_enum  hmac_vap_start_xmit(oal_netbuf_stru *pst_buf, oal_net_devic
 
         if(g_tx_debug)
         {
-            /* 增加维测信息，把tx_event_num的值打印出来，用户关连不上，或者一直ping不通，打开g_tx_debug开关，如果此时的值不为1，就属于异常 */
+            /* ????????????????tx_event_num????????????????????????????????????ping??????????g_tx_debug??????????????????????1???????????? */
             OAM_ERROR_LOG1(pst_vap->uc_vap_id, OAM_SF_TX, "{hmac_vap_start_xmit::tx_event_num value is [%d].}", (oal_int32)oal_atomic_read(&(pst_hmac_vap->ul_tx_event_num)));
             OAL_IO_PRINT("hmac_vap_start_xmit too fast\n");
         }
@@ -2510,14 +2510,14 @@ oal_uint32 hmac_tx_post_event(mac_vap_stru *pst_mac_vap)
 
     pst_hmac_vap = mac_res_get_hmac_vap(pst_mac_vap->uc_vap_id);
 
-    /* tx_event_num减1后等于0表示eth to wlan数据事件为空，可以申请事件。同时这个方案能确保每次只有一个事件入队并处理，防止存在两个以上事件申请入队 */
+    /* tx_event_num??1??????0????eth to wlan?????????????????????????????????????????????????????????????????????????????????????????????????????? */
     if(oal_atomic_dec_and_test(&(pst_hmac_vap->ul_tx_event_num)))
     {
-        /* 申请事件内存 */
+        /* ???????????? */
         pst_event_mem = FRW_EVENT_ALLOC(0);
         if (OAL_UNLIKELY(OAL_PTR_NULL == pst_event_mem))
         {
-            oal_atomic_inc(&(pst_hmac_vap->ul_tx_event_num)); /* 事件申请失败，tx_event_num要加回去，恢复成默认值1 */
+            oal_atomic_inc(&(pst_hmac_vap->ul_tx_event_num)); /* ??????????????tx_event_num??????????????????????1 */
             OAM_ERROR_LOG0(pst_mac_vap->uc_vap_id, OAM_SF_TX, "{hmac_tx_post_event::pst_event_mem null.}");
             OAL_IO_PRINT("Hmac_tx_post_event fail to alloc event mem\n");
             return OAL_ERR_CODE_PTR_NULL;
@@ -2525,7 +2525,7 @@ oal_uint32 hmac_tx_post_event(mac_vap_stru *pst_mac_vap)
 
         pst_event = (frw_event_stru *)pst_event_mem->puc_data;
 
-        /* 填写事件 */
+        /* ???????? */
         FRW_EVENT_HDR_INIT(&(pst_event->st_event_hdr),
                            FRW_EVENT_TYPE_HOST_DRX,
                            HMAC_TX_HOST_DRX,
@@ -2536,26 +2536,26 @@ oal_uint32 hmac_tx_post_event(mac_vap_stru *pst_mac_vap)
                            pst_mac_vap->uc_vap_id);
 
 
-        /* 抛事入队列 */
+        /* ?????????? */
         ul_ret = frw_event_post_event(pst_event_mem,pst_mac_vap->ul_core_id);
         if (OAL_SUCC != ul_ret)
         {
-            oal_atomic_inc(&(pst_hmac_vap->ul_tx_event_num)); /* 事件入队失败，tx_event_num要加回去，恢复成默认值1 */
+            oal_atomic_inc(&(pst_hmac_vap->ul_tx_event_num)); /* ??????????????tx_event_num??????????????????????1 */
             OAM_ERROR_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_TX, "{hmac_tx_post_event::frw_event_dispatch_event failed[%d].}", ul_ret);
             OAL_IO_PRINT("{hmac_tx_post_event::frw_event_dispatch_event failed}\n");
         }
 
-        /* 释放事件内存 */
+        /* ???????????? */
         FRW_EVENT_FREE(pst_event_mem);
     }
     else
     {
-        /* 事件队列中已经有事件要处理(tx_event_num值为0)，这个时候预先减去的值要加回去，tx_event_num要恢复成0 */
+        /* ??????????????????????????(tx_event_num????0)????????????????????????????????tx_event_num????????0 */
         oal_atomic_inc(&(pst_hmac_vap->ul_tx_event_num));
 
         if(g_tx_debug)
         {
-            /* 增加维测信息，把tx_event_num的值打印出来，如果此时的值不为0，就属于异常(不申请事件，但是值又不为0) */
+            /* ????????????????tx_event_num??????????????????????????????0????????????(????????????????????????0) */
             OAM_ERROR_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_TX, "{hmac_tx_post_event::tx_event_num value is [%d].}", (oal_int32)oal_atomic_read(&(pst_hmac_vap->ul_tx_event_num)));
             OAL_IO_PRINT("do not post tx event, data in queue len %d,out queue len %d\n",
                             OAL_NETBUF_LIST_NUM(&pst_hmac_vap->st_tx_queue_head[pst_hmac_vap->uc_in_queue_id]),
@@ -2568,7 +2568,7 @@ oal_uint32 hmac_tx_post_event(mac_vap_stru *pst_mac_vap)
 
 OAL_STATIC oal_uint8 hmac_vap_user_is_bw_limit(mac_vap_stru *pst_vap, oal_netbuf_stru *pst_netbuf)
 {
-    mac_ether_header_stru   *pst_ether_hdr; /* 以太网头 */
+    mac_ether_header_stru   *pst_ether_hdr; /* ???????? */
     oal_uint16               us_user_idx;
     hmac_user_stru          *pst_hmac_user;
     oal_uint32               ul_ret;
@@ -2596,14 +2596,14 @@ oal_uint32  hmac_tx_event_process(oal_mem_stru *pst_event_mem)
     oal_uint32               ul_reschedule = OAL_TRUE;
 	oal_netbuf_stru         *pst_netbuf;
 
-    /* 入参判断 */
+    /* ???????? */
     if (OAL_UNLIKELY(OAL_PTR_NULL == pst_event_mem))
     {
         OAM_ERROR_LOG0(0, OAM_SF_TX, "{hmac_tx_event_process::pst_event_mem null.}");
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 获取事件 */
+    /* ???????? */
     pst_event = (frw_event_stru *)pst_event_mem->puc_data;
     if (OAL_UNLIKELY(OAL_PTR_NULL == pst_event))
     {
@@ -2620,7 +2620,7 @@ oal_uint32  hmac_tx_event_process(oal_mem_stru *pst_event_mem)
     if(g_tx_debug)
         OAL_IO_PRINT("hmac_tx_event_process start\n");
 
-    /* 事件申请时在hmac_tx_post_event处理时已经减为了0，这里要加回去，恢复成1 */
+    /* ????????????hmac_tx_post_event????????????????0??????????????????????1 */
     oal_atomic_inc(&(pst_hmac_vap->ul_tx_event_num));
 
     if(g_tx_debug)
@@ -2629,7 +2629,7 @@ oal_uint32  hmac_tx_event_process(oal_mem_stru *pst_event_mem)
     oal_spin_lock_bh(&pst_hmac_vap->st_smp_lock);
     if(0 == OAL_NETBUF_LIST_NUM(&pst_hmac_vap->st_tx_queue_head[pst_hmac_vap->uc_out_queue_id]))
     {
-        /*如果当前out queue空了, 才切换out_queue_id*/
+        /*????????out queue????, ??????out_queue_id*/
         pst_hmac_vap->uc_in_queue_id = pst_hmac_vap->uc_out_queue_id;
         pst_hmac_vap->uc_out_queue_id = (pst_hmac_vap->uc_out_queue_id + 1) & 1;
 
@@ -2652,7 +2652,7 @@ oal_uint32  hmac_tx_event_process(oal_mem_stru *pst_event_mem)
 
         if(OAL_TRUE == hmac_vap_user_is_bw_limit(&(pst_hmac_vap->st_vap_base_info), pst_netbuf))
         {
-            /* 增加维测信息，出现用户和vap限速之后，也会造成用户关连不上，ping不通问题 */
+            /* ????????????????????????vap????????????????????????????????ping???????? */
             OAM_WARNING_LOG1(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_TX, "{hmac_tx_event_process::vap id[%d] hmac_vap_user_is_bw_limit.}", pst_hmac_vap->st_vap_base_info.uc_vap_id);
             oal_spin_lock_bh(&pst_hmac_vap->st_smp_lock);
             oal_netbuf_add_to_list_tail(pst_netbuf, &pst_hmac_vap->st_tx_queue_head[pst_hmac_vap->uc_out_queue_id]);
@@ -2692,9 +2692,9 @@ oal_void hmac_tx_ba_cnt_vary(
 
         ul_current_timestamp = (oal_uint32)OAL_TIME_GET_STAMP_MS();
 
-        /* 第一个包直接计数；
-           短时间连续发包时，开始建立BA;
-           TCP ACK回复慢，不考虑时间限制。 */
+        /* ??????????????????
+           ??????????????????????????BA;
+           TCP ACK???????????????????????? */
         if((0 == pst_hmac_user->auc_ba_flag[uc_tidno])
            || (oal_netbuf_is_tcp_ack((oal_ip_header_stru *)(oal_netbuf_data(pst_buf) + ETHER_HDR_LEN)))
            || ((oal_uint32)OAL_TIME_GET_RUNTIME(ul_current_timestamp, pst_hmac_user->aul_last_timestamp[uc_tidno]) < WLAN_BA_CNT_INTERVAL))
@@ -2724,42 +2724,42 @@ oal_void hmac_tx_amsdu_ampdu_switch(oal_uint32 ul_tx_throughput_mbps)
     oal_uint32      ul_ret;
     oal_bool_enum_uint8   en_large_amsdu_ampdu;
 
-    /* 如果定制化不支持amsdu_ampdu联合聚合 */
+    /* ????????????????amsdu_ampdu???????? */
     if (OAL_FALSE == g_st_tx_large_amsdu.uc_tx_amsdu_ampdu_en)
     {
         return;
     }
 
-    /* 每秒吞吐量门限 */
+    /* ?????????????? */
     ul_limit_throughput_high = g_st_tx_large_amsdu.us_amsdu_ampdu_throughput_high;
     ul_limit_throughput_low  = g_st_tx_large_amsdu.us_amsdu_ampdu_throughput_low;
 
     if (ul_tx_throughput_mbps > ul_limit_throughput_high)
     {
-        /* 高于150M,切换amsdu大包聚合 */
+        /* ????150M,????amsdu???????? */
         en_large_amsdu_ampdu = OAL_TRUE;
     }
     else if (ul_tx_throughput_mbps < ul_limit_throughput_low)
     {
-        /* 低于100M,关闭amsdu大包聚合 */
+        /* ????100M,????amsdu???????? */
         en_large_amsdu_ampdu = OAL_FALSE;
     }
     else
     {
-        /* 介于100M-150M之间,不作切换 */
+        /* ????100M-150M????,???????? */
         return;
     }
-    /* 当前聚合方式相同,不处理 */
+    /* ????????????????,?????? */
     if (g_st_tx_large_amsdu.uc_cur_amsdu_ampdu_enable == en_large_amsdu_ampdu)
     {
         return;
     }
 
-    /* 切换至amsdu大包聚合时,需要判断是否符合切换条件 */
+    /* ??????amsdu??????????,???????????????????????? */
     if (OAL_TRUE == en_large_amsdu_ampdu)
     {
         pst_mac_device = mac_res_get_dev(0);
-        /* 如果非单VAP,则不开启tx amsdu大包聚合 */
+        /* ????????VAP,????????tx amsdu???????? */
         if (1 != mac_device_calc_up_vap_num(pst_mac_device))
         {
             return;
@@ -2770,7 +2770,7 @@ oal_void hmac_tx_amsdu_ampdu_switch(oal_uint32 ul_tx_throughput_mbps)
         {
             return;
         }
-        /* VHT才支持切换 */
+        /* VHT?????????? */
         if ((WLAN_VHT_MODE != pst_mac_vap->en_protocol) &&
             (WLAN_VHT_ONLY_MODE != pst_mac_vap->en_protocol))
         {

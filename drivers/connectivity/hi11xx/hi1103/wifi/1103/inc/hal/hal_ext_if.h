@@ -11,7 +11,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 #include "oal_ext_if.h"
 #include "oam_ext_if.h"
@@ -27,7 +27,7 @@ extern oal_int32 g_l_rf_channel_num;
 extern oal_int32 g_l_rf_single_tran;
 
 #ifdef _PRE_WLAN_FEATURE_DOUBLE_CHIP
-/* 双芯片场景, 从定制化文件中获取2g和5g的chip id */
+/* ??????????, ??????????????????2g??5g??chip id */
 extern oal_uint8 g_uc_wlan_double_chip_2g_id;
 extern oal_uint8 g_uc_wlan_double_chip_5g_id;
 #else
@@ -49,7 +49,7 @@ extern hal_pwr_efuse_amend_stru g_ast_efuse_G_D[WLAN_RF_CHANNEL_NUMS][WLAN_BAND_
 extern  frw_timeout_stru  g_st_check_pll_lock_sts_timer;
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
 #define HAL_TX_STATS_MAX_NUMS          (256)
 #define HAL_RX_LPF_GAIN                (6)
@@ -59,53 +59,53 @@ extern  frw_timeout_stru  g_st_check_pll_lock_sts_timer;
 #define HAL_RADAR_REF_DIFFERENCE       (24)
 
 #define HAL_PA_ERROR_OFFSET 3
-#define HAL_TX_QEUEU_MAX_PPDU_NUM   2 /* DMAC也有一套，建议合并放入SPEC中 */
+#define HAL_TX_QEUEU_MAX_PPDU_NUM   2 /* DMAC??????????????????????SPEC?? */
 
-#define HAL_MAC_ERROR_THRESHOLD     10  /* mac硬件错误门限，用于软件协助硬件做不去关联复位动作 */
-/* 0.1dbm单位 */
-#define HAL_RSSI_SIGNAL_MIN                    (-1030)  /*信号跨度最小值 */
-#define HAL_RSSI_SIGNAL_MAX                    (50)     /*信号跨度最大值*/
-#define HAL_INVALID_SIGNAL_INITIAL             (1000)    /*非法初始信号极大值*/
+#define HAL_MAC_ERROR_THRESHOLD     10  /* mac???????????????????????????????????????????????? */
+/* 0.1dbm???? */
+#define HAL_RSSI_SIGNAL_MIN                    (-1030)  /*?????????????? */
+#define HAL_RSSI_SIGNAL_MAX                    (50)     /*??????????????*/
+#define HAL_INVALID_SIGNAL_INITIAL             (1000)    /*??????????????????*/
 
-#define HAL_ANT_SWITCH_RSSI_HIGH_TH              30 /* ant0与ant1相差30dB时切换到SISO */
-#define HAL_ANT_SWITCH_RSSI_LOW_TH               10  /* ant0与ant1相差小于10dB时切换到MIMO */
-#define HAL_ANT_SWITCH_RSSI_HIGH_CNT             1000 /* 维持1000帧都超过阈值则切换 */
+#define HAL_ANT_SWITCH_RSSI_HIGH_TH              30 /* ant0??ant1????30dB????????SISO */
+#define HAL_ANT_SWITCH_RSSI_LOW_TH               10  /* ant0??ant1????????10dB????????MIMO */
+#define HAL_ANT_SWITCH_RSSI_HIGH_CNT             1000 /* ????1000?????????????????? */
 #define HAL_ANT_SWITCH_RSSI_LOW_CNT              100
 #define HAL_ANT_SWITCH_MIN_RSSI_TH              -80
 
-#define HAL_ANT_SWITCH_RSSI_MGMT_STRONG_TH       10  /* 强信号下管理帧ant0与ant1相差10dB时切换到SISO */
-#define HAL_ANT_SWITCH_RSSI_MGMT_WEAK_TH         3   /* 弱信号下管理帧ant0与ant1相差3dB时切换到SISO */
-#define HAL_ANT_SWITCH_RSSI_VALID_MAX_TH         3   /* 管理帧new mgmt chain满足连续max的次数 */
+#define HAL_ANT_SWITCH_RSSI_MGMT_STRONG_TH       10  /* ??????????????ant0??ant1????10dB????????SISO */
+#define HAL_ANT_SWITCH_RSSI_MGMT_WEAK_TH         3   /* ??????????????ant0??ant1????3dB????????SISO */
+#define HAL_ANT_SWITCH_RSSI_VALID_MAX_TH         3   /* ??????new mgmt chain????????max?????? */
 
-#define HAL_ANT_SWITCH_RSSI_TBTT_CNT_TH          50   /* 50个tbtt中断触发一次探测 */
-#define HAL_ANT_SWITCH_RSSI_MIMO_TBTT_OPEN_TH    50   /* 50个tbtt中断触发一次探测 */
-#define HAL_ANT_SWITCH_RSSI_MIMO_TBTT_CLOSE_TH   10   /* 50个tbtt中断触发一次探测 */
-#define HAL_ANT_SWITCH_RSSI_HT_DIFF_TH           10   /* HT协议下20M的差值门限，MCS12灵敏度-MCS7灵敏度 */
-#define HAL_ANT_SWITCH_RSSI_VHT_DIFF_TH          12   /* VHT协议下20M的差值门限，双流MCS4灵敏度-单流MCS9灵敏度 */
-#define HAL_ANT_SWITCH_RSSI_HT_MIN_TH            -86  /* HT协议下的最小值门限，MCS11的灵敏度+3db */
-#define HAL_ANT_SWITCH_RSSI_VHT_MIN_TH           -82  /* VHT协议下的最小值门限，双流MCS4的灵敏度+3db */
+#define HAL_ANT_SWITCH_RSSI_TBTT_CNT_TH          50   /* 50??tbtt???????????????? */
+#define HAL_ANT_SWITCH_RSSI_MIMO_TBTT_OPEN_TH    50   /* 50??tbtt???????????????? */
+#define HAL_ANT_SWITCH_RSSI_MIMO_TBTT_CLOSE_TH   10   /* 50??tbtt???????????????? */
+#define HAL_ANT_SWITCH_RSSI_HT_DIFF_TH           10   /* HT??????20M????????????MCS12??????-MCS7?????? */
+#define HAL_ANT_SWITCH_RSSI_VHT_DIFF_TH          12   /* VHT??????20M????????????????MCS4??????-????MCS9?????? */
+#define HAL_ANT_SWITCH_RSSI_HT_MIN_TH            -86  /* HT????????????????????MCS11????????+3db */
+#define HAL_ANT_SWITCH_RSSI_VHT_MIN_TH           -82  /* VHT????????????????????????MCS4????????+3db */
 #define HAL_ANT_SWITCH_RSSI_HT_MAX_TH            -68
 #define HAL_ANT_SWITCH_RSSI_VHT_MAX_TH           -66
 
 #define HAL_ANT_SWITCH_RSSI_MGMT_ENABLE             BIT0
 #define HAL_ANT_SWITCH_RSSI_DATA_ENABLE             BIT1
 
-#define HAL_CCA_OPT_ED_HIGH_20TH_DEF       (-62)        /* CCA 20M检测门限寄存器默认值 */
-#define HAL_CCA_OPT_ED_HIGH_40TH_DEF       (-59)        /* CCA 40M检测门限寄存器默认值 */
-#define HAL_CCA_OPT_ED_HIGH_80TH_DEF       (-56)        /* CCA 80M检测门限寄存器默认值 */
+#define HAL_CCA_OPT_ED_HIGH_20TH_DEF       (-62)        /* CCA 20M???????????????????? */
+#define HAL_CCA_OPT_ED_HIGH_40TH_DEF       (-59)        /* CCA 40M???????????????????? */
+#define HAL_CCA_OPT_ED_HIGH_80TH_DEF       (-56)        /* CCA 80M???????????????????? */
 
-#define HAL_CCA_OPT_ED_LOW_TH_DSSS_DEF     (-76)        /* DSSS信号的默认协议门限 */
-#define HAL_CCA_OPT_ED_LOW_TH_OFDM_DEF     (-82)        /* OFDM信号的默认协议门限 */
-#define HAL_CCA_OPT_ED_LOW_TH_40M_HIGH_DEF (-72)        /* 辅40M带宽的默认协议门限 */
-#define HAL_CCA_OPT_ED_LOW_TH_80M_HIGH_DEF (-69)        /* 辅80M带宽的默认协议门限 */
+#define HAL_CCA_OPT_ED_LOW_TH_DSSS_DEF     (-76)        /* DSSS?????????????????? */
+#define HAL_CCA_OPT_ED_LOW_TH_OFDM_DEF     (-82)        /* OFDM?????????????????? */
+#define HAL_CCA_OPT_ED_LOW_TH_40M_HIGH_DEF (-72)        /* ??40M?????????????????? */
+#define HAL_CCA_OPT_ED_LOW_TH_80M_HIGH_DEF (-69)        /* ??80M?????????????????? */
 
-#define HAL_CCA_OPT_ED_LOW_TH_DSSS_MIN     (-88)        /* DSSS信号的最小协议门限 */
-#define HAL_CCA_OPT_ED_LOW_TH_OFDM_MIN     (-88)        /* OFDM信号的最小协议门限 */
-#define HAL_CCA_OPT_ED_LOW_TH_40M_HIGH_MIN (-85)        /* 辅40M的最小协议门限 */
-#define HAL_CCA_OPT_ED_LOW_TH_80M_HIGH_MIN (-82)        /* 辅80M的最小协议门限 */
+#define HAL_CCA_OPT_ED_LOW_TH_DSSS_MIN     (-88)        /* DSSS?????????????????? */
+#define HAL_CCA_OPT_ED_LOW_TH_OFDM_MIN     (-88)        /* OFDM?????????????????? */
+#define HAL_CCA_OPT_ED_LOW_TH_40M_HIGH_MIN (-85)        /* ??40M?????????????? */
+#define HAL_CCA_OPT_ED_LOW_TH_80M_HIGH_MIN (-82)        /* ??80M?????????????? */
 
-#define HAL_CCA_OPT_ED_HYST_STEP_20TH_DEF       (2)        /* CCA 20M 空闲概率检测安全门限 */
-#define HAL_CCA_OPT_ED_HYST_STEP_40TH_DEF       (2)        /* CCA 40M 空闲概率检测安全门限 */
+#define HAL_CCA_OPT_ED_HYST_STEP_20TH_DEF       (2)        /* CCA 20M ???????????????????? */
+#define HAL_CCA_OPT_ED_HYST_STEP_40TH_DEF       (2)        /* CCA 40M ???????????????????? */
 
 #ifdef _PRE_WLAN_PRODUCT_1151V200
 #define HAL_RF_TEMP_INVALID                 (-65)
@@ -130,23 +130,23 @@ extern  frw_timeout_stru  g_st_check_pll_lock_sts_timer;
              *_pul_val = ((0xFF << ((_idx) << 3)) & (_val)) >> ((_idx) << 3);  \
              }while(0)
 
-#define HAL_DFT_PHY_STAT_NODE_0_BASE           0   /* phy统计节点0的基准bit，寄存器PHY_STA_01_EN的bit0 */
-#define HAL_DFT_PHY_STAT_NODE_1_BASE           16  /* phy统计节点1的基准bit，寄存器PHY_STA_01_EN的bit16 */
-#define HAL_DFT_PHY_STAT_NODE_2_BASE           0   /* phy统计节点2的基准bit，寄存器PHY_STA_23_EN的bit0 */
-#define HAL_DFT_PHY_STAT_NODE_3_BASE           16  /* phy统计节点3的基准bit，寄存器PHY_STA_23_EN的bit16 */
+#define HAL_DFT_PHY_STAT_NODE_0_BASE           0   /* phy????????0??????bit????????PHY_STA_01_EN??bit0 */
+#define HAL_DFT_PHY_STAT_NODE_1_BASE           16  /* phy????????1??????bit????????PHY_STA_01_EN??bit16 */
+#define HAL_DFT_PHY_STAT_NODE_2_BASE           0   /* phy????????2??????bit????????PHY_STA_23_EN??bit0 */
+#define HAL_DFT_PHY_STAT_NODE_3_BASE           16  /* phy????????3??????bit????????PHY_STA_23_EN??bit16 */
 #endif
 
-#define HAL_POW_GET_HE_TRIG_AP_TX_POWER(_rpt_trig_ap_tx_power_idx) ((oal_int8)(_rpt_trig_ap_tx_power_idx - 20))   /* AP指定的发射功率,0~60映射到-20dbm~40dbm */
+#define HAL_POW_GET_HE_TRIG_AP_TX_POWER(_rpt_trig_ap_tx_power_idx) ((oal_int8)(_rpt_trig_ap_tx_power_idx - 20))   /* AP??????????????,0~60??????-20dbm~40dbm */
 
 #define HAL_FOR_EACH_HAL_DEV(_uc_dev_idx)   \
         for ((_uc_dev_idx) = 0; (_uc_dev_idx) < WLAN_DEVICE_MAX_NUM_PER_CHIP; (_uc_dev_idx)++)
 
-#define GET_HAL_DEVICE_STATE(_pst_hal_device)         ((_pst_hal_device)->st_hal_dev_fsm.st_oal_fsm.uc_cur_state)/* 获取当前状态机的状态 */
-#define GET_HAL_DEVICE_PREV_STATE(_pst_hal_device)    ((_pst_hal_device)->st_hal_dev_fsm.st_oal_fsm.uc_prev_state)/* 获取当前状态机的上一个状态 */
-#define GET_WORK_SUB_STATE(_pst_hal_device)           ((_pst_hal_device)->st_hal_dev_fsm.st_oal_work_sub_fsm.uc_cur_state)/* 获取work的子状态 */
+#define GET_HAL_DEVICE_STATE(_pst_hal_device)         ((_pst_hal_device)->st_hal_dev_fsm.st_oal_fsm.uc_cur_state)/* ???????????????????? */
+#define GET_HAL_DEVICE_PREV_STATE(_pst_hal_device)    ((_pst_hal_device)->st_hal_dev_fsm.st_oal_fsm.uc_prev_state)/* ?????????????????????????? */
+#define GET_WORK_SUB_STATE(_pst_hal_device)           ((_pst_hal_device)->st_hal_dev_fsm.st_oal_work_sub_fsm.uc_cur_state)/* ????work???????? */
 #define GET_HAL_DEV_CURRENT_SCAN_IDX(_pst_hal_device)   ((_pst_hal_device)->st_hal_scan_params.uc_start_chan_idx + (_pst_hal_device)->st_hal_scan_params.uc_scan_chan_idx)
-#define INVALID_SAR_PWR_LIMIT                 (0XFF)   /* 当前SAR功率值 */
-#define HAL_SAR_PWR_LIMIT_THRESHOLD            (15)    /* SAR功率阈值，低于阈值表示正在降SAR，高于阈值表示降SAR结束 */
+#define INVALID_SAR_PWR_LIMIT                 (0XFF)   /* ????SAR?????? */
+#define HAL_SAR_PWR_LIMIT_THRESHOLD            (15)    /* SAR????????????????????????????SAR????????????????SAR???? */
 #define HAL_DEVICE_STATE_IS_BUSY(_pst_hal_device)   \
     (((HAL_DEVICE_WORK_STATE  ==  GET_HAL_DEVICE_STATE(_pst_hal_device))\
         || (HAL_DEVICE_SCAN_STATE  ==  GET_HAL_DEVICE_STATE(_pst_hal_device)))? OAL_TRUE : OAL_FALSE)
@@ -163,8 +163,8 @@ extern  frw_timeout_stru  g_st_check_pll_lock_sts_timer;
 #define GET_HAL_DEVICE_M2S_BLACKLIST_ASSOC_AP_ON(_pst_handler)      (GET_HAL_DEVICE_M2S_MGR(_pst_handler)->en_blacklist_assoc_ap_on)
 #define GET_HAL_DEVICE_M2S_MSS_SCAN_OPT_CHAIN(_pst_handler)   (GET_HAL_DEVICE_M2S_MGR(_pst_handler)->uc_mss_scan_opt_chain)
 
-#define GET_HAL_M2S_CUR_STATE(_pst_handler)         ((_pst_handler)->st_hal_m2s_fsm.st_oal_fsm.uc_cur_state)/* 获取当前状态机的状态 */
-#define GET_HAL_M2S_PREV_STATE(_pst_handler)        ((_pst_handler)->st_hal_m2s_fsm.st_oal_fsm.uc_prev_state)/* 获取当前状态机的上一个状态 */
+#define GET_HAL_M2S_CUR_STATE(_pst_handler)         ((_pst_handler)->st_hal_m2s_fsm.st_oal_fsm.uc_cur_state)/* ???????????????????? */
+#define GET_HAL_M2S_PREV_STATE(_pst_handler)        ((_pst_handler)->st_hal_m2s_fsm.st_oal_fsm.uc_prev_state)/* ?????????????????????????? */
 #define GET_HAL_M2S_SWITCH_TPYE(_pst_handler)       ((_pst_handler)->st_hal_m2s_fsm.en_m2s_type)
 #define GET_HAL_M2S_MODE_TPYE(_pst_handler)         (*(oal_uint8*)&((_pst_handler)->st_hal_m2s_fsm.st_m2s_mode))
 #define GET_HAL_M2S_COMMAND_SCAN_ON(_pst_handler)   ((_pst_handler)->st_hal_m2s_fsm.en_command_scan_on)
@@ -190,15 +190,15 @@ extern  frw_timeout_stru  g_st_check_pll_lock_sts_timer;
 
 
 #ifdef _PRE_WLAN_FIT_BASED_REALTIME_CALI
-#define GET_HAL_DYN_CALI_DISABLE(_pst_handler)  (0 == (_pst_handler)->st_dyn_cali_val.aus_cali_en_interval[(_pst_handler)->st_wifi_channel_status.en_band]) /* 获取动态校准是否未使能 */
+#define GET_HAL_DYN_CALI_DISABLE(_pst_handler)  (0 == (_pst_handler)->st_dyn_cali_val.aus_cali_en_interval[(_pst_handler)->st_wifi_channel_status.en_band]) /* ?????????????????????? */
 #endif
 
 #ifdef _PRE_WLAN_FEATURE_BTCOEX
-#define GET_HAL_BTCOEX_SW_PREEMPT_MODE(_pst_handler)       (*(oal_uint8*)&((_pst_handler)->st_btcoex_sw_preempt.st_sw_preempt_mode)) /* 获取当前hal devcie的btcoex sw preempt模式 */
-#define GET_HAL_BTCOEX_SW_PREEMPT_TYPE(_pst_handler)       ((_pst_handler)->st_btcoex_sw_preempt.en_sw_preempt_type)                  /* 获取当前hal devcie的btcoex sw preempt类型 */
-#define GET_HAL_BTCOEX_SW_PREEMPT_SUBTYPE(_pst_handler)    ((_pst_handler)->st_btcoex_sw_preempt.en_sw_preempt_subtype)               /* 获取当前hal devcie的btcoex sw preempt子类型 */
-#define GET_HAL_BTCOEX_SW_PREEMPT_PS_STOP(_pst_handler)    ((_pst_handler)->st_btcoex_sw_preempt.en_ps_stop)                          /* 获取当前hal devcie的ps业务是否打开标记 */
-#define GET_HAL_BTCOEX_SW_PREEMPT_PS_PAUSE(_pst_handler)    ((_pst_handler)->st_btcoex_sw_preempt.en_ps_pause)                          /* 获取当前hal devcie的ps业务是否打开标记 */
+#define GET_HAL_BTCOEX_SW_PREEMPT_MODE(_pst_handler)       (*(oal_uint8*)&((_pst_handler)->st_btcoex_sw_preempt.st_sw_preempt_mode)) /* ????????hal devcie??btcoex sw preempt???? */
+#define GET_HAL_BTCOEX_SW_PREEMPT_TYPE(_pst_handler)       ((_pst_handler)->st_btcoex_sw_preempt.en_sw_preempt_type)                  /* ????????hal devcie??btcoex sw preempt???? */
+#define GET_HAL_BTCOEX_SW_PREEMPT_SUBTYPE(_pst_handler)    ((_pst_handler)->st_btcoex_sw_preempt.en_sw_preempt_subtype)               /* ????????hal devcie??btcoex sw preempt?????? */
+#define GET_HAL_BTCOEX_SW_PREEMPT_PS_STOP(_pst_handler)    ((_pst_handler)->st_btcoex_sw_preempt.en_ps_stop)                          /* ????????hal devcie??ps???????????????? */
+#define GET_HAL_BTCOEX_SW_PREEMPT_PS_PAUSE(_pst_handler)    ((_pst_handler)->st_btcoex_sw_preempt.en_ps_pause)                          /* ????????hal devcie??ps???????????????? */
 
 #define HAL_BTCOEX_CHECK_SW_PREEMPT_ON(_pst_handler)   \
     ((0 != ((*(oal_uint8*)&((_pst_handler)->st_btcoex_sw_preempt.st_sw_preempt_mode))& BIT0)) ? OAL_TRUE : OAL_FALSE)
@@ -213,13 +213,13 @@ extern  frw_timeout_stru  g_st_check_pll_lock_sts_timer;
 #define HAL_BTCOEX_CHECK_SW_PREEMPT_WL0_TX_SLV_ON(_pst_handler)   \
     ((0 != ((*(oal_uint8*)&((_pst_handler)->st_btcoex_sw_preempt.st_sw_preempt_mode))& BIT5)) ? OAL_TRUE : OAL_FALSE)
 
-#define GET_HAL_DEVICE_BTCOEX_MGR(_pst_handler)        (&(((hal_to_dmac_device_rom_stru *)((_pst_handler)->_rom))->st_device_btcoex_mgr))                   /* 获取当前hal devcie的ps业务是否打开标记 */
+#define GET_HAL_DEVICE_BTCOEX_MGR(_pst_handler)        (&(((hal_to_dmac_device_rom_stru *)((_pst_handler)->_rom))->st_device_btcoex_mgr))                   /* ????????hal devcie??ps???????????????? */
 #define GET_HAL_DEVICE_BTCOEX_TIMER_NEED_RESTART(_pst_handler)      (GET_HAL_DEVICE_BTCOEX_MGR(_pst_handler)->en_timer_need_restart)
 #define GET_HAL_DEVICE_BTCOEX_WL0_TX_SLV_ALLOW(_pst_handler)        (GET_HAL_DEVICE_BTCOEX_MGR(_pst_handler)->en_wl0_tx_slv_allow)
 
-#define GET_HAL_DEVICE_BTCOEX_M2S_MODE_BITMAP(_pst_handler)         (*(oal_uint8*)&(GET_HAL_DEVICE_BTCOEX_MGR(_pst_handler)->st_m2s_mode_bitmap)) /* 获取当前hal devcie的btcoex m2s业务bitmap */
-#define GET_HAL_DEVICE_BTCOEX_S2M_MODE_BITMAP(_pst_handler)         (*(oal_uint8*)&(GET_HAL_DEVICE_BTCOEX_MGR(_pst_handler)->st_s2m_mode_bitmap)) /* 获取当前hal devcie的btcoex s2m业务bitmap */
-#define GET_HAL_DEVICE_BTCOEX_S2M_WAIT_BITMAP(_pst_handler)         (*(oal_uint8*)&(GET_HAL_DEVICE_BTCOEX_MGR(_pst_handler)->st_s2m_wait_bitmap)) /* 获取当前hal devcie的btcoex s2m 需要超时才清的业务bitmap */
+#define GET_HAL_DEVICE_BTCOEX_M2S_MODE_BITMAP(_pst_handler)         (*(oal_uint8*)&(GET_HAL_DEVICE_BTCOEX_MGR(_pst_handler)->st_m2s_mode_bitmap)) /* ????????hal devcie??btcoex m2s????bitmap */
+#define GET_HAL_DEVICE_BTCOEX_S2M_MODE_BITMAP(_pst_handler)         (*(oal_uint8*)&(GET_HAL_DEVICE_BTCOEX_MGR(_pst_handler)->st_s2m_mode_bitmap)) /* ????????hal devcie??btcoex s2m????bitmap */
+#define GET_HAL_DEVICE_BTCOEX_S2M_WAIT_BITMAP(_pst_handler)         (*(oal_uint8*)&(GET_HAL_DEVICE_BTCOEX_MGR(_pst_handler)->st_s2m_wait_bitmap)) /* ????????hal devcie??btcoex s2m ??????????????????bitmap */
 
 #define GET_HAL_DEVICE_BTCOEX_M2S_6SLOT_ON(_pst_handler)            (GET_HAL_DEVICE_BTCOEX_MGR(_pst_handler)->bit_m2s_6slot)
 #define GET_HAL_DEVICE_BTCOEX_M2S_LDAC_ON(_pst_handler)             (GET_HAL_DEVICE_BTCOEX_MGR(_pst_handler)->bit_m2s_ldac)
@@ -237,16 +237,16 @@ extern  frw_timeout_stru  g_st_check_pll_lock_sts_timer;
 #define GET_HAL_DEVICE_BTCOEX_PS_SLOT_LOG_PRINT_ON(_pst_handler)    (GET_HAL_DEVICE_BTCOEX_MGR(_pst_handler)->en_log_print_on)
 #define GET_HAL_DEVICE_BTCOEX_PS_SLOT_PAUSE_ON(_pst_handler)        (GET_HAL_DEVICE_BTCOEX_MGR(_pst_handler)->en_dynamic_slot_pause)
 
-#define GET_HAL_CHIP_BTCOEX_BT_STATUS(_pst_handler)     (&((_pst_handler)->st_btcoex_btble_status.un_bt_status.st_bt_status))  /* 获取当前bt status */
-#define GET_HAL_CHIP_BTCOEX_BLE_STATUS(_pst_handler)    (&((_pst_handler)->st_btcoex_btble_status.un_ble_status.st_ble_status))  /* 获取当前ble status */
-#define GET_HAL_CHIP_BTCOEX_BT_LDAC_STATUS(_pst_handler)  ((&((_pst_handler)->st_btcoex_btble_status.un_ble_status.st_ble_status))->bit_bt_ldac) /* 获取当前ldac status */
+#define GET_HAL_CHIP_BTCOEX_BT_STATUS(_pst_handler)     (&((_pst_handler)->st_btcoex_btble_status.un_bt_status.st_bt_status))  /* ????????bt status */
+#define GET_HAL_CHIP_BTCOEX_BLE_STATUS(_pst_handler)    (&((_pst_handler)->st_btcoex_btble_status.un_ble_status.st_ble_status))  /* ????????ble status */
+#define GET_HAL_CHIP_BTCOEX_BT_LDAC_STATUS(_pst_handler)  ((&((_pst_handler)->st_btcoex_btble_status.un_ble_status.st_ble_status))->bit_bt_ldac) /* ????????ldac status */
 #endif
 #ifdef _PRE_WLAN_FEATURE_PSD_ANALYSIS
 #define PSD_DATA_SIZE_20M 128
 #define PSD_DATA_SIZE_40M 256
 #define PSD_DATA_SIZE_80M 512
 
-#define PSD_DATA_SIZE     1024  /* 160M及非业务模式为1024 */
+#define PSD_DATA_SIZE     1024  /* 160M??????????????1024 */
 
 #endif
 
@@ -261,28 +261,28 @@ extern  frw_timeout_stru  g_st_check_pll_lock_sts_timer;
 #endif
 
 /*****************************************************************************
-  8 UNION定义
+  8 UNION????
 *****************************************************************************/
 typedef enum {
-    HAL_DEVICE_EVENT_JOIN_COMP                = 0,          /* staut join完成事件 */
-    HAL_DEVICE_EVENT_VAP_UP                   = 1,          /* vap up事件 */
-    HAL_DEVICE_EVENT_VAP_DOWN                 = 2,          /* vap down事件 */
-    HAL_DEVICE_EVENT_SCAN_BEGIN               = 3,          /* 扫描开始事件 */
-    HAL_DEVICE_EVENT_SCAN_SWITCH_CHANNEL_OFF  = 4,          /* 扫描切离信道事件 */
-    HAL_DEVICE_EVENT_SCAN_SWITCH_CHANNEL_BACK = 5,          /* 扫描切回信道事件 */
-    HAL_DEVICE_EVENT_SCAN_END                 = 6,          /* 扫描结束事件 */
-    HAL_DEVICE_EVENT_SCAN_ABORT               = 7,          /* 扫描abort事件 */
+    HAL_DEVICE_EVENT_JOIN_COMP                = 0,          /* staut join???????? */
+    HAL_DEVICE_EVENT_VAP_UP                   = 1,          /* vap up???? */
+    HAL_DEVICE_EVENT_VAP_DOWN                 = 2,          /* vap down???? */
+    HAL_DEVICE_EVENT_SCAN_BEGIN               = 3,          /* ???????????? */
+    HAL_DEVICE_EVENT_SCAN_SWITCH_CHANNEL_OFF  = 4,          /* ???????????????? */
+    HAL_DEVICE_EVENT_SCAN_SWITCH_CHANNEL_BACK = 5,          /* ???????????????? */
+    HAL_DEVICE_EVENT_SCAN_END                 = 6,          /* ???????????? */
+    HAL_DEVICE_EVENT_SCAN_ABORT               = 7,          /* ????abort???? */
     HAL_DEVICE_EVENT_SCAN_PAUSE               = 8,          /* PAUSE SCAN */
     HAL_DEVICE_EVENT_SCAN_RESUME              = 9,          /* RESUME SCAN */
 
 #ifdef _PRE_WLAN_FEATURE_STA_PM
-    HAL_DEVICE_EVENT_VAP_CHANGE_TO_ACTIVE,          /* vap 进入active状态事件 */
-    HAL_DEVICE_EVENT_VAP_CHANGE_TO_AWAKE,           /* vap 进入awake状态事件 */
-    HAL_DEVICE_EVENT_VAP_CHANGE_TO_DOZE,            /* vap 进入doze状态事件 */
-    HAL_DEVICE_EVENT_HW_QUEUE_EMPTY,                /* 硬件队列为空事件 */
+    HAL_DEVICE_EVENT_VAP_CHANGE_TO_ACTIVE,          /* vap ????active???????? */
+    HAL_DEVICE_EVENT_VAP_CHANGE_TO_AWAKE,           /* vap ????awake???????? */
+    HAL_DEVICE_EVENT_VAP_CHANGE_TO_DOZE,            /* vap ????doze???????? */
+    HAL_DEVICE_EVENT_HW_QUEUE_EMPTY,                /* ???????????????? */
     HAL_DEVICE_EVENT_INIT_RX_DSCR,                  /* add rx dscr */
     HAL_DEVICE_EVENT_DESTROY_RX_DSCR,               /* destroy rx dscr */
-    HAL_DEVICE_EVENT_TBTT_WAKE_UP,                  /* tbtt唤醒事件，区别于其他唤醒事件 */
+    HAL_DEVICE_EVENT_TBTT_WAKE_UP,                  /* tbtt???????????????????????????? */
     HAL_DEVICE_EVENT_TRANS_TO_WORK_STATE,
 #endif
 
@@ -290,62 +290,62 @@ typedef enum {
     HAL_DEVICE_EVENT_SCAN_RESUME_FROM_CHAN_CONFLICT,     /* RESUME SCAN */
 
     HAL_DEVICE_EVENT_DBDC_STOP,
-    HAL_DEVICE_EVENT_DETATCH,                       /* 状态机detatch */
-    HAL_DEVICE_EVENT_SYSTEM_INIT,                   /* 系统初始启动 */
+    HAL_DEVICE_EVENT_DETATCH,                       /* ??????detatch */
+    HAL_DEVICE_EVENT_SYSTEM_INIT,                   /* ???????????? */
 
     HAL_DEVICE_EVENT_BUTT
 }hal_device_event;
 
 
 typedef enum {
-    HAL_DEVICE_INIT_STATE = 0,              /* init状态 */
-    HAL_DEVICE_IDLE_STATE = 1,              /* idle状态 */
-    HAL_DEVICE_WORK_STATE = 2,              /* work状态vap up */
-    HAL_DEVICE_SCAN_STATE = 3,              /* 扫描状态 */
-    HAL_DEVICE_BUTT_STATE                   /* 最大状态 */
+    HAL_DEVICE_INIT_STATE = 0,              /* init???? */
+    HAL_DEVICE_IDLE_STATE = 1,              /* idle???? */
+    HAL_DEVICE_WORK_STATE = 2,              /* work????vap up */
+    HAL_DEVICE_SCAN_STATE = 3,              /* ???????? */
+    HAL_DEVICE_BUTT_STATE                   /* ???????? */
 } hal_device_state_info;
 
-/* MIMO/SISO状态机状态枚举 */
+/* MIMO/SISO?????????????? */
 typedef enum {
-    HAL_M2S_STATE_IDLE = 0,         /* 初始运行状态 */
-    HAL_M2S_STATE_SISO = 1,         /* SISO状态,软件和硬件都是单通道 */
-    HAL_M2S_STATE_MIMO = 2,         /* MIMO状态,软件和硬件都是双通道 */
-    HAL_M2S_STATE_MISO = 3,         /* MISO探测态,软件单通道，硬件双通道 */
-    HAL_M2S_STATE_SIMO = 4,         /* SIMO状态,软件双通道，硬件单通道 */
+    HAL_M2S_STATE_IDLE = 0,         /* ???????????? */
+    HAL_M2S_STATE_SISO = 1,         /* SISO????,???????????????????? */
+    HAL_M2S_STATE_MIMO = 2,         /* MIMO????,???????????????????? */
+    HAL_M2S_STATE_MISO = 3,         /* MISO??????,?????????????????????? */
+    HAL_M2S_STATE_SIMO = 4,         /* SIMO????,?????????????????????? */
 
-    HAL_M2S_STATE_BUTT              /* 最大状态 */
+    HAL_M2S_STATE_BUTT              /* ???????? */
 }hal_m2s_state;
 typedef oal_uint8 hal_m2s_state_uint8;
 
-/* MIMO/SISO切换业务bitmap */
+/* MIMO/SISO????????bitmap */
 typedef enum {
     HAL_M2S_MODE_BITMAP_6SLOT = BIT0,         /* 6slot */
     HAL_M2S_MODE_BITMAP_LDAC  = BIT1,         /* ldac */
     HAL_M2S_MODE_BITMAP_SISO_AP = BIT2,       /* siso ap */
     HAL_M2S_MODE_BITMAP_MSS   = BIT3,         /* mss */
-    HAL_M2S_MODE_BITMAP_2GAP  = BIT4,         /* 2g ap切siso */
-    HAL_M2S_MODE_BITMAP_5GAP  = BIT5,         /* 5g ap切siso */
-    HAL_M2S_MODE_BITMAP_LDAC_RSSI = BIT6,     /* ldac rssi切siso */
+    HAL_M2S_MODE_BITMAP_2GAP  = BIT4,         /* 2g ap??siso */
+    HAL_M2S_MODE_BITMAP_5GAP  = BIT5,         /* 5g ap??siso */
+    HAL_M2S_MODE_BITMAP_LDAC_RSSI = BIT6,     /* ldac rssi??siso */
 
-    HAL_M2S_MODE_BITMAP_BUTT                 /* 最大状态 */
+    HAL_M2S_MODE_BITMAP_BUTT                 /* ???????? */
 }hal_m2s_mode_bitmap;
 typedef oal_uint8 hal_m2s_mode_bitmap_uint8;
 
-/* MIMO/SISO状态机事件枚举 */
+/* MIMO/SISO?????????????? */
 typedef enum {
-    /* 1.RSSI模块 */
+    /* 1.RSSI???? */
     HAL_M2S_EVENT_ANT_RSSI_MIMO_TO_MISO_C0,
     HAL_M2S_EVENT_ANT_RSSI_MIMO_TO_MISO_C1,
     HAL_M2S_EVENT_ANT_RSSI_MISO_C1_TO_MISO_C0,
     HAL_M2S_EVENT_ANT_RSSI_MISO_C0_TO_MISO_C1,
     HAL_M2S_EVENT_ANT_RSSI_MISO_TO_MIMO,
 
-    /* 2.test模块 */
+    /* 2.test???? */
     HAL_M2S_EVENT_TEST_MIMO_TO_SISO_C0 = 10,
     HAL_M2S_EVENT_TEST_MIMO_TO_SISO_C1,
-    HAL_M2S_EVENT_TEST_MIMO_TO_MISO_C0,    /* MISO硬件是mimo的，miso要切分c0还是c1，便于切siso时区分出c0还是c1 */
+    HAL_M2S_EVENT_TEST_MIMO_TO_MISO_C0,    /* MISO??????mimo????miso??????c0????c1????????siso????????c0????c1 */
     HAL_M2S_EVENT_TEST_MIMO_TO_MISO_C1,
-    HAL_M2S_EVENT_TEST_MISO_TO_MIMO,       /* miso此时不区分c0或者c1 */
+    HAL_M2S_EVENT_TEST_MISO_TO_MIMO,       /* miso??????????c0????c1 */
     HAL_M2S_EVENT_TEST_SISO_TO_MIMO,
     HAL_M2S_EVENT_TEST_SISO_TO_MISO_C0,
     HAL_M2S_EVENT_TEST_SISO_TO_MISO_C1,
@@ -361,38 +361,38 @@ typedef enum {
     HAL_M2S_EVENT_TEST_IDLE_TO_MISO_C0,
     HAL_M2S_EVENT_TEST_IDLE_TO_MISO_C1,
 
-    /* 3.BT模块 */
+    /* 3.BT???? */
     HAL_M2S_EVENT_BT_MIMO_TO_SISO_C1 = 40,
     HAL_M2S_EVENT_BT_SISO_TO_MIMO,
     HAL_M2S_EVENT_BT_SISO_C0_TO_SISO_C1,
     HAL_M2S_EVENT_BT_MISO_TO_SISO_C1,
 
-    /* 4.hal device抛来的同步事件 */
+    /* 4.hal device?????????????? */
     HAL_M2S_EVENT_IDLE_BEGIN = 50,
     HAL_M2S_EVENT_WORK_BEGIN,
     HAL_M2S_EVENT_SCAN_BEGIN,
     HAL_M2S_EVENT_SCAN_PREPARE,
-    HAL_M2S_EVENT_SCAN_CHANNEL_BACK, //scan切回home channel事件
+    HAL_M2S_EVENT_SCAN_CHANNEL_BACK, //scan????home channel????
     HAL_M2S_EVENT_SCAN_END,
 
-    /* 5.DBDC模块 */
-    HAL_M2S_EVENT_DBDC_START = 60,   //主路切辅路,siso
+    /* 5.DBDC???? */
+    HAL_M2S_EVENT_DBDC_START = 60,   //??????????,siso
     HAL_M2S_EVENT_DBDC_MIMO_TO_SISO = HAL_M2S_EVENT_DBDC_START,
-    HAL_M2S_EVENT_DBDC_STOP,         //DBDC stop事件
+    HAL_M2S_EVENT_DBDC_STOP,         //DBDC stop????
     HAL_M2S_EVENT_DBDC_SISO_TO_MIMO = HAL_M2S_EVENT_DBDC_STOP,
     HAL_M2S_EVENT_DBDC_MISO_TO_SISO_C0,
     HAL_M2S_EVENT_DBDC_SISO_C1_TO_SISO_C0,
 
-    /* 6.上层模块 */
+    /* 6.???????? */
     HAL_M2S_EVENT_COMMAND_MIMO_TO_SISO_C0 = 70,
     HAL_M2S_EVENT_COMMAND_MIMO_TO_SISO_C1,
-    HAL_M2S_EVENT_COMMAND_MIMO_TO_MISO_C0,    /* MISO硬件是mimo的，miso要切分c0还是c1，便于切siso时区分出c0还是c1 */
+    HAL_M2S_EVENT_COMMAND_MIMO_TO_MISO_C0,    /* MISO??????mimo????miso??????c0????c1????????siso????????c0????c1 */
     HAL_M2S_EVENT_COMMAND_MIMO_TO_MISO_C1,
-    HAL_M2S_EVENT_COMMAND_MISO_TO_MIMO,       /* miso此时不区分c0或者c1 */
-    HAL_M2S_EVENT_COMMAND_SISO_TO_MIMO,       /* siso此时不区分c0或者c1 */
-    HAL_M2S_EVENT_COMMAND_SISO_TO_MISO_SCAN_BEGIN,  /* 专门用于并发扫描未开，mss下的特殊扫描,当前是c0 siso mss */
-    HAL_M2S_EVENT_COMMAND_MISO_TO_SISO_C0_SCAN_END,  /* 专门用于并发扫描未开，mss下的特殊扫描,当前是c0 siso mss */
-    HAL_M2S_EVENT_COMMAND_MISO_TO_SISO_C1_SCAN_END,  /* 专门用于并发扫描未开，mss下的特殊扫描,当前是c1 siso mss */
+    HAL_M2S_EVENT_COMMAND_MISO_TO_MIMO,       /* miso??????????c0????c1 */
+    HAL_M2S_EVENT_COMMAND_SISO_TO_MIMO,       /* siso??????????c0????c1 */
+    HAL_M2S_EVENT_COMMAND_SISO_TO_MISO_SCAN_BEGIN,  /* ??????????????????????mss????????????,??????c0 siso mss */
+    HAL_M2S_EVENT_COMMAND_MISO_TO_SISO_C0_SCAN_END,  /* ??????????????????????mss????????????,??????c0 siso mss */
+    HAL_M2S_EVENT_COMMAND_MISO_TO_SISO_C1_SCAN_END,  /* ??????????????????????mss????????????,??????c1 siso mss */
     HAL_M2S_EVENT_COMMAND_SISO_C0_TO_SISO_C1,
     HAL_M2S_EVENT_COMMAND_SISO_C1_TO_SISO_C0,
     HAL_M2S_EVENT_COMMAND_MISO_TO_SISO_C0,
@@ -405,26 +405,26 @@ typedef enum {
     HAL_M2S_EVENT_COMMAND_IDLE_TO_MISO_C0,
     HAL_M2S_EVENT_COMMAND_IDLE_TO_MISO_C1,
 
-    /* 7.SISO静态启动模块 */
-    HAL_M2S_EVENT_CUSTOM_MIMO_TO_SISO_C0 = 100,   /* 当前蓝牙使用主天线，静态启动默认启动到C0上;开关wifi才能恢复 */
-    HAL_M2S_EVENT_CUSTOM_SISO_C0_TO_SISO_C1,      /* 优先级最高，AP模式下使用，不涉及dbdc，mss和test返回，rssi不涉及，并发扫描返回；蓝牙来的话，切C1siso */
-    HAL_M2S_EVENT_CUSTOM_SISO_C1_TO_SISO_C0,      /* 保持custom优先级最高，根据蓝牙业务触发切c0还是c1 siso */
+    /* 7.SISO???????????? */
+    HAL_M2S_EVENT_CUSTOM_MIMO_TO_SISO_C0 = 100,   /* ??????????????????????????????????????C0??;????wifi???????? */
+    HAL_M2S_EVENT_CUSTOM_SISO_C0_TO_SISO_C1,      /* ????????????AP??????????????????dbdc??mss??test??????rssi????????????????????????????????????C1siso */
+    HAL_M2S_EVENT_CUSTOM_SISO_C1_TO_SISO_C0,      /* ????custom??????????????????????????????c0????c1 siso */
 
-    /* 8.SISO硬件规格静态启动模块, 不允许蓝牙等业务切换 */
-    HAL_M2S_EVENT_SPEC_MIMO_TO_SISO_C0 = 110,     /* 硬件规格,从双天线工作到单天线工作 */
-    HAL_M2S_EVENT_SPEC_MIMO_TO_SISO_C1,           /* 硬件规格,从双天线工作到单天线工作 */
-    HAL_M2S_EVENT_SPEC_SISO_TO_MIMO,              /* 硬件规格,从单天线工作到双天线工作 */
-    HAL_M2S_EVENT_SPEC_MISO_TO_SISO_C0,           /* 硬件规格,从双天线工作到单天线工作 */
-    HAL_M2S_EVENT_SPEC_SISO_C1_TO_SISO_C0,        /* 2g c1 siso切换到5g c0 siso，异频dbac的处理方式，其他场景去关联要先回mimo */
+    /* 8.SISO????????????????????, ???????????????????? */
+    HAL_M2S_EVENT_SPEC_MIMO_TO_SISO_C0 = 110,     /* ????????,???????????????????????? */
+    HAL_M2S_EVENT_SPEC_MIMO_TO_SISO_C1,           /* ????????,???????????????????????? */
+    HAL_M2S_EVENT_SPEC_SISO_TO_MIMO,              /* ????????,???????????????????????? */
+    HAL_M2S_EVENT_SPEC_MISO_TO_SISO_C0,           /* ????????,???????????????????????? */
+    HAL_M2S_EVENT_SPEC_SISO_C1_TO_SISO_C0,        /* 2g c1 siso??????5g c0 siso??????dbac????????????????????????????????mimo */
 
-    /* 初始化 */
+    /* ?????? */
     HAL_M2S_EVENT_FSM_INIT = 255,
 
     HAL_M2S_EVENT_BUTT
 }hal_m2s_event_tpye;
 typedef oal_uint16 hal_m2s_event_tpye_uint16;
 
-/* CBB频率 */
+/* CBB???? */
 typedef enum
 {
     HAL_CLK_0M_FREQ                     = 0,
@@ -439,7 +439,7 @@ typedef enum
 }hal_clk_freq_enum;
 typedef oal_uint8 hal_clk_freq_enum_uint8;
 
-/* ADC/DAC组合频率 */
+/* ADC/DAC???????? */
 typedef enum
 {
     HAL_CLK_ADC80M_DAC160M                      = 0,
@@ -467,14 +467,14 @@ typedef oal_uint8 hal_dpd_cfr_set_type_uint8;
 
 
 /*****************************************************************************
-  9 OTHERS定义
+  9 OTHERS????
 *****************************************************************************/
-/* HAL模块和DMAC模块共用的WLAN RX结构体 */
+/* HAL??????DMAC??????????WLAN RX?????? */
 typedef struct
 {
-    oal_netbuf_stru        *pst_netbuf;         /* netbuf链表一个元素 */
-    oal_uint16              us_netbuf_num;      /* netbuf链表的个数 */
-    oal_uint8               auc_resv[2];        /* 字节对齐 */
+    oal_netbuf_stru        *pst_netbuf;         /* netbuf???????????? */
+    oal_uint16              us_netbuf_num;      /* netbuf?????????? */
+    oal_uint8               auc_resv[2];        /* ???????? */
 }hal_cali_hal2hmac_event_stru;
 
 typedef struct
@@ -493,7 +493,7 @@ typedef struct
 extern hal_error_proc_stru  g_st_err_proc_func[HAL_MAC_ERROR_TYPE_BUTT];
 
 /*****************************************************************************
-  10 函数声明
+  10 ????????
 *****************************************************************************/
 extern oal_int32 hal_main_init(oal_void);
 extern oal_void  hal_main_exit(oal_void);
@@ -513,7 +513,7 @@ extern wlan_ciper_protocol_type_enum_uint8 hal_ctype_to_cipher_suite(hal_cipher_
 
 
 /*****************************************************************************
-  10.1 芯片级别函数
+  10.1 ????????????
 *****************************************************************************/
 extern oal_uint32 hal_chip_get_chip(oal_uint8 uc_chip_id,  hal_to_dmac_chip_stru **ppst_hal_chip);
 extern oal_uint32 hal_chip_get_device_num(oal_uint8 uc_chip_id, oal_uint8 * puc_device_nums);
@@ -566,16 +566,16 @@ extern oal_uint8 g_auc_bw_idx[WLAN_BAND_ASSEMBLE_BUTT];
 #define GET_HAL_DEV_CURRENT_SCAN_IDX(_pst_hal_device)   ((_pst_hal_device)->st_hal_scan_params.uc_start_chan_idx + (_pst_hal_device)->st_hal_scan_params.uc_scan_chan_idx)
 
 /*****************************************************************************
-  10.2 对外暴露的配置接口
+  10.2 ??????????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  10.3 对应一套硬件MAC、PHY的静态内联函数
+  10.3 ????????????MAC??PHY??????????????
 *****************************************************************************/
 #define HAL_CHIP_LEVEL_FUNC
 /*****************************************************************************
-  10.3.1 CHIP级别   第一个入参类型为 hal_to_dmac_chip_stru
+  10.3.1 CHIP????   ???????????????? hal_to_dmac_chip_stru
 *****************************************************************************/
 OAL_STATIC OAL_INLINE oal_void hal_get_chip_version(hal_to_dmac_chip_stru * pst_hal_chip, oal_uint32 *pul_chip_ver)
 {
@@ -584,7 +584,7 @@ OAL_STATIC OAL_INLINE oal_void hal_get_chip_version(hal_to_dmac_chip_stru * pst_
 
 #define HAL_DEVICE_LEVEL_FUNC
 /*****************************************************************************
-  10.3.2 DEVICE级别   第一个入参类型为 hal_to_dmac_device_stru
+  10.3.2 DEVICE????   ???????????????? hal_to_dmac_device_stru
 *****************************************************************************/
 OAL_STATIC OAL_INLINE oal_void hal_rx_init_dscr_queue(hal_to_dmac_device_stru *pst_device,oal_uint8 uc_set_hw)
 {
@@ -630,19 +630,19 @@ OAL_STATIC OAL_INLINE oal_void hal_destroy_hw_rx_isr_list(hal_to_dmac_device_str
     HAL_PUBLIC_HOOK_FUNC(_destroy_hw_rx_isr_list)( pst_device);
 }
 
-/*填充描述符的基本信息，包括帧长度、mac长度、安全信息*/
+/*??????????????????????????????????mac??????????????*/
 OAL_STATIC OAL_INLINE oal_void hal_tx_fill_basic_ctrl_dscr(hal_to_dmac_device_stru * pst_hal_device, hal_tx_dscr_stru * p_tx_dscr, hal_tx_mpdu_stru *pst_mpdu)
 {
     HAL_PUBLIC_HOOK_FUNC(_tx_fill_basic_ctrl_dscr)(pst_hal_device, p_tx_dscr, pst_mpdu);
 }
 
-/* 将两个描述符连起来 */
+/* ?????????????????? */
 OAL_STATIC OAL_INLINE oal_void  hal_tx_ctrl_dscr_link(hal_to_dmac_device_stru * pst_hal_device, hal_tx_dscr_stru *pst_tx_dscr_prev, hal_tx_dscr_stru *pst_tx_dscr)
 {
     HAL_PUBLIC_HOOK_FUNC(_tx_ctrl_dscr_link)( pst_tx_dscr_prev, pst_tx_dscr);
 }
 
-/* 从描述符的next获取下一个描述符地址 */
+/* ??????????next???????????????????? */
 OAL_STATIC OAL_INLINE oal_void  hal_get_tx_dscr_next(hal_to_dmac_device_stru * pst_hal_device, hal_tx_dscr_stru *pst_tx_dscr, hal_tx_dscr_stru **ppst_tx_dscr_next)
 {
     HAL_PUBLIC_HOOK_FUNC(_get_tx_dscr_next)( pst_tx_dscr, ppst_tx_dscr_next);
@@ -670,7 +670,7 @@ OAL_STATIC OAL_INLINE oal_void hal_soc_set_pcie_l1s(hal_to_dmac_device_stru * ps
     HAL_PUBLIC_HOOK_FUNC(_soc_set_pcie_l1s)(pst_device, uc_on_off, uc_pcie_idle);
 }
 
-/* 设置除基本信息外的所有其他描述符字段 */
+/* ???????????????????????????????????? */
 OAL_STATIC OAL_INLINE oal_void hal_tx_ucast_data_set_dscr(hal_to_dmac_device_stru     *pst_hal_device,
                                                    hal_tx_dscr_stru            *pst_tx_dscr,
                                                    hal_tx_txop_feature_stru   *pst_txop_feature,
@@ -680,7 +680,7 @@ OAL_STATIC OAL_INLINE oal_void hal_tx_ucast_data_set_dscr(hal_to_dmac_device_str
     HAL_PUBLIC_HOOK_FUNC(_tx_ucast_data_set_dscr)( pst_hal_device, pst_tx_dscr, pst_txop_feature, pst_txop_alg, pst_ppdu_feature);
 }
 
-/* 设置管理帧，组播 广播数据帧除基本信息外的所有其他描述符字段 */
+/* ???????????????? ?????????????????????????????????????????? */
 OAL_STATIC OAL_INLINE oal_void hal_tx_non_ucast_data_set_dscr(hal_to_dmac_device_stru     *pst_hal_device,
                                                    hal_tx_dscr_stru            *pst_tx_dscr,
                                                    hal_tx_txop_feature_stru   *pst_txop_feature,
@@ -702,7 +702,7 @@ OAL_STATIC OAL_INLINE oal_void  hal_tx_set_dscr_seqno_sw_generate(hal_to_dmac_de
     HAL_PUBLIC_HOOK_FUNC(_tx_set_dscr_seqno_sw_generate)( pst_tx_dscr, uc_sw_seqno_generate);
 }
 
-/*针对amsdu，根据输入的msdu个数，返回发送描述符的首段长度，以及第二段长度 */
+/*????amsdu????????????msdu?????????????????????????????????????????????? */
 OAL_STATIC OAL_INLINE oal_void hal_tx_get_size_dscr(hal_to_dmac_device_stru * pst_hal_device, oal_uint8 us_msdu_num, oal_uint32 * pul_dscr_one_size, oal_uint32 * pul_dscr_two_size)
 {
     HAL_PUBLIC_HOOK_FUNC(_tx_get_size_dscr)( us_msdu_num, pul_dscr_one_size, pul_dscr_two_size);
@@ -984,13 +984,13 @@ OAL_STATIC OAL_INLINE oal_void  hal_tx_get_protocol_mode(hal_to_dmac_device_stru
 }
 
 
-/*获取接收描述符大小*/
+/*??????????????????*/
 OAL_STATIC OAL_INLINE oal_void hal_rx_get_size_dscr(hal_to_dmac_device_stru * pst_hal_device, oal_uint32 * pul_dscr_size)
 {
     *pul_dscr_size = WLAN_RX_DSCR_SIZE;
 }
 
-/*获取描述符信息*/
+/*??????????????*/
 OAL_STATIC OAL_INLINE oal_void hal_rx_get_info_dscr(hal_to_dmac_device_stru *pst_hal_device, oal_uint32 *pul_rx_dscr, hal_rx_ctl_stru *pst_rx_ctl, hal_rx_status_stru *pst_rx_status, hal_rx_statistic_stru *pst_rx_statistics)
 {
     HAL_PUBLIC_HOOK_FUNC(_rx_get_info_dscr)(pst_hal_device, pul_rx_dscr, pst_rx_ctl, pst_rx_status, pst_rx_statistics);
@@ -1025,27 +1025,27 @@ OAL_STATIC OAL_INLINE oal_void hal_rx_record_frame_status_info(hal_to_dmac_devic
 #endif
 
 #ifdef _PRE_WLAN_FEATUER_PCIE_TEST
-/*写PCIE TEST的burst*/
+/*??PCIE TEST??burst*/
 OAL_STATIC OAL_INLINE oal_void hal_pcie_test_write_burst(hal_to_dmac_device_stru * pst_hal_device, oal_uint16 us_data)
 {
     HAL_PUBLIC_HOOK_FUNC(_pcie_test_write_burst)( pst_hal_device, us_data);
 }
-/*写PCIE TEST的读数据的使能bit*/
+/*??PCIE TEST??????????????bit*/
 OAL_STATIC OAL_INLINE oal_void hal_pcie_test_rdata_bit(hal_to_dmac_device_stru * pst_hal_device, oal_uint8 uc_data)
 {
     HAL_PUBLIC_HOOK_FUNC(_pcie_test_rdata_bit)( pst_hal_device, uc_data);
 }
-/*写PCIE TEST的读数据的起始地址*/
+/*??PCIE TEST??????????????????*/
 OAL_STATIC OAL_INLINE oal_void hal_pcie_test_rdata_addr(hal_to_dmac_device_stru * pst_hal_device, oal_uint32 ul_addr)
 {
     HAL_PUBLIC_HOOK_FUNC(_pcie_test_rdata_addr)( pst_hal_device, ul_addr);
 }
-/*写PCIE TEST的写数据的使能bit*/
+/*??PCIE TEST??????????????bit*/
 OAL_STATIC OAL_INLINE oal_void hal_pcie_test_wdata_bit(hal_to_dmac_device_stru * pst_hal_device, oal_uint8 uc_data)
 {
     HAL_PUBLIC_HOOK_FUNC(_pcie_test_wdata_bit)( pst_hal_device, uc_data);
 }
-/*写PCIE TEST的写数据的起始地址*/
+/*??PCIE TEST??????????????????*/
 OAL_STATIC OAL_INLINE oal_void hal_pcie_test_wdata_addr(hal_to_dmac_device_stru * pst_hal_device, oal_uint32 ul_addr)
 {
     HAL_PUBLIC_HOOK_FUNC(_pcie_test_wdata_addr)( pst_hal_device, ul_addr);
@@ -1558,7 +1558,7 @@ OAL_STATIC OAL_INLINE oal_void  hal_reset_phy_machw(hal_to_dmac_device_stru * ps
 }
 
 /*****************************************************************************
-  hal初始化/退出/复位相关接口
+  hal??????/????/????????????
 *****************************************************************************/
 
 OAL_STATIC OAL_INLINE oal_void  hal_disable_machw_phy_and_pa(hal_to_dmac_device_stru *pst_hal_device)
@@ -1578,7 +1578,7 @@ OAL_STATIC OAL_INLINE oal_void  hal_recover_machw_phy_and_pa(hal_to_dmac_device_
     HAL_PUBLIC_HOOK_FUNC(_recover_machw_phy_and_pa)(pst_hal_device);
 }
 /*****************************************************************************
-  hal MAC hardware初始化接口
+  hal MAC hardware??????????
 *****************************************************************************/
 
 OAL_STATIC OAL_INLINE oal_void  hal_initialize_machw(hal_to_dmac_device_stru *pst_hal_device)
@@ -1601,7 +1601,7 @@ OAL_STATIC OAL_INLINE oal_void  hal_initialize_machw_common(hal_to_dmac_device_s
 
 
 /*****************************************************************************
-  频段、带宽、信道号相关接口
+  ??????????????????????????
 *****************************************************************************/
 
 OAL_STATIC OAL_INLINE oal_void  hal_set_freq_band(hal_to_dmac_device_stru *pst_hal_device, wlan_channel_band_enum_uint8 en_band)
@@ -1716,7 +1716,7 @@ OAL_STATIC OAL_INLINE oal_void  hal_restore_machw_ba_params_with_bitmap(hal_to_d
 #endif
 
 /*****************************************************************************
-          RA LUT操作相关接口
+          RA LUT????????????
 *****************************************************************************/
 
 OAL_STATIC OAL_INLINE oal_void  hal_machw_seq_num_index_update_per_tid(hal_to_dmac_device_stru *pst_hal_device, oal_uint8 uc_lut_index, oal_uint8 uc_qos_flag)
@@ -1815,7 +1815,7 @@ OAL_STATIC OAL_INLINE oal_void  hal_enable_machw_cts_trans(hal_to_dmac_device_st
 
 
 /*****************************************************************************
-  PHY相关接口
+  PHY????????
 *****************************************************************************/
 
 OAL_STATIC OAL_INLINE oal_void  hal_initialize_phy(hal_to_dmac_device_stru * pst_hal_device)
@@ -1872,7 +1872,7 @@ OAL_STATIC OAL_INLINE oal_void  hal_trig_dummy_radar(hal_to_dmac_device_stru *ps
 
 
 /*****************************************************************************
-  RF相关接口
+  RF????????
 *****************************************************************************/
 
 OAL_STATIC OAL_INLINE oal_void  hal_initialize_rf_sys(hal_to_dmac_device_stru * pst_hal_device)
@@ -2015,7 +2015,7 @@ OAL_STATIC OAL_INLINE oal_void  hal_psm_rf_awake(hal_to_dmac_device_stru  *pst_h
     HAL_PUBLIC_HOOK_FUNC(_psm_rf_awake)(pst_hal_device,uc_restore_reg);
 }
 
-/* 读写rf reg */
+/* ????rf reg */
 OAL_STATIC OAL_INLINE oal_void  hal_read_rf_reg(hal_to_dmac_device_stru *pst_hal_device, oal_uint16 us_reg_addr, oal_uint16 *pus_reg_val)
 {
     HAL_PUBLIC_HOOK_FUNC(_read_rf_reg)(pst_hal_device, us_reg_addr, pus_reg_val);
@@ -2032,7 +2032,7 @@ OAL_STATIC OAL_INLINE oal_void hal_psm_recover_primary_channel(hal_to_dmac_devic
 
     pst_wifi_channel_status = &(pst_hal_device->st_wifi_channel_status);
 
-    /* 设置带宽 */
+    /* ???????? */
     pst_hal_device->st_wifi_channel_status.en_band     = pst_wifi_channel_status->en_band;
     pst_hal_device->st_wifi_channel_status.uc_chan_idx = pst_wifi_channel_status->uc_chan_idx;
     hal_set_bandwidth_mode(pst_hal_device, pst_wifi_channel_status->en_bandwidth);
@@ -2105,7 +2105,7 @@ OAL_STATIC OAL_INLINE oal_void hal_rf_cali_realtime(hal_to_dmac_device_stru * ps
 #endif
 
 /*****************************************************************************
-  SoC相关接口
+  SoC????????
 *****************************************************************************/
 
 OAL_STATIC OAL_INLINE oal_void  hal_initialize_soc(hal_to_dmac_device_stru * pst_hal_device)
@@ -2114,7 +2114,7 @@ OAL_STATIC OAL_INLINE oal_void  hal_initialize_soc(hal_to_dmac_device_stru * pst
 }
 
 /*****************************************************************************
-  中断相关接口
+  ????????????
 *****************************************************************************/
 
 OAL_STATIC OAL_INLINE oal_void  hal_get_mac_int_status(hal_to_dmac_device_stru *pst_hal_device, oal_uint32 *pul_status)
@@ -2140,13 +2140,13 @@ OAL_STATIC OAL_INLINE oal_void  hal_clear_mac_error_int_status(hal_to_dmac_devic
     HAL_PUBLIC_HOOK_FUNC(_clear_mac_error_int_status)( pst_hal_device, pst_status);
 }
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC != _PRE_MULTI_CORE_MODE)
-/* ERROR IRQ中断寄存器相关操作 */
+/* ERROR IRQ?????????????????? */
 OAL_STATIC OAL_INLINE oal_void  hal_unmask_mac_error_init_status(hal_to_dmac_device_stru * pst_hal_device, hal_error_state_stru *pst_status)
 {
     HAL_PUBLIC_HOOK_FUNC(_unmask_mac_error_init_status)( pst_hal_device, pst_status);
 }
 #endif
-/* mac中断寄存器相关操作 */
+/* mac?????????????????? */
 OAL_STATIC OAL_INLINE oal_void  hal_unmask_mac_init_status(hal_to_dmac_device_stru * pst_hal_device, oal_uint32 ul_status)
 {
     HAL_PUBLIC_HOOK_FUNC(_unmask_mac_init_status)( pst_hal_device, ul_status);
@@ -2198,7 +2198,7 @@ OAL_STATIC OAL_INLINE oal_void hal_cali_matrix_data_send_func(hal_to_dmac_device
 }
 
 /*
-输入vap模式，hal创建vap结构，并标记vap id
+????vap??????hal????vap????????????vap id
 */
 OAL_STATIC OAL_INLINE oal_void hal_add_vap(hal_to_dmac_device_stru * pst_hal_device, wlan_vap_mode_enum_uint8 vap_mode, oal_uint8 uc_mac_vap_id, hal_to_dmac_vap_stru ** ppst_hal_vap)
 {
@@ -2206,7 +2206,7 @@ OAL_STATIC OAL_INLINE oal_void hal_add_vap(hal_to_dmac_device_stru * pst_hal_dev
 }
 
 /*
-输入vap模式，hal删除vap结构，并标记vap id
+????vap??????hal????vap????????????vap id
 */
 OAL_STATIC OAL_INLINE oal_void hal_del_vap(hal_to_dmac_device_stru * pst_hal_device, wlan_vap_mode_enum_uint8 vap_mode, oal_uint8 vap_id)
 {
@@ -2301,7 +2301,7 @@ OAL_STATIC OAL_INLINE oal_void hal_unmask_interrupt(struct tag_hal_to_dmac_devic
 }
 
 /*****************************************************************************
-  寄存器调测接口
+  ??????????????
 *****************************************************************************/
 
 OAL_STATIC OAL_INLINE oal_void  hal_reg_info(hal_to_dmac_device_stru *pst_hal_device, oal_uint32 ul_addr, oal_uint32 *pul_val)
@@ -2561,7 +2561,7 @@ OAL_STATIC OAL_INLINE oal_void hal_get_ch_measurement_result_ram(hal_to_dmac_dev
     HAL_PUBLIC_HOOK_FUNC(_get_ch_measurement_result_ram)( pst_hal_device, pst_ch_statics);
 }
 
-/* ROM化可删除 */
+/* ROM???????? */
 OAL_STATIC OAL_INLINE oal_void hal_get_ch_measurement_result(hal_to_dmac_device_stru *pst_hal_device, hal_ch_statics_irq_event_stru *pst_ch_statics)
 {
     HAL_PUBLIC_HOOK_FUNC(_get_ch_measurement_result)( pst_hal_device, pst_ch_statics);
@@ -3608,7 +3608,7 @@ OAL_STATIC OAL_INLINE oal_void  hal_vap_set_machw_prot_params(hal_to_dmac_vap_st
 
 
 /*****************************************************************************
-  10.2 对应一套硬件MAC VAP的静态内联函数
+  10.2 ????????????MAC VAP??????????????
 *****************************************************************************/
 OAL_STATIC OAL_INLINE oal_void hal_vap_set_macaddr(hal_to_dmac_vap_stru * pst_hal_vap, oal_uint8 *puc_mac_addr)
 {
@@ -3630,7 +3630,7 @@ OAL_STATIC OAL_INLINE oal_void hal_vap_clr_opmode(hal_to_dmac_vap_stru *pst_hal_
 
 
 /*****************************************************************************
-  hal vap EDCA参数配置相关接口
+  hal vap EDCA????????????????
 *****************************************************************************/
 
 OAL_STATIC OAL_INLINE oal_void  hal_vap_set_machw_aifsn_all_ac(
@@ -3791,7 +3791,7 @@ OAL_STATIC OAL_INLINE oal_void  hal_vap_set_machw_prng_seed_val_all_ac(hal_to_dm
 
 
 /*****************************************************************************
-  hal vap TSF参数配置相关接口
+  hal vap TSF????????????????
 *****************************************************************************/
 
 OAL_STATIC OAL_INLINE oal_void  hal_vap_read_tbtt_timer(hal_to_dmac_vap_stru *pst_hal_vap, oal_uint32 *pul_value)
@@ -3940,16 +3940,16 @@ OAL_STATIC OAL_INLINE oal_void  hal_vap_enable_p2p_absent_suspend(
 }
 
 #endif
-/* beacon hal相关接口 原型声明 */
+/* beacon hal???????? ???????? */
 OAL_STATIC OAL_INLINE oal_void hal_tx_complete_update_rate(hal_tx_dscr_ctrl_one_param *pst_tx_dscr_param)
 {
     oal_uint8       uc_retry;
 
     uc_retry = pst_tx_dscr_param->uc_long_retry + pst_tx_dscr_param->uc_short_retry;
 
-    if (uc_retry <= pst_tx_dscr_param->ast_per_rate[0].rate_bit_stru.bit_tx_count) /* 本次使用第1种速率 */
+    if (uc_retry <= pst_tx_dscr_param->ast_per_rate[0].rate_bit_stru.bit_tx_count) /* ??????????1?????? */
     {
-       /* 微波炉算法启动，实际的硬件传输速率等级为rate3，且总传输次数为2，描述符修改为rate3 */
+       /* ????????????????????????????????????????rate3????????????????2??????????????rate3 */
 #ifdef _PRE_WLAN_FEATURE_MWO_DET
         if((3 == pst_tx_dscr_param->uc_last_rate_rank) && (uc_retry <= pst_tx_dscr_param->ast_per_rate[3].rate_bit_stru.bit_tx_count))
         {
@@ -3967,7 +3967,7 @@ OAL_STATIC OAL_INLINE oal_void hal_tx_complete_update_rate(hal_tx_dscr_ctrl_one_
     else
     {
         uc_retry -= pst_tx_dscr_param->ast_per_rate[0].rate_bit_stru.bit_tx_count;
-        if(uc_retry <= pst_tx_dscr_param->ast_per_rate[1].rate_bit_stru.bit_tx_count) /* 本次使用第2种速率 */
+        if(uc_retry <= pst_tx_dscr_param->ast_per_rate[1].rate_bit_stru.bit_tx_count) /* ??????????2?????? */
         {
             pst_tx_dscr_param->uc_last_rate_rank = 1;
         }
@@ -4134,7 +4134,7 @@ OAL_STATIC OAL_INLINE oal_void hal_cfg_slottime_type(hal_to_dmac_device_stru *ps
 }
 
 /*****************************************************************************
-  10.4 SDT读写寄存器函数
+  10.4 SDT??????????????
 *****************************************************************************/
 
 

@@ -9,7 +9,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "wal_regdb.h"
 #include "oam_ext_if.h"
@@ -18,7 +18,7 @@ extern "C" {
 #define THIS_FILE_ID OAM_FILE_ID_WAL_REGDB_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 #if (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION)
 
@@ -32,28 +32,28 @@ extern "C" {
 #include "wal_regdb_default.c"
 #endif
 
-/* 默认管制域信息 */
+/* ?????????????? */
 OAL_CONST oal_ieee80211_regdomain_stru g_st_default_regdom_etc = {
     .n_reg_rules = 4,
     .alpha2 =  "99",
     .reg_rules = {
-        /* IEEE 802.11b/g, 信道 1..13 */
+        /* IEEE 802.11b/g, ???? 1..13 */
         REG_RULE(2412-10, 2472+10, 40, 6, 25, 0),/*lint !e651*/
 
-        /* 信道 36 - 64 */
+        /* ???? 36 - 64 */
         REG_RULE(5150-10, 5350+10, 160, 6, 25, 0),
 
-        /* 信道 100 - 165 */
+        /* ???? 100 - 165 */
         REG_RULE(5470-10, 5850+10, 160, 6, 25, 0),
 
-        /* IEEE 802.11 信道 184,188,192,196 ，对于日本4.9G */
+        /* IEEE 802.11 ???? 184,188,192,196 ??????????4.9G */
         REG_RULE(4920-10, 4980+10, 80, 6, 25, 0),
     }
 };
 
 
 #elif (_PRE_OS_VERSION_WIN32 == _PRE_OS_VERSION)
-/* Win32下代码只封装几个国家的管制域信息， 为了UT， */
+/* Win32?????????????????????????????????? ????UT?? */
 OAL_STATIC OAL_CONST oal_ieee80211_regdomain_stru regdom_AU = {
     5,
     {'A', 'U'},
@@ -152,22 +152,22 @@ OAL_CONST oal_ieee80211_regdomain_stru *reg_regdb_etc[] = {
 
 int reg_regdb_size_etc = OAL_ARRAY_SIZE(reg_regdb_etc);
 
-/* 默认管制域信息 */
+/* ?????????????? */
 OAL_CONST oal_ieee80211_regdomain_stru g_st_default_regdom_etc = {
     4,              /* n_reg_rules */
     {'9', '9'},     /* alpha2 */
     {0, 0},
     {   /* reg_rules */
-        /* IEEE 802.11b/g, 信道 1..13 */
+        /* IEEE 802.11b/g, ???? 1..13 */
         REG_RULE(2402, 2482, 40, 6, 20, 0),
 
-        /* 信道 36 - 64 */
+        /* ???? 36 - 64 */
         REG_RULE(5150-10, 5350+10, 40, 6, 20, (0)),
 
-        /* 信道 100 - 165 */
+        /* ???? 100 - 165 */
         REG_RULE(5470-10, 5850+10, 40, 6, 20, (0)),
 
-        /* IEEE 802.11 信道 184,188,192,196 在日本使用 4.9G */
+        /* IEEE 802.11 ???? 184,188,192,196 ?????????? 4.9G */
         REG_RULE(4920-10, 4980+10, 40, 6, 23, (0)),
     },
 };
@@ -177,7 +177,7 @@ OAL_CONST oal_ieee80211_regdomain_stru g_st_default_regdom_etc = {
 
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 #ifdef _PRE_WLAN_FEATURE_11D
 
@@ -190,7 +190,7 @@ OAL_CONST oal_ieee80211_regdomain_stru* wal_regdb_find_db_etc(oal_int8 *pc_str)
         return OAL_PTR_NULL;
     }
 
-    /* 默认管制域 */
+    /* ?????????? */
     if (('9' == pc_str[0]) && ('9' == pc_str[1]))
     {
         return &g_st_default_regdom_etc;
@@ -205,7 +205,7 @@ OAL_CONST oal_ieee80211_regdomain_stru* wal_regdb_find_db_etc(oal_int8 *pc_str)
         }
 
     }
-    /* 找不到国家码信息时，返回一个特定国家码 */
+    /* ?????????????????????????????????????? */
 #if (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION)
     OAM_WARNING_LOG4(0, OAM_SF_ANY, "{wal_regdb_find_db_etc::regdomain %c,%c was not found,return default regdomain %c,%c.}\r\n",
             pc_str[0], pc_str[1], reg_regdb_etc[HI1103_SPECIFIC_COUNTRY_CODE_IDX]->alpha2[0], reg_regdb_etc[HI1103_SPECIFIC_COUNTRY_CODE_IDX]->alpha2[1]);

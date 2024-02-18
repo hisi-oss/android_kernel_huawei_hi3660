@@ -404,7 +404,7 @@ oal_int32 oal_pcie_firmware_cmd_send_readm(oal_pcie_res *pst_pcie_res, oal_uint8
     cpu_addr = g_aulParamBuf[0];
     ulLen    = g_aulParamBuf[1];
 
-    /* 起始地址和长度需要四字节对齐 */
+    /* ???????????????????????????? */
     if ((0 != (cpu_addr % 4)) || (0 != (ulLen % 4)) || (0 == ulLen))
     {
         PCI_PRINT_LOG(PCI_LOG_ERR, "pcie readm cmd error, addr 0x%x len %u", cpu_addr, ulLen);
@@ -536,9 +536,9 @@ oal_int32 oal_pcie_firmware_get_param(oal_uint8* buff, oal_int32 len)
             break;
         }
 
-        //ret = kstrtouint(pucDataBuff, 0, *ulParam); //0自动识别进制
+        //ret = kstrtouint(pucDataBuff, 0, *ulParam); //0????????????
         pucTmp  = pucDataBuff;
-        ulParam = simple_strtoul(pucTmp, (char **)&pucDataBuff, 0); //0自动识别进制
+        ulParam = simple_strtoul(pucTmp, (char **)&pucDataBuff, 0); //0????????????
 
         g_aulParamBuf[ulParamIndex] = ulParam;
         ulParamIndex++;

@@ -9,7 +9,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "platform_spec.h"
 #include "frw_main.h"
@@ -22,15 +22,15 @@ extern "C" {
 
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 /******************************************************************************
-    事件处理全局变量
+    ????????????????
 *******************************************************************************/
 frw_task_stru g_ast_event_task[WLAN_FRW_MAX_NUM_CORES];
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 #if (_PRE_FRW_FEATURE_PROCCESS_ENTITY_TYPE == _PRE_FRW_FEATURE_PROCCESS_ENTITY_THREAD)
@@ -83,7 +83,7 @@ OAL_STATIC oal_int32 frw_task_thread(oal_void* ul_bind_cpu)
             break;
         }
 
-        /*state为TASK_INTERRUPTIBLE，condition不成立则线程阻塞，直到被唤醒进入waitqueue*/
+        /*state??TASK_INTERRUPTIBLE??condition????????????????????????????????waitqueue*/
         /*lint -e730*/
 #ifdef  _PRE_FRW_EVENT_PROCESS_TRACE_DEBUG
         frw_event_last_pc_trace(__FUNCTION__,__LINE__, (oal_uint32)(oal_ulong)ul_bind_cpu);
@@ -104,7 +104,7 @@ OAL_STATIC oal_int32 frw_task_thread(oal_void* ul_bind_cpu)
 #if (_PRE_FRW_FEATURE_PROCCESS_ENTITY_TYPE == _PRE_FRW_FEATURE_PROCCESS_ENTITY_THREAD)
         if(ul_event_count == g_ast_event_task[(oal_uint)ul_bind_cpu].ul_total_event_cnt)
         {
-            /*空转*/
+            /*????*/
             ul_empty_count++;
             if(ul_empty_count == 10000)
             {
@@ -200,7 +200,7 @@ oal_uint8 frw_task_get_state(oal_uint32 ul_core_id)
 
 #elif (_PRE_FRW_FEATURE_PROCCESS_ENTITY_TYPE == _PRE_FRW_FEATURE_PROCCESS_ENTITY_TASKLET)
 
-// 使用tasklet进行核间通信，tasklet初始化时指定核间通信方向
+// ????tasklet??????????????tasklet????????????????????????
 #if WLAN_FRW_MAX_NUM_CORES == 1
 #define FRW_DST_CORE(this_core) 0
 #elif WLAN_FRW_MAX_NUM_CORES == 2

@@ -47,7 +47,7 @@
  */
 
 /******************************************************************************
-   1 头文件包含
+   1 ??????????
 ******************************************************************************/
 #include "v_typdef.h"
 #include "PsTypeDef.h"
@@ -64,18 +64,18 @@
 #define STATIC
 
 /*****************************************************************************
-    协议栈打印打点方式下的.C文件宏定义
+    ??????????????????????.C??????????
 *****************************************************************************/
 
 #define THIS_FILE_ID PS_FILE_ID_ACPU_NFEX_CTRL_C
 
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
 
 /*****************************************************************************
-  3 全局变量声明
+  3 ????????????
 *****************************************************************************/
 NF_EXT_ENTITY_STRU                  g_stExEntity            = {0};
 VOS_UINT32                          g_ulNFExtTaskId         = 0;
@@ -90,9 +90,9 @@ NF_EXT_NV_STRU                      g_stNfExtNv;
 NF_EXT_HOOK_MASK_NV_STRU            g_stExHookMask;
 
 /*****************************************************************************
-  4 结构定义
+  4 ????????
 *****************************************************************************/
-/* 扩展netfilter开关映射表 */
+/* ????netfilter?????????? */
 NF_EXT_MASK_OPS_STRU g_stNfExtMaskOps[NF_EXT_HOOK_ON_MASK_IDX_ENUM_BUTT];
 
 
@@ -112,7 +112,7 @@ STATIC VOS_VOID NFExt_FlowCtrlInit(VOS_VOID);
 STATIC VOS_INT  NFExt_ReRegHooks(VOS_UINT32 ulMask);
 
 /******************************************************************************
-   5 函数实现
+   5 ????????
 ******************************************************************************/
 
 VOS_VOID  NFExt_UnregHooks(VOS_UINT32 ulMask)
@@ -123,10 +123,10 @@ VOS_VOID  NFExt_UnregHooks(VOS_UINT32 ulMask)
     {
         if ( g_stNfExtMaskOps[i].ulHookMask == (ulMask & g_stNfExtMaskOps[i].ulHookMask) )
         {
-            /*卸载钩子函数*/
+            /*????????????*/
             nf_unregister_hook(&(g_stNfExtMaskOps[i].stNfExtOps));
 
-            /* 重置相应的掩码位 */
+            /* ???????????????? */
             g_stExEntity.ulCurHookOnMask &= ~g_stNfExtMaskOps[i].ulHookMask;
         }
     }
@@ -146,13 +146,13 @@ VOS_INT  NFExt_RegHooks(VOS_UINT32 ulMask)
             continue;
         }
 
-        /*注册相应的钩子函数*/
+        /*??????????????????*/
         iRet = nf_register_hook(&(g_stNfExtMaskOps[i].stNfExtOps));
         if ( 0 != iRet )
         {
             TTF_LOG(ACPU_PID_NFEXT, DIAG_MODE_COMM, PS_PRINT_WARNING,"register_hook error!!\n");
 
-            /*若有一个注册失败则卸载当前所有已经注册上的钩子函数*/
+            /*??????????????????????????????????????????????????*/
             NFExt_UnregHooks(g_stExEntity.ulCurHookOnMask);
             return iRet;
         }
@@ -168,7 +168,7 @@ STATIC VOS_INT  NFExt_ReRegHooks(VOS_UINT32 ulMask)
 {
     VOS_INT iRet;
 
-    /*重新注册前先卸载当前所有的钩子函数*/
+    /*??????????????????????????????????*/
     if ( 0 != g_stExEntity.ulCurHookOnMask )
     {
         NFExt_UnregHooks(g_stExEntity.ulCurHookOnMask);
@@ -185,7 +185,7 @@ PS_BOOL_ENUM_UINT8 NFExt_ConfigEffective(IPS_MNTN_TRACE_CONFIG_REQ_STRU *pRcvMsg
     VOS_INT             iRet;
     VOS_UINT32          ulMask = 0;
 
-    /* 流控hook，默认挂上 */
+    /* ????hook?????????? */
     ulMask |= NF_EXT_DEF_FLOW_CTRL_HOOK_ON_MASK;
 
     if ( (pRcvMsg->stBridgeArpTraceCfg.ulChoice > IPS_MNTN_TRACE_NULL_CHOSEN)
@@ -228,7 +228,7 @@ VOS_UINT32  NFExt_Get1stInetIpv4Addr(struct net_device *pstDev)
 {
     struct in_device   *pinDev;
 
-    /* 使用Linux内核结构，使用Linux风格 */
+    /* ????Linux??????????????Linux???? */
     if (NULL == pstDev)
     {
         return 0;
@@ -254,7 +254,7 @@ STATIC VOS_UINT32 NFExt_ReadNvCfg(VOS_VOID)
 {
     VOS_UINT32                     ulRet;
 
-    /* 读取钩子函数注册点掩码 */
+    /* ?????????????????????? */
     ulRet = NV_Read (en_NV_Item_NETFILTER_HOOK_MASK, &g_stNfExtNv , sizeof(NF_EXT_NV_STRU));
     if (NV_OK != ulRet)
     {
@@ -262,7 +262,7 @@ STATIC VOS_UINT32 NFExt_ReadNvCfg(VOS_VOID)
         return VOS_ERR;
     }
 
-    /* 将NV结构中读出的掩码赋给g_stExHookMask*/
+    /* ??NV????????????????????g_stExHookMask*/
     g_stExHookMask.ulBrArpHookValue         = g_stNfExtNv.ulNetfilterPara1;
     g_stExHookMask.ulInHookValue            = g_stNfExtNv.ulNetfilterPara2;
     g_stExHookMask.ulOutHookValue           = g_stNfExtNv.ulNetfilterPara3;
@@ -321,7 +321,7 @@ STATIC VOS_VOID NFExt_MaskOpsInit(VOS_VOID)
 #endif
     pstMaskOps[NF_EXT_BR_PRE_ROUTING_HOOK_ON_MASK_IDX].stNfExtOps.pf        = NFPROTO_BRIDGE;
     pstMaskOps[NF_EXT_BR_PRE_ROUTING_HOOK_ON_MASK_IDX].stNfExtOps.hooknum   = NF_BR_PRE_ROUTING;
-    pstMaskOps[NF_EXT_BR_PRE_ROUTING_HOOK_ON_MASK_IDX].stNfExtOps.priority  = NF_EXT_BR_PRI_FILTER_OTHER;   /* 网桥hook点的最低优先级 */
+    pstMaskOps[NF_EXT_BR_PRE_ROUTING_HOOK_ON_MASK_IDX].stNfExtOps.priority  = NF_EXT_BR_PRI_FILTER_OTHER;   /* ????hook?????????????? */
 
     pstMaskOps[NF_EXT_BR_POST_ROUTING_HOOK_ON_MASK_IDX].ulHookMask
         = NF_EXT_GET_MASK_FROM_INDEX(NF_EXT_BR_POST_ROUTING_HOOK_ON_MASK_IDX);
@@ -371,7 +371,7 @@ STATIC VOS_VOID NFExt_MaskOpsInit(VOS_VOID)
 #endif
     pstMaskOps[NF_EXT_ARP_LOCAL_IN_ON_MASK_IDX].stNfExtOps.pf       = NFPROTO_ARP;
     pstMaskOps[NF_EXT_ARP_LOCAL_IN_ON_MASK_IDX].stNfExtOps.hooknum  = NF_ARP_IN;
-    pstMaskOps[NF_EXT_ARP_LOCAL_IN_ON_MASK_IDX].stNfExtOps.priority = NF_EXT_IP_PRI_CONNTRACK;      /* ARP hook点的优先级 */
+    pstMaskOps[NF_EXT_ARP_LOCAL_IN_ON_MASK_IDX].stNfExtOps.priority = NF_EXT_IP_PRI_CONNTRACK;      /* ARP hook?????????? */
 
     pstMaskOps[NF_EXT_ARP_LOCAL_OUT_ON_MASK_IDX].ulHookMask
         = NF_EXT_GET_MASK_FROM_INDEX(NF_EXT_ARP_LOCAL_OUT_ON_MASK_IDX);
@@ -391,7 +391,7 @@ STATIC VOS_VOID NFExt_MaskOpsInit(VOS_VOID)
 #endif
     pstMaskOps[NF_EXT_IP4_PRE_ROUTING_HOOK_ON_MASK_IDX].stNfExtOps.pf       = NFPROTO_IPV4;
     pstMaskOps[NF_EXT_IP4_PRE_ROUTING_HOOK_ON_MASK_IDX].stNfExtOps.hooknum  = NF_INET_PRE_ROUTING;
-    pstMaskOps[NF_EXT_IP4_PRE_ROUTING_HOOK_ON_MASK_IDX].stNfExtOps.priority = NF_EXT_IP_PRI_MANGLE;         /* 高于DNAT hook点的优先级 */
+    pstMaskOps[NF_EXT_IP4_PRE_ROUTING_HOOK_ON_MASK_IDX].stNfExtOps.priority = NF_EXT_IP_PRI_MANGLE;         /* ????DNAT hook?????????? */
 
     pstMaskOps[NF_EXT_IP4_POST_ROUTING_HOOK_ON_MASK_IDX].ulHookMask
         = NF_EXT_GET_MASK_FROM_INDEX(NF_EXT_IP4_POST_ROUTING_HOOK_ON_MASK_IDX);
@@ -401,7 +401,7 @@ STATIC VOS_VOID NFExt_MaskOpsInit(VOS_VOID)
 #endif
     pstMaskOps[NF_EXT_IP4_POST_ROUTING_HOOK_ON_MASK_IDX].stNfExtOps.pf          = NFPROTO_IPV4;
     pstMaskOps[NF_EXT_IP4_POST_ROUTING_HOOK_ON_MASK_IDX].stNfExtOps.hooknum     = NF_INET_POST_ROUTING;
-    pstMaskOps[NF_EXT_IP4_POST_ROUTING_HOOK_ON_MASK_IDX].stNfExtOps.priority    = NF_EXT_IP_PRI_SELINUX_LAST;   /* 低于SNAT hook点的优先级 */
+    pstMaskOps[NF_EXT_IP4_POST_ROUTING_HOOK_ON_MASK_IDX].stNfExtOps.priority    = NF_EXT_IP_PRI_SELINUX_LAST;   /* ????SNAT hook?????????? */
 
     pstMaskOps[NF_EXT_IP4_LOCAL_IN_HOOK_ON_MASK_IDX].ulHookMask
         = NF_EXT_GET_MASK_FROM_INDEX(NF_EXT_IP4_LOCAL_IN_HOOK_ON_MASK_IDX);
@@ -491,7 +491,7 @@ STATIC VOS_VOID NFExt_MaskOpsInit(VOS_VOID)
 #endif
     pstMaskOps[NF_EXT_BR_FORWARD_FLOW_CTRL_HOOK_ON_MASK_IDX].stNfExtOps.pf          = NFPROTO_BRIDGE;
     pstMaskOps[NF_EXT_BR_FORWARD_FLOW_CTRL_HOOK_ON_MASK_IDX].stNfExtOps.hooknum     = NF_BR_FORWARD;
-    pstMaskOps[NF_EXT_BR_FORWARD_FLOW_CTRL_HOOK_ON_MASK_IDX].stNfExtOps.priority    = NF_EXT_BR_PRI_FILTER_BRIDGED;             /* 与包过滤优先级相同,优先级在这里不能为0 */
+    pstMaskOps[NF_EXT_BR_FORWARD_FLOW_CTRL_HOOK_ON_MASK_IDX].stNfExtOps.priority    = NF_EXT_BR_PRI_FILTER_BRIDGED;             /* ??????????????????,??????????????????0 */
 
 }
 
@@ -506,20 +506,20 @@ STATIC VOS_INT NFExt_Init(VOS_VOID)
         NFExt_SetDefaultNvCfg();
     }
 
-    /* NFExt模块实体全局变量初始化 */
+    /* NFExt?????????????????????? */
     NFExt_EntityInit();
 
-    /* NFExt模块MaskOps全局变量初始化 */
+    /* NFExt????MaskOps?????????????? */
     NFExt_MaskOpsInit();
 
-    /* 流控信息初始化 */
+    /* ?????????????? */
     NFExt_FlowCtrlInit();
 
     return VOS_OK;
 }
 
 /*****************************************************************************
-                        流控功能
+                        ????????
 *****************************************************************************/
 
 STATIC VOS_VOID NFExt_FlowCtrlInit(VOS_VOID)
@@ -574,18 +574,18 @@ VOS_UINT32 NFExt_GetBrBytesCnt(VOS_VOID)
 
 STATIC VOS_VOID NFExt_StatsShow(VOS_VOID)
 {
-    vos_printf("网桥forward流控丢掉的数据量 %ld \n", g_stNfExtStats.aulStats[NF_EXT_STATS_BR_FC_DROP]);
-    vos_printf("进入网桥forward hook的数据量 %ld \n", g_stNfExtStats.aulStats[NF_EXT_STATS_BR_FC_ENTER]);
-    vos_printf("环形buf满之后导致丢包数量 %ld \n", g_stNfExtStats.aulStats[NF_EXT_STATS_BUF_FULL_DROP]);
-    vos_printf("入环形buf失败次数 %ld \n", g_stNfExtStats.aulStats[NF_EXT_STATS_PUT_BUF_FAIL]);
-    vos_printf("出环形buf失败次数 %ld \n", g_stNfExtStats.aulStats[NF_EXT_STATS_GET_BUF_FAIL]);
-    vos_printf("申请内存失败次数 %ld \n", g_stNfExtStats.aulStats[NF_EXT_STATS_ALLOC_MEM_FAIL]);
+    vos_printf("????forward???????????????? %ld \n", g_stNfExtStats.aulStats[NF_EXT_STATS_BR_FC_DROP]);
+    vos_printf("????????forward hook???????? %ld \n", g_stNfExtStats.aulStats[NF_EXT_STATS_BR_FC_ENTER]);
+    vos_printf("????buf?????????????????? %ld \n", g_stNfExtStats.aulStats[NF_EXT_STATS_BUF_FULL_DROP]);
+    vos_printf("??????buf???????? %ld \n", g_stNfExtStats.aulStats[NF_EXT_STATS_PUT_BUF_FAIL]);
+    vos_printf("??????buf???????? %ld \n", g_stNfExtStats.aulStats[NF_EXT_STATS_GET_BUF_FAIL]);
+    vos_printf("???????????????? %ld \n", g_stNfExtStats.aulStats[NF_EXT_STATS_ALLOC_MEM_FAIL]);
 
-    vos_printf("当前环形缓存中未处理的数据量 %ld \n", ((VOS_UINT32)OM_RingBufferNBytes(g_stExEntity.pRingBufferId) / sizeof(NF_EXT_DATA_RING_BUF_STRU)));
-    vos_printf("当前的Hook Mask %ld \n", g_stExEntity.ulCurHookOnMask);
-    vos_printf("当前的流控状态Mask %ld \n", g_stExFlowCtrlEntity.ulFlowCtrlMsk);
-    vos_printf("当前OM WIFI所使用的IP地址 %x \n", g_stExEntity.ulOmIp);
-    vos_printf("当前网桥转发字节数 %x \n", g_stExFlowCtrlEntity.aulTxBytesCnt[NF_EXT_TX_BYTES_CNT_BR]);
+    vos_printf("???????????????????????????? %ld \n", ((VOS_UINT32)OM_RingBufferNBytes(g_stExEntity.pRingBufferId) / sizeof(NF_EXT_DATA_RING_BUF_STRU)));
+    vos_printf("??????Hook Mask %ld \n", g_stExEntity.ulCurHookOnMask);
+    vos_printf("??????????????Mask %ld \n", g_stExFlowCtrlEntity.ulFlowCtrlMsk);
+    vos_printf("????OM WIFI????????IP???? %x \n", g_stExEntity.ulOmIp);
+    vos_printf("?????????????????? %x \n", g_stExFlowCtrlEntity.aulTxBytesCnt[NF_EXT_TX_BYTES_CNT_BR]);
 }
 
 
@@ -662,7 +662,7 @@ VOS_VOID NFExt_FlushRingBuffer(OM_RING_ID rngId)
     VOS_ULONG                   ulFlags = 0UL;
     VOS_INT                     iRst = 0;
 
-    /* 初始化 */
+    /* ?????? */
     PSACORE_MEM_SET(&stData, sizeof(stData), 0x0, sizeof(stData));
 
     while (!OM_RingBufferIsEmpty(rngId))
@@ -701,7 +701,7 @@ VOS_UINT32 NFExt_AddDataToRingBuf(NF_EXT_DATA_RING_BUF_STRU *pstData)
         return VOS_ERR;
     }
 
-    /* 空到非空，唤醒任务处理勾包 */
+    /* ?????????????????????????? */
     if (OM_RingBufferIsEmpty(g_stExEntity.pRingBufferId))
     {
         ulNeedWakeUp = VOS_TRUE;
@@ -721,7 +721,7 @@ VOS_UINT32 NFExt_AddDataToRingBuf(NF_EXT_DATA_RING_BUF_STRU *pstData)
     {
         NF_EXT_STATS_INC(1, NF_EXT_STATS_BUF_FULL_DROP);
 
-        /* 队列满，唤醒任务处理勾包 */
+        /* ???????????????????????? */
         NFExt_SndDataNotify();
 
         ulRst = VOS_ERR;
@@ -753,29 +753,29 @@ STATIC VOS_VOID NFExt_RcvNfExtInfoCfgReq(VOS_VOID *pMsg)
     enResult        = IPS_MNTN_RESULT_OK;
 
     /*================================*/
-    /*构建回复消息*/
+    /*????????????*/
     /*================================*/
 
     /* Fill DIAG trans msg header */
     stNfExtCfgCnf.stDiagHdr.ulSenderCpuId   = VOS_LOCAL_CPUID;
     stNfExtCfgCnf.stDiagHdr.ulSenderPid     = ACPU_PID_NFEXT;
     stNfExtCfgCnf.stDiagHdr.ulReceiverCpuId = VOS_LOCAL_CPUID;
-    stNfExtCfgCnf.stDiagHdr.ulReceiverPid   = MSP_PID_DIAG_APP_AGENT;   /* 把应答消息发送给DIAG，由DIAG把透传命令的处理结果发送给HIDS工具*/
+    stNfExtCfgCnf.stDiagHdr.ulReceiverPid   = MSP_PID_DIAG_APP_AGENT;   /* ????????????????DIAG????DIAG??????????????????????????HIDS????*/
     stNfExtCfgCnf.stDiagHdr.ulLength        = sizeof(IPS_OM_MNTN_INFO_CONFIG_CNF_STRU) - VOS_MSG_HEAD_LENGTH;
 
     stNfExtCfgCnf.stDiagHdr.ulMsgId         = ID_IPS_OM_MNTN_INFO_CONFIG_CNF;
 
-    /* DIAG透传命令中的特定信息*/
+    /* DIAG????????????????????*/
     stNfExtCfgCnf.stDiagHdr.usOriginalId  = pstNfExtCfgReq->stDiagHdr.usOriginalId;
     stNfExtCfgCnf.stDiagHdr.usTerminalId  = pstNfExtCfgReq->stDiagHdr.usTerminalId;
     stNfExtCfgCnf.stDiagHdr.ulTimeStamp   = pstNfExtCfgReq->stDiagHdr.ulTimeStamp;
     stNfExtCfgCnf.stDiagHdr.ulSN          = pstNfExtCfgReq->stDiagHdr.ulSN;
 
-    /* 填充回复OM申请的确认信息 */
+    /* ????????OM?????????????? */
     stNfExtCfgCnf.stIpsMntnCfgCnf.enCommand  = pstNfExtCfgReq->stIpsMntnCfgReq.enCommand;
     stNfExtCfgCnf.stIpsMntnCfgCnf.enRslt     = enResult;
 
-    /* 发送OM透明消息 */
+    /* ????OM???????? */
     IPS_MNTN_SndCfgCnf2Om( ID_IPS_OM_MNTN_INFO_CONFIG_CNF,
         sizeof(IPS_OM_MNTN_INFO_CONFIG_CNF_STRU), &stNfExtCfgCnf );
 
@@ -811,11 +811,11 @@ VOS_VOID NFExt_RcvOmMsg(VOS_VOID *pMsg)
 
 /******************************************************************************
  Prototype       : NFExt_BindToCpu
- Description     : 绑定Task到指定CPU上面
+ Description     : ????Task??????CPU????
  Input           :
  Output          : NONE
- Return Value    : PS_SUCC   --- 成功
-                   PS_FAIL   --- 失败
+ Return Value    : PS_SUCC   --- ????
+                   PS_FAIL   --- ????
  History         :
    1.Date        : 2016-06-16
      Author      :
@@ -827,10 +827,10 @@ VOS_VOID NFExt_BindToCpu(VOS_VOID)
     pid_t               target_pid;
     VOS_INT             cpu;
 
-    /* 获取当前线程的Pid */
+    /* ??????????????Pid */
     target_pid = current->pid;
 
-    /* 获取当前线程的affinity */
+    /* ??????????????affinity */
     ret = sched_getaffinity(target_pid, &(g_stExEntity.orig_mask));
     if (ret < 0)
     {
@@ -840,10 +840,10 @@ VOS_VOID NFExt_BindToCpu(VOS_VOID)
 
     PSACORE_MEM_SET(&(g_stExEntity.curr_mask), cpumask_size(), 0, cpumask_size());
 
-    /* 设置当前线程的affinity */
+    /* ??????????????affinity */
     for_each_cpu(cpu, &(g_stExEntity.orig_mask))
     {
-        /* 去绑定CPU0 */
+        /* ??????CPU0 */
         if ((0 < cpu) && (cpumask_test_cpu(cpu, &(g_stExEntity.orig_mask))))
         {
             cpumask_set_cpu((unsigned int)cpu, &(g_stExEntity.curr_mask));
@@ -885,7 +885,7 @@ VOS_VOID NFExt_ProcDataNotify(VOS_VOID)
 
     while (!OM_RingBufferIsEmpty(g_stExEntity.pRingBufferId))
     {
-        /* 一次任务调度，最多处理200个勾包 */
+        /* ??????????????????????200?????? */
         if (NF_ONCE_DEAL_MAX_CNT <= ulDealCntOnce)
         {
             NFExt_SndDataNotify();
@@ -949,7 +949,7 @@ VOS_VOID NFExt_MsgProc( struct MsgCB * pMsg )
 
     switch ( pMsg->ulSenderPid )
     {
-        case MSP_PID_DIAG_APP_AGENT:      /* 来自OM的透传消息处理 */
+        case MSP_PID_DIAG_APP_AGENT:      /* ????OM?????????????? */
             NFExt_RcvOmMsg( (void *)pMsg );
             break;
 
@@ -1000,7 +1000,7 @@ VOS_VOID NFExt_FidTask(VOS_VOID)
             continue;
         }
 
-        /* 事件处理 */
+        /* ???????? */
         if (VOS_MSG_SYNC_EVENT != ulEvent)
         {
             NFExt_EventProc(ulEvent);
@@ -1027,7 +1027,7 @@ VOS_UINT32 NFExt_PidInit( enum VOS_INIT_PHASE_DEFINE ip )
     switch ( ip )
     {
         case VOS_IP_LOAD_CONFIG:
-            /* 申请RingBuffer */
+            /* ????RingBuffer */
             g_stExEntity.pRingBufferId = OM_RingBufferCreate(NF_EXT_RING_BUF_SIZE);
             if ( VOS_NULL_PTR == g_stExEntity.pRingBufferId )
             {
@@ -1035,7 +1035,7 @@ VOS_UINT32 NFExt_PidInit( enum VOS_INIT_PHASE_DEFINE ip )
                 return VOS_ERR;
             }
 
-            /* 初始化锁 */
+            /* ???????? */
             VOS_SpinLockInit(&(g_stExEntity.stLockTxTask));
             break;
 
@@ -1067,14 +1067,14 @@ VOS_UINT32 NFExt_FidInit ( enum VOS_INIT_PHASE_DEFINE ip )
     switch ( ip )
     {
         case   VOS_IP_LOAD_CONFIG:
-            /* 先完成模块初始化 */
+            /* ???????????????? */
             if ( 0 != NFExt_Init() )
             {
                 PS_PRINTF("NFExt_FidInit NFExt_Init FAIL!\n");
                 return VOS_ERR;
             }
 
-            /* 可维可测模块注册PID */
+            /* ????????????????PID */
             ulRslt = VOS_RegisterPIDInfo(ACPU_PID_NFEXT,
                                 (Init_Fun_Type)NFExt_PidInit,
                                 (Msg_Fun_Type)NFExt_MsgProc);

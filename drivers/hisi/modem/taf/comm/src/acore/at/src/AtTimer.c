@@ -47,7 +47,7 @@
 */
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include  "AtTimer.h"
 #include  "ATCmdProc.h"
@@ -57,12 +57,12 @@
 #define    THIS_FILE_ID        PS_FILE_ID_AT_TIMER_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 
@@ -78,13 +78,13 @@ VOS_UINT32 AT_StartRelTimer(
     VOS_UINT32                          ulRet;
     AT_TIMER_OPERATION_STRU             stTimer;
 
-    /* Added by L60609 for AT Project，2011-10-22,  Begin*/
+    /* Added by L60609 for AT Project??2011-10-22,  Begin*/
     if (0 == ulLength)
     {
         AT_ERR_LOG("AT_StartRelTimer: Start Rel Timer Length is 0!");
         return VOS_ERR;
     }
-    /* Added by L60609 for AT Project，2011-10-22,  End*/
+    /* Added by L60609 for AT Project??2011-10-22,  End*/
 
     if ( ulLength >= VOS_TIMER_MAX_LENGTH )
     {

@@ -71,17 +71,17 @@
 #include "LPsNvInterface.h"
 #include "LNvCommon.h"
 
-/*lint -e767 原因:Log打印*/
+/*lint -e767 ????:Log????*/
 #define    THIS_FILE_ID        MSP_FILE_ID_AT_LTE_CT_PROC_C
 /*lint +e767 */
 
 /******************************************************************************
  */
-/* 功能描述: 打开上行信道
+/* ????????: ????????????
  */
 /*
  */
-/* 参数说明:
+/* ????????:
  */
 /*   ulIndex [in] ...
  */
@@ -89,7 +89,7 @@
  */
 /*
  */
-/* 返 回 值:
+/* ?? ?? ??:
  */
 /*    TODO: ...
  */
@@ -100,7 +100,7 @@ VOS_UINT32 atSetFTXONPara(VOS_UINT8 ucClientId)
     FTM_SET_TXON_REQ_STRU stFTXONSetReq = {(FTM_TXON_SWT_ENUM)0, };
     VOS_UINT32 ulRst;
 
-    // 参数检查
+    // ????????
 
 
     if(AT_CMD_OPT_SET_PARA_CMD != g_stATParseCmd.ucCmdOptType)
@@ -125,10 +125,10 @@ VOS_UINT32 atSetFTXONPara(VOS_UINT8 ucClientId)
 
     if(AT_SUCCESS == ulRst)
     {
-        /* 设置当前操作类型
+        /* ????????????????
  */
         gastAtClientTab[ucClientId].CmdCurrentOpt = AT_CMD_FTXON_SET;
-        return AT_WAIT_ASYNC_RETURN;    /* 返回命令处理挂起状态
+        return AT_WAIT_ASYNC_RETURN;    /* ????????????????????
  */
     }
 
@@ -152,11 +152,11 @@ VOS_UINT32 atSetFTXONParaCnfProc(VOS_UINT8 ucClientId, VOS_VOID *pMsgBlock)
 
 /******************************************************************************
  */
-/* 功能描述: 查询上行信道打开状态
+/* ????????: ????????????????????
  */
 /*
  */
-/* 参数说明:
+/* ????????:
  */
 /*   ulIndex [in] ...
  */
@@ -164,7 +164,7 @@ VOS_UINT32 atSetFTXONParaCnfProc(VOS_UINT8 ucClientId, VOS_VOID *pMsgBlock)
  */
 /*
  */
-/* 返 回 值:
+/* ?? ?? ??:
  */
 /*    TODO: ...
  */
@@ -263,11 +263,11 @@ VOS_UINT32 atQryFPllStatusParaCnfProc(VOS_UINT8 ucClientId, VOS_VOID *pMsgBlock)
 
 /******************************************************************************
  */
-/* 功能描述: 打开下行信道
+/* ????????: ????????????
  */
 /*
  */
-/* 参数说明:
+/* ????????:
  */
 /*   ulIndex [in] ...
  */
@@ -275,7 +275,7 @@ VOS_UINT32 atQryFPllStatusParaCnfProc(VOS_UINT8 ucClientId, VOS_VOID *pMsgBlock)
  */
 /*
  */
-/* 返 回 值:
+/* ?? ?? ??:
  */
 /*    TODO: ...
  */
@@ -286,7 +286,7 @@ VOS_UINT32 atSetFRXONPara(VOS_UINT8 ucClientId)
     FTM_SET_RXON_REQ_STRU stFRXONSetReq = {0};
     VOS_UINT32 ulRst;
 
-    /* 参数检查
+    /* ????????
  */
     if(AT_CMD_OPT_SET_PARA_CMD != g_stATParseCmd.ucCmdOptType)
     {
@@ -311,10 +311,10 @@ VOS_UINT32 atSetFRXONPara(VOS_UINT8 ucClientId)
 
     if(AT_SUCCESS == ulRst)
     {
-        /* 设置当前操作类型
+        /* ????????????????
  */
         gastAtClientTab[ucClientId].CmdCurrentOpt = AT_CMD_FRXON_SET;
-        return AT_WAIT_ASYNC_RETURN;    /* 返回命令处理挂起状态
+        return AT_WAIT_ASYNC_RETURN;    /* ????????????????????
  */
     }
 
@@ -338,11 +338,11 @@ VOS_UINT32 atSetFRXONParaCnfProc(VOS_UINT8 ucClientId, VOS_VOID *pMsgBlock)
 
 /******************************************************************************
  */
-/* 功能描述: 查询下行信道开启状态
+/* ????????: ????????????????????
  */
 /*
  */
-/* 参数说明:
+/* ????????:
  */
 /*   ulIndex [in] ...
  */
@@ -350,7 +350,7 @@ VOS_UINT32 atSetFRXONParaCnfProc(VOS_UINT8 ucClientId, VOS_VOID *pMsgBlock)
  */
 /*
  */
-/* 返 回 值:
+/* ?? ?? ??:
  */
 /*    TODO: ...
  */
@@ -406,11 +406,11 @@ VOS_UINT32 atQryFRXONParaCnfProc(VOS_UINT8 ucClientId, VOS_VOID *pMsgBlock)
 
 /******************************************************************************
  */
-/* 功能描述: 设置非信令的信道
+/* ????????: ????????????????
  */
 /*
  */
-/* 参数说明:
+/* ????????:
  */
 /*   ulIndex [in] ...
  */
@@ -418,7 +418,7 @@ VOS_UINT32 atQryFRXONParaCnfProc(VOS_UINT8 ucClientId, VOS_VOID *pMsgBlock)
  */
 /*
  */
-/* 返 回 值:
+/* ?? ?? ??:
  */
 /*    TODO: ...
  */
@@ -428,7 +428,7 @@ VOS_UINT32 atSetFCHANPara(VOS_UINT8 ucClientId)
 {
     FTM_SET_FCHAN_REQ_STRU stFCHANSetReq = {(FCHAN_MODE_ENUM)0, };
     VOS_UINT32 ulRst;
-    /* 参数检查
+    /* ????????
  */
     if(AT_CMD_OPT_SET_PARA_CMD != g_stATParseCmd.ucCmdOptType)
     {
@@ -474,10 +474,10 @@ VOS_UINT32 atSetFCHANPara(VOS_UINT8 ucClientId)
 
     if(AT_SUCCESS == ulRst)
     {
-        /* 设置当前操作类型
+        /* ????????????????
  */
         gastAtClientTab[ucClientId].CmdCurrentOpt = AT_CMD_FCHAN_SET;
-        return AT_WAIT_ASYNC_RETURN;    /* 返回命令处理挂起状态
+        return AT_WAIT_ASYNC_RETURN;    /* ????????????????????
  */
     }
 
@@ -508,11 +508,11 @@ VOS_UINT32 atSetFCHANParaCnfProc(VOS_UINT8 ucClientId, VOS_VOID *pMsgBlock)
 
 /******************************************************************************
  */
-/* 功能描述:
+/* ????????:
  */
 /*
  */
-/* 参数说明:
+/* ????????:
  */
 /*   ulIndex [in] ...
  */
@@ -520,7 +520,7 @@ VOS_UINT32 atSetFCHANParaCnfProc(VOS_UINT8 ucClientId, VOS_VOID *pMsgBlock)
  */
 /*
  */
-/* 返 回 值:
+/* ?? ?? ??:
  */
 /*    TODO: ...
  */
@@ -531,7 +531,7 @@ VOS_UINT32 atSetFWAVEPara(VOS_UINT8 ucClientId)
     VOS_UINT32 ulRst;
     FTM_SET_FWAVE_REQ_STRU stFWaveSetReq = { 0 };
 
-    /* 参数检查
+    /* ????????
  */
     if(AT_CMD_OPT_SET_PARA_CMD != g_stATParseCmd.ucCmdOptType)
     {
@@ -562,10 +562,10 @@ VOS_UINT32 atSetFWAVEPara(VOS_UINT8 ucClientId)
 
     if(AT_SUCCESS == ulRst)
     {
-        /* 设置当前操作类型
+        /* ????????????????
  */
         gastAtClientTab[ucClientId].CmdCurrentOpt = AT_CMD_FWAVE_SET;
-        return AT_WAIT_ASYNC_RETURN;    /* 返回命令处理挂起状态
+        return AT_WAIT_ASYNC_RETURN;    /* ????????????????????
  */
     }
 
@@ -587,13 +587,13 @@ VOS_UINT32 atSetFWAVEParaCnfProc(VOS_UINT8 ucClientId, VOS_VOID *pMsgBlock)
 
 /*******************************************************************************/
 
-/* 功能描述: 查询非信令的信道 */
+/* ????????: ???????????????? */
 
-/* 参数说明:*/
+/* ????????:*/
 
 /*   ulIndex [in] ... */
 
-/* 返 回 值: */
+/* ?? ?? ??: */
 
 /*    TODO: ... */
 /*******************************************************************************/
@@ -647,11 +647,11 @@ VOS_UINT32 atQryFCHANParaCnfProc(VOS_UINT8 ucClientId, VOS_VOID *pMsgBlock)
 
 /******************************************************************************
  */
-/* 功能描述: AT^TSELRF  选择射频通路指令
+/* ????????: AT^TSELRF  ????????????????
  */
 /*
  */
-/* 参数说明:
+/* ????????:
  */
 /*   ulIndex [in] ...
  */
@@ -659,7 +659,7 @@ VOS_UINT32 atQryFCHANParaCnfProc(VOS_UINT8 ucClientId, VOS_VOID *pMsgBlock)
  */
 /*
  */
-/* 返 回 值:
+/* ?? ?? ??:
  */
 /*    TODO: ...
  */
@@ -716,7 +716,7 @@ VOS_UINT32 atSetTselrfPara(VOS_UINT8 ucClientId)
         if(ulRst == ERR_MSP_SUCCESS)
         /*lint +e774*/
         {
-            /*WIFI未Enable直接返回失败*/
+            /*WIFI??Enable????????????*/
             if(VOS_FALSE == (VOS_UINT32)WIFI_GET_STATUS())
             {
                 return AT_ERROR;
@@ -775,10 +775,10 @@ VOS_UINT32 atSetTselrfPara(VOS_UINT8 ucClientId)
 
     if(AT_SUCCESS == ulRst)
     {
-        /* 设置当前操作类型
+        /* ????????????????
  */
         gastAtClientTab[ucClientId].CmdCurrentOpt = AT_CMD_TSELRF_SET;
-        return AT_WAIT_ASYNC_RETURN;    /* 返回命令处理挂起状态
+        return AT_WAIT_ASYNC_RETURN;    /* ????????????????????
  */
     }
 
@@ -802,11 +802,11 @@ VOS_UINT32 atSetTselrfParaCnfProc(VOS_UINT8 ucClientId, VOS_VOID *pMsgBlock)
 
 /******************************************************************************
  */
-/* 功能描述: AT^TSELRF  选择射频通路指令
+/* ????????: AT^TSELRF  ????????????????
  */
 /*
  */
-/* 参数说明:
+/* ????????:
  */
 /*   ulIndex [in] ...
  */
@@ -814,7 +814,7 @@ VOS_UINT32 atSetTselrfParaCnfProc(VOS_UINT8 ucClientId, VOS_VOID *pMsgBlock)
  */
 /*
  */
-/* 返 回 值:
+/* ?? ?? ??:
  */
 /*    TODO: ...
  */
@@ -824,7 +824,7 @@ VOS_UINT32 atSetTselrfParaCnfProc(VOS_UINT8 ucClientId, VOS_VOID *pMsgBlock)
 VOS_UINT32 atQryTselrfPara(VOS_UINT8 ucClientId)
 {
 /*
-平台不提供该接口，由产品线实现。具体使用如下三个NV项获取:
+????????????????????????????????????????????????NV??????:
 10000 NV_WG_RF_MAIN_BAND
 0xD22C NV_ID_UE_CAPABILITY
 0xD304 EN_NV_ID_TDS_SUPPORT_FREQ_BAND
@@ -833,11 +833,11 @@ VOS_UINT32 atQryTselrfPara(VOS_UINT8 ucClientId)
 }
 /******************************************************************************
  */
-/* 功能描述: 设置接收机LNA的等级
+/* ????????: ??????????LNA??????
  */
 /*
  */
-/* 参数说明:
+/* ????????:
  */
 /*   ulIndex [in] ...
  */
@@ -845,7 +845,7 @@ VOS_UINT32 atQryTselrfPara(VOS_UINT8 ucClientId)
  */
 /*
  */
-/* 返 回 值:
+/* ?? ?? ??:
  */
 /*    TODO: ...
  */
@@ -856,7 +856,7 @@ VOS_UINT32 atSetFLNAPara(VOS_UINT8 ucClientId)
     FTM_SET_AAGC_REQ_STRU stFLNASetReq = {0};
     VOS_UINT32 ulRst;
 
-    /* 参数检查
+    /* ????????
  */
     if(AT_CMD_OPT_SET_PARA_CMD != g_stATParseCmd.ucCmdOptType)
     {
@@ -880,10 +880,10 @@ VOS_UINT32 atSetFLNAPara(VOS_UINT8 ucClientId)
 
     if(AT_SUCCESS == ulRst)
     {
-        /* 设置当前操作类型
+        /* ????????????????
  */
         gastAtClientTab[ucClientId].CmdCurrentOpt = AT_CMD_FLNA_SET;
-        return AT_WAIT_ASYNC_RETURN;    /* 返回命令处理挂起状态
+        return AT_WAIT_ASYNC_RETURN;    /* ????????????????????
  */
     }
 
@@ -908,11 +908,11 @@ VOS_UINT32 atSetFLNAParaCnfProc(VOS_UINT8 ucClientId, VOS_VOID *pMsgBlock)
 
 /******************************************************************************
  */
-/* 功能描述: 查询接收机LNA的等级
+/* ????????: ??????????LNA??????
  */
 /*
  */
-/* 参数说明:
+/* ????????:
  */
 /*   ulIndex [in] ...
  */
@@ -920,7 +920,7 @@ VOS_UINT32 atSetFLNAParaCnfProc(VOS_UINT8 ucClientId, VOS_VOID *pMsgBlock)
  */
 /*
  */
-/* 返 回 值:
+/* ?? ?? ??:
  */
 /*    TODO: ...
  */
@@ -974,13 +974,13 @@ VOS_UINT32 atQryFLNAParaCnfProc(VOS_UINT8 ucClientId, VOS_VOID *pMsgBlock)
 
 /*******************************************************************************/
 
-/* 功能描述: 查询RSSI*/
+/* ????????: ????RSSI*/
 
-/* 参数说明: */
+/* ????????: */
 
 /*   ulIndex [in] ... */
 
-/* 返 回 值: */
+/* ?? ?? ??: */
 
 /*    TODO: ... */
 
@@ -1018,7 +1018,7 @@ VOS_UINT32 atQryFRSSIParaCnfProc(VOS_UINT8 ucClientId, VOS_VOID *pMsgBlock)
 
     usLength = 0;
 
-    /* 适配V7R5版本4RX接收，GU只报一个值，其他报0，L根据FTM上报结果，支持4RX接收上报4个值，不支持时上报1个值 */
+    /* ????V7R5????4RX??????GU??????????????????0??L????FTM??????????????4RX????????4??????????????????1???? */
     usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                        (VOS_CHAR *)pgucLAtSndCodeAddr,
                                        (VOS_CHAR *)pgucLAtSndCodeAddr + usLength,
@@ -1080,7 +1080,7 @@ VOS_UINT32 AT_GetLteFeatureInfo(AT_FEATURE_SUPPORT_ST*pstFeATure)
         }
     }
 
-    /*解析获取LTE band信息
+    /*????????LTE band????
  */
     if( ucBandFlag > 0 )
     {
@@ -1132,7 +1132,7 @@ VOS_UINT32 atSetTBATPara(VOS_UINT8 ucClientId)
     VOS_UINT16 usValue = 0;
     VOS_UINT32 ulRst=0;
 
-    /* 参数检查
+    /* ????????
  */
     if(AT_CMD_OPT_SET_PARA_CMD != g_stATParseCmd.ucCmdOptType)
     {
@@ -1155,7 +1155,7 @@ VOS_UINT32 atSetTBATPara(VOS_UINT8 ucClientId)
 
     if( ucOpr == 1 )
     {
-        /*设置
+        /*????
  */
         if(0 != gastAtParaList[2].usParaLen)/* [false alarm]:fortify */
         {
@@ -1183,7 +1183,7 @@ VOS_UINT32 atSetTBATPara(VOS_UINT8 ucClientId)
     }
     else if( ucOpr == 0 )
     {
-        /*查询
+        /*????
  */
         usValue = (VOS_UINT16)gastAtParaList[2].usParaLen;/* [false alarm]:fortify */
 

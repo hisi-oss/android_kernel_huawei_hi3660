@@ -9,7 +9,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "oal_ext_if.h"
 #if defined(_PRE_PRODUCT_ID_HI110X_HOST)
@@ -100,11 +100,11 @@ extern "C" {
 #define THIS_FILE_ID OAM_FILE_ID_HMAC_MAIN_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 
 
-/* hmac模块板子的全局控制变量 */
+/* hmac?????????????????????? */
 mac_board_stru g_st_hmac_board_etc;
 
 oal_wakelock_stru g_st_hmac_wakelock_etc;
@@ -148,7 +148,7 @@ extern oal_int32 hmac_hcc_adapt_init_etc(oal_void);
 oal_uint32 hmac_btcoex_check_by_ba_size_etc(hmac_user_stru *pst_hmac_user);
 #endif
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 oal_void  hmac_board_get_instance_etc(mac_board_stru **ppst_hmac_board)
@@ -160,7 +160,7 @@ oal_void  hmac_board_get_instance_etc(mac_board_stru **ppst_hmac_board)
 
  oal_uint32 hmac_init_event_process_etc(frw_event_mem_stru *pst_event_mem)
 {
-    frw_event_stru        *pst_event;             /* 事件结构体 */
+    frw_event_stru        *pst_event;             /* ?????????? */
     mac_data_rate_stru    *pst_data_rate;
     dmac_tx_event_stru    *pst_ctx_event;
     mac_device_stru       *pst_mac_device;
@@ -176,7 +176,7 @@ oal_void  hmac_board_get_instance_etc(mac_board_stru **ppst_hmac_board)
     pst_ctx_event = (dmac_tx_event_stru *)pst_event->auc_event_data;
     pst_data_rate = (mac_data_rate_stru *)(oal_netbuf_data(pst_ctx_event->pst_netbuf));
 
-    /* 同步mac支持的速率集信息 */
+    /* ????mac???????????????? */
     pst_mac_device = mac_res_get_dev_etc(pst_event->st_event_hdr.uc_device_id);
     if (OAL_PTR_NULL == pst_mac_device)
     {
@@ -189,7 +189,7 @@ oal_void  hmac_board_get_instance_etc(mac_board_stru **ppst_hmac_board)
         (oal_uint8 *)pst_data_rate,
         sizeof(mac_data_rate_stru) * MAC_DATARATES_PHY_80211G_NUM);
 
-    /* 释放掉02同步消息所用的netbuf信息 */
+    /* ??????02??????????????netbuf???? */
     oal_netbuf_free(pst_ctx_event->pst_netbuf);
 
     return OAL_SUCC;
@@ -207,7 +207,7 @@ oal_void  hmac_board_get_instance_etc(mac_board_stru **ppst_hmac_board)
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* chip支持的最大数由PCIe总线处理提供; */
+    /* chip??????????????PCIe????????????; */
     ul_chip_max_num = oal_bus_get_chip_num_etc();
 
     if (OAL_UNLIKELY(ul_chip_max_num > WLAN_CHIP_MAX_NUM_PER_BOARD))
@@ -231,7 +231,7 @@ oal_void  hmac_board_get_instance_etc(mac_board_stru **ppst_hmac_board)
 
 OAL_STATIC oal_void hmac_event_fsm_tx_adapt_subtable_register(oal_void)
 {
-    /* 注册WLAN_CTX事件处理函数表 */
+    /* ????WLAN_CTX?????????????? */
     g_ast_dmac_wlan_ctx_event_sub_table_etc[DMAC_WLAN_CTX_EVENT_SUB_TYPE_MGMT].p_tx_adapt_func      = hmac_proc_tx_host_tx_adapt_etc;
     g_ast_dmac_wlan_ctx_event_sub_table_etc[DMAC_WLAN_CTX_EVENT_SUB_TYPE_ADD_USER].p_tx_adapt_func  = hmac_proc_add_user_tx_adapt_etc;
     g_ast_dmac_wlan_ctx_event_sub_table_etc[DMAC_WLAN_CTX_EVENT_SUB_TYPE_DEL_USER].p_tx_adapt_func  = hmac_proc_del_user_tx_adapt_etc;
@@ -279,10 +279,10 @@ OAL_STATIC oal_void hmac_event_fsm_tx_adapt_subtable_register(oal_void)
 #endif
     g_ast_dmac_wlan_ctx_event_sub_table_etc[DMAC_WLAN_CTX_EVENT_SUB_TYPE_RESET_PSM].p_tx_adapt_func = hmac_hcc_tx_convert_event_to_netbuf_uint16_etc;
 
-    /* 注册HOST_DRX事件处理函数表 */
+    /* ????HOST_DRX?????????????? */
     g_ast_dmac_tx_host_drx_etc[DMAC_TX_HOST_DRX].p_tx_adapt_func = hmac_proc_tx_host_tx_adapt_etc;
 
-    /* 注册HOST_CRX事件处理函数表 */
+    /* ????HOST_CRX?????????????? */
     g_ast_dmac_host_crx_table_etc[HMAC_TO_DMAC_SYN_INIT].p_tx_adapt_func = hmac_hcc_tx_convert_event_to_netbuf_uint16_etc;
     g_ast_dmac_host_crx_table_etc[HMAC_TO_DMAC_SYN_CREATE_CFG_VAP].p_tx_adapt_func = hmac_hcc_tx_convert_event_to_netbuf_uint16_etc;
     g_ast_dmac_host_crx_table_etc[HMAC_TO_DMAC_SYN_REG].p_tx_adapt_func = hmac_sdt_recv_reg_cmd_tx_adapt;
@@ -295,7 +295,7 @@ OAL_STATIC oal_void hmac_event_fsm_tx_adapt_subtable_register(oal_void)
     g_ast_dmac_host_crx_table_etc[HMAC_TO_DMAC_AUTOCALI_CMD].p_tx_adapt_func = hmac_sdt_recv_sample_cmd_tx_adapt;
 #endif
     /* liuming add support keep alive code for 1102 */
-    /* 注册WLAN_DTX事件处理函数表 */
+    /* ????WLAN_DTX?????????????? */
 }
 
 
@@ -322,10 +322,10 @@ OAL_STATIC oal_void hmac_event_fsm_rx_adapt_subtable_register(oal_void)
                                         OAL_SIZEOF(g_ast_hmac_wlan_misc_event_sub_table_etc)/OAL_SIZEOF(frw_event_sub_table_item_stru),
                                         hmac_hcc_rx_convert_netbuf_to_event_default_etc);
 
-    /* 注册HMAC模块WLAN_DRX事件子表 */
+    /* ????HMAC????WLAN_DRX???????? */
     g_ast_hmac_wlan_drx_event_sub_table_etc[DMAC_WLAN_DRX_EVENT_SUB_TYPE_RX_DATA].p_rx_adapt_func = hmac_rx_process_data_rx_adapt;
 
-    /* 注册HMAC模块WLAN_CRX事件子表 */
+    /* ????HMAC????WLAN_CRX???????? */
     g_ast_hmac_wlan_crx_event_sub_table_etc[DMAC_WLAN_CRX_EVENT_SUB_TYPE_INIT].p_rx_adapt_func = hmac_rx_convert_netbuf_to_netbuf_default_etc;
     g_ast_hmac_wlan_crx_event_sub_table_etc[DMAC_WLAN_CRX_EVENT_SUB_TYPE_RX].p_rx_adapt_func = hmac_rx_process_mgmt_event_rx_adapt_etc;
 #ifdef _PRE_WLAN_FEATURE_FLOWCTL
@@ -334,11 +334,11 @@ OAL_STATIC oal_void hmac_event_fsm_rx_adapt_subtable_register(oal_void)
 
     g_ast_hmac_wlan_crx_event_sub_table_etc[DMAC_WLAN_CRX_EVENT_SUB_TYPE_EVERY_SCAN_RESULT].p_rx_adapt_func = hmac_rx_convert_netbuf_to_netbuf_default_etc;
 
-    /* 注册MISC事件子表 */
+    /* ????MISC???????? */
 	g_ast_hmac_wlan_misc_event_sub_table_etc[DMAC_MISC_SUB_TYPE_CALI_TO_HMAC].p_rx_adapt_func  = hmac_cali2hmac_misc_event_rx_adapt_etc;
 
 #ifdef _PRE_WLAN_ONLINE_DPD
-    /* 注册MISC事件子表 */
+    /* ????MISC???????? */
 
     g_ast_hmac_wlan_misc_event_sub_table_etc[DMAC_TO_HMAC_DPD].p_rx_adapt_func = hmac_dpd_rx_adapt;
 #endif
@@ -369,7 +369,7 @@ OAL_STATIC oal_uint32  hmac_bandwidth_info_syn_event(frw_event_mem_stru  *pst_ev
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 获取事件、事件头以及事件payload结构体 */
+    /* ????????????????????????payload?????? */
     pst_event     = frw_get_event_stru(pst_event_mem);
     pst_event_hdr = &(pst_event->st_event_hdr);
     pst_set_chan  = (dmac_set_chan_stru *)pst_event->auc_event_data;
@@ -403,7 +403,7 @@ OAL_STATIC oal_uint32  hmac_protection_info_syn_event(frw_event_mem_stru  *pst_e
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 获取事件、事件头以及事件payload结构体 */
+    /* ????????????????????????payload?????? */
     pst_event     = frw_get_event_stru(pst_event_mem);
     pst_event_hdr = &(pst_event->st_event_hdr);
     pst_h2d_prot  = (mac_h2d_protection_stru *)pst_event->auc_event_data;
@@ -441,7 +441,7 @@ OAL_STATIC oal_uint32  hmac_ch_status_info_syn_event(frw_event_mem_stru  *pst_ev
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 获取事件、事件头以及事件payload结构体 */
+    /* ????????????????????????payload?????? */
     pst_event     = frw_get_event_stru(pst_event_mem);
     pst_event_hdr = &(pst_event->st_event_hdr);
     past_ap_ch_list  = (mac_ap_ch_info_stru *)pst_event->auc_event_data;
@@ -462,17 +462,17 @@ OAL_STATIC oal_uint32  hmac_ch_status_info_syn_event(frw_event_mem_stru  *pst_ev
 
 OAL_STATIC oal_void hmac_event_fsm_action_subtable_register(oal_void)
 {
-    /* 将事件类型和调用函数的数组注册到事件调度模块 */
-    /* 注册WLAN_DTX事件子表 */
+    /* ???????????????????????????????????????????? */
+    /* ????WLAN_DTX???????? */
     g_ast_hmac_wlan_dtx_event_sub_table_etc[DMAC_TX_WLAN_DTX].p_func = hmac_tx_wlan_to_wlan_ap_etc;
 
-    /* 注册HMAC模块WLAN_DRX事件子表 */
+    /* ????HMAC????WLAN_DRX???????? */
     g_ast_hmac_wlan_drx_event_sub_table_etc[DMAC_WLAN_DRX_EVENT_SUB_TYPE_RX_DATA].p_func = hmac_rx_process_data_event;
 
-    /* AP 和STA 公共，注册HMAC模块WLAN_DRX事件子表 */
+    /* AP ??STA ??????????HMAC????WLAN_DRX???????? */
     g_ast_hmac_wlan_drx_event_sub_table_etc[DMAC_WLAN_DRX_EVENT_SUB_TYPE_TKIP_MIC_FAILE].p_func = hmac_rx_tkip_mic_failure_process_etc;
 
-    /* 注册HMAC模块WLAN_CRX事件子表 */
+    /* ????HMAC????WLAN_CRX???????? */
     g_ast_hmac_wlan_crx_event_sub_table_etc[DMAC_WLAN_CRX_EVENT_SUB_TYPE_INIT].p_func = hmac_init_event_process_etc;
     g_ast_hmac_wlan_crx_event_sub_table_etc[DMAC_WLAN_CRX_EVENT_SUB_TYPE_RX].p_func = hmac_rx_process_mgmt_event_etc;
     g_ast_hmac_wlan_crx_event_sub_table_etc[DMAC_WLAN_CRX_EVENT_SUB_TYPE_DELBA].p_func = hmac_mgmt_rx_delba_event_etc;
@@ -494,10 +494,10 @@ OAL_STATIC oal_void hmac_event_fsm_action_subtable_register(oal_void)
 #ifdef _PRE_WLAN_FEATURE_DBAC
     g_ast_hmac_wlan_crx_event_sub_table_etc[DMAC_WLAN_CRX_EVENT_SUB_TYPR_DBAC].p_func = hmac_dbac_status_notify_etc;
 #endif
-    /* 注册TBTT事件子表 */
+    /* ????TBTT???????? */
     g_ast_hmac_tbtt_event_sub_table_etc[DMAC_TBTT_EVENT_SUB_TYPE].p_func = hmac_mgmt_tbtt_event_etc;
 
-    /* 注册发向HOST侧的配置事件子表 */
+    /* ????????HOST???????????????? */
     g_ast_hmac_wlan_ctx_event_sub_table_etc[DMAC_TO_HMAC_SYN_UP_REG_VAL].p_func = hmac_sdt_up_reg_val_etc;
 
 #if defined(_PRE_WLAN_FEATURE_DATA_SAMPLE) || defined(_PRE_WLAN_FEATURE_PSD_ANALYSIS)
@@ -563,14 +563,14 @@ oal_uint32  hmac_event_fsm_register_etc(oal_void)
 {
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
 
-    /*注册所有事件的tx adapt子表*/
+    /*??????????????tx adapt????*/
     hmac_event_fsm_tx_adapt_subtable_register();
 
-    /*注册所有事件的rx adapt子表*/
+    /*??????????????rx adapt????*/
     hmac_event_fsm_rx_adapt_subtable_register();
 #endif
 
-    /*注册所有事件的执行函数子表*/
+    /*??????????????????????????*/
     hmac_event_fsm_action_subtable_register();
 
     event_fsm_table_register_etc();
@@ -788,7 +788,7 @@ OAL_STATIC ssize_t  hmac_show_roam_status(struct device *dev, struct device_attr
         }
 
 #ifdef _PRE_WLAN_FEATURE_WAPI
-        /* wapi下，将roam标志置为1，防止arp探测 */
+        /* wapi??????roam????????1??????arp???? */
         pst_hmac_user_multi = (hmac_user_stru *)mac_res_get_hmac_user_etc(pst_hmac_vap->st_vap_base_info.us_multi_user_idx);
         if (OAL_PTR_NULL == pst_hmac_user_multi)
         {
@@ -816,7 +816,7 @@ OAL_STATIC ssize_t  hmac_show_roam_status(struct device *dev, struct device_attr
 #endif
 
     }
-    /* 先出一个版本强制关闭arp探测，测试下效果 */
+    /* ????????????????????arp???????????????? */
     //uc_roming_now = 1;
 
     ret +=  OAL_SPRINTF(buf , PAGE_SIZE, "roam_status=%1d\n", uc_roming_now);
@@ -953,7 +953,7 @@ oal_bool_enum_uint8 hmac_get_pm_pause_func_etc(oal_void)
     oal_bool_enum_uint8  uc_is_any_cnt_exceed_limit = OAL_FALSE;
     oal_bool_enum_uint8  uc_is_any_timer_registerd = OAL_FALSE;
 #endif
-    /* 获取mac device结构体指针 */
+    /* ????mac device?????????? */
     pst_hmac_device = hmac_res_get_mac_dev_etc(0);
 
     if (OAL_PTR_NULL == pst_hmac_device)
@@ -1068,7 +1068,7 @@ oal_void hmac_rxdata_update_napi_weight_etc(oal_netdev_priv_stru  * pst_netdev_p
     oal_uint32            ul_now;
     oal_uint8             uc_new_napi_weight; 
 
-    /* 根据pps水线调整napi weight,调整周期1s */
+    /* ????pps????????napi weight,????????1s */
     ul_now = (oal_uint32)OAL_TIME_GET_STAMP_MS();
     if (OAL_TIME_GET_RUNTIME(pst_netdev_priv->ul_period_start, ul_now) > NAPI_STAT_PERIOD)
     {
@@ -1125,7 +1125,7 @@ oal_void hmac_rxdata_netbuf_enqueue_etc(oal_netbuf_stru  *pst_netbuf)
         (WLAN_IRQ_AFFINITY_IDLE_CPU == g_st_rxdata_thread_etc.uc_allowed_cpus))
     {
         struct cpumask        st_cpus;
-        /* 使用napi接口后,如果队列中缓存的报文太多，造成cpu1达到100%,需要尽快切到大核 */
+        /* ????napi??????,??????????????????????????????cpu1????100%,???????????????? */
         hisi_get_fast_cpus(&st_cpus);
         cpumask_clear_cpu(OAL_BUS_HPCPU_NUM, &st_cpus);
         set_cpus_allowed_ptr( g_st_rxdata_thread_etc.pst_rxdata_thread , &st_cpus);
@@ -1351,11 +1351,11 @@ oal_int32  hmac_main_init_etc(oal_void)
 
     OAL_RET_ON_MISMATCH(hmac, -OAL_EFAIL);
 
-    /**************************** 获取5g开关 ******************************/
+    /**************************** ????5g???? ******************************/
     ul_return = hwifi_get_init_priv_value(WLAN_CFG_PRIV_DBDC_RADIO_0, &l_priv_val);
     if (OAL_SUCC == ul_return)
     {
-        /* 定制化 RADIO_0高4bit 给dbdc软件开关用 */
+        /* ?????? RADIO_0??4bit ??dbdc?????????? */
         l_priv_val &= 0x0F;
         g_auc_mac_device_radio_cap[0] = (oal_uint8)(oal_uint32)l_priv_val;
     }
@@ -1363,7 +1363,7 @@ oal_int32  hmac_main_init_etc(oal_void)
 #endif
     oal_wake_lock_init(&g_st_hmac_wakelock_etc, "wlan_hmac_wakelock");
 
-    /* 为了解各模块的启动时间，增加时间戳打印 TBD */
+    /* ?????????????????????????????????????? TBD */
     if(OAL_SUCC != hmac_param_check_etc())
     {
         OAL_IO_PRINT("hmac_main_init_etc:hmac_param_check_etc failed!\n");
@@ -1410,16 +1410,16 @@ oal_int32  hmac_main_init_etc(oal_void)
     }
 #endif
 
-    /* hmac资源初始化 */
+    /* hmac?????????? */
     hmac_res_init_etc();
 
-    /* 如果初始化状态处于配置VAP成功前的状态，表明此次为HMAC第一次初始化，即重加载或启动初始化 */
+    /* ??????????????????????VAP????????????????????????HMAC?????????????????????????????????? */
     if (en_init_state < FRW_INIT_STATE_HMAC_CONFIG_VAP_SUCC)
     {
-        /* 调用状态机初始化接口 */
+        /* ???????????????????? */
         hmac_fsm_init_etc();
 
-        /* 事件注册 */
+        /* ???????? */
         hmac_event_fsm_register_etc();
 
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
@@ -1429,11 +1429,11 @@ oal_int32  hmac_main_init_etc(oal_void)
             frw_timer_delete_all_timer_etc();
             event_fsm_unregister_etc();
             mac_res_exit_etc();
-            hmac_res_exit_etc(g_pst_mac_board);  /* 释放hmac res资源 */
+            hmac_res_exit_etc(g_pst_mac_board);  /* ????hmac res???? */
             return OAL_FAIL;
         }
 #else
-        /* 抛事件给dmac,执行dmac init hardware */
+        /* ????????dmac,????dmac init hardware */
         pst_event_mem = FRW_EVENT_ALLOC(OAL_SIZEOF(mac_chip_stru) * WLAN_CHIP_MAX_NUM_PER_BOARD);
         if (OAL_UNLIKELY(OAL_PTR_NULL == pst_event_mem))
         {
@@ -1444,7 +1444,7 @@ oal_int32  hmac_main_init_etc(oal_void)
 
         pst_event = frw_get_event_stru(pst_event_mem);
 
-        /* 填写事件头 */
+        /* ?????????? */
         FRW_EVENT_HDR_INIT(&(pst_event->st_event_hdr),
                         FRW_EVENT_TYPE_HOST_CRX,
                         HMAC_TO_DMAC_SYN_INIT,
@@ -1457,19 +1457,19 @@ oal_int32  hmac_main_init_etc(oal_void)
             OAM_WARNING_LOG1(0, OAM_SF_ANY, "{hmac_main_init_etc::frw_event_dispatch_event_etc failed[%d].}", ul_return);
         }
 
-        /* 释放事件 */
+        /* ???????? */
         FRW_EVENT_FREE(pst_event_mem);
 #endif
 
         frw_set_init_state_etc(FRW_INIT_STATE_HMAC_CONFIG_VAP_SUCC);
 
-        /* 启动成功后，输出打印 */
+        /* ???????????????????? */
     }
     else
     {
-        /* TBD 迭代10 康国昌修改 如果初始化状态为配置VAP成功后的状态，则表明本次为配置触发的初始化，
-           需要遍历所有业务VAP，并检查其状态；如未初始化，则需要初始化其相关内容
-           如支持特性接口挂接 */
+        /* TBD ????10 ?????????? ????????????????????VAP????????????????????????????????????????????
+           ????????????????VAP??????????????????????????????????????????????????
+           ?????????????????? */
     }
 
 #ifdef _PRE_WLAN_CHIP_TEST
@@ -1480,7 +1480,7 @@ oal_int32  hmac_main_init_etc(oal_void)
     hmac_data_acq_init();
 #endif
 
-    /* DFX 模块初始化 */
+    /* DFX ?????????? */
     hmac_dfx_init_etc();
 
 #if (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION) && defined(_PRE_WLAN_CHIP_TEST_ALG)
@@ -1545,7 +1545,7 @@ oal_void  hmac_main_exit_etc(oal_void)
 #ifdef _PRE_WLAN_FEATURE_DAQ
     hmac_data_acq_exit();
 #endif
-    /* DFX 模块初始化 */
+    /* DFX ?????????? */
     hmac_dfx_exit_etc();
 
 #ifdef _PRE_WLAN_FEATURE_AUTO_FREQ
@@ -1592,7 +1592,7 @@ oal_uint32  hmac_sdt_recv_reg_cmd_etc(
 
     pst_event = frw_get_event_stru(pst_event_mem);
 
-    /* 填写事件头 */
+    /* ?????????? */
     FRW_EVENT_HDR_INIT(&(pst_event->st_event_hdr),
                        FRW_EVENT_TYPE_HOST_CRX,
                        HMAC_TO_DMAC_SYN_REG,
@@ -1629,7 +1629,7 @@ oal_uint32  hmac_sdt_up_reg_val_etc(frw_event_mem_stru  *pst_event_mem)
     pst_reg_val = (oal_uint32 *)pst_hmac_vap->st_cfg_priv.ac_rsp_msg;
    *pst_reg_val = *((oal_uint32 *)pst_event->auc_event_data);
 
-   /* 唤醒wal_sdt_recv_reg_cmd等待的进程 */
+   /* ????wal_sdt_recv_reg_cmd?????????? */
    pst_hmac_vap->st_cfg_priv.en_wait_ack_for_sdt_reg = OAL_TRUE;
    OAL_WAIT_QUEUE_WAKE_UP_INTERRUPT(&(pst_hmac_vap->st_cfg_priv.st_wait_queue_for_sdt_reg));
 
@@ -1654,7 +1654,7 @@ oal_uint32  hmac_sdt_up_dpd_data(frw_event_mem_stru  *pst_event_mem)
         OAM_ERROR_LOG0(0, OAM_SF_WPA, "{hmac_sdt_up_sample_data::pst_event_mem null.}");
         return OAL_ERR_CODE_PTR_NULL;
     }
-    /* 获取事件头和事件结构体指针 */
+    /* ?????????????????????????? */
 
     pst_event = frw_get_event_stru(pst_event_mem);
     pst_cali_save_event = (hal_cali_hal2hmac_event_stru *)pst_event->auc_event_data;
@@ -1707,7 +1707,7 @@ oal_uint32  hmac_sdt_recv_sample_cmd(
 
     pst_event = frw_get_event_stru(pst_event_mem);
 
-    /* 填写事件头 */
+    /* ?????????? */
     FRW_EVENT_HDR_INIT(&(pst_event->st_event_hdr),
                        FRW_EVENT_TYPE_HOST_CRX,
                        HMAC_TO_DMAC_SYN_SAMPLE,
@@ -1744,12 +1744,12 @@ oal_uint32  hmac_sdt_up_sample_data(frw_event_mem_stru  *pst_event_mem)
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 获取事件头和事件结构体指针 */
+    /* ?????????????????????????? */
     pst_event           = frw_get_event_stru(pst_event_mem);
     pst_event_hdr       = &(pst_event->st_event_hdr);
     us_payload_len = pst_event_hdr->us_length - OAL_SIZEOF(frw_event_hdr_stru);
 
-    /* 抛到WAL */
+    /* ????WAL */
     pst_hmac_event_mem = FRW_EVENT_ALLOC(us_payload_len);
     if (OAL_PTR_NULL == pst_hmac_event_mem)
     {
@@ -1757,7 +1757,7 @@ oal_uint32  hmac_sdt_up_sample_data(frw_event_mem_stru  *pst_event_mem)
        return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 填写事件 */
+    /* ???????? */
     pst_event_up = frw_get_event_stru(pst_hmac_event_mem);
 
     FRW_EVENT_HDR_INIT(&(pst_event_up->st_event_hdr),
@@ -1771,7 +1771,7 @@ oal_uint32  hmac_sdt_up_sample_data(frw_event_mem_stru  *pst_event_mem)
 
     oal_memcopy(pst_event_up->auc_event_data,(oal_uint8 *)frw_get_event_payload(pst_event_mem), us_payload_len);
 
-    /* 分发事件 */
+    /* ???????? */
     frw_event_dispatch_event_etc(pst_hmac_event_mem);
     FRW_EVENT_FREE(pst_hmac_event_mem);
 
@@ -1786,7 +1786,7 @@ oal_uint32  hmac_sdt_up_sample_data(frw_event_mem_stru  *pst_event_mem)
            return OAL_ERR_CODE_PTR_NULL;
         }
         pst_event_syn = frw_get_event_stru(pst_syn_event_mem);
-        /* 填写事件头 */
+        /* ?????????? */
         FRW_EVENT_HDR_INIT(&(pst_event_syn->st_event_hdr),
                           FRW_EVENT_TYPE_HOST_CRX,
                           HMAC_TO_DMAC_SYN_SAMPLE,
@@ -1827,7 +1827,7 @@ oal_uint32  hmac_sdt_recv_autocali_cmd(
 
     pst_event = frw_get_event_stru(pst_event_mem);
 
-    /* 填写事件头 */
+    /* ?????????? */
     FRW_EVENT_HDR_INIT(&(pst_event->st_event_hdr),
                        FRW_EVENT_TYPE_HOST_CRX,
                        HMAC_TO_DMAC_AUTOCALI_CMD,
@@ -1859,13 +1859,13 @@ oal_uint32  hmac_sdt_send_autocali_data(frw_event_mem_stru  *pst_event_mem)
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 获取事件头和事件结构体指针 */
+    /* ?????????????????????????? */
     pst_event           = frw_get_event_stru(pst_event_mem);
     pst_event_hdr       = &(pst_event->st_event_hdr);
 
     pst_autocali_event = (hal_cali_hal2hmac_event_stru *)frw_get_event_payload(pst_event_mem);
 
-    /* 抛事件到WAL */
+    /* ????????WAL */
     pst_hmac_event_mem = FRW_EVENT_ALLOC(OAL_SIZEOF(oal_netbuf_stru*));
     if (OAL_PTR_NULL == pst_hmac_event_mem)
     {
@@ -1874,7 +1874,7 @@ oal_uint32  hmac_sdt_send_autocali_data(frw_event_mem_stru  *pst_event_mem)
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 填写事件 */
+    /* ???????? */
     pst_event_up = frw_get_event_stru(pst_hmac_event_mem);
 
     FRW_EVENT_HDR_INIT(&(pst_event_up->st_event_hdr),
@@ -1896,7 +1896,7 @@ oal_uint32  hmac_sdt_send_autocali_data(frw_event_mem_stru  *pst_event_mem)
     oal_netbuf_free(pst_autocali_event->pst_netbuf);
 
     *(oal_netbuf_stru**)pst_event_up->auc_event_data = pst_net_buf_repot;
-    /* 分发事件 */
+    /* ???????? */
     frw_event_dispatch_event_etc(pst_hmac_event_mem);
 
     FRW_EVENT_FREE(pst_hmac_event_mem);
@@ -1933,7 +1933,7 @@ OAL_STATIC oal_uint32  hmac_create_ba_event(frw_event_mem_stru  *pst_event_mem)
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 该tid下不允许建BA，配置命令需求 */
+    /* ??tid??????????BA?????????????? */
     if (OAL_FALSE == pst_hmac_user->ast_tid_info[uc_tidno].en_ba_handle_tx_enable)
     {
         return OAL_FAIL;
@@ -1953,7 +1953,7 @@ OAL_STATIC oal_uint32  hmac_del_ba_event(frw_event_mem_stru  *pst_event_mem)
     hmac_user_stru     *pst_hmac_user;
     hmac_vap_stru      *pst_hmac_vap;
 
-    mac_action_mgmt_args_stru       st_action_args;   /* 用于填写ACTION帧的参数 */
+    mac_action_mgmt_args_stru       st_action_args;   /* ????????ACTION???????? */
     hmac_tid_stru                  *pst_hmac_tid;
     oal_uint32                      ul_ret;
     dmac_to_hmac_ctx_event_stru    *pst_del_ba_event;
@@ -1965,7 +1965,7 @@ OAL_STATIC oal_uint32  hmac_del_ba_event(frw_event_mem_stru  *pst_event_mem)
     pst_hmac_user = mac_res_get_hmac_user_etc(pst_del_ba_event->us_user_index);
     if (OAL_PTR_NULL == pst_hmac_user)
     {
-        /* dmac抛事件到hmac侧删除ba，此时host侧可能已经删除用户了，此时属于正常，直接返回即可 */
+        /* dmac????????hmac??????ba??????host???????????????????????????????????????????????? */
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{hmac_del_ba_event::pst_hmac_user[%d] null.}",
             pst_del_ba_event->us_user_index);
         return OAL_ERR_CODE_PTR_NULL;
@@ -1999,12 +1999,12 @@ OAL_STATIC oal_uint32  hmac_del_ba_event(frw_event_mem_stru  *pst_event_mem)
 
         st_action_args.uc_category = MAC_ACTION_CATEGORY_BA;
         st_action_args.uc_action   = MAC_BA_ACTION_DELBA;
-        st_action_args.ul_arg1     = uc_tid;       /* 该数据帧对应的TID号 */
-        st_action_args.ul_arg2     = MAC_ORIGINATOR_DELBA;           /* ADDBA_REQ中，buffer_size的默认大小 */
-        st_action_args.ul_arg3     = MAC_UNSPEC_REASON;              /* BA会话的确认策略 */
-        st_action_args.puc_arg5    = pst_hmac_user->st_user_base_info.auc_user_mac_addr;   /* ba会话对应的user */
+        st_action_args.ul_arg1     = uc_tid;       /* ??????????????TID?? */
+        st_action_args.ul_arg2     = MAC_ORIGINATOR_DELBA;           /* ADDBA_REQ????buffer_size?????????? */
+        st_action_args.ul_arg3     = MAC_UNSPEC_REASON;              /* BA?????????????? */
+        st_action_args.puc_arg5    = pst_hmac_user->st_user_base_info.auc_user_mac_addr;   /* ba??????????user */
 
-        /* 删除BA会话 */
+        /* ????BA???? */
         ul_ret = hmac_mgmt_tx_action_etc(pst_hmac_vap,  pst_hmac_user, &st_action_args);
         if (OAL_SUCC != ul_ret)
         {
@@ -2088,7 +2088,7 @@ oal_uint32 hmac_config_set_acs_cmd(mac_vap_stru *pst_mac_vap, oal_uint16 us_len,
     mac_acs_cmd_stru               *pst_acs_cmd;
     hmac_acs_cfg_stru               st_acs_cfg;
 
-    /* 获取device */
+    /* ????device */
     pst_hmac_device = hmac_res_get_mac_dev_etc(pst_mac_vap->uc_device_id);
 
     if ((OAL_PTR_NULL == pst_hmac_device) || OAL_PTR_NULL == pst_hmac_device->pst_device_base_info || (OAL_PTR_NULL == puc_param))
@@ -2126,7 +2126,7 @@ oal_uint32 hmac_config_set_acs_cmd(mac_vap_stru *pst_mac_vap, oal_uint16 us_len,
     }
 
     /***************************************************************************
-     抛事件到DMAC层, 同步DMAC数据
+     ????????DMAC??, ????DMAC????
     ***************************************************************************/
     ul_ret = hmac_config_send_event_etc(pst_mac_vap, WLAN_CFGID_ACS_PARAM, us_len, puc_param);
     if (OAL_UNLIKELY(OAL_SUCC != ul_ret))
@@ -2142,13 +2142,13 @@ oal_uint32 hmac_event_acs_response(frw_event_mem_stru  *pst_event_mem)
 {
     frw_event_stru                     *pst_event;
 
-    /* 转发事件，只修改以下成员 */
+    /* ???????????????????????? */
     pst_event    = frw_get_event_stru(pst_event_mem);
     pst_event->st_event_hdr.en_type = FRW_EVENT_TYPE_HOST_CTX;
     pst_event->st_event_hdr.uc_sub_type = HMAC_HOST_CTX_EVENT_SUB_TYPE_ACS_RESPONSE;
     pst_event->st_event_hdr.en_pipeline = FRW_EVENT_PIPELINE_STAGE_0;
 
-    /* 分发事件 */
+    /* ???????? */
     frw_event_dispatch_event_etc(pst_event_mem);
 
     return OAL_SUCC;
@@ -2159,13 +2159,13 @@ oal_uint32 hmac_event_acs_response(frw_event_mem_stru  *pst_event_mem)
 
 OAL_STATIC oal_uint32  hmac_flowctl_backp_event(frw_event_mem_stru  *pst_event_mem)
 {
-    frw_event_stru              *pst_hmac_to_wal_event;  /* 指向申请事件的payload指针 */
+    frw_event_stru              *pst_hmac_to_wal_event;  /* ??????????????payload???? */
     mac_ioctl_queue_backp_stru  *pst_flowctl_backp_event;
     mac_vap_stru                *pst_mac_vap;
     oal_uint32                   ul_ret;
     hmac_user_stru              *pst_hmac_user;
 
-    /* 获得事件指针 */
+    /* ???????????? */
     pst_hmac_to_wal_event = frw_get_event_stru(pst_event_mem);
 
     pst_flowctl_backp_event = (mac_ioctl_queue_backp_stru *)(pst_hmac_to_wal_event->auc_event_data);
@@ -2177,7 +2177,7 @@ OAL_STATIC oal_uint32  hmac_flowctl_backp_event(frw_event_mem_stru  *pst_event_m
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 对vap/user状态进行同步 */
+    /* ??vap/user???????????? */
     if (0xFFFF == pst_flowctl_backp_event->us_assoc_id)
     {
         pst_mac_vap->bit_vap_bw_limit = pst_flowctl_backp_event->uc_is_stop;
@@ -2193,7 +2193,7 @@ OAL_STATIC oal_uint32  hmac_flowctl_backp_event(frw_event_mem_stru  *pst_event_m
         pst_hmac_user->en_user_bw_limit = (oal_bool_enum_uint8)(pst_flowctl_backp_event->uc_is_stop);
     }
 
-    /* 填写事件头 */
+    /* ?????????? */
     FRW_EVENT_HDR_INIT(&(pst_hmac_to_wal_event->st_event_hdr),
                        FRW_EVENT_TYPE_HOST_CTX,
                        HMAC_HOST_CTX_EVENT_SUB_TYPE_FLOWCTL_BACKP,
@@ -2203,7 +2203,7 @@ OAL_STATIC oal_uint32  hmac_flowctl_backp_event(frw_event_mem_stru  *pst_event_m
                        pst_mac_vap->uc_device_id,
                        pst_mac_vap->uc_vap_id);
 
-    /* 分发 */
+    /* ???? */
     ul_ret = frw_event_dispatch_event_etc(pst_event_mem);
     if (OAL_SUCC != ul_ret)
     {
@@ -2236,7 +2236,7 @@ OAL_STATIC oal_uint32  hmac_m2s_sync_event(frw_event_mem_stru  *pst_event_mem)
 
     if(WLAN_M2S_TYPE_HW == pst_m2s_event->en_m2s_type)
     {
-        /* 硬切换更换mac device的nss能力 */
+        /* ??????????mac device??nss???? */
         MAC_DEVICE_GET_NSS_NUM(pst_mac_device) = pst_m2s_event->en_m2s_nss;
     }
 

@@ -47,7 +47,7 @@
 */
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "vos.h"
 
@@ -72,13 +72,13 @@
 
 
 /*****************************************************************************
-    协议栈打印打点方式下的.C文件宏定义
+    ??????????????????????.C??????????
 *****************************************************************************/
 #define    THIS_FILE_ID        PS_FILE_ID_RNIC_DEMAND_DIAL_FILE_IO_C
 
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 
 static const struct file_operations g_stOnDemandFileOps        =
@@ -102,7 +102,7 @@ static const struct file_operations g_stDialEventReportFileOps =
     .read       = RNIC_ReadDialEventReportFile,
 };
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 VOS_UINT32 RNIC_TransferStringToInt(VOS_CHAR *pcString)
@@ -148,7 +148,7 @@ ssize_t RNIC_ReadOnDemandFile(
 
     TAF_MEM_SET_S(acModeTemp, sizeof(acModeTemp), 0x00, RNIC_ONDEMAND_FILE_LEN);
 
-    /* 获取按需拨号的模式以及时长的地址 */
+    /* ???????????????????????????????? */
     pstDialMode                         = RNIC_GetDialModeAddr();
 
     VOS_sprintf_s((VOS_CHAR *)acModeTemp, sizeof(acModeTemp), "%d", pstDialMode->enDialMode);
@@ -157,7 +157,7 @@ ssize_t RNIC_ReadOnDemandFile(
 
     len             = PS_MIN(len, ulDialModeLen);
 
-    /*拷贝内核空间数据到用户空间上面*/
+    /*??????????????????????????????*/
     if (0 == copy_to_user(buf,(VOS_VOID *)acModeTemp, len))
     {
         *ppos += (loff_t)len;
@@ -186,7 +186,7 @@ ssize_t RNIC_WriteOnDemandFile(
 
     TAF_MEM_SET_S(acModeTemp, sizeof(acModeTemp), 0x00, RNIC_ONDEMAND_FILE_LEN);
 
-    /* 获取按需拨号的模式以及时长的地址 */
+    /* ???????????????????????????????? */
     pstDialMode                         = RNIC_GetDialModeAddr();
 
     if (NULL == buf)
@@ -201,7 +201,7 @@ ssize_t RNIC_WriteOnDemandFile(
         return -ENOSPC;
     }
 
-    /*拷贝用户空间数据到内核空间上面*/
+    /*??????????????????????????????*/
     if (copy_from_user((VOS_VOID *)acModeTemp, (VOS_VOID *)buf, len)  > 0)
     {
         RNIC_ERROR_LOG(ACPU_PID_RNIC, "RNIC_WriteOnDemandFile:copy_from_user ERR!");
@@ -214,7 +214,7 @@ ssize_t RNIC_WriteOnDemandFile(
 
     stDialMode.enDialMode = RNIC_TransferStringToInt(acModeTemp);
 
-    /* 按需拨号 */
+    /* ???????? */
     if (RNIC_DIAL_MODE_DEMAND_CONNECT == stDialMode.enDialMode)
     {
         RNIC_StartTimer(TI_RNIC_DEMAND_DIAL_DISCONNECT, TI_RNIC_DEMAND_DIAL_DISCONNECT_LEN);
@@ -224,7 +224,7 @@ ssize_t RNIC_WriteOnDemandFile(
         RNIC_StopTimer(TI_RNIC_DEMAND_DIAL_DISCONNECT);
     }
 
-    /* 保存拨号模式上下文中 */
+    /* ???????????????????? */
     pstDialMode->enDialMode             = stDialMode.enDialMode;
 
 
@@ -240,7 +240,7 @@ VOS_UINT32 RNIC_InitOnDemandFile(struct proc_dir_entry *pstParentFileDirEntry)
 
     if (VOS_NULL_PTR == pstParentFileDirEntry)
     {
-        /*创建OnDemand虚拟文件*/
+        /*????OnDemand????????*/
         pstOnDemandEntry                   = proc_create("dial/ondemand",
                                                         RNIC_VFILE_CRT_LEVEL,
                                                         pstParentFileDirEntry,
@@ -256,7 +256,7 @@ VOS_UINT32 RNIC_InitOnDemandFile(struct proc_dir_entry *pstParentFileDirEntry)
     }
     else
     {
-        /*创建OnDemand虚拟文件*/
+        /*????OnDemand????????*/
         pstOnDemandEntry                   = proc_create("ondemand",
                                                         RNIC_VFILE_CRT_LEVEL,
                                                         pstParentFileDirEntry,
@@ -295,7 +295,7 @@ ssize_t RNIC_ReadIdleTimerOutFile(
     TAF_MEM_SET_S(acIdleTimeTemp, sizeof(acIdleTimeTemp), 0x00, RNIC_IDLETIMEROUT_FILE_LEN);
 
 
-    /* 获取按需拨号的模式以及时长的地址 */
+    /* ???????????????????????????????? */
     pstDialMode                         = RNIC_GetDialModeAddr();
 
     VOS_sprintf_s(acIdleTimeTemp, sizeof(acIdleTimeTemp), "%d", pstDialMode->ulIdleTime);
@@ -304,7 +304,7 @@ ssize_t RNIC_ReadIdleTimerOutFile(
 
     len            = PS_MIN(len, ulIdleTimeLen);
 
-    /*拷贝内核空间数据到用户空间上面*/
+    /*??????????????????????????????*/
     if (0 == copy_to_user(buf,(VOS_VOID *)acIdleTimeTemp, len))
     {
         *ppos += (loff_t)len;
@@ -345,7 +345,7 @@ ssize_t RNIC_WriteIdleTimerOutFile(
         return -ENOSPC;
     }
 
-    /*拷贝用户空间数据到内核空间上面*/
+    /*??????????????????????????????*/
     if (copy_from_user((VOS_VOID *)acIdleTimeTemp, (VOS_VOID *)buf, len) > 0)
     {
         RNIC_ERROR_LOG(ACPU_PID_RNIC, "RNIC_WriteIdleTimerOutFile:copy_from_user ERR!");
@@ -356,13 +356,13 @@ ssize_t RNIC_WriteIdleTimerOutFile(
 
     stDialMode.ulIdleTime = RNIC_TransferStringToInt(acIdleTimeTemp);
 
-    /* 获取按需拨号的模式以及时长的地址 */
+    /* ???????????????????????????????? */
     pstDialMode                         = RNIC_GetDialModeAddr();
 
     if (RNIC_DIAL_MODE_DEMAND_DISCONNECT == pstDialMode->enDialMode)
     {
 
-        /* PDP激活，且与上次设置的时长不一致，需要启动拨号断开定时器 */
+        /* PDP?????????????????????????????????????????????????????? */
         if ( pstDialMode->ulIdleTime != stDialMode.ulIdleTime)
         {
             RNIC_StopTimer(TI_RNIC_DEMAND_DIAL_DISCONNECT);
@@ -385,7 +385,7 @@ VOS_UINT32 RNIC_InitIdleTimerOutFile(struct proc_dir_entry *pstParentFileDirEntr
 
     if (VOS_NULL_PTR == pstParentFileDirEntry )
     {
-        /*创建IdleTimeOut虚拟文件*/
+        /*????IdleTimeOut????????*/
         pstIdleTimeOutEntry                 = proc_create("dial/idle_timeout",
                                                          RNIC_VFILE_CRT_LEVEL,
                                                          pstParentFileDirEntry,
@@ -400,7 +400,7 @@ VOS_UINT32 RNIC_InitIdleTimerOutFile(struct proc_dir_entry *pstParentFileDirEntr
     }
     else
     {
-        /*创建IdleTimeOut虚拟文件*/
+        /*????IdleTimeOut????????*/
         pstIdleTimeOutEntry                 = proc_create("idle_timeout",
                                                          RNIC_VFILE_CRT_LEVEL,
                                                          pstParentFileDirEntry,
@@ -438,7 +438,7 @@ ssize_t RNIC_ReadDialEventReportFile(
     TAF_MEM_SET_S(acDialEventTemp, sizeof(acDialEventTemp), 0x00, RNIC_EVENTFLAG_FILE_LEN);
 
 
-    /* 获取按需拨号的模式以及时长的地址 */
+    /* ???????????????????????????????? */
     pstDialMode                         = RNIC_GetDialModeAddr();
 
     VOS_sprintf_s(acDialEventTemp, sizeof(acDialEventTemp), "%d", pstDialMode->enEventReportFlag);
@@ -447,7 +447,7 @@ ssize_t RNIC_ReadDialEventReportFile(
 
     len            = PS_MIN(len, ulDialEventLen);
 
-    /*拷贝内核空间数据到用户空间上面*/
+    /*??????????????????????????????*/
     if (0 == copy_to_user(buf, (VOS_VOID *)acDialEventTemp, len))
     {
         *ppos += (loff_t)len;
@@ -489,7 +489,7 @@ ssize_t RNIC_WriteDialEventReportFile(
         return -ENOSPC;
     }
 
-    /*拷贝用户空间数据到内核空间上面*/
+    /*??????????????????????????????*/
     if (copy_from_user((VOS_VOID *)acDialEventTemp, (VOS_VOID *)buf, len) > 0)
     {
         RNIC_ERROR_LOG(ACPU_PID_RNIC, "RNIC_WriteDialEventReportFile:copy_from_user ERR!");
@@ -502,10 +502,10 @@ ssize_t RNIC_WriteDialEventReportFile(
 
     stDialMode.enEventReportFlag    = RNIC_TransferStringToInt(acDialEventTemp);
 
-    /* 获取按需拨号的模式以及时长的地址 */
+    /* ???????????????????????????????? */
     pstDialMode                         = RNIC_GetDialModeAddr();
 
-    /* 保存拨号模式到上下文中 */
+    /* ?????????????????????? */
     pstDialMode->enEventReportFlag      = stDialMode.enEventReportFlag;
 
     RNIC_SendDialInfoMsg(ID_RNIC_MNTN_EVENT_REPORT_INFO);
@@ -519,7 +519,7 @@ VOS_UINT32 RNIC_InitDialEventReportFile(struct proc_dir_entry *pstParentFileDirE
 
     if (VOS_NULL_PTR == pstParentFileDirEntry)
     {
-        /*创建dial_event_report虚拟文件*/
+        /*????dial_event_report????????*/
         pstDialEventReportEntry             = proc_create("dial/dial_event_report",
                                                           RNIC_VFILE_CRT_LEVEL,
                                                           pstParentFileDirEntry,
@@ -536,7 +536,7 @@ VOS_UINT32 RNIC_InitDialEventReportFile(struct proc_dir_entry *pstParentFileDirE
     else
     {
 
-        /*创建dial_event_report虚拟文件*/
+        /*????dial_event_report????????*/
         pstDialEventReportEntry             = proc_create("dial_event_report",
                                                           RNIC_VFILE_CRT_LEVEL,
                                                           pstParentFileDirEntry,

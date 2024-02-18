@@ -60,12 +60,12 @@ extern "C" {
 /*0xa6c  DMA_VIEWPORT_SEL_OFF Call-back Debug*/
 #define PCIE_EDMA_VIEWPORT_REG_CALL_BACK    (1)
 
-/*无效的element首地址，此地址压入FIFO，该通道不启动*/
+/*??????element??????????????????FIFO??????????????*/
 #define PCIE_EDMA_INVAILD_CHANN_ADDR    (0xFFFFFFFFUL) 
 
-/*新增硬化逻辑FIFO操作寄存器,WCPU看到的地址*/
-#define PCIE_DMA_CTRL_BASE_ADDR                (0x40008000)/*对应PCIE_DMA_CTRL页*/
-#define PCIE_CTRL_BASE_ADDR                    (0x40007000)/*对应PCIE_CTRL页*/
+/*????????????FIFO??????????,WCPU??????????*/
+#define PCIE_DMA_CTRL_BASE_ADDR                (0x40008000)/*????PCIE_DMA_CTRL??*/
+#define PCIE_CTRL_BASE_ADDR                    (0x40007000)/*????PCIE_CTRL??*/
 
 #define PCIE_REVISION_4_70A     (0x1)
 #define PCIE_REVISION_5_00A     (0x2)
@@ -105,7 +105,7 @@ extern "C" {
 #define PCIE_H2D_DOORBELL_TRIGGER_VALUE             (1 << 5)
 #define PCIE_D2H_DOORBELL_TRIGGER_VALUE             (1 << 6)
 
-/*Count必须读，address为可选*/
+/*Count????????address??????*/
 /*remote*/
 #define PCIE_FIFO_REMOTE_READ_FIFO0_DATA_OFF     (0x818)/*tx*/
 #define PCIE_FIFO_REMOTE_READ_FIFO1_DATA_OFF     (0x824)/*tx*/
@@ -130,7 +130,7 @@ extern "C" {
 #define PCIE_DMA_TX_LL_CHANEL1_CTL_DATA      (0x020)
 #define PCIE_CFG_BASE_ADDR                   (0x024)
 
-/*DMA LLT FIFO, 启动DMA*/
+/*DMA LLT FIFO, ????DMA*/
 #define PCIE_CFG_BASE_ADD_OFF                (0x024)
 #define PCIE_LLT_FIFO_STATUS                 (0x028)
 #define PCIE_DMA_WRITE_FIFO0_LLT_OFF         (0x400)
@@ -322,7 +322,7 @@ typedef union {
     oal_uint32 AsDword;
 } HOST_INTR_MASK;
 
-/*状态位和中断清除位必须一一对应*/
+/*??????????????????????????????*/
 typedef union {
     struct {
         oal_uint32 pcie_edma_tx_intr_status:1;/*0*/

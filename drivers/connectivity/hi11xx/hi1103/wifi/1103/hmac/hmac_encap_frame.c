@@ -9,7 +9,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "wlan_spec.h"
 #include "mac_resource.h"
@@ -17,12 +17,12 @@ extern "C" {
 #undef  THIS_FILE_ID
 #define THIS_FILE_ID OAM_FILE_ID_HMAC_ENCAP_FRAME_C
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 
@@ -172,7 +172,7 @@ oal_uint16  hmac_mgmt_encap_deauth_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc
         ul_ret = mac_device_find_2up_vap_etc(pst_mac_device, &pst_up_vap1, &pst_up_vap2);
         if (OAL_SUCC == ul_ret)
         {
-            /* 获取另外一个VAP，组帧时修改地址2为另外1个VAP的MAC地址 */
+            /* ????????????VAP????????????????2??????1??VAP??MAC???? */
             if (pst_mac_vap->uc_vap_id != pst_up_vap1->uc_vap_id)
             {
                 pst_up_vap2 = pst_up_vap1;
@@ -247,10 +247,10 @@ oal_uint16  hmac_mgmt_encap_disassoc_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *p
     /*************************************************************************/
 
     /*************************************************************************/
-    /*                            设置帧头                                   */
+    /*                            ????????                                   */
     /*************************************************************************/
 
-    /* 设置subtype   */
+    /* ????subtype   */
     mac_hdr_set_frame_control(puc_data, WLAN_FC0_SUBTYPE_DISASSOC);
 
     if (OAL_PTR_NULL == pst_mac_vap->pst_mib_info)
@@ -259,20 +259,20 @@ oal_uint16  hmac_mgmt_encap_disassoc_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *p
         OAM_ERROR_LOG0(pst_mac_vap->uc_vap_id, OAM_SF_ASSOC, "hmac_mgmt_encap_disassoc_etc: pst_mac_vap mib ptr null.");
         return us_disassoc_len;
     }
-    /* 设置DA */
+    /* ????DA */
     oal_set_mac_addr(((mac_ieee80211_frame_stru *)puc_data)->auc_address1, puc_da);
 
-    /* 设置SA */
+    /* ????SA */
     oal_set_mac_addr(((mac_ieee80211_frame_stru *)puc_data)->auc_address2, mac_mib_get_StationID(pst_mac_vap));
 
-    /* 设置bssid */
+    /* ????bssid */
     oal_set_mac_addr(((mac_ieee80211_frame_stru *)puc_data)->auc_address3, pst_mac_vap->en_vap_mode == WLAN_VAP_MODE_BSS_AP ?
                                                             mac_mib_get_StationID(pst_mac_vap) : pst_mac_vap->auc_bssid);
 
 
 
     /*************************************************************************/
-    /*                  Disassociation 帧 - 帧体                  */
+    /*                  Disassociation ?? - ????                  */
     /* --------------------------------------------------------------------- */
     /* |                           Reason Code                             | */
     /* --------------------------------------------------------------------- */
@@ -281,7 +281,7 @@ oal_uint16  hmac_mgmt_encap_disassoc_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *p
     /*                                                                       */
     /*************************************************************************/
 
-    /* 设置reason code*/
+    /* ????reason code*/
     puc_data[MAC_80211_FRAME_LEN]     = (us_err_code & 0x00FF);
     puc_data[MAC_80211_FRAME_LEN + 1] = (us_err_code & 0xFF00) >> 8;
 

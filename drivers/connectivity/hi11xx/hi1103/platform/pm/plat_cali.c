@@ -1,7 +1,7 @@
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "plat_firmware.h"
 #include "plat_cali.h"
@@ -17,15 +17,15 @@
 
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
 
 /*****************************************************************************
-  3 全局变量定义
+  3 ????????????
 *****************************************************************************/
 
-/*保存校准数据的buf*/
-oal_uint8 *g_pucCaliDataBuf_etc      = NULL;  /* 03 wifi校准数据 */
+/*??????????????buf*/
+oal_uint8 *g_pucCaliDataBuf_etc      = NULL;  /* 03 wifi???????? */
 oal_uint8  g_uc_netdev_is_open_etc   = OAL_FALSE;
 oal_uint32 g_ul_cali_update_channel_info = 0;
 
@@ -94,7 +94,7 @@ bfgx_ini_cmd g_ast_bfgx_ini_config_cmd[BFGX_BT_CUST_INI_SIZE/4] =
 int32 g_aul_bfgx_cust_ini_data[BFGX_BT_CUST_INI_SIZE/4] = {0};
 
 /*****************************************************************************
-  4 函数实现
+  4 ????????
 *****************************************************************************/
 
 
@@ -194,18 +194,18 @@ int32 hi1102_get_bfgx_cali_data(oal_uint8 *buf, oal_uint32 *len, oal_uint32 buf_
 
     /**********************************************************************************
     |----------------------------------------------------------------------------------|
-    |   oal_cali_param_stru          : 源数据结构        |            216 byte         |
+    |   oal_cali_param_stru          : ??????????        |            216 byte         |
     |----------------------------------------------------------------------------------|
-    |   oal_cali_param_addition_stru : 追加数据结构      |             40 byte         |
+    |   oal_cali_param_addition_stru : ????????????      |             40 byte         |
     |----------------------------------------------------------------------------------|
     ************************************************************************************/
 
-    /******************************* WIFI 5G使能检查标志位 ******************************/
+    /******************************* WIFI 5G?????????????? ******************************/
     result = get_cust_conf_int32_etc(INI_MODU_WIFI, CHECK_5G_ENABLE, &wifi_5g_enable_info);
     if (0 > result)
     {
         PS_PRINT_WARNING("host get wifi 5g enable info fail\n");
-        /* 读取失败,默认为5G */
+        /* ????????,??????5G */
         wifi_5g_enable_info = WIFI_MODE_5G;
     }
 
@@ -218,7 +218,7 @@ int32 hi1102_get_bfgx_cali_data(oal_uint8 *buf, oal_uint32 *len, oal_uint32 buf_
         cali_addition.ul_wifi_2_4g_only = 0;
     }
 
-    /******************************** bfgx异常处理结束检查标志位 *********************************/
+    /******************************** bfgx?????????????????????? *********************************/
     if (is_bfgx_exception_etc())
     {
         cali_addition.ul_excep_reboot = SYS_EXCEP_REBOOT;
@@ -522,7 +522,7 @@ int32 bfgx_cust_ini_init(void)
     {
         l_ori_val = g_ast_bfgx_ini_config_cmd[i].init_value;
 
-        /* 获取ini的配置值 */
+        /* ????ini???????? */
         l_ret = get_cust_conf_int32_etc(INI_MODU_DEV_BT, g_ast_bfgx_ini_config_cmd[i].name, &l_cfg_value);
         if (INI_FAILED == l_ret)
         {
@@ -553,7 +553,7 @@ int32 bfgx_customize_init(void)
 {
     int32  ret = 0;
 
-    /*申请用于保存校准数据的buffer*/
+    /*??????????????????????buffer*/
     ret = cali_data_buf_malloc_etc();
     if(OAL_SUCC != ret)
     {
@@ -593,7 +593,7 @@ oal_int32 bfgx_cali_data_init(void)
 
     PS_PRINT_INFO("%s\n", __func__);
 
-    /*校准只在开机时执行一次，OAM可能被杀掉重启，所以加标志保护*/
+    /*????????????????????????OAM??????????????????????????????*/
     if (0 != cali_flag)
     {
         PS_PRINT_INFO("bfgx cali data has inited\n");

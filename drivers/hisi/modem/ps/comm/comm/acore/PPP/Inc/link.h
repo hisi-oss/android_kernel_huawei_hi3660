@@ -54,8 +54,8 @@
 #define PHYSICAL_LINK    1
 #define LOGICAL_LINK     2
 
-#define PPP_HDLC_BY_SOFTWARE                            (0)         /* 使用软件实现PPP封装 解封装 */
-#define PPP_HDLC_BY_HARDWARE                            (1)         /* 使用硬件实现PPP封装 解封装 */
+#define PPP_HDLC_BY_SOFTWARE                            (0)         /* ????????????PPP???? ?????? */
+#define PPP_HDLC_BY_HARDWARE                            (1)         /* ????????????PPP???? ?????? */
 
 extern struct  fsm_parent           parent;
 

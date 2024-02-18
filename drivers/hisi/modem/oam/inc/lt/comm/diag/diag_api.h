@@ -68,19 +68,19 @@ extern "C" {
   2 macro
 *****************************************************************************/
 
-/* diag初始化成功且HSO连接上 */
+/* diag????????????HSO?????? */
 #define  DIAG_IS_CONN_ON            ((g_ulDiagCfgInfo & (DIAG_CFG_INIT | DIAG_CFG_CONN )) == (DIAG_CFG_INIT | DIAG_CFG_CONN ))
 
-/* 允许LT 空口上报 */
+/* ????LT ???????? */
 #define  DIAG_IS_LT_AIR_ON          ((g_ulDiagCfgInfo & (DIAG_CFG_INIT | DIAG_CFG_CONN | DIAG_CFG_LT_AIR)) == (DIAG_CFG_INIT | DIAG_CFG_CONN | DIAG_CFG_LT_AIR))
 
-/* 允许GU 空口上报 */
+/* ????GU ???????? */
 #define  DIAG_IS_GU_AIR_ON          ((g_ulDiagCfgInfo & (DIAG_CFG_INIT | DIAG_CFG_CONN | DIAG_CFG_GU_AIR)) == (DIAG_CFG_INIT | DIAG_CFG_CONN | DIAG_CFG_GU_AIR))
 
-/* 允许事件上报 */
+/* ???????????? */
 #define  DIAG_IS_EVENT_ON           ((g_ulDiagCfgInfo & (DIAG_CFG_INIT | DIAG_CFG_CONN | DIAG_CFG_EVT)) == (DIAG_CFG_INIT | DIAG_CFG_CONN | DIAG_CFG_EVT))
 
-/* 允许开机(PowerOn)log上报 */
+/* ????????(PowerOn)log???? */
 #define  DIAG_IS_POLOG_ON           ((g_ulDiagCfgInfo & (DIAG_CFG_INIT | DIAG_CFG_POWERONLOG)) == (DIAG_CFG_INIT | DIAG_CFG_POWERONLOG))
 
 
@@ -90,7 +90,7 @@ extern "C" {
 #define DIAG_GET_GROUP_ID(id)               ((id & 0x00000F00)>>8)
 #define DIAG_GET_MODULE_ID(id)              ( id & 0x00000FFF)
 
-/* 日志类型定义*/
+/* ????????????*/
 #define DIAG_CMD_LOG_CATETORY_PRINT_ID              (1<<15)
 #define DIAG_CMD_LOG_CATETORY_EVENT_ID              (1<<14)
 #define DIAG_CMD_LOG_CATETORY_AIR_ID                (1<<13)

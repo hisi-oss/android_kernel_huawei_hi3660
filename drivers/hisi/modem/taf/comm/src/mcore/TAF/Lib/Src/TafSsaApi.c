@@ -2,7 +2,7 @@
 
 
 /*****************************************************************************
-   1 头文件包含
+   1 ??????????
 *****************************************************************************/
 #include "PsCommonDef.h"
 #include "TafSsaApi.h"
@@ -12,18 +12,18 @@
 
 
 /*****************************************************************************
-    协议栈打印打点方式下的.C文件宏定义
+    ??????????????????????.C??????????
 *****************************************************************************/
 #define THIS_FILE_ID                    PS_FILE_ID_TAF_SSA_API_C
 
 
 /*****************************************************************************
-   2 全局变量定义
+   2 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-   3 外部函数声明
+   3 ????????????
 *****************************************************************************/
 
 extern VOS_UINT32 AT_GetDestPid(
@@ -33,7 +33,7 @@ extern VOS_UINT32 AT_GetDestPid(
 
 
 /*****************************************************************************
-   4 函数实现
+   4 ????????
 *****************************************************************************/
 
 VOS_VOID TAF_SSA_SndTafMsg(
@@ -49,10 +49,10 @@ VOS_VOID TAF_SSA_SndTafMsg(
 
     pstCtrl = (TAF_CTRL_STRU *)pData;
 
-    /* 填写消息头 */
+    /* ?????????? */
     ulPid = AT_GetDestPid(pstCtrl->usClientId, WUEPS_PID_TAF);
 
-    /* 构造消息 */
+    /* ???????? */
     pstMsg = (TAF_SSA_MSG_STRU*)PS_ALLOC_MSG_WITH_HEADER_LEN(
                                 ulPid,
                                 sizeof(MSG_HEADER_STRU) + ulLength);
@@ -64,10 +64,10 @@ VOS_VOID TAF_SSA_SndTafMsg(
     pstMsg->stHeader.ulReceiverPid      = ulPid;
     pstMsg->stHeader.ulMsgName          = enMsgId;
 
-    /* 填写消息内容 */
+    /* ???????????? */
     TAF_MEM_CPY_S(pstMsg->aucContent, ulLength, pData, ulLength);
 
-    /* 发送消息 */
+    /* ???????? */
     (VOS_VOID)PS_SEND_MSG(ulPid, pstMsg);
 
     return;
@@ -83,15 +83,15 @@ VOS_VOID TAF_SSA_SetCmolrInfo(
 {
     TAF_SSA_SET_LCS_MOLR_REQ_STRU       stSetCmolrReq;
 
-    /* 初始化 */
+    /* ?????? */
     TAF_MEM_SET_S(&stSetCmolrReq, sizeof(stSetCmolrReq), 0x00, sizeof(stSetCmolrReq));
 
-    /* 填写CTRL信息 */
+    /* ????CTRL???? */
     TAF_API_CTRL_HEADER(&stSetCmolrReq, ulModuleId, usClientId, ucOpId);
 
     stSetCmolrReq.stMolrPara  = *pstMolrPara;
 
-    /* 发送消息 */
+    /* ???????? */
     TAF_SSA_SndTafMsg(ID_TAF_SSA_SET_LCS_MOLR_REQ,
                       &stSetCmolrReq,
                       sizeof(stSetCmolrReq));
@@ -108,13 +108,13 @@ VOS_VOID TAF_SSA_GetCmolrInfo(
 {
     TAF_SSA_GET_LCS_MOLR_REQ_STRU       stGetCmolrReq;
 
-    /* 初始化 */
+    /* ?????? */
     TAF_MEM_SET_S(&stGetCmolrReq, sizeof(stGetCmolrReq), 0x00, sizeof(stGetCmolrReq));
 
-    /* 填写CTRL信息 */
+    /* ????CTRL???? */
     TAF_API_CTRL_HEADER(&stGetCmolrReq, ulModuleId, usClientId, ucOpId);
 
-    /* 发送消息 */
+    /* ???????? */
     TAF_SSA_SndTafMsg(ID_TAF_SSA_GET_LCS_MOLR_REQ,
                       &stGetCmolrReq,
                       sizeof(stGetCmolrReq));
@@ -132,15 +132,15 @@ VOS_VOID TAF_SSA_SetCmtlrInfo(
 {
     TAF_SSA_SET_LCS_MTLR_REQ_STRU       stSetCmtlrReq;
 
-    /* 初始化 */
+    /* ?????? */
     TAF_MEM_SET_S(&stSetCmtlrReq, sizeof(stSetCmtlrReq), 0x00, sizeof(stSetCmtlrReq));
 
-    /* 填写CTRL信息 */
+    /* ????CTRL???? */
     TAF_API_CTRL_HEADER(&stSetCmtlrReq, ulModuleId, usClientId, ucOpId);
 
     stSetCmtlrReq.enSubscribe   = enSubscribe;
 
-    /* 发送消息 */
+    /* ???????? */
     TAF_SSA_SndTafMsg(ID_TAF_SSA_SET_LCS_MTLR_REQ,
                       &stSetCmtlrReq,
                       sizeof(stSetCmtlrReq));
@@ -157,13 +157,13 @@ VOS_VOID TAF_SSA_GetCmtlrInfo(
 {
     TAF_SSA_GET_LCS_MTLR_REQ_STRU       stGetCmtlrReq;
 
-    /* 初始化 */
+    /* ?????? */
     TAF_MEM_SET_S(&stGetCmtlrReq, sizeof(stGetCmtlrReq), 0x00, sizeof(stGetCmtlrReq));
 
-    /* 填写CTRL信息 */
+    /* ????CTRL???? */
     TAF_API_CTRL_HEADER(&stGetCmtlrReq, ulModuleId, usClientId, ucOpId);
 
-    /* 发送消息 */
+    /* ???????? */
     TAF_SSA_SndTafMsg(ID_TAF_SSA_GET_LCS_MTLR_REQ,
                       &stGetCmtlrReq,
                       sizeof(stGetCmtlrReq));
@@ -181,15 +181,15 @@ VOS_VOID TAF_SSA_SetCmtlraInfo(
 {
     TAF_SSA_SET_LCS_MTLRA_REQ_STRU      stSetCmtlraReq;
 
-    /* 初始化 */
+    /* ?????? */
     TAF_MEM_SET_S(&stSetCmtlraReq, sizeof(stSetCmtlraReq), 0x00, sizeof(stSetCmtlraReq));
 
-    /* 填写CTRL信息 */
+    /* ????CTRL???? */
     TAF_API_CTRL_HEADER(&stSetCmtlraReq, ulModuleId, usClientId, ucOpId);
 
     stSetCmtlraReq.stCmtlraPara  = *pstCmtlraPara;
 
-    /* 发送消息 */
+    /* ???????? */
     TAF_SSA_SndTafMsg(ID_TAF_SSA_SET_LCS_MTLRA_REQ,
                       &stSetCmtlraReq,
                       sizeof(stSetCmtlraReq));
@@ -206,13 +206,13 @@ VOS_VOID TAF_SSA_GetCmtlraInfo(
 {
     TAF_SSA_GET_LCS_MTLRA_REQ_STRU      stGetCmtlraReq;
 
-    /* 初始化 */
+    /* ?????? */
     TAF_MEM_SET_S(&stGetCmtlraReq, sizeof(stGetCmtlraReq), 0x00, sizeof(stGetCmtlraReq));
 
-    /* 填写CTRL信息 */
+    /* ????CTRL???? */
     TAF_API_CTRL_HEADER(&stGetCmtlraReq, ulModuleId, usClientId, ucOpId);
 
-    /* 发送消息 */
+    /* ???????? */
     TAF_SSA_SndTafMsg(ID_TAF_SSA_GET_LCS_MTLRA_REQ,
                       &stGetCmtlraReq,
                       sizeof(stGetCmtlraReq));

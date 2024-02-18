@@ -52,7 +52,7 @@
   Author       : zhuli
   Version      : V100R002
   Date         : 2008-5-15
-  Description  : 该C文件给出了---完成缓冲内容处理模块实现
+  Description  : ??C??????????---????????????????????????
   Function List:
   History      :
  ************************************************************************/
@@ -63,7 +63,7 @@
 #include "NVIM_Interface.h"
 
 /*****************************************************************************
-    协议栈打印打点方式下的.C文件宏定义
+    ??????????????????????.C??????????
 *****************************************************************************/
 #define    THIS_FILE_ID PS_FILE_ID_PB_DATA_C
 
@@ -75,7 +75,7 @@ VOS_UINT32 SI_PB_FindPBOffset(SI_PB_TYPE_ENUM_UINT32  enPBType, VOS_UINT8 *pucOf
 
     for(i=0; i<SI_PB_MAX_NUMBER; i++)
     {
-        if(gastPBContent[i].enPBType == enPBType)   /*当前的查询类型一致*/
+        if(gastPBContent[i].enPBType == enPBType)   /*??????????????????*/
         {
             PB_INFO_LOG("SI_PB_FindPBOffset Info: Locate the PhoneBook Accurately");
 
@@ -87,7 +87,7 @@ VOS_UINT32 SI_PB_FindPBOffset(SI_PB_TYPE_ENUM_UINT32  enPBType, VOS_UINT8 *pucOf
 
     PB_ERROR_LOG("SI_PB_FindPBOffset Error: The PhoneBook Info is Not Exist");
 
-    return VOS_ERR;             /*当前未找到偏移*/
+    return VOS_ERR;             /*??????????????*/
 }
 
 
@@ -97,7 +97,7 @@ VOS_UINT32 SI_PB_LocateRecord(SI_PB_TYPE_ENUM_UINT32  enPBType, VOS_UINT16 usInd
     VOS_UINT8   ucPBOffset;
     VOS_UINT32 ulResult;
 
-    ulResult = SI_PB_FindPBOffset(enPBType, &ucPBOffset);    /*首先查询当前的缓冲位置*/
+    ulResult = SI_PB_FindPBOffset(enPBType, &ucPBOffset);    /*??????????????????????*/
 
     if(VOS_ERR == ulResult)
     {
@@ -106,14 +106,14 @@ VOS_UINT32 SI_PB_LocateRecord(SI_PB_TYPE_ENUM_UINT32  enPBType, VOS_UINT16 usInd
         return TAF_ERR_UNSPECIFIED_ERROR;
     }
 
-    if(PB_NOT_INITIALISED == gastPBContent[ucPBOffset].enInitialState)   /*当前的电话本没有初始化完毕*/
+    if(PB_NOT_INITIALISED == gastPBContent[ucPBOffset].enInitialState)   /*??????????????????????????*/
     {
         PB_ERROR_LOG("SI_PB_LocateRecord:The PhoneBook is Not Initializtion");
 
         return TAF_ERR_SIM_BUSY;
     }
 
-    if(PB_FILE_NOT_EXIST == gastPBContent[ucPBOffset].enInitialState)   /*当前的电话本没有初始化完毕*/
+    if(PB_FILE_NOT_EXIST == gastPBContent[ucPBOffset].enInitialState)   /*??????????????????????????*/
     {
         PB_ERROR_LOG("SI_PB_LocateRecord:The PhoneBook is Not Exit");
 
@@ -122,14 +122,14 @@ VOS_UINT32 SI_PB_LocateRecord(SI_PB_TYPE_ENUM_UINT32  enPBType, VOS_UINT16 usInd
 
     if((usIndex1 > gastPBContent[ucPBOffset].usTotalNum)
         || (usIndex2 > gastPBContent[ucPBOffset].usTotalNum)
-        || (usIndex1 > usIndex2))/*当前的索引已经超出范围*/
+        || (usIndex1 > usIndex2))/*??????????????????????*/
     {
         PB_WARNING_LOG("SI_PB_LocateRecord: The Index is Not in The Range of PhoneBook");
 
         return TAF_ERR_PB_WRONG_INDEX;
     }
 
-    *pucNumber = ucPBOffset;        /*返回当前的电话本缓冲偏移*/
+    *pucNumber = ucPBOffset;        /*????????????????????????*/
 
     return VOS_OK;
 }
@@ -140,18 +140,18 @@ VOS_UINT32 SI_PB_CountADNRecordNum(VOS_UINT16 usIndex, VOS_UINT16 *pusFileId, VO
     VOS_UINT8 i;
     VOS_UINT16 usTemp = 0;
 
-    for(i=0; i<SI_PB_ADNMAX; i++)   /*根据当前的ADN列表内容循环*/
+    for(i=0; i<SI_PB_ADNMAX; i++)   /*??????????ADN????????????*/
     {
-        if((usTemp < usIndex)&&(usIndex <= (gstPBCtrlInfo.astADNInfo[i].ucRecordNum + usTemp)))/*索引号在文件的范围内*/
+        if((usTemp < usIndex)&&(usIndex <= (gstPBCtrlInfo.astADNInfo[i].ucRecordNum + usTemp)))/*????????????????????*/
         {
-            *pusFileId = gstPBCtrlInfo.astADNInfo[i].usFileID;  /*返回当前的文件ID*/
-            *pucRecordNum = (VOS_UINT8)(usIndex - usTemp);/*返回当前的记录号*/
+            *pusFileId = gstPBCtrlInfo.astADNInfo[i].usFileID;  /*??????????????ID*/
+            *pucRecordNum = (VOS_UINT8)(usIndex - usTemp);/*????????????????*/
 
             return VOS_OK;
         }
         else
         {
-            usTemp += gstPBCtrlInfo.astADNInfo[i].ucRecordNum;  /*索引号累计*/
+            usTemp += gstPBCtrlInfo.astADNInfo[i].ucRecordNum;  /*??????????*/
         }
     }
 
@@ -198,11 +198,11 @@ VOS_VOID SI_PB_BcdToAscii(VOS_UINT8 ucBcdNumLen,VOS_UINT8 *pucBcdNum, VOS_UINT8 
             break;
         }
 
-        ucFirstNumber  = (VOS_UINT8)(pucBcdNum[ucTmp] & 0x0F); /*取出高半字节*/
+        ucFirstNumber  = (VOS_UINT8)(pucBcdNum[ucTmp] & 0x0F); /*????????????*/
 
-        ucSecondNumber = (VOS_UINT8)((pucBcdNum[ucTmp] >> 4) & 0x0F);/*取出低半字节*/
+        ucSecondNumber = (VOS_UINT8)((pucBcdNum[ucTmp] >> 4) & 0x0F);/*????????????*/
 
-        if(ucFirstNumber <= 9)  /*转换数字*/
+        if(ucFirstNumber <= 9)  /*????????*/
         {
             *pucAsciiNum = ucFirstNumber + 0x30;
 
@@ -210,7 +210,7 @@ VOS_VOID SI_PB_BcdToAscii(VOS_UINT8 ucBcdNumLen,VOS_UINT8 *pucBcdNum, VOS_UINT8 
 
             ucLen++;
         }
-        else if(0x0A == ucFirstNumber)   /*转换*字符*/
+        else if(0x0A == ucFirstNumber)   /*????*????*/
         {
             *pucAsciiNum = 0x2a;
 
@@ -218,7 +218,7 @@ VOS_VOID SI_PB_BcdToAscii(VOS_UINT8 ucBcdNumLen,VOS_UINT8 *pucBcdNum, VOS_UINT8 
 
             ucLen++;
         }
-        else if(0x0B == ucFirstNumber)   /*转换#字符*/
+        else if(0x0B == ucFirstNumber)   /*????#????*/
         {
             *pucAsciiNum = 0x23;
 
@@ -226,7 +226,7 @@ VOS_VOID SI_PB_BcdToAscii(VOS_UINT8 ucBcdNumLen,VOS_UINT8 *pucBcdNum, VOS_UINT8 
 
             ucLen++;
         }
-        else if(0x0C == ucFirstNumber)   /*转换'P'字符*/
+        else if(0x0C == ucFirstNumber)   /*????'P'????*/
         {
             *pucAsciiNum = 0x50;
 
@@ -234,7 +234,7 @@ VOS_VOID SI_PB_BcdToAscii(VOS_UINT8 ucBcdNumLen,VOS_UINT8 *pucBcdNum, VOS_UINT8 
 
             ucLen++;
         }
-        else if(0x0D == ucFirstNumber)   /*转换'?'字符*/
+        else if(0x0D == ucFirstNumber)   /*????'?'????*/
         {
             *pucAsciiNum = 0x3F;
 
@@ -242,7 +242,7 @@ VOS_VOID SI_PB_BcdToAscii(VOS_UINT8 ucBcdNumLen,VOS_UINT8 *pucBcdNum, VOS_UINT8 
 
             ucLen++;
         }
-        else                                    /*转换字母*/
+        else                                    /*????????*/
         {
             *pucAsciiNum = ucFirstNumber + 0x57;
 
@@ -279,7 +279,7 @@ VOS_VOID SI_PB_BcdToAscii(VOS_UINT8 ucBcdNumLen,VOS_UINT8 *pucBcdNum, VOS_UINT8 
 
             ucLen++;
         }
-        else if(0x0C == ucSecondNumber)   /*转换'P'字符*/
+        else if(0x0C == ucSecondNumber)   /*????'P'????*/
         {
             *pucAsciiNum = 0x50;
 
@@ -287,7 +287,7 @@ VOS_VOID SI_PB_BcdToAscii(VOS_UINT8 ucBcdNumLen,VOS_UINT8 *pucBcdNum, VOS_UINT8 
 
             ucLen++;
         }
-        else if(0x0D == ucSecondNumber)   /*转换'?'字符*/
+        else if(0x0D == ucSecondNumber)   /*????'?'????*/
         {
             *pucAsciiNum = 0x3F;
 
@@ -316,13 +316,13 @@ VOS_VOID SI_PB_DecodePBName(VOS_UINT8 ucNameMax, VOS_UINT8 *pucName,
 {
     VOS_UINT8 i = 0;
 
-    /* 姓名是UCS2 80 */
+    /* ??????UCS2 80 */
     if (SI_PB_ALPHATAG_TYPE_UCS2_80 == pucName[0])
     {
         *pAlphaType = pucName[0];
 
         ucNameMax--;
-        for(i=0;i<(ucNameMax-(ucNameMax%2));i+=2)   /*遍历当前的姓名长度*/
+        for(i=0;i<(ucNameMax-(ucNameMax%2));i+=2)   /*??????????????????*/
         {
             if((pucName[i+1] == 0xFF)&&(pucName[i+2] == 0xFF))
             {
@@ -330,54 +330,54 @@ VOS_VOID SI_PB_DecodePBName(VOS_UINT8 ucNameMax, VOS_UINT8 *pucName,
             }
         }
 
-        *pNameLen = i;      /*姓名长度返回*/
+        *pNameLen = i;      /*????????????*/
 
         return;
     }
 
-    /* 姓名是UCS2 81 */
+    /* ??????UCS2 81 */
     if (SI_PB_ALPHATAG_TYPE_UCS2_81 == pucName[0])
     {
         *pAlphaType = pucName[0];
 
-        if(pucName[1] > (ucNameMax - 3))/* 如果当前长度信息超过最大长度，则直接阶截断 */
+        if(pucName[1] > (ucNameMax - 3))/* ?????????????????????????????????????????? */
         {
            i = ucNameMax -1;
         }
         else
         {
-           i = pucName[1] + 2;     /*计算当前姓名长度*/
+           i = pucName[1] + 2;     /*????????????????*/
         }
 
-        *pNameLen = i;      /*姓名长度返回*/
+        *pNameLen = i;      /*????????????*/
 
         return;
     }
 
-    /* 姓名是UCS2 82 */
+    /* ??????UCS2 82 */
     if (SI_PB_ALPHATAG_TYPE_UCS2_82 == pucName[0])
     {
         *pAlphaType = pucName[0];
 
-        if(pucName[1] > (ucNameMax - 4))/* 如果当前长度信息超过最大长度，则直接阶截断 */
+        if(pucName[1] > (ucNameMax - 4))/* ?????????????????????????????????????????? */
         {
            i = ucNameMax -1;
         }
         else
         {
-           i = pucName[1] + 3;     /*计算当前姓名长度*/
+           i = pucName[1] + 3;     /*????????????????*/
         }
 
-        *pNameLen = i;      /*姓名长度返回*/
+        *pNameLen = i;      /*????????????*/
 
         return;
     }
 
 
-    /* 姓名是GSM格式存储 */
+    /* ??????GSM???????? */
     *pAlphaType = SI_PB_ALPHATAG_TYPE_GSM;
 
-    for (i = 0; i < ucNameMax; i++)         /*遍历当前的姓名长度*/
+    for (i = 0; i < ucNameMax; i++)         /*??????????????????*/
     {
         if (0xFF == pucName[i])
         {
@@ -385,7 +385,7 @@ VOS_VOID SI_PB_DecodePBName(VOS_UINT8 ucNameMax, VOS_UINT8 *pucName,
         }
     }
 
-    *pNameLen = i;      /*姓名长度返回*/
+    *pNameLen = i;      /*????????????*/
 
     return;
 }
@@ -401,30 +401,30 @@ VOS_VOID SI_PB_TransPBFromate(SI_PB_CONTENT_STRU *pstPBContent, VOS_UINT16 usInd
     VOS_UINT8  ucExtNumLen;
     VOS_UINT8  ucXdnNumLen;
 
-    ulResult = SI_PB_CheckContentValidity(pstPBContent, pContent);/*检查当前的内容是否有效*/
+    ulResult = SI_PB_CheckContentValidity(pstPBContent, pContent);/*??????????????????????*/
 
     if(ulResult != VOS_OK)
     {
-        pstRecord->ValidFlag = SI_PB_CONTENT_INVALID;     /*标记当前的内容无效*/
+        pstRecord->ValidFlag = SI_PB_CONTENT_INVALID;     /*??????????????????*/
 
-        /*全置为0*/
+        /*??????0*/
     }
     else
     {
-        pstRecord->ValidFlag = SI_PB_CONTENT_VALID;/*标记当前的内容有效*/
+        pstRecord->ValidFlag = SI_PB_CONTENT_VALID;/*??????????????????*/
 
         SI_PB_DecodePBName(pstPBContent->ucNameLen, pContent,
                             &pstRecord->AlphaTagType,&pstRecord->ucAlphaTagLength);
 
-        if(pstRecord->ucAlphaTagLength != 0x00)         /*当前姓名不为空*/
+        if(pstRecord->ucAlphaTagLength != 0x00)         /*??????????????*/
         {
-            if(pstRecord->AlphaTagType == SI_PB_ALPHATAG_TYPE_GSM)  /*拷贝英文姓名从头开始*/
+            if(pstRecord->AlphaTagType == SI_PB_ALPHATAG_TYPE_GSM)  /*????????????????????*/
             {
                 PAM_MEM_CPY_S(pstRecord->AlphaTag, SI_PB_ALPHATAG_MAX_LEN, pContent, pstRecord->ucAlphaTagLength);
             }
-            else                                                                                        /*拷贝中文姓名从第二个字节开始*/
+            else                                                                                        /*????????????????????????????*/
             {
-                /*ucs2编码，拷贝从长度字段开始*/
+                /*ucs2????????????????????????*/
                 PAM_MEM_CPY_S(pstRecord->AlphaTag, SI_PB_ALPHATAG_MAX_LEN, pContent+1, pstRecord->ucAlphaTagLength);
             }
         }
@@ -448,7 +448,7 @@ VOS_VOID SI_PB_TransPBFromate(SI_PB_CONTENT_STRU *pstPBContent, VOS_UINT16 usInd
 
         ucExtRecord = ((VOS_NULL_PTR == pucExtContent) ? 0xFF : (ucExtRecord));
 
-        if(pContent[pstPBContent->ucNameLen] < 2)           /*当前号码为空*/
+        if(pContent[pstPBContent->ucNameLen] < 2)           /*????????????*/
         {
             pstRecord->NumberLength = 0;
         }
@@ -465,7 +465,7 @@ VOS_VOID SI_PB_TransPBFromate(SI_PB_CONTENT_STRU *pstPBContent, VOS_UINT16 usInd
             SI_PB_BcdToAscii((VOS_UINT8)(ucExtNumLen + (SI_PB_NUM_LEN/2)), aucPhoneNumber,
                                 pstRecord->Number, &pstRecord->NumberLength);
         }
-        else                                                                                /*拷贝号码从内容开始*/
+        else                                                                                /*??????????????????*/
         {
             ucXdnNumLen = ((pContent[pstPBContent->ucNameLen]-1) > (SI_PB_NUM_LEN/2))?
                            (SI_PB_NUM_LEN/2) : (pContent[pstPBContent->ucNameLen]-1);
@@ -548,7 +548,7 @@ VOS_UINT32 SI_PB_CheckContentValidity(SI_PB_CONTENT_STRU *pstPBContent, VOS_UINT
     }
 
     if(((pContent[pstPBContent->ucNameLen] == 0)||(pContent[pstPBContent->ucNameLen] == 0xFF))
-        &&(pContent[0] == 0xFF))/*检查姓名和号码是否为空*/
+        &&(pContent[0] == 0xFF))/*??????????????????????*/
     {
         PB_INFO_LOG("SI_PB_CheckContentValidity: The PhoneBook Content is Empty");
 
@@ -572,7 +572,7 @@ VOS_UINT32 SI_PB_CheckANRValidity(VOS_UINT8 *pContent)
         return VOS_ERR;
     }
 
-    if((0xFF == pContent[0])||(0xFF == pContent[1])||(0 == pContent[1]))/*检查号码是否为空*/
+    if((0xFF == pContent[0])||(0xFF == pContent[1])||(0 == pContent[1]))/*????????????????*/
     {
         PB_INFO_LOG("SI_PB_CheckANRValidity: The PhoneBook Content is Empty");
 
@@ -598,16 +598,16 @@ VOS_VOID SI_PB_TransANRFromate(VOS_UINT8 ucANROffset,VOS_UINT8 *pANRContent, SI_
     VOS_UINT8  ucExtNumLen;
     VOS_UINT8  ucAnrNumLen;
 
-    ulResult = SI_PB_CheckANRValidity(pANRContent);/*检查当前的内容是否有效*/
+    ulResult = SI_PB_CheckANRValidity(pANRContent);/*??????????????????????*/
 
     if(ulResult != VOS_OK)
     {
-        /*全置为0*/
+        /*??????0*/
         pstRecord->AdditionNumber[ucANROffset].NumberLength = 0;
     }
     else
     {
-        pstRecord->ValidFlag = SI_PB_CONTENT_VALID;/*标记当前的内容有效*/
+        pstRecord->ValidFlag = SI_PB_CONTENT_VALID;/*??????????????????*/
 
         pstRecord->AdditionNumber[ucANROffset].NumberType = pANRContent[2];
 
@@ -628,7 +628,7 @@ VOS_VOID SI_PB_TransANRFromate(VOS_UINT8 ucANROffset,VOS_UINT8 *pANRContent, SI_
             SI_PB_BcdToAscii( (VOS_UINT8)(ucExtNumLen + (SI_PB_NUM_LEN/2)), aucPhoneNumber,
                                 pstRecord->AdditionNumber[ucANROffset].Number, &pstRecord->AdditionNumber[ucANROffset].NumberLength);
         }
-        else                                                                                /*拷贝号码从内容开始*/
+        else                                                                                /*??????????????????*/
         {
             ucAnrNumLen = ((pANRContent[1]-1) > (SI_PB_NUM_LEN/2))?
                           (SI_PB_NUM_LEN/2) : (pANRContent[1]-1);

@@ -10,12 +10,12 @@ extern "C" {
 #endif
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
 #ifdef _PRE_WLAN_FEATURE_AUTO_FREQ
 /*
@@ -32,10 +32,10 @@ extern "C" {
 #define DDR_MAX_FREQ "/sys/class/devfreq/ddrfreq/max_freq"
 #define DDR_MIN_FREQ "/sys/class/devfreq/ddrfreq/min_freq"
 
-#define MAX_DEGRADE_FREQ_COUNT_THRESHOLD_SUCCESSIVE_3 (3)         /*连续3个周期都需要降频才降频*/
-#define MAX_DEGRADE_FREQ_COUNT_THRESHOLD_SUCCESSIVE_10 (100)    /*有包时连续100个周期都需要降频才降频*/
+#define MAX_DEGRADE_FREQ_COUNT_THRESHOLD_SUCCESSIVE_3 (3)         /*????3??????????????????????*/
+#define MAX_DEGRADE_FREQ_COUNT_THRESHOLD_SUCCESSIVE_10 (100)    /*??????????100??????????????????????*/
 #endif
-/* WIFI测吞吐量较大时将收发中断绑定在大核 */
+/* WIFI?????????????????????????????????? */
 #define WLAN_IRQ_AFFINITY_IDLE_CPU   0
 #define WLAN_IRQ_AFFINITY_BUSY_CPU   4
 
@@ -46,14 +46,14 @@ extern "C" {
 #define WLAN_IRQ_PPS_THRESHOLD_LOW     5000   /* pps */
 
 
-#define WLAN_FREQ_TIMER_PERIOD    (100)                         /*定时器100ms定时*/
+#define WLAN_FREQ_TIMER_PERIOD    (100)                         /*??????100ms????*/
 #define WLAN_THROUGHPUT_STA_PERIOD   20
 
-#define WLAN_THROUGHPUT_LOAD_LOW    (10)           /* 低负载10M */
+#define WLAN_THROUGHPUT_LOAD_LOW    (10)           /* ??????10M */
 #define WLAN_THROUGHPUT_LOAD_HIGH   (200)
 
 /*****************************************************************************
-  3 枚举定义
+  3 ????????
 *****************************************************************************/
 #ifdef _PRE_WLAN_FEATURE_AUTO_FREQ
 enum
@@ -90,43 +90,43 @@ typedef oal_uint8 oal_auto_freq_cmd_enum_uint8;
 #endif
 
 /*****************************************************************************
-  4 全局变量声明
+  4 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  5 消息头定义
+  5 ??????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  6 消息定义
+  6 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  7 STRUCT定义
+  7 STRUCT????
 *****************************************************************************/
 typedef struct {
     oal_uint8   uc_trx_stat_log_en;
     oal_uint8   auc_resv[3];
 #ifdef _PRE_WLAN_FEATURE_AUTO_FREQ
-    oal_uint32  ul_tx_pkts;  /* WIFI 业务发送帧统计 */
-    oal_uint32  ul_rx_pkts;   /* WIFI 业务接收帧统计 */
+    oal_uint32  ul_tx_pkts;  /* WIFI ?????????????? */
+    oal_uint32  ul_rx_pkts;   /* WIFI ?????????????? */
 #endif
-    oal_uint32  ul_tx_bytes;  /* WIFI 业务发送帧统计 */
-    oal_uint32  ul_rx_bytes;   /* WIFI 业务接收帧统计 */
+    oal_uint32  ul_tx_bytes;  /* WIFI ?????????????? */
+    oal_uint32  ul_rx_bytes;   /* WIFI ?????????????? */
 }wifi_txrx_pkt_stat;
 extern wifi_txrx_pkt_stat g_st_wifi_rxtx_total;
 #ifdef _PRE_WLAN_FEATURE_AUTO_FREQ
 typedef struct {
-    oal_uint8  uc_device_type;   /*device主频类型*/
-    oal_uint8  uc_reserve[3];   /*保留字段*/
+    oal_uint8  uc_device_type;   /*device????????*/
+    oal_uint8  uc_reserve[3];   /*????????*/
 } device_speed_freq_level_stru;
 typedef struct {
-    oal_uint32  ul_speed_level;    /*吞吐量门限*/
-    oal_uint32  ul_min_cpu_freq;  /*CPU主频下限*/
-    oal_uint32  ul_min_ddr_freq;   /*DDR主频下限*/
+    oal_uint32  ul_speed_level;    /*??????????*/
+    oal_uint32  ul_min_cpu_freq;  /*CPU????????*/
+    oal_uint32  ul_min_ddr_freq;   /*DDR????????*/
 } host_speed_freq_level_stru;
 extern host_speed_freq_level_stru g_host_speed_freq_level_etc[];
 extern device_speed_freq_level_stru g_device_speed_freq_level_etc[];
@@ -135,22 +135,22 @@ extern device_speed_freq_level_stru g_device_speed_freq_level_etc[];
 typedef struct {
 #ifdef _PRE_WLAN_FEATURE_AUTO_FREQ
     oal_bool_enum_uint8  en_is_inited;
-    oal_uint8            uc_lock_mod;  /*使能开关*/
-    oal_uint8            uc_curr_lock_level;  /*当前主频等级*/
-    oal_uint8            uc_req_lock_level;   /*目标主频等级*/
+    oal_uint8            uc_lock_mod;  /*????????*/
+    oal_uint8            uc_curr_lock_level;  /*????????????*/
+    oal_uint8            uc_req_lock_level;   /*????????????*/
     oal_uint32           ul_pre_jiffies;
     oal_uint32           ul_adjust_count;
     oal_mutex_stru       st_lock_freq_mtx;
 	//oal_work_stru        st_work;
 #endif
-    oal_bool_enum_uint8  en_irq_affinity;  /*中断开关*/
-    oal_uint8            uc_timer_cycles;  /* 定时器周期数 */
-    oal_uint8            uc_cur_irq_cpu;  /* 当前中断所在CPU */
-    oal_uint8            uc_req_irq_cpu;  /* 期望中断所在CPU */
-    oal_uint32           ul_pre_time;        /* 上一次统计时间 */
-    oal_uint32           ul_total_sdio_pps;  /*吞吐速率*/
-    oal_uint32           ul_tx_pps;          /* 发送方向pps */
-    oal_uint32           ul_rx_pps;          /* 接收方向pps */
+    oal_bool_enum_uint8  en_irq_affinity;  /*????????*/
+    oal_uint8            uc_timer_cycles;  /* ???????????? */
+    oal_uint8            uc_cur_irq_cpu;  /* ????????????CPU */
+    oal_uint8            uc_req_irq_cpu;  /* ????????????CPU */
+    oal_uint32           ul_pre_time;        /* ?????????????? */
+    oal_uint32           ul_total_sdio_pps;  /*????????*/
+    oal_uint32           ul_tx_pps;          /* ????????pps */
+    oal_uint32           ul_rx_pps;          /* ????????pps */
     oal_uint16           us_throughput_irq_high;
     oal_uint16           us_throughput_irq_low;
     oal_uint32           ul_irq_pps_high;
@@ -165,7 +165,7 @@ extern oal_uint32 g_st_pk_mode_high_th_table[WLAN_PROTOCOL_CAP_BUTT][WLAN_BW_CAP
 extern oal_uint32 g_st_pk_mode_low_th_table[WLAN_PROTOCOL_CAP_BUTT][WLAN_BW_CAP_BUTT];
 #endif
 
-/* 当前wifi业务负载 */
+/* ????wifi???????? */
 typedef struct
 {
     oal_bool_enum_uint8 en_wifi_rx_busy;
@@ -175,17 +175,17 @@ typedef struct
 extern freq_wifi_load_stru g_st_wifi_load;
 
 /*****************************************************************************
-  8 UNION定义
+  8 UNION????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  9 OTHERS定义
+  9 OTHERS????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  10 函数声明
+  10 ????????
 *****************************************************************************/
 #ifdef _PRE_WLAN_FEATURE_AUTO_FREQ
 extern oal_bool_enum_uint8 hmac_set_auto_freq_mod_etc(oal_freq_lock_enum_uint8 uc_freq_enable);

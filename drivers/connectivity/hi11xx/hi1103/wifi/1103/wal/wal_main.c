@@ -10,7 +10,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "oal_ext_if.h"
 #include "oam_ext_if.h"
@@ -42,18 +42,18 @@ extern "C" {
 #undef  THIS_FILE_ID
 #define THIS_FILE_ID OAM_FILE_ID_WAL_MAIN_C
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
-/* HOST CRX子表 */
+/* HOST CRX???? */
 OAL_STATIC frw_event_sub_table_item_stru g_ast_wal_host_crx_table[WAL_HOST_CRX_SUBTYPE_BUTT];
 
-/* HOST CTX字表 */
+/* HOST CTX???? */
 OAL_STATIC frw_event_sub_table_item_stru g_ast_wal_host_ctx_table[HMAC_HOST_CTX_EVENT_SUB_TYPE_BUTT];
 
-/* HOST DRX子表 */
+/* HOST DRX???? */
 /* OAL_STATIC frw_event_sub_table_item_stru g_ast_wal_host_drx_table[WAL_HOST_DRX_SUBTYPE_BUTT]; */
 
-/* wal对外钩子函数 */
+/* wal???????????? */
 oam_wal_func_hook_stru     g_st_wal_drv_func_hook_etc;
 
 oal_wakelock_stru   g_st_wal_wakelock_etc;
@@ -86,7 +86,7 @@ wal_hw_wlan_filter_ops g_st_ip_filter_ops_etc;
 
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 
@@ -258,16 +258,16 @@ OAL_STATIC ssize_t  wal_get_packet_statistics_wlan0_info(struct device *dev, str
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_packet_statistics_wlan0_info_print::oal_dev_get_by_name return null ptr!}\r\n");
         return ret;
     }
-    oal_dev_put(pst_net_dev);   /* 调用oal_dev_get_by_name后，必须调用oal_dev_put使net_dev的引用计数减一 */
-    /* 获取VAP结构体 */
+    oal_dev_put(pst_net_dev);   /* ????oal_dev_get_by_name????????????oal_dev_put??net_dev?????????????? */
+    /* ????VAP?????? */
     pst_vap = (mac_vap_stru *)OAL_NET_DEV_PRIV(pst_net_dev);
-    /* 如果VAP结构体不存在，返回0 */
+    /* ????VAP??????????????????0 */
     if (OAL_UNLIKELY(OAL_PTR_NULL == pst_vap))
     {
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_packet_statistics_wlan0_info_print::pst_vap = OAL_PTR_NULL!}\r\n");
         return ret;
     }
-    /* 非STA直接返回 */
+    /* ??STA???????? */
     if (WLAN_VAP_MODE_BSS_STA != pst_vap->en_vap_mode)
     {
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_packet_statistics_wlan0_info_print::vap_mode:%d.}\r\n", pst_vap->en_vap_mode);
@@ -349,16 +349,16 @@ OAL_STATIC ssize_t  wal_get_dev_wifi_info_print(char* buf, oal_int32 buf_len)
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_get_dev_wifi_info_print::oal_dev_get_by_name return null ptr!}\r\n");
         return ret;
     }
-    oal_dev_put(pst_net_dev);   /* 调用oal_dev_get_by_name后，必须调用oal_dev_put使net_dev的引用计数减一 */
-    /* 获取VAP结构体 */
+    oal_dev_put(pst_net_dev);   /* ????oal_dev_get_by_name????????????oal_dev_put??net_dev?????????????? */
+    /* ????VAP?????? */
     pst_vap = (mac_vap_stru *)OAL_NET_DEV_PRIV(pst_net_dev);
-    /* 如果VAP结构体不存在，返回0 */
+    /* ????VAP??????????????????0 */
     if (OAL_UNLIKELY(OAL_PTR_NULL == pst_vap))
     {
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_get_dev_wifi_info_print::pst_vap = OAL_PTR_NULL!}\r\n");
         return ret;
     }
-    /* 非STA直接返回 */
+    /* ??STA???????? */
     if (WLAN_VAP_MODE_BSS_STA != pst_vap->en_vap_mode)
     {
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_get_dev_wifi_info_print::vap_mode:%d.}\r\n", pst_vap->en_vap_mode);
@@ -498,7 +498,7 @@ oal_int32  wal_main_init_etc(oal_void)
     wal_msg_queue_init_etc();
 
     en_init_state = frw_get_init_state_etc();
-    /* WAL模块初始化开始时，说明HMAC肯定已经初始化成功 */
+    /* WAL??????????????????????HMAC?????????????????? */
     if ((FRW_INIT_STATE_BUTT == en_init_state) || (en_init_state < FRW_INIT_STATE_HMAC_CONFIG_VAP_SUCC))
     {
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_main_init_etc::en_init_state has a invalid value [%d]!}\r\n", en_init_state);
@@ -509,7 +509,7 @@ oal_int32  wal_main_init_etc(oal_void)
 
     wal_event_fsm_init_etc();
 
-    /* 创建proc */
+    /* ????proc */
     ul_ret = wal_hipriv_create_proc_etc(OAL_PTR_NULL);
     if (OAL_SUCC != ul_ret)
     {
@@ -519,7 +519,7 @@ oal_int32  wal_main_init_etc(oal_void)
         return -OAL_EFAIL;
     }
 
-    /* 初始化每个device硬件设备对应的wiphy */
+    /* ??????????device??????????????wiphy */
     ul_ret = wal_cfg80211_init_etc();
     if (ul_ret != OAL_SUCC)
     {
@@ -529,18 +529,18 @@ oal_int32  wal_main_init_etc(oal_void)
         return -OAL_EFAIL;
     }
 
-    /* 在host侧如果WAL初始化成功，即为全部初始化成功 */
+    /* ??host??????WAL?????????????????????????????? */
     frw_set_init_state_etc(FRW_INIT_STATE_ALL_SUCC);
 
 
-    /* wal钩子函数初始化 */
+    /* wal?????????????? */
     wal_drv_cfg_func_hook_init_etc();
 
-    /* wal层对外钩子函数注册至oam模块 */
+    /* wal????????????????????oam???? */
     oam_wal_func_fook_register_etc(&g_st_wal_drv_func_hook_etc);
 
 #ifdef _PRE_WLAN_FEATURE_P2P
-    /* DTSxxxxxx 初始化cfg80211 删除网络设备工作队列 */
+    /* DTSxxxxxx ??????cfg80211 ???????????????????? */
 #endif /* _PRE_WLAN_FEATURE_P2P */
 
 #ifdef _PRE_SUPPORT_ACS
@@ -617,27 +617,27 @@ oal_void  wal_main_exit_etc(oal_void)
 /*debug sysfs*/
     wal_sysfs_entry_exit();
 #endif
-    /* down掉所有的vap */
+    /* down????????vap */
     wal_destroy_all_vap_etc();
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1151)
-    /* 此处02加载ko时出现，找不到符号的错误，待后续解决 TBD */
+    /* ????02????ko???????????????????????????????????? TBD */
 
-    /* 卸载每个device硬件设备对应的wiphy */
+    /* ????????device??????????????wiphy */
     wal_cfg80211_exit_etc();
 #endif
     wal_event_fsm_exit_etc();
 
-    /* 删除proc */
+    /* ????proc */
     wal_hipriv_remove_proc_etc();
 
 
-    /* 卸载成功时，将初始化状态置为HMAC初始化成功 */
+    /* ????????????????????????????HMAC?????????? */
     frw_set_init_state_etc(FRW_INIT_STATE_HMAC_CONFIG_VAP_SUCC);
 
-    /* 去注册钩子函数 */
+    /* ?????????????? */
     oam_wal_func_fook_unregister_etc();
 #ifdef _PRE_WLAN_FEATURE_P2P
-    /* DTSxxxxxx 删除cfg80211 删除网络设备工作队列 */
+    /* DTSxxxxxx ????cfg80211 ???????????????????? */
 #endif
 
 #ifdef _PRE_SUPPORT_ACS

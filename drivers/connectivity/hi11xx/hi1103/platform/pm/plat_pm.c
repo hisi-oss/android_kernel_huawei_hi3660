@@ -75,9 +75,9 @@ oal_debug_module_param(ram_test_detail_tsensor_dump, int, S_IRUGO | S_IWUSR);
 int ram_test_mem_pass_dump = 0;
 oal_debug_module_param(ram_test_mem_pass_dump, int, S_IRUGO | S_IWUSR);
 
-/*0 表示 用例全部跑完,
-  1表示 case1跑完返回，
-  2表示 case2跑完返回 类推*/
+/*0 ???? ????????????,
+  1???? case1??????????
+  2???? case2???????? ????*/
 int ram_test_run_process_sel = 0x0;
 oal_debug_module_param(ram_test_run_process_sel, int, S_IRUGO | S_IWUSR);
 
@@ -263,7 +263,7 @@ void bfgx_uart_baud_change_work(struct work_struct *work)
     bfgx_uart_state_set(UART_BPS_CHG_SEND_ACK);
     spin_unlock_irqrestore(&pm_data->uart_state_spinlock,flags);
 
-    /* 切波特率时，此消息是host发送的最后一个UART数据 */
+    /* ????????????????????host??????????????UART???? */
     ps_tx_urgent_cmd(ps_core_d, SYS_MSG, PL_BAUT_CHG_REQ_ACK);
 
     while(UART_BPS_CHG_IN_PROGRESS!=pm_data->uart_state)
@@ -288,7 +288,7 @@ void bfgx_uart_baud_change_work(struct work_struct *work)
         PS_PRINT_ERR("It is bad!!!, change uart rate fail\n");
     }
 
-    /* 等待device完成切换，pull down GPIO*/
+    /* ????device??????????pull down GPIO*/
     while(1==board_get_bwkup_gpio_val_etc())
     {
         oal_udelay(200);
@@ -304,7 +304,7 @@ void bfgx_uart_baud_change_work(struct work_struct *work)
     bfgx_uart_state_set(UART_BPS_CHG_SEND_COMPLETE);
     spin_unlock_irqrestore(&pm_data->uart_state_spinlock,flags);
 
-    /* 切波特率完成后的第一个握手消息 */
+    /* ?????????????????????????????? */
     ps_tx_urgent_cmd(ps_core_d, SYS_MSG, PL_BAUT_CHG_COMPLETE);
 
     mod_timer(&pm_data->baud_change_timer, jiffies + msecs_to_jiffies(100));
@@ -618,7 +618,7 @@ void host_wkup_dev_work_etc(struct work_struct *work)
             PS_PRINT_INFO("it seems like dev ack with NoSleep\n");
             complete_all(&pm_data->host_wkup_dev_comp);
         }
-        else /* 目前用了一把host_mutex大锁，这种case不应存在，但低功耗模块不应依赖外部 */
+        else /* ????????????host_mutex??????????case?????????????????????????????????? */
         {
             PS_PRINT_DBG("B do wkup_dev work item after A do it but not finished\n");
         }
@@ -702,8 +702,8 @@ void host_wkup_dev_work_etc(struct work_struct *work)
                     }
                     else
                     {
-                        /*bfg异常打印SSI 有可能导致PCIE异常，
-                          甚至PCIE NOC，所以只在root和beta 版本打印*/
+                        /*bfg????????SSI ??????????PCIE??????
+                          ????PCIE NOC??????????root??beta ????????*/
                         if((false == wlan_is_shutdown_etc())&&(0==g_ssi_dump_en))
                         {
                             ssi_dump_device_regs(SSI_MODULE_MASK_ARM_REG|SSI_MODULE_MASK_AON|SSI_MODULE_MASK_COEX_CTL|SSI_MODULE_MASK_BCTRL);
@@ -753,8 +753,8 @@ void host_wkup_dev_work_etc(struct work_struct *work)
 }
 
 #ifdef CONFIG_INPUTHUB
-/*麒麟内核函数，先用内核版本宏隔开*/
-/* sensorbub模块的函数，睡眠唤醒时用来查询sensorhub的状态 */
+/*????????????????????????????????*/
+/* sensorbub??????????????????????????????sensorhub?????? */
 extern int getSensorMcuMode(void);
 extern int get_iomcu_power_state(void);
 #endif
@@ -788,8 +788,8 @@ void host_send_disallow_msg_etc(struct work_struct *work)
         return;
     }
 
-    /* 防止host睡眠情况下被dev唤醒进入gpio中断后直接在这里下发消息，
-     * 此时uart可能还没有ready,所以这里等待tty resume之后才下发消息 */
+    /* ????host????????????dev????????gpio??????????????????????????
+     * ????uart??????????ready,????????????tty resume?????????????? */
     if ((ps_core_d->tty) && (ps_core_d->tty->port))
     {
 #if ((LINUX_VERSION_CODE >= KERNEL_VERSION(4, 7, 0)) && (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION) )
@@ -821,7 +821,7 @@ void host_send_disallow_msg_etc(struct work_struct *work)
 #ifdef CONFIG_INPUTHUB
         if (UART_PCLK_FROM_SENSORHUB == get_uart_pclk_source_etc())
         {
-            /*查询sensorhub状态，如果不是wkup状态，uart的时钟可能会不对*/
+            /*????sensorhub??????????????wkup??????uart????????????????*/
             if (1 == getSensorMcuMode())
             {
                 PS_PRINT_INFO("sensorbub state is %d\n", get_iomcu_power_state());
@@ -848,7 +848,7 @@ void host_send_disallow_msg_etc(struct work_struct *work)
     /* clear pf msg parsing buffer to avoid problem caused by wrong packet */
     reset_uart_rx_buf_etc();
 
-    /* 设置uart可用,下发disallow sleep消息,唤醒完成 */
+    /* ????uart????,????disallow sleep????,???????? */
     spin_lock_irqsave(&pm_data->uart_state_spinlock,flags);
     bfgx_uart_state_set(UART_READY);
     spin_unlock_irqrestore(&pm_data->uart_state_spinlock,flags);
@@ -864,8 +864,8 @@ void host_send_disallow_msg_etc(struct work_struct *work)
         }
     }
 
-    /* 这里设置完成量对于dev wkup host没有意义, 只是保证和host wkup dev的操作一致
-     * 注意这就要求host wkup dev前需要INIT完成量计数 */
+    /* ??????????????????dev wkup host????????, ??????????host wkup dev??????????
+     * ????????????host wkup dev??????INIT?????????? */
     complete_all(&pm_data->host_wkup_dev_comp);
 
     if (!g_b_ir_only_mode)
@@ -949,7 +949,7 @@ void host_allow_bfg_sleep_etc(struct work_struct *work)
         pm_data->bfg_timer_mod_cnt++;
         return;
     }
-    /* 设置device状态为睡眠态，在host唤醒dev完成之前(或dev唤醒host前)uart不可用 */
+    /* ????device????????????????host????dev????????(??dev????host??)uart?????? */
     PS_PRINT_INFO("%s,set UART_NOT_READY,BFGX_SLEEP\n", __func__);
     ps_core_d->ps_pm->bfgx_uart_state_set(UART_NOT_READY);
     ps_core_d->ps_pm->bfgx_dev_state_set(BFGX_SLEEP);
@@ -1002,8 +1002,8 @@ void bfg_check_timer_work(void)
         return;
     }
 
-    /*10s后没有人启动bfg timer
-      补救:直接提交allow to sleep work*/
+    /*10s????????????bfg timer
+      ????:????????allow to sleep work*/
     if((pm_data->bfg_timer_mod_cnt_pre==pm_data->bfg_timer_mod_cnt)&&(0!=pm_data->bfg_timer_mod_cnt)
        &&(GNSS_AGREE_SLEEP == atomic_read(&pm_data->gnss_sleep_flag)))
     {
@@ -1231,7 +1231,7 @@ void bfgx_gpio_intr_enable(uint32  ul_en)
     spin_lock_irqsave(&pm_data->bfg_irq_spinlock, flags);
     if (ul_en)
     {
-        /*不再支持中断开关嵌套*/
+        /*????????????????????*/
         if(pm_data->ul_irq_stat)
         {
             enable_irq(pm_data->bfg_irq);
@@ -1275,7 +1275,7 @@ int32 bfgx_dev_power_on_etc(void)
         PS_PRINT_ERR("ps_core_d is err\n");
         return BFGX_POWER_FAILED;
     }
-    /*防止Host睡眠*/
+    /*????Host????*/
     oal_wake_lock(&pm_data->bfg_wake_lock_etc);
 
     INIT_COMPLETION(pm_data->dev_bootok_ack_comp);
@@ -1287,7 +1287,7 @@ int32 bfgx_dev_power_on_etc(void)
     }
 
     ps_uart_state_pre_etc(ps_core_d->tty);
-    /*WAIT_BFGX_BOOTOK_TIME:这个时间目前为1s，有1s不够的情况，需要关注*/
+    /*WAIT_BFGX_BOOTOK_TIME:??????????????1s????1s????????????????????*/
     timeleft = wait_for_completion_timeout(&pm_data->dev_bootok_ack_comp, msecs_to_jiffies(WAIT_BFGX_BOOTOK_TIME));
     if (!timeleft)
     {
@@ -1363,7 +1363,7 @@ int32 bfgx_dev_power_off_etc(void)
         return -FAILURE;
     }
 
-    /*单红外没有心跳*/
+    /*??????????????*/
     if (!g_b_ir_only_mode)
     {
         pm_data->ps_pm_interface->operate_beat_timer(BEAT_TIMER_DELETE);
@@ -1372,7 +1372,7 @@ int32 bfgx_dev_power_off_etc(void)
         pm_data->bfg_timer_mod_cnt_pre = 0;
     }
 
-    /* 下电即将完成，需要在此时设置下次上电要等待device上电成功的flag */
+    /* ??????????????????????????????????????????device??????????flag */
     atomic_set(&pm_data->bfg_needwait_devboot_flag, NEED_SET_FLAG);
     bd_info->bd_ops.bfgx_dev_power_off_etc();
 
@@ -1623,7 +1623,7 @@ int32 wifi_power_fail_process_etc(int32 error)
     case WIFI_POWER_PULL_POWER_GPIO_FAIL:
         break;
 
-    /*BFGX off，wifi firmware download fail和wait boot up fail，直接返回失败，上层重试，不走DFR*/
+    /*BFGX off??wifi firmware download fail??wait boot up fail??????????????????????????????DFR*/
     case WIFI_POWER_BFGX_OFF_BOOT_UP_FAIL:
         if(OAL_TRUE == oal_trigger_bus_exception(pm_data->pst_wlan_pm_info->pst_bus, OAL_TRUE))
         {
@@ -1639,7 +1639,7 @@ int32 wifi_power_fail_process_etc(int32 error)
         board_power_off_etc(WLAN_POWER);
         break;
 
-    /*BFGX on，wifi上电失败，进行全系统复位，wifi本次返回失败，上层重试*/
+    /*BFGX on??wifi??????????????????????????wifi??????????????????????*/
     case WIFI_POWER_BFGX_ON_BOOT_UP_FAIL:
         if(OAL_TRUE == oal_trigger_bus_exception(pm_data->pst_wlan_pm_info->pst_bus, OAL_TRUE))
         {
@@ -1722,7 +1722,7 @@ int32 wlan_power_on_etc(void)
         return -FAILURE;
     }
 
-    /*wifi上电时如果单红外打开，则需要关闭单红外，下载全patch*/
+    /*wifi??????????????????????????????????????????????patch*/
     if (g_b_ir_only_mode)
     {
         if (hw_ir_only_open_other_subsys() != BFGX_POWER_SUCCESS)
@@ -1907,7 +1907,7 @@ int32 memcheck_bfgx_is_succ(void)
     int state = 0;
     unsigned long timeout;
     unsigned long timeout_hold = jiffies;
-    oal_uint32 hold_time = 100;/*拉高维持100ms*/
+    oal_uint32 hold_time = 100;/*????????100ms*/
     oal_uint32 gpio_value;
     declare_time_cost_stru(cost);
 #if 0
@@ -1920,8 +1920,8 @@ int32 memcheck_bfgx_is_succ(void)
         return  -1;
     }
 #endif
-    /*中断改成电平判断，
-       WLAN POWERON拉高瞬间存在毛刺会误报中断*/
+    /*??????????????????
+       WLAN POWERON??????????????????????????*/
     timeout = jiffies + msecs_to_jiffies(bfgx_mem_check_mdelay);
     PS_PRINT_INFO("bfgx memcheck gpio level check start,timeout=%d ms\n", bfgx_mem_check_mdelay);
     oal_get_time_cost_start(cost);
@@ -2067,7 +2067,7 @@ int32 device_mem_check_etc(unsigned long long *time)
     ret = firmware_download_function_priv(RAM_REG_TEST_CFG, device_mem_check_priv_init);
     if(SUCCESS == ret)
     {
-         /*等待device信息处理*/
+         /*????device????????*/
          mdelay(wlan_mem_check_mdelay);
          ret = is_device_mem_test_succ();
          if(ram_test_detail_result_dump)
@@ -2118,7 +2118,7 @@ int32 device_mem_check_etc(unsigned long long *time)
     g_auc_pilot_cfg_patch_in_vendor[RAM_REG_TEST_CFG]=RAM_CHECK_CFG_HI1103_PILOT_PATH;
     if(SUCCESS == ret)
     {
-        /*等待device信息处理*/
+        /*????device????????*/
         ret = memcheck_bfgx_is_succ();
         if(ram_test_detail_result_dump)
         {
@@ -2559,7 +2559,7 @@ STATIC int low_power_probe(void)
         goto WLAN_INIT_FAIL;
     }
 
-    /*FPGA版本支持2M，动态修改*/
+    /*FPGA????????2M??????????*/
     if(!isAsic_etc())
     {
         g_default_baud_rate = LOW_FREQ_BAUD_RATE;

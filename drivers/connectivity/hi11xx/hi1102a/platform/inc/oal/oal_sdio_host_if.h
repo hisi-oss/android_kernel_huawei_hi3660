@@ -101,7 +101,7 @@ struct oal_sdio
     /*sdio work state, sleep , work or shutdown?*/
     hcc_bus*                    pst_bus;
 
-    oal_uint32                  state;	            /*总线当前状态*/
+    oal_uint32                  state;	            /*????????????*/
 #if (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION)
     struct sdio_func           *func;
 #endif

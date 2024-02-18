@@ -94,7 +94,7 @@ VOS_UINT32 diag_GuDspTransProc(DIAG_FRAME_INFO_STRU *pData)
 
     stDiagInfo.ulMsgType = pData->stID.pri4b;
 
-    /*组包回复*/
+    /*????????*/
     ulRet = DIAG_MsgReport(&stDiagInfo, &stRttCnf, sizeof(stRttCnf));
 
     return ulRet;
@@ -104,7 +104,7 @@ VOS_UINT32 diag_GuDspTransProc(DIAG_FRAME_INFO_STRU *pData)
 
 /*****************************************************************************
  Function Name   : diag_DspMsgProc
- Description     : DSP处理消息处理包括连接断开
+ Description     : DSP????????????????????????
  Input           : None
  Output          : None
  Return          : None
@@ -122,7 +122,7 @@ VOS_UINT32 diag_DspMsgProc(DIAG_FRAME_INFO_STRU *pData)
 
     switch(pData->stID.mode4b)
     {
-        /* GUDSP的命令在A核直接透传给GUDSP处理 */
+        /* GUDSP????????A????????????GUDSP???? */
         case DIAG_MODE_GSM:
         case DIAG_MODE_UMTS:
         case DIAG_MODE_1X:
@@ -132,7 +132,7 @@ VOS_UINT32 diag_DspMsgProc(DIAG_FRAME_INFO_STRU *pData)
         default:
             break;
 
-        /* GU的消息已经在A核处理，C核只处理TL的请求 */
+        /* GU????????????A????????C????????TL?????? */
     }
 
     ulLen = sizeof(DIAG_PHY_MSG_A_TRANS_C_STRU)-VOS_MSG_HEAD_LENGTH + pData->ulMsgLen;
@@ -162,14 +162,14 @@ DIAG_ERROR:
     stDiagInfo.ulMsgType = pData->stID.pri4b;
     stDiagInfo.ulMode    = pData->stID.mode4b;
 
-    /*组包回复*/
+    /*????????*/
     ulRet = DIAG_MsgReport(&stDiagInfo, &stRttCnf, sizeof(stRttCnf));
     return ulRet;
 }
 
 /*****************************************************************************
  Function Name   : diag_DspMsgInit
- Description     : MSP dsp部分初始化
+ Description     : MSP dsp??????????
  Input           : None
  Output          : None
  Return          : None
@@ -179,7 +179,7 @@ DIAG_ERROR:
 VOS_VOID diag_DspMsgInit(VOS_VOID)
 {
 
-    /*注册message消息回调*/
+    /*????message????????*/
     DIAG_MsgProcReg(DIAG_MSG_TYPE_PHY, diag_DspMsgProc);
 
 }

@@ -11,7 +11,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 #include <linux/version.h>
 #include <net/iw_handler.h>
@@ -79,7 +79,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
 #define OAL_BITFIELD_LITTLE_ENDIAN      0
 #define OAL_BITFIELD_BIG_ENDIAN         1
@@ -91,7 +91,7 @@ extern "C" {
 #define ETHER_ADDR_LEN  6   /* length of an Ethernet address */
 
 /*****************************************************************************
-  2.10 IP宏定义
+  2.10 IP??????
 *****************************************************************************/
 #define IPV6_ADDR_MULTICAST    	0x0002U
 #define IPV6_ADDR_UNICAST      	0x0001U
@@ -113,16 +113,16 @@ extern "C" {
 
 
 /*****************************************************************************
-  2.11 VLAN宏定义
+  2.11 VLAN??????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  2.12 LLC SNAP宏定义
+  2.12 LLC SNAP??????
 *****************************************************************************/
 
 /*****************************************************************************
-  2.13 ETHER宏定义
+  2.13 ETHER??????
 *****************************************************************************/
 /* ether type */
 #define ETHER_TYPE_PAE   0x888e  /* EAPOL PAE/802.1x */
@@ -136,7 +136,7 @@ extern "C" {
 #define ETHER_TYPE_WAI   0x88b4  /* WAI/WAPI */
 #define ETHER_LLTD_TYPE  0x88D9  /* LLTD */
 #define ETHER_ONE_X_TYPE 0x888E  /* 802.1x Authentication */
-#define ETHER_TUNNEL_TYPE 0x88bd  /* 自定义tunnel协议 */
+#define ETHER_TUNNEL_TYPE 0x88bd  /* ??????tunnel???? */
 #define ETHER_TYPE_PPP_DISC 0x8863      /* PPPoE discovery messages */
 #define ETHER_TYPE_PPP_SES  0x8864      /* PPPoE session messages */
 
@@ -219,7 +219,7 @@ typedef iw_handler                                  oal_iw_handler;
 #define OAL_IFF_RUNNING         IFF_RUNNING
 #define OAL_SIOCIWFIRSTPRIV     SIOCIWFIRSTPRIV
 
-/* iw_priv参数类型OAL封装 */
+/* iw_priv????????OAL???? */
 #define OAL_IW_PRIV_TYPE_BYTE   IW_PRIV_TYPE_BYTE       /* Char as number */
 #define OAL_IW_PRIV_TYPE_CHAR   IW_PRIV_TYPE_CHAR       /* Char as character */
 #define OAL_IW_PRIV_TYPE_INT    IW_PRIV_TYPE_INT        /* 32 bits int */
@@ -228,7 +228,7 @@ typedef iw_handler                                  oal_iw_handler;
 #define OAL_IW_PRIV_SIZE_FIXED  IW_PRIV_SIZE_FIXED      /* Variable or fixed number of args */
 #define OAL_IW_PRIV_SIZE_MASK   IW_PRIV_SIZE_MASK       /* Max number of those args */
 
-/* iwconfig mode oal封装 */
+/* iwconfig mode oal???? */
 #define OAL_IW_MODE_AUTO    IW_MODE_AUTO    /* Let the driver decides */
 #define OAL_IW_MODE_ADHOC   IW_MODE_ADHOC   /* Single cell network */
 #define OAL_IW_MODE_INFRA   IW_MODE_INFRA   /* Multi cell network, roaming, ... */
@@ -245,7 +245,7 @@ typedef iw_handler                                  oal_iw_handler;
 #define OAL_IW_TXPOW_RELATIVE   IW_TXPOW_RELATIVE       /* Value is in arbitrary units */
 #define OAL_IW_TXPOW_RANGE      IW_TXPOW_RANGE          /* Range of value between min/max */
 
-/* 主机与网络字节序转换 */
+/* ???????????????????? */
 #define OAL_HOST2NET_SHORT(_x)  htons(_x)
 #define OAL_NET2HOST_SHORT(_x)  ntohs(_x)
 #define OAL_HOST2NET_LONG(_x)   htonl(_x)
@@ -257,11 +257,11 @@ typedef iw_handler                                  oal_iw_handler;
 #define OAL_INET_ECN_CE         INET_ECN_CE
 #define OAL_INET_ECN_MASK       INET_ECN_MASK
 
-/* 提取vlan信息 */
+/* ????vlan???? */
 #define oal_vlan_tx_tag_present(_skb)   vlan_tx_tag_present(_skb)
 #define oal_vlan_tx_tag_get(_skb)       vlan_tx_tag_get(_skb)
 
-/* vlan宏定义 */
+/* vlan?????? */
 #define OAL_VLAN_VID_MASK       VLAN_VID_MASK       /* VLAN Identifier */
 #define OAL_VLAN_PRIO_MASK      VLAN_PRIO_MASK      /* Priority Code Point */
 
@@ -284,7 +284,7 @@ typedef iw_handler                                  oal_iw_handler;
 #define  OAL_IPPROTO_TCP     IPPROTO_TCP         /* Transmission Control Protocol */
 #define  OAL_IPPROTO_ICMPV6  IPPROTO_ICMPV6      /* ICMPv6 */
 
-#define OAL_IEEE80211_MAX_SSID_LEN          32  /* 最大SSID长度 */
+#define OAL_IEEE80211_MAX_SSID_LEN          32  /* ????SSID???? */
 #define OAL_INIT_NET            init_net
 #define OAL_THIS_MODULE         THIS_MODULE
 #define OAL_MSG_DONTWAIT        MSG_DONTWAIT
@@ -305,7 +305,7 @@ typedef iw_handler                                  oal_iw_handler;
 #define OAL_WDEV_MATCH(_netif,_req)   (_netif->ifindex == _req->ifidx)
 #endif
 /*****************************************************************************
-  3 枚举定义
+  3 ????????
 *****************************************************************************/
 typedef gfp_t        oal_gfp_enum_uint8;
 
@@ -326,7 +326,7 @@ typedef netdev_tx_t  oal_net_dev_tx_enum;
 #else
 typedef oal_int32    oal_net_dev_tx_enum;
 #endif
-/* 由于02 device是裸系统，需要使用uint8，所有02用uint8类型 51不改变*/
+/* ????02 device??????????????????uint8??????02??uint8???? 51??????*/
 #if (defined(_PRE_PRODUCT_ID_HI110X_DEV) || defined(_PRE_PRODUCT_ID_HI110X_HOST))
 typedef oal_uint8  oal_nl80211_auth_type_enum_uint8;
 #endif
@@ -342,7 +342,7 @@ typedef struct oal_cpu_usage_stat
     oal_uint64 ull_steal;
     oal_uint64 ull_guest;
 }oal_cpu_usage_stat_stru;
-/* 加密类型linux-2.6.34内核和linux-2.6.30内核不同 */
+/* ????????linux-2.6.34??????linux-2.6.30???????? */
 
 struct oal_ether_header
 {
@@ -353,25 +353,25 @@ struct oal_ether_header
 typedef struct oal_ether_header oal_ether_header_stru;
 
 /*****************************************************************************
-  4 全局变量声明
+  4 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  5 消息头定义
+  5 ??????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  6 消息定义
+  6 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  7 STRUCT定义
+  7 STRUCT????
 *****************************************************************************/
 
-/* linux 结构体 */
+/* linux ?????? */
 
 typedef struct sk_buff                      oal_netbuf_stru;
 typedef struct sk_buff_head                 oal_netbuf_head_stru;
@@ -413,13 +413,13 @@ typedef struct key_params                   oal_key_params_stru;
 typedef struct cfg80211_scan_request        oal_cfg80211_scan_request_stru;
 typedef struct cfg80211_ssid                oal_cfg80211_ssid_stru;
 typedef struct cfg80211_sched_scan_request  oal_cfg80211_sched_scan_request_stru;
-/*linux-2.6.34内核才有以下两个结构体，加密相关*/
+/*linux-2.6.34????????????????????????????????*/
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,34))
 typedef enum nl80211_mfp oal_nl80211_mfp_enum_uint8;
 typedef struct cfg80211_connect_params      oal_cfg80211_conn_stru;
 typedef struct cfg80211_crypto_settings     oal_cfg80211_crypto_settings_stru;
 #else
-/* linux-2.6.30内核没有这两个加密相关的结构体，命令下发上报也是内核透传，这里打桩 */
+/* linux-2.6.30?????????????????????????????????????????????????????????????????? */
 typedef struct  cfg80211_crypto_settings
 {
     oal_uint32              wpa_versions;
@@ -459,7 +459,7 @@ typedef enum nl80211_channel_type           oal_nl80211_channel_type;
 typedef enum wiphy_params_flags             oal_wiphy_params_flags;
 typedef enum wiphy_flags                    oal_wiphy_flags;
 #else
-/* linux-2.6.30内核打桩一份wiphy_flags枚举 */
+/* linux-2.6.30????????????wiphy_flags???? */
 typedef enum wiphy_flags
 {
     WIPHY_FLAG_CUSTOM_REGULATORY    = BIT(0),
@@ -536,7 +536,7 @@ typedef struct netlink_skb_parms    oal_netlink_skb_parms;
 
 #define OAL_LL_ALLOCATED_SPACE  LL_ALLOCATED_SPACE
 
-/* netlink相关 */
+/* netlink???? */
 #define OAL_NLMSG_ALIGNTO                NLMSG_ALIGNTO
 #define OAL_NLMSG_ALIGN(_len)            NLMSG_ALIGN(_len)
 #define OAL_NLMSG_HDRLEN                 NLMSG_HDRLEN
@@ -597,23 +597,23 @@ typedef struct ieee80211_iface_combination  oal_ieee80211_iface_combination;
 #ifdef _PRE_WLAN_FEATURE_PACKET_CAPTURE
 typedef struct
 {
-    oal_uint32       ul_manufacturerid;      /* 厂商ID                   */
-    oal_uint8       *puc_radiotapheader;     /* Radiotap头Buff指针       */
-    oal_uint32       ul_rhlen;               /* Radiotap头Buff长度       */
-    oal_uint8       *puc_macheader;          /* 802.11 MAC Header指针    */
-    oal_uint32       ul_macheaderlen;        /* 802.11 MAC Header长度    */
-    oal_uint8       *puc_databuff;           /* 802.11数据帧数据Buff指针 */
-    oal_uint32       ul_datalen;             /* 802.11数据帧数据Buff长度 */
+    oal_uint32       ul_manufacturerid;      /* ????ID                   */
+    oal_uint8       *puc_radiotapheader;     /* Radiotap??Buff????       */
+    oal_uint32       ul_rhlen;               /* Radiotap??Buff????       */
+    oal_uint8       *puc_macheader;          /* 802.11 MAC Header????    */
+    oal_uint32       ul_macheaderlen;        /* 802.11 MAC Header????    */
+    oal_uint8       *puc_databuff;           /* 802.11??????????Buff???? */
+    oal_uint32       ul_datalen;             /* 802.11??????????Buff???? */
 }hw_ker_wifi_sniffer_packet_s;
 #endif
 
 #if (_PRE_TARGET_PRODUCT_TYPE_ONT == _PRE_CONFIG_TARGET_PRODUCT)
 #define HW_KER_WIFI_EVENT_CLIENT_LINK_STATUS (13)
-#define HW_RET_SUCCESS                       0 /* 成功 */
+#define HW_RET_SUCCESS                       0 /* ???? */
 #define WLAN_UPMODE_UP                       6
 #define WLAN_UPMODE_DOWN                     0
 
-/* ONT产品钩子函数,用于上送SKB报文 */
+/* ONT????????????,????????SKB???? */
 typedef int (*pf_wifi_rx_handler)(struct sk_buff *);
 extern pf_wifi_rx_handler gpf_wifi_inner_cpu_rx_handler;
 extern oal_uint32 (*g_pf_wifi_report)(oal_uint32, oal_uint32, void*, oal_uint32);
@@ -627,12 +627,12 @@ typedef struct
     oal_uint32  ul_ie_buf_len;
 }hmac_huawei_ie_stru;
 
-/* ONT产品钩子函数,用于上送huawei私有IE */
+/* ONT????????????,????????huawei????IE */
 typedef unsigned int (*pf_ie_report)(hmac_huawei_ie_stru *);
 extern  pf_ie_report g_pf_ie_report;
 
 #ifdef _PRE_WLAN_FEATURE_HILINK
-/* ONT产品钩子函数,用于上送未关联sta信息 */
+/* ONT????????????,??????????????sta???? */
 typedef unsigned int (*pf_unconnect_sta_report)(void *);
 extern pf_unconnect_sta_report g_pf_unconnect_sta_report;
 #endif
@@ -643,7 +643,7 @@ extern oal_uint32 (*g_wifi_80211_mirror_pkt)(hw_ker_wifi_sniffer_packet_s *pst_p
 
 #endif
 
-/* NAPI 参数 */
+/* NAPI ???? */
 #define NAPI_POLL_WEIGHT_MAX             32
 #define NAPI_POLL_WEIGHT_LEV1            1
 #define NAPI_POLL_WEIGHT_LEV2            4
@@ -656,26 +656,26 @@ extern oal_uint32 (*g_wifi_80211_mirror_pkt)(hw_ker_wifi_sniffer_packet_s *pst_p
 
 typedef struct
 {
-    oal_uint8               uc_napi_enable; /*NAPI使能*/
-    oal_uint8               uc_gro_enable;  /*GRO使能*/
-    oal_uint8               uc_napi_weight; /*NAPI权重，一次队列出包数*/
-    oal_uint8               uc_state; /*当前NAPI开关状态*/
-    oal_uint8               uc_napi_dyn_weight; /*NAPI是否开启自动调weight*/
+    oal_uint8               uc_napi_enable; /*NAPI????*/
+    oal_uint8               uc_gro_enable;  /*GRO????*/
+    oal_uint8               uc_napi_weight; /*NAPI????????????????????*/
+    oal_uint8               uc_state; /*????NAPI????????*/
+    oal_uint8               uc_napi_dyn_weight; /*NAPI??????????????weight*/
     oal_uint8               auc_reserve[3];
     struct napi_struct      st_napi;
-    oal_netbuf_head_stru    st_rx_netbuf_queue;/*NAPI poll的队列*/
+    oal_netbuf_head_stru    st_rx_netbuf_queue;/*NAPI poll??????*/
     oal_uint32              ul_queue_len_max;
-    oal_uint32              ul_period_pkts;  /* 统计周期pps，以便调整napi参数*/
-    oal_uint32              ul_period_start; /* 统计周期起始时间戳 */
+    oal_uint32              ul_period_pkts;  /* ????????pps??????????napi????*/
+    oal_uint32              ul_period_start; /* ?????????????????? */
 }oal_netdev_priv_stru;
 
 /*****************************************************************************
-  8 UNION定义
+  8 UNION????
 *****************************************************************************/
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(4,7,0))
-/* WiFi 驱动适配linux4.9 */
-/* Linux 4.7 删除enum ieee80211_band，用enum nl80211_band 替换，
-   WiFi 驱动新增enum ieee80211_band 定义 */
+/* WiFi ????????linux4.9 */
+/* Linux 4.7 ????enum ieee80211_band????enum nl80211_band ??????
+   WiFi ????????enum ieee80211_band ???? */
 enum ieee80211_band {
     IEEE80211_BAND_2GHZ = NL80211_BAND_2GHZ,
     IEEE80211_BAND_5GHZ = NL80211_BAND_5GHZ,
@@ -692,12 +692,12 @@ enum ieee80211_band {
 #endif  /* (LINUX_VERSION_CODE >= KERNEL_VERSION(4,7,0)) */
 
 /*****************************************************************************
-  9 OTHERS定义
+  9 OTHERS????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  10 函数声明
+  10 ????????
 *****************************************************************************/
 OAL_STATIC OAL_INLINE oal_void oal_netbuf_copy_queue_mapping(oal_netbuf_stru  *to, const oal_netbuf_stru *from)
 {
@@ -843,9 +843,9 @@ OAL_STATIC OAL_INLINE oal_netbuf_stru *oal_get_netbuf_prev(oal_netbuf_stru *pst_
     return pst_buf->prev;
 }
 
-/*arm64 尾指针变成了偏移*/
+/*arm64 ????????????????*/
 #ifndef CONFIG_ARM64
-/*tail指针操作请使用skb_put，避免使用该函数*/
+/*tail??????????????skb_put????????????????*/
 OAL_STATIC OAL_INLINE oal_void oal_set_netbuf_tail(oal_netbuf_stru *pst_buf,  oal_uint8  *tail)
 {
     pst_buf->tail = tail;
@@ -869,9 +869,9 @@ OAL_STATIC OAL_INLINE oal_netbuf_stru *oal_get_netbuf_next(oal_netbuf_stru *pst_
     return pst_buf->next;
 }
 
-/*arm64 尾指针变成了偏移*/
+/*arm64 ????????????????*/
 #ifndef CONFIG_ARM64
-/*tail指针操作请使用skb_put，避免使用该函数*/
+/*tail??????????????skb_put????????????????*/
 OAL_STATIC OAL_INLINE oal_void oal_set_single_netbuf_tail(oal_netbuf_stru *pst_netbuf,oal_uint8 *puc_tail)
 {
     pst_netbuf->tail = puc_tail;
@@ -894,7 +894,7 @@ OAL_STATIC OAL_INLINE oal_ieee80211_channel_stru *oal_ieee80211_get_channel(oal_
     return ieee80211_get_channel(pst_wiphy,ul_freq);
 }
 
-/* BEGIN : Linux wiphy 结构相关的处理函数 */
+/* BEGIN : Linux wiphy ?????????????????? */
 
 
 OAL_STATIC OAL_INLINE oal_wiphy_stru * oal_wiphy_new(oal_cfg80211_ops_stru *ops, oal_int32 sizeof_priv)
@@ -931,9 +931,9 @@ OAL_STATIC OAL_INLINE void oal_wiphy_apply_custom_regulatory(oal_wiphy_stru *pst
     wiphy_apply_custom_regulatory(pst_wiphy, regd);
 }
 
-/* END : Linux wiphy 结构相关的处理函数 */
+/* END : Linux wiphy ?????????????????? */
 
-/* 添加wiphy结构体rts门限赋值 */
+/* ????wiphy??????rts???????? */
 OAL_STATIC OAL_INLINE void oal_wiphy_set_rts(oal_wiphy_stru *pst_wiphy, oal_uint32 ul_rts_threshold)
 {
     #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,34))
@@ -942,7 +942,7 @@ OAL_STATIC OAL_INLINE void oal_wiphy_set_rts(oal_wiphy_stru *pst_wiphy, oal_uint
     return;
 }
 
-/* 添加wiphy结构体分片门限赋值 */
+/* ????wiphy?????????????????? */
 OAL_STATIC OAL_INLINE void oal_wiphy_set_frag(oal_wiphy_stru *pst_wiphy, oal_uint32 ul_frag_threshold)
 {
     #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,34))
@@ -1090,7 +1090,7 @@ OAL_STATIC OAL_INLINE oal_int32 oal_net_register_netdev(oal_net_device_stru *p_n
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
     /*TBD,Just For HCC*/
 #ifdef _PRE_WLAN_FEATURE_MULTI_NETBUF_AMSDU
-    /* 扩展ETHER HEAD并且4bytes对齐 */
+    /* ????ETHER HEAD????4bytes???? */
     OAL_NETDEVICE_HEADROOM(p_net_device) = 75;
 #else
     OAL_NETDEVICE_HEADROOM(p_net_device) = 64;
@@ -1124,7 +1124,7 @@ OAL_STATIC OAL_INLINE oal_void* oal_net_device_priv(oal_net_device_stru *pst_net
 
 OAL_STATIC OAL_INLINE oal_int32  oal_net_device_open(oal_net_device_stru *pst_dev)
 {
-    /* TBD netdevice相关接口函数后续统一优化 */
+    /* TBD netdevice???????????????????????? */
     pst_dev->flags |= OAL_IFF_RUNNING;
 
     return OAL_SUCC;
@@ -1133,7 +1133,7 @@ OAL_STATIC OAL_INLINE oal_int32  oal_net_device_open(oal_net_device_stru *pst_de
 
 OAL_STATIC OAL_INLINE oal_int32 oal_net_device_close(oal_net_device_stru *pst_dev)
 {
-    /* TBD netdevice相关接口函数后续统一优化 */
+    /* TBD netdevice???????????????????????? */
 
     pst_dev->flags &= ~OAL_IFF_RUNNING;
 
@@ -1143,7 +1143,7 @@ OAL_STATIC OAL_INLINE oal_int32 oal_net_device_close(oal_net_device_stru *pst_de
 
 OAL_STATIC OAL_INLINE oal_int32 oal_net_device_set_macaddr(oal_net_device_stru *pst_dev, oal_void *pst_addr)
 {
-    /* TBD netdevice相关接口函数后续统一优化 */
+    /* TBD netdevice???????????????????????? */
 
     oal_sockaddr_stru *pst_mac;
 
@@ -1157,7 +1157,7 @@ OAL_STATIC OAL_INLINE oal_int32 oal_net_device_set_macaddr(oal_net_device_stru *
 
 OAL_STATIC OAL_INLINE oal_int32 oal_net_device_init(oal_net_device_stru *pst_dev)
 {
-    /* TBD netdevice相关接口函数后续统一优化 */
+    /* TBD netdevice???????????????????????? */
 
     return OAL_SUCC;
 }
@@ -1165,7 +1165,7 @@ OAL_STATIC OAL_INLINE oal_int32 oal_net_device_init(oal_net_device_stru *pst_dev
 
 OAL_STATIC OAL_INLINE oal_net_device_stats_stru *oal_net_device_get_stats(oal_net_device_stru *pst_dev)
 {
-    /* TBD netdevice相关接口函数后续统一优化 */
+    /* TBD netdevice???????????????????????? */
 
     oal_net_device_stats_stru *pst_stats;
 
@@ -1185,14 +1185,14 @@ OAL_STATIC OAL_INLINE oal_net_device_stats_stru *oal_net_device_get_stats(oal_ne
 
 OAL_STATIC OAL_INLINE oal_int32 oal_net_device_ioctl(oal_net_device_stru *pst_dev, oal_ifreq_stru *pst_ifr, oal_int32 ul_cmd)
 {
-    /* TBD netdevice相关接口函数后续统一优化 */
+    /* TBD netdevice???????????????????????? */
     return -OAL_EINVAL;
 }
 
 
 OAL_STATIC OAL_INLINE oal_int32 oal_net_device_multicast_list(oal_net_device_stru *pst_dev)
 {
-    /* TBD netdevice相关接口函数后续统一优化 */
+    /* TBD netdevice???????????????????????? */
 
     return OAL_SUCC;
 }
@@ -1200,7 +1200,7 @@ OAL_STATIC OAL_INLINE oal_int32 oal_net_device_multicast_list(oal_net_device_str
 
 OAL_STATIC OAL_INLINE oal_int32 oal_net_device_change_mtu(oal_net_device_stru *pst_dev, oal_int32 ul_mtu)
 {
-    /* TBD 需要优化 */
+    /* TBD ???????? */
     pst_dev->mtu = ul_mtu;
     return OAL_SUCC;
 }
@@ -1209,13 +1209,13 @@ OAL_STATIC OAL_INLINE oal_int32 oal_net_device_change_mtu(oal_net_device_stru *p
 
 OAL_STATIC OAL_INLINE oal_int32 oal_net_device_hardstart(oal_netbuf_stru *pst_skb, oal_net_device_stru *pst_dev)
 {
-    /* TBD netdevice相关接口函数后续统一优化 */
+    /* TBD netdevice???????????????????????? */
 
     return OAL_SUCC;
 }
 
 
-/* 在dev.c中定义，用来在中断上下文或者非中断上下文中释放skb */
+/* ??dev.c??????????????????????????????????????????????skb */
 extern void dev_kfree_skb_any(struct sk_buff *skb);
 
 
@@ -1230,7 +1230,7 @@ OAL_STATIC OAL_INLINE oal_netbuf_stru* _oal_netbuf_alloc(oal_uint32 ul_size, oal
     oal_netbuf_stru *pst_netbuf;
     oal_uint32       ul_offset;
 
-    /* 保证data部分的size不会再字节对齐后小于预先想分配的大小 */
+    /* ????data??????size???????????????????????????????????? */
     if (l_align)
     {
         ul_size += (l_align - 1);
@@ -1248,7 +1248,7 @@ OAL_STATIC OAL_INLINE oal_netbuf_stru* _oal_netbuf_alloc(oal_uint32 ul_size, oal
 
     if (l_align)
     {
-        /* 计算为了能使4字节对齐的偏移量 */
+        /* ????????????4???????????????? */
         ul_offset = (oal_int32)(((oal_uint)pst_netbuf->data) % (oal_uint)l_align);
 
         if (ul_offset)
@@ -1344,7 +1344,7 @@ OAL_STATIC OAL_INLINE oal_void  oal_netbuf_spe_free(oal_netbuf_stru *pst_netbuf)
     {
         ul_dma_addr = spe_hook.get_skb_dma(pst_netbuf);
 
-        /* 交给SPE回收时需要还原data地址，预留一段head room给amsdu发送流程用 */
+        /* ????SPE??????????????data??????????????head room??amsdu?????????? */
         pst_netbuf->data = pst_netbuf->head + SPE_HEAD_ROOM;
 
         if (phys_to_virt(ul_dma_addr) != pst_netbuf->data)
@@ -1373,7 +1373,7 @@ OAL_STATIC OAL_INLINE oal_uint32  _oal_netbuf_free(oal_netbuf_stru *pst_netbuf)
     else
 #endif
     {
-        //适配PCIE中断上下文释放内存
+        //????PCIE??????????????????
         dev_kfree_skb_any(pst_netbuf);
     }
 
@@ -1975,7 +1975,7 @@ OAL_STATIC OAL_INLINE oal_sock_stru* oal_netlink_kernel_create(
     // host evn android 4.4 netlink_kernel_create API is changed
     struct netlink_kernel_cfg cfg;
 
-    // C01分支同步而来:不初始化会导致内核随机踩内存
+    // C01????????????:????????????????????????????
     oal_memset(&cfg, 0, OAL_SIZEOF(cfg));
     cfg.groups = 0;
     cfg.input = input;
@@ -2053,7 +2053,7 @@ OAL_STATIC OAL_INLINE oal_int32  oal_genlmsg_multicast(
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(4, 1, 0))
     return genlmsg_multicast(pst_skb, ul_pid, ul_group, flags);
 #else
-    /* Linux 新版本已经提供其他接口上报信息，不需要通过genlmsg_multicast 上报 */
+    /* Linux ??????????????????????????????????????????genlmsg_multicast ???? */
     return OAL_SUCC;
 #endif /* (LINUX_VERSION_CODE < KERNEL_VERSION(4, 1, 0)) */
 }
@@ -2145,10 +2145,10 @@ OAL_STATIC OAL_INLINE oal_void oal_netbuf_reset(oal_netbuf_stru *pst_netbuf, oal
 #if (defined(_PRE_BOARD_SD5610) || defined(_PRE_BOARD_SD5115))
     struct skb_shared_info *shinfo;
 
-    /* tail之前的成员初始化为0 */
+    /* tail??????????????????0 */
     memset(pst_netbuf, 0, offsetof(struct sk_buff, tail));
 
-    /* 初始化skb的share info */
+    /* ??????skb??share info */
     shinfo = skb_shinfo(pst_netbuf);
     shinfo->nr_frags  = 0;
     shinfo->gso_size = 0;
@@ -2159,7 +2159,7 @@ OAL_STATIC OAL_INLINE oal_void oal_netbuf_reset(oal_netbuf_stru *pst_netbuf, oal
     shinfo->frag_list = NULL;
     memset(&shinfo->hwtstamps, 0, sizeof(shinfo->hwtstamps));
 
-    /* data tail指针复位 */
+    /* data tail???????? */
     pst_netbuf->data = pst_netbuf->head + ul_data_offset;
     pst_netbuf->tail = pst_netbuf->data;
     pst_netbuf->len  = 0;
@@ -2323,7 +2323,7 @@ OAL_STATIC OAL_INLINE oal_int32  oal_ipv6_addr_type(oal_in6_addr *pst_ipv6)
 {
 #ifdef _PRE_WLAN_FEATURE_SUPPORT_IPV6
     return ipv6_addr_type(pst_ipv6);
-#else  /* 不支持ipv6产品，相关函数无法获取，直接返回OAL_IPV6_ADDR_RESERVED 0x2000U */
+#else  /* ??????ipv6????????????????????????????????OAL_IPV6_ADDR_RESERVED 0x2000U */
     return (oal_int32)IPV6_ADDR_RESERVED;
 #endif
 }

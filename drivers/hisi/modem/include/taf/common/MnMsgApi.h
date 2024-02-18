@@ -50,7 +50,7 @@
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "vos.h"
 #include "product_config.h"
@@ -68,13 +68,13 @@ extern "C" {
 #pragma pack(4)
 
 /*****************************************************************************
-  2 常量定义
+  2 ????????
 *****************************************************************************/
 /* Added by f62575 for AT Project, 2011-10-24, begin */
-/* Deleted by f62575 for V9R1 STK升级, 2013-6-26, begin */
+/* Deleted by f62575 for V9R1 STK????, 2013-6-26, begin */
 /* Deleted MN_MSG_7BIT_MASK */
 #define MN_MSG_RP_REPORT_CAUSE_VALUE_MASK                   (0xff)
-/* Deleted by f62575 for V9R1 STK升级, 2013-6-26, end */
+/* Deleted by f62575 for V9R1 STK????, 2013-6-26, end */
 
 
 /*------------------------TP-MTI(TP-Message-Type-Indicator,Bit 0 and 1)---------*/
@@ -91,15 +91,15 @@ extern "C" {
 #define MN_MSG_TIMESTAMP_SIGN_MASK                          (0x08)
 #define MN_MSG_MAX_TIMEZONE_VALUE                           (48)
 
-#define MN_MSG_NVIM_ITEM_ACTIVE                             (1)                 /*NVIM项已激活*/
-#define MN_MSG_NVIM_ITEM_INACTIVE                           (0)                 /*NVIM项未激活*/
+#define MN_MSG_NVIM_ITEM_ACTIVE                             (1)                 /*NVIM????????*/
+#define MN_MSG_NVIM_ITEM_INACTIVE                           (0)                 /*NVIM????????*/
 
 /* Added by f62575 for AT Project, 2011-10-24, end */
 
 typedef  VOS_UINT8   MN_MSG_ADDR_NUM_TYPE_T;
 
-#define MN_MSG_MIN_BCD_NUM_LEN                              (1)                 /* (2 - 1)  参考协议 24011 8.2.5.1 减去一个字节是描述长度的字节 */
-#define MN_MSG_MAX_BCD_NUM_LEN                              (10)                /* (11 - 1) 同上 */
+#define MN_MSG_MIN_BCD_NUM_LEN                              (1)                 /* (2 - 1)  ???????? 24011 8.2.5.1 ???????????????????????????? */
+#define MN_MSG_MAX_BCD_NUM_LEN                              (10)                /* (11 - 1) ???? */
 
 typedef VOS_UINT8    MN_MSG_OPER_TYPE_T;
 #define MN_MSG_OPER_SET                                     0
@@ -133,25 +133,25 @@ typedef VOS_UINT8    MN_MSG_OPER_TYPE_T;
 #if ((FEATURE_ON == FEATURE_GCBS) || (FEATURE_ON == FEATURE_WCBS))
 
 
-#define TAF_CBA_MAX_CBPAGE_LEN                              (88)                /* 广播短消息一页的最大长度 */
-#define TAF_CBA_MAX_CBDATA_LEN                              (82)                /* 广播短消息页数据区的最大长度 */
-#define TAF_CBA_MAX_CBMPAGE_NUM                             (15)                /* 广播短消息最多包含的页数 */
-#define TAF_CBA_MAX_CBMID_RANGE_NUM                         (100)               /* 用户最多可输入的消息ID范围个数，在接受模式下还要受到CBMIR文件大小限制 */
-#define TAF_CBA_MAX_LABEL_NUM                               (16)                /* 用户最多可输入的描述信息的长度，单位BYTE */
-#define TAF_CBA_MAX_RAW_CBDATA_LEN                          (93)                /* 广播短消息页数据区的最大长度 */
+#define TAF_CBA_MAX_CBPAGE_LEN                              (88)                /* ???????????????????????? */
+#define TAF_CBA_MAX_CBDATA_LEN                              (82)                /* ???????????????????????????? */
+#define TAF_CBA_MAX_CBMPAGE_NUM                             (15)                /* ???????????????????????? */
+#define TAF_CBA_MAX_CBMID_RANGE_NUM                         (100)               /* ????????????????????ID??????????????????????????????CBMIR???????????? */
+#define TAF_CBA_MAX_LABEL_NUM                               (16)                /* ????????????????????????????????????BYTE */
+#define TAF_CBA_MAX_RAW_CBDATA_LEN                          (93)                /* ???????????????????????????? */
 
 
 #endif
 
-/* Added by f62575 for V9R1 STK升级, 2013-6-26, begin */
-/* DCS GROUP为1，则CB DATA字段携带语言类型，占2个7位位组长度 */
+/* Added by f62575 for V9R1 STK????, 2013-6-26, begin */
+/* DCS GROUP??1????CB DATA????????????????????2??7?????????? */
 #define TAF_MSG_CBA_LANG_LENGTH                             (2)
-/* Added by f62575 for V9R1 STK升级, 2013-6-26, end */
+/* Added by f62575 for V9R1 STK????, 2013-6-26, end */
 
 #define MN_MSG_OTA_SECURITY_SMS_DSC_DATA                    (0xf6)
 
 /*****************************************************************************
-  3 类型定义
+  3 ????????
 *****************************************************************************/
 
 enum NAS_SMS_FAIL_CLOSE_LINK_CTRL_CFG_ENUM
@@ -172,7 +172,7 @@ enum MN_MSG_MO_DOMAIN_CUSTOMIZE_TYPE
 };
 typedef VOS_UINT8 MN_MSG_MO_DOMAIN_CUSTOMIZE_TYPE_UINT8;
 
-/* Added by f62575 for AT Project，2011-10-03,  Begin*/
+/* Added by f62575 for AT Project??2011-10-03,  Begin*/
 enum MN_MSG_DATE_INVALID_TYPE_ENUM
 {
     MN_MSG_DATE_INVALID_YEAR            = 0x01,
@@ -186,20 +186,20 @@ enum MN_MSG_DATE_INVALID_TYPE_ENUM
 typedef VOS_UINT8  MN_MSG_DATE_INVALID_TYPE_ENUM_UINT8;
 
 /*****************************************************************************
- 枚举名    : MN_MSG_STUB_TYPE_ENUM
- 枚举说明  : 短信相关桩类型
-            0: efsms文件不可用
-            1: efsms文件容量为1
-            2: efsmss溢出标志清除操作；
-            3: efsmsp文件获取无响应；
-            4: efsms文件获取无响应；
-            5: 触发STK短信发送，STK短信内容需要压缩编码
-            6: 触发STK短信发送，STK短信长度超过标准短信长度，需要分段发送；
-            7: 去使能短信重发功能；
-            8: 设置CLASS0类短信的定制配置；
-            9: 设置PP DOWNLOAD操作失败，并指定失败原因值
-           10: PS域短信连发开关
-           11: 触发短信自动回复功能
+ ??????    : MN_MSG_STUB_TYPE_ENUM
+ ????????  : ??????????????
+            0: efsms??????????
+            1: efsms??????????1
+            2: efsmss??????????????????
+            3: efsmsp????????????????
+            4: efsms????????????????
+            5: ????STK??????????STK????????????????????
+            6: ????STK??????????STK????????????????????????????????????????
+            7: ????????????????????
+            8: ????CLASS0??????????????????
+            9: ????PP DOWNLOAD??????????????????????????
+           10: PS??????????????
+           11: ????????????????????
 *****************************************************************************/
 enum MN_MSG_STUB_TYPE_ENUM
 {
@@ -218,7 +218,7 @@ enum MN_MSG_STUB_TYPE_ENUM
     MN_MSG_STUB_TYPE_BUTT
 };
 typedef VOS_UINT32 MN_MSG_STUB_TYPE_ENUM_U32;
-/* Added by f62575 for AT Project，2011-10-03,  End*/
+/* Added by f62575 for AT Project??2011-10-03,  End*/
 
 enum MN_MSG_LINK_CTRL
 {
@@ -368,7 +368,7 @@ enum MN_MSG_TP_PID_TYPE_ENUM
     MN_MSG_TP_PID_REPLACE_SM_5                              = 0x45,             /*Replace Short Message Type 5*/
     MN_MSG_TP_PID_REPLACE_SM_6                              = 0x46,             /*Replace Short Message Type 6*/
     MN_MSG_TP_PID_REPLACE_SM_7                              = 0x47,             /*Replace Short Message Type 7*/
-    MN_MSG_TP_PID_RESERVED_51                               = 0x51,             /*TP-PID 的RESERVED位,TPPID=0x51*/
+    MN_MSG_TP_PID_RESERVED_51                               = 0x51,             /*TP-PID ??RESERVED??,TPPID=0x51*/
     MN_MSG_TP_PID_EMS                                       = 0x5e,             /*Enhanced Message Service (Obsolete)*/
     MN_MSG_TP_PID_RETURN_CALL                               = 0x5f,             /*Return Call Message*/
     MN_MSG_TP_PID_ANSI136_R_DATA                            = 0x7c,             /*ANSI-136 R-DATA*/
@@ -591,9 +591,9 @@ typedef VOS_UINT8  MN_MSG_SEND_DOMAIN_ENUM_U8;
 
 enum MN_MSG_RCV_DOMAIN_ENUM
 {
-    MN_MSG_RCV_DOMAIN_PS                                   = 0       ,          /* PS域接收短信 */
-    MN_MSG_RCV_DOMAIN_CS,                                                       /* CS域接收短信 */
-    MN_MSG_RCV_DOMAIN_BUTT                                                      /* 无效值 */
+    MN_MSG_RCV_DOMAIN_PS                                   = 0       ,          /* PS?????????? */
+    MN_MSG_RCV_DOMAIN_CS,                                                       /* CS?????????? */
+    MN_MSG_RCV_DOMAIN_BUTT                                                      /* ?????? */
 };
 typedef VOS_UINT8  MN_MSG_RCV_DOMAIN_ENUM_U8;
 
@@ -647,10 +647,10 @@ typedef VOS_UINT8 MN_MSG_COMPRESSION_ALGORITHM_U8;
 
 enum MN_MSG_CLASS0_TAILOR
 {
-    MN_MSG_CLASS0_VODAFONE,                                                     /* Vodafone Class0 短信定制*/
-    MN_MSG_CLASS0_TIM,                                                          /* Italy TIM Class0 短信定制（即H3G Class0 短信定制） */
-    MN_MSG_CLASS0_DEF,                                                          /* 默认Class 0 短信处理(Balong符合3GPP协议的处理方式即可) */
-    MN_MSG_CLASS0_VIVO                                                          /* VIVO Class0 短信定制*/
+    MN_MSG_CLASS0_VODAFONE,                                                     /* Vodafone Class0 ????????*/
+    MN_MSG_CLASS0_TIM,                                                          /* Italy TIM Class0 ????????????H3G Class0 ?????????? */
+    MN_MSG_CLASS0_DEF,                                                          /* ????Class 0 ????????(Balong????3GPP??????????????????) */
+    MN_MSG_CLASS0_VIVO                                                          /* VIVO Class0 ????????*/
 };
 
 typedef VOS_UINT8 MN_MSG_CLASS0_TAILOR_U8;
@@ -715,7 +715,7 @@ typedef VOS_UINT8 MN_MSG_CBMODE_ENUM_U8;
 
 #endif
 
-/*SMS version PHASE2版本 SMS PHASE2+版本*/
+/*SMS version PHASE2???? SMS PHASE2+????*/
 enum MN_MSG_CSMS_MSG_VERSION_ENUM
 {
     MN_MSG_CSMS_MSG_VERSION_PHASE2,
@@ -727,16 +727,16 @@ typedef VOS_UINT8 MN_MSG_CSMS_MSG_VERSION_ENUM_U8;
 
 enum TAF_CBA_ETWS_PRIM_NTF_AUTH_RSLT_ENUM
 {
-    TAF_CBA_ETWS_PRIM_NTF_AUTH_SUCCESS,                                         /* ETWS主通知信息通过鉴权 */
-    TAF_CBA_ETWS_PRIM_NTF_AUTH_FAILED                                           /* ETWS主通知信息未通过鉴权 */
+    TAF_CBA_ETWS_PRIM_NTF_AUTH_SUCCESS,                                         /* ETWS?????????????????? */
+    TAF_CBA_ETWS_PRIM_NTF_AUTH_FAILED                                           /* ETWS???????????????????? */
 };
 typedef VOS_UINT8 TAF_CBA_ETWS_PRIM_NTF_AUTH_RSLT_ENUM_UINT8;
 
 
 enum TAF_CBA_CBMI_RANGE_RCV_MODE_ENMU
 {
-    TAF_CBA_CBMI_RANGE_RCV_MODE_REJECT,                                         /* 不接收该范围的消息 */
-    TAF_CBA_CBMI_RANGE_RCV_MODE_ACCEPT,                                         /* 接收该范围的消息 */
+    TAF_CBA_CBMI_RANGE_RCV_MODE_REJECT,                                         /* ?????????????????? */
+    TAF_CBA_CBMI_RANGE_RCV_MODE_ACCEPT,                                         /* ???????????????? */
     TAF_CBA_CBMI_RANGE_RCV_MODE_BUTT
 };
 typedef VOS_UINT32 TAF_CBA_CBMI_RANGE_RCV_MODE_ENMU_UINT32;
@@ -744,9 +744,9 @@ typedef VOS_UINT32 TAF_CBA_CBMI_RANGE_RCV_MODE_ENMU_UINT32;
 
 enum TAF_MSG_SIGNALLING_TYPE_ENUM
 {
-    /* SMS基于GSM，UTRAN或LTE信令发送 */
+    /* SMS????GSM??UTRAN??LTE???????? */
     TAF_MSG_SIGNALLING_TYPE_NAS_SIGNALLING,
-    /* SMS基于SIP信令发送 */
+    /* SMS????SIP???????? */
     TAF_MSG_SIGNALLING_TYPE_CS_OVER_IP,
 
     TAF_MSG_SIGNALLING_TYPE_BUTT
@@ -754,14 +754,14 @@ enum TAF_MSG_SIGNALLING_TYPE_ENUM
 typedef VOS_UINT32 TAF_MSG_SIGNALLING_TYPE_ENUM_UINT32;
 
 /*****************************************************************************
-  7 STRUCT定义
+  7 STRUCT????
 *****************************************************************************/
 
 /*******************************************************************************
- 结构名    : MN_MSG_CONFIG_PARM_STRU
- 协议表格  :
- ASN.1描述 :
- 结构说明  : 短信业务参数结构
+ ??????    : MN_MSG_CONFIG_PARM_STRU
+ ????????  :
+ ASN.1???? :
+ ????????  : ????????????????
 *******************************************************************************/
 typedef struct
 {
@@ -770,26 +770,26 @@ typedef struct
     MN_MSG_RCVMSG_ACT_ENUM_U8           enRcvStaRptAct;                         /*action of received Status Report msg*/
     MN_MSG_MEM_STORE_ENUM_U8            enStaRptMemStore;                       /*Sm memory store:NVIM or USIM of Status Report msg*/
     MN_MSG_MEM_STORE_ENUM_U8            enCbmMemStore;                          /*Cbm memory store:NVIM of received msg*/
-    MN_MSG_MEM_FLAG_ENUM_U8             enAppMemStatus;                         /*外部存储器状态,仅当协议栈不保存时有效*/
-    MN_MSG_CSMS_MSG_VERSION_ENUM_U8     enSmsServVersion;                       /*巴西vivo短消息方案-添加变量*/
+    MN_MSG_MEM_FLAG_ENUM_U8             enAppMemStatus;                         /*??????????????,??????????????????????*/
+    MN_MSG_CSMS_MSG_VERSION_ENUM_U8     enSmsServVersion;                       /*????vivo??????????-????????*/
 
     MN_MSG_CNMI_MT_TYPE_ENUM_U8         enMtType;
 
 }MN_MSG_CONFIG_PARM_STRU;
 
 /*******************************************************************************
- 结构名    : MN_MSG_TPDU_STRU
- 协议表格  :
- ASN.1描述 :
- 结构说明  : 短信TPDU结构, 包括TPDU长度(单位: 字节)和TPDU码流
+ ??????    : MN_MSG_TPDU_STRU
+ ????????  :
+ ASN.1???? :
+ ????????  : ????TPDU????, ????TPDU????(????: ????)??TPDU????
 *******************************************************************************/
-/*lint -e958 -e959 修改人:l60609;原因:64bit*/
+/*lint -e958 -e959 ??????:l60609;????:64bit*/
 typedef struct
 {
     VOS_UINT32                          ulLen;
     VOS_UINT8                          *pucTpdu;
 }MN_MSG_TPDU_STRU;
-/*lint +e958 +e959 修改人:l60609;原因:64bit*/
+/*lint +e958 +e959 ??????:l60609;????:64bit*/
 
 typedef struct
 {
@@ -1226,7 +1226,7 @@ typedef struct
     VOS_UINT16                          usPos;
 }MN_MSG_UDH_REO_STRU;
 
-/*140 - 1(UDHL) - 1(IEI) - 1(IEIDL) - 3(data以外数据长度)*/
+/*140 - 1(UDHL) - 1(IEI) - 1(IEIDL) - 3(data????????????)*/
 #define MN_MSG_UDH_MAX_COMPRESSION_DATA_LEN                 134
 typedef struct
 {
@@ -1244,7 +1244,7 @@ typedef struct
     VOS_BOOL                            bObjNotFowarded;
 }MN_MSG_UDH_OBJ_DISTR_STRU;
 
-/*140 - 1(UDHL) - 1(IEI) - 1(IEIDL) - 1(data以外数据长度)*/
+/*140 - 1(UDHL) - 1(IEI) - 1(IEIDL) - 1(data????????????)*/
 #define MN_MSG_UDH_MAX_WVG_DATA_LEN                         136
 typedef struct
 {
@@ -1524,7 +1524,7 @@ typedef struct
     VOS_UINT8                           aucReserve1[2];
 }MN_MSG_RP_CAUSE_STRU;
 
-/* Added by f62575 for V9R1 STK升级, 2013-6-26, begin */
+/* Added by f62575 for V9R1 STK????, 2013-6-26, begin */
 
 enum TAF_MSG_ERROR_ENUM
 {
@@ -1618,7 +1618,7 @@ enum TAF_MSG_ERROR_ENUM
     TAF_MSG_ERROR_ERROR_BUTT              = 0xFFFFFFFF
 };
 typedef VOS_UINT32 TAF_MSG_ERROR_ENUM_UINT32;
-/* Added by f62575 for V9R1 STK升级, 2013-6-26, end */
+/* Added by f62575 for V9R1 STK????, 2013-6-26, end */
 
 /*event report:MN_MSG_SUBMIT_RPT_EVT_INFO_STRU*/
 
@@ -1708,7 +1708,7 @@ typedef struct
     MN_MSG_STATUS_TYPE_ENUM_U8          enStatus;                               /*sms status*/
     MN_MSG_MEM_STORE_ENUM_U8            enMemStore;                             /*momory store:NVIM or USIM*/
 
-    VOS_UINT8                           ucIsFirstTimeReq;                       /* 消息请求类型:VOS_TRUE 表示首次请求，VOS_FALSE表示请求上报余下部分MSG */
+    VOS_UINT8                           ucIsFirstTimeReq;                       /* ????????????:VOS_TRUE ??????????????VOS_FALSE????????????????????MSG */
     VOS_UINT8                           aucReserve1[1];
     VOS_BOOL                            bChangeFlag;                            /*change status or not change status after read or list*/
 }MN_MSG_LIST_PARM_STRU;
@@ -1725,7 +1725,7 @@ typedef struct
     MN_MSG_EACHSM_LIST_INFO_STRU        astSmInfo[MN_MSG_MAX_REPORT_EVENT_NUM];
     VOS_BOOL                            bFirstListEvt;
 
-    MN_MSG_LIST_PARM_STRU               stReceivedListPara;                     /* 上报收到的LIST参数信息 */
+    MN_MSG_LIST_PARM_STRU               stReceivedListPara;                     /* ??????????LIST???????? */
 }MN_MSG_LIST_EVT_INFO_STRU;
 
 /*event report:MN_MSG_EVT_WRITE*/
@@ -1783,7 +1783,7 @@ typedef struct
 /*event report:MN_MSG_EVT_CHANGED_SETSRV_PARAM*/
 #define  MN_MSG_MAX_USIM_EFSMSP_NUM                         5                   /*Max record is 5 in USIM of EFSMSP*/
 
-#define  MN_MSG_DEFAULT_CSCA_CSMP_STORAGE_INDEX             (0)                 /* EFSMSP中Default csca csmp 存储索引*/
+#define  MN_MSG_DEFAULT_CSCA_CSMP_STORAGE_INDEX             (0)                 /* EFSMSP??Default csca csmp ????????*/
 
 typedef struct
 {
@@ -1813,7 +1813,7 @@ typedef struct
     MN_MSG_RCVMSG_ACT_ENUM_U8           enRcvStaRptAct;                         /*action of received Status Report msg*/
     MN_MSG_MEM_STORE_ENUM_U8            enStaRptMemStore;                       /*Sm memory store:NVIM or USIM of Status Report msg*/
     MN_MSG_MEM_STORE_ENUM_U8            enCbmMemStore;                          /*Cbm memory store:NVIM of received msg*/
-    MN_MSG_CSMS_MSG_VERSION_ENUM_U8     enSmsServVersion;                       /*巴西vivo短信方案-添加变量*/
+    MN_MSG_CSMS_MSG_VERSION_ENUM_U8     enSmsServVersion;                       /*????vivo????????-????????*/
     VOS_UINT8                           aucReserve1[1];
 }MN_MSG_RCVMSG_PATH_EVT_INFO_STRU;
 
@@ -1825,7 +1825,7 @@ typedef struct
     MN_MSG_MEM_STORE_ENUM_U8            enSmMemStore;                           /*Sm memory store:NVIM or USIM of SM msg*/
     MN_MSG_RCVMSG_ACT_ENUM_U8           enRcvStaRptAct;                         /*action of received Status Report msg*/
     MN_MSG_MEM_STORE_ENUM_U8            enStaRptMemStore;                       /*Sm memory store:NVIM or USIM of Status Report msg*/
-    MN_MSG_CSMS_MSG_VERSION_ENUM_U8     enSmsServVersion;                       /*巴西vivo短信方案-添加变量*/
+    MN_MSG_CSMS_MSG_VERSION_ENUM_U8     enSmsServVersion;                       /*????vivo????????-????????*/
 
     MN_MSG_CNMI_MT_TYPE_ENUM_U8         enCnmiMtType;
     VOS_UINT8                           aucReserve1[2];
@@ -1860,16 +1860,16 @@ typedef struct
     VOS_UINT8                           aucReserved[3];
 }MN_MSG_LINK_CTRL_EVT_INFO_STRU;
 
-/* Added by f62575 for AT Project，2011-10-03,  Begin*/
+/* Added by f62575 for AT Project??2011-10-03,  Begin*/
 /*****************************************************************************
- 枚举名    : MN_MSG_STUB_EVT_INFO_STRU
- 结构说明  : 短信桩相关操作结果上报
+ ??????    : MN_MSG_STUB_EVT_INFO_STRU
+ ????????  : ??????????????????????
 *****************************************************************************/
 typedef struct
 {
     VOS_UINT32                          ulErrorCode;                            /*set(get) success or failure */
 }MN_MSG_RESULT_EVT_INFO_STRU;
-/* Added by f62575 for AT Project，2011-10-03,  End*/
+/* Added by f62575 for AT Project??2011-10-03,  End*/
 
 #if ((FEATURE_ON == FEATURE_GCBS) || (FEATURE_ON == FEATURE_WCBS))
 
@@ -1892,7 +1892,7 @@ typedef struct
     VOS_UINT8                           ucRawDcsData;                           /*Raw DCS Byte */
 }MN_MSG_CBDCS_CODE_STRU;
 
-/*CBS消息中的GS相关信息*/
+/*CBS????????GS????????*/
 enum MN_MSG_CBGS_ENUM
 {
     MN_MSG_CBGS_CELL_IMME             =    0x00,
@@ -1926,18 +1926,18 @@ typedef struct
 
 typedef struct
 {
-    VOS_UINT8                                               ucLabel[TAF_CBA_MAX_LABEL_NUM]; /* 小区广播消息id范围标签 */
-    VOS_UINT16                                              usMsgIdFrom;                    /* 小区广播消息ID的开始序号  */
-    VOS_UINT16                                              usMsgIdTo;                      /* 小区广播消息ID的结束序号 */
-    TAF_CBA_CBMI_RANGE_RCV_MODE_ENMU_UINT32                 enRcvMode;                      /* 每个CBMI RANGE 的接收模式, 目前仅支持 ACCEPT的模式 */
+    VOS_UINT8                                               ucLabel[TAF_CBA_MAX_LABEL_NUM]; /* ????????????id???????? */
+    VOS_UINT16                                              usMsgIdFrom;                    /* ????????????ID??????????  */
+    VOS_UINT16                                              usMsgIdTo;                      /* ????????????ID?????????? */
+    TAF_CBA_CBMI_RANGE_RCV_MODE_ENMU_UINT32                 enRcvMode;                      /* ????CBMI RANGE ??????????, ?????????? ACCEPT?????? */
 }TAF_CBA_CBMI_RANGE_STRU;
 
 
 typedef struct
 {
-    VOS_UINT16                          usCbmirNum;                             /* 小区广播消息的ID个数 */
+    VOS_UINT16                          usCbmirNum;                             /* ??????????????ID???? */
     VOS_UINT8                           aucReserve[6];
-    TAF_CBA_CBMI_RANGE_STRU             astCbmiRangeInfo[TAF_CBA_MAX_CBMID_RANGE_NUM]; /* 小区广播消息的范围信息 */
+    TAF_CBA_CBMI_RANGE_STRU             astCbmiRangeInfo[TAF_CBA_MAX_CBMID_RANGE_NUM]; /* ?????????????????????? */
 }TAF_CBA_CBMI_RANGE_LIST_STRU;
 
 
@@ -1996,12 +1996,12 @@ typedef struct
 typedef struct
 {
     TAF_CBA_PLMN_ID_STRU                                    stPlmn;             /* plmn */
-    VOS_UINT16                                              usWarnType;         /* 告警类型 */
-    VOS_UINT16                                              usMsgId;            /* 消息ID */
+    VOS_UINT16                                              usWarnType;         /* ???????? */
+    VOS_UINT16                                              usMsgId;            /* ????ID */
 
-    VOS_UINT16                                              usSN;               /* 序列号 */
-    TAF_CBA_ETWS_PRIM_NTF_AUTH_RSLT_ENUM_UINT8              enAuthRslt;         /* 鉴权结果 */
-    VOS_UINT8                                               ucRsv;              /* 字节对齐保留 */
+    VOS_UINT16                                              usSN;               /* ?????? */
+    TAF_CBA_ETWS_PRIM_NTF_AUTH_RSLT_ENUM_UINT8              enAuthRslt;         /* ???????? */
+    VOS_UINT8                                               ucRsv;              /* ???????????? */
 }TAF_CBA_ETWS_PRIM_NTF_EVT_INFO_STRU;
 
 #endif
@@ -2012,8 +2012,8 @@ typedef struct
 
 /*Sms Event Type*/
 /*****************************************************************************
- 枚举名    : MN_MSG_EVENT_ENUM
- 结构说明  : TAF的短信模块事件上报的事件名称
+ ??????    : MN_MSG_EVENT_ENUM
+ ????????  : TAF????????????????????????????
 *****************************************************************************/
 enum MN_MSG_EVENT_ENUM
 {
@@ -2047,9 +2047,9 @@ enum MN_MSG_EVENT_ENUM
     MN_MSG_EVT_INIT_RESULT,                                                     /*initialization of sms finished */
     MN_MSG_EVT_SET_LINK_CTRL_PARAM,                                             /*sms set link ctrl parameter*/
     MN_MSG_EVT_GET_LINK_CTRL_PARAM,                                             /*sms get link ctrl parameter*/
-    /* Added by f62575 for AT Project，2011-10-03,  Begin*/
-    MN_MSG_EVT_STUB_RESULT,                                                     /* 短信相关操作结果上报事件 */
-    /* Added by f62575 for AT Project，2011-10-03,  End*/
+    /* Added by f62575 for AT Project??2011-10-03,  Begin*/
+    MN_MSG_EVT_STUB_RESULT,                                                     /* ???????????????????????? */
+    /* Added by f62575 for AT Project??2011-10-03,  End*/
     /*#if ((FEATURE_ON == FEATURE_GCBS) || (FEATURE_ON == FEATURE_WCBS))*/
     MN_MSG_EVT_DELIVER_CBM,                                                     /*rcv a new msg*/
     MN_MSG_EVT_GET_CBTYPE,                                                      /*Get Cbs Type*/
@@ -2089,15 +2089,15 @@ typedef struct
     MN_MSG_INIT_EVT_INFO_STRU           stInitResultInfo;                       /*event report:MN_MSG_EVT_INIT_RESULT*/
     MN_MSG_INIT_SMSP_EVT_INFO_STRU      stInitSmspResultInfo;
     MN_MSG_LINK_CTRL_EVT_INFO_STRU      stLinkCtrlInfo;                         /*event report:MN_MSG_EVT_SET_LINK_CTRL_PARAM,MN_MSG_EVT_GET_LINK_CTRL_PARAM*/
-    /* Added by f62575 for AT Project，2011-10-03,  Begin*/
+    /* Added by f62575 for AT Project??2011-10-03,  Begin*/
     MN_MSG_RESULT_EVT_INFO_STRU         stResult;                               /*event report:MN_MSG_EVT_GET_LINK_CTRL_PARAM, etc */
-    /* Added by f62575 for AT Project，2011-10-03,  End*/
+    /* Added by f62575 for AT Project??2011-10-03,  End*/
 #if ((FEATURE_ON == FEATURE_GCBS) || (FEATURE_ON == FEATURE_WCBS))
     MN_MSG_CB_DELIVER_EVT_INFO_STRU     stCbsDeliverInfo;                       /*event report:MN_MSG_EVT_DELIVER_CBS*/
     MN_MSG_CBMIDS_CHANGE_EVT_INFO_STRU  stCbsChangeInfo;
     MN_MSG_CBMIDS_GET_EVT_INFO_STRU     stCbsCbMids;
 #if (FEATURE_ON == FEATURE_ETWS)
-    TAF_CBA_ETWS_PRIM_NTF_EVT_INFO_STRU stEtwsPrimNtf;                            /* ETWS主通知信息上报 */
+    TAF_CBA_ETWS_PRIM_NTF_EVT_INFO_STRU stEtwsPrimNtf;                            /* ETWS?????????????? */
 #endif
 
 #endif
@@ -2109,32 +2109,32 @@ typedef struct
     MN_MSG_LINK_CTRL_U8 enRelayLinkCtrl;
 }MN_MSG_SET_LINK_CTRL_STRU;
 
-/* Added by f62575 for AT Project，2011-10-03,  Begin*/
+/* Added by f62575 for AT Project??2011-10-03,  Begin*/
 /*****************************************************************************
- 枚举名    : MN_MSG_STUB_MSG_STRU
- 结构说明  : 短信相关桩消息参数结构
-             enStubType 桩类型
-             ulValue    设置类桩消息有效，指定类型的桩需要配置C核参数的值，
-                <enStubType>           <Value>的含义
-                    0             efsms文件不可用； 0: efsms文件可用；1: efsms文件不可用；
-                    1             efsms文件容量为1；0:不启用桩，其他 : EFSMS的容量为<Value>指定容量；
-                    2             efsmss溢出标志清除操作；0: efsmss文件溢出标志有效；1: 强制清除efsmss文件溢出标志；
-                    3             efsmsp文件获取无响应；0: efsmsp文件操作正常；1: efsmsp文件操作无响应；
-                    4             efsms文件获取无响应；0: efsms文件操作正常；1: efsms文件操作无响应；
-                    5             触发STK短信发送，STK短信内容需要压缩编码
-                    6             触发STK短信发送，STK短信长度超过标准短信长度，需要分段发送；
-                    7             去使能短信重发功能； 0: 短信重发功能正常；1: 不启用短信重发功能
-                    8             设置CLASS0类短信的定制配置；
-                    9             设置PP DOWNLOAD操作失败，并指定失败原因值
-                   10             PS域短信连发开关 0: 默认关闭PS域短信连发功能；1: 启动PS域短信连发功能；
-                   11             触发短信自动回复功能 0: 默认关闭短信自动回复桩过程；1: 启动短信自动回复桩过程；
+ ??????    : MN_MSG_STUB_MSG_STRU
+ ????????  : ??????????????????????
+             enStubType ??????
+             ulValue    ??????????????????????????????????????C????????????
+                <enStubType>           <Value>??????
+                    0             efsms???????????? 0: efsms??????????1: efsms????????????
+                    1             efsms??????????1??0:?????????????? : EFSMS????????<Value>??????????
+                    2             efsmss??????????????????0: efsmss??????????????????1: ????????efsmss??????????????
+                    3             efsmsp????????????????0: efsmsp??????????????1: efsmsp????????????????
+                    4             efsms????????????????0: efsms??????????????1: efsms????????????????
+                    5             ????STK??????????STK????????????????????
+                    6             ????STK??????????STK????????????????????????????????????????
+                    7             ???????????????????? 0: ??????????????????1: ??????????????????
+                    8             ????CLASS0??????????????????
+                    9             ????PP DOWNLOAD??????????????????????????
+                   10             PS?????????????? 0: ????????PS????????????????1: ????PS????????????????
+                   11             ???????????????????? 0: ????????????????????????????1: ????????????????????????
 *****************************************************************************/
 typedef struct
 {
     MN_MSG_STUB_TYPE_ENUM_U32           enStubType;
     VOS_UINT32                          ulValue;
 }MN_MSG_STUB_MSG_STRU;
-/* Added by f62575 for AT Project，2011-10-03,  End*/
+/* Added by f62575 for AT Project??2011-10-03,  End*/
 
 enum MN_MSG_CLIENT_TYPE_ENUM
 {
@@ -2271,12 +2271,12 @@ typedef struct
 }MN_MSG_APP_ADDR_STRU;
 
 /*****************************************************************************
-  H2ASN顶级消息结构定义
+  H2ASN????????????????
 *****************************************************************************/
 typedef struct
 {
     MN_MSG_EVENT_ENUM_U32               enMsgID;    /*_H2ASN_MsgChoice_Export NAS_RRC_MSG_TYPE_ENUM_UINT32*/
-                                                    /* 为了兼容NAS的消息头定义，所以转换ASN.1使用NAS_RRC_MSG_TYPE_ENUM_UINT32 */
+                                                    /* ????????NAS??????????????????????ASN.1????NAS_RRC_MSG_TYPE_ENUM_UINT32 */
 
     /***************************************************************************
         _H2ASN_MsgChoice_When_Comment          NAS_RRC_MSG_TYPE_ENUM_UINT16
@@ -2292,15 +2292,15 @@ typedef struct
 
 
 /*****************************************************************************
-  4 宏定义
+  4 ??????
 *****************************************************************************/
 
 /*****************************************************************************
-  5 全局变量声明
+  5 ????????????
 *****************************************************************************/
 
 /*****************************************************************************
-  6 接口函数声明
+  6 ????????????
 *****************************************************************************/
 /*Set command controls the continuity of SMS relay protocol link. */
 VOS_UINT32   MN_MSG_SetLinkCtrl(
@@ -2515,7 +2515,7 @@ VOS_UINT32  MN_MSG_EncodeRelatTime(
     VOS_UINT8                           *pucRelatTimeData
 );
 
-/*根据TP或RP层地址解析得到ASCII码表示号码的数据结构*/
+/*????TP??RP??????????????ASCII????????????????????*/
 VOS_UINT32 MN_MSG_DecodeAddress(
     const VOS_UINT8                     *pucAddr,
     VOS_BOOL                            bRpAddr,
@@ -2523,7 +2523,7 @@ VOS_UINT32 MN_MSG_DecodeAddress(
     VOS_UINT32                          *pulLen
 );
 
-/*根据ASCII码表示号码的数据结构编码得到TP或RP层地址*/
+/*????ASCII????????????????????????????TP??RP??????*/
 VOS_UINT32 MN_MSG_EncodeAddress(
     const MN_MSG_ASCII_ADDR_STRU        *pstAsciiAddr,
     VOS_BOOL                            bRpAddr,
@@ -2531,7 +2531,7 @@ VOS_UINT32 MN_MSG_EncodeAddress(
     VOS_UINT32                          *pulLen
 );
 
-/*根据VP和VPF解析得到有效期数据结构*/
+/*????VP??VPF??????????????????????*/
 VOS_UINT32 MN_MSG_DecodeValidPeriod(
     MN_MSG_VALID_PERIOD_ENUM_U8         enVpf,
     const VOS_UINT8                     *pucValidPeriod,
@@ -2539,7 +2539,7 @@ VOS_UINT32 MN_MSG_DecodeValidPeriod(
     VOS_UINT32                          *pulLen
 );
 
-/*将MN_MSG_BCD_ADDR_STRU类型地址转换成MN_MSG_ASCII_ADDR_STRU类型地址*/
+/*??MN_MSG_BCD_ADDR_STRU??????????????MN_MSG_ASCII_ADDR_STRU????????*/
 VOS_UINT32 MN_MSG_BcdAddrToAscii(
     MN_MSG_BCD_ADDR_STRU                *pstBcdAddr,
     MN_MSG_ASCII_ADDR_STRU              *pstAsciiAddr
@@ -2569,7 +2569,7 @@ VOS_VOID MN_MSG_GetSmsServicePara(
     MN_MSG_ME_STORAGE_STATUS_ENUM_UINT8 *penMeStorageEnable
 );
 
-/* Added by f62575 for AT Project，2011-10-03,  Begin*/
+/* Added by f62575 for AT Project??2011-10-03,  Begin*/
 
 VOS_UINT32 MN_MSG_ReqStub(
     MN_CLIENT_ID_T                      clientId,
@@ -2583,7 +2583,7 @@ VOS_UINT32 MN_MSG_ChkDate(
     MN_MSG_DATE_INVALID_TYPE_ENUM_UINT8 *pucInvalidType
 );
 
-/* Added by f62575 for AT Project，2011-10-03,  End*/
+/* Added by f62575 for AT Project??2011-10-03,  End*/
 
 
 VOS_VOID MN_MSG_GetMoSmsCtrlFlag(
@@ -2656,7 +2656,7 @@ enum MN_MSG_MT_CUSTOMIZE_ENUM
     MN_MSG_MT_CUSTOMIZE_NONE,
     MN_MSG_MT_CUSTOMIZE_DCM,
     MN_MSG_MT_CUSTOMIZE_FT,
-    MN_MSG_MT_CUSTOMIZE_KT,      /*KT定制项目 NV打开的标志 */
+    MN_MSG_MT_CUSTOMIZE_KT,      /*KT???????? NV?????????? */
     MN_MSG_MT_CUSTOMIZE_BUTT
 };
 typedef VOS_UINT8 MN_MSG_MT_CUSTOMIZE_ENUM_UINT8;

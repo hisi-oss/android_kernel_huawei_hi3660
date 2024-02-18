@@ -47,7 +47,7 @@
 */
  
 /*****************************************************************************
-   1 头文件包含
+   1 ??????????
 *****************************************************************************/
 #include "ATCmdProc.h"
 #include "siapppb.h"
@@ -107,25 +107,25 @@
 
 
 /*****************************************************************************
-    协议栈打印打点方式下的.C文件宏定义
+    ??????????????????????.C??????????
 *****************************************************************************/
 #define    THIS_FILE_ID        PS_FILE_ID_AT_CMDMSGPROC_C
 
 
 /*****************************************************************************
-  2 类型定义
+  2 ????????
 *****************************************************************************/
 
 /*****************************************************************************
-   3 全局变量定义
+   3 ????????????
 *****************************************************************************/
 
-/* Added by L60609 for AT Project，2011-10-04,  Begin*/
+/* Added by L60609 for AT Project??2011-10-04,  Begin*/
 
-/*AT 模块处理来自AT AGENT消息函数对应表*/
+/*AT ????????????AT AGENT??????????????*/
 const AT_PROC_MSG_FROM_DRV_AGENT_STRU g_astAtProcMsgFromDrvAgentTab[]=
 {
-    /* 消息ID */                            /* 消息处理函数 */
+    /* ????ID */                            /* ???????????? */
     {DRV_AGENT_MSID_QRY_CNF,                AT_RcvDrvAgentMsidQryCnf},
     {DRV_AGENT_GAS_MNTN_CMD_RSP,            AT_RcvDrvAgentGasMntnCmdRsp},
     {DRV_AGENT_HARDWARE_QRY_RSP,            AT_RcvDrvAgentHardwareQryRsp},
@@ -147,10 +147,10 @@ const AT_PROC_MSG_FROM_DRV_AGENT_STRU g_astAtProcMsgFromDrvAgentTab[]=
     {DRV_AGENT_SFEATURE_QRY_CNF,            AT_RcvDrvAgentQrySfeatureRsp},
     {DRV_AGENT_PRODTYPE_QRY_CNF,            AT_RcvDrvAgentQryProdtypeRsp},
 
-    /* Added by 傅映君/f62575 for CPULOAD&MFREELOCKSIZE处理过程移至C核, 2011/11/15, begin */
+    /* Added by ??????/f62575 for CPULOAD&MFREELOCKSIZE????????????C??, 2011/11/15, begin */
     {DRV_AGENT_CPULOAD_QRY_CNF,             AT_RcvDrvAgentCpuloadQryRsp},
     {DRV_AGENT_MFREELOCKSIZE_QRY_CNF,       AT_RcvDrvAgentMfreelocksizeQryRsp},
-    /* Added by 傅映君/f62575 for CPULOAD&MFREELOCKSIZE处理过程移至C核, 2011/11/15, end */
+    /* Added by ??????/f62575 for CPULOAD&MFREELOCKSIZE????????????C??, 2011/11/15, end */
     {DRV_AGENT_MEMINFO_QRY_CNF,             AT_RcvDrvAgentMemInfoQryRsp},
     /* Added by f62575 for AT Project, 2011-10-04,  Begin */
     {DRV_AGENT_DLOADINFO_QRY_CNF,           AT_RcvDrvAgentDloadInfoQryRsp},
@@ -231,12 +231,12 @@ const AT_PROC_MSG_FROM_DRV_AGENT_STRU g_astAtProcMsgFromDrvAgentTab[]=
 
 };
 
-/* Added by L60609 for AT Project，2011-10-04,  End*/
+/* Added by L60609 for AT Project??2011-10-04,  End*/
 
-/* AT模块处理来自MTA消息函数对应表*/
+/* AT????????????MTA??????????????*/
 const AT_PROC_MSG_FROM_MTA_STRU g_astAtProcMsgFromMtaTab[]=
 {
-    /* 消息ID */                            /* 消息处理函数 */
+    /* ????ID */                            /* ???????????? */
     {ID_MTA_AT_CPOS_SET_CNF,                AT_RcvMtaCposSetCnf},
     {ID_MTA_AT_CPOSR_IND,                   AT_RcvMtaCposrInd},
     {ID_MTA_AT_XCPOSRRPT_IND,               AT_RcvMtaXcposrRptInd},
@@ -433,7 +433,7 @@ const AT_PROC_MSG_FROM_CALL_STRU g_astAtProcMsgFromCallTab[]=
 
 const AT_PROC_MSG_FROM_MMA_STRU g_astAtProcMsgFromMmaTab[]=
 {
-    /* 消息ID */                            /* 消息处理函数 */
+    /* ????ID */                            /* ???????????? */
     {ID_TAF_MMA_OM_MAINTAIN_INFO_IND,   AT_RcvMmaOmMaintainInfoInd},
 
     {ID_TAF_MMA_USIM_STATUS_IND,            AT_RcvAtMmaUsimStatusInd},
@@ -528,7 +528,7 @@ const AT_PROC_MSG_FROM_MMA_STRU g_astAtProcMsgFromMmaTab[]=
     {ID_TAF_MMA_REG_STATE_QRY_CNF,     AT_RcvMmaRegStateQryCnf},
     {ID_TAF_MMA_AUTO_ATTACH_QRY_CNF,   AT_RcvMmaAutoAttachQryCnf},
     {ID_TAF_MMA_SYSINFO_QRY_CNF,       AT_RcvMmaSysInfoQryCnf},
-    /* ANTENNA_INFO_QRY_CNF 移到MTA模块处理 */
+    /* ANTENNA_INFO_QRY_CNF ????MTA???????? */
     {ID_TAF_MMA_HOME_PLMN_QRY_CNF,     AT_RcvMmaEHplmnInfoQryCnf},
 
     {ID_TAF_MMA_SRV_STATUS_IND,        AT_RcvMmaSrvStatusInd},
@@ -544,9 +544,9 @@ const AT_PROC_MSG_FROM_MMA_STRU g_astAtProcMsgFromMmaTab[]=
     {ID_TAF_MMA_SYSCFG_TEST_CNF,        AT_RcvTafMmaSyscfgTestCnf},
     {ID_TAF_MMA_CRPN_QRY_CNF,           AT_RcvTafMmaCrpnQryCnf},
     {ID_TAF_MMA_QUICKSTART_QRY_CNF,     AT_RcvTafMmaQuickStartQryCnf},
-    /* CSNR_QRY_CNF移到MTA模块处理 */
+    /* CSNR_QRY_CNF????MTA???????? */
     {ID_TAF_MMA_CSQ_QRY_CNF,            AT_RcvTafMmaCsqQryCnf},
-    /* CSQLVL_QRY_CNF移到MTA模块处理 */
+    /* CSQLVL_QRY_CNF????MTA???????? */
 
     {ID_TAF_MMA_BATTERY_CAPACITY_QRY_CNF, AT_RcvMmaCbcQryCnf},
     {ID_TAF_MMA_HAND_SHAKE_QRY_CNF,      AT_RcvMmaHsQryCnf},
@@ -597,12 +597,12 @@ const AT_PROC_MSG_FROM_MMA_STRU g_astAtProcMsgFromMmaTab[]=
     {ID_TAF_MMA_PACSP_QRY_CNF,       AT_RcvMmaPacspQryCnf},
 };
 
-/* AT码流缓存数组(包括AT命令或其它数据)。
-   设置该缓存数组的原因:底软任务在调用At_CmdStreamPreProc接口时，某些场景下(如直接使用超级终端发送AT命令),则会
-   出现AT码流以一个字符为单位发送到AT的消息队列中，导致AT的消息队列慢，触发单板复位。*/
+/* AT????????????(????AT??????????????)??
+   ????????????????????:??????????????At_CmdStreamPreProc??????????????????(??????????????????????AT????),????
+   ????AT??????????????????????????AT??????????????????AT????????????????????????????*/
 AT_DATA_STREAM_BUFFER_STRU              g_aucAtDataBuff[AT_MAX_CLIENT_NUM];
 
-/*CREG/CGREG的<CI>域以4字节上报是否使能(VDF需求)*/
+/*CREG/CGREG??<CI>????4????????????????(VDF????)*/
 
 AT_CLIENT_MANAGE_STRU                   gastAtClientTab[AT_MAX_CLIENT_NUM];
 
@@ -626,7 +626,7 @@ AT_FREQLOCK_GSM_BAND_TBL_STRU    g_astFreqLockGsmBandTbl[] =
     {AT_FREQLOCK_BAND_TYPE_GSM_1900    ,0, "03"},
 };
 /*****************************************************************************
-   3 函数、变量声明
+   3 ??????????????
 *****************************************************************************/
 
 extern VOS_UINT32    AT_ProcTempprtEventInd(
@@ -634,10 +634,10 @@ extern VOS_UINT32    AT_ProcTempprtEventInd(
 );
 
 /*****************************************************************************
-   4 函数实现
+   4 ????????
 *****************************************************************************/
 
-/* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, end */
+/* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, end */
 
 
 TAF_VOID At_MmaMsgProc(
@@ -648,10 +648,10 @@ TAF_VOID At_MmaMsgProc(
     VOS_UINT32                          ulMsgCnt;
     VOS_UINT32                          ulRst;
 
-    /*从g_astAtProcMsgFromMmaTab中获取消息个数*/
+    /*??g_astAtProcMsgFromMmaTab??????????????*/
     ulMsgCnt = sizeof(g_astAtProcMsgFromMmaTab)/sizeof(AT_PROC_MSG_FROM_MMA_STRU);
 
-    /*g_astAtProcMsgFromMtaTab查表，进行消息分发*/
+    /*g_astAtProcMsgFromMtaTab??????????????????*/
     for (i = 0; i < ulMsgCnt; i++)
     {
         if (g_astAtProcMsgFromMmaTab[i].ulMsgName == pstMsg->ulMsgName)
@@ -667,7 +667,7 @@ TAF_VOID At_MmaMsgProc(
         }
     }
 
-    /*没有找到匹配的消息*/
+    /*??????????????????*/
     if (ulMsgCnt == i)
     {
         AT_ERR_LOG("At_MmaMsgProc: Msg Id is invalid!");
@@ -685,10 +685,10 @@ TAF_UINT32 At_CallMsgProc(
     VOS_UINT32                          ulMsgCnt;
     VOS_UINT32                          ulRst;
 
-    /*从g_astAtProcMsgFromXcallTab中获取消息个数*/
+    /*??g_astAtProcMsgFromXcallTab??????????????*/
     ulMsgCnt = sizeof(g_astAtProcMsgFromCallTab)/sizeof(AT_PROC_MSG_FROM_CALL_STRU);
 
-    /*g_astAtProcMsgFromXcallTab查表，进行消息分发*/
+    /*g_astAtProcMsgFromXcallTab??????????????????*/
     for (i = 0; i < ulMsgCnt; i++)
     {
         if ((g_astAtProcMsgFromCallTab[i].ulMsgName == pstMsg->ulMsgName)
@@ -705,7 +705,7 @@ TAF_UINT32 At_CallMsgProc(
         }
     }
 
-    /*没有找到匹配的消息*/
+    /*??????????????????*/
     if (ulMsgCnt == i)
     {
         AT_ERR_LOG("AT_XcallMsgProc: Msg Id is invalid!");
@@ -733,7 +733,7 @@ TAF_VOID At_EventMsgProc(MN_AT_IND_EVT_STRU *pMsg)
             return;
 
         case MN_CALLBACK_PS_CALL:
-            /* PS域事件处理 */
+            /* PS?????????? */
             AT_RcvTafPsEvt((TAF_PS_EVT_STRU*)pMsg);
             return;
 
@@ -761,11 +761,11 @@ TAF_VOID At_EventMsgProc(MN_AT_IND_EVT_STRU *pMsg)
             At_CmdCnfMsgProc(pMsg->aucContent, pMsg->usLen);
             break;
 
-        /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, begin */
+        /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, begin */
         case MN_CALLBACK_VOICE_CONTROL:
             At_VcMsgProc(pMsg, pMsg->usLen);
             break;
-        /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, end */
+        /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, end */
 
         case MN_CALLBACK_LOG_PRINT:
             AT_LogPrintMsgProc((TAF_MNTN_LOG_PRINT_STRU *)pMsg);
@@ -786,7 +786,7 @@ VOS_BOOL AT_E5CheckRight(
 )
 {
     static VOS_BOOL                     bIsRight = VOS_FALSE;
-    VOS_UINT8                           aucCmdTmp[20]; /* 须大于aucQuickCmd[]的长度 */
+    VOS_UINT8                           aucCmdTmp[20]; /* ??????aucQuickCmd[]?????? */
     VOS_UINT8                           aucQuickCmd[] = "AT^OPENPORT=";
     VOS_UINT16                          usQuickCmdLen;
     VOS_UINT16                          usLeftLen;
@@ -794,33 +794,33 @@ VOS_BOOL AT_E5CheckRight(
     VOS_CHAR                            acPassword[AT_RIGHT_PWD_LEN+1];
     VOS_UINT8                           *pucAtStart ;
 
-    /* 当前权限未开启,直接返回  */
+    /* ??????????????,????????  */
     if ( AT_RIGHT_OPEN_FLAG_CLOSE == g_stAtRightOpenFlg.enRightOpenFlg )
     {
         return VOS_TRUE;
     }
 
-    /* 如果已经获取到权限,则直接返回 */
+    /* ??????????????????,?????????? */
     if ( VOS_TRUE == bIsRight )
     {
         return VOS_TRUE;
     }
 
-    /* SSCOM 输入的字符串前有 0x0A */
+    /* SSCOM ???????????????? 0x0A */
     pucAtStart = pucData;
     while( (*pucAtStart != 'a') && (*pucAtStart != 'A')  )
     {
         pucAtStart++;
         if ( pucAtStart >= (pucData+usLen) )
         {
-            /* 未找到 a 或 A break */
+            /* ?????? a ?? A break */
             break;
         }
     }
     usLen -= (VOS_UINT16)(pucAtStart - pucData);
     pucData = pucAtStart;
 
-    /* 长度非法,直接返回无权限 */
+    /* ????????,?????????????? */
     usQuickCmdLen = (VOS_UINT16)VOS_StrLen((VOS_CHAR *)aucQuickCmd);
     if (usLen <= usQuickCmdLen)
     {
@@ -831,7 +831,7 @@ VOS_BOOL AT_E5CheckRight(
     TAF_MEM_SET_S(aucCmdTmp, sizeof(aucCmdTmp), 0x00, (VOS_SIZE_T)sizeof(aucCmdTmp));
     TAF_MEM_CPY_S(aucCmdTmp, sizeof(aucCmdTmp), pucData, (VOS_SIZE_T)usQuickCmdLen);
 
-    /* 不是AT^OPENPORT命令直接返回无权限 */
+    /* ????AT^OPENPORT?????????????????? */
     if (0 != VOS_StrNiCmp((VOS_CHAR *)aucCmdTmp,
                           (VOS_CHAR *)aucQuickCmd,
                           (VOS_SIZE_T)usQuickCmdLen))
@@ -855,16 +855,16 @@ VOS_BOOL AT_E5CheckRight(
     TAF_MEM_SET_S(acPassword, sizeof(acPassword), 0x00, sizeof(acPassword));
     TAF_MEM_CPY_S(acPassword, sizeof(acPassword), g_stAtRightOpenFlg.acPassword, sizeof(g_stAtRightOpenFlg.acPassword));
 
-    /* 比较密码是否相同*/
+    /* ????????????????*/
     if ( 0 == VOS_StrCmp(acPassword, (VOS_CHAR *)aucCmdTmp))
     {
-        /* 上报OK并记录有权限 */
+        /* ????OK???????????? */
         At_FormatResultData(ucIndex, AT_OK);
         bIsRight = VOS_TRUE;
         return VOS_FALSE;
     }
 
-    /* 上报ERROR */
+    /* ????ERROR */
     At_FormatResultData(ucIndex, AT_ERROR);
     return VOS_FALSE;
 }
@@ -885,13 +885,13 @@ TAF_VOID At_PppProtocolRelIndProc(AT_PPP_PROTOCOL_REL_IND_MSG_STRU *pMsg)
           && (AT_PPP_DATA_MODE == gastAtClientTab[ucIndex].DataMode)
           && (AT_CMD_WAIT_PPP_PROTOCOL_REL_SET == gastAtClientTab[ucIndex].CmdCurrentOpt) )
         {
-            /* 将AT通道切换为命令模式 */
+            /* ??AT?????????????????? */
             At_SetMode(ucIndex, AT_CMD_MODE, AT_NORMAL_MODE);
 
-            /* 停止定时器 */
+            /* ?????????? */
             AT_STOP_TIMER_CMD_READY(ucIndex);
 
-            /* 回复NO CARRIER */
+            /* ????NO CARRIER */
             gstAtSendData.usBufLen = 0;
             At_FormatResultData(ucIndex, AT_NO_CARRIER);
         }
@@ -967,7 +967,7 @@ VOS_UINT32  At_RfCfgCnfReturnErrProc(
            ulRslt = AT_FRSSI_OTHER_ERR;
            break;
 
-       /* 设置主集和分集时收到DSP回复出错情况下返回的错误码相同 */
+       /* ????????????????????DSP?????????????????????????????? */
        case AT_CMD_SET_RXDIV:
        case AT_CMD_SET_RXPRI:
            ulRslt = AT_CME_RX_DIV_OTHER_ERR;
@@ -991,7 +991,7 @@ VOS_VOID  At_RfCfgCnfReturnSuccProc(
         case AT_CMD_SET_FTXON:
             g_stAtDevCmdCtrl.ucTxOnOff = g_stAtDevCmdCtrl.ucTempRxorTxOnOff;
 
-            /* 如果是打开发射机操作，需要记录最近一次执行的是打开发射机还是打开接收机操作 */
+            /* ?????????????????????????????????????????????????????????????????????????? */
             if (AT_DSP_RF_SWITCH_ON == g_stAtDevCmdCtrl.ucTxOnOff)
             {
                 g_stAtDevCmdCtrl.ucRxonOrTxon = AT_TXON_OPEN;
@@ -1001,7 +1001,7 @@ VOS_VOID  At_RfCfgCnfReturnSuccProc(
         case AT_CMD_SET_FRXON:
             g_stAtDevCmdCtrl.ucRxOnOff = g_stAtDevCmdCtrl.ucTempRxorTxOnOff;
 
-            /* 如果是打开接收机操作，需要记录最近一次执行的是打开发射机还是打开接收机操作 */
+            /* ?????????????????????????????????????????????????????????????????????????? */
             if (AT_DSP_RF_SWITCH_ON == g_stAtDevCmdCtrl.ucRxOnOff)
             {
                 g_stAtDevCmdCtrl.ucRxonOrTxon = AT_RXON_OPEN;
@@ -1041,7 +1041,7 @@ VOS_VOID  At_HpaRfCfgCnfProc(
     VOS_UINT32                          ulRslt;
     VOS_UINT8                           ucIndex;
 
-    /*获取本地保存的用户索引*/
+    /*??????????????????????*/
     ucIndex = g_stAtDevCmdCtrl.ucIndex;
 
     if (AT_HPA_RSLT_FAIL == pstMsg->usErrFlg)
@@ -1056,8 +1056,8 @@ VOS_VOID  At_HpaRfCfgCnfProc(
         ulRslt = AT_OK;
         At_RfCfgCnfReturnSuccProc(ucIndex);
 
-        /* ^FRSSI?在GDSP LOAD情况会收到ID_HPA_AT_RF_CFG_CNF消息,不用上报,等收到
-           ID_HPA_AT_RF_RX_RSSI_IND消息时再上报 */
+        /* ^FRSSI???GDSP LOAD??????????ID_HPA_AT_RF_CFG_CNF????,????????,??????
+           ID_HPA_AT_RF_RX_RSSI_IND???????????? */
         if (AT_CMD_QUERY_RSSI != gastAtClientTab[ucIndex].CmdCurrentOpt)
         {
             AT_STOP_TIMER_CMD_READY(ucIndex);
@@ -1075,7 +1075,7 @@ VOS_VOID  At_CHpaRfCfgCnfProc(
     VOS_UINT32                          ulRslt;
     VOS_UINT8                           ucIndex;
 
-    /*获取本地保存的用户索引*/
+    /*??????????????????????*/
     ucIndex = g_stAtDevCmdCtrl.ucIndex;
 
     if (AT_HPA_RSLT_FAIL == pstMsg->usErrFlg)
@@ -1107,10 +1107,10 @@ VOS_VOID  At_RfRssiIndProc(
     VOS_UINT16                          usLength;
     VOS_INT32                           lRssi;
 
-    /*获取本地保存的用户索引*/
+    /*??????????????????????*/
     ucIndex  = g_stAtDevCmdCtrl.ucIndex;
 
-    if (AT_DSP_RF_AGC_STATE_ERROR == pstMsg->sAGCGain)  /* 错误 */
+    if (AT_DSP_RF_AGC_STATE_ERROR == pstMsg->sAGCGain)  /* ???? */
     {
         AT_WARN_LOG("AT_RfRssiIndProc err");
         ulRslt = AT_FRSSI_OTHER_ERR;
@@ -1120,11 +1120,11 @@ VOS_VOID  At_RfRssiIndProc(
 
         gstAtSendData.usBufLen = 0;
 
-        /*由于RSSI测量值单位0.125dBm，为了消除浮点数*1000.*/
+        /*????RSSI??????????0.125dBm????????????????*1000.*/
         lRssi = pstMsg->sRSSI * AT_DSP_RSSI_VALUE_MUL_THOUSAND;
 
-        /*读取的RSSI值，采用正值上报，精确到0.1dBm定制值信息。如果当前的RSSI
-          值为-85.1dBm，返回值为851. 由于之前乘1000，所以精确到0.1dBm这里要除100*/
+        /*??????RSSI????????????????????????0.1dBm??????????????????????RSSI
+          ????-85.1dBm??????????851. ??????????1000????????????0.1dBm????????100*/
         if (lRssi < 0 )
         {
             lRssi = (-1*lRssi)/100;
@@ -1134,7 +1134,7 @@ VOS_VOID  At_RfRssiIndProc(
             lRssi = lRssi/100;
         }
 
-        /* 适配V7R5版本4RX接收，GU只报一个值，其他报0，L根据FTM上报结果，支持4RX接收上报4个值，不支持时上报1个值 */
+        /* ????V7R5????4RX??????GU??????????????????0??L????FTM??????????????4RX????????4??????????????????1???? */
         usLength = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN, (VOS_CHAR *)pgucAtSndCodeAddr,
                                            (VOS_CHAR*)pgucAtSndCodeAddr, "%s:%d",
                                            g_stParseContext[ucIndex].pstCmdElement->pszCmdName,
@@ -1313,7 +1313,7 @@ VOS_UINT32 AT_FormatAtiCmdQryString(
     VOS_UINT32                          ulI;
     VOS_UINT8                           ucCheckData;
 
-    /* 初始化 */
+    /* ?????? */
     usDataLen     = 0;
     ulI           = 0;
     ucCheckData   = 0;
@@ -1322,14 +1322,14 @@ VOS_UINT32 AT_FormatAtiCmdQryString(
 
     TAF_MEM_SET_S(aucTmp, sizeof(aucTmp), 0x00, sizeof(aucTmp));
 
-    /* 读取Model信息 */
+    /* ????Model???? */
     if ( (VOS_NULL_PTR == pstDrvAgentMsidQryCnf)
       || (DRV_AGENT_MSID_QRY_NO_ERROR != pstDrvAgentMsidQryCnf->ulResult))
     {
         return AT_ERROR;
     }
 
-    /* 读取Manufacturer信息 */
+    /* ????Manufacturer???? */
     usDataLen = TAF_MAX_MFR_ID_LEN + 1;
     if (NV_OK != NV_ReadEx(MODEM_ID_0, en_NV_Item_FMRID, aucTmp, usDataLen))
     {
@@ -1341,7 +1341,7 @@ VOS_UINT32 AT_FormatAtiCmdQryString(
         TAF_MEM_CPY_S(stMeInfo.FmrId.aucMfrId, sizeof(stMeInfo.FmrId.aucMfrId), aucTmp, usDataLen);
     }
 
-    /* 读取IMEI信息 */
+    /* ????IMEI???? */
     for (ulI = 0; ulI < TAF_PH_IMEI_LEN; ulI++)
     {
         stMeInfo.ImeisV.aucImei[ulI] = pstDrvAgentMsidQryCnf->aucImei[ulI] + 0x30;
@@ -1358,7 +1358,7 @@ VOS_UINT32 AT_FormatAtiCmdQryString(
     stMeInfo.ImeisV.aucImei[TAF_PH_IMEI_LEN - 2] = ucCheckData + 0x30;
     stMeInfo.ImeisV.aucImei[TAF_PH_IMEI_LEN - 1] = 0;
 
-    /* 输出ATI命令返回结果 */
+    /* ????ATI???????????? */
     usDataLen = 0;
     usDataLen += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,(TAF_CHAR *)pgucAtSndCodeAddr,(TAF_CHAR *)pgucAtSndCodeAddr + usDataLen,"%s: %s\r\n","Manufacturer",stMeInfo.FmrId.aucMfrId);
     usDataLen += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,(TAF_CHAR *)pgucAtSndCodeAddr,(TAF_CHAR *)pgucAtSndCodeAddr + usDataLen,"%s: %s\r\n","Model",  pstDrvAgentMsidQryCnf->acModelId);
@@ -1386,26 +1386,26 @@ VOS_UINT32 AT_RcvDrvAgentMsidQryCnf(VOS_VOID *pMsg)
     enModemId = MODEM_ID_0;
     /* Modified by l60609 for DSDA Phase III, 2013-3-4, End */
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg               = (DRV_AGENT_MSG_STRU *)pMsg;
     pstDrvAgentMsidQryCnf = (DRV_AGENT_MSID_QRY_CNF_STRU *)(pRcvMsg->aucContent);
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstDrvAgentMsidQryCnf->stAtAppCtrl.usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentMsidQryCnf:WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentMsidQryCnf : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_MSID_READ == gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_STOP_TIMER_CMD_READY(ucIndex);
@@ -1470,37 +1470,37 @@ VOS_UINT32 AT_RcvDrvAgentGasMntnCmdRsp(VOS_VOID *pMsg)
     VOS_UINT32                          i;
     VOS_UINT16                          usLength;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg                  = (DRV_AGENT_MSG_STRU *)pMsg;
     pstDrvAgentGasMntnCmdCnf = (DRV_AGENT_GAS_MNTN_CMD_CNF_STRU *)(pRcvMsg->aucContent);
     ulResult                 = AT_OK;
     usLength                 = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstDrvAgentGasMntnCmdCnf->stAtAppCtrl.usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentGasMntnCmdRsp:WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentGasMntnCmdRsp : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CGAS_QUERY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^CGAS命令返回 */
+    /* ??????AT^CGAS???????? */
     gstAtSendData.usBufLen = 0;
 
     if (VOS_OK != pstDrvAgentGasMntnCmdCnf->ulResult)
@@ -1511,7 +1511,7 @@ VOS_UINT32 AT_RcvDrvAgentGasMntnCmdRsp(VOS_VOID *pMsg)
     {
         ulResult = AT_OK;
 
-        /* 邻区状态 */
+        /* ???????? */
         if (GAS_AT_CMD_NCELL == pstDrvAgentGasMntnCmdCnf->ucCmd)
         {
             if ( (pstDrvAgentGasMntnCmdCnf->stAtCmdRslt.ulRsltNum > 0)
@@ -1535,7 +1535,7 @@ VOS_UINT32 AT_RcvDrvAgentGasMntnCmdRsp(VOS_VOID *pMsg)
         }
         else if (GAS_AT_CMD_SCELL == pstDrvAgentGasMntnCmdCnf->ucCmd)
         {
-            /* 服务小区状态 */
+            /* ???????????? */
             if (3 != pstDrvAgentGasMntnCmdCnf->stAtCmdRslt.ulRsltNum)
             {
                 ulResult = AT_ERROR;
@@ -1563,7 +1563,7 @@ VOS_UINT32 AT_RcvDrvAgentGasMntnCmdRsp(VOS_VOID *pMsg)
         }
         else if (pstDrvAgentGasMntnCmdCnf->stAtCmdRslt.ulRsltNum > 0)
         {
-            /* 其它命令 */
+            /* ???????? */
             usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                                (TAF_CHAR *)pgucAtSndCodeAddr,
                                                (TAF_CHAR *)pgucAtSndCodeAddr+usLength,
@@ -1586,7 +1586,7 @@ VOS_UINT32 AT_RcvDrvAgentGasMntnCmdRsp(VOS_VOID *pMsg)
         }
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -1601,24 +1601,24 @@ VOS_UINT32 AT_RcvDrvAgentHardwareQryRsp(VOS_VOID *pMsg)
     DRV_AGENT_MSG_STRU                         *pRcvMsg;
     DRV_AGENT_HARDWARE_QRY_CNF_STRU            *pHardWareCnf;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg      = (DRV_AGENT_MSG_STRU*)pMsg;
     pHardWareCnf = (DRV_AGENT_HARDWARE_QRY_CNF_STRU *)pRcvMsg->aucContent;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pHardWareCnf->stAtAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentHardwareQryRsp: AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentHardwareQryRsp : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
     if (AT_CMD_DRV_AGENT_HARDWARE_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
@@ -1665,36 +1665,36 @@ VOS_UINT32 AT_RcvDrvAgentVertimeQryRsp(VOS_VOID *pMsg)
     VOS_UINT32                          ulResult;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg                     = (DRV_AGENT_MSG_STRU *)pMsg;
     pstDrvAgentVersionTime      = (DRV_AGENT_VERSION_TIME_STRU *)(pRcvMsg->aucContent);
     ulResult                    = AT_OK;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstDrvAgentVersionTime->stAtAppCtrl.usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentVertimeQryRsp:WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentVertimeQryRsp : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_VERSIONTIME_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^VERTIME命令返回 */
+    /* ??????AT^VERTIME???????? */
     gstAtSendData.usBufLen = (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                                     (TAF_CHAR *)pgucAtSndCodeAddr,
                                                     (TAF_CHAR*)pgucAtSndCodeAddr,
@@ -1702,7 +1702,7 @@ VOS_UINT32 AT_RcvDrvAgentVertimeQryRsp(VOS_VOID *pMsg)
                                                     g_stParseContext[ucIndex].pstCmdElement->pszCmdName,
                                                     pstDrvAgentVersionTime->aucData);
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -1717,37 +1717,37 @@ VOS_UINT32 AT_RcvDrvAgentYjcxSetCnf(VOS_VOID *pMsg)
     VOS_UINT8                               ucIndex;
     VOS_UINT16                              usDataLen;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg         = (DRV_AGENT_MSG_STRU *)pMsg;
     pstYjcxSetCnf   = (DRV_AGENT_YJCX_SET_CNF_STRU *)(pRcvMsg->aucContent);
     ulResult        = AT_OK;
     usDataLen       = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstYjcxSetCnf->stAtAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentYjcxSetCnf:WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentYjcxSetCnf : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_YJCX_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^YJCX设置命令返回 */
+    /* ??????AT^YJCX???????????? */
     gstAtSendData.usBufLen = 0;
     if (VOS_OK != pstYjcxSetCnf->ulResult)
     {
@@ -1770,7 +1770,7 @@ VOS_UINT32 AT_RcvDrvAgentYjcxSetCnf(VOS_VOID *pMsg)
         gstAtSendData.usBufLen = usDataLen;
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -1785,37 +1785,37 @@ VOS_UINT32 AT_RcvDrvAgentYjcxQryCnf(VOS_VOID *pMsg)
     VOS_UINT8                               ucIndex;
     VOS_UINT16                              usDataLen;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg         = (DRV_AGENT_MSG_STRU *)pMsg;
     pstYjcxQryCnf   = (DRV_AGENT_YJCX_QRY_CNF_STRU *)(pRcvMsg->aucContent);
     ulResult        = AT_OK;
     usDataLen       = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstYjcxQryCnf->stAtAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentYjcxQryCnf:WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentYjcxQryCnf : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_YJCX_QUERY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^YJCX查询命令返回 */
+    /* ??????AT^YJCX???????????? */
     gstAtSendData.usBufLen = 0;
     if (VOS_OK != pstYjcxQryCnf->ulResult)
     {
@@ -1839,7 +1839,7 @@ VOS_UINT32 AT_RcvDrvAgentYjcxQryCnf(VOS_VOID *pMsg)
         gstAtSendData.usBufLen = usDataLen;
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -1875,7 +1875,7 @@ VOS_VOID At_QryEonsUcs2RspProc(
                                               "%s:",
                                               g_stParseContext[ucIndex].pstCmdElement->pszCmdName);
 
-            /* 打印home NodeB Name, ucs2编码，最大长度48字节 */
+            /* ????home NodeB Name, ucs2??????????????48???? */
             ucHomeNodeBLen = AT_MIN(pstHnbName->ucHomeNodeBNameLen, TAF_MMA_MAX_HOME_NODEB_NAME_LEN);
 
             for (ulLoop = 0; ulLoop < ucHomeNodeBLen; ulLoop++)
@@ -1895,7 +1895,7 @@ VOS_VOID At_QryEonsUcs2RspProc(
     }
 
 
-    /* 变量初始化 */
+    /* ?????????? */
     pstPlmnName = (TAF_MMA_EONS_UCS2_PLMN_NAME_STRU *)stEonsUcs2PlmnName;
 
     if (VOS_NULL_PTR == pstPlmnName)
@@ -1903,7 +1903,7 @@ VOS_VOID At_QryEonsUcs2RspProc(
         return;
     }
 
-    /* 转换LongName及ShortName */
+    /* ????LongName??ShortName */
     if ( pstPlmnName->ucLongNameLen <= TAF_PH_OPER_NAME_LONG
       && pstPlmnName->ucShortNameLen <= TAF_PH_OPER_NAME_SHORT )
     {
@@ -1954,7 +1954,7 @@ VOS_UINT32 AT_RcvMmaEonsUcs2Cnf(VOS_VOID *pMsg)
     VOS_UINT32                          ulResult;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pstEonsUcs2QryCnfMsg    = (TAF_MMA_EONS_UCS2_CNF_STRU *)pMsg;
     ulResult                = AT_OK;
 
@@ -1964,7 +1964,7 @@ VOS_UINT32 AT_RcvMmaEonsUcs2Cnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstEonsUcs2QryCnfMsg->usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaCrpnQueryRsp:WARNING:AT INDEX NOT FOUND!");
@@ -1977,16 +1977,16 @@ VOS_UINT32 AT_RcvMmaEonsUcs2Cnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_EONSUCS2_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^EONSUCS2查询命令返回 */
+    /* ??????AT^EONSUCS2???????????? */
     if (TAF_ERR_NO_ERROR != pstEonsUcs2QryCnfMsg->enRslt)
     {
         ulResult = At_ChgTafErrorCode(ucIndex, (VOS_UINT16)pstEonsUcs2QryCnfMsg->enErrorCause);
@@ -2012,7 +2012,7 @@ VOS_UINT32 AT_RcvAtMmaUsimStatusInd(VOS_VOID *pMsg)
     MODEM_ID_ENUM_UINT16                enModemId;
     AT_USIM_INFO_CTX_STRU              *pstUsimInfoCtx = VOS_NULL_PTR;
 
-    /* 初始化 */
+    /* ?????? */
     pstAtMmaUsimStatusIndMsg   = (AT_MMA_USIM_STATUS_IND_STRU *)pMsg;
 
     enModemId = AT_GetModemIDFromPid(pstAtMmaUsimStatusIndMsg->ulSenderPid);
@@ -2026,7 +2026,7 @@ VOS_UINT32 AT_RcvAtMmaUsimStatusInd(VOS_VOID *pMsg)
 
     pstUsimInfoCtx = AT_GetUsimInfoCtxFromModemId(enModemId);
 
-    /* 刷新卡状态全局变量 */
+    /* ?????????????????? */
     pstUsimInfoCtx->enCardType       = pstAtMmaUsimStatusIndMsg->enCardType;
     pstUsimInfoCtx->enCardMediumType = pstAtMmaUsimStatusIndMsg->enCardMediumType;
     pstUsimInfoCtx->enCardStatus     = pstAtMmaUsimStatusIndMsg->enCardStatus;
@@ -2050,36 +2050,36 @@ VOS_UINT32 At_RcvAtCcMsgStateQryCnfProc(VOS_VOID *pMsg)
     VOS_UINT32                              i;
     VOS_UINT16                              usLength;
 
-    /* 初始化 */
+    /* ?????? */
     pstAtCcStateQryCnfMsg = (AT_CC_STATE_QRY_CNF_MSG_STRU *)pMsg;
     ulResult              = AT_OK;
     usLength              = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstAtCcStateQryCnfMsg->stAtAppCtrl.usClientId,&ucIndex))
     {
         AT_WARN_LOG("At_RcvAtCcMsgStateQryCnfProc:WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("At_RcvAtCcMsgStateQryCnfProc : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
-    /* 当前未等待该命令回复 */
+    /* ???????????????????? */
     if (AT_CMD_CC_STATE_QUERY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^CCC查询命令返回 */
+    /* ??????AT^CCC???????????? */
     gstAtSendData.usBufLen = 0;
     if (0 == pstAtCcStateQryCnfMsg->ucCallNum)
     {
@@ -2099,7 +2099,7 @@ VOS_UINT32 At_RcvAtCcMsgStateQryCnfProc(VOS_VOID *pMsg)
         }
     }
 
-    /* 输出结果 */
+    /* ???????? */
     gstAtSendData.usBufLen = usLength;
     At_FormatResultData(ucIndex, ulResult);
 
@@ -2115,30 +2115,30 @@ VOS_UINT32 AT_RcvMmaCmmSetCmdRsp(VOS_VOID *pMsg)
     VOS_UINT32                          i;
     VOS_UINT16                          usLength;
 
-    /* 初始化 */
+    /* ?????? */
     pstMnMmTestCmdRspMsg = (TAF_MMA_CMM_SET_CNF_STRU *)pMsg;
     ulResult              = AT_OK;
     usLength              = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstMnMmTestCmdRspMsg->stCtrl.usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaCmmSetCmdRsp:WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaCmmSetCmdRsp : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^CMM查询命令返回 */
+    /* ??????AT^CMM???????????? */
     gstAtSendData.usBufLen = 0;
     if (VOS_OK != pstMnMmTestCmdRspMsg->ulResult)
     {
@@ -2168,7 +2168,7 @@ VOS_UINT32 AT_RcvMmaCmmSetCmdRsp(VOS_VOID *pMsg)
         }
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -2182,24 +2182,24 @@ VOS_UINT32 AT_RcvDrvAgentFullHardwareQryRsp(VOS_VOID *pMsg)
     DRV_AGENT_MSG_STRU                              *pRcvMsg;
     DRV_AGENT_FULL_HARDWARE_QRY_CNF_STRU            *pstEvent;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg  = (DRV_AGENT_MSG_STRU*)pMsg;
     pstEvent = (DRV_AGENT_FULL_HARDWARE_QRY_CNF_STRU *)pRcvMsg->aucContent;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstEvent->stAtAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentFullHardwareQryRsp: AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentFullHardwareQryRsp : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
     if (AT_CMD_DRV_AGENT_FULL_HARDWARE_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
@@ -2260,7 +2260,7 @@ VOS_UINT32 At_SendRfCfgAntSelToHPA(
     VOS_UINT32                           ulLength;
     VOS_UINT16                           usMask;
 
-    /* 申请AT_HPA_RF_CFG_REQ_STRU消息 */
+    /* ????AT_HPA_RF_CFG_REQ_STRU???? */
     ulLength = sizeof(AT_HPA_RF_CFG_REQ_STRU) - VOS_MSG_HEAD_LENGTH;
     pstMsg   = (AT_HPA_RF_CFG_REQ_STRU *)PS_ALLOC_MSG(WUEPS_PID_AT, ulLength);
 
@@ -2273,7 +2273,7 @@ VOS_UINT32 At_SendRfCfgAntSelToHPA(
     TAF_MEM_SET_S(pstMsg, sizeof(AT_HPA_RF_CFG_REQ_STRU), 0x00, sizeof(AT_HPA_RF_CFG_REQ_STRU));
 
 
-    /* 填写消息头 */
+    /* ?????????? */
     pstMsg->ulSenderCpuId      = VOS_LOCAL_CPUID;
     pstMsg->ulSenderPid        = WUEPS_PID_AT;
     pstMsg->ulReceiverCpuId    = VOS_LOCAL_CPUID;
@@ -2281,12 +2281,12 @@ VOS_UINT32 At_SendRfCfgAntSelToHPA(
     pstMsg->ulLength           = ulLength;
 
 
-    /* 填写消息体 */
+    /* ?????????? */
     pstMsg->usMsgID            = ID_AT_HPA_RF_CFG_REQ;
     usMask                     = W_RF_MASK_RX_ARFCN | W_RF_MASK_RX_ANTSEL \
                                  | W_RF_MASK_RX_RXONOFF;
 
-    /* 按位标识配置类型 */
+    /* ???????????????? */
     pstMsg->stRfCfgPara.usMask = usMask;
 
     if (AT_RX_DIV_ON == ucDivOrPriOn)
@@ -2320,24 +2320,24 @@ VOS_UINT32 AT_RcvDrvAgentSetSimlockCnf(VOS_VOID *pMsg)
     VOS_UINT32                                       ulRet;
     VOS_UINT8                                        ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg  = (DRV_AGENT_MSG_STRU*)pMsg;
     pstEvent = (DRV_AGENT_SET_SIMLOCK_CNF_STRU *)pRcvMsg->aucContent;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstEvent->stAtAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentSetSimlockCnf: AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentSetSimlockCnf : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
     if (AT_CMD_DRV_AGENT_SIMLOCK_SET_REQ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
@@ -2376,24 +2376,24 @@ VOS_UINT32 AT_RcvDrvAgentQryRxdivCnf(VOS_VOID *pMsg)
     VOS_UINT32                                       ulDrvDivBandsHigh;
     VOS_UINT16                                       usLen;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg  = (DRV_AGENT_MSG_STRU*)pMsg;
     pstEvent = (DRV_AGENT_QRY_RXDIV_CNF_STRU *)pRcvMsg->aucContent;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstEvent->stAtAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentQryRxdivCnf: AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentQryRxdivCnf : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
     if (AT_CMD_DRV_AGENT_RXDIV_QRY_REQ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
@@ -2491,25 +2491,25 @@ VOS_UINT32 AT_RcvDrvAgentSetRxdivCnf(VOS_VOID *pMsg)
     DRV_AGENT_MSG_STRU                              *pRcvMsg;
     DRV_AGENT_AT_RXDIV_CNF_STRU                     *pstEvent;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg  = (DRV_AGENT_MSG_STRU*)pMsg;
     pstEvent = (DRV_AGENT_AT_RXDIV_CNF_STRU *)pRcvMsg->aucContent;
 
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstEvent->stAtAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentSetRxdivCnf: AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentSetRxdivCnf : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
     if (AT_CMD_DRV_AGENT_RXDIV_SET_REQ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
@@ -2562,12 +2562,12 @@ VOS_UINT32 AT_RcvDrvAgentSetRxdivCnf(VOS_VOID *pMsg)
             return VOS_ERR;
         }
 
-        /* 设置当前操作类型 */
+        /* ???????????????? */
         gastAtClientTab[ucIndex].CmdCurrentOpt = AT_CMD_SET_RXDIV;
         g_stAtDevCmdCtrl.ucIndex               = ucIndex;
         g_stAtDevCmdCtrl.usOrigBand            = pstEvent->usSetDivBands;
 
-        /* 返回命令处理挂起状态 */
+        /* ???????????????????? */
         return AT_WAIT_ASYNC_RETURN;
     }
     else
@@ -2591,24 +2591,24 @@ VOS_UINT32 AT_RcvDrvAgentSetNvRestoreCnf(VOS_VOID *pMsg)
     DRV_AGENT_MSG_STRU                              *pRcvMsg;
     DRV_AGENT_NVRESTORE_RST_STRU                *pstEvent;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg                 = (DRV_AGENT_MSG_STRU*)pMsg;
     pstEvent                = (DRV_AGENT_NVRESTORE_RST_STRU *)pRcvMsg->aucContent;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstEvent->stAtAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentSetNvRestoreCnf: AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentSetNvRestoreCnf : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
     if (AT_CMD_NVRESTORE_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
@@ -2639,24 +2639,24 @@ VOS_UINT32 AT_RcvDrvAgentQryNvRestoreRstCnf(VOS_VOID *pMsg)
     DRV_AGENT_MSG_STRU                              *pRcvMsg;
     DRV_AGENT_NVRESTORE_RST_STRU                    *pstEvent;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg                 = (DRV_AGENT_MSG_STRU*)pMsg;
     pstEvent                = (DRV_AGENT_NVRESTORE_RST_STRU *)pRcvMsg->aucContent;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstEvent->stAtAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentQryNvRestoreRstCnf: AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentQryNvRestoreRstCnf : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
     if (AT_CMD_NVRSTSTTS_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
@@ -2701,24 +2701,24 @@ VOS_UINT32 AT_RcvDrvAgentNvRestoreManuDefaultRsp(VOS_VOID *pMsg)
     DRV_AGENT_MSG_STRU                              *pRcvMsg;
     DRV_AGENT_NVRESTORE_RST_STRU                    *pstEvent;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg                 = (DRV_AGENT_MSG_STRU*)pMsg;
     pstEvent                = (DRV_AGENT_NVRESTORE_RST_STRU *)pRcvMsg->aucContent;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstEvent->stAtAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentNvRestoreManuDefaultRsp: AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentNvRestoreManuDefaultRsp : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
     if (AT_CMD_F_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
@@ -2736,7 +2736,7 @@ VOS_UINT32 AT_RcvDrvAgentNvRestoreManuDefaultRsp(VOS_VOID *pMsg)
     {
         g_bSetFlg = VOS_TRUE;
 
-        /* E5通知APP恢复用户设置  */
+        /* E5????APP????????????  */
         AT_PhSendRestoreFactParm();
 
         ulRst = AT_OK;
@@ -2782,7 +2782,7 @@ VOS_UINT32  AT_GetImeiValue(
         return VOS_ERR;
     }
 
-    /* NV 4008读取值为0x5a5a表示生效，其他值表示不生效 */
+    /* NV 4008????????0x5a5a?????????????????????????? */
     if ((MODEM_ID_2 == enModemId)
      && (0x5A5A == stScPersCtrl.usImei0ReplaseImei2))
     {
@@ -2836,20 +2836,20 @@ VOS_UINT32 AT_RcvDrvAgentSetGpioplRsp(VOS_VOID *pMsg)
     pRcvMsg               = (DRV_AGENT_MSG_STRU *)pMsg;
     pstDrvAgentGpioSetCnf = (DRV_AGENT_GPIOPL_SET_CNF_STRU *)pRcvMsg->aucContent;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstDrvAgentGpioSetCnf->stAtAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentGpioplRsp:WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentGpioplRsp : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
     if (AT_CMD_GPIOPL_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
@@ -2867,7 +2867,7 @@ VOS_UINT32 AT_RcvDrvAgentSetGpioplRsp(VOS_VOID *pMsg)
         ulResult = AT_OK;
     }
 
-    /* 调用AT_FormATResultDATa发送命令结果 */
+    /* ????AT_FormATResultDATa???????????? */
     gstAtSendData.usBufLen = 0;
     At_FormatResultData(ucIndex, ulResult);
     return VOS_OK;
@@ -2885,37 +2885,37 @@ VOS_UINT32 AT_RcvDrvAgentQryGpioplRsp(VOS_VOID *pMsg)
     VOS_UINT8                             ucIndex;
     VOS_UINT32                            ulResult;
 
-    /* 初始化消息，获取ucContent */
+    /* ????????????????ucContent */
     pRcvMsg               = (DRV_AGENT_MSG_STRU *)pMsg;
     pstGpioQryCnf         = (DRV_AGENT_GPIOPL_QRY_CNF_STRU *)pRcvMsg->aucContent;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstGpioQryCnf->stAtAppCtrl.usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentQryGpioplRsp:WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentQryGpioplRsp : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
-    /* 判断当前操作类型是否为AT_CMD_GPIOPL_QRY */
+    /* ??????????????????????AT_CMD_GPIOPL_QRY */
     if (AT_CMD_GPIOPL_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /*复位AT状态*/
+    /*????AT????*/
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     if (VOS_TRUE != pstGpioQryCnf->bFail)
     {
-        /* 打印结果 */
+        /* ???????? */
         usLength = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                          (VOS_CHAR *)pgucAtSndCodeAddr,
                                          (VOS_CHAR *)pgucAtSndCodeAddr,
@@ -2934,7 +2934,7 @@ VOS_UINT32 AT_RcvDrvAgentQryGpioplRsp(VOS_VOID *pMsg)
     }
     else
     {
-        /* 调用AT_FormATResultDATa发送命令结果 */
+        /* ????AT_FormATResultDATa???????????? */
         gstAtSendData.usBufLen = 0;
         ulResult               = AT_ERROR;
     }
@@ -2951,37 +2951,37 @@ VOS_UINT32 AT_RcvDrvAgentSetDatalockRsp(VOS_VOID *pMsg)
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulResult;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg                   = (DRV_AGENT_MSG_STRU *)pMsg;
     pstDatalockSetCnf         = (DRV_AGENT_DATALOCK_SET_CNF_STRU *)pRcvMsg->aucContent;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstDatalockSetCnf->stAtAppCtrl.usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentSetDatalockRsp:WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentSetDatalockRsp : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
-    /* 判断当前操作类型是否为AT_CMD_DATALOCK_SET */
+    /* ??????????????????????AT_CMD_DATALOCK_SET */
     if (AT_CMD_DATALOCK_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     if (VOS_TRUE != pstDatalockSetCnf->bFail)
     {
-        /* 设置dATalock已解锁 */
+        /* ????dATalock?????? */
         g_bAtDataLocked    =  VOS_FALSE;
         ulResult           =  AT_OK;
     }
@@ -2990,7 +2990,7 @@ VOS_UINT32 AT_RcvDrvAgentSetDatalockRsp(VOS_VOID *pMsg)
         ulResult           =  AT_ERROR;
     }
 
-    /* 调用AT_FormAtResultData发送命令结果  */
+    /* ????AT_FormAtResultData????????????  */
     gstAtSendData.usBufLen = 0;
     At_FormatResultData(ucIndex, ulResult);
     return VOS_OK;
@@ -3001,7 +3001,7 @@ VOS_UINT32 AT_RcvDrvAgentSetDatalockRsp(VOS_VOID *pMsg)
 VOS_UINT32 AT_GetSimLockStatus(VOS_UINT8 ucIndex)
 {
 
-    /* 发消息到C核获取SIMLOCK 状态信息 */
+    /* ????????C??????SIMLOCK ???????? */
     if(TAF_SUCCESS != Taf_ParaQuery(gastAtClientTab[ucIndex].usClientId, 0,
                                     TAF_PH_SIMLOCK_VALUE_PARA, VOS_NULL_PTR))
     {
@@ -3009,14 +3009,14 @@ VOS_UINT32 AT_GetSimLockStatus(VOS_UINT8 ucIndex)
         return VOS_ERR;
     }
 
-    /* ^SIMLOCK=2查询UE的锁卡状态不在AT命令处理的主流程，需要本地启动保护定时器并更新端口状态 */
+    /* ^SIMLOCK=2????UE??????????????AT?????????????????????????????????????????????????????? */
     if (AT_SUCCESS != At_StartTimer(AT_SET_PARA_TIME, ucIndex))
     {
         At_FormatResultData(ucIndex, AT_ERROR);
         return VOS_ERR;
     }
 
-    /* 设置AT模块实体的状态为等待异步返回 */
+    /* ????AT???????????????????????????? */
     gastAtClientTab[ucIndex].CmdCurrentOpt   = AT_CMD_SIMLOCKSTATUS_READ;
 
     g_stParseContext[ucIndex].ucClientStatus = AT_FW_CLIENT_STATUS_PEND;
@@ -3033,36 +3033,36 @@ VOS_UINT32 AT_RcvDrvAgentQryTbatvoltRsp(VOS_VOID *pMsg)
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulResult;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg                   = (DRV_AGENT_MSG_STRU *)pMsg;
     pstTbatvoltQryCnf         = (DRV_AGENT_TBATVOLT_QRY_CNF_STRU *)pRcvMsg->aucContent;
 
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstTbatvoltQryCnf->stAtAppCtrl.usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentQryTbatvoltRsp:WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentQryTbatvoltRsp : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
-    /*判断当前操作类型是否为AT_CMD_TBATVOLT_QRY*/
+    /*??????????????????????AT_CMD_TBATVOLT_QRY*/
     if (AT_CMD_TBATVOLT_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 电池电压查询结果判断 */
+    /* ???????????????????? */
     if (VOS_TRUE != pstTbatvoltQryCnf->bFail)
     {
 
@@ -3080,7 +3080,7 @@ VOS_UINT32 AT_RcvDrvAgentQryTbatvoltRsp(VOS_VOID *pMsg)
         ulResult = AT_ERROR;
     }
 
-    /* 调用AT_FormatResultData发送命令结果 */
+    /* ????AT_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
     return VOS_OK;
 }
@@ -3097,31 +3097,31 @@ VOS_VOID At_RcvVcMsgQryModeCnfProc(MN_AT_IND_EVT_STRU *pstData)
     VOS_UINT32                           ulRet;
 
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg         = pstData;
     pstEvent        = (APP_VC_EVENT_INFO_STRU *)pstData->aucContent;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pRcvMsg->clientId, &ucIndex))
     {
         AT_WARN_LOG("At_RcvVcMsgQryModeCnfProc:WARNING:AT INDEX NOT FOUND!");
         return;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("At_RcvVcMsgQryModeCnfProc : AT_BROADCAST_INDEX.");
         return;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
-    /* 格式化VMSET命令返回 */
+    /* ??????VMSET???????? */
     if (AT_CMD_VMSET_READ == gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         usDevMode = pstEvent->enDevMode;
 
-        /* 无效的模式，直接返回ERROR */
+        /* ????????????????????ERROR */
         if (usDevMode >= VC_PHY_DEVICE_MODE_BUTT)
         {
             gstAtSendData.usBufLen = 0;
@@ -3138,14 +3138,14 @@ VOS_VOID At_RcvVcMsgQryModeCnfProc(MN_AT_IND_EVT_STRU *pstData)
             ulRet = AT_OK;
         }
     }
-    /* 格式化CVOICE命令返回 */
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, begin */
+    /* ??????CVOICE???????? */
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, begin */
     else if ( AT_CMD_CVOICE_READ == gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
-        /* 转换为应用于VC语音模式 */
+        /* ????????????VC???????? */
         usVoiceMode     = APP_VC_VcPhyVoiceMode2AppVcVoiceMode(pstEvent->enDevMode);
 
-        /* 无效的模式，直接返回ERROR */
+        /* ????????????????????ERROR */
         if (usVoiceMode >= APP_VC_VOICE_MODE_BUTT)
         {
             gstAtSendData.usBufLen = 0;
@@ -3165,13 +3165,13 @@ VOS_VOID At_RcvVcMsgQryModeCnfProc(MN_AT_IND_EVT_STRU *pstData)
             ulRet = AT_OK;
         }
     }
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, begin */
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, begin */
     else
     {
         return;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
     At_FormatResultData(ucIndex, ulRet);
 
@@ -3186,25 +3186,25 @@ VOS_VOID At_RcvVcMsgSetPortCnfProc(MN_AT_IND_EVT_STRU *pstData)
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulRet;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg         = pstData;
     pstEvent        = (APP_VC_EVENT_INFO_STRU *)pstData->aucContent;
 
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pRcvMsg->clientId, &ucIndex))
     {
         AT_WARN_LOG("At_RcvVcMsgSetPortCnfProc:WARNING:AT INDEX NOT FOUND!");
         return;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("At_RcvVcMsgSetPortCnfProc : AT_BROADCAST_INDEX.");
         return;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
     if (VOS_TRUE == pstEvent->bSuccess)
     {
@@ -3215,7 +3215,7 @@ VOS_VOID At_RcvVcMsgSetPortCnfProc(MN_AT_IND_EVT_STRU *pstData)
         ulRet = AT_ERROR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
     At_FormatResultData(ucIndex, ulRet);
 
@@ -3229,29 +3229,29 @@ VOS_VOID At_RcvVcMsgQryPortCnfProc(MN_AT_IND_EVT_STRU *pstData)
     MN_AT_IND_EVT_STRU                  *pRcvMsg;
     APP_VC_EVENT_INFO_STRU              *pstEvent;
     VOS_UINT8                            ucIndex;
-    APP_VC_VOICE_PORT_ENUM_U8            ucVoicePort;                           /* 语音设备端口号 */
+    APP_VC_VOICE_PORT_ENUM_U8            ucVoicePort;                           /* ?????????????? */
     VOS_UINT32                           ulRet;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg         = pstData;
     pstEvent        = (APP_VC_EVENT_INFO_STRU *)pstData->aucContent;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pRcvMsg->clientId, &ucIndex))
     {
         AT_WARN_LOG("At_RcvVcMsgQryPortCnfProc:WARNING:AT INDEX NOT FOUND!");
         return;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("At_RcvVcMsgQryPortCnfProc : AT_BROADCAST_INDEX.");
         return;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
-    /* 查询的端口号 */
+    /* ???????????? */
     ucVoicePort = pstEvent->enVoicePort;
 
     if (APP_VC_VOICE_PORT_BUTT > ucVoicePort)
@@ -3270,7 +3270,7 @@ VOS_VOID At_RcvVcMsgQryPortCnfProc(MN_AT_IND_EVT_STRU *pstData)
         ulRet = AT_ERROR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
     At_FormatResultData(ucIndex, ulRet);
 
@@ -3321,7 +3321,7 @@ VOS_UINT32 AT_RcvRnicDsflowRsp(MsgBlock *pstMsg)
 
     gstAtSendData.usBufLen = usLength;
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
     At_FormatResultData(ucIndex, AT_OK);
 
@@ -3374,7 +3374,7 @@ VOS_UINT32 AT_RcvRnicDialModeCnf(MsgBlock *pstMsg)
 
     gstAtSendData.usBufLen = usLength;
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
     At_FormatResultData(ucIndex, AT_OK);
 
@@ -3388,11 +3388,11 @@ VOS_VOID At_ZeroReplaceBlankInString( VOS_UINT8 *pData, VOS_UINT32 ulLen)
     TAF_UINT8  *pWrite   = pData;
     TAF_UINT8  *pRead    = pData;
 
-    /* 输入参数检查 */
+    /* ???????????? */
     while ( ulChkLen < ulLen )
     {
-        /* 时间格式 May  5 2011 17:08:00
-           转换成   May 05 2011 17:08:00 */
+        /* ???????? May  5 2011 17:08:00
+           ??????   May 05 2011 17:08:00 */
         if (' ' == *pRead++)
         {
             if (' ' == *pRead)
@@ -3423,7 +3423,7 @@ VOS_UINT32 AT_RcvDrvAgentQryVersionRsp(VOS_VOID *pMsg)
     VOS_BOOL                            bPhyNumIsNull;
 
     VOS_UINT32                          ulOpt;
-    /* Modify by f62575 for V7代码同步, 2012-04-07, Begin   */
+    /* Modify by f62575 for V7????????, 2012-04-07, Begin   */
     VOS_UINT32                          ulRet;
     TAF_NVIM_CS_VER_STRU                stCsver;
     /* Modified by l60609 for DSDA Phase III, 2013-3-4, Begin */
@@ -3439,29 +3439,29 @@ VOS_UINT32 AT_RcvDrvAgentQryVersionRsp(VOS_VOID *pMsg)
     {
         return AT_ERROR;
     }
-    /* Modify by f62575 for V7代码同步, 2012-04-07, End   */
+    /* Modify by f62575 for V7????????, 2012-04-07, End   */
 
-    /* 初始化消息，获取ucContent */
+    /* ????????????????ucContent */
     ulLen                        = 0;
     pRcvMsg                      = (DRV_AGENT_MSG_STRU *)pMsg;
     pstVersionQryCnfInfo         = (DRV_AGENT_VERSION_QRY_CNF_STRU *)pRcvMsg->aucContent;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstVersionQryCnfInfo->stAtAppCtrl.usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentQryVersionRsp:WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentQryVersionRsp : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
-    /* 判断当前操作类型是否为AT_CMD_VERSION_QRY/AT_CMD_RSFR_VERSION_QRY, ^RSFR命令也借用此接口 */
+    /* ??????????????????????AT_CMD_VERSION_QRY/AT_CMD_RSFR_VERSION_QRY, ^RSFR???????????????? */
     if ((AT_CMD_VERSION_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
         && (AT_CMD_RSFR_VERSION_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt))
     {
@@ -3479,10 +3479,10 @@ VOS_UINT32 AT_RcvDrvAgentQryVersionRsp(VOS_VOID *pMsg)
 
     ulOpt = gastAtClientTab[ucIndex].CmdCurrentOpt;
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /*查询出错 */
+    /*???????? */
     if(DRV_AGENT_VERSION_QRY_NO_ERROR != pstVersionQryCnfInfo->enResult)
     {
         gstAtSendData.usBufLen = 0;
@@ -3490,16 +3490,16 @@ VOS_UINT32 AT_RcvDrvAgentQryVersionRsp(VOS_VOID *pMsg)
         return VOS_OK;
     }
 
-    /*版本编译时间格式转换，将时间戳中连续两个空格的后一个空格用0替换 */
+    /*??????????????????????????????????????????????????????????0???? */
     ulLen = VOS_StrLen(pstVersionQryCnfInfo->acVerTime);
     TAF_MEM_CPY_S(acTmpTime, sizeof(acTmpTime), pstVersionQryCnfInfo->acVerTime, ulLen + 1);
     At_ZeroReplaceBlankInString((VOS_UINT8 *)acTmpTime, ulLen);
 
-    /* 字符串预解析 */
+    /* ???????????? */
     usLength = TAF_CDROM_VERSION_LEN;
     At_DelCtlAndBlankCharWithEndPadding(pstVersionQryCnfInfo->stIsoVer.aucIsoInfo, &usLength);
 
-    /* 获取物理号是否为空的标识 */
+    /* ???????????????????????? */
     if (AT_OK != AT_PhyNumIsNull(enModemId, AT_PHYNUM_TYPE_IMEI, &bPhyNumIsNull))
     {
         AT_WARN_LOG("AT_RcvDrvAgentQryVersionRsp(): AT_PhyNumIsNull Error!");
@@ -3511,8 +3511,8 @@ VOS_UINT32 AT_RcvDrvAgentQryVersionRsp(VOS_VOID *pMsg)
 
     usLength = 0;
 
-    /* 内部版本号在单板未写入物理号前，查询需如实显示；写入物理号后，如查询版本号前未
-       输入解锁指令，内部版本号显示为空，如果已经输入解锁指令，内部版本号如实显示 */
+    /* ??????????????????????????????????????????????????????????????????????????????
+       ?????????????????????????????????????????????????????????????????????????? */
     if (VOS_FALSE == g_bAtDataLocked || (VOS_TRUE == bPhyNumIsNull))
     {
         usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN, (VOS_CHAR *)pgucAtSndCodeAddr, (VOS_CHAR *)(pgucAtSndCodeAddr + usLength),
@@ -3551,11 +3551,11 @@ VOS_UINT32 AT_RcvDrvAgentQryVersionRsp(VOS_VOID *pMsg)
                                            "%s:INTU:%s%s",
                                            "^VERSION",pstVersionQryCnfInfo->stInterModelId.aucModelId, gaucAtCrLf);
 
-        /* Modify by f62575 for V7代码同步, 2012-04-07, Begin   */
+        /* Modify by f62575 for V7????????, 2012-04-07, Begin   */
         usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN, (VOS_CHAR *)pgucAtSndCodeAddr, (VOS_CHAR *)(pgucAtSndCodeAddr + usLength),
                                            "%s:CFG:%d%s",
                                            "^VERSION",stCsver.usCsver, gaucAtCrLf);
-        /* Modify by f62575 for V7代码同步, 2012-04-07, End   */
+        /* Modify by f62575 for V7????????, 2012-04-07, End   */
 
         usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN, (VOS_CHAR *)pgucAtSndCodeAddr, (VOS_CHAR *)(pgucAtSndCodeAddr + usLength),
                                            "%s:PRL:",
@@ -3601,11 +3601,11 @@ VOS_UINT32 AT_RcvDrvAgentQryVersionRsp(VOS_VOID *pMsg)
                                            "%s:INTU:%s",
                                            "^VERSION", gaucAtCrLf);
 
-        /* Modify by f62575 for V7代码同步, 2012-04-07, Begin   */
+        /* Modify by f62575 for V7????????, 2012-04-07, Begin   */
         usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN, (VOS_CHAR *)pgucAtSndCodeAddr, (VOS_CHAR *)(pgucAtSndCodeAddr + usLength),
                                            "%s:CFG:%d%s",
                                            "^VERSION",stCsver.usCsver, gaucAtCrLf);
-        /* Modify by f62575 for V7代码同步, 2012-04-07, End   */
+        /* Modify by f62575 for V7????????, 2012-04-07, End   */
 
         usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN, (VOS_CHAR *)pgucAtSndCodeAddr, (VOS_CHAR *)(pgucAtSndCodeAddr + usLength),
                                            "%s:PRL:",
@@ -3614,12 +3614,12 @@ VOS_UINT32 AT_RcvDrvAgentQryVersionRsp(VOS_VOID *pMsg)
         gstAtSendData.usBufLen = usLength;
     }
 
-    /* 如果是^RSFR命令发起的查询VERSION信息的请求,则由^RSFR命令去处理 */
+    /* ??????^RSFR??????????????VERSION??????????,????^RSFR?????????? */
     if(AT_CMD_RSFR_VERSION_QRY == ulOpt)
     {
         AT_SetRsfrVersionCnf(ucIndex, pgucAtSndCodeAddr, gstAtSendData.usBufLen);
 
-        /* AT返回的字符串在AT_SetRsfrVersionCnf中处理 */
+        /* AT??????????????AT_SetRsfrVersionCnf?????? */
         return VOS_OK;
     }
 
@@ -3671,35 +3671,35 @@ VOS_UINT32 AT_RcvDrvAgentSetFchanRsp(VOS_VOID *pMsg)
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulError;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg          = (DRV_AGENT_MSG_STRU *)pMsg;
     pstFchanSetCnf   = (DRV_AGENT_FCHAN_SET_CNF_STRU *)pRcvMsg->aucContent;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstFchanSetCnf->stAtAppCtrl.usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentSetFchanRsp:WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentSetFchanRsp : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
-    /* 判断当前操作类型是否为AT_CMD_FCHAN_SET */
+    /* ??????????????????????AT_CMD_FCHAN_SET */
     if (AT_CMD_FCHAN_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 设置有错误的处理 */
+    /* ???????????????? */
     ulError =  AT_SetFchanRspErr(pstFchanSetCnf->enResult);
     if(DRV_AGENT_FCHAN_SET_NO_ERROR != ulError)
     {
@@ -3708,14 +3708,14 @@ VOS_UINT32 AT_RcvDrvAgentSetFchanRsp(VOS_VOID *pMsg)
         return VOS_OK;
     }
 
-    /* 设置无错误的处理 */
+    /* ???????????????? */
     g_stAtDevCmdCtrl.bDspLoadFlag    = VOS_TRUE;
     g_stAtDevCmdCtrl.ucDeviceRatMode = (VOS_UINT8)pstFchanSetCnf->stFchanSetReq.ucDeviceRatMode;
     g_stAtDevCmdCtrl.ucDeviceAtBand  = (VOS_UINT8)pstFchanSetCnf->stFchanSetReq.ucDeviceAtBand;
     g_stAtDevCmdCtrl.stDspBandArfcn  = pstFchanSetCnf->stFchanSetReq.stDspBandArfcn;
-    g_stAtDevCmdCtrl.usFDAC          = 0;                                       /* FDAC清零，防止G/W范围错误 */
+    g_stAtDevCmdCtrl.usFDAC          = 0;                                       /* FDAC??????????G/W???????? */
 
-    /* 调用AT_FormATResultDATa发送命令结果 */
+    /* ????AT_FormATResultDATa???????????? */
     gstAtSendData.usBufLen = 0;
     At_FormatResultData(ucIndex,AT_OK);
     return VOS_OK;
@@ -3745,7 +3745,7 @@ VOS_VOID AT_SupportHsdpa(
     )
 {
 
-    /* 初始化为不支持DPA */
+    /* ??????????????DPA */
     *pbSupportHsdpa = VOS_FALSE;
 
     if (pstUECapa->enAsRelIndicator >= 2)
@@ -3772,7 +3772,7 @@ VOS_VOID AT_SupportHsupa(
 )
 {
 
-    /* 初始化为不支持UPA */
+    /* ??????????????UPA */
     *pbSupportHsupa = VOS_FALSE;
 
     if (pstUECapa->enAsRelIndicator >= 3)
@@ -3812,7 +3812,7 @@ VOS_UINT32 AT_GetWFeatureInfo(
     TAF_MEM_SET_S(&stUECapa, sizeof(stUECapa), 0x00, sizeof(stUECapa));
 
 
-    /* 读取HSPA,HSPA+支持能力 */
+    /* ????HSPA,HSPA+???????? */
     if (NV_OK != NV_ReadEx(MODEM_ID_0, en_NV_Item_WAS_RadioAccess_Capa_New, &stUECapa,
                         sizeof(AT_NVIM_UE_CAPA_STRU)))
     {
@@ -3820,11 +3820,11 @@ VOS_UINT32 AT_GetWFeatureInfo(
         return VOS_ERR;
     }
 
-    /* 获取Wcdma频段信息 */
-    /* !!!如果增加频段，aucStrTmp 长度需要增加!!! */
+    /* ????Wcdma???????? */
+    /* !!!??????????????aucStrTmp ????????????!!! */
     ulLen = (VOS_UINT32)AT_GetWcdmaBandStr(aucStrTmp,&(pstAtAgentSfeatureQryCnf->stBandFeature));
 
-    /* HSPA+是否支持 */
+    /* HSPA+???????? */
     if ((stUECapa.enAsRelIndicator >= 4)
      && (PS_TRUE == stUECapa.enMacEhsSupport)
      && (stUECapa.ucHSDSCHPhyCategory >= 10)
@@ -3835,7 +3835,7 @@ VOS_UINT32 AT_GetWFeatureInfo(
         TAF_MEM_CPY_S(pstFeATure[AT_FEATURE_HSPAPLUS].aucContent, sizeof(pstFeATure[AT_FEATURE_HSPAPLUS].aucContent), aucStrTmp, ulLen);
      }
 
-    /* DPA是否支持 */
+    /* DPA???????? */
     AT_SupportHsdpa(&stUECapa, &bSupportHsdpa);
     if (VOS_TRUE == bSupportHsdpa)
     {
@@ -3843,7 +3843,7 @@ VOS_UINT32 AT_GetWFeatureInfo(
         TAF_MEM_CPY_S(pstFeATure[AT_FEATURE_HSDPA].aucContent, sizeof(pstFeATure[AT_FEATURE_HSDPA].aucContent), aucStrTmp, ulLen);
     }
 
-    /*UPA是否支持*/
+    /*UPA????????*/
     AT_SupportHsupa(&stUECapa, &bSupportHsupa);
     if(VOS_TRUE == bSupportHsupa)
     {
@@ -3852,12 +3852,12 @@ VOS_UINT32 AT_GetWFeatureInfo(
     }
 
 
-    /* 分集信息 */
+    /* ???????? */
     pstFeATure[AT_FEATURE_DIVERSITY].ucFeatureFlag = AT_FEATURE_EXIST;
-    /* UMTS的分集信息输出*/
+    /* UMTS??????????????*/
     TAF_MEM_SET_S(aucStrDiv, sizeof(aucStrDiv), 0x00, sizeof(aucStrDiv));
 
-    /* !!!如果增加频段，aucStrDiv 长度需要增加!!! */
+    /* !!!??????????????aucStrDiv ????????????!!! */
     ulDivLen = (VOS_UINT32)AT_GetWcdmaDivBandStr(aucStrDiv);
 
     TAF_MEM_CPY_S(pstFeATure[AT_FEATURE_DIVERSITY].aucContent, sizeof(pstFeATure[AT_FEATURE_DIVERSITY].aucContent), aucStrDiv, ulDivLen);
@@ -3886,8 +3886,8 @@ VOS_VOID AT_GetGFeatureInfo(
     usEgprsFlag = 0;
 
 
-    /* 获取GSM频段信息 */
-    /* !!!如果增加频段，aucStrDiv 长度需要增加!!! */
+    /* ????GSM???????? */
+    /* !!!??????????????aucStrDiv ????????????!!! */
     ulLen = (VOS_UINT32)AT_GetGsmBandStr(aucStrTmp,&(pstATAgentSfeatureQryCnf->stBandFeature));
 
     if ( 0 == ulLen )
@@ -3896,7 +3896,7 @@ VOS_VOID AT_GetGFeatureInfo(
         return;
     }
 
-    /* 读取EDGE支持能力 */
+    /* ????EDGE???????? */
     if (NV_OK != NV_ReadEx(MODEM_ID_0, en_NV_Item_Egprs_Flag, &usEgprsFlag,
                         sizeof(VOS_UINT16)))
     {
@@ -3945,7 +3945,7 @@ VOS_UINT32 AT_GetTdsFeatureInfo(AT_FEATURE_SUPPORT_ST * pstFeATure)
         return ERR_MSP_FAILURE;
     }
 
-    /* 读取NV成功，支持TDS */
+    /* ????NV??????????TDS */
     pstFeATure[AT_FEATURE_TDSCDMA].ucFeatureFlag = AT_FEATURE_EXIST;
 
     ulLen = 0;
@@ -3977,7 +3977,7 @@ VOS_UINT32 AT_GetTdsFeatureInfo(AT_FEATURE_SUPPORT_ST * pstFeATure)
 
     if(ulLen > 0)
     {
-        /* 屏蔽掉最后一个逗号 */
+        /* ?????????????????? */
         pstFeATure[AT_FEATURE_TDSCDMA].aucContent[ulLen - 1] = '\0';
     }
 
@@ -3987,7 +3987,7 @@ VOS_UINT32 AT_GetTdsFeatureInfo(AT_FEATURE_SUPPORT_ST * pstFeATure)
 
 VOS_UINT32 AT_RcvDrvAgentQrySfeatureRsp(VOS_VOID *pMsg)
 {
-    /* 初始化 */
+    /* ?????? */
     DRV_AGENT_MSG_STRU                 *pRcvMsg;
     DRV_AGENT_SFEATURE_QRY_CNF_STRU    *pstAtAgentSfeatureQryCnf;
     VOS_UINT8                           ucIndex;
@@ -4018,28 +4018,28 @@ VOS_UINT32 AT_RcvDrvAgentQrySfeatureRsp(VOS_VOID *pMsg)
     pRcvMsg                      = (DRV_AGENT_MSG_STRU*)pMsg;
     pstAtAgentSfeatureQryCnf     = (DRV_AGENT_SFEATURE_QRY_CNF_STRU*)pRcvMsg->aucContent;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstAtAgentSfeatureQryCnf->stAtAppCtrl.usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentQrySfeatureRsp:WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentQrySfeatureRsp : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
-    /*判断当前操作类型是否为AT_CMD_SFEATURE_QRY */
+    /*??????????????????????AT_CMD_SFEATURE_QRY */
     if (AT_CMD_SFEATURE_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     pstFeATure = (AT_FEATURE_SUPPORT_ST*)PS_MEM_ALLOC(WUEPS_PID_AT, AT_FEATURE_MAX*sizeof(AT_FEATURE_SUPPORT_ST));
@@ -4061,7 +4061,7 @@ VOS_UINT32 AT_RcvDrvAgentQrySfeatureRsp(VOS_VOID *pMsg)
         return VOS_OK;
     }
 
-/* Modify by f62575 for V7代码同步, 2012-04-07, Begin   */
+/* Modify by f62575 for V7????????, 2012-04-07, Begin   */
     ulReult = AT_GetLteFeatureInfo(pstFeATure);
     if (VOS_OK != ulReult)
     {
@@ -4070,7 +4070,7 @@ VOS_UINT32 AT_RcvDrvAgentQrySfeatureRsp(VOS_VOID *pMsg)
         PS_MEM_FREE(WUEPS_PID_AT, pstFeATure);
         return VOS_OK;
     }
-/* Modify by f62575 for V7代码同步, 2012-04-07, End   */
+/* Modify by f62575 for V7????????, 2012-04-07, End   */
 
     ulReult = AT_GetTdsFeatureInfo(pstFeATure);
     if (VOS_OK != ulReult)
@@ -4083,16 +4083,16 @@ VOS_UINT32 AT_RcvDrvAgentQrySfeatureRsp(VOS_VOID *pMsg)
 
     AT_GetGFeatureInfo(pstFeATure,pstAtAgentSfeatureQryCnf);
 
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, begin */
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, begin */
     if (BSP_MODULE_SUPPORT == mdrv_misc_support_check(BSP_MODULE_TYPE_WIFI) )
     {
         /* WIFI */
         pstFeATure[AT_FEATURE_WIFI].ucFeatureFlag = AT_FEATURE_EXIST;
         VOS_sprintf_s((VOS_CHAR*)pstFeATure[AT_FEATURE_WIFI].aucContent, sizeof(pstFeATure[AT_FEATURE_WIFI].aucContent), "B,G,N");
     }
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, begin */
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, begin */
 
-    /* 计算支持特性的个数 */
+    /* ?????????????????? */
     ucFeATrueNum = 0;
     for (ucIndexTmp = 0; ucIndexTmp < AT_FEATURE_MAX; ucIndexTmp++)
     {
@@ -4104,7 +4104,7 @@ VOS_UINT32 AT_RcvDrvAgentQrySfeatureRsp(VOS_VOID *pMsg)
     }
 
     ulLen = 0;
-    /* 打印输出支持的特性数 */
+    /* ???????????????????? */
     ulLen = (TAF_UINT32)At_sprintf(AT_CMD_MAX_LEN,
                                    (TAF_CHAR *)pgucAtSndCodeAddr,
                                    (TAF_CHAR *)pgucAtSndCodeAddr + ulLen,
@@ -4113,7 +4113,7 @@ VOS_UINT32 AT_RcvDrvAgentQrySfeatureRsp(VOS_VOID *pMsg)
                                    ucFeATrueNum,
                                    gaucAtCrLf);
 
-    /* 分行打印输出支持的特性 */
+    /* ?????????????????????? */
     for (ucIndexTmp = 0; ucIndexTmp < AT_FEATURE_MAX; ucIndexTmp++)
     {
         if (AT_FEATURE_EXIST == pstFeATure[ucIndexTmp].ucFeatureFlag)
@@ -4145,32 +4145,32 @@ VOS_UINT32 AT_RcvDrvAgentQryProdtypeRsp(VOS_VOID * pMsg)
     DRV_AGENT_PRODTYPE_QRY_CNF_STRU    *stProdTypeCnf;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化消息 */
+    /* ?????????? */
     pRcvMsg                  = (DRV_AGENT_MSG_STRU *)pMsg;
     stProdTypeCnf            = (DRV_AGENT_PRODTYPE_QRY_CNF_STRU *)pRcvMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if (AT_FAILURE == At_ClientIdToUserId(stProdTypeCnf->stAtAppCtrl.usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentQryProdtypeRsp:WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentQryProdtypeRsp : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
-    /* 判断当前操作类型是否为AT_CMD_PRODTYPE_QRY */
+    /* ??????????????????????AT_CMD_PRODTYPE_QRY */
     if (AT_CMD_PRODTYPE_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
     gstAtSendData.usBufLen = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                                     (VOS_CHAR *)pgucAtSndCodeAddr,
@@ -4179,12 +4179,12 @@ VOS_UINT32 AT_RcvDrvAgentQryProdtypeRsp(VOS_VOID * pMsg)
                                                     g_stParseContext[ucIndex].pstCmdElement->pszCmdName,
                                                     stProdTypeCnf->ulProdType);
 
-    /* 调用AT_FormATResultDATa发送命令结果 */
+    /* ????AT_FormATResultDATa???????????? */
     At_FormatResultData(ucIndex, AT_OK);
     return VOS_OK;
 }
 
-/* Added by L60609 for AT Project，2011-10-04,  Begin*/
+/* Added by L60609 for AT Project??2011-10-04,  Begin*/
 
 VOS_VOID At_ProcMsgFromDrvAgent(DRV_AGENT_MSG_STRU *pMsg)
 {
@@ -4193,13 +4193,13 @@ VOS_VOID At_ProcMsgFromDrvAgent(DRV_AGENT_MSG_STRU *pMsg)
     VOS_UINT32                          ulMsgId;
     VOS_UINT32                          ulRst;
 
-    /*从g_astDrvAgentMsgProcTab中获取消息个数*/
+    /*??g_astDrvAgentMsgProcTab??????????????*/
     ulMsgCnt = sizeof(g_astAtProcMsgFromDrvAgentTab)/sizeof(AT_PROC_MSG_FROM_DRV_AGENT_STRU);
 
-    /*从消息包中获取MSG ID*/
+    /*??????????????MSG ID*/
     ulMsgId  = ((DRV_AGENT_MSG_STRU *)pMsg)->ulMsgId;
 
-    /*g_astDrvAgentMsgProcTab查表，进行消息分发*/
+    /*g_astDrvAgentMsgProcTab??????????????????*/
     for (i = 0; i < ulMsgCnt; i++)
     {
         if (g_astAtProcMsgFromDrvAgentTab[i].ulMsgType == ulMsgId)
@@ -4215,7 +4215,7 @@ VOS_VOID At_ProcMsgFromDrvAgent(DRV_AGENT_MSG_STRU *pMsg)
         }
     }
 
-    /*没有找到匹配的消息*/
+    /*??????????????????*/
     if (ulMsgCnt == i)
     {
         AT_ERR_LOG("At_ProcMsgFromDrvAgent: Msg Id is invalid!");
@@ -4240,10 +4240,10 @@ TAF_UINT32 At_PB_Unicode2UnicodePrint(TAF_UINT32 MaxLength,TAF_INT8 *headaddr,TA
         return 0;
     }
 
-    /* 扫完整个字串 */
+    /* ???????????? */
     while( usChkLen < usSrcLen )
     {
-        /* 第一个字节 */
+        /* ?????????? */
         ucHigh1 = 0x0F & (*pRead >> 4);
         ucHigh2 = 0x0F & *pRead;
 
@@ -4273,12 +4273,12 @@ TAF_UINT32 At_PB_Unicode2UnicodePrint(TAF_UINT32 MaxLength,TAF_INT8 *headaddr,TA
 
         }
 
-        /* 下一个字符 */
+        /* ?????????? */
         usChkLen++;
         pRead++;
 
 
-        usLen += 2;    /* 记录长度 */
+        usLen += 2;    /* ???????? */
     }
 
     return usLen;
@@ -4301,7 +4301,7 @@ TAF_UINT16 At_PbGsmFormatPrint(TAF_UINT16 usMaxLength,
 
     for (i = 0; i < usSrcLen; i++)
     {
-        /* 将最高bit清零 */
+        /* ??????bit???? */
         pucDst[i] = pucSrc[i] & AT_PB_GSM7_CODE_MAX_VALUE;
     }
 
@@ -4323,7 +4323,7 @@ TAF_UINT32 At_PbOneUnicodeToIra(TAF_UINT16 usUnicodeChar, TAF_UINT8 *pucDst)
         }
     }
 
-    /* 未找到UCS2对应的IRA编码 */
+    /* ??????UCS2??????IRA???? */
     AT_LOG1("At_PbOneUnicodeToIra error: no found [%x]",usUnicodeChar);
 
     return AT_FAILURE;
@@ -4340,10 +4340,10 @@ TAF_UINT16 At_PbUnicodeToIraFormatPrint(TAF_UINT16 usMaxLength,
     TAF_UINT8       *pucData = pucSrc;
     TAF_UINT16      usUnicodeChar;
 
-    /* IRA码流的长度是UCS2码流长度的一半 */
+    /* IRA????????????UCS2?????????????? */
     usRetLen = usSrcLen >> 1;
 
-    /* 检查存储空间是否足够 */
+    /* ???????????????????? */
     if (usRetLen > usMaxLength)
     {
        AT_ERR_LOG("At_PbUnicodeToIraFormatPrint error: too long");
@@ -4351,10 +4351,10 @@ TAF_UINT16 At_PbUnicodeToIraFormatPrint(TAF_UINT16 usMaxLength,
        return 0;
     }
 
-    /* 逐个将UCS2字符通过查表转换为IRA编码 */
+    /* ??????UCS2??????????????????IRA???? */
     for (usIndex = 0; usIndex < usRetLen; usIndex++)
     {
-        /* 先将UINT8数据转为UINT16 */
+        /* ????UINT8????????UINT16 */
         usUnicodeChar = (*pucData << 8) | (*(pucData + 1));
         pucData += 2;
 
@@ -4385,23 +4385,23 @@ TAF_VOID At_PbUnicode82FormatPrint(TAF_UINT8  *puc82Code,
     TAF_UINT16      *pusUnicode = (TAF_UINT16 *)pucDst;
     TAF_UINT8       *pucSrc;
 
-    /* 取得82编码的长度 */
+    /* ????82?????????? */
     usSrcLen = puc82Code[0];
 
-    /* 取得82编码的Basecode */
+    /* ????82??????Basecode */
     usBaseCode = (puc82Code[1] << 8) | puc82Code[2];
 
-    if((SI_PB_ALPHATAG_MAX_LEN < usSrcLen)||(0xFFFF == usBaseCode)) /*数据长度错误*/
+    if((SI_PB_ALPHATAG_MAX_LEN < usSrcLen)||(0xFFFF == usBaseCode)) /*????????????*/
     {
         *pusDstLen = 0;
 
         return;
     }
 
-    /* 取得82编码的码流, 第四个及以后的Byte表示82压缩后的码流 */
+    /* ????82??????????, ??????????????Byte????82???????????? */
     pucSrc = puc82Code + 3;
 
-    /* 从第四个字节开始是82编码的码流 */
+    /* ??????????????????82?????????? */
     for(usIndex = 0; usIndex < usSrcLen; usIndex++)
     {
         usGsmCodeLen = 0;
@@ -4424,7 +4424,7 @@ TAF_VOID At_PbUnicode82FormatPrint(TAF_UINT8  *puc82Code,
             continue;
         }
 
-        /* 82 编码先将第8bit置零再与基本码相加 */
+        /* 82 ??????????8bit?????????????????? */
         usUnicode = usBaseCode + (pucSrc[usIndex] & AT_PB_GSM7_CODE_MAX_VALUE);
 
         AT_UNICODE2VALUE(usUnicode);
@@ -4452,23 +4452,23 @@ TAF_VOID At_PbUnicode81FormatPrint(TAF_UINT8  *puc81Code,
     TAF_UINT16      *pusUnicode = (TAF_UINT16 *)pucDst;
     TAF_UINT8       *pucSrc;
 
-    if(SI_PB_ALPHATAG_MAX_LEN < puc81Code[0])    /*字符个数不能大于姓名的最大值*/
+    if(SI_PB_ALPHATAG_MAX_LEN < puc81Code[0])    /*????????????????????????????*/
     {
         *pusDstLen = 0;
 
         return;
     }
 
-    /* 取得81编码的长度 */
+    /* ????81?????????? */
     usSrcLen = puc81Code[0];
 
-    /* 取得81编码的基指针 */
+    /* ????81???????????? */
     usBaseCode = puc81Code[1] << 7;
 
-    /* 取得81编码的码流, 第三个及以后的Byte表示81压缩后的码流 */
+    /* ????81??????????, ??????????????Byte????81???????????? */
     pucSrc = puc81Code + 2;
 
-    /* 从第三个字节开始是81编码的码流 */
+    /* ??????????????????81?????????? */
     for (usIndex = 0; usIndex < usSrcLen; usIndex++)
     {
         usGsmCodeLen = 0;
@@ -4491,7 +4491,7 @@ TAF_VOID At_PbUnicode81FormatPrint(TAF_UINT8  *puc81Code,
             continue;
         }
 
-        /* 81编码先将第8bit置零再与基本码相加 */
+        /* 81??????????8bit?????????????????? */
         usUnicode = usBaseCode + (pucSrc[usIndex] & AT_PB_GSM7_CODE_MAX_VALUE);
 
         AT_UNICODE2VALUE(usUnicode);
@@ -4510,13 +4510,13 @@ TAF_VOID At_PbUnicode80FormatPrint(TAF_UINT8  *pucSrc,
                                    TAF_UINT8  *pucDst,
                                    TAF_UINT16 *pusDstLen)
 {
-    if((0xFF == pucSrc[0])&&(0xFF == pucSrc[1]))   /*当首字符为FFFF，认为当前姓名为空*/
+    if((0xFF == pucSrc[0])&&(0xFF == pucSrc[1]))   /*??????????FFFF??????????????????*/
     {
         *pusDstLen = 0;
     }
     else
     {
-        /* 跳过80标志位 */
+        /* ????80?????? */
         TAF_MEM_CPY_S(pucDst, 500, pucSrc, usSrcLen);
 
         *pusDstLen = usSrcLen;
@@ -4530,7 +4530,7 @@ TAF_UINT32 At_PbGsmExtToUnicode(TAF_UINT8 ucGsmExtChar, TAF_UINT16 *pusUnicodeCh
 {
     TAF_UINT16      usIndex;
 
-    /* 查找GSM到UNICODE扩展表，找到则返回成功，否则返回失败 */
+    /* ????GSM??UNICODE???????????????????????????????????? */
     for (usIndex = 0; usIndex < AT_PB_GSM7EXT_MAX_NUM; usIndex++)
     {
         if (ucGsmExtChar == g_astGsm7extToUnicode[usIndex].ucOctet)
@@ -4559,10 +4559,10 @@ TAF_VOID At_PbGsmToUnicode(TAF_UINT8  *pucSrc,
 
     for (usIndex = 0; usIndex < usSrcLen; usIndex++)
     {
-        /* 为兼容有些平台再GSM模式下写入记录时未对最高BIT置零 */
+        /* ????????????????GSM????????????????????????BIT???? */
         pucSrc[usIndex] = pucSrc[usIndex] & AT_PB_GSM7_CODE_MAX_VALUE;
 
-        /* 非0x1B字符，直接查GSM到UNICODE基本表 */
+        /* ??0x1B????????????GSM??UNICODE?????? */
         if (AT_PB_GSM7EXT_SYMBOL != pucSrc[usIndex])
         {
             usUnicodeChar = g_astGsmToUnicode[pucSrc[usIndex]].usUnicode;
@@ -4574,10 +4574,10 @@ TAF_VOID At_PbGsmToUnicode(TAF_UINT8  *pucSrc,
             continue;
         }
 
-        /* 当前GSM编码为0x1b时,可能为扩展标志 */
+        /* ????GSM??????0x1b??,?????????????? */
         if ((usSrcLen - usIndex) < 2)
         {
-            /* 最后一个字节为0x1B，查GSM到UNICODE基本表, 将0x1B译为SPACE */
+            /* ??????????????0x1B????GSM??UNICODE??????, ??0x1B????SPACE */
             usUnicodeChar = g_astGsmToUnicode[pucSrc[usIndex]].usUnicode;
             AT_UNICODE2VALUE(usUnicodeChar);
             *pusUnicode = usUnicodeChar;
@@ -4587,8 +4587,8 @@ TAF_VOID At_PbGsmToUnicode(TAF_UINT8  *pucSrc,
             continue;
         }
 
-        /* 对于0x1B 0x1B的情况，因为我们不支持第三张扩展表，因此直接将0x1B
-            0x1B译为SPACE SPACE */
+        /* ????0x1B 0x1B??????????????????????????????????????????????0x1B
+            0x1B????SPACE SPACE */
         if (AT_PB_GSM7EXT_SYMBOL == pucSrc[usIndex + 1])
         {
             usUnicodeChar = g_astGsmToUnicode[pucSrc[usIndex]].usUnicode;
@@ -4607,7 +4607,7 @@ TAF_VOID At_PbGsmToUnicode(TAF_UINT8  *pucSrc,
             continue;
         }
 
-        /* 0x1B可能为标志，查找GSM到UNICODE扩展表 */
+        /* 0x1B????????????????GSM??UNICODE?????? */
         if (AT_SUCCESS == At_PbGsmExtToUnicode(pucSrc[usIndex + 1], &usUnicodeChar))
         {
             AT_UNICODE2VALUE(usUnicodeChar);
@@ -4619,7 +4619,7 @@ TAF_VOID At_PbGsmToUnicode(TAF_UINT8  *pucSrc,
             continue;
         }
 
-       /* 对于1BXX，未在扩展表中，且XX不为0x1B的情况，译为SPACE+XX对应的字符 */
+       /* ????1BXX??????????????????XX????0x1B????????????SPACE+XX?????????? */
        usUnicodeChar = g_astGsmToUnicode[pucSrc[usIndex]].usUnicode;
        AT_UNICODE2VALUE(usUnicodeChar);
        *pusUnicode = usUnicodeChar;
@@ -4627,7 +4627,7 @@ TAF_VOID At_PbGsmToUnicode(TAF_UINT8  *pucSrc,
        usUnicodeLen++;
     }
 
-    /* GSM7BIT 码流中可能有扩展表中字符，GSM7bit到UNICODE转换长度不一定是原码流长度的2倍 */
+    /* GSM7BIT ??????????????????????????GSM7bit??UNICODE????????????????????????????2?? */
     *pusDstLen = (TAF_UINT16)(usUnicodeLen << 1);
 
     return;
@@ -4687,7 +4687,7 @@ TAF_UINT32 At_Pb_AlaphPrint(TAF_UINT16            *pusDataLen,
 
     if (AT_CSCS_GSM_7Bit_CODE == gucAtCscsType)
     {
-        /* 在GSM字符集下，不支持UCS2编码 */
+        /* ??GSM????????????????UCS2???? */
         if ((SI_PB_ALPHATAG_TYPE_UCS2_80 == pstEvent->PBEvent.PBReadCnf.PBRecord.AlphaTagType)
          || (SI_PB_ALPHATAG_TYPE_UCS2_81 == pstEvent->PBEvent.PBReadCnf.PBRecord.AlphaTagType)
          || (SI_PB_ALPHATAG_TYPE_UCS2_82 == pstEvent->PBEvent.PBReadCnf.PBRecord.AlphaTagType))
@@ -4704,12 +4704,12 @@ TAF_UINT32 At_Pb_AlaphPrint(TAF_UINT16            *pusDataLen,
                                           pstEvent->PBEvent.PBReadCnf.PBRecord.AlphaTag,
                                           pstEvent->PBEvent.PBReadCnf.PBRecord.ucAlphaTagLength);
     }
-    else  /* 当前字符集为UCS2或IRA时 */
+    else  /* ????????????UCS2??IRA?? */
     {
-        /* 当前字符集为UCS2或IRA时，先根据存储格式转换为UCS2编码 */
+        /* ????????????UCS2??IRA????????????????????????UCS2???? */
         At_PbRecordToUnicode(pstEvent, aucDecode, &usDecodeLen);
 
-        /* 当前字符集为IRA时，将UCS2转换为IRA码流输出*/
+        /* ????????????IRA??????UCS2??????IRA????????*/
         if (AT_CSCS_IRA_CODE == gucAtCscsType)
         {
             usReturnLen = At_PbUnicodeToIraFormatPrint((AT_CMD_MAX_LEN - usLength),
@@ -4718,7 +4718,7 @@ TAF_UINT32 At_Pb_AlaphPrint(TAF_UINT16            *pusDataLen,
                                                        usDecodeLen);
         }
 
-        /* 当前字符集为UCS2时，将UCS2转换为打印格式输出*/
+        /* ????????????UCS2??????UCS2??????????????????*/
         if (AT_CSCS_UCS2_CODE == gucAtCscsType)
         {
             usReturnLen = (TAF_UINT16)At_Unicode2UnicodePrint(AT_CMD_MAX_LEN,
@@ -4756,7 +4756,7 @@ TAF_UINT32 At_Pb_CnumAlaphPrint(TAF_UINT16            *pusDataLen,
 
     if (AT_CSCS_GSM_7Bit_CODE == gucAtCscsType)
     {
-        /* 在GSM字符集下，不支持UCS2编码 */
+        /* ??GSM????????????????UCS2???? */
         if ((SI_PB_ALPHATAG_TYPE_UCS2_80 == pstEvent->PBEvent.PBReadCnf.PBRecord.AlphaTagType)
          || (SI_PB_ALPHATAG_TYPE_UCS2_81 == pstEvent->PBEvent.PBReadCnf.PBRecord.AlphaTagType)
          || (SI_PB_ALPHATAG_TYPE_UCS2_82 == pstEvent->PBEvent.PBReadCnf.PBRecord.AlphaTagType))
@@ -4772,12 +4772,12 @@ TAF_UINT32 At_Pb_CnumAlaphPrint(TAF_UINT16            *pusDataLen,
                                           pstEvent->PBEvent.PBReadCnf.PBRecord.AlphaTag,
                                           pstEvent->PBEvent.PBReadCnf.PBRecord.ucAlphaTagLength);
     }
-    else  /* 当前字符集为UCS2或IRA时 */
+    else  /* ????????????UCS2??IRA?? */
     {
-        /* 当前字符集为UCS2或IRA时，先根据存储格式转换为UCS2编码 */
+        /* ????????????UCS2??IRA????????????????????????UCS2???? */
         At_PbRecordToUnicode(pstEvent, aucDecode, &usDecodeLen);
 
-        /* 当前字符集为IRA时，将UCS2转换为IRA码流输出*/
+        /* ????????????IRA??????UCS2??????IRA????????*/
         if (AT_CSCS_IRA_CODE == gucAtCscsType)
         {
             usReturnLen = At_PbUnicodeToIraFormatPrint((AT_CMD_MAX_LEN - usLength),
@@ -4786,7 +4786,7 @@ TAF_UINT32 At_Pb_CnumAlaphPrint(TAF_UINT16            *pusDataLen,
                                                        usDecodeLen);
         }
 
-        /* 当前字符集为UCS2时，将UCS2转换为打印格式输出*/
+        /* ????????????UCS2??????UCS2??????????????????*/
         if (AT_CSCS_UCS2_CODE == gucAtCscsType)
         {
             usReturnLen = (TAF_UINT16)At_Unicode2UnicodePrint(AT_CMD_MAX_LEN,
@@ -4873,7 +4873,7 @@ TAF_UINT32 At_PbCNUMCmdPrint(VOS_UINT8 ucIndex,TAF_UINT16 *pusDataLen,TAF_UINT8 
 
     usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,(TAF_CHAR *)pucData,(TAF_CHAR *)pucData + usLength,"%s: ",g_stParseContext[ucIndex].pstCmdElement->pszCmdName);
 
-    /* 注意:内容需要根据编码类型进行输出，如果是ASCII码直接打印，如果UNICODE需要转换 */
+    /* ????:????????????????????????????????????ASCII????????????????UNICODE???????? */
     usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,(TAF_CHAR *)pucData,(TAF_CHAR *)pucData + usLength,"\"");
 
     if ( (pEvent->PBEvent.PBReadCnf.PBRecord.ucAlphaTagLength != 0)
@@ -4892,7 +4892,7 @@ TAF_UINT32 At_PbCNUMCmdPrint(VOS_UINT8 ucIndex,TAF_UINT16 *pusDataLen,TAF_UINT8 
     usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,(TAF_CHAR *)pucData,(TAF_CHAR *)pucData + usLength,"\"");
 
 
-    /* 将电话号码及号码类型处理封装为函数 */
+    /* ?????????????????????????????????? */
     AT_Pb_NumberPrint(&usLength, pEvent, pucData);
 
     *pusDataLen = usLength;
@@ -4915,10 +4915,10 @@ TAF_UINT32 At_PbCPBR2CmdPrint(VOS_UINT8 ucIndex,TAF_UINT16 *pusDataLen,TAF_UINT8
                                     pEvent->PBEvent.PBReadCnf.PBRecord.Index);
 
 
-    /* 将电话号码及号码类型处理封装为函数 */
+    /* ?????????????????????????????????? */
     AT_Pb_NumberPrint(&usLength, pEvent, pucData);
 
-    /* 注意:内容需要根据编码类型进行输出，如果是ASCII码直接打印，如果UNICODE需要转换 */
+    /* ????:????????????????????????????????????ASCII????????????????UNICODE???????? */
     usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,(TAF_CHAR *)pucData,(TAF_CHAR *)pucData + usLength,",\"");
 
     if( (pEvent->PBEvent.PBReadCnf.PBRecord.ucAlphaTagLength != 0)
@@ -4957,10 +4957,10 @@ TAF_UINT32 At_PbCPBRCmdPrint(VOS_UINT8 ucIndex,TAF_UINT16 *pusDataLen,TAF_UINT8 
                                     pEvent->PBEvent.PBReadCnf.PBRecord.Index);
 
 
-    /* 将电话号码及号码类型处理封装为函数 */
+    /* ?????????????????????????????????? */
     AT_Pb_NumberPrint(&usLength, pEvent, pucData);
 
-    /* 注意:内容需要根据编码类型进行输出，如果是ASCII码直接打印，如果UNICODE需要转换 */
+    /* ????:????????????????????????????????????ASCII????????????????UNICODE???????? */
     usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,(TAF_CHAR *)pucData,(TAF_CHAR *)pucData + usLength,",\"");
 
     if ( (pEvent->PBEvent.PBReadCnf.PBRecord.ucAlphaTagLength != 0)
@@ -4977,7 +4977,7 @@ TAF_UINT32 At_PbCPBRCmdPrint(VOS_UINT8 ucIndex,TAF_UINT16 *pusDataLen,TAF_UINT8 
                                         pucData+usLength, pEvent->PBEvent.PBReadCnf.PBRecord.AlphaTag,
                                         pEvent->PBEvent.PBReadCnf.PBRecord.ucAlphaTagLength);
 
-            if((pEvent->PBEvent.PBReadCnf.PBRecord.ucAlphaTagLength%2) == 0)/*对于奇数个中文需要后面补充FF*/
+            if((pEvent->PBEvent.PBReadCnf.PBRecord.ucAlphaTagLength%2) == 0)/*??????????????????????????FF*/
             {
                 usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,(TAF_CHAR *)pucData,(TAF_CHAR *)pucData + usLength,"FF");
             }
@@ -5024,16 +5024,16 @@ TAF_VOID At_PbEmailPrint(TAF_UINT8  *pucSrc,
 
     TAF_UINT16  usReturnLen;
 
-    /* 对EMAIL长度大于64Byte，进行截断处理 */
+    /* ??EMAIL????????64Byte?????????????? */
     if(SI_PB_EMAIL_MAX_LEN < usEMailLen)
     {
         usEMailLen = SI_PB_EMAIL_MAX_LEN;
     }
 
-    /* 先将GSM模式转成UCS2模式 */
+    /* ????GSM????????UCS2???? */
     At_PbGsmToUnicode(pucSrc, usEMailLen, aucUCS2Code, &usUCS2CodeLen);
 
-    /* 再将UCS2模式转成IRA模式 */
+    /* ????UCS2????????IRA???? */
     usReturnLen = At_PbUnicodeToIraFormatPrint(usSrcLen, pucDst, aucUCS2Code, usUCS2CodeLen);
     if (0 == usReturnLen)
     {
@@ -5062,7 +5062,7 @@ TAF_UINT32 At_PbSCPBRCmdPrint(VOS_UINT8 ucIndex,TAF_UINT16 *pusDataLen,SI_PB_EVE
                                     pEvent->PBEvent.PBReadCnf.PBRecord.Index);
 
 
-    /* 将电话号码及号码类型处理封装为函数 */
+    /* ?????????????????????????????????? */
     AT_Pb_NumberPrint(&usLength, pEvent, pgucAtSndCrLfAddr);
 
     for(i = 0; i < 3; i++)
@@ -5100,7 +5100,7 @@ TAF_UINT32 At_PbSCPBRCmdPrint(VOS_UINT8 ucIndex,TAF_UINT16 *pusDataLen,SI_PB_EVE
                                         pEvent->PBEvent.PBReadCnf.PBRecord.AdditionNumber[i].NumberType);
     }
 
-    /* 注意:内容需要根据编码类型进行输出，如果是ASCII码直接打印，如果UNICODE需要转换 */
+    /* ????:????????????????????????????????????ASCII????????????????UNICODE???????? */
     usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,(TAF_CHAR *)pgucAtSndCrLfAddr,(TAF_CHAR *)pgucAtSndCrLfAddr + usLength,",\"");
 
     if( (pEvent->PBEvent.PBReadCnf.PBRecord.ucAlphaTagLength != 0)
@@ -5116,7 +5116,7 @@ TAF_UINT32 At_PbSCPBRCmdPrint(VOS_UINT8 ucIndex,TAF_UINT16 *pusDataLen,SI_PB_EVE
                                         pgucAtSndCrLfAddr+usLength, pEvent->PBEvent.PBReadCnf.PBRecord.AlphaTag,
                                         pEvent->PBEvent.PBReadCnf.PBRecord.ucAlphaTagLength);
 
-            if((pEvent->PBEvent.PBReadCnf.PBRecord.ucAlphaTagLength%2) == 0)/*对于奇数个中文需要后面补充FF*/
+            if((pEvent->PBEvent.PBReadCnf.PBRecord.ucAlphaTagLength%2) == 0)/*??????????????????????????FF*/
             {
                 usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,(TAF_CHAR *)pgucAtSndCrLfAddr,(TAF_CHAR *)pgucAtSndCrLfAddr + usLength,"FF");
             }
@@ -5174,8 +5174,8 @@ TAF_UINT32 At_PbSCPBRCmdPrint(VOS_UINT8 ucIndex,TAF_UINT16 *pusDataLen,SI_PB_EVE
 
 /*****************************************************************************
  Prototype      : At_PbSearchCnfProc
- Description    : 电话簿查找数据打印函数
- Input          : pEvent --- 事件内容
+ Description    : ??????????????????????
+ Input          : pEvent --- ????????
  Output         :
  Return Value   : ---
  Calls          : ---
@@ -5198,9 +5198,9 @@ TAF_VOID At_PbSearchCnfProc(VOS_UINT8 ucIndex,SI_PB_EVENT_INFO_STRU  *pEvent)
         usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,(TAF_CHAR *)pgucAtSndCodeAddr, (TAF_CHAR *)pgucAtSndCodeAddr + usLength,"%s",gaucAtCrLf);
     }
 */
-    if(pEvent->PBEvent.PBSearchCnf.PBRecord.ValidFlag == SI_PB_CONTENT_INVALID)/*当前的内容无效*/
+    if(pEvent->PBEvent.PBSearchCnf.PBRecord.ValidFlag == SI_PB_CONTENT_INVALID)/*??????????????*/
     {
-        return;              /*返回不处理*/
+        return;              /*??????????*/
     }
 
     usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,(TAF_CHAR *)pgucAtSndCodeAddr,(TAF_CHAR *)pgucAtSndCodeAddr + usLength,"%s: ",g_stParseContext[ucIndex].pstCmdElement->pszCmdName);
@@ -5232,7 +5232,7 @@ TAF_VOID At_PbSearchCnfProc(VOS_UINT8 ucIndex,SI_PB_EVENT_INFO_STRU  *pEvent)
 
         usLength += (TAF_UINT16)At_PB_Unicode2UnicodePrint(AT_CMD_MAX_LEN,(TAF_INT8 *)pgucAtSndCodeAddr,pgucAtSndCodeAddr+usLength,pEvent->PBEvent.PBSearchCnf.PBRecord.AlphaTag,pEvent->PBEvent.PBSearchCnf.PBRecord.ucAlphaTagLength);
 
-        if((pEvent->PBEvent.PBSearchCnf.PBRecord.ucAlphaTagLength%2) == 0)/*对于奇数个中文需要后面补充FF*/
+        if((pEvent->PBEvent.PBSearchCnf.PBRecord.ucAlphaTagLength%2) == 0)/*??????????????????????????FF*/
         {
             usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,(TAF_CHAR *)pgucAtSndCodeAddr,(TAF_CHAR *)pgucAtSndCodeAddr + usLength,"FF");
         }
@@ -5256,7 +5256,7 @@ TAF_VOID At_PbSearchCnfProc(VOS_UINT8 ucIndex,SI_PB_EVENT_INFO_STRU  *pEvent)
 
     if(AT_V_ENTIRE_TYPE == gucAtVType)
     {
-        TAF_MEM_CPY_S((TAF_CHAR *)pgucAtSndCrLfAddr, AT_CMD_MAX_LEN + 20 - 1, (TAF_CHAR *)gaucAtCrLf, 2);/*Code前面加\r\n*/
+        TAF_MEM_CPY_S((TAF_CHAR *)pgucAtSndCrLfAddr, AT_CMD_MAX_LEN + 20 - 1, (TAF_CHAR *)gaucAtCrLf, 2);/*Code??????\r\n*/
         At_SendResultData(ucIndex,pgucAtSndCrLfAddr,usLength+2);
     }
     else
@@ -5276,9 +5276,9 @@ TAF_UINT32 At_PbReadCnfProc(VOS_UINT8 ucIndex,SI_PB_EVENT_INFO_STRU  *pEvent)
     ulResult                            = AT_FAILURE;
     usPBReadPrintLength                 = 0;
 
-    if (SI_PB_CONTENT_INVALID == pEvent->PBEvent.PBReadCnf.PBRecord.ValidFlag)/*当前的内容无效*/
+    if (SI_PB_CONTENT_INVALID == pEvent->PBEvent.PBReadCnf.PBRecord.ValidFlag)/*??????????????*/
     {
-        return AT_SUCCESS;              /*返回不处理*/
+        return AT_SUCCESS;              /*??????????*/
     }
     else
     {
@@ -5289,19 +5289,19 @@ TAF_UINT32 At_PbReadCnfProc(VOS_UINT8 ucIndex,SI_PB_EVENT_INFO_STRU  *pEvent)
 
         gulPBPrintTag = TAF_TRUE;
 
-        if(AT_CMD_CPBR_SET == gastAtClientTab[ucIndex].CmdCurrentOpt) /*按照 ^CPBR 的方式进行打印*/
+        if(AT_CMD_CPBR_SET == gastAtClientTab[ucIndex].CmdCurrentOpt) /*???? ^CPBR ??????????????*/
         {
             ulResult = At_PbCPBRCmdPrint(ucIndex,&usPBReadPrintLength,pgucAtSndCrLfAddr,pEvent);
         }
-        else if(AT_CMD_CPBR2_SET == gastAtClientTab[ucIndex].CmdCurrentOpt) /*按照 +CPBR 的方式进行打印*/
+        else if(AT_CMD_CPBR2_SET == gastAtClientTab[ucIndex].CmdCurrentOpt) /*???? +CPBR ??????????????*/
         {
             ulResult = At_PbCPBR2CmdPrint(ucIndex,&usPBReadPrintLength,pgucAtSndCrLfAddr,pEvent);
         }
-        else if(AT_CMD_SCPBR_SET == gastAtClientTab[ucIndex].CmdCurrentOpt) /*按照 ^SCPBR 的方式进行打印*/
+        else if(AT_CMD_SCPBR_SET == gastAtClientTab[ucIndex].CmdCurrentOpt) /*???? ^SCPBR ??????????????*/
         {
             ulResult = At_PbSCPBRCmdPrint(ucIndex,&usPBReadPrintLength,pEvent);
         }
-        else if(AT_CMD_CNUM_READ == gastAtClientTab[ucIndex].CmdCurrentOpt) /*按照 CNUM 的方式进行打印*/
+        else if(AT_CMD_CNUM_READ == gastAtClientTab[ucIndex].CmdCurrentOpt) /*???? CNUM ??????????????*/
         {
             ulResult = At_PbCNUMCmdPrint(ucIndex,&usPBReadPrintLength,pgucAtSndCrLfAddr,pEvent);
         }
@@ -5313,18 +5313,18 @@ TAF_UINT32 At_PbReadCnfProc(VOS_UINT8 ucIndex,SI_PB_EVENT_INFO_STRU  *pEvent)
         }
     }
 
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, begin */
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, begin */
     if(AT_SUCCESS == ulResult)
     {
         usPBReadPrintLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,(TAF_CHAR *)pgucAtSndCrLfAddr,
                                                 (TAF_CHAR *)pgucAtSndCrLfAddr + usPBReadPrintLength,
                                                 "%s","\r\n");
     }
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, end */
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, end */
 
     At_SendResultData(ucIndex,pgucAtSndCrLfAddr,usPBReadPrintLength);
 
-    TAF_MEM_CPY_S((TAF_CHAR *)pgucAtSndCrLfAddr, AT_CMD_MAX_LEN + 20 - 1, (TAF_CHAR *)gaucAtCrLf,2);/*AT输出Buffer的前两个字节恢复为\r\n*/
+    TAF_MEM_CPY_S((TAF_CHAR *)pgucAtSndCrLfAddr, AT_CMD_MAX_LEN + 20 - 1, (TAF_CHAR *)gaucAtCrLf,2);/*AT????Buffer??????????????????\r\n*/
 
     return ulResult;
 }
@@ -5336,39 +5336,39 @@ TAF_VOID At_PbCallBackFunc(SI_PB_EVENT_INFO_STRU  *pEvent)
     TAF_UINT32 ulSendMsg = 0;
     TAF_UINT8  ucIndex;
 
-    if(TAF_NULL_PTR == pEvent)      /*参数错误*/
+    if(TAF_NULL_PTR == pEvent)      /*????????*/
     {
         AT_WARN_LOG("At_PbCallBackFunc pEvent NULL");
 
         return;
     }
 
-    if(AT_FAILURE == At_ClientIdToUserId(pEvent->ClientId, &ucIndex))/*回复的客户端内容错误*/
+    if(AT_FAILURE == At_ClientIdToUserId(pEvent->ClientId, &ucIndex))/*????????????????????*/
     {
         //At_SendReportMsg(MN_CALLBACK_PHONE_BOOK, (TAF_UINT8*)pEvent, sizeof(SI_PB_EVENT_INFO_STRU));
 
         return;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("At_PbMsgProc : AT_BROADCAST_INDEX.");
         return;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
     if(AT_CMD_CNUM == gastAtClientTab[ucIndex].CmdIndex)
     {
         pEvent->PBError = ((TAF_ERR_PB_NOT_FOUND == pEvent->PBError)?TAF_ERR_NO_ERROR:pEvent->PBError);
     }
 
-    if(TAF_ERR_NO_ERROR != pEvent->PBError)/*出错，发送消息处理*/
+    if(TAF_ERR_NO_ERROR != pEvent->PBError)/*??????????????????*/
     {
         ulSendMsg = SI_TRUE;
     }
     else if(((pEvent->PBEventType == SI_PB_EVENT_READ_CNF)||(pEvent->PBEventType == SI_PB_EVENT_SREAD_CNF))
-        && (pEvent->PBLastTag != SI_PB_LAST_TAG_TRUE))/*由于读取的特殊要求，因此不能通过一次性的消息发送数据进行处理*/
+        && (pEvent->PBLastTag != SI_PB_LAST_TAG_TRUE))/*????????????????????????????????????????????????????????????*/
     {
         if ( AT_SUCCESS != At_PbReadCnfProc(ucIndex,pEvent) )
         {
@@ -5389,7 +5389,7 @@ TAF_VOID At_PbCallBackFunc(SI_PB_EVENT_INFO_STRU  *pEvent)
             return;
         }
     }
-    else        /*其它的回复可以通过消息进行一次性发送处理*/
+    else        /*????????????????????????????????????????*/
     {
         ulSendMsg = SI_TRUE;
     }
@@ -5402,7 +5402,7 @@ TAF_VOID At_PbCallBackFunc(SI_PB_EVENT_INFO_STRU  *pEvent)
     return;
 }
 
-/* Added by L60609 for AT Project，2011-10-04,  End*/
+/* Added by L60609 for AT Project??2011-10-04,  End*/
 
 
 VOS_VOID At_RcvVcMsgSetGroundCnfProc(
@@ -5412,7 +5412,7 @@ VOS_VOID At_RcvVcMsgSetGroundCnfProc(
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulRet;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstData->clientId, &ucIndex))
     {
         AT_WARN_LOG("At_RcvVcMsgSetGroundCnfProc:WARNING:AT INDEX NOT FOUND!");
@@ -5425,7 +5425,7 @@ VOS_VOID At_RcvVcMsgSetGroundCnfProc(
         return;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CBG_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("At_RcvVcMsgSetGroundCnfProc:WARNING:AT ARE WAITING ANOTHER CMD!");
@@ -5441,10 +5441,10 @@ VOS_VOID At_RcvVcMsgSetGroundCnfProc(
         ulRet = AT_ERROR;
     }
 
-    /* 输出设置结果 */
+    /* ???????????? */
     gstAtSendData.usBufLen = 0;
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
     At_FormatResultData(ucIndex, ulRet);
 
@@ -5460,7 +5460,7 @@ VOS_VOID At_RcvVcMsgQryGroundRspProc(
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulRet;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstData->clientId, &ucIndex))
     {
         AT_WARN_LOG("At_RcvVcMsgQryGroundRspProc:WARNING:AT INDEX NOT FOUND!");
@@ -5473,19 +5473,19 @@ VOS_VOID At_RcvVcMsgQryGroundRspProc(
         return;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CBG_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("At_RcvVcMsgQryGroundRspProc:WARNING:AT ARE WAITING ANOTHER CMD!");
         return;
     }
 
-    /* 初始化 */
+    /* ?????? */
     pstQryRslt = (APP_VC_QRY_GROUNG_RSP_STRU *)pstData->aucContent;
 
     if (VOS_OK == pstQryRslt->ucQryRslt)
     {
-        /* 输出查询结果 */
+        /* ???????????? */
         gstAtSendData.usBufLen = (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                                         (TAF_CHAR *)pgucAtSndCodeAddr,
                                                         (TAF_CHAR *)pgucAtSndCodeAddr,
@@ -5499,7 +5499,7 @@ VOS_VOID At_RcvVcMsgQryGroundRspProc(
         ulRet = AT_ERROR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
     At_FormatResultData(ucIndex, ulRet);
 
@@ -5516,10 +5516,10 @@ VOS_VOID At_RcvVcMsgQryTTYModeCnfProc(
     VOS_UINT32                          ulRet;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pstTTYMode      = (APP_VC_QRY_TTYMODE_CNF_STRU *)pstData->aucContent;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstData->clientId, &ucIndex))
     {
         AT_WARN_LOG("At_RcvVcMsgQryTTYModeCnfProc: WARNING: AT INDEX NOT FOUND!");
@@ -5532,14 +5532,14 @@ VOS_VOID At_RcvVcMsgQryTTYModeCnfProc(
         return;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_TTYMODE_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("At_RcvVcMsgQryTTYModeCnfProc: WARNING:AT ARE WAITING ANOTHER CMD!");
         return;
     }
 
-    /* 查询的TTY MODE */
+    /* ??????TTY MODE */
     if (VOS_OK == pstTTYMode->ucQryRslt)
     {
         gstAtSendData.usBufLen = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
@@ -5556,7 +5556,7 @@ VOS_VOID At_RcvVcMsgQryTTYModeCnfProc(
         ulRet = AT_ERROR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
     At_FormatResultData(ucIndex, ulRet);
 
@@ -5572,7 +5572,7 @@ VOS_VOID At_RcvVcMsgSetTTYModeCnfProc(
     VOS_UINT8                          *pucResult;
     VOS_UINT8                           ucIndex;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstData->clientId, &ucIndex))
     {
         AT_WARN_LOG("At_RcvVcMsgSetTTYModeCnfProc: WARNING: AT INDEX NOT FOUND!");
@@ -5585,7 +5585,7 @@ VOS_VOID At_RcvVcMsgSetTTYModeCnfProc(
         return;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_TTYMODE_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("At_RcvVcMsgSetTTYModeCnfProc: WARNING:AT ARE WAITING ANOTHER CMD!");
@@ -5602,10 +5602,10 @@ VOS_VOID At_RcvVcMsgSetTTYModeCnfProc(
         ulRet = AT_ERROR;
     }
 
-    /* 输出设置结果 */
+    /* ???????????? */
     gstAtSendData.usBufLen = 0;
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
     At_FormatResultData(ucIndex, ulRet);
 
@@ -5632,12 +5632,12 @@ VOS_VOID At_ProcMsgFromVc(MN_AT_IND_EVT_STRU *pMsg)
 
         case APP_VC_MSG_SET_FOREGROUND_CNF:
         case APP_VC_MSG_SET_BACKGROUND_CNF:
-            /*AT 处理 VC 上报的前台模式、后台模式CNF MSG*/
+            /*AT ???? VC ????????????????????????CNF MSG*/
             At_RcvVcMsgSetGroundCnfProc(pMsg);
             break;
 
         case APP_VC_MSG_FOREGROUND_RSP:
-            /*AT 处理VC 上报的查询前台模式回复消息*/
+            /*AT ????VC ??????????????????????????*/
             At_RcvVcMsgQryGroundRspProc(pMsg);
             break;
         case APP_VC_MSG_QRY_TTYMODE_CNF:
@@ -5668,13 +5668,13 @@ VOS_UINT32 At_RcvRnicMsg(MsgBlock *pstMsg)
 
     switch(pstMsgHeader->ulMsgName)
     {
-        /* 处理RNIC发来的流量上报 */
+        /* ????RNIC?????????????? */
         case ID_RNIC_AT_DSFLOW_RSP:
 
             ulRst = AT_RcvRnicDsflowRsp(pstMsg);
             break;
 
-        /* 处理RNIC发来的拨号模式查询回复 */
+        /* ????RNIC?????????????????????? */
         case ID_RNIC_AT_DIAL_MODE_CNF:
 
             ulRst = AT_RcvRnicDialModeCnf(pstMsg);
@@ -5752,17 +5752,17 @@ VOS_UINT32    AT_ProcRabmSetFastDormParaCnf(
     VOS_UINT8                               ucIndex;
     VOS_UINT32                              ulRslt;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstMsg->usClientId,&ucIndex))
     {
         AT_WARN_LOG("At_ProcRabmSetFastDormParaCnf:WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 输出设置结果 */
+    /* ???????????? */
     gstAtSendData.usBufLen = 0;
     ulRslt = AT_ERROR;
     if (AT_RABM_PARA_SET_RSLT_SUCC == pstMsg->enRslt)
@@ -5786,20 +5786,20 @@ VOS_UINT32    AT_ProcRabmQryFastDormParaCnf(
 
     ulResult = AT_ERROR;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstMsg->usClientId,&ucIndex))
     {
         AT_WARN_LOG("At_RcvAtCcMsgStateQryCnfProc:WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     /* Added by l60609 for B070 Project, 2012/03/20, begin */
     if (VOS_TRUE == pstMsg->ucRslt)
     {
-        /* 输出查询结果 */
+        /* ???????????? */
         usLength = 0;
         usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,(TAF_CHAR *)pgucAtSndCodeAddr,(TAF_CHAR *)pgucAtSndCodeAddr + usLength,"%s",gaucAtCrLf);
         usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,(TAF_CHAR *)pgucAtSndCodeAddr,(TAF_CHAR *)pgucAtSndCodeAddr + usLength,"^FASTDORM:%d",pstMsg->stFastDormPara.enFastDormOperationType);
@@ -5830,14 +5830,14 @@ VOS_UINT32 AT_ProcRabmReleaseRrcCnf(RABM_AT_RELEASE_RRC_CNF_STRU *pstMsg)
 
     ulRslt = AT_ERROR;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstMsg->usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_ProcRabmReleaseRrcCnf:WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* 输出设置结果 */
+    /* ???????????? */
     gstAtSendData.usBufLen = 0;
 
     if (VOS_OK == pstMsg->ulRslt)
@@ -5845,7 +5845,7 @@ VOS_UINT32 AT_ProcRabmReleaseRrcCnf(RABM_AT_RELEASE_RRC_CNF_STRU *pstMsg)
         ulRslt = AT_OK;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
     At_FormatResultData(ucIndex, ulRslt);
 
@@ -5860,17 +5860,17 @@ VOS_UINT32    AT_ProcRabmSetVoicePreferParaCnf(
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulRslt;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstMsg->usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_ProcRabmSetVoicePreferParaCnf:WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 输出设置结果 */
+    /* ???????????? */
     gstAtSendData.usBufLen = 0;
     ulRslt = AT_ERROR;
     if (AT_RABM_PARA_SET_RSLT_SUCC == pstMsg->enRslt)
@@ -5891,17 +5891,17 @@ VOS_UINT32 AT_ProcRabmQryVoicePreferEnableParaCnf(RABM_AT_QRY_VOICEPREFER_PARA_C
 
     ulResult = AT_ERROR;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstMsg->usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_ProcRabmQryVoicePreferEnableParaCnf:WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 输出查询结果 */
+    /* ???????????? */
     usLength = 0;
     usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                       (VOS_CHAR *)pgucAtSndCodeAddr,
@@ -5928,14 +5928,14 @@ VOS_UINT32 AT_ProcRabmVoicePreferStatusReport(RABM_AT_VOICEPREFER_STATUS_REPORT_
     ucIndex = 0;
     usLength = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstMsg->usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_ProcRabmVoicePreferStatusReport:WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* 输出上报结果 */
+    /* ???????????? */
     usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                       (VOS_CHAR *)pgucAtSndCodeAddr,
                                       (VOS_CHAR *)pgucAtSndCodeAddr + usLength,
@@ -6001,7 +6001,7 @@ TAF_VOID At_MsgProc(MsgBlock* pMsg)
     ulSendPid    = pMsg->ulSenderPid;
     ulMsgName    = ((MSG_HEADER_STRU *)pMsg)->ulMsgName;
 
-    /* 超时处理 */
+    /* ???????? */
     if ( VOS_PID_TIMER == pMsg->ulSenderPid )
     {
         At_TimeOutProc((REL_TIMER_MSG*)pMsg);
@@ -6011,7 +6011,7 @@ TAF_VOID At_MsgProc(MsgBlock* pMsg)
         return;
     }
 
-    /* 消息的分发处理 */
+    /* ?????????????? */
     switch ( pMsg->ulSenderPid )
     {
         case WUEPS_PID_AT:
@@ -6221,15 +6221,15 @@ VOS_VOID AT_EventReport(
     VOS_UINT32                          ulAtEventMsgLen;
     VOS_UINT32                          ulRslt;
 
-    /* 入参检查 */
+    /* ???????? */
     if ( (VOS_NULL_PTR == pData) && (ulLen != 0) )
     {
-        /* 错误打印 */
+        /* ???????? */
         TAF_LOG(ulPid, VOS_NULL, PS_LOG_LEVEL_WARNING, "NAS_EventReport:pPara is NULL.");
         return;
     }
 
-    /* 申请内存 */
+    /* ???????? */
     if (4 >= ulLen)
     {
         ulAtEventMsgLen = sizeof(NAS_OM_EVENT_IND_STRUCT);
@@ -6247,10 +6247,10 @@ VOS_VOID AT_EventReport(
         return;
     }
 
-    /* 初始化 */
+    /* ?????? */
     TAF_MEM_SET_S(pstAtEvent, ulAtEventMsgLen, 0x00, ulAtEventMsgLen);
 
-    /* 填写事件消息内容 */
+    /* ???????????????? */
     pstAtEvent->usEventId    = enEventId;
     pstAtEvent->usReserve    = 0;
     if ( (VOS_NULL_PTR != pData) && (ulLen > 0) )
@@ -6258,7 +6258,7 @@ VOS_VOID AT_EventReport(
         TAF_MEM_CPY_S(pstAtEvent->aucData, ulLen, pData, ulLen);
     }
 
-    /* 填写发给DIAG的结构体 */
+    /* ????????DIAG???????? */
     stDiagEvent.ulLength        = sizeof(NAS_OM_EVENT_IND_STRUCT) - 4 + ulLen;
     stDiagEvent.ulPid           = ulPid;
     stDiagEvent.ulEventId       = (VOS_UINT32)enEventId;
@@ -6286,35 +6286,35 @@ VOS_UINT32 AT_RcvDrvAgentSetAdcRsp(VOS_VOID *pMsg)
     VOS_UINT8                                  ucIndex;
     VOS_UINT32                                 ulResult;
 
-    /* 初始化消息 */
+    /* ?????????? */
     pRcvMsg         = (DRV_AGENT_MSG_STRU *)pMsg;
     pstAdcCnf       = (DRV_AGENT_ADC_SET_CNF_STRU *)pRcvMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if (AT_FAILURE == At_ClientIdToUserId(pstAdcCnf->stAtAppCtrl.usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentSetAdcRsp:WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentSetAdcRsp : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
-    /* 判断当前操作类型是否为AT_CMD_ADC_SET */
+    /* ??????????????????????AT_CMD_ADC_SET */
     if (AT_CMD_ADC_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /*设置门限值是否成功 */
+    /*?????????????????? */
     if (VOS_TRUE != pstAdcCnf->bFail)
     {
         ulResult = AT_OK;
@@ -6324,7 +6324,7 @@ VOS_UINT32 AT_RcvDrvAgentSetAdcRsp(VOS_VOID *pMsg)
         ulResult = AT_ERROR;
     }
 
-    /* 调用AT_FormATResultDATa发送命令结果 */
+    /* ????AT_FormATResultDATa???????????? */
     gstAtSendData.usBufLen = 0;
     At_FormatResultData(ucIndex, ulResult);
 
@@ -6339,31 +6339,31 @@ VOS_UINT32 AT_RcvDrvAgentQryTbatRsp(VOS_VOID *pMsg)
     DRV_AGENT_TBAT_QRY_CNF_STRU        *stTbatTypeCnf;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化消息 */
+    /* ?????????? */
     pRcvMsg                = (DRV_AGENT_MSG_STRU *)pMsg;
     stTbatTypeCnf          = (DRV_AGENT_TBAT_QRY_CNF_STRU *)pRcvMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if (AT_FAILURE == At_ClientIdToUserId(stTbatTypeCnf->stAtAppCtrl.usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentQryTbatRsp:WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /*自动应答开启情况下被叫死机问题*/
+    /*??????????????????????????????*/
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentQryTbatRsp : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_TBAT_QRY */
+    /* ??????????????????????AT_CMD_TBAT_QRY */
     if (AT_CMD_TBAT_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
     gstAtSendData.usBufLen = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                                     (VOS_CHAR *)pgucAtSndCodeAddr,
@@ -6372,7 +6372,7 @@ VOS_UINT32 AT_RcvDrvAgentQryTbatRsp(VOS_VOID *pMsg)
                                                     g_stParseContext[ucIndex].pstCmdElement->pszCmdName,
                                                     stTbatTypeCnf->ulTbatType);
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, AT_OK);
     return VOS_OK;
 
@@ -6395,14 +6395,14 @@ VOS_UINT32 AT_RcvSimLockQryRsp(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_SIMLOCKSTATUS_READ或AT_CMD_CSDFLT_READ */
+    /* ??????????????????????AT_CMD_SIMLOCKSTATUS_READ??AT_CMD_CSDFLT_READ */
     if ((AT_CMD_SIMLOCKSTATUS_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
      && (AT_CMD_CSDFLT_READ != gastAtClientTab[ucIndex].CmdCurrentOpt))
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     if (AT_CMD_SIMLOCKSTATUS_READ == gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_STOP_TIMER_CMD_READY(ucIndex);
@@ -6422,7 +6422,7 @@ VOS_UINT32 AT_RcvSimLockQryRsp(VOS_VOID *pMsg)
         ulRet                  = AT_OutputCsdfltDefault(ucIndex, pstEvent->bSimlockEnableFlg);
     }
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulRet);
 
     return VOS_OK;
@@ -6438,11 +6438,11 @@ VOS_UINT32 AT_RcvDrvAgentSetSpwordRsp(VOS_VOID *pMsg)
     DRV_AGENT_SPWORD_SET_CNF_STRU             *pstSpwordSetCnf;
     VOS_UINT8                                  ucIndex;
 
-    /* 初始化消息 */
+    /* ?????????? */
     pRcvMsg         = (DRV_AGENT_MSG_STRU *)pMsg;
     pstSpwordSetCnf = (DRV_AGENT_SPWORD_SET_CNF_STRU *)pRcvMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if (AT_FAILURE == At_ClientIdToUserId(pstSpwordSetCnf->stAtAppCtrl.usClientId,&ucIndex))
     {
         AT_WARN_LOG("pstSpwordSetCnf:WARNING:AT INDEX NOT FOUND!");
@@ -6455,30 +6455,30 @@ VOS_UINT32 AT_RcvDrvAgentSetSpwordRsp(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_SPWORD_SET */
+    /* ??????????????????????AT_CMD_SPWORD_SET */
     if (AT_CMD_SPWORD_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 密码校验通过，错误次数需要清零 */
+    /* ?????????????????????????????? */
     if (VOS_OK == pstSpwordSetCnf->ulResult)
     {
         g_stSpWordCtx.ucShellPwdCheckFlag = VOS_TRUE;
         g_stSpWordCtx.ucErrTimes          = 0;
 
-        /* 调用At_FormatResultData发送命令结果 */
+        /* ????At_FormatResultData???????????? */
         At_FormatResultData(ucIndex, AT_OK);
     }
-    /* 密码校验失败，错误次数加1 */
+    /* ????????????????????????1 */
     else
     {
         g_stSpWordCtx.ucErrTimes++;
 
-        /* 调用At_FormatResultData发送命令结果 */
+        /* ????At_FormatResultData???????????? */
         At_FormatResultData(ucIndex, AT_ERROR);
     }
 
@@ -6492,11 +6492,11 @@ VOS_UINT32 AT_RcvMmaCipherInfoQueryCnf(VOS_VOID *pMsg)
     VOS_UINT32                          ulResult;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pstCipherQryCnf     = (TAF_MMA_CIPHER_QRY_CNF_STRU *)pMsg;
     ulResult            = AT_OK;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstCipherQryCnf->usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaCipherInfoQueryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -6509,16 +6509,16 @@ VOS_UINT32 AT_RcvMmaCipherInfoQueryCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_CIPERQRY_READ */
+    /*??????????????????????AT_CMD_CIPERQRY_READ */
     if (AT_CMD_CIPERQRY_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^CIPERQRY查询命令返回 */
+    /* ??????AT^CIPERQRY???????????? */
     gstAtSendData.usBufLen = 0;
     if (VOS_OK != pstCipherQryCnf->ulResult)
     {
@@ -6536,7 +6536,7 @@ VOS_UINT32 AT_RcvMmaCipherInfoQueryCnf(VOS_VOID *pMsg)
                                                    pstCipherQryCnf->ucCipherInfo);
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -6551,12 +6551,12 @@ VOS_UINT32 AT_RcvMmaLocInfoQueryCnf(VOS_VOID *pMsg)
     VOS_UINT16                          usLength;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pstLocInfoCnf       = (TAF_MMA_LOCATION_INFO_QRY_CNF_STRU *)pMsg;
     usLength            = 0;
     ulResult            = AT_OK;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstLocInfoCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaLocInfoQueryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -6569,16 +6569,16 @@ VOS_UINT32 AT_RcvMmaLocInfoQueryCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_LOCINFO_READ */
+    /*??????????????????????AT_CMD_LOCINFO_READ */
     if (AT_CMD_LOCINFO_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 使用AT_STOP_TIMER_CMD_READY恢复AT命令实体状态为READY状态 */
+    /* ????AT_STOP_TIMER_CMD_READY????AT??????????????READY???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^CIPERQRY查询命令返回 */
+    /* ??????AT^CIPERQRY???????????? */
     if (VOS_OK != pstLocInfoCnf->ulResult)
     {
         ulResult = AT_ERROR;
@@ -6593,7 +6593,7 @@ VOS_UINT32 AT_RcvMmaLocInfoQueryCnf(VOS_VOID *pMsg)
                                           "%s:",
                                           g_stParseContext[ucIndex].pstCmdElement->pszCmdName);
 
-        /* 上报MCC和MNC */
+        /* ????MCC??MNC */
         usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                           (VOS_CHAR *)pgucAtSndCodeAddr,
                                           (VOS_CHAR *)pgucAtSndCodeAddr + usLength,
@@ -6609,7 +6609,7 @@ VOS_UINT32 AT_RcvMmaLocInfoQueryCnf(VOS_VOID *pMsg)
                                           (VOS_INT32)(pstLocInfoCnf->ulMnc & 0x0f) ,
                                           (VOS_INT32)(pstLocInfoCnf->ulMnc & 0x0f00) >> 8);
 
-        /* MNC最后一位不等于F，则MNC为三位，否则为两位 */
+        /* MNC??????????????F????MNC?????????????????? */
         if (0x0f != ((pstLocInfoCnf->ulMnc & 0x0f0000) >> 16))
         {
             usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
@@ -6643,7 +6643,7 @@ VOS_UINT32 AT_RcvMmaLocInfoQueryCnf(VOS_VOID *pMsg)
         gstAtSendData.usBufLen = usLength;
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -6658,12 +6658,12 @@ VOS_UINT32 AT_RcvDrvAgentNvBackupStatQryRsp(VOS_VOID *pMsg)
     VOS_UINT32                              ulResult;
     VOS_UINT16                              usLength;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pRcvMsg         = (DRV_AGENT_MSG_STRU *)pMsg;
     pstEvent        = (DRV_AGENT_NVBACKUPSTAT_QRY_CNF_STRU *)pRcvMsg->aucContent;
     usLength        = 0;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstEvent->stAtAppCtrl.usClientId,&ucIndex) )
     {
         AT_WARN_LOG("AT_RcvDrvAgentNvBackupStatQryRsp:WARNING:AT INDEX NOT FOUND!");
@@ -6676,16 +6676,16 @@ VOS_UINT32 AT_RcvDrvAgentNvBackupStatQryRsp(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_NVBACKUPSTAT_READ */
+    /* ??????????????????????AT_CMD_NVBACKUPSTAT_READ */
     if ( AT_CMD_NVBACKUPSTAT_READ != gastAtClientTab[ucIndex].CmdCurrentOpt )
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( DRV_AGENT_NO_ERROR == pstEvent->ulResult )
     {
         if ( NV_OK == pstEvent->ulNvBackupStat )
@@ -6715,7 +6715,7 @@ VOS_UINT32 AT_RcvDrvAgentNvBackupStatQryRsp(VOS_VOID *pMsg)
     }
 
     gstAtSendData.usBufLen = usLength;
-    /* 调用AT_FormATResultDATa发送命令结果 */
+    /* ????AT_FormATResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -6732,14 +6732,14 @@ VOS_UINT32 AT_RcvDrvAgentNandBadBlockQryRsp(VOS_VOID *pMsg)
     VOS_UINT32                              uli;
     VOS_UINT32                              ulMaxBBNum;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pRcvMsg         = (DRV_AGENT_MSG_STRU *)pMsg;
     pstEvent        = (DRV_AGENT_NANDBBC_QRY_CNF_STRU *)pRcvMsg->aucContent;
     usLength        = 0;
     uli             = 0;
     ulMaxBBNum      = 0;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstEvent->stAtAppCtrl.usClientId,&ucIndex) )
     {
         AT_WARN_LOG("AT_RcvDrvAgentNandBadBlockQryRsp:WARNING:AT INDEX NOT FOUND!");
@@ -6752,16 +6752,16 @@ VOS_UINT32 AT_RcvDrvAgentNandBadBlockQryRsp(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_NANDBBC_READ */
+    /* ??????????????????????AT_CMD_NANDBBC_READ */
     if ( AT_CMD_NANDBBC_READ != gastAtClientTab[ucIndex].CmdCurrentOpt )
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( DRV_AGENT_NO_ERROR == pstEvent->ulResult )
     {
         usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
@@ -6791,7 +6791,7 @@ VOS_UINT32 AT_RcvDrvAgentNandBadBlockQryRsp(VOS_VOID *pMsg)
     }
 
     gstAtSendData.usBufLen = usLength;
-    /* 调用AT_FormATResultDATa发送命令结果 */
+    /* ????AT_FormATResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -6806,12 +6806,12 @@ VOS_UINT32 AT_RcvDrvAgentNandDevInfoQryRsp(VOS_VOID *pMsg)
     VOS_UINT32                              ulResult;
     VOS_UINT16                              usLength;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pRcvMsg         = (DRV_AGENT_MSG_STRU *)pMsg;
     pstEvent        = (DRV_AGENT_NANDVER_QRY_CNF_STRU *)pRcvMsg->aucContent;
     usLength        = 0;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstEvent->stAtAppCtrl.usClientId,&ucIndex) )
     {
         AT_WARN_LOG("AT_RcvDrvAgentNandDevInfoQryRsp:WARNING:AT INDEX NOT FOUND!");
@@ -6824,19 +6824,19 @@ VOS_UINT32 AT_RcvDrvAgentNandDevInfoQryRsp(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_NANDVER_READ */
+    /* ??????????????????????AT_CMD_NANDVER_READ */
     if ( AT_CMD_NANDVER_READ != gastAtClientTab[ucIndex].CmdCurrentOpt )
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( DRV_AGENT_NO_ERROR == pstEvent->ulResult )
     {
-        /* 输出查询结果 */
+        /* ???????????? */
         usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                            (TAF_CHAR *)pgucAtSndCodeAddr,
                                            (TAF_CHAR *)pgucAtSndCodeAddr + usLength,
@@ -6855,7 +6855,7 @@ VOS_UINT32 AT_RcvDrvAgentNandDevInfoQryRsp(VOS_VOID *pMsg)
     }
 
     gstAtSendData.usBufLen = usLength;
-    /* 调用AT_FormATResultDATa发送命令结果 */
+    /* ????AT_FormATResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -6870,12 +6870,12 @@ VOS_UINT32 AT_RcvDrvAgentChipTempQryRsp(VOS_VOID *pMsg)
     VOS_UINT32                          ulResult;
     VOS_UINT16                          usLength;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pRcvMsg         = (DRV_AGENT_MSG_STRU *)pMsg;
     pstEvent        = (DRV_AGENT_CHIPTEMP_QRY_CNF_STRU *)pRcvMsg->aucContent;
     usLength        = 0;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstEvent->stAtAppCtrl.usClientId,&ucIndex) )
     {
         AT_WARN_LOG("AT_RcvDrvAgentChipTempQryRsp:WARNING:AT INDEX NOT FOUND!");
@@ -6888,19 +6888,19 @@ VOS_UINT32 AT_RcvDrvAgentChipTempQryRsp(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_CHIPTEMP_READ */
+    /* ??????????????????????AT_CMD_CHIPTEMP_READ */
     if ( AT_CMD_CHIPTEMP_READ != gastAtClientTab[ucIndex].CmdCurrentOpt )
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( DRV_AGENT_NO_ERROR == pstEvent->ulResult )
     {
-        /* 输出查询结果 */
+        /* ???????????? */
         usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                            (TAF_CHAR *)pgucAtSndCodeAddr,
                                            (TAF_CHAR *)pgucAtSndCodeAddr + usLength,
@@ -6920,7 +6920,7 @@ VOS_UINT32 AT_RcvDrvAgentChipTempQryRsp(VOS_VOID *pMsg)
     }
 
     gstAtSendData.usBufLen = usLength;
-    /* 调用AT_FormATResultDATa发送命令结果 */
+    /* ????AT_FormATResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -6963,14 +6963,14 @@ VOS_UINT32 AT_RcvDrvAgentAntStateIndRsp(VOS_VOID *pMsg)
     pstAntState             = (DRV_AGENT_ANT_STATE_IND_STRU *)pRcvMsg->aucContent;
     ucIndex                 = AT_BROADCAST_CLIENT_INDEX_MODEM_0;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstAntState->stAtAppCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvDrvAgentAntStateIndRsp: WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* 根据接口约定，天线状态非0时，直接返回1 */
+    /* ????????????????????????0????????????1 */
     if (0 == ((pstAntState->usAntState) & AT_CMD_MAX_ANT_BIT_MASK))
     {
         AT_NORM_LOG("AT_RcvDrvAgentAntStateIndRsp: usAntState Set to 0");
@@ -7001,11 +7001,11 @@ VOS_UINT32 AT_RcvDrvAgentSetMaxLockTmsRsp(VOS_VOID *pMsg)
     DRV_AGENT_MAX_LOCK_TMS_SET_CNF_STRU       *pstMaxlockTmsSetCnf;
     VOS_UINT8                                  ucIndex;
 
-    /* 初始化消息 */
+    /* ?????????? */
     pRcvMsg             = (DRV_AGENT_MSG_STRU *)pMsg;
     pstMaxlockTmsSetCnf = (DRV_AGENT_MAX_LOCK_TMS_SET_CNF_STRU *)pRcvMsg->aucContent;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstMaxlockTmsSetCnf->stAtAppCtrl.usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentSetMaxLockTmsRsp:WARNING:AT INDEX NOT FOUND!");
@@ -7018,24 +7018,24 @@ VOS_UINT32 AT_RcvDrvAgentSetMaxLockTmsRsp(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_MAXLCKTMS_SET */
+    /*??????????????????????AT_CMD_MAXLCKTMS_SET */
     if (AT_CMD_MAXLCKTMS_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 使用AT_STOP_TIMER_CMD_READY恢复AT命令实体状态为READY状态 */
+    /* ????AT_STOP_TIMER_CMD_READY????AT??????????????READY???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^MAXLCKTMS设置命令返回 */
+    /* ??????AT^MAXLCKTMS???????????? */
     if (VOS_OK != pstMaxlockTmsSetCnf->ulResult)
     {
-        /* 调用At_FormatResultData发送命令结果 */
+        /* ????At_FormatResultData???????????? */
         At_FormatResultData(ucIndex, AT_DEVICE_OTHER_ERROR);
     }
     else
     {
-        /* 调用At_FormatResultData发送命令结果 */
+        /* ????At_FormatResultData???????????? */
         At_FormatResultData(ucIndex, AT_OK);
     }
 
@@ -7049,11 +7049,11 @@ VOS_UINT32 AT_RcvDrvAgentSetApSimstRsp(VOS_VOID *pMsg)
     DRV_AGENT_AP_SIMST_SET_CNF_STRU           *pstApSimStSetCnf;
     VOS_UINT8                                  ucIndex;
 
-    /* 初始化消息 */
+    /* ?????????? */
     pRcvMsg             = (DRV_AGENT_MSG_STRU *)pMsg;
     pstApSimStSetCnf    = (DRV_AGENT_AP_SIMST_SET_CNF_STRU *)pRcvMsg->aucContent;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstApSimStSetCnf->stAtAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentSetApSimstRsp:WARNING:AT INDEX NOT FOUND!");
@@ -7066,24 +7066,24 @@ VOS_UINT32 AT_RcvDrvAgentSetApSimstRsp(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_APSIMST_SET */
+    /*??????????????????????AT_CMD_APSIMST_SET */
     if (AT_CMD_APSIMST_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 使用AT_STOP_TIMER_CMD_READY恢复AT命令实体状态为READY状态 */
+    /* ????AT_STOP_TIMER_CMD_READY????AT??????????????READY???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^APSIMST设置命令返回 */
+    /* ??????AT^APSIMST???????????? */
     if (VOS_OK != pstApSimStSetCnf->ulResult)
     {
-        /* 调用At_FormatResultData发送命令结果 */
+        /* ????At_FormatResultData???????????? */
         At_FormatResultData(ucIndex, AT_ERROR);
     }
     else
     {
-        /* 调用At_FormatResultData发送命令结果 */
+        /* ????At_FormatResultData???????????? */
         At_FormatResultData(ucIndex, AT_OK);
     }
 
@@ -7101,13 +7101,13 @@ VOS_UINT32 AT_RcvDrvAgentHukSetCnf(VOS_VOID *pMsg)
 
     printk(KERN_ERR "\n AT_RcvDrvAgentHukSetCnf enter\n");
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg         = (DRV_AGENT_MSG_STRU *)pMsg;
     pstEvent        = (DRV_AGENT_HUK_SET_CNF_STRU *)pRcvMsg->aucContent;
     ucIndex         = AT_BROADCAST_CLIENT_INDEX_MODEM_0;
     ulResult        = VOS_NULL;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstEvent->stAtAppCtrl.usClientId,&ucIndex) )
     {
         AT_WARN_LOG("AT_RcvDrvAgentHukSetCnf: WARNING:AT INDEX NOT FOUND!");
@@ -7120,29 +7120,29 @@ VOS_UINT32 AT_RcvDrvAgentHukSetCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_HUK_SET */
+    /* ??????????????????????AT_CMD_HUK_SET */
     if (AT_CMD_HUK_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if (DRV_AGENT_PERSONALIZATION_NO_ERROR == pstEvent->enResult)
     {
-        /* 输出设置结果 */
+        /* ???????????? */
         ulResult    = AT_OK;
     }
     else
     {
-        /* 异常情况, 转换错误码 */
+        /* ????????, ?????????? */
         ulResult    = AT_PERSONALIZATION_ERR_BEGIN + pstEvent->enResult;
     }
 
     gstAtSendData.usBufLen = 0;
-    /* 调用AT_FormATResultDATa发送命令结果 */
+    /* ????AT_FormATResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -7158,13 +7158,13 @@ VOS_UINT32 AT_RcvDrvAgentFacAuthPubkeySetCnf(VOS_VOID *pMsg)
 
     printk(KERN_ERR "\n AT_RcvDrvAgentFacAuthPubkeySetCnf enter \n");
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg         = (DRV_AGENT_MSG_STRU *)pMsg;
     pstEvent        = (DRV_AGENT_FACAUTHPUBKEY_SET_CNF_STRU *)pRcvMsg->aucContent;
     ucIndex         = AT_BROADCAST_CLIENT_INDEX_MODEM_0;
     ulResult        = VOS_NULL;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstEvent->stAtAppCtrl.usClientId,&ucIndex) )
     {
         AT_WARN_LOG("AT_RcvDrvAgentFacAuthPubkeySetCnf: WARNING:AT INDEX NOT FOUND!");
@@ -7177,29 +7177,29 @@ VOS_UINT32 AT_RcvDrvAgentFacAuthPubkeySetCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_FACAUTHPUBKEY_SET */
+    /* ??????????????????????AT_CMD_FACAUTHPUBKEY_SET */
     if (AT_CMD_FACAUTHPUBKEYEX_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( DRV_AGENT_PERSONALIZATION_NO_ERROR == pstEvent->enResult )
     {
-        /* 输出设置结果 */
+        /* ???????????? */
         ulResult    = AT_OK;
     }
     else
     {
-        /* 异常情况, 转换错误码 */
+        /* ????????, ?????????? */
         ulResult    = AT_PERSONALIZATION_ERR_BEGIN + pstEvent->enResult;
     }
 
     gstAtSendData.usBufLen = 0;
-    /* 调用AT_FormATResultDATa发送命令结果 */
+    /* ????AT_FormATResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -7217,13 +7217,13 @@ VOS_UINT32 AT_RcvDrvAgentIdentifyStartSetCnf(VOS_VOID *pMsg)
 
     printk(KERN_ERR "\n AT_RcvDrvAgentIdentifyStartSetCnf enter\n");
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg         = (DRV_AGENT_MSG_STRU *)pMsg;
     pstEvent        = (DRV_AGENT_IDENTIFYSTART_SET_CNF_STRU *)pRcvMsg->aucContent;
     ucIndex         = AT_BROADCAST_CLIENT_INDEX_MODEM_0;
     usLength        = 0;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstEvent->stAtAppCtrl.usClientId,&ucIndex) )
     {
         AT_WARN_LOG("AT_RcvDrvAgentIdentifyStartSetCnf: WARNING:AT INDEX NOT FOUND!");
@@ -7236,19 +7236,19 @@ VOS_UINT32 AT_RcvDrvAgentIdentifyStartSetCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_IDENTIFYSTART_SET */
+    /* ??????????????????????AT_CMD_IDENTIFYSTART_SET */
     if ( AT_CMD_IDENTIFYSTART_SET != gastAtClientTab[ucIndex].CmdCurrentOpt )
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( DRV_AGENT_PERSONALIZATION_NO_ERROR == pstEvent->enResult )
     {
-        /* 输出设置结果 */
+        /* ???????????? */
         ulResult    = AT_OK;
         usLength = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                           (VOS_CHAR *)pgucAtSndCodeAddr,
@@ -7266,12 +7266,12 @@ VOS_UINT32 AT_RcvDrvAgentIdentifyStartSetCnf(VOS_VOID *pMsg)
     }
     else
     {
-        /* 异常情况, 转换错误码 */
+        /* ????????, ?????????? */
         ulResult    = AT_PERSONALIZATION_ERR_BEGIN + pstEvent->enResult;
     }
 
     gstAtSendData.usBufLen = usLength;
-    /* 调用AT_FormATResultDATa发送命令结果 */
+    /* ????AT_FormATResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -7287,11 +7287,11 @@ VOS_UINT32 AT_RcvDrvAgentIdentifyEndSetCnf(VOS_VOID *pMsg)
 
     printk(KERN_ERR "\n AT_RcvDrvAgentIdentifyEndSetCnf enter \n");
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pRcvMsg         = (DRV_AGENT_MSG_STRU *)pMsg;
     pstEvent        = (DRV_AGENT_IDENTIFYEND_SET_CNF_STRU *)pRcvMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstEvent->stAtAppCtrl.usClientId,&ucIndex) )
     {
         AT_WARN_LOG("AT_RcvDrvAgentIdentifyEndSetCnf: WARNING:AT INDEX NOT FOUND!");
@@ -7304,29 +7304,29 @@ VOS_UINT32 AT_RcvDrvAgentIdentifyEndSetCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_IDENTIFYEND_SET */
+    /* ??????????????????????AT_CMD_IDENTIFYEND_SET */
     if ( AT_CMD_IDENTIFYEND_SET != gastAtClientTab[ucIndex].CmdCurrentOpt )
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( DRV_AGENT_PERSONALIZATION_NO_ERROR == pstEvent->enResult )
     {
-        /* 输出设置结果 */
+        /* ???????????? */
         ulResult    = AT_OK;
     }
     else
     {
-        /* 异常情况, 转换错误码 */
+        /* ????????, ?????????? */
         ulResult    = AT_PERSONALIZATION_ERR_BEGIN + pstEvent->enResult;
     }
 
     gstAtSendData.usBufLen = 0;
-    /* 调用AT_FormATResultDATa发送命令结果 */
+    /* ????AT_FormATResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -7342,11 +7342,11 @@ VOS_UINT32 AT_RcvDrvAgentSimlockDataWriteSetCnf(VOS_VOID *pMsg)
 
     printk(KERN_ERR "\n AT_RcvDrvAgentSimlockDataWriteSetCnf enter\n");
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pRcvMsg         = (DRV_AGENT_MSG_STRU *)pMsg;
     pstEvent        = (DRV_AGENT_SIMLOCKDATAWRITE_SET_CNF_STRU *)pRcvMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstEvent->stAtAppCtrl.usClientId,&ucIndex) )
     {
         AT_WARN_LOG("AT_RcvDrvAgentSimlockDataWriteSetCnf: WARNING:AT INDEX NOT FOUND!");
@@ -7359,29 +7359,29 @@ VOS_UINT32 AT_RcvDrvAgentSimlockDataWriteSetCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_SIMLOCKDATAWRITE_SET */
+    /* ??????????????????????AT_CMD_SIMLOCKDATAWRITE_SET */
     if ( AT_CMD_SIMLOCKDATAWRITE_SET != gastAtClientTab[ucIndex].CmdCurrentOpt )
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( DRV_AGENT_PERSONALIZATION_NO_ERROR == pstEvent->enResult )
     {
-        /* 输出设置结果 */
+        /* ???????????? */
         ulResult    = AT_OK;
     }
     else
     {
-        /* 异常情况, 转换错误码 */
+        /* ????????, ?????????? */
         ulResult    = AT_PERSONALIZATION_ERR_BEGIN + pstEvent->enResult;
     }
 
     gstAtSendData.usBufLen = 0;
-    /* 调用AT_FormATResultDATa发送命令结果 */
+    /* ????AT_FormATResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -7412,17 +7412,17 @@ VOS_UINT32 AT_CheckSimlockCodeLast2Char(
 {
     VOS_UINT8                           i           = 0;
 
-    /* 检测最后两位的有效性, NET无需检测 */
+    /* ????????????????????, NET???????? */
     if (DRV_AGENT_PERSONALIZATION_CATEGORY_NETWORK < enCategory)
     {
         for (i = 0; i < 2; i++)
         {
-            /* NETSUB支持范围: 0x00~0x99 */
+            /* NETSUB????????: 0x00~0x99 */
             if ( ('0' <= pcStrLast2Char[i]) && ('9' >= pcStrLast2Char[i]) )
             {
                 continue;
             }
-            /* SP支持范围: 0x00~0xFF */
+            /* SP????????: 0x00~0xFF */
             else if ( (DRV_AGENT_PERSONALIZATION_CATEGORY_SERVICE_PROVIDER == enCategory)
                    && ('A' <= pcStrLast2Char[i]) && ('F' >= pcStrLast2Char[i]) )
             {
@@ -7448,7 +7448,7 @@ VOS_UINT32 AT_CheckSimlockCodeStr(
 {
     VOS_UINT8                           i           = 0;
     VOS_UINT8                           j           = 0;
-    VOS_UINT8                           ucLen;              /* 锁网号码长度 */
+    VOS_UINT8                           ucLen;              /* ???????????? */
     VOS_CHAR                           *pcTmpStr;
 
     pcTmpStr    = pcStrCode;
@@ -7463,7 +7463,7 @@ VOS_UINT32 AT_CheckSimlockCodeStr(
             break;
     }
 
-    /* 检测PLMN合法性及其位数 */
+    /* ????PLMN?????????????? */
     for (i = 0; i < AT_PERSONALIZATION_NET_CODE_LEN; i++)
     {
         if ( ('0' <= pcTmpStr[i]) && ('9' >= pcTmpStr[i]) )
@@ -7488,7 +7488,7 @@ VOS_UINT32 AT_CheckSimlockCodeStr(
 
     pcTmpStr[ucLen] = 0;
 
-    /* 检测锁网锁卡号码最后两位的合法性 */
+    /* ???????????????????????????????? */
     if (VOS_OK != AT_CheckSimlockCodeLast2Char(enCategory, &pcTmpStr[ucLen - 2]))
     {
         return VOS_ERR;
@@ -7526,10 +7526,10 @@ VOS_UINT32 AT_SimlockCodeBcd2Str(
             return VOS_ERR;
     }
 
-    /* 对锁网锁卡号码进行高低字节转换 */
+    /* ?????????????????????????????? */
     for (i = 0; i < ucDecodeLen; i++)
     {
-        /* 分别取出高低字节 */
+        /* ???????????????? */
         ucFirstNum  = (VOS_UINT8)((*(pucBcdNum + i)) & 0x0F);
         ucSecondNum = (VOS_UINT8)(((*(pucBcdNum + i)) >> 4) & 0x0F);
 
@@ -7537,14 +7537,14 @@ VOS_UINT32 AT_SimlockCodeBcd2Str(
         *pcStrTmp++ = AT_Num2AsciiNum(ucSecondNum);
     }
 
-    /* 将第四位号码后移到第六位(与产线对接) */
+    /* ????????????????????????(??????????) */
     pcStrTmp        = &pcStrNum[AT_PERSONALIZATION_CODE_FOURTH_CHAR_INDEX];
     cTmpChar        = pcStrTmp[0];
     pcStrTmp[0]     = pcStrTmp[1];
     pcStrTmp[1]     = pcStrTmp[2];
     pcStrTmp[2]     = cTmpChar;
 
-    /* 对高低字节转换后的锁网锁卡号码进行合法性检查 */
+    /* ???????????????????????????????????????????? */
     if (VOS_OK != AT_CheckSimlockCodeStr(enCategory, pcStrNum))
     {
         return VOS_ERR;
@@ -7661,7 +7661,7 @@ VOS_UINT32 AT_RcvDrvAgentPhoneSimlockInfoQryCnf(VOS_VOID *pMsg)
     VOS_UINT32                                              ulResult;
     VOS_UINT16                                              usLength;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pRcvMsg         = (DRV_AGENT_MSG_STRU *)pMsg;
 
     pstEvent        = (DRV_AGENT_PHONESIMLOCKINFO_QRY_CNF_STRU *)pRcvMsg->aucContent;
@@ -7671,7 +7671,7 @@ VOS_UINT32 AT_RcvDrvAgentPhoneSimlockInfoQryCnf(VOS_VOID *pMsg)
 
     printk(KERN_ERR "\n AT_RcvDrvAgentPhoneSimlockI***QryCnf enter (AT^PHONESIMLOCKI***) %u \n", VOS_GetSlice());
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstEvent->stAtAppCtrl.usClientId,&ucIndex) )
     {
         AT_WARN_LOG("AT_RcvDrvAgentPhoneSimlockInfoQryCnf: WARNING:AT INDEX NOT FOUND!");
@@ -7684,21 +7684,21 @@ VOS_UINT32 AT_RcvDrvAgentPhoneSimlockInfoQryCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_PHONESIMLOCKINFO_READ */
+    /* ??????????????????????AT_CMD_PHONESIMLOCKINFO_READ */
     if ( AT_CMD_PHONESIMLOCKINFO_READ != gastAtClientTab[ucIndex].CmdCurrentOpt )
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( DRV_AGENT_PERSONALIZATION_NO_ERROR == pstEvent->enResult )
     {
-        /* 输出设置结果 */
+        /* ???????????? */
         ulResult    = AT_OK;
-        /* 打印结果 */
+        /* ???????? */
         if (VOS_OK != AT_PhoneSimlockInfoPrint(pstEvent, ucIndex, &usLength))
         {
             ulResult = AT_PERSONALIZATION_OTHER_ERROR;
@@ -7706,12 +7706,12 @@ VOS_UINT32 AT_RcvDrvAgentPhoneSimlockInfoQryCnf(VOS_VOID *pMsg)
     }
     else
     {
-        /* 异常情况, 转换错误码 */
+        /* ????????, ?????????? */
         ulResult    = AT_PERSONALIZATION_ERR_BEGIN + pstEvent->enResult;
     }
 
     gstAtSendData.usBufLen = usLength;
-    /* 调用AT_FormATResultDATa发送命令结果 */
+    /* ????AT_FormATResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -7832,14 +7832,14 @@ VOS_UINT32 AT_RcvDrvAgentSimlockDataReadQryCnf(VOS_VOID *pMsg)
     printk(KERN_ERR "\n AT_RcvDrvAgentSimlockDataReadQryCnf enter\n");
 
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pRcvMsg         = (DRV_AGENT_MSG_STRU *)pMsg;
     pstEvent        = (DRV_AGENT_SIMLOCKDATAREAD_QRY_CNF_STRU *)pRcvMsg->aucContent;
     ucIndex         = AT_BROADCAST_CLIENT_INDEX_MODEM_0;
     ucSimlockType   = (VOS_UINT8)AT_GetSimlockUnlockCategoryFromClck();
     usLength        = 0;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstEvent->stAtAppCtrl.usClientId,&ucIndex) )
     {
         AT_WARN_LOG("AT_RcvDrvAgentSimlockDataReadQryCnf: WARNING:AT INDEX NOT FOUND!");
@@ -7858,12 +7858,12 @@ VOS_UINT32 AT_RcvDrvAgentSimlockDataReadQryCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( DRV_AGENT_PERSONALIZATION_NO_ERROR == pstEvent->enResult )
     {
-        /* 输出设置结果 */
+        /* ???????????? */
         ulResult    = AT_OK;
-        /* 打印结果 */
+        /* ???????? */
         if ( AT_CMD_CLCK_SIMLOCKDATAREAD != gastAtClientTab[ucIndex].CmdCurrentOpt)
         {
             if ( VOS_OK != AT_SimlockDataReadPrint(*pstEvent, ucIndex, &usLength))
@@ -7883,16 +7883,16 @@ VOS_UINT32 AT_RcvDrvAgentSimlockDataReadQryCnf(VOS_VOID *pMsg)
     }
     else
     {
-        /* 异常情况, 转换错误码 */
+        /* ????????, ?????????? */
         ulResult    = AT_PERSONALIZATION_ERR_BEGIN + pstEvent->enResult;
     }
 
     gstAtSendData.usBufLen = usLength;
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 调用AT_FormATResultDATa发送命令结果 */
+    /* ????AT_FormATResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -7906,13 +7906,13 @@ VOS_UINT32 AT_RcvDrvAgentPhonePhynumSetCnf(VOS_VOID *pMsg)
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pRcvMsg         = (DRV_AGENT_MSG_STRU *)pMsg;
     pstEvent        = (DRV_AGENT_PHONEPHYNUM_SET_CNF_STRU *)pRcvMsg->aucContent;
 
     printk(KERN_ERR "\n AT_RcvDrvAgentPhonePhynumSetCnf enter \n");
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstEvent->stAtAppCtrl.usClientId,&ucIndex) )
     {
         AT_WARN_LOG("AT_RcvDrvAgentPhonePhynumSetCnf: WARNING:AT INDEX NOT FOUND!");
@@ -7925,29 +7925,29 @@ VOS_UINT32 AT_RcvDrvAgentPhonePhynumSetCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_PHONEPHYNUM_SET */
+    /* ??????????????????????AT_CMD_PHONEPHYNUM_SET */
     if ( AT_CMD_PHONEPHYNUM_SET != gastAtClientTab[ucIndex].CmdCurrentOpt )
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( DRV_AGENT_PERSONALIZATION_NO_ERROR == pstEvent->enResult )
     {
-        /* 输出设置结果 */
+        /* ???????????? */
         ulResult    = AT_OK;
     }
     else
     {
-        /* 异常情况, 转换错误码 */
+        /* ????????, ?????????? */
         ulResult    = AT_PERSONALIZATION_ERR_BEGIN + pstEvent->enResult;
     }
 
     gstAtSendData.usBufLen = 0;
-    /* 调用AT_FormATResultDATa发送命令结果 */
+    /* ????AT_FormATResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -7965,13 +7965,13 @@ VOS_UINT32 AT_RcvDrvAgentPhonePhynumQryCnf(VOS_VOID *pMsg)
 
     printk(KERN_ERR "\n AT_RcvDrvAgentPhonePhynumQryCnf enter \n");
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pRcvMsg         = (DRV_AGENT_MSG_STRU *)pMsg;
     pstEvent        = (DRV_AGENT_PHONEPHYNUM_QRY_CNF_STRU *)pRcvMsg->aucContent;
     ucIndex         = AT_BROADCAST_CLIENT_INDEX_MODEM_0;
     usLength        = 0;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstEvent->stAtAppCtrl.usClientId,&ucIndex) )
     {
         AT_WARN_LOG("AT_RcvDrvAgentPhonePhynumQryCnf: WARNING:AT INDEX NOT FOUND!");
@@ -7984,20 +7984,20 @@ VOS_UINT32 AT_RcvDrvAgentPhonePhynumQryCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_PHONEPHYNUM_READ */
+    /* ??????????????????????AT_CMD_PHONEPHYNUM_READ */
     if ( AT_CMD_PHONEPHYNUM_READ != gastAtClientTab[ucIndex].CmdCurrentOpt )
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( DRV_AGENT_PERSONALIZATION_NO_ERROR == pstEvent->enResult )
     {
         ulResult    = AT_OK;
-        /* 格式化输出查询结果 */
+        /* ?????????????????? */
         usLength = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                           (VOS_CHAR *)pgucAtSndCodeAddr,
                                           (VOS_CHAR *)pgucAtSndCodeAddr,
@@ -8028,12 +8028,12 @@ VOS_UINT32 AT_RcvDrvAgentPhonePhynumQryCnf(VOS_VOID *pMsg)
     }
     else
     {
-        /* 异常情况, 转换错误码 */
+        /* ????????, ?????????? */
         ulResult    = AT_PERSONALIZATION_ERR_BEGIN + pstEvent->enResult;
     }
 
     gstAtSendData.usBufLen = usLength;
-    /* 调用AT_FormATResultDATa发送命令结果 */
+    /* ????AT_FormATResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -8071,11 +8071,11 @@ VOS_UINT32 AT_RcvDrvAgentPortctrlTmpSetCnf(VOS_VOID *pMsg)
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pRcvMsg         = (DRV_AGENT_MSG_STRU *)pMsg;
     pstEvent        = (DRV_AGENT_PORTCTRLTMP_SET_CNF_STRU *)pRcvMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstEvent->stAtAppCtrl.usClientId,&ucIndex) )
     {
         AT_WARN_LOG("AT_RcvDrvAgentPortctrlTmpSetCnf: WARNING:AT INDEX NOT FOUND!");
@@ -8088,19 +8088,19 @@ VOS_UINT32 AT_RcvDrvAgentPortctrlTmpSetCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_PORTCTRLTMP_SET */
+    /* ??????????????????????AT_CMD_PORTCTRLTMP_SET */
     if ( AT_CMD_PORTCTRLTMP_SET != gastAtClientTab[ucIndex].CmdCurrentOpt )
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( DRV_AGENT_PERSONALIZATION_NO_ERROR == pstEvent->enResult )
     {
-        /* 给OM发消息打开OM端口 */
+        /* ??OM??????????OM???? */
         ulResult    = AT_PortCtrlTmpSndMsg();
         if ( AT_OK != ulResult)
         {
@@ -8109,12 +8109,12 @@ VOS_UINT32 AT_RcvDrvAgentPortctrlTmpSetCnf(VOS_VOID *pMsg)
     }
     else
     {
-        /* 输出设置结果, 转换错误码 */
+        /* ????????????, ?????????? */
         ulResult         = AT_PERSONALIZATION_ERR_BEGIN + pstEvent->enResult;;
     }
 
     gstAtSendData.usBufLen = 0;
-    /* 调用AT_FormATResultDATa发送命令结果 */
+    /* ????AT_FormATResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -8128,11 +8128,11 @@ VOS_UINT32 AT_RcvDrvAgentPortAttribSetCnf(VOS_VOID *pMsg)
     VOS_UINT8                             ucIndex;
     VOS_UINT32                            ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pRcvMsg         = (DRV_AGENT_MSG_STRU *)pMsg;
     pstEvent        = (DRV_AGENT_PORTATTRIBSET_SET_CNF_STRU *)pRcvMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstEvent->stAtAppCtrl.usClientId,&ucIndex) )
     {
         AT_WARN_LOG("AT_RcvDrvAgentPortAttribSetCnf: WARNING:AT INDEX NOT FOUND!");
@@ -8145,28 +8145,28 @@ VOS_UINT32 AT_RcvDrvAgentPortAttribSetCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_PORTATTRIBSET_SET */
+    /* ??????????????????????AT_CMD_PORTATTRIBSET_SET */
     if ( AT_CMD_PORTATTRIBSET_SET != gastAtClientTab[ucIndex].CmdCurrentOpt )
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( DRV_AGENT_PERSONALIZATION_NO_ERROR == pstEvent->enResult )
     {
         ulResult    = AT_OK;
     }
     else
     {
-        /* 输出设置结果, 转换错误码 */
+        /* ????????????, ?????????? */
         ulResult    = AT_PERSONALIZATION_ERR_BEGIN + pstEvent->enResult;
     }
 
     gstAtSendData.usBufLen = 0;
-    /* 调用AT_FormATResultDATa发送命令结果 */
+    /* ????AT_FormATResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -8180,11 +8180,11 @@ VOS_UINT32 AT_RcvDrvAgentPortAttribSetQryCnf(VOS_VOID *pMsg)
     VOS_UINT8                                               ucIndex;
     VOS_UINT32                                              ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pRcvMsg         = (DRV_AGENT_MSG_STRU *)pMsg;
     pstEvent        = (DRV_AGENT_PORTATTRIBSET_QRY_CNF_STRU *)pRcvMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstEvent->stAtAppCtrl.usClientId,&ucIndex) )
     {
         AT_WARN_LOG("AT_RcvDrvAgentPortAttribSetQryCnf: WARNING:AT INDEX NOT FOUND!");
@@ -8197,18 +8197,18 @@ VOS_UINT32 AT_RcvDrvAgentPortAttribSetQryCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_PORTATTRIBSET_READ */
+    /* ??????????????????????AT_CMD_PORTATTRIBSET_READ */
     if ( AT_CMD_PORTATTRIBSET_READ != gastAtClientTab[ucIndex].CmdCurrentOpt )
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     gstAtSendData.usBufLen = 0;
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( DRV_AGENT_PERSONALIZATION_NO_ERROR == pstEvent->enResult )
     {
         if( (DRV_AGENT_PORT_STATUS_OFF  == pstEvent->enPortStatus)
@@ -8229,11 +8229,11 @@ VOS_UINT32 AT_RcvDrvAgentPortAttribSetQryCnf(VOS_VOID *pMsg)
     }
     else
     {
-        /* 输出设置结果, 转换错误码 */
+        /* ????????????, ?????????? */
         ulResult = AT_PERSONALIZATION_ERR_BEGIN + pstEvent->enResult;
     }
 
-    /* 调用AT_FormATResultDATa发送命令结果 */
+    /* ????AT_FormATResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -8247,11 +8247,11 @@ VOS_UINT32 AT_RcvDrvAgentOpwordSetCnf(VOS_VOID *pMsg)
     VOS_UINT8                                ucIndex;
     VOS_UINT32                               ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pRcvMsg         = (DRV_AGENT_MSG_STRU *)pMsg;
     pstEvent        = (DRV_AGENT_OPWORD_SET_CNF_STRU *)pRcvMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstEvent->stAtAppCtrl.usClientId,&ucIndex) )
     {
         AT_WARN_LOG("AT_RcvDrvAgentOpwordSetCnf: WARNING:AT INDEX NOT FOUND!");
@@ -8264,30 +8264,30 @@ VOS_UINT32 AT_RcvDrvAgentOpwordSetCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_OPWORD_SET */
+    /* ??????????????????????AT_CMD_OPWORD_SET */
     if ( AT_CMD_OPWORD_SET != gastAtClientTab[ucIndex].CmdCurrentOpt )
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( DRV_AGENT_PERSONALIZATION_NO_ERROR == pstEvent->enResult )
     {
-        /* 密码比对成功，获取权限 */
+        /* ?????????????????????? */
         g_enATE5RightFlag   = AT_E5_RIGHT_FLAG_YES;
         ulResult            = AT_OK;
     }
     else
     {
-        /* 输出设置结果, 转换错误码 */
+        /* ????????????, ?????????? */
         ulResult = AT_ERROR;
     }
 
     gstAtSendData.usBufLen = 0;
-    /* 调用AT_FormATResultDATa发送命令结果 */
+    /* ????AT_FormATResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -8303,7 +8303,7 @@ VOS_UINT32 AT_RcvDrvAgentAntSwitchSetCnf(VOS_VOID *pstData)
 
     pRcvMsg         = (DRV_AGENT_MSG_STRU *)pstData;
     pstAntSwitchCnf = (DRV_AGENT_ANTSWITCH_SET_CNF_STRU *)pRcvMsg->aucContent;
-    /* 根据ClientID获取通道索引 */
+    /* ????ClientID???????????? */
     if(AT_FAILURE == At_ClientIdToUserId(pstAntSwitchCnf->stAtAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentAntSwitchSetCnf: Get Index Fail!");
@@ -8316,14 +8316,14 @@ VOS_UINT32 AT_RcvDrvAgentAntSwitchSetCnf(VOS_VOID *pstData)
         return VOS_ERR;
     }
 
-    /* AT模块在等待^ANTSWITCH命令的操作结果事件上报 */
+    /* AT??????????^ANTSWITCH?????????????????????? */
     if (AT_CMD_ANTSWITCH_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvDrvAgentAntSwitchSetCnf: Error Option!");
         return VOS_ERR;
     }
 
-    /* 使用AT_STOP_TIMER_CMD_READY恢复AT命令实体状态为READY状态 */
+    /* ????AT_STOP_TIMER_CMD_READY????AT??????????????READY???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     if (VOS_OK != pstAntSwitchCnf->ulResult)
@@ -8348,7 +8348,7 @@ VOS_UINT32 AT_RcvDrvAgentAntSwitchQryCnf(VOS_VOID *pstData)
     pRcvMsg         = (DRV_AGENT_MSG_STRU *)pstData;
     pstAntSwitchCnf = (DRV_AGENT_ANTSWITCH_QRY_CNF_STRU *)pRcvMsg->aucContent;
 
-    /* 根据ClientID获取通道索引 */
+    /* ????ClientID???????????? */
     if(AT_FAILURE == At_ClientIdToUserId(pstAntSwitchCnf->stAtAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentAntSwitchQryCnf: Get Index Fail!");
@@ -8361,14 +8361,14 @@ VOS_UINT32 AT_RcvDrvAgentAntSwitchQryCnf(VOS_VOID *pstData)
         return VOS_ERR;
     }
 
-    /* AT模块在等待^ANTSWITCH命令的操作结果事件上报 */
+    /* AT??????????^ANTSWITCH?????????????????????? */
     if (AT_CMD_ANTSWITCH_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvDrvAgentAntSwitchQryCnf: Error Option!");
         return VOS_ERR;
     }
 
-    /* 使用AT_STOP_TIMER_CMD_READY恢复AT命令实体状态为READY状态 */
+    /* ????AT_STOP_TIMER_CMD_READY????AT??????????????READY???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
     gstAtSendData.usBufLen = 0;
 
@@ -8395,17 +8395,17 @@ VOS_UINT32 AT_RcvDrvAgentAntSwitchQryCnf(VOS_VOID *pstData)
 
 VOS_UINT32 AT_RcvMtaCposSetCnf(VOS_VOID *pMsg)
 {
-    /* 定义局部变量 */
+    /* ???????????? */
     AT_MTA_MSG_STRU                  *pstCposMsg;
     MTA_AT_CPOS_CNF_STRU             *pstEvent;
     VOS_UINT8                         ucIndex;
     VOS_UINT32                        ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pstCposMsg  = (AT_MTA_MSG_STRU*)pMsg;
     pstEvent    = (MTA_AT_CPOS_CNF_STRU*)pstCposMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstCposMsg->stAppCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMtaCposSetCnf: WARNING:AT INDEX NOT FOUND!");
@@ -8418,17 +8418,17 @@ VOS_UINT32 AT_RcvMtaCposSetCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_CPOS_SET */
+    /* ??????????????????????AT_CMD_CPOS_SET */
     if ( AT_CMD_CPOS_SET != gastAtClientTab[ucIndex].CmdCurrentOpt )
     {
         AT_WARN_LOG("AT_RcvMtaCposSetCnf: WARNING:Not AT_CMD_CPOS_SET!");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( MTA_AT_RESULT_NO_ERROR == pstEvent->enResult )
     {
         ulResult            = AT_OK;
@@ -8439,7 +8439,7 @@ VOS_UINT32 AT_RcvMtaCposSetCnf(VOS_VOID *pMsg)
     }
 
     gstAtSendData.usBufLen = 0;
-    /* 调用AT_FormatResultDATa发送命令结果 */
+    /* ????AT_FormatResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -8448,18 +8448,18 @@ VOS_UINT32 AT_RcvMtaCposSetCnf(VOS_VOID *pMsg)
 
 VOS_UINT32 AT_RcvMtaCposrInd(VOS_VOID *pMsg)
 {
-    /* 定义局部变量 */
+    /* ???????????? */
     VOS_UINT8                           ucIndex;
     AT_MTA_MSG_STRU                    *pstCposrMsg;
     MTA_AT_CPOSR_IND_STRU              *pstEvent;
     /* Modified by l60609 for DSDA Phase III, 2013-2-20, Begin */
     AT_MODEM_AGPS_CTX_STRU             *pstAgpsCtx = VOS_NULL_PTR;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pstCposrMsg = (AT_MTA_MSG_STRU*)pMsg;
     pstEvent    = (MTA_AT_CPOSR_IND_STRU*)pstCposrMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if (AT_FAILURE == At_ClientIdToUserId(pstCposrMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaCposrInd: WARNING:AT INDEX NOT FOUND!");
@@ -8468,7 +8468,7 @@ VOS_UINT32 AT_RcvMtaCposrInd(VOS_VOID *pMsg)
 
     pstAgpsCtx = AT_GetModemAgpsCtxAddrFromClientId(ucIndex);
 
-    /* 根据当前的AT_GetModemAgpsCtxAddrFromModemId(MODEM_ID_0)->enCposrReport的值判断是否允许主动上报辅助数据和指示 */
+    /* ??????????AT_GetModemAgpsCtxAddrFromModemId(MODEM_ID_0)->enCposrReport?????????????????????????????????????? */
     if (AT_CPOSR_ENABLE == pstAgpsCtx->enCposrReport)
     {
         gstAtSendData.usBufLen = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
@@ -8496,18 +8496,18 @@ VOS_UINT32 AT_RcvMtaXcposrRptInd(VOS_VOID *pMsg)
     MTA_AT_XCPOSRRPT_IND_STRU          *pstEvent;
     /* Modified by l60609 for DSDA Phase III, 2013-2-20, Begin */
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pstXcposrRptMsg = (AT_MTA_MSG_STRU*)pMsg;
     pstEvent        = (MTA_AT_XCPOSRRPT_IND_STRU*)pstXcposrRptMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstXcposrRptMsg->stAppCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMtaXcposrRptInd: WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* 根据当前的AT_GetModemAgpsCtxAddrFromModemId(MODEM_ID_0)->enXcposrReport的值判断是否允许上报主动清除申请 */
+    /* ??????????AT_GetModemAgpsCtxAddrFromModemId(MODEM_ID_0)->enXcposrReport???????????????????????????????? */
     gstAtSendData.usBufLen = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                                         (VOS_CHAR *)pgucAtSndCodeAddr,
                                                         (VOS_CHAR *)pgucAtSndCodeAddr,
@@ -8524,7 +8524,7 @@ VOS_UINT32 AT_RcvMtaXcposrRptInd(VOS_VOID *pMsg)
 
 VOS_UINT32 AT_RcvMtaCgpsClockSetCnf(VOS_VOID *pMsg)
 {
-    /* 定义局部变量 */
+    /* ???????????? */
     VOS_BOOL                            bEnable;
     MODEM_ID_ENUM_UINT16                enModemId;
     VOS_UINT8                           ucIndex;
@@ -8535,12 +8535,12 @@ VOS_UINT32 AT_RcvMtaCgpsClockSetCnf(VOS_VOID *pMsg)
 
     pstSetCnf = (MTA_AT_CGPSCLOCK_CNF_STRU*)pstMtaMsg->aucContent;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex             = 0;
     bEnable             = 0;
     enModemId           = MODEM_ID_0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstMtaMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaCgpsClockSetCnf : WARNING:AT INDEX NOT FOUND!");
@@ -8553,21 +8553,21 @@ VOS_UINT32 AT_RcvMtaCgpsClockSetCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CGPSCLOCK_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaCgpsClockSetCnf : Current Option is not AT_CMD_CGPSCLOCK_SET.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if (MTA_AT_RESULT_NO_ERROR != pstSetCnf->enResult)
     {
         gstAtSendData.usBufLen = 0;
-        /* 调用AT_FormATResultDATa发送命令结果 */
+        /* ????AT_FormATResultDATa???????????? */
         At_FormatResultData(ucIndex, AT_ERROR);
 
         return VOS_OK;
@@ -8585,7 +8585,7 @@ VOS_UINT32 AT_RcvMtaCgpsClockSetCnf(VOS_VOID *pMsg)
                                    pstSetCnf->enRatMode) )
     {
         gstAtSendData.usBufLen = 0;
-        /* 调用AT_FormATResultDATa发送命令结果 */
+        /* ????AT_FormATResultDATa???????????? */
         At_FormatResultData(ucIndex, AT_ERROR);
 
         AT_ERR_LOG("AT_RcvMtaCgpsClockSetCnf: AT_CfgGpsRefClk() failed!");
@@ -8593,7 +8593,7 @@ VOS_UINT32 AT_RcvMtaCgpsClockSetCnf(VOS_VOID *pMsg)
     }
 
     gstAtSendData.usBufLen = 0;
-    /* 调用AT_FormATResultDATa发送命令结果 */
+    /* ????AT_FormATResultDATa???????????? */
     At_FormatResultData(ucIndex, AT_OK);
 
     return VOS_OK;
@@ -8606,13 +8606,13 @@ VOS_VOID At_ProcMtaMsg(AT_MTA_MSG_STRU *pstMsg)
     VOS_UINT32                          ulMsgId;
     VOS_UINT32                          ulRst;
 
-    /*从g_astAtProcMsgFromMtaTab中获取消息个数*/
+    /*??g_astAtProcMsgFromMtaTab??????????????*/
     ulMsgCnt = sizeof(g_astAtProcMsgFromMtaTab)/sizeof(AT_PROC_MSG_FROM_MTA_STRU);
 
-    /*从消息包中获取MSG ID*/
+    /*??????????????MSG ID*/
     ulMsgId  = ((AT_MTA_MSG_STRU *)pstMsg)->ulMsgId;
 
-    /*g_astAtProcMsgFromMtaTab查表，进行消息分发*/
+    /*g_astAtProcMsgFromMtaTab??????????????????*/
     for (i = 0; i < ulMsgCnt; i++)
     {
         if (g_astAtProcMsgFromMtaTab[i].ulMsgType == ulMsgId)
@@ -8628,7 +8628,7 @@ VOS_VOID At_ProcMtaMsg(AT_MTA_MSG_STRU *pstMsg)
         }
     }
 
-    /*没有找到匹配的消息*/
+    /*??????????????????*/
     if (ulMsgCnt == i)
     {
         AT_ERR_LOG("At_ProcMtaMsg: Msg Id is invalid!");
@@ -8645,13 +8645,13 @@ VOS_VOID AT_ProcXpdsMsg(AT_XPDS_MSG_STRU *pstMsg)
     VOS_UINT32                          ulMsgId;
     VOS_UINT32                          ulRst;
 
-    /*从g_astAtProcMsgFromXpdsTab中获取消息个数*/
+    /*??g_astAtProcMsgFromXpdsTab??????????????*/
     ulMsgCnt = sizeof(g_astAtProcMsgFromXpdsTab)/sizeof(AT_PROC_MSG_FROM_XPDS_STRU);
 
-    /*从消息包中获取MSG ID*/
+    /*??????????????MSG ID*/
     ulMsgId  = ((AT_XPDS_MSG_STRU *)pstMsg)->enMsgId;
 
-    /*g_astAtProcMsgFromXpdsTab查表，进行消息分发*/
+    /*g_astAtProcMsgFromXpdsTab??????????????????*/
     for (i = 0; i < ulMsgCnt; i++)
     {
         if (g_astAtProcMsgFromXpdsTab[i].ulMsgType == ulMsgId)
@@ -8667,7 +8667,7 @@ VOS_VOID AT_ProcXpdsMsg(AT_XPDS_MSG_STRU *pstMsg)
         }
     }
 
-    /*没有找到匹配的消息*/
+    /*??????????????????*/
     if (ulMsgCnt == i)
     {
         AT_ERR_LOG("At_ProcXpdsMsg: Msg Id is invalid!");
@@ -8685,12 +8685,12 @@ VOS_UINT32 AT_RcvMtaSimlockUnlockSetCnf( VOS_VOID *pMsg )
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulResult;
 
-    /* 初始化 */
+    /* ?????? */
     pstRcvMsg       = (AT_MTA_MSG_STRU *)pMsg;
     pstEvent        = (MTA_AT_SIMLOCKUNLOCK_CNF_STRU *)pstRcvMsg->aucContent;
     ucIndex         = AT_BROADCAST_CLIENT_INDEX_MODEM_0;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaSimlockUnlockSetCnf: WARNING:AT INDEX NOT FOUND!");
@@ -8710,24 +8710,24 @@ VOS_UINT32 AT_RcvMtaSimlockUnlockSetCnf( VOS_VOID *pMsg )
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断回复消息中的错误码 */
+    /* ?????????????????????? */
     if (MTA_AT_RESULT_NO_ERROR == pstEvent->enResult)
     {
-        /* 解锁成功，输出OK */
+        /* ??????????????OK */
         ulResult    = AT_OK;
     }
     else
     {
-        /* 解锁失败，输出ERROR */
+        /* ??????????????ERROR */
         ulResult    = AT_ERROR;
     }
 
     gstAtSendData.usBufLen = 0;
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -8742,11 +8742,11 @@ VOS_UINT32 AT_RcvMtaQryNmrCnf( VOS_VOID *pMsg )
     VOS_UINT32                          ulNmrDataIndex;
     VOS_UINT16                          usLength;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg      = (AT_MTA_MSG_STRU *)pMsg;
     pstQryNmrCnf = (MTA_AT_QRY_NMR_CNF_STRU *)(pRcvMsg->aucContent);
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaQryNmrCnf:WARNING:AT INDEX NOT FOUND!");
@@ -8759,7 +8759,7 @@ VOS_UINT32 AT_RcvMtaQryNmrCnf( VOS_VOID *pMsg )
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CNMR_QUERY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
@@ -8767,20 +8767,20 @@ VOS_UINT32 AT_RcvMtaQryNmrCnf( VOS_VOID *pMsg )
 
     if (MTA_AT_RESULT_ERROR == pstQryNmrCnf->enResult)
     {
-        /* 查询失败直接上报error */
+        /* ????????????????error */
         gstAtSendData.usBufLen = 0;
 
-        /* 复位AT状态 */
+        /* ????AT???? */
         AT_STOP_TIMER_CMD_READY(ucIndex);
 
-        /* 输出结果 */
+        /* ???????? */
         At_FormatResultData(ucIndex, AT_ERROR);
         return VOS_OK;
     }
 
     usLength = 0;
 
-    /* 按AT^CNMR查询命令返回将接入层返回的数据码流显示上报 */
+    /* ??AT^CNMR?????????????????????????????????????????? */
     usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                        (VOS_CHAR *)pgucAtSndCodeAddr,
                                        (VOS_CHAR *)pgucAtSndCodeAddr + usLength,
@@ -8798,10 +8798,10 @@ VOS_UINT32 AT_RcvMtaQryNmrCnf( VOS_VOID *pMsg )
 
         gstAtSendData.usBufLen = usLength;
 
-        /* 复位AT状态 */
+        /* ????AT???? */
         AT_STOP_TIMER_CMD_READY(ucIndex);
 
-        /* 输出结果 */
+        /* ???????? */
         At_FormatResultData(ucIndex, AT_OK);
         return VOS_OK;
     }
@@ -8840,10 +8840,10 @@ VOS_UINT32 AT_RcvMtaQryNmrCnf( VOS_VOID *pMsg )
 
         gstAtSendData.usBufLen = 0;
 
-        /* 复位AT状态 */
+        /* ????AT???? */
         AT_STOP_TIMER_CMD_READY(ucIndex);
 
-        /* 输出结果 */
+        /* ???????? */
         At_FormatResultData(ucIndex, AT_OK);
     }
 
@@ -8862,14 +8862,14 @@ VOS_UINT32 AT_RcvMtaWrrAutotestQryCnf(
     VOS_UINT32                          i;
     VOS_UINT32                          ulRsltNum;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg             = (AT_MTA_MSG_STRU *)pMsg;
     pstWrrAutotestCnf   = (MTA_AT_WRR_AUTOTEST_QRY_CNF_STRU *)pRcvMsg->aucContent;
     ulResult            = AT_OK;
     ucIndex             = 0;
     ulRsltNum           = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaWrrAutotestQryCnf : WARNING:AT INDEX NOT FOUND!");
@@ -8882,17 +8882,17 @@ VOS_UINT32 AT_RcvMtaWrrAutotestQryCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CWAS_QUERY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaWrrAutotestQryCnf : Current Option is not AT_CMD_CWAS_QUERY.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^CWAS命令返回 */
+    /* ??????AT^CWAS???????? */
     gstAtSendData.usBufLen = 0;
 
     if (VOS_OK != pstWrrAutotestCnf->ulResult)
@@ -8924,7 +8924,7 @@ VOS_UINT32 AT_RcvMtaWrrAutotestQryCnf(
         }
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -8942,14 +8942,14 @@ VOS_UINT32 AT_RcvMtaWrrCellinfoQryCnf(
     VOS_UINT32                          i;
     VOS_UINT32                          ulCellNum;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg                 = (AT_MTA_MSG_STRU *)pMsg;
     pstWrrCellinfoQryCnf    = (MTA_AT_WRR_CELLINFO_QRY_CNF_STRU *)pRcvMsg->aucContent;
     ulResult                = AT_OK;
     ucIndex                 = 0;
     ulCellNum               = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaWrrCellinfoQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -8962,17 +8962,17 @@ VOS_UINT32 AT_RcvMtaWrrCellinfoQryCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CELLINFO_QUERY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaWrrCellinfoQryCnf : Current Option is not AT_CMD_CELLINFO_QUERY.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^CELLINFO命令返回 */
+    /* ??????AT^CELLINFO???????? */
     gstAtSendData.usBufLen = 0;
 
     if (VOS_OK != pstWrrCellinfoQryCnf->ulResult)
@@ -8983,7 +8983,7 @@ VOS_UINT32 AT_RcvMtaWrrCellinfoQryCnf(
     {
         ulResult = AT_OK;
 
-        /*没有获取的小区信息，打印0*/
+        /*????????????????????????0*/
         if ( 0 == pstWrrCellinfoQryCnf->stWrrCellInfo.ulCellNum )
         {
             gstAtSendData.usBufLen += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,
@@ -9007,7 +9007,7 @@ VOS_UINT32 AT_RcvMtaWrrCellinfoQryCnf(
         }
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -9030,7 +9030,7 @@ VOS_UINT32 AT_RcvMtaWrrMeanrptQryCnf(
     VOS_UINT32                          ulRptNum;
     VOS_UINT16                          usCellNum;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg                 = (AT_MTA_MSG_STRU *)pMsg;
     pstWrrMeanrptQryCnf     = (MTA_AT_WRR_MEANRPT_QRY_CNF_STRU *)pRcvMsg->aucContent;
     ulResult                = AT_OK;
@@ -9039,7 +9039,7 @@ VOS_UINT32 AT_RcvMtaWrrMeanrptQryCnf(
     ulRptNum                = 0;
     usCellNum               = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaWrrMeanrptQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -9052,17 +9052,17 @@ VOS_UINT32 AT_RcvMtaWrrMeanrptQryCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_MEANRPT_QUERY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaWrrMeanrptQryCnf : Current Option is not AT_CMD_MEANRPT_QUERY.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^MEANRPT命令返回 */
+    /* ??????AT^MEANRPT???????? */
     gstAtSendData.usBufLen = 0;
 
     if (VOS_OK != pstWrrMeanrptQryCnf->ulResult)
@@ -9105,7 +9105,7 @@ VOS_UINT32 AT_RcvMtaWrrMeanrptQryCnf(
         gstAtSendData.usBufLen = usLength;
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -9121,13 +9121,13 @@ VOS_UINT32 AT_RcvMtaWrrCellSrhSetCnf(
     VOS_UINT32                          ulResult;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg             = (AT_MTA_MSG_STRU *)pMsg;
     pstWrrCellSrhSetCnf = (MTA_AT_WRR_CELLSRH_SET_CNF_STRU *)pRcvMsg->aucContent;
     ulResult            = AT_OK;
     ucIndex             = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaWrrCellSrhSetCnf : WARNING:AT INDEX NOT FOUND!");
@@ -9140,17 +9140,17 @@ VOS_UINT32 AT_RcvMtaWrrCellSrhSetCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_WAS_MNTN_SET_CELLSRH != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaWrrCellSrhSetCnf : Current Option is not AT_CMD_WAS_MNTN_SET_CELLSRH.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^CELLSRH命令返回 */
+    /* ??????AT^CELLSRH???????? */
     gstAtSendData.usBufLen = 0;
 
     if (VOS_OK != pstWrrCellSrhSetCnf->ulResult)
@@ -9162,7 +9162,7 @@ VOS_UINT32 AT_RcvMtaWrrCellSrhSetCnf(
         ulResult = AT_OK;
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -9178,13 +9178,13 @@ VOS_UINT32 AT_RcvMtaWrrCellSrhQryCnf(
     VOS_UINT32                          ulResult;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg             = (AT_MTA_MSG_STRU *)pMsg;
     pstWrrCellSrhQryCnf = (MTA_AT_WRR_CELLSRH_QRY_CNF_STRU *)pRcvMsg->aucContent;
     ulResult            = AT_OK;
     ucIndex             = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaWrrCellSrhQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -9197,17 +9197,17 @@ VOS_UINT32 AT_RcvMtaWrrCellSrhQryCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_WAS_MNTN_QRY_CELLSRH != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaWrrCellSrhQryCnf : Current Option is not AT_CMD_WAS_MNTN_QRY_CELLSRH.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^FREQLOCK查询命令返回 */
+    /* ??????AT^FREQLOCK???????????? */
     gstAtSendData.usBufLen = 0;
 
     if (VOS_OK != pstWrrCellSrhQryCnf->ulResult)
@@ -9227,7 +9227,7 @@ VOS_UINT32 AT_RcvMtaWrrCellSrhQryCnf(
 
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -9243,13 +9243,13 @@ VOS_UINT32 AT_RcvMtaWrrFreqLockSetCnf(
     VOS_UINT32                          ulResult;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg             = (AT_MTA_MSG_STRU *)pMsg;
     pstWrrFreqlockCnf   = (MTA_AT_WRR_FREQLOCK_SET_CNF_STRU *)pRcvMsg->aucContent;
     ulResult            = AT_OK;
     ucIndex             = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaWrrFreqLockSetCnf : WARNING:AT INDEX NOT FOUND!");
@@ -9262,17 +9262,17 @@ VOS_UINT32 AT_RcvMtaWrrFreqLockSetCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_FREQLOCK_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaWrrFreqLockSetCnf : Current Option is not AT_CMD_FREQLOCK_SET.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^FREQLOCK命令返回 */
+    /* ??????AT^FREQLOCK???????? */
     gstAtSendData.usBufLen = 0;
 
     if (VOS_OK != pstWrrFreqlockCnf->ulResult)
@@ -9284,7 +9284,7 @@ VOS_UINT32 AT_RcvMtaWrrFreqLockSetCnf(
         ulResult = AT_OK;
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -9300,13 +9300,13 @@ VOS_UINT32 AT_RcvMtaWrrFreqLockQryCnf(
     VOS_UINT32                          ulResult;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg             = (AT_MTA_MSG_STRU *)pMsg;
     pstWrrFreqlockCnf   = (MTA_AT_WRR_FREQLOCK_QRY_CNF_STRU *)pRcvMsg->aucContent;
     ulResult            = AT_OK;
     ucIndex             = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaWrrFreqLockQryCnf : WARNING:AT INDEX NOT FOUND!");
@@ -9319,17 +9319,17 @@ VOS_UINT32 AT_RcvMtaWrrFreqLockQryCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_FREQLOCK_QUERY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaWrrFreqLockQryCnf : Current Option is not AT_CMD_FREQLOCK_QUERY.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^FREQLOCK查询命令返回 */
+    /* ??????AT^FREQLOCK???????????? */
     gstAtSendData.usBufLen = 0;
     if (VOS_OK != pstWrrFreqlockCnf->ulResult)
     {
@@ -9361,7 +9361,7 @@ VOS_UINT32 AT_RcvMtaWrrFreqLockQryCnf(
 
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -9377,13 +9377,13 @@ VOS_UINT32 AT_RcvMtaWrrRrcVersionSetCnf(
     VOS_UINT32                              ulResult;
     VOS_UINT8                               ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg                 = (AT_MTA_MSG_STRU *)pMsg;
     pstWrrVersionSetCnf     = (MTA_AT_WRR_RRC_VERSION_SET_CNF_STRU *)pRcvMsg->aucContent;
     ulResult                = AT_OK;
     ucIndex                 = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaWrrRrcVersionSetCnf : WARNING:AT INDEX NOT FOUND!");
@@ -9396,17 +9396,17 @@ VOS_UINT32 AT_RcvMtaWrrRrcVersionSetCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_RRC_VERSION_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaWrrRrcVersionSetCnf : Current Option is not AT_CMD_RRC_VERSION_SET.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^FREQLOCK命令返回 */
+    /* ??????AT^FREQLOCK???????? */
     gstAtSendData.usBufLen = 0;
 
     if (VOS_OK != pstWrrVersionSetCnf->ulResult)
@@ -9415,7 +9415,7 @@ VOS_UINT32 AT_RcvMtaWrrRrcVersionSetCnf(
     }
     else
     {
-        /* 设置成功后重新读写一下NV */
+        /* ??????????????????????NV */
         /* Modified by l60609 for DSDA Phase III, 2013-3-5, Begin */
         AT_ReadWasCapabilityNV();
         /* Modified by l60609 for DSDA Phase III, 2013-3-5, End */
@@ -9423,7 +9423,7 @@ VOS_UINT32 AT_RcvMtaWrrRrcVersionSetCnf(
         ulResult = AT_OK;
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -9441,13 +9441,13 @@ VOS_UINT32 AT_RcvMtaWrrRrcVersionQryCnf(
     VOS_UINT32                              ulResult;
     VOS_UINT8                               ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg             = (AT_MTA_MSG_STRU *)pMsg;
     pstWrrVersionQryCnf = (MTA_AT_WRR_RRC_VERSION_QRY_CNF_STRU *)pRcvMsg->aucContent;
     ulResult            = AT_OK;
     ucIndex             = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaWrrRrcVersionQryCnf : WARNING:AT INDEX NOT FOUND!");
@@ -9460,17 +9460,17 @@ VOS_UINT32 AT_RcvMtaWrrRrcVersionQryCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_RRC_VERSION_QUERY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaWrrRrcVersionQryCnf : Current Option is not AT_CMD_RRC_VERSION_QUERY.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^FREQLOCK查询命令返回 */
+    /* ??????AT^FREQLOCK???????????? */
     gstAtSendData.usBufLen = 0;
 
     if (VOS_OK != pstWrrVersionQryCnf->ulResult)
@@ -9490,7 +9490,7 @@ VOS_UINT32 AT_RcvMtaWrrRrcVersionQryCnf(
 
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -9504,12 +9504,12 @@ VOS_UINT32 AT_RcvMmaAcInfoQueryCnf(VOS_VOID *pstMsg)
     VOS_UINT16                          usLength;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pstAcInfoQueryCnf       = (TAF_MMA_AC_INFO_QRY_CNF_STRU*)pstMsg;
     usLength                = 0;
     ulResult                = AT_OK;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstAcInfoQueryCnf->stCtrl.usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaAcInfoQueryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -9522,16 +9522,16 @@ VOS_UINT32 AT_RcvMmaAcInfoQueryCnf(VOS_VOID *pstMsg)
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_LOCINFO_READ */
+    /*??????????????????????AT_CMD_LOCINFO_READ */
     if (AT_CMD_ACINFO_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 使用AT_STOP_TIMER_CMD_READY恢复AT命令实体状态为READY状态 */
+    /* ????AT_STOP_TIMER_CMD_READY????AT??????????????READY???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询结果是否失败,如果失败则返回ERROR */
+    /* ????????????????????,??????????????ERROR */
     if (VOS_OK != pstAcInfoQueryCnf->ulRslt)
     {
         ulResult = AT_ERROR;
@@ -9545,12 +9545,12 @@ VOS_UINT32 AT_RcvMmaAcInfoQueryCnf(VOS_VOID *pstMsg)
                                           (VOS_CHAR *)pgucAtSndCodeAddr + usLength,
                                           "%s:%d,%d,%d,%d",
                                           g_stParseContext[ucIndex].pstCmdElement->pszCmdName,
-                                          (VOS_UINT8)(pstAcInfoQueryCnf->stCellCsAcInfo.enSrvDomain),/* 上报服务域 */
-                                          (VOS_UINT8)(pstAcInfoQueryCnf->stCellCsAcInfo.enCellAcType),/* 上报小区禁止接入类型 */
-                                          (VOS_UINT8)(pstAcInfoQueryCnf->stCellCsAcInfo.ucRestrictRegister),/* 上报是否注册受限 */
-                                          (VOS_UINT8)(pstAcInfoQueryCnf->stCellCsAcInfo.ucRestrictPagingRsp));/* 上报是否寻呼受限 */
+                                          (VOS_UINT8)(pstAcInfoQueryCnf->stCellCsAcInfo.enSrvDomain),/* ?????????? */
+                                          (VOS_UINT8)(pstAcInfoQueryCnf->stCellCsAcInfo.enCellAcType),/* ???????????????????? */
+                                          (VOS_UINT8)(pstAcInfoQueryCnf->stCellCsAcInfo.ucRestrictRegister),/* ???????????????? */
+                                          (VOS_UINT8)(pstAcInfoQueryCnf->stCellCsAcInfo.ucRestrictPagingRsp));/* ???????????????? */
 
-        /* 换行 */
+        /* ???? */
         usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                           (TAF_CHAR *)pgucAtSndCodeAddr,
                                           (TAF_CHAR *)pgucAtSndCodeAddr + usLength,
@@ -9562,16 +9562,16 @@ VOS_UINT32 AT_RcvMmaAcInfoQueryCnf(VOS_VOID *pstMsg)
                                           (VOS_CHAR *)pgucAtSndCodeAddr + usLength,
                                           "%s:%d,%d,%d,%d",
                                           g_stParseContext[ucIndex].pstCmdElement->pszCmdName,
-                                          (VOS_UINT8)(pstAcInfoQueryCnf->stCellPsAcInfo.enSrvDomain),/* 上报服务域 */
-                                          (VOS_UINT8)(pstAcInfoQueryCnf->stCellPsAcInfo.enCellAcType),/* 上报小区禁止接入类型 */
-                                          (VOS_UINT8)(pstAcInfoQueryCnf->stCellPsAcInfo.ucRestrictRegister),/* 上报是否注册受限 */
-                                          (VOS_UINT8)(pstAcInfoQueryCnf->stCellPsAcInfo.ucRestrictPagingRsp));/* 上报是否寻呼受限 */
+                                          (VOS_UINT8)(pstAcInfoQueryCnf->stCellPsAcInfo.enSrvDomain),/* ?????????? */
+                                          (VOS_UINT8)(pstAcInfoQueryCnf->stCellPsAcInfo.enCellAcType),/* ???????????????????? */
+                                          (VOS_UINT8)(pstAcInfoQueryCnf->stCellPsAcInfo.ucRestrictRegister),/* ???????????????? */
+                                          (VOS_UINT8)(pstAcInfoQueryCnf->stCellPsAcInfo.ucRestrictPagingRsp));/* ???????????????? */
 
         gstAtSendData.usBufLen = usLength;
 
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -9588,14 +9588,14 @@ VOS_UINT32 AT_RcvMtaQryCurcCnf(VOS_VOID *pstMsg)
     VOS_UINT16                              usLength;
     VOS_UINT8                               ucLoop;
 
-    /* 初始化 */
+    /* ?????? */
     pstRcvMsg           = (AT_MTA_MSG_STRU *)pstMsg;
     pstMtaAtQryCurcCnf  = (MTA_AT_CURC_QRY_CNF_STRU *)pstRcvMsg->aucContent;
     ulResult            = AT_OK;
     ucIndex             = 0;
     usLength            = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaQryCurcCnf : WARNING:AT INDEX NOT FOUND!");
@@ -9608,17 +9608,17 @@ VOS_UINT32 AT_RcvMtaQryCurcCnf(VOS_VOID *pstMsg)
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CURC_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaQryCurcCnf : Current Option is not AT_CMD_RRC_VERSION_QUERY.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^CURC查询命令返回 */
+    /* ??????AT^CURC???????????? */
     gstAtSendData.usBufLen = 0;
 
     if (MTA_AT_RESULT_NO_ERROR != pstMtaAtQryCurcCnf->enResult)
@@ -9636,7 +9636,7 @@ VOS_UINT32 AT_RcvMtaQryCurcCnf(VOS_VOID *pstMsg)
                                                   g_stParseContext[ucIndex].pstCmdElement->pszCmdName,
                                                   pstMtaAtQryCurcCnf->enCurcRptType);
 
-        /* 如果<mode>参数为2，需要打印参数<report_cfg> */
+        /* ????<mode>??????2??????????????<report_cfg> */
         if (AT_MTA_RPT_GENERAL_CONTROL_CUSTOM == pstMtaAtQryCurcCnf->enCurcRptType)
         {
             usLength    += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
@@ -9657,7 +9657,7 @@ VOS_UINT32 AT_RcvMtaQryCurcCnf(VOS_VOID *pstMsg)
 
     gstAtSendData.usBufLen = usLength;
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -9671,13 +9671,13 @@ VOS_UINT32 AT_RcvMtaSetUnsolicitedRptCnf(VOS_VOID *pstMsg)
     VOS_UINT32                              ulResult;
     VOS_UINT8                               ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pstRcvMsg               = (AT_MTA_MSG_STRU *)pstMsg;
     pstSetUnsolicitedCnf    = (MTA_AT_UNSOLICITED_RPT_SET_CNF_STRU *)pstRcvMsg->aucContent;
     ulResult                = AT_OK;
     ucIndex                 = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaSetUnsolicitedRptCnf : WARNING:AT INDEX NOT FOUND!");
@@ -9690,17 +9690,17 @@ VOS_UINT32 AT_RcvMtaSetUnsolicitedRptCnf(VOS_VOID *pstMsg)
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_UNSOLICITED_RPT_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaSetUnsolicitedRptCnf : Current Option is not AT_CMD_RRC_VERSION_QUERY.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化命令返回 */
+    /* ?????????????? */
     gstAtSendData.usBufLen = 0;
 
     if (MTA_AT_RESULT_NO_ERROR != pstSetUnsolicitedCnf->enResult)
@@ -9712,7 +9712,7 @@ VOS_UINT32 AT_RcvMtaSetUnsolicitedRptCnf(VOS_VOID *pstMsg)
         ulResult = AT_OK;
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -9727,13 +9727,13 @@ VOS_UINT32 AT_RcvMtaQryUnsolicitedRptCnf(VOS_VOID *pstMsg)
     VOS_UINT32                              ulResult;
     VOS_UINT8                               ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pstRcvMsg               = (AT_MTA_MSG_STRU *)pstMsg;
     pstQryUnsolicitedCnf    = (MTA_AT_UNSOLICITED_RPT_QRY_CNF_STRU *)pstRcvMsg->aucContent;
     ulResult                = AT_OK;
     ucIndex                 = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaQryUnsolicitedRptCnf : WARNING:AT INDEX NOT FOUND!");
@@ -9746,17 +9746,17 @@ VOS_UINT32 AT_RcvMtaQryUnsolicitedRptCnf(VOS_VOID *pstMsg)
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_UNSOLICITED_RPT_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaQryUnsolicitedRptCnf : Current Option is not AT_CMD_RRC_VERSION_QUERY.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化查询命令返回 */
+    /* ?????????????????? */
     gstAtSendData.usBufLen = 0;
 
     if (MTA_AT_RESULT_NO_ERROR != pstQryUnsolicitedCnf->enResult)
@@ -9765,11 +9765,11 @@ VOS_UINT32 AT_RcvMtaQryUnsolicitedRptCnf(VOS_VOID *pstMsg)
     }
     else
     {
-        /* ucIndex参数带下来 */
+        /* ucIndex?????????? */
         ulResult = AT_ProcMtaUnsolicitedRptQryCnf(ucIndex, pstMsg);
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -9784,7 +9784,7 @@ VOS_UINT32 AT_ProcMtaUnsolicitedRptQryCnf(
     AT_MTA_MSG_STRU                        *pstRcvMsg            = VOS_NULL_PTR;
     MTA_AT_UNSOLICITED_RPT_QRY_CNF_STRU    *pstQryUnsolicitedCnf = VOS_NULL_PTR;
     VOS_UINT32                              ulResult;
-    /* ucIndex通过上层函数传下来 */
+    /* ucIndex?????????????????? */
 
     pstRcvMsg               = (AT_MTA_MSG_STRU *)pstMsg;
     pstQryUnsolicitedCnf    = (MTA_AT_UNSOLICITED_RPT_QRY_CNF_STRU *)pstRcvMsg->aucContent;
@@ -9792,7 +9792,7 @@ VOS_UINT32 AT_ProcMtaUnsolicitedRptQryCnf(
 
     switch (pstQryUnsolicitedCnf->enReqType)
     {
-        /* TIME查询的处理 */
+        /* TIME?????????? */
         case AT_MTA_QRY_TIME_RPT_TYPE:
             gstAtSendData.usBufLen =
                 (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
@@ -9803,8 +9803,8 @@ VOS_UINT32 AT_ProcMtaUnsolicitedRptQryCnf(
                                        pstQryUnsolicitedCnf->u.ucTimeRptFlg);
             break;
 
-        /* pstQryUnsolicitedCnf数据结构体修改 */
-        /* CTZR查询的处理 */
+        /* pstQryUnsolicitedCnf?????????????? */
+        /* CTZR?????????? */
         case AT_MTA_QRY_CTZR_RPT_TYPE:
             gstAtSendData.usBufLen = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                        (VOS_CHAR *)pgucAtSndCodeAddr,
@@ -9814,7 +9814,7 @@ VOS_UINT32 AT_ProcMtaUnsolicitedRptQryCnf(
                                        pstQryUnsolicitedCnf->u.ucCtzrRptFlg);
             break;
 
-        /* CSSN查询的处理 */
+        /* CSSN?????????? */
         case AT_MTA_QRY_CSSN_RPT_TYPE:
             gstAtSendData.usBufLen = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                                             (VOS_CHAR *)pgucAtSndCodeAddr,
@@ -9825,7 +9825,7 @@ VOS_UINT32 AT_ProcMtaUnsolicitedRptQryCnf(
                                                             pstQryUnsolicitedCnf->u.stCssnRptFlg.ucCssuRptFlg);
             break;
 
-        /* CUSD查询的处理 */
+        /* CUSD?????????? */
         case AT_MTA_QRY_CUSD_RPT_TYPE:
             gstAtSendData.usBufLen = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                                             (VOS_CHAR *)pgucAtSndCodeAddr,
@@ -9852,12 +9852,12 @@ VOS_UINT32 AT_RcvMmaCerssiInfoQueryCnf(VOS_VOID *pstMsg)
     AT_MODEM_NET_CTX_STRU              *pstNetCtx = VOS_NULL_PTR;
     VOS_UINT8                          *pucSystemAppConfig;
 
-    /* 初始化 */
+    /* ?????? */
     pstCerssiInfoQueryCnf   = (TAF_MMA_CERSSI_INFO_QRY_CNF_STRU*)pstMsg;
     usLength                = 0;
     pucSystemAppConfig      = AT_GetSystemAppConfigAddr();
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstCerssiInfoQueryCnf->stCtrl.usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaCerssiInfoQueryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -9872,16 +9872,16 @@ VOS_UINT32 AT_RcvMmaCerssiInfoQueryCnf(VOS_VOID *pstMsg)
 
     pstNetCtx = AT_GetModemNetCtxAddrFromClientId(ucIndex);
 
-    /*判断当前操作类型是否为AT_CMD_CERSSI_READ */
+    /*??????????????????????AT_CMD_CERSSI_READ */
     if (AT_CMD_CERSSI_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 使用AT_STOP_TIMER_CMD_READY恢复AT命令实体状态为READY状态 */
+    /* ????AT_STOP_TIMER_CMD_READY????AT??????????????READY???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询结果是否失败,如果失败则返回ERROR */
+    /* ????????????????????,??????????????ERROR */
     if (TAF_ERR_NO_ERROR != pstCerssiInfoQueryCnf->enErrorCause)
     {
         At_FormatResultData(ucIndex, AT_ERROR);
@@ -9910,7 +9910,7 @@ VOS_UINT32 AT_RcvMmaCerssiInfoQueryCnf(VOS_VOID *pstMsg)
 
             gstAtSendData.usBufLen = usLength;
 
-            /* 输出结果 */
+            /* ???????? */
             At_FormatResultData(ucIndex, AT_OK);
             return VOS_OK;
         }
@@ -9938,13 +9938,13 @@ VOS_UINT32 AT_RcvMmaCerssiInfoQueryCnf(VOS_VOID *pstMsg)
 
                 gstAtSendData.usBufLen = usLength;
 
-                /* 输出结果 */
+                /* ???????? */
                 At_FormatResultData(ucIndex, AT_OK);
                 return VOS_OK;
             }
             else
             {
-                /* 非fdd 3g 小区，ecio值为无效值255 */
+                /* ??fdd 3g ??????ecio??????????255 */
                 usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                                    (VOS_CHAR *)pgucAtSndCodeAddr,
                                                    (VOS_CHAR *)pgucAtSndCodeAddr + usLength,
@@ -9966,7 +9966,7 @@ VOS_UINT32 AT_RcvMmaCerssiInfoQueryCnf(VOS_VOID *pstMsg)
 
                 gstAtSendData.usBufLen = usLength;
 
-                /* 输出结果 */
+                /* ???????? */
                 At_FormatResultData(ucIndex, AT_OK);
                 return VOS_OK;
 
@@ -9976,7 +9976,7 @@ VOS_UINT32 AT_RcvMmaCerssiInfoQueryCnf(VOS_VOID *pstMsg)
 
         if (TAF_MMA_RAT_LTE == pstCerssiInfoQueryCnf->stCerssi.enRatType)
         {
-            /* LTE下的cerssi查询处理由L4A移到NAS，和atCerssiInfoCnfProc的处理相同 */
+            /* LTE????cerssi??????????L4A????NAS????atCerssiInfoCnfProc?????????? */
             if (SYSTEM_APP_ANDROID != *pucSystemAppConfig)
             {
                 usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
@@ -10025,13 +10025,13 @@ VOS_UINT32 AT_RcvMmaCerssiInfoQueryCnf(VOS_VOID *pstMsg)
             }
             gstAtSendData.usBufLen = usLength;
 
-            /* 输出结果 */
+            /* ???????? */
             At_FormatResultData(ucIndex, AT_OK);
             return VOS_OK;
         }
     }
 
-    /* 刚开机没有接入模式，参数都返回无效值 */
+    /* ???????????????????????????????????? */
     usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                        (VOS_CHAR *)pgucAtSndCodeAddr,
                                        (VOS_CHAR *)pgucAtSndCodeAddr + usLength,
@@ -10051,7 +10051,7 @@ VOS_UINT32 AT_RcvMmaCerssiInfoQueryCnf(VOS_VOID *pstMsg)
 
     gstAtSendData.usBufLen = usLength;
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, AT_OK);
 
     return VOS_OK;
@@ -10067,11 +10067,11 @@ VOS_UINT32 AT_RcvMtaBodySarSetCnf(VOS_VOID *pstMsg)
     VOS_UINT32                          ulResult;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg          = (AT_MTA_MSG_STRU*)pstMsg;
     pstBodySarSetCnf = (MTA_AT_RESULT_CNF_STRU*)pRcvMsg->aucContent;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaBodySarSetCnf: WARNING:AT INDEX NOT FOUND!");
@@ -10084,21 +10084,21 @@ VOS_UINT32 AT_RcvMtaBodySarSetCnf(VOS_VOID *pstMsg)
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_BODYSARON_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断回复消息中的错误码 */
+    /* ?????????????????????? */
     if (MTA_AT_RESULT_NO_ERROR == pstBodySarSetCnf->enResult)
     {
         ulResult    = AT_OK;
 
-        /* 更新BODYSAR 状态 */
+        /* ????BODYSAR ???? */
         if (AT_MTA_BODY_SAR_OFF == g_enAtBodySarState)
         {
             g_enAtBodySarState = AT_MTA_BODY_SAR_ON;
@@ -10115,7 +10115,7 @@ VOS_UINT32 AT_RcvMtaBodySarSetCnf(VOS_VOID *pstMsg)
 
     gstAtSendData.usBufLen = 0;
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -10137,7 +10137,7 @@ VOS_VOID AT_ReportResetCmd(AT_RESET_REPORT_CAUSE_ENUM_UINT32 enCause)
                                         enCause,
                                         gaucAtCrLf);
 
-    /* 需要上报给上层的双RIL */
+    /* ??????????????????RIL */
     At_SendResultData(AT_CLIENT_ID_APP,  pgucAtSndCodeAddr, usLength);
     At_SendResultData(AT_CLIENT_ID_PCUI, pgucAtSndCodeAddr, usLength);
 
@@ -10163,7 +10163,7 @@ VOS_VOID AT_StopAllTimer(VOS_VOID)
     {
         pstCcCtx = AT_GetModemCcCtxAddrFromClientId(ucModemIndex);
 
-        /* 停止S0定时器 */
+        /* ????S0?????? */
         if (VOS_TRUE == pstCcCtx->stS0TimeInfo.bTimerStart)
         {
             ulTimerName = pstCcCtx->stS0TimeInfo.ulTimerName;
@@ -10199,10 +10199,10 @@ VOS_VOID AT_ResetParseCtx(VOS_VOID)
 
         pstParseContext->ucClientStatus = AT_FW_CLIENT_STATUS_READY;
 
-        /* 清空所有的缓存的AT命令 */
+        /* ????????????????AT???? */
         AT_ClearBlockCmdInfo(ucClientIndex);
 
-        /* 重置AT组合命令解析的信息 */
+        /* ????AT?????????????????? */
         At_ResetCombinParseInfo(ucClientIndex);
 
         pstParseContext->ucMode    = AT_NORMAL_MODE;
@@ -10230,7 +10230,7 @@ VOS_VOID AT_ResetClientTab(VOS_VOID)
 
     for (ucClientIndex = 0; ucClientIndex < AT_MAX_CLIENT_NUM; ucClientIndex++)
     {
-        /* 清空对应表项 */
+        /* ???????????? */
         TAF_MEM_SET_S(&gastAtClientTab[ucClientIndex], sizeof(AT_CLIENT_MANAGE_STRU), 0x00, sizeof(AT_CLIENT_MANAGE_STRU));
     }
 
@@ -10292,7 +10292,7 @@ VOS_VOID AT_ResetClientTab(VOS_VOID)
     gastAtClientTab[ucIndex].UserType        = AT_APP_SOCK_USER;
     gastAtClientTab[ucIndex].ucUsed          = AT_CLIENT_USED;
 
-    /* MAX 有NV来控制的，CLIENT TAB的重置放在 AT_MuxInit里面 */
+    /* MAX ??NV??????????CLIENT TAB?????????? AT_MuxInit???? */
 
     /* APP */
     for (ucLoop = 0; ucLoop < AT_VCOM_AT_CHANNEL_MAX; ucLoop++)
@@ -10323,10 +10323,10 @@ VOS_VOID AT_ResetOtherCtx(VOS_VOID)
     /* <DEL> */
     ucAtS5          = 8;
 
-    /* 指示命令返回码类型 */
+    /* ?????????????????? */
     gucAtVType      = AT_V_ENTIRE_TYPE;
 
-    /* 指示TE编码类型 */
+    /* ????TE???????? */
     gucAtCscsType   = AT_CSCS_IRA_CODE;
 
     gucAtEType      = AT_E_ECHO_CMD;
@@ -10335,7 +10335,7 @@ VOS_VOID AT_ResetOtherCtx(VOS_VOID)
        Dial tone and busy detection are disabled. */
     gucAtXType      = 0;
 
-    /* 默认LTE上下行category都为6 */
+    /* ????LTE??????category????6 */
     g_stAtDlRateCategory.ucLteUeDlCategory = 6;
     g_stAtDlRateCategory.ucLteUeUlCategory = 6;
 }
@@ -10346,54 +10346,54 @@ VOS_UINT32 AT_RcvCcpuResetStartInd(
 )
 {
     printk(KERN_ERR "\n AT_RcvCcpuResetStartInd enter %u \n", VOS_GetSlice());
-    /* 上报^RESET:0命令 */
+    /* ????^RESET:0???? */
     AT_ReportResetCmd(AT_RESET_REPORT_CAUSE_CCPU_START);
 
-    /* 停止所有启动的内部定时器 */
+    /* ???????????????????????? */
     AT_StopAllTimer();
 
-    /* 初始化上下文信息 */
+    /* ???????????????? */
     AT_InitCtx();
 
     printk(KERN_ERR "\n AT_RcvCcpuResetStartInd nv write begin %u \n", VOS_GetSlice());
 
-    /* 将C核单独复位的标记写进NV中 */
+    /* ??C????????????????????NV?? */
     AT_WriteCcpuResetRecordNvim(VOS_TRUE);
 
     printk(KERN_ERR "\n AT_RcvCcpuResetStartInd nv write end %u \n", VOS_GetSlice());
 
-    /* 读取NV项 */
+    /* ????NV?? */
     AT_ReadNV();
 
-    /* 装备初始化 */
+    /* ?????????? */
     AT_InitDeviceCmd();
 
-    /* STK初始化 */
+    /* STK?????? */
     AT_InitStk();
 
         printk(KERN_ERR "\n AT_RcvCcpuResetStartInd nv read end %u \n", VOS_GetSlice());
 
-    /* AT模块参数的初始化 */
+    /* AT???????????????? */
     AT_InitPara();
 
-    /* 重置客户端解析信息 */
+    /* ?????????????????? */
     AT_ResetParseCtx();
 
-    /* 重置用户信息 */
+    /* ???????????? */
     AT_ResetClientTab();
 
 
-    /* 重置其他散落的全局变量 */
+    /* ?????????????????????? */
     AT_ResetOtherCtx();
 
     printk(KERN_ERR "\n AT_RcvCcpuResetStartInd set modem state %u \n", VOS_GetSlice());
 
-    /* C核单独复位后设置设备节点，当前未启动 */
+    /* C???????????????????????????????????? */
     mdrv_set_modem_state(PS_FALSE);
 
     printk(KERN_ERR "\n AT_RcvCcpuResetStartInd leave %u \n", VOS_GetSlice());
 
-    /* 释放信号量，使得调用API任务继续运行 */
+    /* ????????????????????API???????????? */
     VOS_SmV(AT_GetResetSem());
 
     return VOS_OK;
@@ -10405,10 +10405,10 @@ VOS_UINT32 AT_RcvCcpuResetEndInd(
 {
     printk(KERN_ERR "\n AT_RcvCcpuResetEndInd enter %u \n", VOS_GetSlice());
 
-    /* 设置复位完成的标志 */
+    /* ?????????????????? */
     AT_SetResetFlag(VOS_FALSE);
 
-    /* 上报^RESET:1命令 */
+    /* ????^RESET:1???? */
     AT_ReportResetCmd(AT_RESET_REPORT_CAUSE_CCPU_END);
 
     AT_WriteCcpuResetRecordNvim(VOS_FALSE);
@@ -10424,7 +10424,7 @@ VOS_UINT32 AT_RcvHifiResetStartInd(
 {
     printk(KERN_ERR "\n AT_RcvHifiResetStartInd %u \n", VOS_GetSlice());
 
-    /* 上报^RESET:2命令 */
+    /* ????^RESET:2???? */
     AT_ReportResetCmd(AT_RESET_REPORT_CAUSE_HIFI_START);
 
     AT_DBG_SAVE_HIFI_RESET_NUM(1);
@@ -10439,7 +10439,7 @@ VOS_UINT32 AT_RcvHifiResetEndInd(
 {
     printk(KERN_ERR "\n AT_RcvHifiResetEndInd %u \n", VOS_GetSlice());
 
-    /* 上报^RESET:3命令 */
+    /* ????^RESET:3???? */
     AT_ReportResetCmd(AT_RESET_REPORT_CAUSE_HIFI_END);
 
     return VOS_OK;
@@ -10478,7 +10478,7 @@ VOS_UINT32 AT_RcvTempprtStatusInd(VOS_VOID *pMsg)
 
     TAF_MEM_SET_S(&stTempProtectPara, sizeof(stTempProtectPara), 0x00, sizeof(stTempProtectPara));
 
-    /* 读取温度保护状态主动上报NV项 */
+    /* ????????????????????????NV?? */
     ulResult = NV_ReadEx(MODEM_ID_0,
                          en_NV_Item_TEMP_PROTECT_CONFIG,
                          &stTempProtectPara,
@@ -10516,11 +10516,11 @@ VOS_UINT32 AT_RcvMtaImeiVerifyQryCnf(VOS_VOID *pstMsg)
     VOS_UINT16                          usLength;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg       = (AT_MTA_MSG_STRU*)pstMsg;
     pulImeiVerify = (VOS_UINT32*)pRcvMsg->aucContent;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaImeiVerifyQryCnf: WARNING:AT INDEX NOT FOUND!");
@@ -10533,16 +10533,16 @@ VOS_UINT32 AT_RcvMtaImeiVerifyQryCnf(VOS_VOID *pstMsg)
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_IMEI_VERIFY_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 打印^IMEIVERIFY */
+    /* ????^IMEIVERIFY */
     usLength  = 0;
     usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                        (VOS_CHAR *)pgucAtSndCodeAddr,
@@ -10571,14 +10571,14 @@ VOS_UINT32 AT_RcvMtaCgsnQryCnf(VOS_VOID *pstMsg)
     MTA_AT_CGSN_QRY_CNF_STRU           *pstCgsn;
     VOS_UINT8                           aucImeiAscii[TAF_PH_IMEI_LEN];
 
-    /* 初始化 */
+    /* ?????? */
     ucCheckData   = 0;
     TAF_MEM_SET_S(aucImeiAscii, sizeof(aucImeiAscii), 0x00, TAF_PH_IMEI_LEN);
 
     pstRcvMsg = (AT_MTA_MSG_STRU*)pstMsg;
     pstCgsn   = (MTA_AT_CGSN_QRY_CNF_STRU *)pstRcvMsg->aucContent;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaCgsnQryCnf: WARNING:AT INDEX NOT FOUND!");
@@ -10591,16 +10591,16 @@ VOS_UINT32 AT_RcvMtaCgsnQryCnf(VOS_VOID *pstMsg)
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CGSN_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 读取IMEI信息 */
+    /* ????IMEI???? */
     for (ulI = 0; ulI < (TAF_PH_IMEI_LEN - 2); ulI += 2)
     {
         aucImeiAscii[ulI]     = pstCgsn->aucImei[ulI] + 0x30;
@@ -10643,13 +10643,13 @@ VOS_UINT32 AT_RcvMmaCopnInfoQueryCnf(VOS_VOID *pMsg)
     VOS_UINT32                          ulLoop;
     VOS_UINT32                          ulRet;
 
-    /* 初始化 */
+    /* ?????? */
     /* Modified by k902809 for Iteration 11, 2015-3-24, begin */
     pstCopnInfo   = (TAF_MMA_COPN_INFO_QRY_CNF_STRU *)pMsg;
     /* Modified by k902809 for Iteration 11, Iteration 11 2015-3-24, end */
     usLength      = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstCopnInfo->stCtrl.usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaCopnInfoQueryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -10662,26 +10662,26 @@ VOS_UINT32 AT_RcvMmaCopnInfoQueryCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_COPN_QRY */
+    /*??????????????????????AT_CMD_COPN_QRY */
     if (AT_CMD_COPN_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 参照+COPS或^MMPLMNINFO命令处理 */
+    /* ????+COPS??^MMPLMNINFO???????? */
     pstPlmnName = (TAF_PH_OPERATOR_NAME_STRU *)pstCopnInfo->aucContent;
 
     for (ulLoop = 0; ulLoop < pstCopnInfo->usPlmnNum; ulLoop++)
     {
         /*  +COPN: <operator in numeric format><operator in long alphanumeric format>     */
-        /* 输出命令名 */
+        /* ?????????? */
         usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                           (VOS_CHAR *)pgucAtSndCodeAddr,
                                           (VOS_CHAR *)pgucAtSndCodeAddr + usLength,
                                           "%s: ",
                                           g_stParseContext[ucIndex].pstCmdElement->pszCmdName);
 
-        /* 输出数字格式运营商名称 */
+        /* ?????????????????????? */
         usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                            (VOS_CHAR *)pgucAtSndCodeAddr,
                                            (VOS_CHAR *)(pgucAtSndCodeAddr + usLength),
@@ -10707,21 +10707,21 @@ VOS_UINT32 AT_RcvMmaCopnInfoQueryCnf(VOS_VOID *pMsg)
                                            (TAF_MMA_PLMN_MNC_DIGIT2_MASK & pstPlmnName->PlmnId.Mnc) >> TAF_MMA_PLMN_MNC_DIGIT2_OFFSET,
                                            (TAF_MMA_PLMN_MNC_DIGIT1_MASK & pstPlmnName->PlmnId.Mnc) >> TAF_MMA_PLMN_MNC_DIGIT1_OFFSET);
 
-        /* 添加逗号分隔符 */
+        /* ?????????????? */
         usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                            (VOS_CHAR *)pgucAtSndCodeAddr,
                                            (VOS_CHAR *)pgucAtSndCodeAddr + usLength,
                                            ",\"");
 
-        /* 输出运营商长名 */
+        /* ?????????????? */
         usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                            (VOS_CHAR *)pgucAtSndCodeAddr,
                                            (VOS_CHAR *)pgucAtSndCodeAddr + usLength,
                                            "%s",
                                            pstPlmnName->aucOperatorNameLong);
 
-        /* 添加引号 */
-        /* 添加逗号分隔符 */
+        /* ???????? */
+        /* ?????????????? */
         usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                            (VOS_CHAR *)pgucAtSndCodeAddr,
                                            (VOS_CHAR *)pgucAtSndCodeAddr + usLength,
@@ -10737,15 +10737,15 @@ VOS_UINT32 AT_RcvMmaCopnInfoQueryCnf(VOS_VOID *pMsg)
     }
 
     /*
-    AT模块根据MMA上报的运营商个数来确认运营商信息是否收集完成: 小于请求的运营商
-    个数则认为运营商信息已经收集完成，原因如下所述:
-    AT模块每次请求50条运营商信息，起始位置为已经输出的最后一个运营商的下一条运营商信息索引
-    如果待输出的运营商信息总数不足50条，则按实际的输出，
-    如果运营商数为50的倍数，则AT会再发一次运营商信息请求，MMA回复的运营商信息总数为0
+    AT????????MMA????????????????????????????????????????????: ????????????????
+    ??????????????????????????????????????????????:
+    AT????????????50??????????????????????????????????????????????????????????????????????
+    ??????????????????????????????50????????????????????
+    ??????????????50??????????AT??????????????????????????MMA??????????????????????0
     */
     if (pstCopnInfo->usPlmnNum < TAF_MMA_COPN_PLMN_MAX_NUM)
     {
-        /* 使用AT_STOP_TIMER_CMD_READY恢复AT命令实体状态为READY状态 */
+        /* ????AT_STOP_TIMER_CMD_READY????AT??????????????READY???? */
         AT_STOP_TIMER_CMD_READY(ucIndex);
         gstAtSendData.usBufLen = 0;
         At_FormatResultData(ucIndex, AT_OK);
@@ -10763,7 +10763,7 @@ VOS_UINT32 AT_RcvMmaCopnInfoQueryCnf(VOS_VOID *pMsg)
         /* Modified by k902809 for Iteration 11, Iteration 11 2015-3-24, end */
         if (VOS_TRUE != ulRet)
         {
-            /* 使用AT_STOP_TIMER_CMD_READY恢复AT命令实体状态为READY状态 */
+            /* ????AT_STOP_TIMER_CMD_READY????AT??????????????READY???? */
             AT_STOP_TIMER_CMD_READY(ucIndex);
             gstAtSendData.usBufLen = 0;
             At_FormatResultData(ucIndex, AT_ERROR);
@@ -10782,13 +10782,13 @@ VOS_UINT32 AT_RcvMtaSetNCellMonitorCnf(VOS_VOID *pstMsg)
     VOS_UINT32                              ulResult;
     VOS_UINT8                               ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pstRcvMsg    = (AT_MTA_MSG_STRU *)pstMsg;
     pstSetCnf    = (MTA_AT_RESULT_CNF_STRU *)pstRcvMsg->aucContent;
     ulResult     = AT_OK;
     ucIndex      = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaSetNCellMonitorCnf : WARNING:AT INDEX NOT FOUND!");
@@ -10801,17 +10801,17 @@ VOS_UINT32 AT_RcvMtaSetNCellMonitorCnf(VOS_VOID *pstMsg)
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_NCELL_MONITOR_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaSetNCellMonitorCnf : Current Option is not AT_CMD_NCELL_MONITOR_SET.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化命令返回 */
+    /* ?????????????? */
     gstAtSendData.usBufLen = 0;
 
     if (MTA_AT_RESULT_NO_ERROR != pstSetCnf->enResult)
@@ -10823,7 +10823,7 @@ VOS_UINT32 AT_RcvMtaSetNCellMonitorCnf(VOS_VOID *pstMsg)
         ulResult = AT_OK;
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -10839,14 +10839,14 @@ VOS_UINT32 AT_RcvMtaQryNCellMonitorCnf(VOS_VOID *pstMsg)
     VOS_UINT8                               ucIndex;
     VOS_UINT16                              usLength;
 
-    /* 初始化 */
+    /* ?????? */
     pstRcvMsg           = (AT_MTA_MSG_STRU *)pstMsg;
     pstMtaAtQryCnf      = (MTA_AT_NCELL_MONITOR_QRY_CNF_STRU *)pstRcvMsg->aucContent;
     ulResult            = AT_OK;
     ucIndex             = 0;
     usLength            = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaQryNCellMonitorCnf : WARNING:AT INDEX NOT FOUND!");
@@ -10859,17 +10859,17 @@ VOS_UINT32 AT_RcvMtaQryNCellMonitorCnf(VOS_VOID *pstMsg)
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_NCELL_MONITOR_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaQryNCellMonitorCnf : Current Option is not AT_CMD_NCELL_MONITOR_READ.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^NCELLMONITOR查询命令返回 */
+    /* ??????AT^NCELLMONITOR???????????? */
     gstAtSendData.usBufLen = 0;
 
     if (MTA_AT_RESULT_NO_ERROR != pstMtaAtQryCnf->enResult)
@@ -10880,7 +10880,7 @@ VOS_UINT32 AT_RcvMtaQryNCellMonitorCnf(VOS_VOID *pstMsg)
     {
         ulResult = AT_OK;
 
-        /* 查询时，还需要上报邻区状态 */
+        /* ?????????????????????????? */
         usLength        += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                                   (VOS_CHAR *)pgucAtSndCodeAddr,
                                                   (VOS_CHAR *)pgucAtSndCodeAddr + usLength,
@@ -10893,7 +10893,7 @@ VOS_UINT32 AT_RcvMtaQryNCellMonitorCnf(VOS_VOID *pstMsg)
 
     gstAtSendData.usBufLen = usLength;
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -10907,13 +10907,13 @@ VOS_UINT32 AT_RcvMtaNCellMonitorInd(VOS_VOID *pstMsg)
     VOS_UINT8                               ucIndex;
     VOS_UINT16                              usLength;
 
-    /* 初始化 */
+    /* ?????? */
     pstRcvMsg           = (AT_MTA_MSG_STRU *)pstMsg;
     pstMtaAtInd         = (MTA_AT_NCELL_MONITOR_IND_STRU *)pstRcvMsg->aucContent;
     ucIndex             = 0;
     usLength            = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaNCellMonitorInd : WARNING:AT INDEX NOT FOUND!");
@@ -10947,7 +10947,7 @@ VOS_UINT32 AT_RcvMmaSimInsertRsp(VOS_VOID *pMsg)
 
     ucIndex = AT_BROADCAST_CLIENT_INDEX_MODEM_0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstSimInsertRsp->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaSimInsertRsp : WARNING:AT INDEX NOT FOUND!");
@@ -10960,7 +10960,7 @@ VOS_UINT32 AT_RcvMmaSimInsertRsp(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_SIMINSERT_SET */
+    /*??????????????????????AT_CMD_SIMINSERT_SET */
     if (AT_CMD_SIMINSERT_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
@@ -10979,7 +10979,7 @@ VOS_UINT32 AT_RcvMmaSimInsertRsp(VOS_VOID *pMsg)
 
     gstAtSendData.usBufLen = 0;
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -10988,18 +10988,18 @@ VOS_UINT32 AT_RcvMmaSimInsertRsp(VOS_VOID *pMsg)
 
 VOS_UINT32 AT_RcvMtaRefclkfreqSetCnf(VOS_VOID *pMsg)
 {
-    /* 定义局部变量 */
+    /* ???????????? */
     AT_MTA_MSG_STRU                    *pstMtaMsg;
     MTA_AT_RESULT_CNF_STRU             *pstRltCnf;
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex     = 0;
     pstMtaMsg   = (AT_MTA_MSG_STRU *)pMsg;
     pstRltCnf   = (MTA_AT_RESULT_CNF_STRU *)pstMtaMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstMtaMsg->stAppCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMtaRefclkfreqSetCnf: WARNING:AT INDEX NOT FOUND!");
@@ -11012,17 +11012,17 @@ VOS_UINT32 AT_RcvMtaRefclkfreqSetCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_REFCLKFREQ_SET */
+    /* ??????????????????????AT_CMD_REFCLKFREQ_SET */
     if ( AT_CMD_REFCLKFREQ_SET != gastAtClientTab[ucIndex].CmdCurrentOpt )
     {
         AT_WARN_LOG("AT_RcvMtaRefclkfreqSetCnf: WARNING:Not AT_CMD_REFCLKFREQ_SET!");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( MTA_AT_RESULT_NO_ERROR == pstRltCnf->enResult )
     {
         ulResult    = AT_OK;
@@ -11034,7 +11034,7 @@ VOS_UINT32 AT_RcvMtaRefclkfreqSetCnf(VOS_VOID *pMsg)
 
     gstAtSendData.usBufLen = 0;
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -11044,13 +11044,13 @@ VOS_UINT32 AT_RcvMtaRefclkfreqSetCnf(VOS_VOID *pMsg)
 
 VOS_UINT32 AT_RcvMtaRficSsiRdQryCnf(VOS_VOID *pMsg)
 {
-    /* 定义局部变量 */
+    /* ???????????? */
     AT_MTA_MSG_STRU                    *pstMtaMsg;
     MTA_AT_RFICSSIRD_CNF_STRU          *pstRficSsiRdCnf;
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex                 = 0;
     pstMtaMsg               = ( AT_MTA_MSG_STRU * )pMsg;
     pstRficSsiRdCnf         = ( MTA_AT_RFICSSIRD_CNF_STRU * )pstMtaMsg->aucContent;
@@ -11063,17 +11063,17 @@ VOS_UINT32 AT_RcvMtaRficSsiRdQryCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_RFICSSIRD_SET */
+    /* ??????????????????????AT_CMD_RFICSSIRD_SET */
     if ( AT_CMD_RFICSSIRD_SET != gastAtClientTab[ucIndex].CmdCurrentOpt )
     {
         AT_WARN_LOG("AT_RcvMtaRficSsiRdQryCnf: WARNING:Not AT_CMD_REFCLKFREQ_READ!");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 输出寄存器的值 */
+    /* ?????????????? */
     gstAtSendData.usBufLen  = (VOS_UINT16)At_sprintf( AT_CMD_MAX_LEN,
                                                      (VOS_CHAR *)pgucAtSndCodeAddr,
                                                      (VOS_CHAR *)pgucAtSndCodeAddr,
@@ -11082,7 +11082,7 @@ VOS_UINT32 AT_RcvMtaRficSsiRdQryCnf(VOS_VOID *pMsg)
                                                      pstRficSsiRdCnf->ulRegValue );
     ulResult                = AT_OK;
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -11092,18 +11092,18 @@ VOS_UINT32 AT_RcvMtaRficSsiRdQryCnf(VOS_VOID *pMsg)
 
 VOS_UINT32 AT_RcvMtaRefclkfreqQryCnf(VOS_VOID *pMsg)
 {
-    /* 定义局部变量 */
+    /* ???????????? */
     AT_MTA_MSG_STRU                    *pstMtaMsg;
     MTA_AT_REFCLKFREQ_QRY_CNF_STRU     *pstRefclkfreqCnf;
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex             = 0;
     pstMtaMsg           = (AT_MTA_MSG_STRU *)pMsg;
     pstRefclkfreqCnf    = (MTA_AT_REFCLKFREQ_QRY_CNF_STRU *)pstMtaMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstMtaMsg->stAppCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMtaRefclkfreqQryCnf: WARNING:AT INDEX NOT FOUND!");
@@ -11116,20 +11116,20 @@ VOS_UINT32 AT_RcvMtaRefclkfreqQryCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_REFCLKFREQ_READ */
+    /* ??????????????????????AT_CMD_REFCLKFREQ_READ */
     if ( AT_CMD_REFCLKFREQ_READ != gastAtClientTab[ucIndex].CmdCurrentOpt )
     {
         AT_WARN_LOG("AT_RcvMtaRefclkfreqQryCnf: WARNING:Not AT_CMD_REFCLKFREQ_READ!");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( MTA_AT_RESULT_NO_ERROR == pstRefclkfreqCnf->enResult )
     {
-        /* 输出GPS参考时钟信息，命令版本号默认为0 */
+        /* ????GPS??????????????????????????????0 */
         gstAtSendData.usBufLen = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                                         (VOS_CHAR *)pgucAtSndCodeAddr,
                                                         (VOS_CHAR *)pgucAtSndCodeAddr,
@@ -11146,7 +11146,7 @@ VOS_UINT32 AT_RcvMtaRefclkfreqQryCnf(VOS_VOID *pMsg)
         ulResult    = AT_ERROR;
     }
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -11155,23 +11155,23 @@ VOS_UINT32 AT_RcvMtaRefclkfreqQryCnf(VOS_VOID *pMsg)
 
 VOS_UINT32 AT_RcvMtaRefclkfreqInd(VOS_VOID *pMsg)
 {
-    /* 定义局部变量 */
+    /* ???????????? */
     VOS_UINT8                           ucIndex;
     AT_MTA_MSG_STRU                    *pstMtaMsg;
     MTA_AT_REFCLKFREQ_IND_STRU         *pstRefclkfreqInd;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pstMtaMsg           = (AT_MTA_MSG_STRU*)pMsg;
     pstRefclkfreqInd    = (MTA_AT_REFCLKFREQ_IND_STRU*)pstMtaMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if (AT_FAILURE == At_ClientIdToUserId(pstMtaMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaRefclkfreqInd: WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* 输出GPS参考时钟信息，命令版本号默认为0 */
+    /* ????GPS??????????????????????????????0 */
     gstAtSendData.usBufLen = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                                     (VOS_CHAR *)pgucAtSndCodeAddr,
                                                     (VOS_CHAR *)pgucAtSndCodeAddr,
@@ -11198,13 +11198,13 @@ VOS_UINT32 AT_RcvMtaHandleDectSetCnf(
     VOS_UINT32                          ulResult;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg             = (AT_MTA_MSG_STRU *)pMsg;
     pstSetCnf           = (MTA_AT_HANDLEDECT_SET_CNF_STRU *)pRcvMsg->aucContent;
     ulResult            = AT_OK;
     ucIndex             = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaHandleDectSetCnf : WARNING:AT INDEX NOT FOUND!");
@@ -11217,14 +11217,14 @@ VOS_UINT32 AT_RcvMtaHandleDectSetCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_HANDLEDECT_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaHandleDectSetCnf : Current Option is not AT_CMD_HANDLEDECT_SET.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     gstAtSendData.usBufLen = 0;
@@ -11237,7 +11237,7 @@ VOS_UINT32 AT_RcvMtaHandleDectSetCnf(
         ulResult = AT_OK;
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -11253,13 +11253,13 @@ VOS_UINT32 AT_RcvMtaHandleDectQryCnf(
     VOS_UINT32                          ulResult;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg             = (AT_MTA_MSG_STRU *)pMsg;
     pstQryCnf           = (MTA_AT_HANDLEDECT_QRY_CNF_STRU *)pRcvMsg->aucContent;
     ulResult            = AT_OK;
     ucIndex             = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaHandleDectQryCnf : WARNING:AT INDEX NOT FOUND!");
@@ -11272,17 +11272,17 @@ VOS_UINT32 AT_RcvMtaHandleDectQryCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_HANDLEDECT_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaHandleDectQryCnf : Current Option is not AT_CMD_HANDLEDECT_QRY.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^HANDLEDECT?查询命令返回 */
+    /* ??????AT^HANDLEDECT????????????? */
     gstAtSendData.usBufLen = 0;
     if (MTA_AT_RESULT_NO_ERROR != pstQryCnf->enResult)
     {
@@ -11301,7 +11301,7 @@ VOS_UINT32 AT_RcvMtaHandleDectQryCnf(
 
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -11316,12 +11316,12 @@ VOS_UINT32 AT_RcvMtaPsTransferInd(
     AT_MTA_MSG_STRU                    *pstMtaMsg;
     MTA_AT_PS_TRANSFER_IND_STRU        *pstPsTransferInd;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex             = 0;
     pstMtaMsg           = (AT_MTA_MSG_STRU*)pMsg;
     pstPsTransferInd    = (MTA_AT_PS_TRANSFER_IND_STRU*)pstMtaMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstMtaMsg->stAppCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMtaPsTransferInd: WARNING:AT INDEX NOT FOUND!");
@@ -11350,12 +11350,12 @@ VOS_UINT32 AT_RcvMtaMipiInfoInd(
     AT_MTA_MSG_STRU                    *pstMtaMsg;
     MTA_AT_RF_LCD_MIPICLK_IND_STRU     *pstMipiClkCnf;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex             = 0;
     pstMtaMsg           = (AT_MTA_MSG_STRU*)pMsg;
     pstMipiClkCnf       = (MTA_AT_RF_LCD_MIPICLK_IND_STRU*)pstMtaMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstMtaMsg->stAppCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMtaMipiInfoInd: WARNING:AT INDEX NOT FOUND!");
@@ -11386,12 +11386,12 @@ VOS_UINT32 AT_RcvMtaMipiInfoCnf(
     AT_MTA_MSG_STRU                    *pstMtaMsg;
     MTA_AT_RF_LCD_MIPICLK_CNF_STRU     *pstMipiClkCnf;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex             = 0;
     pstMtaMsg           = (AT_MTA_MSG_STRU*)pMsg;
     pstMipiClkCnf       = (MTA_AT_RF_LCD_MIPICLK_CNF_STRU*)pstMtaMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstMtaMsg->stAppCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMtaMipiInfoCnf: WARNING:AT INDEX NOT FOUND!");
@@ -11404,13 +11404,13 @@ VOS_UINT32 AT_RcvMtaMipiInfoCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_MIPI_CLK_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     gstAtSendData.usBufLen = 0;
@@ -11430,7 +11430,7 @@ VOS_UINT32 AT_RcvMtaMipiInfoCnf(
                                                         pstMipiClkCnf->usMipiClk);
     }
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -11443,24 +11443,24 @@ VOS_VOID AT_RcvSwitchCmdModeMsg(VOS_UINT8 ucIndex)
 
     pstLineCtrl = AT_GetUartLineCtrlInfo();
 
-    /* 处理原则(enPortIndex对应的端口):
-     * (1) ONLINE-DATA模式 - 上报OK
-     * (2) 其他模式        - 丢弃
+    /* ????????(enPortIndex??????????):
+     * (1) ONLINE-DATA???? - ????OK
+     * (2) ????????        - ????
      */
 
-    /* 端口索引检查 */
+    /* ???????????? */
     if (ucIndex >= AT_CLIENT_BUTT)
     {
         return;
     }
 
-    /* 只处理UART端口检测到的切换命令 */
+    /* ??????UART???????????????????? */
     if (VOS_TRUE != AT_CheckHsUartUser(ucIndex))
     {
         return;
     }
 
-    /* 目前只支持PPP和IP模式下切换为ONLINE-COMMAND模式 */
+    /* ??????????PPP??IP????????????ONLINE-COMMAND???? */
     if ( (AT_DATA_MODE == gastAtClientTab[ucIndex].Mode)
       && ( (AT_PPP_DATA_MODE == gastAtClientTab[ucIndex].DataMode)
         || (AT_IP_DATA_MODE == gastAtClientTab[ucIndex].DataMode) ) )
@@ -11484,19 +11484,19 @@ VOS_VOID AT_RcvWaterLowMsg(VOS_UINT8 ucIndex)
 
     pstUartCtx = AT_GetUartCtxAddr();
 
-    /* 端口索引检查 */
+    /* ???????????? */
     if (ucIndex >= AT_CLIENT_BUTT)
     {
         return;
     }
 
-    /* 只处理UART端口的低水线消息 */
+    /* ??????UART???????????????? */
     if (VOS_TRUE != AT_CheckHsUartUser(ucIndex))
     {
         return;
     }
 
-    /* TX低水线处理 */
+    /* TX?????????? */
     if (VOS_NULL_PTR != pstUartCtx->pWmLowFunc)
     {
         pstUartCtx->pWmLowFunc(ucIndex);
@@ -11508,16 +11508,16 @@ VOS_VOID AT_RcvWaterLowMsg(VOS_UINT8 ucIndex)
 
 VOS_UINT32 AT_RcvMtaPsProtectSetCnf(VOS_VOID *pMsg)
 {
-    /* 定义局部变量 */
+    /* ???????????? */
     AT_MTA_MSG_STRU                    *pRcvMsg;
     MTA_AT_RRC_PROTECT_PS_CNF_STRU     *pstEvent;
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulResult;
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pRcvMsg = (AT_MTA_MSG_STRU*)pMsg;
     pstEvent = (MTA_AT_RRC_PROTECT_PS_CNF_STRU*)pRcvMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pRcvMsg->stAppCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMtaPsProtectSetCnf: WARNING:AT INDEX NOT FOUND!");
@@ -11530,17 +11530,17 @@ VOS_UINT32 AT_RcvMtaPsProtectSetCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_PSPROTECTMODE_SET */
+    /* ??????????????????????AT_CMD_PSPROTECTMODE_SET */
     if ( AT_CMD_PSPROTECTMODE_SET != gastAtClientTab[ucIndex].CmdCurrentOpt )
     {
         AT_WARN_LOG("AT_RcvMtaCgpsClockSetCnf: WARNING:Not AT_CMD_CGPSCLOCK_SET!");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( MTA_AT_RESULT_NO_ERROR == pstEvent->enResult )
     {
         ulResult = AT_OK;
@@ -11552,7 +11552,7 @@ VOS_UINT32 AT_RcvMtaPsProtectSetCnf(VOS_VOID *pMsg)
 
     gstAtSendData.usBufLen = 0;
 
-    /* 调用AT_FormATResultDATa发送命令结果 */
+    /* ????AT_FormATResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -11561,17 +11561,17 @@ VOS_UINT32 AT_RcvMtaPsProtectSetCnf(VOS_VOID *pMsg)
 
 VOS_UINT32 AT_RcvMtaPhyInitCnf(VOS_VOID *pMsg)
 {
-    /* 定义局部变量 */
+    /* ???????????? */
     AT_MTA_MSG_STRU                    *pRcvMsg;
     MTA_AT_PHY_INIT_CNF_STRU           *pstEvent;
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pRcvMsg = (AT_MTA_MSG_STRU*)pMsg;
     pstEvent = (MTA_AT_PHY_INIT_CNF_STRU*)pRcvMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pRcvMsg->stAppCtrl.usClientId,&ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMtaPhyInitCnf: WARNING:AT INDEX NOT FOUND!");
@@ -11584,17 +11584,17 @@ VOS_UINT32 AT_RcvMtaPhyInitCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_PHYINIT_SET */
+    /* ??????????????????????AT_CMD_PHYINIT_SET */
     if ( AT_CMD_PHYINIT_SET != gastAtClientTab[ucIndex].CmdCurrentOpt )
     {
         AT_WARN_LOG("AT_RcvMtaPhyInitCnf: WARNING:Not AT_CMD_PHYINIT!");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( MTA_AT_RESULT_NO_ERROR == pstEvent->enResult )
     {
         ulResult = AT_OK;
@@ -11605,7 +11605,7 @@ VOS_UINT32 AT_RcvMtaPhyInitCnf(VOS_VOID *pMsg)
     }
 
     gstAtSendData.usBufLen = 0;
-    /* 调用AT_FormATResultDATa发送命令结果 */
+    /* ????AT_FormATResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -11616,18 +11616,18 @@ VOS_UINT32 AT_RcvMtaPhyInitCnf(VOS_VOID *pMsg)
 
 VOS_UINT32 AT_RcvMtaEcidSetCnf(VOS_VOID *pMsg)
 {
-    /* 定义局部变量 */
+    /* ???????????? */
     VOS_UINT8                           ucIndex;
     AT_MTA_MSG_STRU                    *pstMtaMsg;
     MTA_AT_ECID_SET_CNF_STRU           *pstEcidSetCnf;
     VOS_UINT32                          ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex         = 0;
     pstMtaMsg       = (AT_MTA_MSG_STRU*)pMsg;
     pstEcidSetCnf   = (MTA_AT_ECID_SET_CNF_STRU*)pstMtaMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstMtaMsg->stAppCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMtaEcidSetCnf: WARNING:AT INDEX NOT FOUND!");
@@ -11640,20 +11640,20 @@ VOS_UINT32 AT_RcvMtaEcidSetCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_REFCLKFREQ_READ */
+    /* ??????????????????????AT_CMD_REFCLKFREQ_READ */
     if ( AT_CMD_ECID_SET != gastAtClientTab[ucIndex].CmdCurrentOpt )
     {
         AT_WARN_LOG("AT_RcvMtaEcidSetCnf: WARNING:Not AT_CMD_REFCLKFREQ_READ!");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( MTA_AT_RESULT_NO_ERROR == pstEcidSetCnf->enResult )
     {
-        /* 输出查询的增强型小区信息 */
+        /* ???????????????????????? */
         /* +ECID=<version>,<rat>,[<cell_description>] */
         gstAtSendData.usBufLen = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                                         (VOS_CHAR *)pgucAtSndCodeAddr,
@@ -11675,7 +11675,7 @@ VOS_UINT32 AT_RcvMtaEcidSetCnf(VOS_VOID *pMsg)
         ulResult    = AT_OK;
     }
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -11695,7 +11695,7 @@ VOS_UINT32 AT_RcvMmaSysCfgSetCnf(
 
     ucIndex = AT_BROADCAST_CLIENT_INDEX_MODEM_0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstCnfMsg->usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaSysCfgSetCnf : WARNING:AT INDEX NOT FOUND!");
@@ -11723,7 +11723,7 @@ VOS_UINT32 AT_RcvMmaSysCfgSetCnf(
 
     gstAtSendData.usBufLen = 0;
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -11753,7 +11753,7 @@ VOS_UINT32 AT_RcvMmaPhoneModeSetCnf(
         return VOS_ERR;
     }
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstCnfMsg->usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaSysCfgSetCnf : WARNING:AT INDEX NOT FOUND!");
@@ -11774,14 +11774,14 @@ VOS_UINT32 AT_RcvMmaPhoneModeSetCnf(
     }
     else
     {
-        ulResult = At_ChgTafErrorCode(ucIndex, pstCnfMsg->enErrorCause);       /* 发生错误 */
+        ulResult = At_ChgTafErrorCode(ucIndex, pstCnfMsg->enErrorCause);       /* ???????? */
     }
 
 
 
 
     /* Added by c64416 for ^PSTANDBY low power proc, 2013-9-13, Begin */
-    /* V7R2 ^PSTANDBY命令复用关机处理流程 */
+    /* V7R2 ^PSTANDBY???????????????????? */
     if(AT_CMD_PSTANDBY_SET == (AT_LTE_CMD_CURRENT_OPT_ENUM)gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_STOP_TIMER_CMD_READY(ucIndex);
@@ -11790,7 +11790,7 @@ VOS_UINT32 AT_RcvMmaPhoneModeSetCnf(
     }
     /* Added by c64416 for ^PSTANDBY low power proc, 2013-9-13, End */
 
-    /* 如果GU处理结果正确，则发送到TL测并等待结果 */
+    /* ????GU??????????????????????TL???????????? */
     if (ulResult == AT_OK)
     {
         ucSptLteFlag        = AT_IsModemSupportRat(enModemId, TAF_MMA_RAT_LTE);
@@ -11812,7 +11812,7 @@ VOS_UINT32 AT_RcvMmaPhoneModeSetCnf(
 
     gstAtSendData.usBufLen = 0;
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -11831,7 +11831,7 @@ VOS_UINT32 AT_RcvMmaDetachCnf(
 
     ucIndex = AT_BROADCAST_CLIENT_INDEX_MODEM_0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstDetachCnf->usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaDetachCnf : WARNING:AT INDEX NOT FOUND!");
@@ -11858,7 +11858,7 @@ VOS_UINT32 AT_RcvMmaDetachCnf(
 
     gstAtSendData.usBufLen = 0;
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -11877,36 +11877,36 @@ VOS_UINT32 AT_RcvMmaAttachCnf(
 
     ucIndex = AT_BROADCAST_CLIENT_INDEX_MODEM_0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstAttachCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaAttachCnf : WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* 去除广播CLIENT类型的情况 */
+    /* ????????CLIENT?????????? */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaAttachCnf : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
 
-    /* 停止保护定时器 */
+    /* ?????????????? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 只输出结果(OK/ERROR)，不输出其他信息 */
+    /* ??????????(OK/ERROR)???????????????? */
     gstAtSendData.usBufLen = 0;
 
     if (TAF_MMA_APP_OPER_RESULT_SUCCESS == pstAttachCnf->enRslt)
     {
-        /* 调用At_FormatResultData发送命令结果 */
+        /* ????At_FormatResultData???????????? */
         At_FormatResultData(ucIndex, AT_OK);
     }
     else
     {
         gastAtClientTab[ucIndex].ulCause = pstAttachCnf->enErrorCause;
 
-        /* 调用At_FormatResultData发送命令结果 */
+        /* ????At_FormatResultData???????????? */
         At_FormatResultData(ucIndex, AT_ERROR);
     }
 
@@ -11925,38 +11925,38 @@ VOS_UINT32 AT_RcvMmaAttachStatusQryCnf(
 
     ucIndex = AT_BROADCAST_CLIENT_INDEX_MODEM_0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstAttachStatusQryCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaAttachStatusQryCnf : WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* 去除广播CLIENT类型的情况 */
+    /* ????????CLIENT?????????? */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaAttachStatusQryCnf : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
 
-    /* 检查当前操作类型 */
+    /* ???????????????? */
     if (AT_CMD_MMA_GET_CURRENT_ATTACH_STATUS != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaAttachStatusQryCnf : CmdCurrentOpt Not Match.");
         return VOS_ERR;
     }
 
-    /* 停止保护定时器 */
+    /* ?????????????? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 检查查询结果 */
+    /* ???????????? */
     if (TAF_MMA_APP_OPER_RESULT_SUCCESS != pstAttachStatusQryCnf->enRslt)
     {
         At_FormatResultData(ucIndex,AT_ERROR);
         return AT_ERROR;
     }
 
-    /* 根据Domain Type输出返回结果 */
+    /* ????Domain Type???????????? */
     if (TAF_MMA_SERVICE_DOMAIN_CS_PS == pstAttachStatusQryCnf->enDomainType)
     {
         gstAtSendData.usBufLen = (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,
@@ -12005,14 +12005,14 @@ VOS_UINT32 AT_RcvMmaCLocInfoQueryCnf(
     VOS_UINT8                           ucIndex;
 
 
-    /* 初始化 */
+    /* ?????? */
     /* Modified by k902809 for Iteration 11, 2015-3-25, begin */
     pstCLocInfoQueryCnf = (TAF_MMA_CDMA_LOCINFO_QRY_CNF_STRU*)pstMsg;
     /* Modified by k902809 for Iteration 11, Iteration 11 2015-3-25, end */
     usLength            = 0;
     ulResult            = AT_OK;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstCLocInfoQueryCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaCLocInfoQueryCnf: WARNING:AT INDEX NOT FOUND!");
@@ -12025,7 +12025,7 @@ VOS_UINT32 AT_RcvMmaCLocInfoQueryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_CLOCINFO_QRY */
+    /*??????????????????????AT_CMD_CLOCINFO_QRY */
     if (AT_CMD_CLOCINFO_QRY == gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_STOP_TIMER_CMD_READY(ucIndex);
@@ -12055,7 +12055,7 @@ VOS_UINT32 AT_RcvMmaCLocInfoQueryCnf(
         {
             /* IsClocInfoValid = VOS_FALSE; */
 
-            /* 查询失败，上报^CLOCINFO: 0*/
+            /* ??????????????^CLOCINFO: 0*/
             usLength = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                              (VOS_CHAR *)pgucAtSndCodeAddr,
                                              (VOS_CHAR *)pgucAtSndCodeAddr + usLength,
@@ -12071,7 +12071,7 @@ VOS_UINT32 AT_RcvMmaCLocInfoQueryCnf(
         return VOS_ERR;
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -12085,11 +12085,11 @@ VOS_UINT32 AT_RcvMmaCSidInd(
     VOS_UINT8                           ucIndex;
     TAF_MMA_CSID_IND_STRU              *pstCSidInd;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex             = 0;
     pstCSidInd       = (TAF_MMA_CSID_IND_STRU*)pstMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstCSidInd->stCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMmaCSidInd: WARNING:AT INDEX NOT FOUND!");
@@ -12119,11 +12119,11 @@ VOS_UINT32 AT_RcvMmaEmcCallBackNtf(
     VOS_UINT8                           ucIndex;
     TAF_MMA_1X_EMC_CALL_BACK_NTF_STRU  *pstEmcCallBack;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex             = 0;
     pstEmcCallBack      = (TAF_MMA_1X_EMC_CALL_BACK_NTF_STRU*)pstMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstEmcCallBack->stCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMmaEmcCallBackNtf: WARNING:AT INDEX NOT FOUND!");
@@ -12153,11 +12153,11 @@ VOS_UINT32 AT_RcvMmaQuitCallBackCnf(
     TAF_MMA_QUIT_CALLBACK_SET_CNF_STRU *pstQccbCnf;
     VOS_UINT32                          ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex            = 0;
     pstQccbCnf = (TAF_MMA_QUIT_CALLBACK_SET_CNF_STRU*)pMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstQccbCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaQuitCallBackCnf : WARNING:AT INDEX NOT FOUND!");
@@ -12170,7 +12170,7 @@ VOS_UINT32 AT_RcvMmaQuitCallBackCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_QCCB_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaQuitCallBackCnf : Current Option is not AT_CMD_QCCB_SET.");
@@ -12179,7 +12179,7 @@ VOS_UINT32 AT_RcvMmaQuitCallBackCnf(
 
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^QCCB查询命令返回 */
+    /* ??????AT^QCCB???????????? */
     gstAtSendData.usBufLen = 0;
 
     if (TAF_ERR_NO_ERROR == pstQccbCnf->enErrorCode)
@@ -12191,7 +12191,7 @@ VOS_UINT32 AT_RcvMmaQuitCallBackCnf(
         ulResult = AT_ERROR;
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
     return VOS_OK;
 }
@@ -12205,12 +12205,12 @@ VOS_UINT32 AT_RcvMmaQryEmcCallBackCnf(
     VOS_UINT16                                              usLength;
     VOS_UINT32                                              ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex            = 0;
     usLength           = 0;
     pstQryEmcCallBackCnf = (TAF_MMA_1X_EMC_CALL_BACK_QRY_CNF_STRU*)pMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstQryEmcCallBackCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaQryEmcCallBackCnf : WARNING:AT INDEX NOT FOUND!");
@@ -12223,7 +12223,7 @@ VOS_UINT32 AT_RcvMmaQryEmcCallBackCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_EMCCBM_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaQuitCallBackCnf : Current Option is not AT_CMD_EMCCBM_QRY.");
@@ -12232,7 +12232,7 @@ VOS_UINT32 AT_RcvMmaQryEmcCallBackCnf(
 
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^QCCB查询命令返回 */
+    /* ??????AT^QCCB???????????? */
     gstAtSendData.usBufLen = 0;
 
     if (TAF_ERR_NO_ERROR == pstQryEmcCallBackCnf->enErrorCode)
@@ -12251,7 +12251,7 @@ VOS_UINT32 AT_RcvMmaQryEmcCallBackCnf(
         ulResult = AT_CME_UNKNOWN;
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
     return VOS_OK;
 }
@@ -12264,11 +12264,11 @@ VOS_UINT32 AT_RcvMmaSetCSidListCnf(
     TAF_MMA_CSIDLIST_SET_CNF_STRU      *pstSetCSidListCnf;
     VOS_UINT32                          ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex            = 0;
     pstSetCSidListCnf = (TAF_MMA_CSIDLIST_SET_CNF_STRU*)pMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstSetCSidListCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaSetCSidListCnf : WARNING:AT INDEX NOT FOUND!");
@@ -12281,7 +12281,7 @@ VOS_UINT32 AT_RcvMmaSetCSidListCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CSIDLIST_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaSetCSidListCnf : Current Option is not AT_CMD_CSIDLIST_SET.");
@@ -12290,7 +12290,7 @@ VOS_UINT32 AT_RcvMmaSetCSidListCnf(
 
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^CSIDLIST设置命令 */
+    /* ??????AT^CSIDLIST???????? */
     gstAtSendData.usBufLen = 0;
 
     if (TAF_ERR_NO_ERROR == pstSetCSidListCnf->enErrorCode)
@@ -12302,7 +12302,7 @@ VOS_UINT32 AT_RcvMmaSetCSidListCnf(
      ulResult = AT_ERROR;
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
     return VOS_OK;
 }
@@ -12317,12 +12317,12 @@ VOS_UINT32 AT_RcvMmaQryCurrSidNidCnf(
     VOS_UINT16                                              usLength;
     VOS_UINT32                                              ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex            = 0;
     usLength           = 0;
     pstQryCurrSidNidCnf = (TAF_MMA_CURR_SID_NID_QRY_CNF_STRU*)pMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstQryCurrSidNidCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaQryCurrSidNidCnf : WARNING:AT INDEX NOT FOUND!");
@@ -12335,7 +12335,7 @@ VOS_UINT32 AT_RcvMmaQryCurrSidNidCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CSNID_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaQryCurrSidNidCnf : Current Option is not AT_CMD_EMCCBM_QRY.");
@@ -12344,7 +12344,7 @@ VOS_UINT32 AT_RcvMmaQryCurrSidNidCnf(
 
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^CSNID查询命令返回 */
+    /* ??????AT^CSNID???????????? */
     gstAtSendData.usBufLen = 0;
 
     if (TAF_ERR_NO_ERROR == pstQryCurrSidNidCnf->enErrorCode)
@@ -12365,7 +12365,7 @@ VOS_UINT32 AT_RcvMmaQryCurrSidNidCnf(
         ulResult = AT_ERROR;
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
     return VOS_OK;
 }
@@ -12378,11 +12378,11 @@ VOS_UINT32 AT_RcvMmaRoamingModeSwitchInd(
     TAF_MMA_ROAMING_MODE_SWITCH_IND_STRU                   *pstRoamingModeSwitchInd = VOS_NULL_PTR;
     VOS_UINT8                                               ucIndex;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex                 = 0;
     pstRoamingModeSwitchInd = (TAF_MMA_ROAMING_MODE_SWITCH_IND_STRU *)pstMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstRoamingModeSwitchInd->usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMmaRoamingModeSwitchInd: WARNING:AT INDEX NOT FOUND!");
@@ -12410,11 +12410,11 @@ VOS_UINT32 AT_RcvMmaCombinedModeSwitchInd(
     TAF_MMA_COMBINED_MODE_SWITCH_IND_STRU                  *pstCombinedModeSwitchInd = VOS_NULL_PTR;
     VOS_UINT8                                               ucIndex;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex = 0;
     pstCombinedModeSwitchInd = (TAF_MMA_COMBINED_MODE_SWITCH_IND_STRU *)pstMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstCombinedModeSwitchInd->usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMmaRoamingModeSwitchInd: WARNING:AT INDEX NOT FOUND!");
@@ -12444,11 +12444,11 @@ VOS_UINT32 AT_RcvMmaRatCombinedModeQryCnf(
     VOS_UINT8                                               ucIndex;
     TAF_MMA_RAT_COMBINED_MODE_QRY_CNF_STRU                 *pstRcvMsg;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex           = 0;
     pstRcvMsg         = (TAF_MMA_RAT_COMBINED_MODE_QRY_CNF_STRU*)pstMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMmaRatCombinedModeQryCnf: WARNING:AT INDEX NOT FOUND!");
@@ -12461,7 +12461,7 @@ VOS_UINT32 AT_RcvMmaRatCombinedModeQryCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_RATCOMBINEDMODE_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaRatCombinedModeQryCnf : Current Option is not AT_CMD_PRLID_QRY.");
@@ -12495,11 +12495,11 @@ VOS_UINT32 AT_RcvMmaIccAppTypeSwitchInd(
     TAF_MMA_ICC_APP_TYPE_SWITCH_IND_STRU                   *pstIccAppTypeSwitchInd;
     VOS_UINT8                                               ucIndex;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex = 0;
     pstIccAppTypeSwitchInd = (TAF_MMA_ICC_APP_TYPE_SWITCH_IND_STRU *)pstMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstIccAppTypeSwitchInd->usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMmaIccAppTypeSwitchInd: WARNING:AT INDEX NOT FOUND!");
@@ -12531,12 +12531,12 @@ VOS_UINT32 AT_RcvMmaCtRoamInfoCnf(
     VOS_UINT16                                              usLength;
     VOS_UINT32                                              ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex            = 0;
     usLength           = 0;
     pstQryMultiModeSidMcc = (TAF_MMA_CTCC_ROAMING_NW_INFO_QRY_CNF_STRU *)pstMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstQryMultiModeSidMcc->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaCtRoamInfoCnf : WARNING:AT INDEX NOT FOUND!");
@@ -12549,7 +12549,7 @@ VOS_UINT32 AT_RcvMmaCtRoamInfoCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CTROAMINFO_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaCtRoamInfoCnf : Current Option is not AT_CMD_MULTIMODESIDMCC_QRY.");
@@ -12558,7 +12558,7 @@ VOS_UINT32 AT_RcvMmaCtRoamInfoCnf(
 
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^CSNID查询命令返回 */
+    /* ??????AT^CSNID???????????? */
     gstAtSendData.usBufLen = 0;
 
     ulResult = AT_OK;
@@ -12578,7 +12578,7 @@ VOS_UINT32 AT_RcvMmaCtRoamInfoCnf(
 
     gstAtSendData.usBufLen = usLength;
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
     return VOS_OK;
 }
@@ -12592,19 +12592,19 @@ VOS_UINT32 AT_RcvMmaCtRoamingInfoChgInd(
     TAF_MMA_CTCC_ROAMING_NW_INFO_REPORT_IND_STRU           *pstMultiModeSidMccChgInd = VOS_NULL_PTR;
     VOS_UINT16                                              usLength;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex            = 0;
     usLength           = 0;
     pstMultiModeSidMccChgInd = (TAF_MMA_CTCC_ROAMING_NW_INFO_REPORT_IND_STRU *)pstMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstMultiModeSidMccChgInd->usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaCtRoamingInfoChgInd : WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* 格式化AT^CSNID查询命令返回 */
+    /* ??????AT^CSNID???????????? */
     gstAtSendData.usBufLen = 0;
 
     usLength = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
@@ -12638,11 +12638,11 @@ VOS_UINT32 AT_RcvMmaCtOosCountCnf(
     VOS_UINT8                                               ucIndex;
     VOS_UINT32                                              ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex            = 0;
     pstOosCountCnf = (TAF_MMA_CTCC_OOS_COUNT_SET_CNF_STRU*)pstMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstOosCountCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaCtOosCountCnf : WARNING:AT INDEX NOT FOUND!");
@@ -12655,7 +12655,7 @@ VOS_UINT32 AT_RcvMmaCtOosCountCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CTOOSCOUNT_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaCtOosCountCnf : Current Option is not AT_CMD_CTOOSCOUNT_SET.");
@@ -12664,7 +12664,7 @@ VOS_UINT32 AT_RcvMmaCtOosCountCnf(
 
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^QCCB查询命令返回 */
+    /* ??????AT^QCCB???????????? */
     gstAtSendData.usBufLen = 0;
 
     if (TAF_ERR_NO_ERROR == pstOosCountCnf->enErrorCode)
@@ -12676,7 +12676,7 @@ VOS_UINT32 AT_RcvMmaCtOosCountCnf(
         ulResult = AT_ERROR;
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
     return VOS_OK;
 }
@@ -12693,11 +12693,11 @@ VOS_UINT32 AT_RcvXcallEncryptCallCnf(
     VOS_UINT32                                              ulResult;
     AT_ENCRYPT_VOICE_ERROR_ENUM_UINT32                      enEcnErr;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex           = 0;
     pstRcvMsg         = (TAF_CALL_APP_ENCRYPT_VOICE_CNF_STRU*)pstMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvXcallEncryptCallCnf: WARNING:AT INDEX NOT FOUND!");
@@ -12710,7 +12710,7 @@ VOS_UINT32 AT_RcvXcallEncryptCallCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_ECCALL_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvXcallEncryptCallCnf : Current Option is not AT_CMD_ECCALL_SET.");
@@ -12720,7 +12720,7 @@ VOS_UINT32 AT_RcvXcallEncryptCallCnf(
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     gstAtSendData.usBufLen = 0;
-    /* 格式化AT^ECCALL  SET命令返回 */
+    /* ??????AT^ECCALL  SET???????? */
     if (TAF_CALL_APP_ENCRYPT_VOICE_SUCC == pstRcvMsg->enEccVoiceStatus)
     {
         ulResult = AT_OK;
@@ -12730,7 +12730,7 @@ VOS_UINT32 AT_RcvXcallEncryptCallCnf(
         ulResult = AT_ERROR;
         enEcnErr = AT_MapEncVoiceErr(pstRcvMsg->enEccVoiceStatus);
 
-        /* 密话主叫结果其他原因值上报 */
+        /* ?????????????????????????? */
         gstAtSendData.usBufLen = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                                         (VOS_CHAR *)pgucAtSndCodeAddr,
                                                         (VOS_CHAR *)pgucAtSndCodeAddr,
@@ -12757,12 +12757,12 @@ VOS_UINT32 AT_RcvXcallEncryptCallInd(
     VOS_UINT8                                               aucAsciiNum[MN_CALL_MAX_CALLED_BCD_NUM_LEN + 1];
     AT_ENCRYPT_VOICE_ERROR_ENUM_UINT32                      enEcnErr;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex           = 0;
     pstRcvMsg         = (TAF_CALL_APP_ENCRYPT_VOICE_IND_STRU*)pstMsg;
     TAF_MEM_SET_S(aucAsciiNum, sizeof(aucAsciiNum), 0x00, MN_CALL_MAX_CALLED_BCD_NUM_LEN + 1);
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvXcallEncryptCallInd: WARNING:AT INDEX NOT FOUND!");
@@ -12773,10 +12773,10 @@ VOS_UINT32 AT_RcvXcallEncryptCallInd(
 
     enEcnErr = AT_MapEncVoiceErr(pstRcvMsg->enEccVoiceStatus);
 
-    /* AT^ECCALL ind命令返回 */
+    /* AT^ECCALL ind???????? */
     if (AT_ENCRYPT_VOICE_MT_CALL_NOTIFICATION == enEcnErr)
     {
-        /* 密话被叫主动上报 */
+        /* ???????????????? */
         AT_BcdNumberToAscii(pstRcvMsg->stCallingNumber.aucBcdNum,
                             pstRcvMsg->stCallingNumber.ucNumLen,
                             (VOS_CHAR *)aucAsciiNum);
@@ -12791,12 +12791,12 @@ VOS_UINT32 AT_RcvXcallEncryptCallInd(
     }
     else if (AT_ENCRYPT_VOICE_ERROR_ENUM_BUTT == enEcnErr)
     {
-        /* 异常场景 */
+        /* ???????? */
         return VOS_ERR;
     }
     else
     {
-        /* 密话主叫结果其他原因值上报 */
+        /* ?????????????????????????? */
         gstAtSendData.usBufLen = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                                         (VOS_CHAR *)pgucAtSndCodeAddr,
                                                         (VOS_CHAR *)pgucAtSndCodeAddr,
@@ -12821,11 +12821,11 @@ VOS_UINT32 AT_RcvXcallEccRemoteCtrlInd(
     VOS_UINT8                                               ucIndex;
     TAF_CALL_APP_EC_REMOTE_CTRL_IND_STRU                   *pstRcvMsg;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex           = 0;
     pstRcvMsg         = (TAF_CALL_APP_EC_REMOTE_CTRL_IND_STRU*)pstMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvXcallEcRemoteCtrlInd: WARNING:AT INDEX NOT FOUND!");
@@ -12855,11 +12855,11 @@ VOS_UINT32 AT_RcvXcallRemoteCtrlAnsCnf(
     TAF_CALL_APP_REMOTE_CTRL_ANSWER_CNF_STRU               *pstRcvMsg;
     VOS_UINT32                                              ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex           = 0;
     pstRcvMsg         = (TAF_CALL_APP_REMOTE_CTRL_ANSWER_CNF_STRU*)pstMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvXcallRemoteCtrlAnsCnf: WARNING:AT INDEX NOT FOUND!");
@@ -12872,7 +12872,7 @@ VOS_UINT32 AT_RcvXcallRemoteCtrlAnsCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_ECCTRL_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvXcallRemoteCtrlAnsCnf : Current Option is not AT_CMD_ECCTRL_SET.");
@@ -12882,7 +12882,7 @@ VOS_UINT32 AT_RcvXcallRemoteCtrlAnsCnf(
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     gstAtSendData.usBufLen = 0;
-    /* 格式化AT^ECCTRL  SET命令返回 */
+    /* ??????AT^ECCTRL  SET???????? */
     if (TAF_CALL_SEND_RESULT_SUCC == pstRcvMsg->enResult)
     {
         ulResult = AT_OK;
@@ -12906,11 +12906,11 @@ VOS_UINT32 AT_RcvXcallEccCapSetCnf(
     TAF_CALL_APP_ECC_SRV_CAP_CFG_CNF_STRU                  *pstRcvMsg;
     VOS_UINT32                                              ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex           = 0;
     pstRcvMsg         = (TAF_CALL_APP_ECC_SRV_CAP_CFG_CNF_STRU*)pstMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvXcallEccCapSetCnf: WARNING:AT INDEX NOT FOUND!");
@@ -12923,7 +12923,7 @@ VOS_UINT32 AT_RcvXcallEccCapSetCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_ECCAP_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvXcallEccCapSetCnf : Current Option is not AT_CMD_ECCAP_SET.");
@@ -12934,7 +12934,7 @@ VOS_UINT32 AT_RcvXcallEccCapSetCnf(
 
     gstAtSendData.usBufLen = 0;
 
-    /* 格式化AT^ECCAP  SET命令返回 */
+    /* ??????AT^ECCAP  SET???????? */
     if (TAF_CALL_APP_ECC_SRV_CAP_CFG_RESULT_SUCC == pstRcvMsg->enResult)
     {
         ulResult = AT_OK;
@@ -12958,11 +12958,11 @@ VOS_UINT32 AT_RcvXcallEccCapQryCnf(
     TAF_CALL_APP_ECC_SRV_CAP_QRY_CNF_STRU                  *pstRcvMsg;
     VOS_UINT32                                              ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex           = 0;
     pstRcvMsg         = (TAF_CALL_APP_ECC_SRV_CAP_QRY_CNF_STRU*)pstMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvXcallEccCapQryCnf: WARNING:AT INDEX NOT FOUND!");
@@ -12975,7 +12975,7 @@ VOS_UINT32 AT_RcvXcallEccCapQryCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_ECCAP_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvXcallEccCapQryCnf : Current Option is not AT_CMD_ECCAP_QRY.");
@@ -12986,7 +12986,7 @@ VOS_UINT32 AT_RcvXcallEccCapQryCnf(
 
     gstAtSendData.usBufLen = 0;
 
-    /* 格式化AT^ECCAP  SET命令返回 */
+    /* ??????AT^ECCAP  SET???????? */
     if (TAF_CALL_APP_ECC_SRV_CAP_DISABLE == pstRcvMsg->enEccSrvCap)
     {
         ulResult               = AT_OK;
@@ -13032,11 +13032,11 @@ VOS_UINT32 AT_RcvMmaClocinfoInd(
     VOS_UINT8                           ucIndex;
     TAF_MMA_CLOCINFO_IND_STRU          *pstClocinfoInd;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex             = 0;
     pstClocinfoInd      = (TAF_MMA_CLOCINFO_IND_STRU*)pMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstClocinfoInd->stCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMmaClocinfoInd: WARNING:AT INDEX NOT FOUND!");
@@ -13074,11 +13074,11 @@ VOS_UINT32 AT_RcvXcallPrivacyModeSetCnf(
     TAF_CALL_APP_PRIVACY_MODE_SET_CNF_STRU                 *pstRcvMsg = VOS_NULL_PTR;
     VOS_UINT32                                              ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex           = 0;
     pstRcvMsg         = (TAF_CALL_APP_PRIVACY_MODE_SET_CNF_STRU*)pstMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvXcallPrivacyModeSetCnf: WARNING:AT INDEX NOT FOUND!");
@@ -13091,7 +13091,7 @@ VOS_UINT32 AT_RcvXcallPrivacyModeSetCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CPMP_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvXcallPrivacyModeSetCnf : Current Option is not AT_CMD_CPMP_SET.");
@@ -13102,7 +13102,7 @@ VOS_UINT32 AT_RcvXcallPrivacyModeSetCnf(
 
     gstAtSendData.usBufLen = 0;
 
-    /* 格式化AT^CPMP  SET命令返回 */
+    /* ??????AT^CPMP  SET???????? */
     if (TAF_CALL_APP_RESULT_TYPE_SUCCESS == pstRcvMsg->enResult)
     {
         ulResult = AT_OK;
@@ -13125,11 +13125,11 @@ VOS_UINT32 AT_RcvXcallPrivacyModeQryCnf(
     VOS_UINT8                                               ucIndex;
     TAF_CALL_APP_PRIVACY_MODE_QRY_CNF_STRU                 *pstRcvMsg = VOS_NULL_PTR;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex           = 0;
     pstRcvMsg         = (TAF_CALL_APP_PRIVACY_MODE_QRY_CNF_STRU*)pstMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvXcallPrivacyModeQryCnf: WARNING:AT INDEX NOT FOUND!");
@@ -13142,7 +13142,7 @@ VOS_UINT32 AT_RcvXcallPrivacyModeQryCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CPMP_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvXcallPrivacyModeQryCnf : Current Option is not AT_CMD_ECCAP_QRY.");
@@ -13153,7 +13153,7 @@ VOS_UINT32 AT_RcvXcallPrivacyModeQryCnf(
 
     gstAtSendData.usBufLen = 0;
 
-    /* X模下，只有一路激活的呼叫 */
+    /* X???????????????????????? */
     if (0 != pstRcvMsg->ucCallNums)
     {
         gstAtSendData.usBufLen = (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,
@@ -13192,11 +13192,11 @@ VOS_UINT32 AT_RcvXcallPrivacyModeInd(
     VOS_UINT8                                               ucIndex;
     TAF_CALL_APP_PRIVACY_MODE_IND_STRU                     *pstRcvMsg = VOS_NULL_PTR;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex           = 0;
     pstRcvMsg         = (TAF_CALL_APP_PRIVACY_MODE_IND_STRU*)pstMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvXcallPrivacyModeInd: WARNING:AT INDEX NOT FOUND!");
@@ -13227,11 +13227,11 @@ VOS_UINT32 AT_RcvMmaCtRoamRptCfgSetCnf(
     TAF_MMA_CTCC_ROAMING_NW_INFO_RTP_CFG_SET_CNF_STRU      *pstCtRoamRptSetCnf;
     VOS_UINT32                                              ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex    = 0;
     pstCtRoamRptSetCnf = (TAF_MMA_CTCC_ROAMING_NW_INFO_RTP_CFG_SET_CNF_STRU*)pMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstCtRoamRptSetCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaCtRoamRptCfgSetCnf : WARNING:AT INDEX NOT FOUND!");
@@ -13244,7 +13244,7 @@ VOS_UINT32 AT_RcvMmaCtRoamRptCfgSetCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CTROAMINFO_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaCtRoamRptCfgSetCnf : Current Option is not AT_CMD_CTROAMINFO_SET.");
@@ -13253,7 +13253,7 @@ VOS_UINT32 AT_RcvMmaCtRoamRptCfgSetCnf(
 
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^CTROAM设置命令返回 */
+    /* ??????AT^CTROAM???????????? */
     gstAtSendData.usBufLen = 0;
 
     if (TAF_ERR_NO_ERROR == pstCtRoamRptSetCnf->enErrorCode)
@@ -13265,7 +13265,7 @@ VOS_UINT32 AT_RcvMmaCtRoamRptCfgSetCnf(
         ulResult = AT_ERROR;
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
     return VOS_OK;
 }
@@ -13278,11 +13278,11 @@ VOS_UINT32 AT_RcvMmaPrlIdQryCnf(
     VOS_UINT8                           ucIndex;
     TAF_MMA_PRLID_QRY_CNF_STRU         *pstRcvMsg = VOS_NULL_PTR;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex           = 0;
     pstRcvMsg         = (TAF_MMA_PRLID_QRY_CNF_STRU*)pstMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMmaPrlIdQryCnf: WARNING:AT INDEX NOT FOUND!");
@@ -13295,7 +13295,7 @@ VOS_UINT32 AT_RcvMmaPrlIdQryCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_PRLID_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaPrlIdQryCnf : Current Option is not AT_CMD_PRLID_QRY.");
@@ -13334,18 +13334,18 @@ VOS_UINT32 AT_RcvMmaCTimeInd(
     TAF_MMA_CTIME_IND_STRU             *pstCTimeInd;
     VOS_INT8                            cTimeZone;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex           = 0;
     pstCTimeInd       = (TAF_MMA_CTIME_IND_STRU*)pstMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstCTimeInd->usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMmaCTimeInd: WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* 底层上报的cTimeZone是以30分钟为单位的，AP要求以15分钟为单位 */
+    /* ??????????cTimeZone????30??????????????AP??????15?????????? */
     if(pstCTimeInd->stTimezoneCTime.cTimeZone < 0)
     {
         cTimeZone = (VOS_INT8)(-1 * 2 * pstCTimeInd->stTimezoneCTime.cTimeZone);
@@ -13356,7 +13356,7 @@ VOS_UINT32 AT_RcvMmaCTimeInd(
     }
 
     gstAtSendData.usBufLen = 0;
-    /*时间显示格式: ^CTIME: "yy/mm/dd,hh:mm:ss(+/-)tz,dst" */
+    /*????????????: ^CTIME: "yy/mm/dd,hh:mm:ss(+/-)tz,dst" */
     if (pstCTimeInd->stTimezoneCTime.cTimeZone >= 0)
     {
         gstAtSendData.usBufLen = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
@@ -13407,11 +13407,11 @@ VOS_UINT32 AT_RcvMmaCFreqLockSetCnf(
     TAF_MMA_CFREQ_LOCK_SET_CNF_STRU    *pstCFreqLockSetCnf;
     VOS_UINT32                          ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex             = 0;
     pstCFreqLockSetCnf  = (TAF_MMA_CFREQ_LOCK_SET_CNF_STRU*)pstMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstCFreqLockSetCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaCFreqLockSetCnf : WARNING:AT INDEX NOT FOUND!");
@@ -13424,7 +13424,7 @@ VOS_UINT32 AT_RcvMmaCFreqLockSetCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CFREQLOCK_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaCFreqLockSetCnf : Current Option is not AT_CMD_CFREQLOCK_SET.");
@@ -13433,7 +13433,7 @@ VOS_UINT32 AT_RcvMmaCFreqLockSetCnf(
 
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^CFREQLOCK命令返回 */
+    /* ??????AT^CFREQLOCK???????? */
     gstAtSendData.usBufLen = 0;
 
     if (VOS_TRUE != pstCFreqLockSetCnf->ulRslt)
@@ -13445,7 +13445,7 @@ VOS_UINT32 AT_RcvMmaCFreqLockSetCnf(
         ulResult = AT_OK;
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -13461,12 +13461,12 @@ VOS_UINT32 AT_RcvMmaCFreqLockQueryCnf(
     VOS_UINT16                          usLength;
 
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex            = 0;
     usLength           = 0;
     pstCFreqLockQryCnf = (TAF_MMA_CFREQ_LOCK_QUERY_CNF_STRU*)pstMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstCFreqLockQryCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaCFreqLockQueryCnf : WARNING:AT INDEX NOT FOUND!");
@@ -13479,7 +13479,7 @@ VOS_UINT32 AT_RcvMmaCFreqLockQueryCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CFREQLOCK_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaCFreqLockQueryCnf : Current Option is not AT_CMD_CFREQLOCK_QUERY.");
@@ -13488,7 +13488,7 @@ VOS_UINT32 AT_RcvMmaCFreqLockQueryCnf(
 
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^CFREQLOCK查询命令返回 */
+    /* ??????AT^CFREQLOCK???????????? */
     gstAtSendData.usBufLen = 0;
     if (TAF_MMA_CFREQ_LOCK_MODE_OFF == pstCFreqLockQryCnf->stCFreqLockPara.enFreqLockMode)
     {
@@ -13518,7 +13518,7 @@ VOS_UINT32 AT_RcvMmaCFreqLockQueryCnf(
     }
 
     gstAtSendData.usBufLen = usLength;
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, AT_OK);
 
     return VOS_OK;
@@ -13538,7 +13538,7 @@ VOS_UINT32 AT_RcvMmaCdmaCsqSetCnf(
 
     ucIndex = AT_BROADCAST_CLIENT_INDEX_MODEM_0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstCdmaCsqCnf->usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaCdmaCsqSetCnf : WARNING:AT INDEX NOT FOUND!");
@@ -13564,7 +13564,7 @@ VOS_UINT32 AT_RcvMmaCdmaCsqSetCnf(
 
     gstAtSendData.usBufLen = 0;
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -13580,12 +13580,12 @@ VOS_UINT32 AT_RcvMmaCdmaCsqQryCnf(
     VOS_UINT16                          usLength;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pstCdmaCsqQueryCnf  = (TAF_MMA_CDMACSQ_QUERY_CNF_STRU*)pMsg;
     usLength            = 0;
     ulResult            = AT_OK;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstCdmaCsqQueryCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaCdmaCsqQryCnf: WARNING:AT INDEX NOT FOUND!");
@@ -13598,7 +13598,7 @@ VOS_UINT32 AT_RcvMmaCdmaCsqQryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_CDMACSQ_QRY */
+    /*??????????????????????AT_CMD_CDMACSQ_QRY */
     if (AT_CMD_CDMACSQ_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
@@ -13621,7 +13621,7 @@ VOS_UINT32 AT_RcvMmaCdmaCsqQryCnf(
 
     gstAtSendData.usBufLen = usLength;
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -13635,11 +13635,11 @@ VOS_UINT32 AT_RcvMmaCdmaCsqInd(
     VOS_UINT8                           ucIndex;
     TAF_MMA_CDMACSQ_IND_STRU           *pstCdmaCsqInd;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex             = 0;
     pstCdmaCsqInd       = (TAF_MMA_CDMACSQ_IND_STRU*)pMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstCdmaCsqInd->usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMmaCdmaCsqInd: WARNING:AT INDEX NOT FOUND!");
@@ -13675,11 +13675,11 @@ VOS_UINT32 AT_RcvMmaCLModInd(
     VOS_UINT32                          ulRslt;
     VOS_UINT8                          *pucIsCLMode;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex             = 0;
     pstCLModeInd        = (TAF_MMA_CLMODE_IND_STRU*)pMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstCLModeInd->usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMmaCLModInd: WARNING:AT INDEX NOT FOUND!");
@@ -13711,12 +13711,12 @@ VOS_UINT32 AT_RcvMtaXpassInfoInd(
     AT_MTA_MSG_STRU                    *pstMtaMsg       = VOS_NULL_PTR;
     MTA_AT_XPASS_INFO_IND_STRU         *pstXpassInfoInd = VOS_NULL_PTR;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex             = 0;
     pstMtaMsg           = (AT_MTA_MSG_STRU*)pMsg;
     pstXpassInfoInd     = (MTA_AT_XPASS_INFO_IND_STRU*)pstMtaMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstMtaMsg->stAppCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMtaXpassInfoInd: WARNING:AT INDEX NOT FOUND!");
@@ -13751,7 +13751,7 @@ VOS_UINT32 AT_RcvMmaCFPlmnSetCnf(
 
     ucIndex = AT_BROADCAST_CLIENT_INDEX_MODEM_0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstCFPLmnCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaCFPlmnSetCnf : WARNING:AT INDEX NOT FOUND!");
@@ -13764,7 +13764,7 @@ VOS_UINT32 AT_RcvMmaCFPlmnSetCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CFPLMN_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaCFPlmnSetCnf : Current Option is not AT_CMD_CFPLMN_SET.");
@@ -13779,13 +13779,13 @@ VOS_UINT32 AT_RcvMmaCFPlmnSetCnf(
     }
     else
     {
-        /* 这次代码的修改涉及接口的重构，为了保持和原有GU代码的一致性，返回结果出错时，结果设置为AT_CME_UNKNOWN  */
+        /* ????????????????????????????????????????????GU????????????????????????????????????????AT_CME_UNKNOWN  */
         ulResult = AT_CME_UNKNOWN;
     }
 
     gstAtSendData.usBufLen = 0;
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -13801,7 +13801,7 @@ VOS_UINT32 AT_RcvMmaCFPlmnQueryCnf(
     VOS_UINT32                          ulResult;
     VOS_UINT32                          ulLoop;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex = 0;
     pstCFPlmnQrynf = (TAF_MMA_CFPLMN_QUERY_CNF_STRU *)pstMsg;
     pstCFPlmnList = (TAF_USER_PLMN_LIST_STRU *)PS_MEM_ALLOC(WUEPS_PID_AT, sizeof(TAF_USER_PLMN_LIST_STRU));
@@ -13813,7 +13813,7 @@ VOS_UINT32 AT_RcvMmaCFPlmnQueryCnf(
 
     TAF_MEM_SET_S(pstCFPlmnList, sizeof(TAF_USER_PLMN_LIST_STRU), 0x00, sizeof(TAF_USER_PLMN_LIST_STRU));
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstCFPlmnQrynf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaCFPlmnQueryCnf : WARNING:AT INDEX NOT FOUND!");
@@ -13828,7 +13828,7 @@ VOS_UINT32 AT_RcvMmaCFPlmnQueryCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CFPLMN_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaCFPlmnQueryCnf : Current Option is not AT_CMD_CFREQLOCK_QUERY.");
@@ -13841,7 +13841,7 @@ VOS_UINT32 AT_RcvMmaCFPlmnQueryCnf(
     if (TAF_MMA_APP_OPER_RESULT_SUCCESS != pstCFPlmnQrynf->enRslt)
     {
         gstAtSendData.usBufLen = 0;
-        /* 这次代码的修改涉及接口的重构，为了保持和原有GU代码的一致性，返回结果出错时，结果设置为AT_CME_UNKNOWN  */
+        /* ????????????????????????????????????????????GU????????????????????????????????????????AT_CME_UNKNOWN  */
         ulResult = AT_CME_UNKNOWN;
         At_FormatResultData(ucIndex, ulResult);
     }
@@ -13991,7 +13991,7 @@ VOS_VOID AT_ReportQryPrefPlmnCmd(
         if ((0 == pstCpolQryCnf->ulValidPlmnNum)
          && (1 == *pulValidPlmnNum))
         {
-            /* 参考V.250协议5.7.2: 根据V命令的设置给信息字段的头尾增加回车换行符 */
+            /* ????V.250????5.7.2: ????V???????????????????????????????????????? */
             if (AT_V_ENTIRE_TYPE == gucAtVType)
             {
                 *pusLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
@@ -14045,12 +14045,12 @@ VOS_UINT32 AT_RcvMmaPrefPlmnSetCnf(
     TAF_MMA_PREF_PLMN_SET_CNF_STRU     *pstPrefPlmnCnf;
     VOS_UINT32                          ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex            = 0;
     ulResult           = AT_ERROR;
     pstPrefPlmnCnf     = (TAF_MMA_PREF_PLMN_SET_CNF_STRU*)pstMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstPrefPlmnCnf->usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaPrefPlmnSetCnf : WARNING:AT INDEX NOT FOUND!");
@@ -14063,7 +14063,7 @@ VOS_UINT32 AT_RcvMmaPrefPlmnSetCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CPOL_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaPrefPlmnSetCnf : Current Option is not AT_CMD_CPOL_SET.");
@@ -14081,10 +14081,10 @@ VOS_UINT32 AT_RcvMmaPrefPlmnSetCnf(
         ulResult = AT_OK;
     }
 
-    /* 格式化AT+CPOL测试命令返回 */
+    /* ??????AT+CPOL???????????? */
     gstAtSendData.usBufLen = 0;
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -14108,7 +14108,7 @@ VOS_UINT32 AT_RcvMmaPrefPlmnQueryCnf(
 
     pstAvailPlmnInfo = (TAF_PLMN_NAME_LIST_STRU*)&pstCpolQryCnf->stPlmnName;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstCpolQryCnf->usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_QryParaRspPrefPlmnProc:WARNING:AT INDEX NOT FOUND!");
@@ -14122,7 +14122,7 @@ VOS_UINT32 AT_RcvMmaPrefPlmnQueryCnf(
     }
     pstNetCtx = AT_GetModemNetCtxAddrFromClientId(ucIndex);
 
-    /*判断当前操作类型是否为AT_CMD_CPOL_READ */
+    /*??????????????????????AT_CMD_CPOL_READ */
     if (AT_CMD_CPOL_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
@@ -14142,15 +14142,15 @@ VOS_UINT32 AT_RcvMmaPrefPlmnQueryCnf(
     AT_ReportQryPrefPlmnCmd(pstCpolQryCnf, &ulValidPlmnNum, pstNetCtx, &usLength, ucIndex);
 
     /*
-    AT模块根据MMA上报的运营商个数来确认运营商信息是否收集完成: 小于请求的运营商
-    个数则认为运营商信息已经收集完成，原因如下所述:
-    AT模块每次请求37条运营商信息，起始位置为已经输出的最后一个运营商的下一条运营商信息索引
-    如果待输出的运营商信息总数不足37条，则按实际的输出，
-    如果运营商数为37的倍数，则AT会再发一次运营商信息请求，MMA回复的运营商信息总数为0
+    AT????????MMA????????????????????????????????????????????: ????????????????
+    ??????????????????????????????????????????????:
+    AT????????????37??????????????????????????????????????????????????????????????????????
+    ??????????????????????????????37????????????????????
+    ??????????????37??????????AT??????????????????????????MMA??????????????????????0
     */
     if (pstAvailPlmnInfo->ulPlmnNum < TAF_MMA_MAX_PLMN_NAME_LIST_NUM)
     {
-        /* 参考V.250协议5.7.2: 根据V命令的设置给信息字段的头尾增加回车换行符 */
+        /* ????V.250????5.7.2: ????V???????????????????????????????????????? */
         if ((AT_V_ENTIRE_TYPE == gucAtVType)
          && (0 != (pstCpolQryCnf->ulValidPlmnNum + ulValidPlmnNum)))
         {
@@ -14164,7 +14164,7 @@ VOS_UINT32 AT_RcvMmaPrefPlmnQueryCnf(
 
         At_BufferorSendResultData(ucIndex, pgucAtSndCodeAddr, usLength);
 
-        /* 使用AT_STOP_TIMER_CMD_READY恢复AT命令实体状态为READY状态 */
+        /* ????AT_STOP_TIMER_CMD_READY????AT??????????????READY???? */
         AT_STOP_TIMER_CMD_READY(ucIndex);
         gstAtSendData.usBufLen = 0;
         At_FormatResultData(ucIndex, AT_OK);
@@ -14183,7 +14183,7 @@ VOS_UINT32 AT_RcvMmaPrefPlmnQueryCnf(
                                       &stCpolInfo);
         if (VOS_TRUE != ulResult)
         {
-            /* 使用AT_STOP_TIMER_CMD_READY恢复AT命令实体状态为READY状态 */
+            /* ????AT_STOP_TIMER_CMD_READY????AT??????????????READY???? */
             AT_STOP_TIMER_CMD_READY(ucIndex);
             gstAtSendData.usBufLen = 0;
             At_FormatResultData(ucIndex, AT_CME_UNKNOWN);
@@ -14203,13 +14203,13 @@ VOS_UINT32 AT_RcvMmaPrefPlmnTestCnf(
     VOS_UINT16                          usLength;
     VOS_UINT32                          ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex            = 0;
     usLength           = 0;
     ulResult           = AT_ERROR;
     pstPrefPlmnCnf     = (TAF_MMA_PREF_PLMN_TEST_CNF_STRU*)pstMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstPrefPlmnCnf->usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaPrefPlmnTestCnf : WARNING:AT INDEX NOT FOUND!");
@@ -14222,7 +14222,7 @@ VOS_UINT32 AT_RcvMmaPrefPlmnTestCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CPOL_TEST != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaPrefPlmnTestCnf : Current Option is not AT_CMD_CPOL_TEST.");
@@ -14239,7 +14239,7 @@ VOS_UINT32 AT_RcvMmaPrefPlmnTestCnf(
         return VOS_OK;
     }
 
-    /* 格式化AT+CPOL测试命令返回 */
+    /* ??????AT+CPOL???????????? */
     gstAtSendData.usBufLen = 0;
     if ( 0 == pstPrefPlmnCnf->usPlmnNum )
     {
@@ -14260,7 +14260,7 @@ VOS_UINT32 AT_RcvMmaPrefPlmnTestCnf(
 
     gstAtSendData.usBufLen = usLength;
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -14304,7 +14304,7 @@ VOS_UINT32 AT_RcvMmaAcInfoChangeInd(
         return VOS_ERR;
     }
 
-    /* 通过AT^CURC控制紧急呼叫号码不上报 */
+    /* ????AT^CURC?????????????????????? */
     /* Deleted by k902809 for Iteration 11, 2015-4-1, begin */
     /* Deleted by k902809 for Iteration 11, Iteration 11 2015-4-1, end */
     /* Modified by l60609 for DSDA Phase III, 2013-2-25, End */
@@ -14315,10 +14315,10 @@ VOS_UINT32 AT_RcvMmaAcInfoChangeInd(
                                        "%s%s%d,%d,%d,%d%s",
                                        gaucAtCrLf,
                                        gastAtStringTab[AT_STRING_ACINFO].pucText,
-                                       pstCellAcInfo->enSrvDomain,/* 上报服务域 */
-                                       pstCellAcInfo->enCellAcType,/* 上报小区禁止接入类型 */
-                                       pstCellAcInfo->ucRestrictRegister,/* 上报是否注册受限 */
-                                       pstCellAcInfo->ucRestrictPagingRsp,/* 上报是否寻呼受限 */
+                                       pstCellAcInfo->enSrvDomain,/* ?????????? */
+                                       pstCellAcInfo->enCellAcType,/* ???????????????????? */
+                                       pstCellAcInfo->ucRestrictRegister,/* ???????????????? */
+                                       pstCellAcInfo->ucRestrictPagingRsp,/* ???????????????? */
                                        gaucAtCrLf);
 
     gstAtSendData.usBufLen = usLength;
@@ -14340,7 +14340,7 @@ VOS_UINT32 AT_RcvMmaEOPlmnSetCnf(
 
     pstEOPlmnSetCnf  = (TAF_MMA_EOPLMN_SET_CNF_STRU *)pstMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstEOPlmnSetCnf->usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaEOPlmnSetCnf At_ClientIdToUserId FAILURE");
@@ -14353,7 +14353,7 @@ VOS_UINT32 AT_RcvMmaEOPlmnSetCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_EOPLMN_SET != gastAtClientTab[ucIndex].CmdCurrentOpt )
     {
         AT_WARN_LOG("AT_RcvMmaEOPlmnSetCnf: WARNING:Not AT_CMD_EOPLMN_SET!");
@@ -14392,24 +14392,24 @@ VOS_UINT32 AT_RcvMmaEOPlmnQryCnf(
     usLen            = 0;
     pstEOPlmnQryCnf  = (TAF_MMA_EOPLMN_QRY_CNF_STRU *)pstMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if (AT_FAILURE == At_ClientIdToUserId(pstEOPlmnQryCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaEOPlmnQryCnf At_ClientIdToUserId FAILURE");
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_EOPLMN_QRY */
+    /* ??????????????????????AT_CMD_EOPLMN_QRY */
     if (AT_CMD_EOPLMN_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt )
     {
         AT_WARN_LOG("AT_RcvMmaEOPlmnQryCnf: WARNING:Not AT_CMD_EOPLMN_QRY!");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 输出查询结果 */
+    /* ???????????? */
     if (TAF_ERR_NO_ERROR == pstEOPlmnQryCnf->ulResult)
     {
         usLen += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
@@ -14421,7 +14421,7 @@ VOS_UINT32 AT_RcvMmaEOPlmnQryCnf(
                                         pstEOPlmnQryCnf->usOPlmnNum * TAF_AT_PLMN_WITH_RAT_LEN);
 
 
-        /* 将16进制数转换为ASCII码后输入主动命令内容 */
+        /* ??16????????????ASCII???????????????????? */
         usLen += (TAF_UINT16)At_HexText2AsciiStringSimple(AT_CMD_MAX_LEN,
                                                             (TAF_INT8 *)pgucAtSndCodeAddr,
                                                             (TAF_UINT8 *)pgucAtSndCodeAddr + usLen,
@@ -14489,7 +14489,7 @@ VOS_UINT32 AT_RcvMmaUserSrvStateQryCnf(
 
     pstUserSrvStateCnf = (TAF_MMA_USER_SRV_STATE_QRY_CNF_STRU *)pstMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstUserSrvStateCnf->usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaUserSrvStateQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -14502,13 +14502,13 @@ VOS_UINT32 AT_RcvMmaUserSrvStateQryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_USER_SRV_STATE_READ */
+    /*??????????????????????AT_CMD_USER_SRV_STATE_READ */
     if (AT_CMD_USER_SRV_STATE_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     /* Modified by k902809 for Iteration 11, Iteration 11 2015-3-28, end */
@@ -14547,7 +14547,7 @@ VOS_UINT32  AT_RcvMmaPwrOnAndRegTimeQryCnf(
 
     pstAppwronregCnf = (TAF_MMA_POWER_ON_AND_REG_TIME_QRY_CNF_STRU *)pstMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstAppwronregCnf->usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaPwrOnAndRegTimeQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -14560,26 +14560,26 @@ VOS_UINT32  AT_RcvMmaPwrOnAndRegTimeQryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_REGISTER_TIME_READ */
+    /*??????????????????????AT_CMD_REGISTER_TIME_READ */
     if (AT_CMD_REGISTER_TIME_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     ulCostTime = pstAppwronregCnf->ulCostTime;
     /* Modified by k902809 for Iteration 11, Iteration 11 2015-3-28, end */
 
-    /* 初始化 */
+    /* ?????? */
     ulResult   = AT_OK;
     usLength   = 0;
 
-    /* MMA报给AT时，按slice上报，(32 * 1024)个slice是1S
-       如果slice为0，表示没有注册成功；如果slice小于1S,AT按1S上报 */
+    /* MMA????AT??????slice??????(32 * 1024)??slice??1S
+       ????slice??0????????????????????????slice????1S,AT??1S???? */
 
-    /* 将查询时间上报给APP*/
+    /* ????????????????APP*/
     if ( 0 ==  ulCostTime)
     {
         ulResult = AT_ERROR;
@@ -14627,7 +14627,7 @@ VOS_UINT32  AT_RcvMmaSpnQryCnf(
     TAF_PH_USIM_SPN_STRU                stAtSPNRslt;
     VOS_UINT16                          usLength;
     VOS_UINT16                          usDatalen;
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, begin */
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, begin */
     VOS_UINT8                          *pucSystemAppConfig;
     /* Modified by l60609 for DSDA Phase III, 2013-2-22, Begin */
     VOS_UINT8                           ucIndex;
@@ -14635,7 +14635,7 @@ VOS_UINT32  AT_RcvMmaSpnQryCnf(
 
     pstSpnCnf = (TAF_MMA_SPN_QRY_CNF_STRU *)pstMsg ;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstSpnCnf->usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaSpnQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -14648,28 +14648,28 @@ VOS_UINT32  AT_RcvMmaSpnQryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_SPN_QUERY */
+    /*??????????????????????AT_CMD_SPN_QUERY */
     if (AT_CMD_SPN_QUERY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     pstNetCtx = AT_GetModemNetCtxAddrFromClientId(ucIndex);
     /* Modified by l60609 for DSDA Phase III, 2013-2-22, End */
 
     pucSystemAppConfig                  = AT_GetSystemAppConfigAddr();
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, end */
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, end */
 
-    /* 初始化 */
+    /* ?????? */
     ulResult  = AT_OK;
     usLength  = 0;
     usDatalen = 0;
 
     TAF_MEM_SET_S(&stAtSPNRslt, (VOS_SIZE_T)sizeof(stAtSPNRslt), 0x00, (VOS_SIZE_T)sizeof(TAF_PH_USIM_SPN_STRU));
-    /* 0 表示SIM */
+    /* 0 ????SIM */
     /* Modified by l60609 for DSDA Phase III, 2013-2-22, Begin */
     if (1 == pstNetCtx->ucSpnType)
     /* Modified by l60609 for DSDA Phase III, 2013-2-22, End */
@@ -14696,7 +14696,7 @@ VOS_UINT32  AT_RcvMmaSpnQryCnf(
                                             g_stParseContext[ucIndex].pstCmdElement->pszCmdName);
 
 
-        /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, begin */
+        /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, begin */
         if ( SYSTEM_APP_WEBUI == *pucSystemAppConfig)
         {
             usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,(TAF_CHAR *)pgucAtSndCodeAddr,
@@ -14737,7 +14737,7 @@ VOS_UINT32  AT_RcvMmaSpnQryCnf(
 
     gstAtSendData.usBufLen = usLength;
 
-    /* 回复用户命令结果 */
+    /* ???????????????? */
     At_FormatResultData(ucIndex,ulResult);
 
     return VOS_OK;
@@ -14755,11 +14755,11 @@ VOS_UINT32  AT_RcvMmaMMPlmnInfoQryCnf(
     VOS_UINT8                           i;
     VOS_UINT8                           ucIndex;
 
-    /* 变量初始化 */
+    /* ?????????? */
     pstMMPlmnInfoCnf = (TAF_MMA_MMPLMNINFO_QRY_CNF_STRU *)pstMsg;
     ulResult    = AT_ERROR;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstMMPlmnInfoCnf->usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaMMPlmnInfoQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -14772,16 +14772,16 @@ VOS_UINT32  AT_RcvMmaMMPlmnInfoQryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_MMPLMNINFO_QRY */
+    /*??????????????????????AT_CMD_MMPLMNINFO_QRY */
     if (AT_CMD_MMPLMNINFO_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 转换LongName及ShortName */
+    /* ????LongName??ShortName */
     if ( pstMMPlmnInfoCnf->stMmPlmnInfo.ucLongNameLen <= TAF_PH_OPER_NAME_LONG
       && pstMMPlmnInfoCnf->stMmPlmnInfo.ucShortNameLen <= TAF_PH_OPER_NAME_SHORT )
     {
@@ -14838,7 +14838,7 @@ VOS_UINT32  AT_RcvMmaPlmnQryCnf(
     pstPlmnCnf = (TAF_MMA_LAST_CAMP_PLMN_QRY_CNF_STRU *)pstMsg;
     usLength  = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstPlmnCnf->usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaPlmnQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -14851,16 +14851,16 @@ VOS_UINT32  AT_RcvMmaPlmnQryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_PLMN_QRY */
+    /*??????????????????????AT_CMD_PLMN_QRY */
     if (AT_CMD_PLMN_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 无效的PLMN */
+    /* ??????PLMN */
     if ((0 == pstPlmnCnf->stPlmnId.Mcc)
      && (0 == pstPlmnCnf->stPlmnId.Mnc))
     {
@@ -14928,7 +14928,7 @@ VOS_UINT32 AT_RcvMmaCerssiSetCnf(
 
     pstCerssiSetCnf = (TAF_MMA_CERSSI_SET_CNF_STRU *)pstMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstCerssiSetCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaCerssiSetCnf : WARNING:AT INDEX NOT FOUND!");
@@ -14941,7 +14941,7 @@ VOS_UINT32 AT_RcvMmaCerssiSetCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CERSSI_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaCerssiSetCnf : Current Option is not AT_CMD_CERSSI_SET.");
@@ -14979,7 +14979,7 @@ VOS_UINT32 AT_RcvMmaPlmnReselAutoSetCnf(
 
     ucIndex = AT_BROADCAST_CLIENT_INDEX_MODEM_0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstPlmnReselAutoCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaPlmnReselAutoSetCnf : WARNING:AT INDEX NOT FOUND!");
@@ -14992,7 +14992,7 @@ VOS_UINT32 AT_RcvMmaPlmnReselAutoSetCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_COPS_SET_AUTOMATIC != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaPlmnReselAutoSetCnf : Current Option is not AT_CMD_COPS_SET_AUTOMATIC.");
@@ -15012,7 +15012,7 @@ VOS_UINT32 AT_RcvMmaPlmnReselAutoSetCnf(
 
     gstAtSendData.usBufLen = 0;
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -15030,7 +15030,7 @@ VOS_UINT32 AT_RcvMmaPlmnSpecialSelSetCnf(
 
     ucIndex = AT_BROADCAST_CLIENT_INDEX_MODEM_0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstPlmnSpecialSelCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaPlmnSpecialSelSetCnf : WARNING:AT INDEX NOT FOUND!");
@@ -15043,7 +15043,7 @@ VOS_UINT32 AT_RcvMmaPlmnSpecialSelSetCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_COPS_SET_MANUAL != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaPlmnSpecialSelSetCnf : Current Option is not AT_CMD_COPS_SET_MANUAL.");
@@ -15063,7 +15063,7 @@ VOS_UINT32 AT_RcvMmaPlmnSpecialSelSetCnf(
 
     gstAtSendData.usBufLen = 0;
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -15081,7 +15081,7 @@ VOS_UINT32 AT_RcvMmaPlmnListAbortCnf(
 
     ucIndex = AT_BROADCAST_CLIENT_INDEX_MODEM_0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstPlmnListAbortCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaPlmnSpecialSelSetCnf : WARNING:AT INDEX NOT FOUND!");
@@ -15094,9 +15094,9 @@ VOS_UINT32 AT_RcvMmaPlmnListAbortCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
-    /* 容错处理, 当前不在列表搜ABORT过程中则不上报ABORT.
-       如AT的ABORT保护定时器已超时, 之后再收到MMA的ABORT_CNF则不上报ABORT */
+    /* ????AT???????????????????? */
+    /* ????????, ??????????????ABORT??????????????ABORT.
+       ??AT??ABORT????????????????, ??????????MMA??ABORT_CNF????????ABORT */
     if (AT_CMD_COPS_ABORT_PLMN_LIST != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaPlmnSpecialSelSetCnf : Current Option is not AT_CMD_COPS_SET_MANUAL.");
@@ -15109,7 +15109,7 @@ VOS_UINT32 AT_RcvMmaPlmnListAbortCnf(
 
     gstAtSendData.usBufLen = 0;
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -15127,7 +15127,7 @@ VOS_UINT32 AT_RcvMmaPowerDownCnf(
 
     ucIndex = AT_BROADCAST_CLIENT_INDEX_MODEM_0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstPrefPlmnTypeSetCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaPowerDownCnf : WARNING:AT INDEX NOT FOUND!");
@@ -15140,7 +15140,7 @@ VOS_UINT32 AT_RcvMmaPowerDownCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_MMA_MT_POWER_DOWN != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaPowerDownCnf : Current Option is not AT_CMD_MMA_MT_POWER_DOWN.");
@@ -15160,7 +15160,7 @@ VOS_UINT32 AT_RcvMmaPowerDownCnf(
 
     gstAtSendData.usBufLen = 0;
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -15179,7 +15179,7 @@ VOS_UINT32 AT_RcvMmaPrefPlmnTypeSetCnf(
 
     ucIndex = AT_BROADCAST_CLIENT_INDEX_MODEM_0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstPrefPlmnTypeSetCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaPrefPlmnTypeSetCnf : WARNING:AT INDEX NOT FOUND!");
@@ -15192,7 +15192,7 @@ VOS_UINT32 AT_RcvMmaPrefPlmnTypeSetCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_MMA_SET_PREF_PLMN_TYPE != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaPrefPlmnTypeSetCnf : Current Option is not AT_CMD_MMA_SET_PREF_PLMN_TYPE.");
@@ -15209,7 +15209,7 @@ VOS_UINT32 AT_RcvMmaPrefPlmnTypeSetCnf(
 
     gstAtSendData.usBufLen = 0;
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -15225,7 +15225,7 @@ VOS_UINT32 AT_RcvMmaPhoneModeQryCnf(
 
     pstPhoneModeQryCnf = (TAF_MMA_PHONE_MODE_QRY_CNF_STRU *)pMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstPhoneModeQryCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaPhoneModeQryCnf : WARNING:AT INDEX NOT FOUND!");
@@ -15238,7 +15238,7 @@ VOS_UINT32 AT_RcvMmaPhoneModeQryCnf(
         return VOS_ERR;
     }
 
-    /* 当前操作是否为查询操作AT_CMD_CFUN_READ */
+    /* ??????????????????????AT_CMD_CFUN_READ */
     if (AT_CMD_CFUN_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaPhoneModeQryCnf : Current Option is not AT_CMD_CFUN_READ.");
@@ -15263,7 +15263,7 @@ VOS_UINT32 AT_RcvMmaPhoneModeQryCnf(
         ulResult = At_ChgTafErrorCode(ucIndex, pstPhoneModeQryCnf->enErrorCause);
     }
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -15280,7 +15280,7 @@ VOS_UINT32 AT_RcvTafMmaQuickStartSetCnf(
 
     pstQuickStartSetCnf = (TAF_MMA_QUICKSTART_SET_CNF_STRU *)pMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstQuickStartSetCnf->usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvTafMmaQuickStartSetCnf : WARNING:AT INDEX NOT FOUND!");
@@ -15293,7 +15293,7 @@ VOS_UINT32 AT_RcvTafMmaQuickStartSetCnf(
         return VOS_ERR;
     }
 
-    /* 当前操作是否为查询操作AT_CMD_CQST_SET */
+    /* ??????????????????????AT_CMD_CQST_SET */
     if (AT_CMD_CQST_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvTafMmaQuickStartSetCnf : Current Option is not AT_CMD_CQST_SET.");
@@ -15311,7 +15311,7 @@ VOS_UINT32 AT_RcvTafMmaQuickStartSetCnf(
         ulResult = AT_ERROR;
     }
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -15330,7 +15330,7 @@ VOS_UINT32 AT_RcvTafMmaAutoAttachSetCnf(
 
      ucIndex             = AT_BROADCAST_CLIENT_INDEX_MODEM_0;
 
-     /* 通过clientid获取index */
+     /* ????clientid????index */
      if (AT_FAILURE == At_ClientIdToUserId(pstAutoAttachSetCnf->stCtrl.usClientId, &ucIndex))
      {
          AT_WARN_LOG("AT_RcvTafMmaAutoAttachSetCnf : WARNING:AT INDEX NOT FOUND!");
@@ -15343,7 +15343,7 @@ VOS_UINT32 AT_RcvTafMmaAutoAttachSetCnf(
          return VOS_ERR;
      }
 
-     /* 当前操作是否为查询操作AT_CMD_CAATT_SET */
+     /* ??????????????????????AT_CMD_CAATT_SET */
      if (AT_CMD_CAATT_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
      {
          AT_WARN_LOG("AT_RcvTafMmaAutoAttachSetCnf : Current Option is not AT_CMD_CAATT_SET.");
@@ -15361,7 +15361,7 @@ VOS_UINT32 AT_RcvTafMmaAutoAttachSetCnf(
          ulResult = AT_ERROR;
      }
 
-     /* 调用At_FormatResultData发送命令结果 */
+     /* ????At_FormatResultData???????????? */
      At_FormatResultData(ucIndex, ulResult);
 
      return VOS_OK;
@@ -15382,7 +15382,7 @@ VOS_UINT32 AT_RcvTafMmaSyscfgQryCnf(
 
     ucIndex = AT_BROADCAST_CLIENT_INDEX_MODEM_0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstSyscfgQryCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvTafMmaSyscfgQryCnf : WARNING:AT INDEX NOT FOUND!");
@@ -15395,9 +15395,9 @@ VOS_UINT32 AT_RcvTafMmaSyscfgQryCnf(
         return VOS_ERR;
     }
 
-    if(TAF_ERR_NO_ERROR != pstSyscfgQryCnf->enErrorCause)  /* MT本地错误 */
+    if(TAF_ERR_NO_ERROR != pstSyscfgQryCnf->enErrorCause)  /* MT???????? */
     {
-        ulResult = At_ChgTafErrorCode(ucIndex, pstSyscfgQryCnf->enErrorCause);       /* 发生错误 */
+        ulResult = At_ChgTafErrorCode(ucIndex, pstSyscfgQryCnf->enErrorCause);       /* ???????? */
     }
     else if(AT_CMD_SYSCFG_READ == gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
@@ -15435,10 +15435,10 @@ VOS_UINT32 AT_RcvMmaAccessModeQryCnf(
     VOS_UINT32                          ulResult;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pstAccessModeCnf    = (TAF_MMA_ACCESS_MODE_QRY_CNF_STRU *)pMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstAccessModeCnf->stCtrl.usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaAccessModeQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -15451,18 +15451,18 @@ VOS_UINT32 AT_RcvMmaAccessModeQryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_CPAM_READ */
+    /*??????????????????????AT_CMD_CPAM_READ */
     if (AT_CMD_CPAM_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     gstAtSendData.usBufLen = 0;
 
-    /* 如果查询的接入模式为无效值，则返回ERROR，例如当前LTE only不支持GU */
+    /* ??????????????????????????????????ERROR??????????LTE only??????GU */
     if (pstAccessModeCnf->enAccessMode >= MN_MMA_CPAM_RAT_TYPE_BUTT)
     {
         ulResult = AT_ERROR;
@@ -15493,10 +15493,10 @@ VOS_UINT32 AT_RcvMmaCopsQryCnf(
     TAF_MMA_COPS_QRY_CNF_STRU          *pstCopsQryCnf;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pstCopsQryCnf    = (TAF_MMA_COPS_QRY_CNF_STRU *)pMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstCopsQryCnf->usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaCopsQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -15509,13 +15509,13 @@ VOS_UINT32 AT_RcvMmaCopsQryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_COPS_READ */
+    /*??????????????????????AT_CMD_COPS_READ */
     if (AT_CMD_COPS_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     At_QryParaRspCopsProc(ucIndex, pstCopsQryCnf->ucOpId, (VOS_VOID *)&(pstCopsQryCnf->stCopsInfo));
@@ -15531,10 +15531,10 @@ VOS_UINT32 AT_RcvMmaRegStateQryCnf(
     TAF_MMA_REG_STATE_QRY_CNF_STRU     *pstRegStateCnf;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pstRegStateCnf    = (TAF_MMA_REG_STATE_QRY_CNF_STRU *)pMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRegStateCnf->stCtrl.usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaRegStateQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -15547,24 +15547,24 @@ VOS_UINT32 AT_RcvMmaRegStateQryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_CREG_READ */
+    /*??????????????????????AT_CMD_CREG_READ */
     if (AT_CMD_CREG_READ == gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
-        /* 复位AT状态 */
+        /* ????AT???? */
         AT_STOP_TIMER_CMD_READY(ucIndex);
 
         At_QryParaRspCregProc(ucIndex, pstRegStateCnf->stCtrl.ucOpId, (VOS_VOID *)&(pstRegStateCnf->stRegInfo));
     }
     else if (AT_CMD_CGREG_READ == gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
-        /* 复位AT状态 */
+        /* ????AT???? */
         AT_STOP_TIMER_CMD_READY(ucIndex);
 
         At_QryParaRspCgregProc(ucIndex, pstRegStateCnf->stCtrl.ucOpId, (VOS_VOID *)&(pstRegStateCnf->stRegInfo));
     }
     else if (AT_CMD_CEREG_READ == gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
-        /* 复位AT状态 */
+        /* ????AT???? */
         AT_STOP_TIMER_CMD_READY(ucIndex);
 
         AT_QryParaRspCeregProc(ucIndex, pstRegStateCnf->stCtrl.ucOpId, (VOS_VOID *)&(pstRegStateCnf->stRegInfo));
@@ -15586,10 +15586,10 @@ VOS_UINT32 AT_RcvMmaAutoAttachQryCnf(
     VOS_UINT32                          ulResult;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pstAutoAttachCnf    = (TAF_MMA_AUTO_ATTACH_QRY_CNF_STRU *)pMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstAutoAttachCnf->stCtrl.usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaAutoAttachQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -15602,13 +15602,13 @@ VOS_UINT32 AT_RcvMmaAutoAttachQryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_CAATT_READ */
+    /*??????????????????????AT_CMD_CAATT_READ */
     if (AT_CMD_CAATT_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     gstAtSendData.usBufLen = 0;
@@ -15642,10 +15642,10 @@ VOS_UINT32 AT_RcvMmaSysInfoQryCnf(
     TAF_MMA_SYSINFO_QRY_CNF_STRU       *pstSysInfoCnf;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pstSysInfoCnf  = (TAF_MMA_SYSINFO_QRY_CNF_STRU *)pMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstSysInfoCnf->usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaSysInfoQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -15654,7 +15654,7 @@ VOS_UINT32 AT_RcvMmaSysInfoQryCnf(
 
     if (VOS_FALSE == pstSysInfoCnf->ucIsSupport)
     {
-        /* 复位AT状态 */
+        /* ????AT???? */
         AT_STOP_TIMER_CMD_READY(ucIndex);
 
         At_FormatResultData(ucIndex,AT_CMD_NOT_SUPPORT);
@@ -15670,10 +15670,10 @@ VOS_UINT32 AT_RcvMmaSysInfoQryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_SYSINFO_READ */
+    /*??????????????????????AT_CMD_SYSINFO_READ */
     if (AT_CMD_SYSINFO_READ == gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
-        /* 复位AT状态 */
+        /* ????AT???? */
         AT_STOP_TIMER_CMD_READY(ucIndex);
 
         At_QryParaRspSysinfoProc(ucIndex, pstSysInfoCnf->ucOpId, (VOS_VOID *)&(pstSysInfoCnf->stSysInfo));
@@ -15682,7 +15682,7 @@ VOS_UINT32 AT_RcvMmaSysInfoQryCnf(
     }
     else if (AT_CMD_SYSINFOEX_READ == gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
-        /* 复位AT状态 */
+        /* ????AT???? */
         AT_STOP_TIMER_CMD_READY(ucIndex);
 
         AT_QryParaRspSysinfoExProc(ucIndex, pstSysInfoCnf->ucOpId, (VOS_VOID *)&(pstSysInfoCnf->stSysInfo));
@@ -15705,11 +15705,11 @@ VOS_UINT32 AT_RcvMtaAnqueryQryCnf(
     VOS_UINT32                          ulResult;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pRcvMsg                 = (AT_MTA_MSG_STRU *)pMsg;
     pstAntennaInfoQryCnf    = (MTA_AT_ANTENNA_INFO_QRY_CNF_STRU *)pRcvMsg->aucContent;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaAnqueryQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -15722,13 +15722,13 @@ VOS_UINT32 AT_RcvMtaAnqueryQryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_ANQUERY_READ */
+    /*??????????????????????AT_CMD_ANQUERY_READ */
     if (AT_CMD_ANQUERY_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     if (MTA_AT_RESULT_NO_ERROR == pstAntennaInfoQryCnf->enResult)
@@ -15757,7 +15757,7 @@ VOS_UINT32 AT_RcvMmaEHplmnInfoQryCnf(
 
     pstHplmnCnf  = (TAF_MMA_HOME_PLMN_QRY_CNF_STRU *)pstMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstHplmnCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaEHplmnInfoQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -15770,7 +15770,7 @@ VOS_UINT32 AT_RcvMmaEHplmnInfoQryCnf(
         return VOS_ERR;
     }
 
-    /* 根据当前操作类型进入^HPLMN/^APHPLMN的处理 */
+    /* ????????????????????^HPLMN/^APHPLMN?????? */
     if (AT_CMD_HOMEPLMN_READ == gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         /* ^APHPLMN */
@@ -15798,12 +15798,12 @@ VOS_UINT32 AT_RcvMmaApHplmnQryCnf(
     VOS_UINT32                          ulResult;
     TAF_MMA_HPLMN_WITH_MNC_LEN_STRU     stHplmn;
 
-    /* 初始化 */
+    /* ?????? */
     pstHplmnCnf  = (TAF_MMA_HOME_PLMN_QRY_CNF_STRU *)pstMsg;
 
-    /* index的异常判断移到AT_RcvMmaEHplmnInfoQryCnf中 */
+    /* index??????????????AT_RcvMmaEHplmnInfoQryCnf?? */
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     if (TAF_ERR_NO_ERROR == pstHplmnCnf->enErrorCause)
@@ -15847,12 +15847,12 @@ VOS_UINT32 AT_RcvMmaSrvStatusInd(
     VOS_UINT8                           ucIndex;
     VOS_UINT16                          usLength;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex             = 0;
     usLength            = 0;
     pstSrvStatusInd     = (TAF_MMA_SRV_STATUS_IND_STRU*)pstMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstSrvStatusInd->usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMmaSrvStatusInd: WARNING:AT INDEX NOT FOUND!");
@@ -15889,12 +15889,12 @@ VOS_UINT32 AT_RcvMmaImsiRefreshInd(
     VOS_UINT8                           ucIndex;
     VOS_UINT16                          usLength;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex             = 0;
     usLength            = 0;
     pstImsiRefreshInd   = (TAF_MMA_IMSI_REFRESH_IND_STRU *)pstMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstImsiRefreshInd->usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMmaImsiRefreshInd: WARNING:AT INDEX NOT FOUND!");
@@ -15931,11 +15931,11 @@ VOS_UINT32 AT_RcvMmaRssiInfoInd(
     TAF_MMA_RSSI_INFO_IND_STRU         *pstRssiInfoInd;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex            = 0;
     pstRssiInfoInd     = (TAF_MMA_RSSI_INFO_IND_STRU*)pstMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if (AT_FAILURE == At_ClientIdToUserId(pstRssiInfoInd->usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaRssiInfoInd: WARNING:AT INDEX NOT FOUND!");
@@ -15955,11 +15955,11 @@ VOS_UINT32 AT_RcvMmaRegStatusInd(
     TAF_MMA_REG_STATUS_IND_STRU        *pstRegStatusInd;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex             = 0;
     pstRegStatusInd     = (TAF_MMA_REG_STATUS_IND_STRU*)pstMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if (AT_FAILURE == At_ClientIdToUserId(pstRegStatusInd->usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaRegStatusInd: WARNING:AT INDEX NOT FOUND!");
@@ -15981,12 +15981,12 @@ VOS_UINT32 AT_RcvMmaRegRejInfoInd(
     VOS_UINT8                           ucIndex;
     VOS_UINT16                          usLength;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex          = 0;
     usLength         = 0;
     pstRegRejInd     = (TAF_MMA_REG_REJ_INFO_IND_STRU*)pstMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if (AT_FAILURE == At_ClientIdToUserId(pstRegRejInd->usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaRegRejInfoInd: WARNING:AT INDEX NOT FOUND!");
@@ -16062,7 +16062,7 @@ VOS_UINT32 AT_RcvMmaRegRejInfoInd(
                 0x000f & (pstRegRejInd->stRegRejInfo.ucRac >> 0));
 
 
-    /* <CI>域以4字节方式上报 */
+    /* <CI>????4???????????? */
     usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,
             (VOS_CHAR *)pgucAtSndCodeAddr,
             (VOS_CHAR *)pgucAtSndCodeAddr + usLength,
@@ -16094,12 +16094,12 @@ VOS_UINT32 AT_RcvMmaPlmnSelectInfoInd(
     VOS_UINT16                              usLength;
     VOS_UINT8                               ucIndex;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex             = 0;
     usLength            = 0;
     pstPlmnSelecInd     = (TAF_MMA_PLMN_SElECTION_INFO_IND_STRU*)pstMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if (AT_FAILURE == At_ClientIdToUserId(pstPlmnSelecInd->usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaPlmnSelectInfoInd: WARNING:AT INDEX NOT FOUND!");
@@ -16145,7 +16145,7 @@ VOS_UINT32 AT_RcvTafMmaSyscfgTestCnf(
 
     pstSysCfgTestCnf = (TAF_MMA_SYSCFG_TEST_CNF_STRU *)pMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstSysCfgTestCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvTafMmaSyscfgTestCnf : WARNING:AT INDEX NOT FOUND!");
@@ -16227,11 +16227,11 @@ VOS_UINT32 AT_RcvTafMmaQuickStartQryCnf(
     VOS_UINT32                          ulResult;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pstQuickStartQryCnf = (TAF_MMA_QUICKSTART_QRY_CNF_STRU *)pMsg;
     ulResult = AT_OK;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstQuickStartQryCnf->usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvTafMmaQuickStartQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -16244,18 +16244,18 @@ VOS_UINT32 AT_RcvTafMmaQuickStartQryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_CQST_READ */
+    /*??????????????????????AT_CMD_CQST_READ */
     if (AT_CMD_CQST_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     gstAtSendData.usBufLen = 0;
 
-    /* 如果查询的接入模式为无效值，则返回ERROR，例如当前LTE only不支持GU */
+    /* ??????????????????????????????????ERROR??????????LTE only??????GU */
     if (TAF_ERR_NO_ERROR != pstQuickStartQryCnf->enErrorCause)
     {
         ulResult = AT_ERROR;
@@ -16286,12 +16286,12 @@ VOS_UINT32 AT_RcvMtaCsnrQryCnf(
     VOS_UINT32                          ulResult;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pstRcvMsg      = (AT_MTA_MSG_STRU *)pMsg;
     pstrCsnrQryCnf = (MTA_AT_CSNR_QRY_CNF_STRU *)pstRcvMsg->aucContent;
     ulResult       = AT_OK;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaCsnrQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -16304,13 +16304,13 @@ VOS_UINT32 AT_RcvMtaCsnrQryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_CSNR_READ */
+    /*??????????????????????AT_CMD_CSNR_READ */
     if (AT_CMD_CSNR_QUERY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     gstAtSendData.usBufLen = 0;
@@ -16331,7 +16331,7 @@ VOS_UINT32 AT_RcvMtaCsnrQryCnf(
                                                     (TAF_INT32)pstrCsnrQryCnf->stCsnrPara.sCpichEcNo);
     }
 
-    /* 回复用户命令结果 */
+    /* ???????????????? */
     At_FormatResultData(ucIndex,ulResult);
     return  VOS_OK;
 }
@@ -16347,11 +16347,11 @@ VOS_UINT32 AT_RcvTafMmaCsqQryCnf(
     TAF_UINT16                          usLength = 0;
     TAF_PH_RSSI_STRU                    stCsq;
 
-    /* 初始化 */
+    /* ?????? */
     pstrCsqQryCnf = (TAF_MMA_CSQ_QRY_CNF_STRU *)pMsg;
     ulResult = AT_OK;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstrCsqQryCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvTafMmaCsqQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -16364,13 +16364,13 @@ VOS_UINT32 AT_RcvTafMmaCsqQryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_CSQ_SET */
+    /*??????????????????????AT_CMD_CSQ_SET */
     if (AT_CMD_CSQ_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     TAF_MEM_CPY_S(&stCsq, sizeof(stCsq), &pstrCsqQryCnf->stCsq, sizeof(TAF_PH_RSSI_STRU));
@@ -16384,7 +16384,7 @@ VOS_UINT32 AT_RcvTafMmaCsqQryCnf(
         ulResult = AT_OK;
         if(stCsq.ucRssiNum > 0)
         {
-            /* 增加范围限制 */
+            /* ???????????? */
             if((stCsq.aRssi[0].ucRssiValue >= 31) && (stCsq.aRssi[0].ucRssiValue < 99))
             {
                 usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,(TAF_CHAR *)pgucAtSndCodeAddr,(TAF_CHAR *)pgucAtSndCodeAddr + usLength,"%d",31);
@@ -16415,12 +16415,12 @@ VOS_UINT32 AT_RcvMtaCsqlvlQryCnf(
     AT_MTA_CSQLVL_PARA_STRU             stCsqlvl;
     AT_MTA_CSQLVLEXT_PARA_STRU          stCsqlvlext;
 
-    /* 初始化 */
+    /* ?????? */
     pstRcvMsg        = (AT_MTA_MSG_STRU *)pMsg;
     pstrCsqlvlQryCnf = (MTA_AT_CSQLVL_QRY_CNF_STRU *)pstRcvMsg->aucContent;
     ulResult         = AT_OK;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaCsqlvlQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -16440,11 +16440,11 @@ VOS_UINT32 AT_RcvMtaCsqlvlQryCnf(
     {
         if (AT_CMD_CSQLVL_SET == gastAtClientTab[ucIndex].CmdCurrentOpt)
         {
-            /* 复位AT状态 */
+            /* ????AT???? */
             AT_STOP_TIMER_CMD_READY(ucIndex);
 
             ulResult = AT_OK;
-            /* 根据MMA上报的查询结果显示Csqlvl到串口；*/
+            /* ????MMA??????????????????Csqlvl????????*/
             gstAtSendData.usBufLen = (VOS_UINT16)At_sprintf( AT_CMD_MAX_LEN,
                                                             (VOS_CHAR*)pgucAtSndCodeAddr,
                                                             (VOS_CHAR*)pgucAtSndCodeAddr,
@@ -16455,12 +16455,12 @@ VOS_UINT32 AT_RcvMtaCsqlvlQryCnf(
         }
         else if (AT_CMD_CSQLVLEXT_SET == gastAtClientTab[ucIndex].CmdCurrentOpt)
         {
-            /* 复位AT状态 */
+            /* ????AT???? */
             AT_STOP_TIMER_CMD_READY(ucIndex);
 
             ulResult = AT_OK;
-            /* 根据MMA上报的查询结果显示Csqlvl到串口；*/
-            /* 根据MMA上报的查询结果显示CsqlvlExt到串口；*/
+            /* ????MMA??????????????????Csqlvl????????*/
+            /* ????MMA??????????????????CsqlvlExt????????*/
             gstAtSendData.usBufLen = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                                             (VOS_CHAR*)pgucAtSndCodeAddr,
                                                             (VOS_CHAR*)pgucAtSndCodeAddr,
@@ -16495,12 +16495,12 @@ VOS_UINT32 AT_RcvMmaTimeChangeInd(
     TAF_MMA_TIME_CHANGE_IND_STRU       *pstTimeChangeInd;
     TAF_UINT16                          usLength;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex             = 0;
     pstTimeChangeInd    = (TAF_MMA_TIME_CHANGE_IND_STRU*)pMsg;
     usLength            = 0;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstTimeChangeInd->usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMmaTimeChangeInd: WARNING:AT INDEX NOT FOUND!");
@@ -16511,7 +16511,7 @@ VOS_UINT32 AT_RcvMmaTimeChangeInd(
     if ((NAS_MM_INFO_IE_UTLTZ == (pstTimeChangeInd->ucIeFlg & NAS_MM_INFO_IE_UTLTZ))
      || (NAS_MM_INFO_IE_LTZ == (pstTimeChangeInd->ucIeFlg & NAS_MM_INFO_IE_LTZ)))
     {
-        /* 存在时间信息 */
+        /* ???????????? */
         usLength += (TAF_UINT16)At_PrintMmTimeInfo(ucIndex,
                                                    pstTimeChangeInd,
                                                    (pgucAtSndCodeAddr + usLength));
@@ -16536,7 +16536,7 @@ VOS_UINT32 AT_RcvMmaModeChangeInd(
     usLength  = 0;
     enModemId = MODEM_ID_0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvTafMmaCsqlvlextQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -16563,7 +16563,7 @@ VOS_UINT32 AT_RcvMmaModeChangeInd(
 
     At_SendResultData(ucIndex, pgucAtSndCodeAddr, usLength);
 
-    /* 此处全局变量维护不再准确，需要删除，用时从C核获取 */
+    /* ??????????????????????????????????????????C?????? */
 
     return VOS_TRUE;
 
@@ -16585,7 +16585,7 @@ VOS_UINT32 AT_RcvMmaPlmnChangeInd(
     pstRcvMsg = (TAF_MMA_PLMN_CHANGE_IND_STRU *)pMsg;
     enModemId = MODEM_ID_0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvTafMmaCsqlvlextQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -16660,45 +16660,45 @@ VOS_UINT32 AT_RcvTafMmaCrpnQryCnf(
     VOS_UINT8                           aucPlmn[TAF_MAX_AUTHDATA_PLMN_LEN + 1];
     TAF_MMA_CRPN_QRY_PARA_STRU          stMnMmaCrpnQry;
 
-    /* 初始化 */
+    /* ?????? */
     pstCrpnQryCnf           = (TAF_MMA_CRPN_QRY_CNF_STRU *)pMsg;
     pstMnMmaCrpnQryCnf      = &pstCrpnQryCnf->stCrpnQryInfo;
     ulResult                = AT_OK;
     usLength                = 0;
     ulLoop                  = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstCrpnQryCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvTafMmaCrpnQryCnf:WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, begin */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, begin */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvTafMmaCrpnQryCnf : AT_BROADCAST_INDEX.");
         return VOS_ERR;
     }
-    /* Added by 傅映君/f62575 for 自动应答开启情况下被叫死机问题, 2011/11/28, end */
+    /* Added by ??????/f62575 for ??????????????????????????????, 2011/11/28, end */
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CRPN_QUERY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
 
-    /* 格式化AT^CRPN查询命令返回 */
+    /* ??????AT^CRPN???????????? */
     gstAtSendData.usBufLen = 0;
     if (TAF_ERR_NO_ERROR != pstCrpnQryCnf->enErrorCause)
     {
         ulResult = At_ChgTafErrorCode(ucIndex, (VOS_UINT16)pstCrpnQryCnf->enErrorCause);;
 
-        /* 使用AT_STOP_TIMER_CMD_READY恢复AT命令实体状态为READY状态 */
+        /* ????AT_STOP_TIMER_CMD_READY????AT??????????????READY???? */
         AT_STOP_TIMER_CMD_READY(ucIndex);
 
-        /* 输出结果 */
+        /* ???????? */
         At_FormatResultData(ucIndex, ulResult);
 
         return VOS_OK;
@@ -16722,7 +16722,7 @@ VOS_UINT32 AT_RcvTafMmaCrpnQryCnf(
                                            g_stParseContext[ucIndex].pstCmdElement->pszCmdName);
 
         /* <PLMN> */
-        /* 参照标杆，如果命令中输入的是PLMN ID，则输出时直接采用输入的PLMN ID */
+        /* ????????????????????????????PLMN ID????????????????????????PLMN ID */
         if (2 == pstMnMmaCrpnQryCnf->stMnMmaCrpnQry.ucPlmnType)
         {
             TAF_MEM_SET_S(aucPlmn, sizeof(aucPlmn), 0x00, sizeof(aucPlmn));
@@ -16794,14 +16794,14 @@ VOS_UINT32 AT_RcvTafMmaCrpnQryCnf(
     At_BufferorSendResultData(ucIndex, pgucAtSndCodeAddr, usLength);
     usLength = 0;
 
-    /* 如果本次上报的CRPN数目与要求的相同，则认为C核仍有Plmn list没有上报，要继续发送请求进行查询 */
+    /* ??????????????CRPN????????????????????????C??????Plmn list???????????????????????????????? */
     if (TAF_PH_CRPN_PLMN_MAX_NUM == pstMnMmaCrpnQryCnf->ucTotalNum)
     {
         TAF_MEM_CPY_S(&stMnMmaCrpnQry, sizeof(stMnMmaCrpnQry), &pstMnMmaCrpnQryCnf->stMnMmaCrpnQry, sizeof(TAF_MMA_CRPN_QRY_PARA_STRU));
         stMnMmaCrpnQry.ucCurrIndex = pstMnMmaCrpnQryCnf->ucCurrIndex + pstMnMmaCrpnQryCnf->ucTotalNum;
         stMnMmaCrpnQry.ucQryNum    = TAF_PH_CRPN_PLMN_MAX_NUM;
 
-        /* 发送ID_TAF_MMA_CRPN_QRY_REQ消息给MMA处理 */
+        /* ????ID_TAF_MMA_CRPN_QRY_REQ??????MMA???? */
         if (VOS_TRUE == TAF_MMA_QryCrpnReq( WUEPS_PID_AT,
                                             gastAtClientTab[ucIndex].usClientId,
                                             0,
@@ -16811,7 +16811,7 @@ VOS_UINT32 AT_RcvTafMmaCrpnQryCnf(
         }
         else
         {
-            /* 使用AT_STOP_TIMER_CMD_READY恢复AT命令实体状态为READY状态 */
+            /* ????AT_STOP_TIMER_CMD_READY????AT??????????????READY???? */
             AT_STOP_TIMER_CMD_READY(ucIndex);
             gstAtSendData.usBufLen = 0;
             At_FormatResultData(ucIndex, AT_ERROR);
@@ -16827,7 +16827,7 @@ VOS_UINT32 AT_RcvTafMmaCrpnQryCnf(
         At_BufferorSendResultData(ucIndex, pgucAtSndCodeAddr, usLength);
         usLength = 0;
 
-        /* 使用AT_STOP_TIMER_CMD_READY恢复AT命令实体状态为READY状态 */
+        /* ????AT_STOP_TIMER_CMD_READY????AT??????????????READY???? */
         AT_STOP_TIMER_CMD_READY(ucIndex);
         gstAtSendData.usBufLen = usLength;
         At_FormatResultData(ucIndex, ulResult);
@@ -16847,11 +16847,11 @@ VOS_UINT32 AT_RcvMmaCbcQryCnf(
     VOS_UINT8                           ucIndex;
     TAF_UINT16                          usLength = 0;
 
-    /* 初始化 */
+    /* ?????? */
     pstCbcCnf           = (TAF_MMA_BATTERY_CAPACITY_QRY_CNF_STRU *)pMsg;
     ulResult            = AT_OK;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstCbcCnf->stCtrl.usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaCbcQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -16864,13 +16864,13 @@ VOS_UINT32 AT_RcvMmaCbcQryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_CBC_SET */
+    /*??????????????????????AT_CMD_CBC_SET */
     if (AT_CMD_CBC_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,
@@ -16903,11 +16903,11 @@ VOS_UINT32 AT_RcvMmaHsQryCnf(
     VOS_UINT8                           ucIndex;
     TAF_UINT16                          usLength = 0;
 
-    /* 初始化 */
+    /* ?????? */
     pstHsCnf            = (TAF_MMA_HAND_SHAKE_QRY_CNF_STRU *)pMsg;
     ulResult            = AT_OK;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstHsCnf->stCtrl.usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaHsQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -16920,14 +16920,14 @@ VOS_UINT32 AT_RcvMmaHsQryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_HS_READ */
+    /*??????????????????????AT_CMD_HS_READ */
     if (AT_CMD_HS_READ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,
@@ -16967,11 +16967,11 @@ VOS_UINT32 AT_RcvMmaHdrCsqInd(
     VOS_UINT8                           ucIndex;
     MMA_TAF_HDR_CSQ_VALUE_IND_STRU     *pstHdrcsqInd;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex             = 0;
     pstHdrcsqInd        = (MMA_TAF_HDR_CSQ_VALUE_IND_STRU*)pMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstHdrcsqInd->stCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMmaCdmaCsqInd: WARNING:AT INDEX NOT FOUND!");
@@ -17008,7 +17008,7 @@ VOS_UINT32 AT_RcvMmaHdrCsqSetCnf(
 
     ucIndex = AT_BROADCAST_CLIENT_INDEX_MODEM_0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstHdrCsqCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaHdrCsqSetCnf : WARNING:AT INDEX NOT FOUND!");
@@ -17034,7 +17034,7 @@ VOS_UINT32 AT_RcvMmaHdrCsqSetCnf(
 
     gstAtSendData.usBufLen = 0;
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -17050,12 +17050,12 @@ VOS_UINT32 AT_RcvMmaHdrCsqQryCnf(
     VOS_UINT16                          usLength;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pstHdrCsqQueryCnf  = (MMA_TAF_HDR_CSQ_QRY_SETTING_CNF_STRU*)pMsg;
     usLength            = 0;
     ulResult            = AT_OK;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstHdrCsqQueryCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaHdrCsqQryCnf: WARNING:AT INDEX NOT FOUND!");
@@ -17068,7 +17068,7 @@ VOS_UINT32 AT_RcvMmaHdrCsqQryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_HDR_CSQ_QRY */
+    /*??????????????????????AT_CMD_HDR_CSQ_QRY */
     if (AT_CMD_HDR_CSQ_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
@@ -17094,7 +17094,7 @@ VOS_UINT32 AT_RcvMmaHdrCsqQryCnf(
 
     At_FormatResultData(ucIndex, ulResult);
 
-    /* 输出结果 */
+    /* ???????? */
     return VOS_OK;
 }
 
@@ -17112,28 +17112,28 @@ VOS_UINT32 AT_RcvMmaImsSwitchSetCnf(
     ucIndex = AT_BROADCAST_CLIENT_INDEX_MODEM_0;
     pstCnfMsg = (TAF_MMA_IMS_SWITCH_SET_CNF_STRU*)pMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if (AT_FAILURE == At_ClientIdToUserId(pstCnfMsg->usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaImsSwitchSetCnf: WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* 广播消息不处理 */
+    /* ?????????????? */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaImsSwitchSetCnf: WARNING:AT_BROADCAST_INDEX!");
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型 */
+    /* ???????????????? */
     if (AT_CMD_LTE_IMS_SWITCH_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaImsSwitchSetCnf: WARNING:Not AT_CMD_LTE_IMS_SWITCH_SET!");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     if (TAF_MMA_APP_OPER_RESULT_SUCCESS == pstCnfMsg->enResult)
@@ -17160,10 +17160,10 @@ VOS_UINT32 AT_RcvMmaImsSwitchQryCnf(
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulResult;
 
-    /* 初始化 */
+    /* ?????? */
     pstSwitchQryCnf     = (TAF_MMA_IMS_SWITCH_QRY_CNF_STRU *)pMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstSwitchQryCnf->usClientId,&ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaImsSwitchQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -17176,14 +17176,14 @@ VOS_UINT32 AT_RcvMmaImsSwitchQryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_IMS_SWITCH_QRY */
+    /*??????????????????????AT_CMD_IMS_SWITCH_QRY */
     if (AT_CMD_LTE_IMS_SWITCH_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaImsSwitchQryCnf: WARNING:Not AT_CMD_LTE_IMS_SWITCH_QRY!");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     if (TAF_MMA_APP_OPER_RESULT_SUCCESS == pstSwitchQryCnf->enResult)
@@ -17220,28 +17220,28 @@ VOS_UINT32 AT_RcvMmaVoiceDomainSetCnf(
     ucIndex   = AT_BROADCAST_CLIENT_INDEX_MODEM_0;
     pstCnfMsg = (TAF_MMA_VOICE_DOMAIN_SET_CNF_STRU *)pMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if (AT_FAILURE == At_ClientIdToUserId(pstCnfMsg->usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaVoiceDomainSetCnf: WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* 广播消息不处理 */
+    /* ?????????????? */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaVoiceDomainSetCnf: WARNING:AT_BROADCAST_INDEX!");
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型 */
+    /* ???????????????? */
     if (AT_CMD_VOICE_DOMAIN_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaVoiceDomainSetCnf: WARNING:Not AT_CMD_VOICE_DOMAIN_SET!");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     if (TAF_MMA_APP_OPER_RESULT_SUCCESS == pstCnfMsg->enResult)
@@ -17307,11 +17307,11 @@ VOS_UINT32 AT_RcvMmaVoiceDomainQryCnf(
     VOS_UINT32                          ulValue;
     VOS_UINT32                          ulResult;
 
-    /* 初始化 */
+    /* ?????? */
     ulValue             = 0;
     pstDomainQryCnf     = (TAF_MMA_VOICE_DOMAIN_QRY_CNF_STRU *)pMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstDomainQryCnf->usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaVoiceDomainQryCnf:WARNING:AT INDEX NOT FOUND!");
@@ -17324,14 +17324,14 @@ VOS_UINT32 AT_RcvMmaVoiceDomainQryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_VOICE_DOMAIN_QRY */
+    /*??????????????????????AT_CMD_VOICE_DOMAIN_QRY */
     if (AT_CMD_VOICE_DOMAIN_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaVoiceDomainQryCnf: WARNING:Not AT_CMD_VOICE_DOMAIN_QRY!");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     if (VOS_TRUE != AT_VoiceDomainTransToOutputValue(pstDomainQryCnf->enVoiceDomain, &ulValue))
@@ -17364,28 +17364,28 @@ VOS_UINT32 AT_RcvMmaImsDomainCfgSetCnf(VOS_VOID * pMsg)
 
     pstDomainCfgSetCnf = (TAF_MMA_IMS_DOMAIN_CFG_SET_CNF_STRU *)pMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstDomainCfgSetCnf->usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaImsDomainCfgSetCnf :WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* 判断是否为广播 */
+    /* ?????????????? */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaImsDomainCfgSetCnf : AT_BROADCAST_INDEX!");
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_IMSDOMAIN_SET */
+    /* ??????????????????????AT_CMD_IMSDOMAIN_SET */
     if (AT_CMD_IMSDOMAINCFG_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaImsDomainCfgSetCnf : WARNING:Not AT_CMD_IMSDOMAINCFG_SET!");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     if (TAF_MMA_IMS_DOMAIN_CFG_RESULT_SUCCESS == pstDomainCfgSetCnf->enImsDomainCfgResult)
@@ -17411,7 +17411,7 @@ VOS_UINT32 AT_RcvMmaImsDomainCfgQryCnf(VOS_VOID *pMsg)
 
     pstDomainCfgQryCnf = (TAF_MMA_IMS_DOMAIN_CFG_QRY_CNF_STRU *)pMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstDomainCfgQryCnf->usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaImsDomainCfgQryCnf :WARNING:AT INDEX NOT FOUND!");
@@ -17424,14 +17424,14 @@ VOS_UINT32 AT_RcvMmaImsDomainCfgQryCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_IMSDOMAINCFG_QRY */
+    /* ??????????????????????AT_CMD_IMSDOMAINCFG_QRY */
     if (AT_CMD_IMSDOMAINCFG_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaImsDomainCfgQryCnf : WARNING:Not AT_CMD_IMSDOMAIN_QRY!");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     gstAtSendData.usBufLen = 0;
@@ -17456,28 +17456,28 @@ VOS_UINT32 AT_RcvMmaRoamImsSupportSetCnf(VOS_VOID * pMsg)
 
     pstRoamImsSupportSetCnf = (TAF_MMA_ROAM_IMS_SUPPORT_SET_CNF_STRU *)pMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRoamImsSupportSetCnf->usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaRoamImsSupportSetCnf :WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* 判断是否为广播 */
+    /* ?????????????? */
     if (AT_IS_BROADCAST_CLIENT_INDEX(ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaRoamImsSupportSetCnf : AT_BROADCAST_INDEX!");
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_ROAM_IMS_SET */
+    /* ??????????????????????AT_CMD_ROAM_IMS_SET */
     if (AT_CMD_ROAM_IMS_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaRoamImsSupportSetCnf : WARNING:Not AT_CMD_ROAM_IMS_SET!");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     if (TAF_MMA_ROAM_IMS_SUPPORT_RESULT_SUCCESS == pstRoamImsSupportSetCnf->enRoamImsSupportResult)
@@ -17506,13 +17506,13 @@ VOS_UINT32 AT_RcvMtaSetFemctrlCnf(
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulResult;
 
-    /* 初始化 */
+    /* ?????? */
     pstRcvMsg    = (AT_MTA_MSG_STRU *)pMsg;
     pstSetCnf    = (MTA_AT_SET_FEMCTRL_CNF_STRU *)pstRcvMsg->aucContent;
     ucIndex      = 0;
     ulResult     = AT_ERROR;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaSetFemctrlCnf : WARNING:AT INDEX NOT FOUND!");
@@ -17525,17 +17525,17 @@ VOS_UINT32 AT_RcvMtaSetFemctrlCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_FEMCTRL_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaSetFemctrlCnf : Current Option is not AT_CMD_FEMCTRL_SET.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化命令返回 */
+    /* ?????????????? */
     gstAtSendData.usBufLen = 0;
 
     if (MTA_AT_RESULT_NO_ERROR == pstSetCnf->enResult)
@@ -17556,11 +17556,11 @@ VOS_UINT32 AT_RcvMma1xChanSetCnf(
     TAF_MMA_CFREQ_LOCK_SET_CNF_STRU    *pstCFreqLockSetCnf;
     VOS_UINT32                          ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex             = 0;
     pstCFreqLockSetCnf  = (TAF_MMA_CFREQ_LOCK_SET_CNF_STRU*)pstMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstCFreqLockSetCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMma1xChanSetCnf : WARNING:AT INDEX NOT FOUND!");
@@ -17573,7 +17573,7 @@ VOS_UINT32 AT_RcvMma1xChanSetCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_1XCHAN_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMma1xChanSetCnf : Current Option is not AT_CMD_CFREQLOCK_SET.");
@@ -17582,7 +17582,7 @@ VOS_UINT32 AT_RcvMma1xChanSetCnf(
 
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^1XCHAN命令返回 */
+    /* ??????AT^1XCHAN???????? */
     gstAtSendData.usBufLen = 0;
 
     if (VOS_OK != pstCFreqLockSetCnf->ulRslt)
@@ -17594,7 +17594,7 @@ VOS_UINT32 AT_RcvMma1xChanSetCnf(
         ulResult = AT_OK;
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -17610,12 +17610,12 @@ VOS_UINT32 AT_RcvMma1xChanQueryCnf(
     VOS_UINT8                           ucIndex;
     VOS_INT16                           sInvalidChan;
 
-    /* 初始化 */
+    /* ?????? */
     pst1xChanQueryCnf   = (TAF_MMA_1XCHAN_QUERY_CNF_STRU*)pstMsg;
     usLength            = 0;
     sInvalidChan        = -1;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pst1xChanQueryCnf->stAtAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMma1xChanQueryCnf: WARNING:AT INDEX NOT FOUND!");
@@ -17628,7 +17628,7 @@ VOS_UINT32 AT_RcvMma1xChanQueryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_CVER_QRY */
+    /*??????????????????????AT_CMD_CVER_QRY */
     if (AT_CMD_1XCHAN_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMma1xChanQueryCnf : Current Option is not AT_CMD_1XCHAN_QRY.");
@@ -17650,7 +17650,7 @@ VOS_UINT32 AT_RcvMma1xChanQueryCnf(
     }
     else
     {
-        /* 查询失败，上报^1XCHAN: BUTT */
+        /* ??????????????^1XCHAN: BUTT */
         usLength = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                      (VOS_CHAR *)pgucAtSndCodeAddr,
                                      (VOS_CHAR *)pgucAtSndCodeAddr + usLength,
@@ -17661,7 +17661,7 @@ VOS_UINT32 AT_RcvMma1xChanQueryCnf(
         gstAtSendData.usBufLen = usLength;
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, AT_OK);
 
     return VOS_OK;
@@ -17677,12 +17677,12 @@ VOS_UINT32 AT_RcvMmaCVerQueryCnf(
     VOS_UINT8                           ucIndex;
     TAF_MMA_1X_CAS_P_REV_ENUM_UINT8     enInvalidVersion;
 
-    /* 初始化 */
+    /* ?????? */
     pstCVerQueryCnf     = (TAF_MMA_CVER_QUERY_CNF_STRU*)pstMsg;
     usLength            = 0;
     enInvalidVersion    = TAF_MMA_1X_CAS_P_REV_ENUM_BUTT;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstCVerQueryCnf->stAtAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaCVerQueryCnf: WARNING:AT INDEX NOT FOUND!");
@@ -17695,7 +17695,7 @@ VOS_UINT32 AT_RcvMmaCVerQueryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_CVER_QRY */
+    /*??????????????????????AT_CMD_CVER_QRY */
     if (AT_CMD_CVER_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaCVerQueryCnf : Current Option is not AT_CMD_CVER_QRY.");
@@ -17717,7 +17717,7 @@ VOS_UINT32 AT_RcvMmaCVerQueryCnf(
     }
     else
     {
-        /* 查询失败，上报^CVER: BUTT */
+        /* ??????????????^CVER: BUTT */
         usLength = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                      (VOS_CHAR *)pgucAtSndCodeAddr,
                                      (VOS_CHAR *)pgucAtSndCodeAddr + usLength,
@@ -17728,7 +17728,7 @@ VOS_UINT32 AT_RcvMmaCVerQueryCnf(
         gstAtSendData.usBufLen = usLength;
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, AT_OK);
 
     return VOS_OK;
@@ -17744,12 +17744,12 @@ VOS_UINT32 AT_RcvMmaStateQueryCnf(
     VOS_UINT8                           ucIndex;
     VOS_INT8                            cInvalidSta;
 
-    /* 初始化 */
+    /* ?????? */
     pstStQryCnf     = (TAF_MMA_STATE_QUERY_CNF_STRU*)pstMsg;
     usLength        = 0;
     cInvalidSta     = -1;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstStQryCnf->stAtAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaStateQueryCnf: WARNING:AT INDEX NOT FOUND!");
@@ -17762,7 +17762,7 @@ VOS_UINT32 AT_RcvMmaStateQueryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_CVER_QRY */
+    /*??????????????????????AT_CMD_CVER_QRY */
     if (AT_CMD_GETSTA_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaStateQueryCnf : Current Option is not AT_CMD_GETST_QRY.");
@@ -17785,7 +17785,7 @@ VOS_UINT32 AT_RcvMmaStateQueryCnf(
     }
     else
     {
-        /* 查询失败，上报^GETSTA: BUTT */
+        /* ??????????????^GETSTA: BUTT */
         usLength = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                      (VOS_CHAR *)pgucAtSndCodeAddr,
                                      (VOS_CHAR *)pgucAtSndCodeAddr + usLength,
@@ -17797,7 +17797,7 @@ VOS_UINT32 AT_RcvMmaStateQueryCnf(
         gstAtSendData.usBufLen = usLength;
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, AT_OK);
 
     return VOS_OK;
@@ -17813,12 +17813,12 @@ VOS_UINT32 AT_RcvMmaCHverQueryCnf(
     VOS_UINT8                           ucIndex;
     TAF_MMA_1X_CAS_P_REV_ENUM_UINT8     enInvalidVer;
 
-    /* 初始化 */
+    /* ?????? */
     pstStaQryCnf     = (TAF_MMA_CHIGHVER_QUERY_CNF_STRU*)pstMsg;
     usLength         = 0;
     enInvalidVer     = TAF_MMA_1X_CAS_P_REV_ENUM_BUTT;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstStaQryCnf->stAtAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaCHverQueryCnf: WARNING:AT INDEX NOT FOUND!");
@@ -17831,7 +17831,7 @@ VOS_UINT32 AT_RcvMmaCHverQueryCnf(
         return VOS_ERR;
     }
 
-    /*判断当前操作类型是否为AT_CMD_CHIGHVER_QRY */
+    /*??????????????????????AT_CMD_CHIGHVER_QRY */
     if (AT_CMD_CHIGHVER_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaCHverQueryCnf : Current Option is not AT_CMD_CHIGHVER_QRY.");
@@ -17853,7 +17853,7 @@ VOS_UINT32 AT_RcvMmaCHverQueryCnf(
     }
     else
     {
-        /* 查询失败，上报^CHIGHVER: BUTT */
+        /* ??????????????^CHIGHVER: BUTT */
         usLength = (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                      (VOS_CHAR *)pgucAtSndCodeAddr,
                                      (VOS_CHAR *)pgucAtSndCodeAddr + usLength,
@@ -17864,7 +17864,7 @@ VOS_UINT32 AT_RcvMmaCHverQueryCnf(
         gstAtSendData.usBufLen = usLength;
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, AT_OK);
 
     return VOS_OK;
@@ -17882,13 +17882,13 @@ VOS_UINT32 AT_RcvMmaHplmnQryCnf(
     VOS_UINT32                          i;
     VOS_UINT8                           aucImsiString[NAS_IMSI_STR_LEN + 1];
 
-    /* 局部变量初始化 */
+    /* ?????????????? */
     pstHplmnQryCnf = (TAF_MMA_HOME_PLMN_QRY_CNF_STRU *)pstMsg;
     usLength       = 0;
 
-    /* index的异常判断移到AT_RcvMmaEHplmnInfoQryCnf中 */
+    /* index??????????????AT_RcvMmaEHplmnInfoQryCnf?? */
 
-    /* 复位AT状态为READY状态 */
+    /* ????AT??????READY???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     if ((0 == pstHplmnQryCnf->stEHplmnInfo.ulEHplmnNum)
@@ -17896,7 +17896,7 @@ VOS_UINT32 AT_RcvMmaHplmnQryCnf(
     {
         AT_WARN_LOG("AT_RcvMmaHplmnQryCnf : EHPLMN num error.");
 
-        /* 查询命令失败，上报错误情况 */
+        /* ?????????????????????????? */
         gstAtSendData.usBufLen = 0;
 
         At_FormatResultData(ucIndex, At_ChgTafErrorCode(ucIndex, pstHplmnQryCnf->enErrorCause));
@@ -17904,10 +17904,10 @@ VOS_UINT32 AT_RcvMmaHplmnQryCnf(
         return VOS_ERR;
     }
 
-    /* 将IMSI数字转换为字符串 */
+    /* ??IMSI???????????????? */
     AT_ConvertImsiDigit2String(pstHplmnQryCnf->stEHplmnInfo.aucImsi, aucImsiString);
 
-    /* 查询命令成功，上报AT^HPLMN */
+    /* ??????????????????AT^HPLMN */
     usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                  (VOS_CHAR *)pgucAtSndCodeAddr,
                                  (VOS_CHAR *)pgucAtSndCodeAddr + usLength,
@@ -17978,7 +17978,7 @@ VOS_UINT32 AT_RcvMmaHplmnQryCnf(
 
     gstAtSendData.usBufLen = usLength;
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, AT_OK);
 
     return VOS_OK;
@@ -17995,11 +17995,11 @@ VOS_UINT32 AT_RcvMmaDplmnQryCnf(
     VOS_UINT8                           ucIndex;
     VOS_UINT8                           aucTempVersion[NAS_VERSION_LEN + 1];
 
-    /* 局部变量初始化*/
+    /* ??????????????*/
     pstDplmnQryCnf  = (TAF_MMA_DPLMN_QRY_CNF_STRU *)pstMsg;
     usLength        = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstDplmnQryCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaDplmnQryCnf At_ClientIdToUserId FAILURE");
@@ -18018,23 +18018,23 @@ VOS_UINT32 AT_RcvMmaDplmnQryCnf(
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_DPLMNLIST_QRY */
+    /* ??????????????????????AT_CMD_DPLMNLIST_QRY */
     if (AT_CMD_DPLMNLIST_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaDplmnQryCnf : Current Option is not AT_CMD_DPLMNLIST_READ.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态为READY状态 */
+    /* ????AT??????READY???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 将version数字转换为字符串 */
+    /* ??version???????????????? */
     TAF_MEM_CPY_S(aucTempVersion, sizeof(aucTempVersion), pstDplmnQryCnf->aucVersionId, NAS_VERSION_LEN);
 
-    /* 加字符串结束符 */
+    /* ?????????????? */
     aucTempVersion[NAS_VERSION_LEN]    = '\0';
 
-    /* 查询命令成功，上报^DPLMN版本号 */
+    /* ??????????????????^DPLMN?????? */
     usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                  (VOS_CHAR *)pgucAtSndCodeAddr,
                                  (VOS_CHAR *)pgucAtSndCodeAddr + usLength,
@@ -18044,7 +18044,7 @@ VOS_UINT32 AT_RcvMmaDplmnQryCnf(
 
     gstAtSendData.usBufLen = usLength;
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, AT_OK);
 
     return VOS_OK;
@@ -18061,11 +18061,11 @@ VOS_UINT32 AT_RcvMmaDplmnSetCnf(
     VOS_UINT32                          ulResult;
     VOS_UINT32                          ulRetVal;
 
-    /* 局部变量初始化 */
+    /* ?????????????? */
     pstDplmnSetCnf = (TAF_MMA_DPLMN_SET_CNF_STRU *)pstMsg;
     ulRetVal       = VOS_ERR;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstDplmnSetCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaDplmnSetCnf At_ClientIdToUserId FAILURE");
@@ -18084,14 +18084,14 @@ VOS_UINT32 AT_RcvMmaDplmnSetCnf(
         return ulRetVal;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_DPLMNLIST_SET */
+    /* ??????????????????????AT_CMD_DPLMNLIST_SET */
     if (AT_CMD_DPLMNLIST_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaDplmnSetCnf : Current Option is not AT_CMD_DPLMNLIST_SET.");
         return ulRetVal;
     }
 
-    /* 复位AT状态为READY状态 */
+    /* ????AT??????READY???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     if (VOS_OK == pstDplmnSetCnf->ulRslt)
@@ -18104,7 +18104,7 @@ VOS_UINT32 AT_RcvMmaDplmnSetCnf(
         ulResult = AT_CME_UNKNOWN;
     }
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return ulRetVal;
@@ -18122,13 +18122,13 @@ VOS_UINT32 AT_RcvMmaBorderInfoSetCnf(
     MODEM_ID_ENUM_UINT16                enModemId;
     VOS_UINT8                           ucIndex;
 
-    /* 局部变量初始化 */
+    /* ?????????????? */
     pstSetCnf = (TAF_MMA_BORDER_INFO_SET_CNF_STRU *)pstMsg;
     ulRetVal  = VOS_ERR;
     enModemId = MODEM_ID_BUTT;
     ucIndex   = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstSetCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaBorderInfoSetCnf At_ClientIdToUserId FAILURE");
@@ -18147,14 +18147,14 @@ VOS_UINT32 AT_RcvMmaBorderInfoSetCnf(
         return ulRetVal;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_BORDERINFO_SET */
+    /* ??????????????????????AT_CMD_BORDERINFO_SET */
     if (AT_CMD_BORDERINFO_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaBorderInfoSetCnf : Current Option is not AT_CMD_BORDERINFO_SET.");
         return ulRetVal;
     }
 
-    /* 复位AT状态为READY状态 */
+    /* ????AT??????READY???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     if (VOS_OK == pstSetCnf->ulRslt)
@@ -18167,7 +18167,7 @@ VOS_UINT32 AT_RcvMmaBorderInfoSetCnf(
         ulResult = AT_CME_UNKNOWN;
     }
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return ulRetVal;
@@ -18184,13 +18184,13 @@ VOS_UINT32 AT_RcvMmaBorderInfoQryCnf(
     MODEM_ID_ENUM_UINT16                enModemId;
     VOS_UINT8                           ucIndex;
 
-    /* 局部变量初始化*/
+    /* ??????????????*/
     pstQryCnf  = (TAF_MMA_BORDER_INFO_QRY_CNF_STRU *)pstMsg;
     usLength   = 0;
     enModemId  = MODEM_ID_BUTT;
     ucIndex    = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstQryCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaBorderInfoQryCnf At_ClientIdToUserId FAILURE");
@@ -18209,23 +18209,23 @@ VOS_UINT32 AT_RcvMmaBorderInfoQryCnf(
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_BORDERINFO_QRY */
+    /* ??????????????????????AT_CMD_BORDERINFO_QRY */
     if (AT_CMD_BORDERINFO_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaBorderInfoQryCnf : Current Option is not AT_CMD_BORDERINFO_QRY.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态为READY状态 */
+    /* ????AT??????READY???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 将version数字转换为字符串 */
+    /* ??version???????????????? */
     TAF_MEM_CPY_S(aucTempVersion, sizeof(aucTempVersion), pstQryCnf->aucVersionId, NAS_VERSION_LEN);
 
-    /* 加字符串结束符 */
+    /* ?????????????? */
     aucTempVersion[NAS_VERSION_LEN]    = '\0';
 
-    /* 查询命令成功，上报^BORDERINFO版本号 */
+    /* ??????????????????^BORDERINFO?????? */
     usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                  (VOS_CHAR *)pgucAtSndCodeAddr,
                                  (VOS_CHAR *)pgucAtSndCodeAddr + usLength,
@@ -18235,7 +18235,7 @@ VOS_UINT32 AT_RcvMmaBorderInfoQryCnf(
 
     gstAtSendData.usBufLen = usLength;
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, AT_OK);
 
     return VOS_OK;
@@ -18251,13 +18251,13 @@ VOS_UINT32 AT_RcvMtaSetFrCnf(
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulResult;
 
-    /* 初始化 */
+    /* ?????? */
     pstRcvMsg    = (AT_MTA_MSG_STRU *)pMsg;
     pstSetFrCnf  = (MTA_AT_SET_FR_CNF_STRU *)pstRcvMsg->aucContent;
     ucIndex      = 0;
     ulResult     = AT_ERROR;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaSetFrCnf : WARNING:AT INDEX NOT FOUND!");
@@ -18270,17 +18270,17 @@ VOS_UINT32 AT_RcvMtaSetFrCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_FRSTATUS_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaSetFrCnf : Current Option is not AT_CMD_FRSTATUS_SET.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化命令返回 */
+    /* ?????????????? */
     gstAtSendData.usBufLen = 0;
 
     if (MTA_AT_RESULT_NO_ERROR == pstSetFrCnf->enRslt)
@@ -18304,14 +18304,14 @@ VOS_UINT32 AT_RcvMtaSib16TimeUpdateInd(
     VOS_UINT16                          usLength;
     VOS_UINT16                          usLengthTemp;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pstRcvMsg           = (AT_MTA_MSG_STRU *)pstMsg;
     pstSib16TimeUpdate  = (MTA_AT_SIB16_TIME_UPDATE_STRU *)pstRcvMsg->aucContent;
     ucIndex             = 0;
     usLength            = 0;
     usLengthTemp        = 0;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMtaSib16TimeUpdateInd: WARNING:AT INDEX NOT FOUND!");
@@ -18332,7 +18332,7 @@ VOS_UINT32 AT_RcvMtaSib16TimeUpdateInd(
                                        (VOS_CHAR *)pgucAtSndCodeAddr + usLength,
                                        "%d, ", pstSib16TimeUpdate->enTimeType);
 
-    /* 打印时间 */
+    /* ???????? */
     switch(pstSib16TimeUpdate->enTimeType)
     {
         case MTA_AT_LOCAL_TIME:
@@ -18383,14 +18383,14 @@ VOS_UINT32 AT_RcvMtaSib16TimeUpdateInd(
             break;
     }
 
-    /* 打印夏令时指示 */
+    /* ?????????????? */
     /* Day Light Saving Ind */
     usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                        (VOS_CHAR *)pgucAtSndCodeAddr,
                                        (VOS_CHAR *)pgucAtSndCodeAddr + usLength,
                                        "%d\"%s", pstSib16TimeUpdate->enDayLightSavingInd, gaucAtCrLf);
 
-    /* 输出结果 */
+    /* ???????? */
     gstAtSendData.usBufLen = usLength;
     At_SendResultData(ucIndex, pgucAtSndCodeAddr, usLength);
 
@@ -18409,12 +18409,12 @@ VOS_UINT32 AT_RcvMtaAccessStratumRelInd(
     MTA_AT_ACCESS_STRATUM_REL_IND_STRU *pstAccessStratumRelInd = VOS_NULL_PTR;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pstRcvMsg              = (AT_MTA_MSG_STRU *)pstMsg;
     pstAccessStratumRelInd = (MTA_AT_ACCESS_STRATUM_REL_IND_STRU *)pstRcvMsg->aucContent;
     ucIndex                = 0;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMtaAccessStratumRelInd: WARNING:AT INDEX NOT FOUND!");
@@ -18478,12 +18478,12 @@ VOS_UINT32 AT_RcvMtaRsInfoQryCnf(
     MTA_AT_RS_INFO_QRY_CNF_STRU        *pstRsInfoQryCnf = VOS_NULL_PTR;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pstRcvMsg           = (AT_MTA_MSG_STRU *)pstMsg;
     pstRsInfoQryCnf     = (MTA_AT_RS_INFO_QRY_CNF_STRU *)pstRcvMsg->aucContent;
     ucIndex             = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaRsInfoQryCnf : WARNING:AT INDEX NOT FOUND!");
@@ -18496,7 +18496,7 @@ VOS_UINT32 AT_RcvMtaRsInfoQryCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待+RSRP/+RSRQ命令返回 */
+    /* ????AT??????????+RSRP/+RSRQ???????? */
     if ( (AT_CMD_RSRP_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
       && (AT_CMD_RSRQ_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt) )
     {
@@ -18504,7 +18504,7 @@ VOS_UINT32 AT_RcvMtaRsInfoQryCnf(
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     if (AT_MTA_RSRP_TYPE == pstRsInfoQryCnf->stRsInfoRslt.enRsInfoType)
@@ -18516,7 +18516,7 @@ VOS_UINT32 AT_RcvMtaRsInfoQryCnf(
         AT_FormatRsrq(pstRsInfoQryCnf);
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, AT_OK);
 
     return VOS_OK;
@@ -18534,13 +18534,13 @@ VOS_UINT32 AT_RcvMtaClearHistoryFreqCnf(
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulResult;
 
-    /* 初始化 */
+    /* ?????? */
     pstRcvMsg    = (AT_MTA_MSG_STRU *)pMsg;
     pstSetCnf    = (MTA_AT_RESULT_CNF_STRU *)pstRcvMsg->aucContent;
     ucIndex      = 0;
     ulResult     = AT_ERROR;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaClearHistoryFreqCnf : WARNING:AT INDEX NOT FOUND!");
@@ -18553,17 +18553,17 @@ VOS_UINT32 AT_RcvMtaClearHistoryFreqCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_CLEAR_HISTORY_FREQ != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaClearHistoryFreqCnf : Current Option is not AT_CMD_CLEAR_HISTORY_FREQ.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化命令返回 */
+    /* ?????????????? */
     gstAtSendData.usBufLen = 0;
 
     if (MTA_AT_RESULT_NO_ERROR == pstSetCnf->enResult)
@@ -18679,13 +18679,13 @@ VOS_UINT32 AT_RcvMtaTransModeQryCnf(VOS_VOID *pMsg)
     VOS_UINT32                              ulResult;
     VOS_UINT8                               ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pstRcvMsg                = (AT_MTA_MSG_STRU *)pMsg;
     pstMtaAtQryTransModeCnf  = (MTA_AT_TRANSMODE_QRY_CNF_STRU *)pstRcvMsg->aucContent;
     ulResult                 = AT_OK;
     ucIndex                  = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaTransModeQryCnf : WARNING:AT INDEX NOT FOUND!");
@@ -18698,14 +18698,14 @@ VOS_UINT32 AT_RcvMtaTransModeQryCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_TRANSMODE_READ!= gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaTransModeQryCnf : Current Option is not AT_CMD_RRC_VERSION_QUERY.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
     gstAtSendData.usBufLen = 0;
     if (MTA_AT_RESULT_NO_ERROR != pstMtaAtQryTransModeCnf->enResult)
@@ -18734,13 +18734,13 @@ VOS_UINT32 AT_RcvMtaUECenterQryCnf(VOS_VOID *pMsg)
     VOS_UINT32                              ulResult;
     VOS_UINT8                               ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pstRcvMsg                = (AT_MTA_MSG_STRU *)pMsg;
     pstMtaAtQryUECenterCnf   = (MTA_AT_QRY_UE_CENTER_CNF_STRU *)pstRcvMsg->aucContent;
     ulResult                 = AT_OK;
     ucIndex                  = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaUECenterQryCnf : WARNING:AT INDEX NOT FOUND!");
@@ -18753,14 +18753,14 @@ VOS_UINT32 AT_RcvMtaUECenterQryCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_UE_CENTER_QRY!= gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaUECenterQryCnf : Current Option is not AT_CMD_RRC_VERSION_QUERY.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
     gstAtSendData.usBufLen = 0;
     if (MTA_AT_RESULT_NO_ERROR != pstMtaAtQryUECenterCnf->enResult)
@@ -18789,13 +18789,13 @@ VOS_UINT32 AT_RcvMtaUECenterSetCnf(VOS_VOID *pMsg)
     VOS_UINT32                              ulResult;
     VOS_UINT8                               ucIndex;
 
-    /* 初始化 */
+    /* ?????? */
     pstRcvMsg                = (AT_MTA_MSG_STRU *)pMsg;
     pstMtaAtSetUECenterCnf   = (MTA_AT_SET_UE_CENTER_CNF_STRU *)pstRcvMsg->aucContent;
     ulResult                 = AT_OK;
     ucIndex                  = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaUECenterQryCnf : WARNING:AT INDEX NOT FOUND!");
@@ -18808,14 +18808,14 @@ VOS_UINT32 AT_RcvMtaUECenterSetCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_UE_CENTER_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaUECenterQryCnf : Current Option is not AT_CMD_RRC_VERSION_QUERY.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
     gstAtSendData.usBufLen = 0;
     if (MTA_AT_RESULT_NO_ERROR != pstMtaAtSetUECenterCnf->enResult)
@@ -18838,10 +18838,10 @@ VOS_UINT32  At_MipiRdCnfProc( HPA_AT_MIPI_RD_CNF_STRU *pstMsg )
     VOS_UINT16                          usLength;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化本地变量 */
+    /* ?????????????? */
     usLength        = 0;
 
-    /*获取本地保存的用户索引*/
+    /*??????????????????????*/
     ucIndex         = g_stAtDevCmdCtrl.ucIndex;
 
     if (AT_CMD_MIPI_RD != gastAtClientTab[ucIndex].CmdCurrentOpt)
@@ -18879,7 +18879,7 @@ VOS_UINT32  At_MipiWrCnfProc( HPA_AT_MIPI_WR_CNF_STRU       *pstMsg )
     VOS_UINT32                          ulRslt;
     VOS_UINT8                           ucIndex;
 
-    /*获取本地保存的用户索引*/
+    /*??????????????????????*/
     ucIndex = g_stAtDevCmdCtrl.ucIndex;
 
      if ( AT_CMD_MIPI_WR != gastAtClientTab[ucIndex].CmdCurrentOpt )
@@ -18910,7 +18910,7 @@ VOS_UINT32  At_SsiWrCnfProc( HPA_AT_SSI_WR_CNF_STRU         *pstMsg )
     VOS_UINT32                          ulRslt;
     VOS_UINT8                           ucIndex;
 
-    /*获取本地保存的用户索引*/
+    /*??????????????????????*/
     ucIndex     = g_stAtDevCmdCtrl.ucIndex;
 
     if (AT_CMD_SSI_WR != gastAtClientTab[ucIndex].CmdCurrentOpt)
@@ -18944,10 +18944,10 @@ VOS_UINT32  At_SsiRdCnfProc( HPA_AT_SSI_RD_CNF_STRU          *pstMsg )
     VOS_UINT16                          usLength;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化本地变量 */
+    /* ?????????????? */
     usLength        = 0;
 
-    /*获取本地保存的用户索引*/
+    /*??????????????????????*/
     ucIndex         = g_stAtDevCmdCtrl.ucIndex;
 
     if ( AT_CMD_SSI_RD != gastAtClientTab[ucIndex].CmdCurrentOpt )
@@ -18987,7 +18987,7 @@ VOS_UINT32  At_PdmCtrlCnfProc( HPA_AT_PDM_CTRL_CNF_STRU *pstMsg )
     VOS_UINT32                          ulRslt;
     VOS_UINT8                           ucIndex;
 
-    /*获取本地保存的用户索引*/
+    /*??????????????????????*/
     ucIndex         = g_stAtDevCmdCtrl.ucIndex;
 
     if ( AT_CMD_PDM_CTRL != gastAtClientTab[ucIndex].CmdCurrentOpt )
@@ -19021,11 +19021,11 @@ VOS_UINT32 AT_RcvMmaInitLocInfoInd(
     VOS_UINT8                           ucIndex;
     TAF_MMA_INIT_LOC_INFO_IND_STRU     *pstInitLocInfoInd;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex             = 0;
     pstInitLocInfoInd   = (TAF_MMA_INIT_LOC_INFO_IND_STRU *)pMsg;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstInitLocInfoInd->usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMmaInitLocInfoInd: WARNING:AT INDEX NOT FOUND!");
@@ -19061,7 +19061,7 @@ VOS_UINT32 AT_RcvMmaEflociInfoSetCnf(
 
     pstEflociInfoSetCnf = (TAF_MMA_EFLOCIINFO_SET_CNF_STRU *)pMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstEflociInfoSetCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaEflociInfoSetCnf : WARNING:AT INDEX NOT FOUND!");
@@ -19074,17 +19074,17 @@ VOS_UINT32 AT_RcvMmaEflociInfoSetCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_EFLOCIINFO_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaEflociInfoSetCnf : Current Option is not AT_CMD_EFLOCIINFO_SET.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化命令返回 */
+    /* ?????????????? */
     gstAtSendData.usBufLen = 0;
 
     if (TAF_MMA_APP_OPER_RESULT_SUCCESS == pstEflociInfoSetCnf->enRslt)
@@ -19113,7 +19113,7 @@ VOS_UINT32 AT_RcvMmaEflociInfoQryCnf(
     pstEfloiinfoQryCnf = (TAF_MMA_EFLOCIINFO_QRY_CNF_STRU *)pMsg;
     usLength = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstEfloiinfoQryCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaEflociInfoQryCnf : WARNING:AT INDEX NOT FOUND!");
@@ -19126,17 +19126,17 @@ VOS_UINT32 AT_RcvMmaEflociInfoQryCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_EFLOCIINFO_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaEflociInfoQryCnf : Current Option is not AT_CMD_EFLOCIINFO_QRY.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 查询失败直接返回ERROR */
+    /* ????????????????ERROR */
     if (TAF_MMA_APP_OPER_RESULT_SUCCESS != pstEfloiinfoQryCnf->enRslt)
     {
         ulResult = AT_ERROR;
@@ -19211,7 +19211,7 @@ VOS_UINT32 AT_RcvMmaEflociInfoQryCnf(
 
     gstAtSendData.usBufLen = usLength;
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, AT_OK);
 
     return VOS_OK;
@@ -19228,7 +19228,7 @@ VOS_UINT32 AT_RcvMmaPsEflociInfoSetCnf(
 
     pstPsEflociInfoSetCnf = (TAF_MMA_EFPSLOCIINFO_SET_CNF_STRU *)pMsg;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstPsEflociInfoSetCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaPsEflociInfoSetCnf : WARNING:AT INDEX NOT FOUND!");
@@ -19241,17 +19241,17 @@ VOS_UINT32 AT_RcvMmaPsEflociInfoSetCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_EFPSLOCIINFO_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaPsEflociInfoSetCnf : Current Option is not AT_CMD_EFPSLOCIINFO_SET.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化命令返回 */
+    /* ?????????????? */
     gstAtSendData.usBufLen = 0;
 
     if (TAF_MMA_APP_OPER_RESULT_SUCCESS == pstPsEflociInfoSetCnf->enRslt)
@@ -19280,7 +19280,7 @@ VOS_UINT32 AT_RcvMmaPsEflociInfoQryCnf(
     pstPsefloiinfoQryCnf = (TAF_MMA_EFPSLOCIINFO_QRY_CNF_STRU *)pMsg;
     usLength = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstPsefloiinfoQryCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaPsEflociInfoQryCnf : WARNING:AT INDEX NOT FOUND!");
@@ -19293,17 +19293,17 @@ VOS_UINT32 AT_RcvMmaPsEflociInfoQryCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_EFPSLOCIINFO_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaPsEflociInfoQryCnf : Current Option is not AT_CMD_EFPSLOCIINFO_QRY.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 查询失败直接返回ERROR */
+    /* ????????????????ERROR */
     if (TAF_MMA_APP_OPER_RESULT_SUCCESS != pstPsefloiinfoQryCnf->enRslt)
     {
         ulResult = AT_ERROR;
@@ -19386,7 +19386,7 @@ VOS_UINT32 AT_RcvMmaPsEflociInfoQryCnf(
 
     gstAtSendData.usBufLen = usLength;
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, AT_OK);
 
     return VOS_OK;
@@ -19402,7 +19402,7 @@ VOS_UINT32 AT_RcvMtaSetM2MFreqLockCnf(
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulResult;
 
-    /* 初始化 */
+    /* ?????? */
     pstRcvMsg       = (AT_MTA_MSG_STRU *)pmsg;
     pstSetCnf       = (MTA_AT_SET_M2M_FREQLOCK_CNF_STRU *)pstRcvMsg->aucContent;
     ucIndex         = 0;
@@ -19418,13 +19418,13 @@ VOS_UINT32 AT_RcvMtaSetM2MFreqLockCnf(
         return AT_ERROR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_M2M_FREQLOCK_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return AT_ERROR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     if(MTA_AT_RESULT_NO_ERROR == pstSetCnf->ulResult)
@@ -19447,14 +19447,14 @@ VOS_UINT32 AT_RcvMtaQryM2MFreqLockCnf(
     VOS_UINT8                               ucIndex;
     VOS_UINT16                              usLength;
 
-    /* 初始化 */
+    /* ?????? */
     pstRcvMsg           = (AT_MTA_MSG_STRU *)pmsg;
     pstQryFreqLockCnf   = (MTA_AT_QRY_M2M_FREQLOCK_CNF_STRU *)pstRcvMsg->aucContent;
     ulResult            = AT_OK;
     ucIndex             = 0;
     usLength            = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaQryM2MFreqLockCnf : WARNING:AT INDEX NOT FOUND!");
@@ -19467,26 +19467,26 @@ VOS_UINT32 AT_RcvMtaQryM2MFreqLockCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_M2M_FREQLOCK_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaQryFreqLockCnf : Current Option is not AT_CMD_M2M_FREQLOCK_QRY.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化AT^FREQLOCK查询命令返回 */
+    /* ??????AT^FREQLOCK???????????? */
     gstAtSendData.usBufLen = 0;
 
-    /* 锁频查询结果按G-W-T-L顺序依次输出  */
+    /* ??????????????G-W-T-L????????????  */
     usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                         (TAF_CHAR *)pgucAtSndCodeAddr,
                                         (TAF_CHAR *)pgucAtSndCodeAddr + usLength,"%s: ",
                                         g_stParseContext[ucIndex].pstCmdElement->pszCmdName);
 
-    /* 输出GSM制式锁频状态信息 */
+    /* ????GSM???????????????? */
     if (AT_MTA_M2M_FREQLOCK_FLAG_TYPE_OFF == pstQryFreqLockCnf->ucFreqState[AT_FREQLOCK_MODE_TYPE_GSM - 1])
     {
         /* <enable>,<mode> */
@@ -19510,7 +19510,7 @@ VOS_UINT32 AT_RcvMtaQryM2MFreqLockCnf(
 
     usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,(VOS_CHAR*)pgucAtSndCodeAddr,(VOS_CHAR*)pgucAtSndCodeAddr + usLength,"%s",gaucAtCrLf);
 
-    /* 输出WCDMA制式锁频状态信息 */
+    /* ????WCDMA???????????????? */
     usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                         (TAF_CHAR *)pgucAtSndCodeAddr,
                                         (TAF_CHAR *)pgucAtSndCodeAddr + usLength,"%s: ",
@@ -19527,7 +19527,7 @@ VOS_UINT32 AT_RcvMtaQryM2MFreqLockCnf(
     }
     else
     {
-        /* 判断WCDMA锁频的类型:区分锁频、锁频+扰码组合 */
+        /* ????WCDMA??????????:??????????????+???????? */
         if (AT_MTA_M2M_FREQLOCK_TYPE_ENUM_FREQ_ONLY == pstQryFreqLockCnf->stWFreqLockInfo.ucFreqType)
         {
             /* <enable>,<mode>,<freq>,,, */
@@ -19553,7 +19553,7 @@ VOS_UINT32 AT_RcvMtaQryM2MFreqLockCnf(
 
     usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,(VOS_CHAR*)pgucAtSndCodeAddr,(VOS_CHAR*)pgucAtSndCodeAddr + usLength,"%s",gaucAtCrLf);
 
-    /* 输出TDS-CDMA制式锁频状态信息 */
+    /* ????TDS-CDMA???????????????? */
     usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                         (TAF_CHAR *)pgucAtSndCodeAddr,
                                         (TAF_CHAR *)pgucAtSndCodeAddr + usLength,"%s: ",
@@ -19570,7 +19570,7 @@ VOS_UINT32 AT_RcvMtaQryM2MFreqLockCnf(
     }
     else
     {
-        /* 判断WCDMA锁频的类型:区分锁频、锁频+扰码组合 */
+        /* ????WCDMA??????????:??????????????+???????? */
         if (AT_MTA_M2M_FREQLOCK_TYPE_ENUM_FREQ_ONLY == pstQryFreqLockCnf->stTFreqLockInfo.ucFreqType)
         {
             /* <enable>,<mode>,<freq>,,, */
@@ -19596,7 +19596,7 @@ VOS_UINT32 AT_RcvMtaQryM2MFreqLockCnf(
 
     usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,(VOS_CHAR*)pgucAtSndCodeAddr,(VOS_CHAR*)pgucAtSndCodeAddr + usLength,"%s",gaucAtCrLf);
 
-    /* 输出LTE制式锁频状态信息 */
+    /* ????LTE???????????????? */
     usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                         (TAF_CHAR *)pgucAtSndCodeAddr,
                                         (TAF_CHAR *)pgucAtSndCodeAddr + usLength,"%s: ",
@@ -19613,7 +19613,7 @@ VOS_UINT32 AT_RcvMtaQryM2MFreqLockCnf(
     }
     else
     {
-        /* 判断LTE锁频的类型:区分锁频、锁频+扰码组合 */
+        /* ????LTE??????????:??????????????+???????? */
         if (AT_MTA_M2M_FREQLOCK_TYPE_ENUM_FREQ_ONLY == pstQryFreqLockCnf->stLFreqLockInfo.ucFreqType)
         {
             /* <enable>,<mode>,<freq>,,, */
@@ -19639,7 +19639,7 @@ VOS_UINT32 AT_RcvMtaQryM2MFreqLockCnf(
 
     gstAtSendData.usBufLen = usLength;
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -19650,17 +19650,17 @@ VOS_UINT32 AT_RcvMtaSetXCposrCnf(
     VOS_VOID                                *pMsg
 )
 {
-    /* 定义局部变量 */
+    /* ???????????? */
     AT_MTA_MSG_STRU                  *pstMtaMsg;
     MTA_AT_RESULT_CNF_STRU           *pstSetXcposrCnf;
     VOS_UINT8                         ucIndex;
     VOS_UINT32                        ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pstMtaMsg       = (AT_MTA_MSG_STRU*)pMsg;
     pstSetXcposrCnf = (MTA_AT_RESULT_CNF_STRU*)pstMtaMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstMtaMsg->stAppCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMtaSetXCposrCnf: WARNING:AT INDEX NOT FOUND!");
@@ -19673,17 +19673,17 @@ VOS_UINT32 AT_RcvMtaSetXCposrCnf(
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_XCPOSR_SET */
+    /* ??????????????????????AT_CMD_XCPOSR_SET */
     if (AT_CMD_XCPOSR_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaSetXCposrCnf: WARNING:Not AT_CMD_XCPOSR_SET!");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( MTA_AT_RESULT_NO_ERROR == pstSetXcposrCnf->enResult )
     {
         ulResult    = AT_OK;
@@ -19694,7 +19694,7 @@ VOS_UINT32 AT_RcvMtaSetXCposrCnf(
     }
 
     gstAtSendData.usBufLen = 0;
-    /* 调用AT_FormatResultDATa发送命令结果 */
+    /* ????AT_FormatResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -19705,17 +19705,17 @@ VOS_UINT32 AT_RcvMtaQryXcposrCnf(
     VOS_VOID                        *pMsg
 )
 {
-    /* 定义局部变量 */
+    /* ???????????? */
     AT_MTA_MSG_STRU                  *pstMtaMsg;
     MTA_AT_QRY_XCPOSR_CNF_STRU       *pstQryXcposrCnf;
     VOS_UINT8                         ucIndex;
     VOS_UINT32                        ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pstMtaMsg       = (AT_MTA_MSG_STRU*)pMsg;
     pstQryXcposrCnf = (MTA_AT_QRY_XCPOSR_CNF_STRU*)pstMtaMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstMtaMsg->stAppCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMtaQryXcposrCnf: WARNING:AT INDEX NOT FOUND!");
@@ -19728,17 +19728,17 @@ VOS_UINT32 AT_RcvMtaQryXcposrCnf(
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_XCPOSR_QRY */
+    /* ??????????????????????AT_CMD_XCPOSR_QRY */
     if (AT_CMD_XCPOSR_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaQryXcposrCnf: WARNING:Not AT_CMD_XCPOSR_QRY!");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( MTA_AT_RESULT_NO_ERROR == pstQryXcposrCnf->enResult )
     {
         ulResult    = AT_OK;
@@ -19755,7 +19755,7 @@ VOS_UINT32 AT_RcvMtaQryXcposrCnf(
         gstAtSendData.usBufLen = 0;
     }
 
-    /* 调用AT_FormatResultDATa发送命令结果 */
+    /* ????AT_FormatResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
     return VOS_OK;
 }
@@ -19765,17 +19765,17 @@ VOS_UINT32 AT_RcvMtaSetXcposrRptCnf(
     VOS_VOID                        *pMsg
 )
 {
-    /* 定义局部变量 */
+    /* ???????????? */
     AT_MTA_MSG_STRU                  *pstMtaMsg             = VOS_NULL_PTR;
     MTA_AT_RESULT_CNF_STRU           *pstSetXcposrRptCnf    = VOS_NULL_PTR;
     VOS_UINT8                         ucIndex;
     VOS_UINT32                        ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pstMtaMsg           = (AT_MTA_MSG_STRU*)pMsg;
     pstSetXcposrRptCnf  = (MTA_AT_RESULT_CNF_STRU*)pstMtaMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstMtaMsg->stAppCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMtaSetXcposrRptCnf: WARNING:AT INDEX NOT FOUND!");
@@ -19788,17 +19788,17 @@ VOS_UINT32 AT_RcvMtaSetXcposrRptCnf(
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_XCPOSR_SET */
+    /* ??????????????????????AT_CMD_XCPOSR_SET */
     if (AT_CMD_XCPOSRRPT_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaSetXcposrRptCnf: WARNING:Not AT_CMD_XCPOSRRPT_SET!");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( MTA_AT_RESULT_NO_ERROR == pstSetXcposrRptCnf->enResult )
     {
         ulResult    = AT_OK;
@@ -19810,7 +19810,7 @@ VOS_UINT32 AT_RcvMtaSetXcposrRptCnf(
 
     gstAtSendData.usBufLen = 0;
 
-    /* 调用AT_FormatResultDATa发送命令结果 */
+    /* ????AT_FormatResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -19822,17 +19822,17 @@ VOS_UINT32 AT_RcvMtaQryXcposrRptCnf(
     VOS_VOID                        *pMsg
 )
 {
-    /* 定义局部变量 */
+    /* ???????????? */
     AT_MTA_MSG_STRU                  *pstMtaMsg;
     MTA_AT_QRY_XCPOSRRPT_CNF_STRU    *pstQryXcposrRptCnf;
     VOS_UINT8                         ucIndex;
     VOS_UINT32                        ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pstMtaMsg           = (AT_MTA_MSG_STRU*)pMsg;
     pstQryXcposrRptCnf  = (MTA_AT_QRY_XCPOSRRPT_CNF_STRU*)pstMtaMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstMtaMsg->stAppCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMtaQryXcposrCnf: WARNING:AT INDEX NOT FOUND!");
@@ -19845,17 +19845,17 @@ VOS_UINT32 AT_RcvMtaQryXcposrRptCnf(
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_XCPOSR_QRY */
+    /* ??????????????????????AT_CMD_XCPOSR_QRY */
     if (AT_CMD_XCPOSRRPT_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaQryXcposrCnf: WARNING:Not AT_CMD_XCPOSR_QRY!");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( MTA_AT_RESULT_NO_ERROR == pstQryXcposrRptCnf->enResult )
     {
         ulResult                = AT_OK;
@@ -19872,7 +19872,7 @@ VOS_UINT32 AT_RcvMtaQryXcposrRptCnf(
         gstAtSendData.usBufLen  = 0;
     }
 
-    /* 调用AT_FormatResultDATa发送命令结果 */
+    /* ????AT_FormatResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
     return VOS_OK;
 }
@@ -19887,13 +19887,13 @@ VOS_UINT32 AT_RcvFratIgnitionQryCnf(
     VOS_UINT32                          ulRet;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pstMtaMsg       = (AT_MTA_MSG_STRU *)pMsg;
     pstIgnitionCnf  = (MTA_AT_FRAT_IGNITION_QRY_CNF_STRU *)pstMtaMsg->aucContent;
     ucIndex         = 0;
     ulRet           = AT_OK;
 
-     /* 通过clientid获取index */
+     /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstMtaMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvFratIgnitionQryCnf: AT INDEX NOT FOUND!");
@@ -19906,14 +19906,14 @@ VOS_UINT32 AT_RcvFratIgnitionQryCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_FRATIGNITION_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvFratIgnitionQryCnf : Current Option is not AT_CMD_FRATIGNITION_QRY.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     gstAtSendData.usBufLen = 0;
@@ -19932,7 +19932,7 @@ VOS_UINT32 AT_RcvFratIgnitionQryCnf(
                                                         pstIgnitionCnf->enFratIgnitionState);
     }
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, ulRet);
 
     return VOS_OK;
@@ -19943,18 +19943,18 @@ VOS_UINT32 AT_RcvFratIgnitionSetCnf(
     VOS_VOID                           *pMsg
 )
 {
-    /* 定义局部变量 */
+    /* ???????????? */
     AT_MTA_MSG_STRU                    *pstMtaMsg           = VOS_NULL_PTR;
     MTA_AT_FRAT_IGNITION_SET_CNF_STRU  *pstCnfContent       = VOS_NULL_PTR;
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulResult;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     pstMtaMsg       = (AT_MTA_MSG_STRU *)pMsg;
     pstCnfContent   = (MTA_AT_FRAT_IGNITION_SET_CNF_STRU *)pstMtaMsg->aucContent;
     ulResult        = AT_ERROR;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstMtaMsg->stAppCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvFratIgnitionSetCnf: AT INDEX NOT FOUND!");
@@ -19967,17 +19967,17 @@ VOS_UINT32 AT_RcvFratIgnitionSetCnf(
         return VOS_ERR;
     }
 
-    /* 判断当前操作类型是否为AT_CMD_FRATIGNITION_SET */
+    /* ??????????????????????AT_CMD_FRATIGNITION_SET */
     if (AT_CMD_FRATIGNITION_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvFratIgnitionSetCnf: Not AT_CMD_FRATIGNITION_SET!");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 判断查询操作是否成功 */
+    /* ???????????????????? */
     if ( MTA_AT_RESULT_NO_ERROR == pstCnfContent->enResult )
     {
         ulResult    = AT_OK;
@@ -19985,7 +19985,7 @@ VOS_UINT32 AT_RcvFratIgnitionSetCnf(
 
     gstAtSendData.usBufLen = 0;
 
-    /* 调用AT_FormatResultDATa发送命令结果 */
+    /* ????AT_FormatResultDATa???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -20003,13 +20003,13 @@ VOS_UINT32 AT_RcvMtaSetSensorCnf(
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulResult;
 
-    /* 初始化 */
+    /* ?????? */
     pstRcvMsg    = (AT_MTA_MSG_STRU *)pMsg;
     pstSetCnf    = (MTA_AT_SET_SENSOR_CNF_STRU *)pstRcvMsg->aucContent;
     ucIndex      = 0;
     ulResult     = AT_ERROR;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaSetSensorCnf : WARNING:AT INDEX NOT FOUND!");
@@ -20022,17 +20022,17 @@ VOS_UINT32 AT_RcvMtaSetSensorCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_SENSOR_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaSetSensorCnf : Current Option is not AT_CMD_SENSOR_SET.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化命令返回 */
+    /* ?????????????? */
     gstAtSendData.usBufLen = 0;
 
     if (MTA_AT_RESULT_NO_ERROR == pstSetCnf->enResult)
@@ -20054,13 +20054,13 @@ VOS_UINT32 AT_RcvMtaSetScreenCnf(
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulResult;
 
-    /* 初始化 */
+    /* ?????? */
     pstRcvMsg    = (AT_MTA_MSG_STRU *)pMsg;
     pstSetCnf    = (MTA_AT_SET_SCREEN_CNF_STRU *)pstRcvMsg->aucContent;
     ucIndex      = 0;
     ulResult     = AT_ERROR;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaSetScreenCnf : WARNING:AT INDEX NOT FOUND!");
@@ -20073,17 +20073,17 @@ VOS_UINT32 AT_RcvMtaSetScreenCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_SCREEN_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaSetScreenCnf : Current Option is not AT_CMD_SCREEN_SET.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化命令返回 */
+    /* ?????????????? */
     gstAtSendData.usBufLen = 0;
 
     if (MTA_AT_RESULT_NO_ERROR == pstSetCnf->enResult)
@@ -20106,13 +20106,13 @@ VOS_UINT32 AT_RcvMtaSetModemTimeCnf(
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulResult;
 
-    /* 初始化 */
+    /* ?????? */
     pstRcvMsg    = (AT_MTA_MSG_STRU *)pMsg;
     pstSetCnf    = (MTA_AT_SET_TIME_CNF_STRU *)pstRcvMsg->aucContent;
     ucIndex      = 0;
     ulResult     = AT_ERROR;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaSetModemTimeCnf : WARNING:AT INDEX NOT FOUND!");
@@ -20125,17 +20125,17 @@ VOS_UINT32 AT_RcvMtaSetModemTimeCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_MODEM_TIME_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaSetModemTimeCnf : Current Option is not AT_CMD_MODEM_TIME_SET.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化命令返回 */
+    /* ?????????????? */
     gstAtSendData.usBufLen = 0;
 
     if (MTA_AT_RESULT_NO_ERROR == pstSetCnf->enResult)
@@ -20157,20 +20157,20 @@ VOS_UINT32 AT_RcvMtaAfcClkUnlockCauseInd(
     VOS_UINT8                           ucIndex;
     VOS_UINT16                          usLength;
 
-    /* 初始化 */
+    /* ?????? */
     pstRcvMsg               = (AT_MTA_MSG_STRU *)pMsg;
     pstMtaAtAfcClkUnlockInd = (MTA_AT_AFC_CLK_UNLOCK_IND_STRU *)pstRcvMsg->aucContent;
     ucIndex                 = 0;
     usLength                = 0;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if ( AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex) )
     {
         AT_WARN_LOG("AT_RcvMtaAfcClkUnlockCauseInd: WARNING:AT INDEX NOT FOUND!");
         return VOS_ERR;
     }
 
-    /* 打印^AFCCLKUNLOCK: */
+    /* ????^AFCCLKUNLOCK: */
     usLength += (VOS_UINT16)At_sprintf(AT_CMD_MAX_LEN,
                                        (VOS_CHAR *)pgucAtSndCodeAddr,
                                        (VOS_CHAR *)pgucAtSndCodeAddr + usLength,
@@ -20199,7 +20199,7 @@ VOS_UINT32 AT_RcvDrvAgentQryCcpuMemInfoCnf(VOS_VOID *pstData)
     pRcvMsg              = (DRV_AGENT_MSG_STRU *)pstData;
     pstQryCcpuMemInfoCnf = (DRV_AGENT_QRY_CCPU_MEM_INFO_CNF_STRU *)pRcvMsg->aucContent;
 
-    /* 根据ClientID获取通道索引 */
+    /* ????ClientID???????????? */
     if(AT_FAILURE == At_ClientIdToUserId(pstQryCcpuMemInfoCnf->stAtAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvDrvAgentQryCcpuMemInfoCnf: Get Index Fail!");
@@ -20212,14 +20212,14 @@ VOS_UINT32 AT_RcvDrvAgentQryCcpuMemInfoCnf(VOS_VOID *pstData)
         return VOS_ERR;
     }
 
-    /* AT模块在等待^CCPUMEMINFO命令的操作结果事件上报 */
+    /* AT??????????^CCPUMEMINFO?????????????????????? */
     if (AT_CMD_CCPUMEMINFO_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvDrvAgentQryCcpuMemInfoCnf: Error Option!");
         return VOS_ERR;
     }
 
-    /* 使用AT_STOP_TIMER_CMD_READY恢复AT命令实体状态为READY状态 */
+    /* ????AT_STOP_TIMER_CMD_READY????AT??????????????READY???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     gstAtSendData.usBufLen = 0;
@@ -20252,7 +20252,7 @@ VOS_UINT32 AT_RcvMtaSetBestFreqCnf(VOS_VOID *pMsg)
     ucIndex      = 0;
     ulRslt       = AT_ERROR;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaSetBestFreqCnf : WARNING:AT INDEX NOT FOUND!");
@@ -20265,17 +20265,17 @@ VOS_UINT32 AT_RcvMtaSetBestFreqCnf(VOS_VOID *pMsg)
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_BESTFREQ_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaSetBestFreqCnf : Current Option is not AT_CMD_RXTESTMODE_SET.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化命令返回 */
+    /* ?????????????? */
     gstAtSendData.usBufLen = 0;
 
     if (MTA_AT_RESULT_NO_ERROR == pstSetCnf->enResult)
@@ -20303,7 +20303,7 @@ VOS_UINT32 AT_RcvMtaBestFreqInfoInd(
     pstMtaMsg          = (AT_MTA_MSG_STRU *)pMsg;
     pstBestFreqCaseInd = (MTA_AT_BEST_FREQ_CASE_IND_STRU *)pstMtaMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if (AT_FAILURE == At_ClientIdToUserId(pstMtaMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaBestFreqInfoInd: WARNING:AT INDEX NOT FOUND!");
@@ -20345,13 +20345,13 @@ VOS_UINT32 AT_RcvMtaQryBestFreqCnf(
     VOS_UINT16                          usLength;
     VOS_UINT8                           ucIndex;
 
-    /* 初始化消息变量 */
+    /* ?????????????? */
     ucIndex        = 0;
     usLength       = 0;
     pstMtaMsg      = (AT_MTA_MSG_STRU *)pMsg;
     pstBestFreqCnf = (MTA_AT_BESTFREQ_QRY_CNF_STRU *)pstMtaMsg->aucContent;
 
-    /* 通过ClientId获取ucIndex */
+    /* ????ClientId????ucIndex */
     if (AT_FAILURE == At_ClientIdToUserId(pstMtaMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaBestFreqInfoCnf: WARNING:AT INDEX NOT FOUND!");
@@ -20364,13 +20364,13 @@ VOS_UINT32 AT_RcvMtaQryBestFreqCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_BESTFREQ_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     if (MTA_AT_RESULT_NO_ERROR != pstBestFreqCnf->enResult)
@@ -20406,7 +20406,7 @@ VOS_UINT32 AT_RcvMtaQryBestFreqCnf(
 
     gstAtSendData.usBufLen = usLength;
 
-    /* 调用At_FormatResultData发送命令结果 */
+    /* ????At_FormatResultData???????????? */
     At_FormatResultData(ucIndex, ulResult);
 
     return VOS_OK;
@@ -20423,13 +20423,13 @@ VOS_UINT32 AT_RcvMtaModemCapUpdateCnf(
     VOS_UINT8                           ucIndex;
     VOS_UINT32                          ulResult;
 
-    /* 初始化 */
+    /* ?????? */
     pstRcvMsg    = (AT_MTA_MSG_STRU *)pMsg;
     pstSetCnf    = (MTA_AT_MODEM_CAP_UPDATE_CNF_STRU *)pstRcvMsg->aucContent;
     ucIndex      = 0;
     ulResult     = AT_ERROR;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstRcvMsg->stAppCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMtaModemCapUpdateCnf : WARNING:AT INDEX NOT FOUND!");
@@ -20444,7 +20444,7 @@ VOS_UINT32 AT_RcvMtaModemCapUpdateCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_MODEM_CAP_UPDATE_SET != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMtaModemCapUpdateCnf : Current Option is not AT_CMD_MODEM_CAP_UPDATE_SET.");
@@ -20452,10 +20452,10 @@ VOS_UINT32 AT_RcvMtaModemCapUpdateCnf(
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
-    /* 格式化命令返回 */
+    /* ?????????????? */
     gstAtSendData.usBufLen = 0;
 
     if (MTA_AT_RESULT_NO_ERROR == pstSetCnf->enRslt)
@@ -20483,7 +20483,7 @@ VOS_UINT32 AT_RcvMmaPacspQryCnf(
     pstPacspQryCnf = (TAF_MMA_PACSP_QRY_CNF_STRU *)pMsg;
     usLength = 0;
 
-    /* 通过clientid获取index */
+    /* ????clientid????index */
     if (AT_FAILURE == At_ClientIdToUserId(pstPacspQryCnf->stCtrl.usClientId, &ucIndex))
     {
         AT_WARN_LOG("AT_RcvMmaPacspQryCnf : WARNING:AT INDEX NOT FOUND!");
@@ -20502,14 +20502,14 @@ VOS_UINT32 AT_RcvMmaPacspQryCnf(
         return VOS_ERR;
     }
 
-    /* 当前AT是否在等待该命令返回 */
+    /* ????AT???????????????????? */
     if (AT_CMD_PACSP_QRY != gastAtClientTab[ucIndex].CmdCurrentOpt)
     {
         AT_WARN_LOG("AT_RcvMmaPacspQryCnf : Current Option is not AT_CMD_PACSP_QRY.");
         return VOS_ERR;
     }
 
-    /* 复位AT状态 */
+    /* ????AT???? */
     AT_STOP_TIMER_CMD_READY(ucIndex);
 
     usLength += (TAF_UINT16)At_sprintf(AT_CMD_MAX_LEN,
@@ -20519,7 +20519,7 @@ VOS_UINT32 AT_RcvMmaPacspQryCnf(
 
     gstAtSendData.usBufLen = usLength;
 
-    /* 输出结果 */
+    /* ???????? */
     At_FormatResultData(ucIndex, AT_OK);
 
     return VOS_OK;

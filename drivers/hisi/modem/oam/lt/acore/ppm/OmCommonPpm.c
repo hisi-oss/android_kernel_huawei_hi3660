@@ -49,7 +49,7 @@
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 **************************************************************************** */
 #include "OmCommonPpm.h"
 #include "cpm.h"
@@ -65,23 +65,23 @@
 #define    THIS_FILE_ID        PS_FILE_ID_OM_COMMON_PPM_C
 
 /* ****************************************************************************
-  2 全局变量定义
+  2 ????????????
 **************************************************************************** */
-/* 用于ACPU上USB设备的UDI句柄 */
+/* ????ACPU??USB??????UDI???? */
 UDI_HANDLE                              g_astOMPortUDIHandle[OM_PORT_HANDLE_BUTT];
 
-/* USB承载的OM IND端口中，伪造为同步接口使用的数据结构体 */
+/* USB??????OM IND?????????????????????????????????????? */
 OM_PSEUDO_SYNC_STRU                     g_stUsbIndPseudoSync;
 
-/* USB承载的OM CNF端口中，伪造为同步接口使用的数据结构体 */
+/* USB??????OM CNF?????????????????????????????????????? */
 OM_PSEUDO_SYNC_STRU                     g_stUsbCfgPseudoSync;
 
 VOS_UINT32                              g_ulUSBSendErrCnt   = 0;
 
-/* 端口切换信息的数据结构体 */
+/* ???????????????????????? */
 PPM_PORT_CFG_INFO_STRU                  g_stPpmPortSwitchInfo;
 
-/* 自旋锁，用来作AT命令端口切换的临界资源保护 */
+/* ??????????????AT?????????????????????????? */
 VOS_SPINLOCK                            g_stPpmPortSwitchSpinLock;
 
 VOS_BOOL                                g_bPpmLogCompress   = VOS_FALSE;
@@ -92,13 +92,13 @@ OM_ACPU_DEBUG_INFO                      g_stAcpuDebugInfo;
 VOS_UINT32                              g_ulOmAcpuDbgFlag = VOS_FALSE;
 
 /*****************************************************************************
-  3 外部引用声明
+  3 ????????????
 *****************************************************************************/
 extern OM_CHANNLE_PORT_CFG_STRU         g_stPortCfg;
 extern VOS_SPINLOCK                     g_stScmSoftDecodeDataRcvSpinLock;
 extern VOS_SPINLOCK                     g_stCbtScmDataRcvSpinLock;
 /*****************************************************************************
-  4 函数实现
+  4 ????????
 *****************************************************************************/
 
 
@@ -153,7 +153,7 @@ VOS_VOID PPM_GetSendDataLen(SOCP_CODER_DST_ENUM_U32 enChanID, VOS_UINT32 ulDataL
     }
 
 
-    /*当发送是通过USB并且发送长度大于60k的时候，需要限制发送长度*/
+    /*????????????USB????????????????60k????????????????????????*/
     if (((CPM_IND_PORT == enPhyport) || (CPM_CFG_PORT == enPhyport))
         &&(ulDataLen > USB_MAX_DATA_LEN))
     {
@@ -162,7 +162,7 @@ VOS_VOID PPM_GetSendDataLen(SOCP_CODER_DST_ENUM_U32 enChanID, VOS_UINT32 ulDataL
     }
     else
     {
-        *pulSendDataLen = ulDataLen;  /*其他情况下不需要调整当前的大小，包括sd、wifi*/
+        *pulSendDataLen = ulDataLen;  /*????????????????????????????????????sd??wifi*/
     }
 
     *penPhyport = enPhyport;
@@ -193,7 +193,7 @@ VOS_VOID PPM_PortStatus(OM_PROT_HANDLE_ENUM_UINT32 enHandle, CPM_PHY_PORT_ENUM_U
         ulSndMsg  = VOS_FALSE;
         enChannel = OM_LOGIC_CHANNEL_BUTT;
 
-        /* CFG端口处理GU和TL的端口断开，发消息到GU和TL去处理，但不断开CPM的关联 */
+        /* CFG????????GU??TL????????????????????GU??TL????????????????CPM?????? */
         if (OM_USB_CFG_PORT_HANDLE == enHandle)
         {
             if (enPhyPort == CPM_QueryPhyPort(CPM_OM_CFG_COMM))
@@ -202,7 +202,7 @@ VOS_VOID PPM_PortStatus(OM_PROT_HANDLE_ENUM_UINT32 enHandle, CPM_PHY_PORT_ENUM_U
                 enChannel = OM_LOGIC_CHANNEL_CNF;
             }
         }
-        /* IND端口断开时发消息到GU和TL去处理 */
+        /* IND??????????????????GU??TL?????? */
         else if (OM_USB_IND_PORT_HANDLE == enHandle)
         {
             if (enPhyPort == CPM_QueryPhyPort(CPM_OM_IND_COMM))
@@ -268,7 +268,7 @@ VOS_VOID PPM_PortCloseProc(OM_PROT_HANDLE_ENUM_UINT32  enHandle, CPM_PHY_PORT_EN
     ulSndMsg  = VOS_FALSE;
     enChannel = OM_LOGIC_CHANNEL_BUTT;
 
-    /* CFG端口处理GU和TL的端口断开，发消息到GU和TL去处理，但不断开CPM的关联 */
+    /* CFG????????GU??TL????????????????????GU??TL????????????????CPM?????? */
     if (OM_USB_CFG_PORT_HANDLE == enHandle)
     {
         if (enPhyPort == CPM_QueryPhyPort(CPM_OM_CFG_COMM))
@@ -277,7 +277,7 @@ VOS_VOID PPM_PortCloseProc(OM_PROT_HANDLE_ENUM_UINT32  enHandle, CPM_PHY_PORT_EN
             enChannel = OM_LOGIC_CHANNEL_CNF;
         }
     }
-    /* IND端口断开时发消息到GU和TL去处理，但不断开CPM的关联 */
+    /* IND??????????????????GU??TL????????????????CPM?????? */
     else if (OM_USB_IND_PORT_HANDLE == enHandle)
     {
         if (enPhyPort == CPM_QueryPhyPort(CPM_OM_IND_COMM))
@@ -321,7 +321,7 @@ VOS_INT32 PPM_ReadPortData(CPM_PHY_PORT_ENUM_UINT32 enPhyPort, UDI_HANDLE UdiHan
 
     (VOS_VOID)VOS_MemSet_s(&stInfo, sizeof(stInfo), 0, sizeof(ACM_WR_ASYNC_INFO));
 
-    /* 获取USB的IO CTRL口的读缓存 */
+    /* ????USB??IO CTRL?????????? */
     if (VOS_OK != mdrv_udi_ioctl(UdiHandle, UDI_ACM_IOCTL_GET_READ_BUFFER_CB, &stInfo))
     {
         LogPrint("\r\n PPM_ReadPortData:Call mdrv_udi_ioctl is Failed\n");
@@ -403,10 +403,10 @@ VOS_UINT32 PPM_LogPortSwitch(VOS_UINT32  ulPhyPort, VOS_BOOL ulEffect)
                      (ulPhyPort == CPM_OM_PORT_TYPE_USB) ? "USB"  : "VCOM",
                      (ulEffect  == VOS_TRUE)             ? "TRUE" : "FALSE");
 
-    /* 切换的端口与当前端口一致不切换 */
+    /* ?????????????????????????????? */
     if (ulPhyPort == g_stPortCfg.enPortNum)
     {
-        /* 为了规避USB输出时开启了延时写入无法连接工具,切换到USB输出时需要重新设置SOCP的超时中断到默认值 */
+        /* ????????USB????????????????????????????????,??????USB??????????????????SOCP?????????????????? */
         if (CPM_OM_PORT_TYPE_USB == g_stPortCfg.enPortNum)
         {
             ret = mdrv_socp_set_ind_mode(SOCP_IND_MODE_DIRECT);
@@ -430,39 +430,39 @@ VOS_UINT32 PPM_LogPortSwitch(VOS_UINT32  ulPhyPort, VOS_BOOL ulEffect)
 
     VOS_SpinLockIntLock(&g_stPpmPortSwitchSpinLock, ulLockLevel);
 
-    /* 切换到VCOM输出 */
+    /* ??????VCOM???? */
     if (CPM_OM_PORT_TYPE_VCOM == ulPhyPort)
     {
-        /* 当前是USB输出 */
+        /* ??????USB???? */
         if ((CPM_CFG_PORT == enPhyCfgPort) && (CPM_IND_PORT == enPhyIndPort))
         {
-            /* 需要断开连接 */
+            /* ???????????? */
             ulSndMsg = VOS_TRUE;
 
             CPM_DisconnectPorts(CPM_CFG_PORT, CPM_OM_CFG_COMM);
             CPM_DisconnectPorts(CPM_IND_PORT, CPM_OM_IND_COMM);
         }
 
-        /* 当前OM走VCOM上报 */
+        /* ????OM??VCOM???? */
         CPM_ConnectPorts(CPM_VCOM_CFG_PORT, CPM_OM_CFG_COMM);
         CPM_ConnectPorts(CPM_VCOM_IND_PORT, CPM_OM_IND_COMM);
 
         g_stPortCfg.enPortNum = CPM_OM_PORT_TYPE_VCOM;
     }
-    /* 切换到USB输出 */
+    /* ??????USB???? */
     else
     {
-        /* 当前是VCOM输出 */
+        /* ??????VCOM???? */
         if ((CPM_VCOM_CFG_PORT == enPhyCfgPort) && (CPM_VCOM_IND_PORT == enPhyIndPort))
         {
-            /* 断开连接 */
+            /* ???????? */
             ulSndMsg = VOS_TRUE;
 
             CPM_DisconnectPorts(CPM_VCOM_CFG_PORT, CPM_OM_CFG_COMM);
             CPM_DisconnectPorts(CPM_VCOM_IND_PORT, CPM_OM_IND_COMM);
         }
 
-        /* OM走USB上报 */
+        /* OM??USB???? */
         CPM_ConnectPorts(CPM_CFG_PORT, CPM_OM_CFG_COMM);
         CPM_ConnectPorts(CPM_IND_PORT, CPM_OM_IND_COMM);
 
@@ -476,7 +476,7 @@ VOS_UINT32 PPM_LogPortSwitch(VOS_UINT32  ulPhyPort, VOS_BOOL ulEffect)
         PPM_DisconnectAllPort(OM_LOGIC_CHANNEL_CNF);
     }
     
-    /* 为了规避USB输出时开启了延时写入无法连接工具,切换到USB输出时需要重新设置SOCP的超时中断到默认值 */
+    /* ????????USB????????????????????????????????,??????USB??????????????????SOCP?????????????????? */
     if (CPM_OM_PORT_TYPE_USB == g_stPortCfg.enPortNum)
     {
         ret = mdrv_socp_set_ind_mode(SOCP_IND_MODE_DIRECT);
@@ -515,7 +515,7 @@ VOS_UINT32 PPM_LogCompressCfg(VOS_BOOL enable)
         {
             (VOS_VOID)SCM_CoderDstCompressCfg(enable);
         }
-        /*为了芯片验证，临时打桩，让USB端口也走压缩方式*/
+        /*??????????????????????????USB????????????????*/
         if (CPM_OM_PORT_TYPE_USB == g_stPortCfg.enPortNum)
         {
             (VOS_VOID)SCM_CoderDstCompressCfg(enable);
@@ -564,7 +564,7 @@ VOS_VOID PPM_ReadPortDataInit(CPM_PHY_PORT_ENUM_UINT32        enPhyPort,
     ACM_READ_BUFF_INFO                  stReadBuffInfo;
     VOS_BOOL                            isCnf = VOS_TRUE;
 
-    /*初始化当前使用的USB通道*/
+    /*????????????????USB????*/
     /* Add by h59254 for V8R1 OM begin */
     if (CPM_IND_PORT == enPhyPort)
     {
@@ -615,7 +615,7 @@ VOS_VOID PPM_ReadPortDataInit(CPM_PHY_PORT_ENUM_UINT32        enPhyPort,
         return;
     }
 
-    /* 打开OM使用的USB通道 */
+    /* ????OM??????USB???? */
     g_astOMPortUDIHandle[enHandle] = mdrv_udi_open(&stUdiPara);
 
     if (VOS_ERROR == g_astOMPortUDIHandle[enHandle])
@@ -628,7 +628,7 @@ VOS_VOID PPM_ReadPortDataInit(CPM_PHY_PORT_ENUM_UINT32        enPhyPort,
     g_stAcpuDebugInfo.astPortInfo[enHandle].ulUSBOpenOkNum++;
     g_stAcpuDebugInfo.astPortInfo[enHandle].ulUSBOpenOkSlice = mdrv_timer_get_normal_timestamp();
 
-    /* 配置OM使用的USB通道缓存 */
+    /* ????OM??????USB???????? */
     if (VOS_OK != mdrv_udi_ioctl(g_astOMPortUDIHandle[enHandle], ACM_IOCTL_RELLOC_READ_BUFF, &stReadBuffInfo))
     {
         LogPrint("\r\n PPM_ReadPortDataInit, mdrv_udi_ioctl ACM_IOCTL_RELLOC_READ_BUFF Failed\r\n");
@@ -636,7 +636,7 @@ VOS_VOID PPM_ReadPortDataInit(CPM_PHY_PORT_ENUM_UINT32        enPhyPort,
         return;
     }
 
-    /* 注册OM使用的USB读数据回调函数 */
+    /* ????OM??????USB?????????????? */
     if (VOS_OK != PPM_UdiRegCallBackFun(g_astOMPortUDIHandle[enHandle], UDI_ACM_IOCTL_SET_READ_CB, pReadCB))
     {
         LogPrint("\r\n PPM_ReadPortDataInit, mdrv_udi_ioctl UDI_ACM_IOCTL_SET_READ_CB Failed\r\n");
@@ -688,7 +688,7 @@ VOS_UINT32 PPM_PortSend(OM_PROT_HANDLE_ENUM_UINT32 enHandle, VOS_UINT8 *pucVirAd
 
     if ((VOS_NULL_PTR == pucVirAddr) || (VOS_NULL_PTR == pucPhyAddr))
     {
-        /* 打印错误 */
+        /* ???????? */
         LogPrint("\r\nPPM_PortSend: Vir or Phy Addr is Null \n");
 
         return CPM_SEND_PARA_ERR;
@@ -719,7 +719,7 @@ VOS_UINT32 PPM_PortSend(OM_PROT_HANDLE_ENUM_UINT32 enHandle, VOS_UINT8 *pucVirAd
         g_stAcpuDebugInfo.stCnfDebugInfo.ulUSBSendLen += ulDataLen;
     }
 
-    /* 返回写入数据长度代表写操作成功 */
+    /* ?????????????????????????????? */
     lRet = mdrv_udi_ioctl(g_astOMPortUDIHandle[enHandle], ACM_IOCTL_WRITE_ASYNC, &stVcom);
 
     g_stAcpuDebugInfo.astPortInfo[enHandle].ulUSBWriteNum2++;
@@ -740,17 +740,17 @@ VOS_UINT32 PPM_PortSend(OM_PROT_HANDLE_ENUM_UINT32 enHandle, VOS_UINT8 *pucVirAd
         g_stAcpuDebugInfo.astPortInfo[enHandle].ulUSBWriteMaxTime = ulWriteSlice;
     }
 
-    if (MDRV_OK == lRet)     /*当前发送成功*/
+    if (MDRV_OK == lRet)     /*????????????*/
     {
-        /* 伪同步接口，获取信号量 */
+        /* ?????????????????????? */
         PPM_PortPseudoSyncGetSmp(enHandle);
 
         return CPM_SEND_AYNC;
 
     }
-    else if(MDRV_OK > lRet)    /*临时错误*/
+    else if(MDRV_OK > lRet)    /*????????*/
     {
-        /*打印信息，调用UDI接口的错误信息*/
+        /*??????????????UDI??????????????*/
         LogPrint1("\r\nPPM_PortSend: mdrv_udi_ioctl Send Data return Error %d\n", lRet);
 
         g_stAcpuDebugInfo.astPortInfo[enHandle].ulUSBWriteErrNum++;
@@ -760,11 +760,11 @@ VOS_UINT32 PPM_PortSend(OM_PROT_HANDLE_ENUM_UINT32 enHandle, VOS_UINT8 *pucVirAd
 
         g_ulUSBSendErrCnt++;
 
-        return CPM_SEND_FUNC_NULL; /*对于临时错误，需要返回NULL丢弃数据*/
+        return CPM_SEND_FUNC_NULL; /*??????????????????????NULL????????*/
     }
-    else    /*其他错误需要复位单板*/
+    else    /*????????????????????*/
     {
-        /*打印信息，调用UDI接口*/
+        /*??????????????UDI????*/
         LogPrint1("\r\nPPM_PortSend: mdrv_udi_ioctl Send Data return Error %d\n", lRet);
 
         VOS_ProtectionReboot(MSP_REBOOT_USB_SEND_ERROR, lRet, (VOS_INT)enHandle,
@@ -788,13 +788,13 @@ VOS_VOID PPM_PortWriteAsyCB(OM_PROT_HANDLE_ENUM_UINT32 enHandle, VOS_UINT8* pucD
         ulRlsLen = (VOS_UINT32)lLen;
     }
 
-    /* 统计数据通道的吞吐率 */
+    /* ???????????????????? */
     if(OM_USB_IND_PORT_HANDLE == enHandle)
     {
         diag_ThroughputSave(EN_DIAG_THRPUT_DATA_CHN_CB, lLen);
     }
 
-    /* 伪同步接口，释放信号量 */
+    /* ?????????????????????? */
     if (OM_USB_IND_PORT_HANDLE == enHandle)
     {
         g_stUsbIndPseudoSync.ulLen          = ulRlsLen;
@@ -855,13 +855,13 @@ VOS_UINT32 PPM_PortInit(VOS_VOID)
 
     VOS_SpinLockInit(&g_stPpmPortSwitchSpinLock);
 
-    /* USB承载的虚拟端口通道的初始化 */
+    /* USB?????????????????????????? */
     PPM_UsbPortInit();
 
-    /* Hsic承载的虚拟端口通道的初始化 */
+    /* Hsic?????????????????????????? */
     PPM_HsicPortInit();
 
-    /* Vcom承载的虚拟端口通道的初始化 */
+    /* Vcom?????????????????????????? */
     PPM_VComPortInit();
 
     return VOS_OK;

@@ -47,31 +47,31 @@
 */
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include  "PsTypeDef.h"
 #include  "PsCommonDef.h"
 #include  "MnErrorCode.h"
 #include  "MnMsgApi.h"
 #include  "MnMsgTs.h"
-/* Added by f62575 for V9R1 STK升级, 2013-6-26, begin */
+/* Added by f62575 for V9R1 STK????, 2013-6-26, begin */
 #include "TafStdlib.h"
-/* Added by f62575 for V9R1 STK升级, 2013-6-26, end */
+/* Added by f62575 for V9R1 STK????, 2013-6-26, end */
 
 
 
 /*****************************************************************************
-  2 常量定义
+  2 ????????
 *****************************************************************************/
 #define    THIS_FILE_ID        PS_FILE_ID_MNMSG_DECODE_C
 
-/*长短信包含短信的最大个数*/
+/*????????????????????????*/
 #define MSG_LONG_MSG_VOLUME                                 255
-/*普通短信UD的最大长度*/
+/*????????UD??????????*/
 #define MSG_MAX_NORM_MSG_LEN                                153
 
 /*****************************************************************************
-  3 类型定义
+  3 ????????
 *****************************************************************************/
 typedef struct
 {
@@ -82,15 +82,15 @@ typedef struct
 }MN_MSG_CONCENTRATE_MSG_ATTR;
 
 /*****************************************************************************
-  4 宏定义
+  4 ??????
 *****************************************************************************/
 /*****************************************************************************
-  5 函数实现
+  5 ????????
 *****************************************************************************/
 /* Added by f62575 for AT Project, 2011-10-24, begin */
 
 
-/* MN_BcdToAsciiCode、MN_BcdNumberToAscii、MN_MSG_BcdAddrToAscii调整到TafStdlib.c中 */
+/* MN_BcdToAsciiCode??MN_BcdNumberToAscii??MN_MSG_BcdAddrToAscii??????TafStdlib.c?? */
 
 
 
@@ -173,7 +173,7 @@ LOCAL VOS_UINT32 MSG_DecodeTimeStamp(
     if (0 != (MN_MSG_TIMESTAMP_SIGN_MASK & pucTimeStamp[6]))
     {
         bNegativeFlag = VOS_TRUE;
-        /*将时区符号标志位BIT3置0*/
+        /*????????????????BIT3??0*/
         ucAbsTimeZone  = pucTimeStamp[6] ^ MN_MSG_TIMESTAMP_SIGN_MASK;
     }
     else
@@ -218,7 +218,7 @@ VOS_UINT32  MSG_ConvertBcdNumberToAscii(
         return MN_ERR_NULLPTR;
     }
 
-    /*整理号码字符串，去除无效的0XFF数据*/
+    /*??????????????????????????0XFF????*/
     while (ucBcdLen > 1)
     {
         if (0xFF == pucBcdNumber[ucBcdLen - 1])
@@ -231,8 +231,8 @@ VOS_UINT32  MSG_ConvertBcdNumberToAscii(
         }
     }
 
-    /*判断pucBcdAddress所指向的字符串的最后一个字节的高位是否为1111，
-    如果是，说明号码位数为奇数，否则为偶数*/
+    /*????pucBcdAddress????????????????????????????????????????1111??
+    ??????????????????????????????????????*/
     if ((pucBcdNumber[ucBcdLen - 1] & 0xF0) == 0xF0)
     {
         ucLen = (VOS_UINT8)((ucBcdLen * 2) - 1);
@@ -242,23 +242,23 @@ VOS_UINT32  MSG_ConvertBcdNumberToAscii(
         ucLen = (VOS_UINT8)(ucBcdLen * 2);
     }
 
-    /*解析号码*/
+    /*????????*/
 
     for (ucLoop = 0; ucLoop < ucLen; ucLoop++)
     {
-        /*判断当前解码的是奇数位号码还是偶数位号码，从0开始，是偶数*/
+        /*????????????????????????????????????????????0????????????*/
         if (1 == (ucLoop % 2))
         {
-            /*如果是奇数位号码，则取高4位的值*/
+            /*????????????????????????4??????*/
             ucBcdCode = ((pucBcdNumber[(ucLoop / 2)] >> 4) & 0x0F);
         }
         else
         {
-            /*如果是偶数位号码，则取低4位的值*/
+            /*????????????????????????4??????*/
             ucBcdCode = (pucBcdNumber[(ucLoop / 2)] & 0x0F);
         }
 
-        /* 将二进制数字转换成Ascii码形式, 无效填充值字符F用字符‘0’替代 */
+        /* ??????????????????Ascii??????, ??????????????F????????0?????? */
     	cAsciiNumber = 0;
 
         ulRet = TAF_STD_ConvertBcdCodeToAscii(ucBcdCode, &cAsciiNumber);
@@ -277,7 +277,7 @@ VOS_UINT32  MSG_ConvertBcdNumberToAscii(
 
 	}
 
-    pcAsciiNumber[ucLoop] = '\0';      /*字符串末尾为0*/
+    pcAsciiNumber[ucLoop] = '\0';      /*????????????0*/
 
     return MN_ERR_NO_ERROR;
 }
@@ -306,9 +306,9 @@ VOS_UINT32 MN_MSG_DecodeAddress(
     /*3GPP 24011 RP DATA (Network to Mobile Station)*/
     if (VOS_TRUE == bRpAddr)
     {
-        /*从长度中去除号码类型及编码类型的长度(1 OCTET)*/
+        /*????????????????????????????????????(1 OCTET)*/
         ucBcdLen                = pucAddr[ulPos++];
-        /*地址长度为0直接返回*/
+        /*??????????0????????*/
         if (0 == ucBcdLen)
         {
             *pulLen = ulPos;
@@ -356,7 +356,7 @@ VOS_UINT32 MN_MSG_DecodeAddress(
     pstAsciiAddr->enNumPlan = pucAddr[ulPos] &  0x0f;
     pstAsciiAddr->enNumType = (pucAddr[ulPos] >> 4) &  0x07;
 
-    /*号码类型,拨号计划类型有效性检查*/
+    /*????????,??????????????????????*/
     ulRet = MN_ChkNumPlan(pstAsciiAddr->enNumPlan);
     if (MN_ERR_NO_ERROR != ulRet)
     {
@@ -374,7 +374,7 @@ VOS_UINT32 MN_MSG_DecodeAddress(
     if ((VOS_TRUE != bRpAddr)
      && (MN_MSG_TON_ALPHANUMERIC == pstAsciiAddr->enNumType))
     {
-        /* Modified by f62575 for V9R1 STK升级, 2013-6-26, begin */
+        /* Modified by f62575 for V9R1 STK????, 2013-6-26, begin */
         ulRet = TAF_STD_UnPack7Bit(&(pucAddr[ulPos]),
                                    pstAsciiAddr->ulLen,
                                    0,
@@ -388,7 +388,7 @@ VOS_UINT32 MN_MSG_DecodeAddress(
             ulRet = MN_ERR_NO_ERROR;
         }
 
-        /* Modified by f62575 for V9R1 STK升级, 2013-6-26, end */
+        /* Modified by f62575 for V9R1 STK????, 2013-6-26, end */
         pstAsciiAddr->ulLen = (pstAsciiAddr->ulLen * 4)/7;
     }
     else
@@ -781,7 +781,7 @@ LOCAL VOS_UINT8 MSG_DecodeUdhTextFormat(
     pstTextFormat->enAlign =  pucUdh[ucPos]       & 0x03;
     ucPos++;
 
-    /*存在Color位，则解码*/
+    /*????Color??????????*/
     if (pstTextFormat->ucLen > 1)
     {
         pstTextFormat->stColor.enForegroundColor = (pucUdh[ucPos] & 0x0f);
@@ -1030,7 +1030,7 @@ LOCAL VOS_UINT8 MSG_DecodeUdhVarPic(
         return 0;
     }
     pstVarPic->ucPos       = pucUdh[ucPos++];
-    /*Horizontal dimension of the picture: 一行中象素个数需要转换成占用OCTET数，1OCTET可表示8个象素*/
+    /*Horizontal dimension of the picture: ????????????????????????????OCTET????1OCTET??????8??????*/
     pstVarPic->ucHorDim    = (VOS_UINT8)(pucUdh[ucPos++] * MN_MSG_PIXELS_IN_A_OCTET);
     pstVarPic->ucVertDim   = pucUdh[ucPos++];
     ulPduNum = (pstVarPic->ucHorDim/MN_MSG_PIXELS_IN_A_OCTET) * pstVarPic->ucVertDim;
@@ -1538,7 +1538,7 @@ LOCAL VOS_UINT32 MN_MSG_UnpackSmWithOutUdh(
     if ((MN_MSG_MSG_CODING_7_BIT == pstDcsInfo->enMsgCoding)
      && (VOS_TRUE != pstDcsInfo->bCompressed))
     {
-        /* Modified by f62575 for V9R1 STK升级, 2013-6-26, begin */
+        /* Modified by f62575 for V9R1 STK????, 2013-6-26, begin */
         ulRet = TAF_STD_UnPack7Bit(&pucUserData[ulPos],
                                    ucUdl,
                                    0,
@@ -1552,7 +1552,7 @@ LOCAL VOS_UINT32 MN_MSG_UnpackSmWithOutUdh(
         {
             ulRet = MN_ERR_NO_ERROR;
         }
-        /* Modified by f62575 for V9R1 STK升级, 2013-6-26, end */
+        /* Modified by f62575 for V9R1 STK????, 2013-6-26, end */
     }
     else
     {
@@ -1613,7 +1613,7 @@ LOCAL VOS_UINT32 MN_MSG_UpackSmWithUdh(
         return ulRet;
     }
 
-    /*将数据区数组下标移至UDHL UDH之后 */
+    /*????????????????????UDHL UDH???? */
     ulPos += ucUdhl;
 
     /*decode SM, Refer to 23040 9.2.3.16*/
@@ -1627,7 +1627,7 @@ LOCAL VOS_UINT32 MN_MSG_UpackSmWithUdh(
             return MN_ERR_CLASS_SMS_MSGLEN_OVERFLOW;
         }
         *pulLen = ucUdl - ((((ucUdhl + 1) * 8) + 6)/7);
-        /* Modified by f62575 for V9R1 STK升级, 2013-6-26, begin */
+        /* Modified by f62575 for V9R1 STK????, 2013-6-26, begin */
         ulRet = TAF_STD_UnPack7Bit(&(pucUserData[ulPos]),
                                    *pulLen,
                                    ucFillBit,
@@ -1640,7 +1640,7 @@ LOCAL VOS_UINT32 MN_MSG_UpackSmWithUdh(
         {
             ulRet = MN_ERR_NO_ERROR;
         }
-        /* Modified by f62575 for V9R1 STK升级, 2013-6-26, end */
+        /* Modified by f62575 for V9R1 STK????, 2013-6-26, end */
     }
     else
     {
@@ -1739,7 +1739,7 @@ VOS_UINT32 MN_MSG_Decode_UsimMsg(
       RP  UDHI SRR  VPF      RD  MTI
       0   0    0    2        1   2
       TP MTI TP RD TP VPF TP RP TP UDHI TP SRR*/
-    /*TP MTI ignore 23040 9.2.3.1 填写bit0bit1:MIT     0011 0001 */
+    /*TP MTI ignore 23040 9.2.3.1 ????bit0bit1:MIT     0011 0001 */
 
     /*TP RD  23040 9.2.3.25*/
     MSG_GET_TP_RD(pstLongSubmit->bRejectDuplicates, pucData[ulPos]);
@@ -1835,7 +1835,7 @@ LOCAL VOS_UINT32 MSG_DecodeUserData(
         return MN_ERR_NO_ERROR;
     }
 
-    /*UDL长度有效性检查*/
+    /*UDL??????????????*/
     if ((MN_MSG_MSG_CODING_7_BIT == pstDcsInfo->enMsgCoding)
      && (VOS_TRUE != pstDcsInfo->bCompressed))
     {
@@ -2295,7 +2295,7 @@ LOCAL VOS_UINT32   MSG_DecodeSubmit(
       RP  UDHI SRR  VPF      RD  MTI
       0   0    0    2        1   2
       TP MTI TP RD TP VPF TP RP TP UDHI TP SRR*/
-    /*TP MTI ignore 23040 9.2.3.1 填写bit0bit1:MIT     0011 0001 */
+    /*TP MTI ignore 23040 9.2.3.1 ????bit0bit1:MIT     0011 0001 */
 
     /*TP RD  23040 9.2.3.25*/
     MSG_GET_TP_RD(pstSmsSubmitInfo->bRejectDuplicates, pstSmsRawDataInfo->aucData[ulPos]);
@@ -2517,14 +2517,14 @@ VOS_UINT32  MN_MSG_DecodeDcs(
 {
     VOS_UINT8                           ucCodingGroup;
 
-    /*判断输入参数的合法性*/
+    /*????????????????????*/
     if (VOS_NULL_PTR == pstDcs)
     {
         MN_ERR_LOG("MN_MSG_DecodeDcs: Parameter of the function is null.");
         return MN_ERR_NULLPTR;
     }
 
-    /*给pstDcsCode初始化为一个默认值*/
+    /*??pstDcsCode??????????????????*/
     pstDcs->bCompressed         = VOS_FALSE;
     pstDcs->bWaitingIndiActive  = VOS_FALSE;
     pstDcs->enMsgClass          = MN_MSG_MSG_CLASS_NONE;
@@ -2533,12 +2533,12 @@ VOS_UINT32  MN_MSG_DecodeDcs(
     pstDcs->enMsgWaitingKind    = MN_MSG_MSG_WAITING_OTHER;
     pstDcs->ucRawDcsData        = ucDcsData;
     pstDcs->bRawDcsValid        = VOS_TRUE;
-    /*ucDcsData 的bit 6 bit 7两位*/
+    /*ucDcsData ??bit 6 bit 7????*/
     ucCodingGroup               = (ucDcsData >> 6) & 0x03;
 
-    /* LGU+网络下短信使用的DCS类型为0x84，按照协议属于Reserved coding group，需要特殊处理
-       以保证短信的正常收发，按照协议解码DCS后，当前使用的character set为8 bit，没有所用
-       压缩模式，且没有指定message class */
+    /* LGU+????????????????DCS??????0x84??????????????Reserved coding group??????????????
+       ??????????????????????????????????DCS??????????????character set??8 bit??????????
+       ????????????????????message class */
     if (0x84 == ucDcsData)
     {
         pstDcs->enMsgCoding = MN_MSG_MSG_CODING_8_BIT;
@@ -2566,7 +2566,7 @@ VOS_UINT32  MN_MSG_DecodeDcs(
             {
                 MSG_GET_MSGCLASS(pstDcs->enMsgClass, ucDcsData);
             }
-            /*数据损失引入点*/
+            /*??????????????*/
             break;
         case 3:
             if ((ucDcsData & 0x30) == 0x30) /*(pattern 1111 xxxx)*/
@@ -2574,11 +2574,11 @@ VOS_UINT32  MN_MSG_DecodeDcs(
                 pstDcs->enMsgWaiting = MN_MSG_MSG_WAITING_NONE_1111;
                 MSG_GET_MSGCODING(pstDcs->enMsgCoding, ucDcsData);
                 MSG_GET_MSGCLASS(pstDcs->enMsgClass, ucDcsData);
-                /*bit3 默认为0，数据损失引入点*/
+                /*bit3 ??????0????????????????*/
             }
             else
             {
-                /*bit2 默认为0，数据损失引入点*/
+                /*bit2 ??????0????????????????*/
                 /*lint -e961*/
                 MSG_GET_INDSENSE(pstDcs->bWaitingIndiActive, ucDcsData);
                 MSG_GET_INDTYPE(pstDcs->enMsgWaitingKind, ucDcsData);
@@ -2626,10 +2626,10 @@ VOS_UINT32  MN_MSG_DecodeRelatTime(
         TAF_MEM_SET_S(pstRelatTime, sizeof(MN_MSG_TIMESTAMP_STRU), 0x00, sizeof(MN_MSG_TIMESTAMP_STRU));
     }
 
-    /*0～143：（VP+1）* 5 分钟；可表示5分钟到12小时的时间段
-      144～167：12 小时+（（VP–143）*30 分钟）；12 -> 23.5小时
-      168～196：（VP–166）*1 日；最多表示(196 - 166)== 30天
-      197～255：（VP–192）*1 周。可表示(255-192)*7 == 441天*/
+    /*0??143????VP+1??* 5 ????????????5??????12????????????
+      144??167??12 ????+????VP?C143??*30 ????????12 -> 23.5????
+      168??196????VP?C166??*1 ????????????(196 - 166)== 30??
+      197??255????VP?C192??*1 ??????????(255-192)*7 == 441??*/
     if (ucRelatTimeData < 144)
     {
         ulMunite                = (ucRelatTimeData + 1) * 5;
@@ -2858,7 +2858,7 @@ VOS_UINT32 MSG_FillLongMsgUdh(
         return MN_ERR_NULLPTR;
     }
 
-    /*将当前IE插入到长短信的消息头中*/
+    /*??????IE??????????????????????*/
     for (ulLoop = 0; ulLoop < pstSmsDeliverInfo->stUserData.ucNumofHeaders; ulLoop++)
     {
         pstUserDataHeader = &pstSmsDeliverInfo->stUserData.astUserDataHeader[ulLoop];
@@ -2982,7 +2982,7 @@ VOS_UINT32 MSG_FillLongMsg(
 
     }
 
-    /*下列数据在连续短信中会不同吗?有影响吗?*/
+    /*??????????????????????????????????????*/
     pstLongDeliver->bReplayPath          = pstSmsDeliverInfo->bReplayPath;
     if (0 != pstLongDeliver->stLongUserData.ucNumofHeaders)
     {
@@ -3028,7 +3028,7 @@ VOS_UINT32   MN_MSG_ParseConcatenateMsg(
     }
 
     pucQueueMsg[pstConcentrateMsgAttr->ucFirstMsgSeqNum - 1] = 1;
-    /*为连续短消息排序*/
+    /*????????????????*/
     for (ulLoop = 1; ulLoop < ucNum; ulLoop++)
     {
         ulRet = MSG_DecodeDeliver(pstRawData, pstSmsDeliverInfo);
@@ -3088,7 +3088,7 @@ VOS_UINT32   MN_MSG_ParseConcatenateMsg(
             return MN_ERR_INVALIDPARM;
         }
 
-        /*消息重复检查*/
+        /*????????????*/
         if (0 != pucQueueMsg[ucSeqNum - 1])
         {
             MN_WARN_LOG("MN_MSG_ParseConcatenateMsg: Repeated message.");
@@ -3098,7 +3098,7 @@ VOS_UINT32   MN_MSG_ParseConcatenateMsg(
         pstRawData++;
     }
 
-    /*消息间断检查*/
+    /*????????????*/
     for (ulLoop = 0; ulLoop < ucNum; ulLoop++)
     {
         if (0 == pucQueueMsg[ulLoop])
@@ -3129,13 +3129,13 @@ VOS_UINT32   MN_MSG_Concatenate(
     VOS_UINT8                           ucTotalNum          = 0;
     /*Sequence number of the current short message.*/
     VOS_UINT8                           ucSeqNum            = 0;
-    /*顺序排列的连续短信在输入源数据中的偏移列表*/
+    /*??????????????????????????????????????????*/
     VOS_UINT8                           aucQueueMsg[MSG_LONG_MSG_VOLUME];
-    /*无偏移的短信个数，正常情况下应该有且仅有一个*/
+    /*????????????????????????????????????????????*/
     const MN_MSG_RAW_TS_DATA_STRU       *pstTmpMsg;
     MN_MSG_CONCENTRATE_MSG_ATTR         stConcentrateMsgAttr;
 
-    /*判断输入参数的合法性*/
+    /*????????????????????*/
     if ((VOS_NULL_PTR == pstRawData)
      || (VOS_NULL_PTR == pstDeliver))
     {
@@ -3207,7 +3207,7 @@ VOS_UINT32   MN_MSG_Concatenate(
     if ((VOS_TRUE != b8bitConcatMsg)
      && (VOS_TRUE != b16bitConcatMsg))
     {
-        /*连续短消息没有连续短消息IE,异常退出*/
+        /*????????????????????????IE,????????*/
         if (1 != ucNum)
         {
             MN_WARN_LOG("MN_MSG_Concatenate: concatenate message without concatenate IE. ");
@@ -3217,7 +3217,7 @@ VOS_UINT32   MN_MSG_Concatenate(
         else
         {
             TAF_MEM_SET_S(aucQueueMsg, sizeof(aucQueueMsg), 0x00, MSG_LONG_MSG_VOLUME);
-            /*填写短消息到长短信结构中;*/
+            /*????????????????????????;*/
             aucQueueMsg[0] = 1;
             ulRet = MSG_FillLongMsg(ucNum, aucQueueMsg, pstRawData, pstSmsDeliverInfo, pstDeliver);
 
@@ -3226,7 +3226,7 @@ VOS_UINT32   MN_MSG_Concatenate(
         }
     }
 
-    /*连续短消息存在冲突的连续短消息IE,异常退出*/
+    /*??????????????????????????????IE,????????*/
     if ((VOS_TRUE == b8bitConcatMsg)
      && (VOS_TRUE == b16bitConcatMsg))
     {
@@ -3280,16 +3280,16 @@ VOS_VOID MN_MSG_GetAddressFromSubmit(
     VOS_UINT32                          ulRet;
 
     ucPos = 0;
-    /* 第一个字节是RP层消息类型； */
+    /* ????????????RP???????????? */
     ucPos++;
 
-    /* 第二个字节是RP-MR */
+    /* ????????????RP-MR */
     ucPos++;
 
-    /* 从第三个字节开始是RP-OA */
+    /* ??????????????????RP-OA */
     ucPos++;
 
-    /* 从第四个字节开始是是RP-DA，即短信中心 */
+    /* ????????????????????RP-DA???????????? */
     ucScLen = pucRpduContent[ucPos];
 
     ulRet = MN_MSG_DecodeAddress(&pucRpduContent[ucPos],
@@ -3301,13 +3301,13 @@ VOS_VOID MN_MSG_GetAddressFromSubmit(
         MN_WARN_LOG("NAS_MNTN_GetAddressFromSubmit:Error SC.");
         return;
     }
-    /*偏移到短信中心后的数据区: BCD码长度加一位长度位 */
+    /*????????????????????????: BCD?????????????????? */
     ucPos += (ucScLen + 1);
 
-    /* RP-DA后一个字节RP-DATA长度 */
+    /* RP-DA??????????RP-DATA???? */
     ucPos++;
 
-    /* 消息类型过滤：消息不是SUBMIT消息直接退出 */
+    /* ??????????????????????SUBMIT???????????? */
     MSG_GET_TP_MTI(ucMti, pucRpduContent[ucPos]);
     if (MN_MSG_TP_MTI_SUBMIT != ucMti)
     {
@@ -3316,10 +3316,10 @@ VOS_VOID MN_MSG_GetAddressFromSubmit(
     }
     ucPos++;
 
-    /* 移动到TP-MR后 */
+    /* ??????TP-MR?? */
     ucPos++;
 
-    /* 获取到目的号码的首地址后解析得到目的号码 */
+    /* ???????????????????????????????????????? */
     ulRet = MN_MSG_DecodeAddress(&pucRpduContent[ucPos],
                                  VOS_FALSE,
                                  (MN_MSG_ASCII_ADDR_STRU *)pstDestAddr,

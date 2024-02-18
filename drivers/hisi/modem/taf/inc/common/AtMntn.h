@@ -49,7 +49,7 @@
 #define _AT_MNTN_H_
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 #include "vos.h"
 #include "PsTypeDef.h"
@@ -71,12 +71,12 @@ extern "C" {
 
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
-/* 1.1: OM_GreenChannel的第二个参数usPrimId的定义*/
-#define     AT_OM_GREEN_CHANNEL_PS      (0xC001)                                /* PS相关 */
+/* 1.1: OM_GreenChannel????????????usPrimId??????*/
+#define     AT_OM_GREEN_CHANNEL_PS      (0xC001)                                /* PS???? */
 
-/* 封装可维可测事件消息头 */
+/* ?????????????????????? */
 #define AT_MNTN_CFG_MSG_HDR(pstMsg, enEventId, ulEventLen)\
             (pstMsg)->ulSenderCpuId   = VOS_LOCAL_CPUID;\
             (pstMsg)->ulSenderPid     = WUEPS_PID_AT;\
@@ -86,7 +86,7 @@ extern "C" {
             (pstMsg)->enMsgId         = (enEventId)
 
 
-/* C核单独复位统计信息 */
+/* C?????????????????? */
 #define AT_DBG_SET_SEM_INIT_FLAG(flag)              (g_stAtStatsInfo.stCCpuResetStatsInfo.ulSemInitFlg = (flag))
 #define AT_DBG_SAVE_BINARY_SEM_ID(sem_id)           (g_stAtStatsInfo.stCCpuResetStatsInfo.hBinarySemId = (sem_id))
 #define AT_DBG_CREATE_BINARY_SEM_FAIL_NUM(n)        (g_stAtStatsInfo.stCCpuResetStatsInfo.ulCreateBinarySemFailNum += (n))
@@ -96,7 +96,7 @@ extern "C" {
 #define AT_DBG_SAVE_CCPU_RESET_AFTER_NUM(n)         (g_stAtStatsInfo.stCCpuResetStatsInfo.ulResetAfterNum += (n))
 #define AT_DBG_SAVE_HIFI_RESET_NUM(n)               (g_stAtStatsInfo.stCCpuResetStatsInfo.ulHifiResetNum += (n))
 
-/* MODEM上行统计信息 */
+/* MODEM???????????? */
 #define AT_MODEM_DBG_UL_DATA_READ_CB_NUM(n)         (g_stAtStatsInfo.stModemStats.ulUlDataReadCBNum += (n))
 #define AT_MODEM_DBG_UL_GET_RD_FAIL_NUM(n)          (g_stAtStatsInfo.stModemStats.ulUlGetRDFailNum += (n))
 #define AT_MODEM_DBG_UL_GET_RD_SUCC_NUM(n)          (g_stAtStatsInfo.stModemStats.ulUlGetRDSuccNum += (n))
@@ -104,18 +104,18 @@ extern "C" {
 #define AT_MODEM_DBG_UL_RETURN_BUFF_SUCC_NUM(n)     (g_stAtStatsInfo.stModemStats.ulUlReturnBuffSuccNum += (n))
 #define AT_MODEM_DBG_UL_RETURN_BUFF_FAIL_NUM(n)     (g_stAtStatsInfo.stModemStats.ulUlReturnBuffFailNum += (n))
 
-/* MODEM下行数据统计信息 */
+/* MODEM???????????????? */
 #define AT_MODEM_DBG_DL_WRITE_ASYNC_SUCC_NUM(n)     (g_stAtStatsInfo.stModemStats.ulDlWriteAsyncSuccNum += (n))
 #define AT_MODEM_DBG_DL_WRITE_ASYNC_FAIL_NUM(n)     (g_stAtStatsInfo.stModemStats.ulDlWriteAsyncFailNum += (n))
 #define AT_MODEM_DBG_DL_FREE_BUFF_NUM(n)            (g_stAtStatsInfo.stModemStats.ulDlFreeBuffNum += (n))
 
-/* HSUART NV读写统计信息 */
+/* HSUART NV???????????? */
 #define AT_HSUART_DBG_NV_READ_ERR(n)                (g_stAtStatsInfo.stHsUartStats.ucReadNvFailNum += (n))
 #define AT_HSUART_DBG_NV_WRITE_ERR(n)               (g_stAtStatsInfo.stHsUartStats.ucWriteNvFailNum += (n))
 #define AT_HSUART_DBG_NV_BAUDRATE_ERR(n)            (g_stAtStatsInfo.stHsUartStats.ucBaudRateERR += (n))
 #define AT_HSUART_DBG_NV_FORMAT_ERR(n)              (g_stAtStatsInfo.stHsUartStats.ucFormatERR += (n))
 
-/* HSUART IOCTL统计信息 */
+/* HSUART IOCTL???????? */
 #define AT_HSUART_DBG_IOCTL_SET_READ_CB_ERR(n)      (g_stAtStatsInfo.stHsUartStats.ucSetReadCbERR += (n))
 #define AT_HSUART_DBG_IOCTL_RELLOC_READ_BUFF_ERR(n) (g_stAtStatsInfo.stHsUartStats.ucRellocReadBuffERR += (n))
 #define AT_HSUART_DBG_IOCTL_SET_FREE_CB_ERR(n)      (g_stAtStatsInfo.stHsUartStats.ucSetFreeBuffCbERR += (n))
@@ -135,7 +135,7 @@ extern "C" {
 #define AT_HSUART_DBG_IOCTL_CLEAR_BUFF_SUCC_NUM(n)  (g_stAtStatsInfo.stHsUartStats.ulClearBuffSuccNum += (n))
 #define AT_HSUART_DBG_IOCTL_CLEAR_BUFF_FAIL_NUM(n)  (g_stAtStatsInfo.stHsUartStats.ulClearBuffFailNum += (n))
 
-/* HSUART上行数据统计信息 */
+/* HSUART???????????????? */
 #define AT_HSUART_DBG_UL_DATA_READ_CB_NUM(n)        (g_stAtStatsInfo.stHsUartStats.ulUlDataReadCBNum += (n))
 #define AT_HSUART_DBG_UL_GET_RD_SUCC_NUM(n)         (g_stAtStatsInfo.stHsUartStats.ulUlGetRDSuccNum += (n))
 #define AT_HSUART_DBG_UL_GET_RD_FAIL_NUM(n)         (g_stAtStatsInfo.stHsUartStats.ulUlGetRDFailNum += (n))
@@ -150,7 +150,7 @@ extern "C" {
 #define AT_HSUART_DBG_UL_RETURN_BUFF_SUCC_NUM(n)    (g_stAtStatsInfo.stHsUartStats.ulUlReturnBuffSuccNum += (n))
 #define AT_HSUART_DBG_UL_RETURN_BUFF_FAIL_NUM(n)    (g_stAtStatsInfo.stHsUartStats.ulUlReturnBuffFailNum += (n))
 
-/* HSUART下行数据统计信息 */
+/* HSUART???????????????? */
 #define AT_HSUART_DBG_DL_WRITE_ASYNC_SUCC_NUM(n)    (g_stAtStatsInfo.stHsUartStats.ulDlWriteAsyncSuccNum += (n))
 #define AT_HSUART_DBG_DL_WRITE_ASYNC_FAIL_NUM(n)    (g_stAtStatsInfo.stHsUartStats.ulDlWriteAsyncFailNum += (n))
 #define AT_HSUART_DBG_DL_WRITE_SYNC_SUCC_NUM(n)     (g_stAtStatsInfo.stHsUartStats.ulDlWriteSyncSuccNum += (n))
@@ -159,7 +159,7 @@ extern "C" {
 #define AT_HSUART_DBG_DL_WRITE_SYNC_FAIL_LEN(n)     (g_stAtStatsInfo.stHsUartStats.ulDlWriteSyncFailLen += (n))
 #define AT_HSUART_DBG_DL_FREE_BUFF_NUM(n)           (g_stAtStatsInfo.stHsUartStats.ulDlFreeBuffNum += (n))
 
-/* AT记录Msg的最大个数 */
+/* AT????Msg?????????? */
 #define AT_MNTN_MSG_RECORD_MAX_NUM                  (100)
 
 
@@ -185,12 +185,12 @@ extern "C" {
 
 
 /*****************************************************************************
-  3 枚举定义
+  3 ????????
 *****************************************************************************/
 
 /*****************************************************************************
- 结构名称: AT_FC_DEVICE_TYPE_ENUM
- 结构说明: 流控设备类型
+ ????????: AT_FC_DEVICE_TYPE_ENUM
+ ????????: ????????????
 *****************************************************************************/
 enum AT_FC_DEVICE_TYPE_ENUM
 {
@@ -204,8 +204,8 @@ enum AT_FC_DEVICE_TYPE_ENUM
 typedef VOS_UINT32 AT_FC_DEVICE_TYPE_ENUM_UINT32;
 
 /*****************************************************************************
- 结构名称: AT_FC_POINT_TYPE_ENUM
- 结构说明: 流控点类型
+ ????????: AT_FC_POINT_TYPE_ENUM
+ ????????: ??????????
 *****************************************************************************/
 enum AT_FC_POINT_TYPE_ENUM
 {
@@ -238,26 +238,26 @@ typedef VOS_UINT32 AT_OM_GREENCHANNEL_ERR_ENUM_UINT32;
 
 
 /*****************************************************************************
-  4 消息头定义
+  4 ??????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  5 消息定义
+  5 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  6 STRUCT定义
+  6 STRUCT????
 *****************************************************************************/
 
 
 typedef struct
 {
     VOS_MSG_HEADER                                                              /* _H2ASN_Skip */
-    AT_INTER_MSG_ID_ENUM_UINT32         enMsgId;            /* 消息类型     */  /* _H2ASN_Skip */
-    VOS_UINT32                          ulPortId;           /* 端口ID */
-    AT_DCE_MSC_STRU                     stDceMscInfo;       /* 管脚信号信息 */
+    AT_INTER_MSG_ID_ENUM_UINT32         enMsgId;            /* ????????     */  /* _H2ASN_Skip */
+    VOS_UINT32                          ulPortId;           /* ????ID */
+    AT_DCE_MSC_STRU                     stDceMscInfo;       /* ???????????? */
 
 } AT_MNTN_MSC_STRU;
 
@@ -265,8 +265,8 @@ typedef struct
 typedef struct
 {
     VOS_MSG_HEADER                                                              /* _H2ASN_Skip */
-    AT_INTER_MSG_ID_ENUM_UINT32         enMsgId;            /* 消息类型     */  /* _H2ASN_Skip */
-    VOS_UINT32                          ulPortId;           /* 端口ID */
+    AT_INTER_MSG_ID_ENUM_UINT32         enMsgId;            /* ????????     */  /* _H2ASN_Skip */
+    VOS_UINT32                          ulPortId;           /* ????ID */
     AT_FC_DEVICE_TYPE_ENUM_UINT32       enDevice;
 
 } AT_MNTN_FLOW_CTRL_STRU;
@@ -275,8 +275,8 @@ typedef struct
 typedef struct
 {
     VOS_MSG_HEADER                                                              /* _H2ASN_Skip */
-    AT_INTER_MSG_ID_ENUM_UINT32         enMsgId;            /* 消息类型     */  /* _H2ASN_Skip */
-    VOS_UINT32                          ulPortId;           /* 端口ID */
+    AT_INTER_MSG_ID_ENUM_UINT32         enMsgId;            /* ????????     */  /* _H2ASN_Skip */
+    VOS_UINT32                          ulPortId;           /* ????ID */
     AT_FC_POINT_TYPE_ENUM_UINT32        enPoint;
 
 } AT_MNTN_FC_POINT_STRU;
@@ -285,8 +285,8 @@ typedef struct
 typedef struct
 {
     AT_CLIENT_TAB_INDEX_UINT8           enAtClientTabIndex;
-    VOS_UINT8                           ucReportFlg;                            /* 该端口是否允许主动上报，VOS_TRUE为允许，VOS_FALSE为不允许，默认允许 */
-    MODEM_ID_ENUM_UINT16                enModemId;                              /* 该端口属于哪个modem */
+    VOS_UINT8                           ucReportFlg;                            /* ????????????????????????VOS_TRUE????????VOS_FALSE?????????????????? */
+    MODEM_ID_ENUM_UINT16                enModemId;                              /* ??????????????modem */
 } AT_RPT_PORT_STRU;
 
 
@@ -300,7 +300,7 @@ typedef struct
 
 typedef struct
 {
-    /* 上行统计信息 */
+    /* ???????????? */
     VOS_UINT32                          ulUlDataReadCBNum;
     VOS_UINT32                          ulUlGetRDSuccNum;
     VOS_UINT32                          ulUlGetRDFailNum;
@@ -308,7 +308,7 @@ typedef struct
     VOS_UINT32                          ulUlReturnBuffSuccNum;
     VOS_UINT32                          ulUlReturnBuffFailNum;
 
-    /* 下行统计信息 */
+    /* ???????????? */
     VOS_UINT32                          ulDlWriteAsyncSuccNum;
     VOS_UINT32                          ulDlWriteAsyncFailNum;
     VOS_UINT32                          ulDlFreeBuffNum;
@@ -318,13 +318,13 @@ typedef struct
 
 typedef struct
 {
-    /* NV读取统计信息 */
+    /* NV???????????? */
     VOS_UINT8                           ucReadNvFailNum;
     VOS_UINT8                           ucWriteNvFailNum;
     VOS_UINT8                           ucBaudRateERR;
     VOS_UINT8                           ucFormatERR;
 
-    /* IOCTRL统计信息 */
+    /* IOCTRL???????? */
     VOS_UINT8                           ucSetReadCbERR;
     VOS_UINT8                           ucRellocReadBuffERR;
     VOS_UINT8                           ucSetFreeBuffCbERR;
@@ -346,7 +346,7 @@ typedef struct
     VOS_UINT32                          ulClearBuffSuccNum;
     VOS_UINT32                          ulClearBuffFailNum;
 
-    /* 上行统计信息 */
+    /* ???????????? */
     VOS_UINT32                          ulUlDataReadCBNum;
     VOS_UINT32                          ulUlGetRDSuccNum;
     VOS_UINT32                          ulUlGetRDFailNum;
@@ -362,7 +362,7 @@ typedef struct
     VOS_UINT32                          ulUlReturnBuffSuccNum;
     VOS_UINT32                          ulUlReturnBuffFailNum;
 
-    /* 下行统计信息 */
+    /* ???????????? */
     VOS_UINT32                          ulDlWriteAsyncSuccNum;
     VOS_UINT32                          ulDlWriteAsyncFailNum;
     VOS_UINT32                          ulDlWriteSyncSuccNum;
@@ -376,34 +376,34 @@ typedef struct
 
 typedef struct
 {
-    VOS_UINT8                           ucPcuiCtrlConcurrentFlg;                /* PCUI和CTRL口并发标志 */
-    VOS_UINT8                           ucPcuiPsCallFlg;                        /* PCUI口模拟NDISDUP拨号标志 */
-    VOS_UINT8                           ucPcuiUserId;                           /* PCUI口模拟哪个端口拨号 */
-    VOS_UINT8                           ucCtrlPsCallFlg;                        /* CTRL口模拟NDISDUP拨号标志 */
-    VOS_UINT8                           ucCtrlUserId;                           /* CTRL口模拟哪个端口拨号 */
-    VOS_UINT8                           ucPcui2PsCallFlg;                       /* PCUI2口模拟NDISDUP拨号标志 */
-    VOS_UINT8                           ucPcui2UserId;                          /* PCUI2口模拟哪个端口拨号 */
+    VOS_UINT8                           ucPcuiCtrlConcurrentFlg;                /* PCUI??CTRL?????????? */
+    VOS_UINT8                           ucPcuiPsCallFlg;                        /* PCUI??????NDISDUP???????? */
+    VOS_UINT8                           ucPcuiUserId;                           /* PCUI?????????????????? */
+    VOS_UINT8                           ucCtrlPsCallFlg;                        /* CTRL??????NDISDUP???????? */
+    VOS_UINT8                           ucCtrlUserId;                           /* CTRL?????????????????? */
+    VOS_UINT8                           ucPcui2PsCallFlg;                       /* PCUI2??????NDISDUP???????? */
+    VOS_UINT8                           ucPcui2UserId;                          /* PCUI2?????????????????? */
     VOS_UINT8                           ucUnCheckApPortFlg;
 }AT_DEBUG_INFO_STRU;
 
 
 typedef struct
 {
-    /* 复位信号量信息 */
-    VOS_SEM                 hBinarySemId;                                       /* 二进制信号量ID */
-    VOS_UINT32              ulSemInitFlg;                                       /* 初始化标识, VOS_TRUE: 成功; VOS_FALSE: 失败 */
-    VOS_UINT32              ulCreateBinarySemFailNum;                           /* 创建二进制信号量失败次数 */
-    VOS_UINT32              ulLockBinarySemFailNum;                             /* 锁二进制信号量失败次数 */
-    VOS_UINT32              ulLastBinarySemErrRslt;                             /* 最后一次锁二进制信号量失败结果 */
-    VOS_UINT32              ulResetBeforeNum;                                   /* C核复位前的次数 */
-    VOS_UINT32              ulResetAfterNum;                                    /* C核复位后的次数 */
-    VOS_UINT32              ulHifiResetNum;                                     /* HIFI复位的次数 */
+    /* ?????????????? */
+    VOS_SEM                 hBinarySemId;                                       /* ????????????ID */
+    VOS_UINT32              ulSemInitFlg;                                       /* ??????????, VOS_TRUE: ????; VOS_FALSE: ???? */
+    VOS_UINT32              ulCreateBinarySemFailNum;                           /* ???????????????????????? */
+    VOS_UINT32              ulLockBinarySemFailNum;                             /* ?????????????????????? */
+    VOS_UINT32              ulLastBinarySemErrRslt;                             /* ?????????????????????????????? */
+    VOS_UINT32              ulResetBeforeNum;                                   /* C?????????????? */
+    VOS_UINT32              ulResetAfterNum;                                    /* C?????????????? */
+    VOS_UINT32              ulHifiResetNum;                                     /* HIFI?????????? */
     VOS_UINT32              ulReserved;
 }AT_RESET_STATS_INFO_STRU;
 
 /*****************************************************************************
- 结构名    : AT_MNTN_STATS_STRU
- 结构说明  : 记录AT模块的可维可测信息
+ ??????    : AT_MNTN_STATS_STRU
+ ????????  : ????AT??????????????????
 *****************************************************************************/
 typedef struct
 {
@@ -430,11 +430,11 @@ typedef struct
 } AT_MNTN_MSG_RECORD_INFO_STRU;
 
 /*****************************************************************************
-  7 OTHERS定义
+  7 OTHERS????
 *****************************************************************************/
 
 /*****************************************************************************
-  H2ASN顶级消息结构定义
+  H2ASN????????????????
 *****************************************************************************/
 typedef struct
 {
@@ -454,19 +454,19 @@ typedef struct
 
 
 /*****************************************************************************
-  8 UNION定义
+  8 UNION????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  9 全局变量声明
+  9 ????????????
 *****************************************************************************/
 extern AT_MNTN_STATS_STRU               g_stAtStatsInfo;
 extern AT_DEBUG_INFO_STRU               g_stAtDebugInfo;
 
 
 /*****************************************************************************
-  10 函数声明
+  10 ????????
 *****************************************************************************/
 
 VOS_UINT8 AT_GetPcuiCtrlConcurrentFlag(VOS_VOID);
@@ -484,12 +484,12 @@ VOS_VOID AT_SetUnCheckApPortFlg(
 VOS_UINT8 AT_GetUnCheckApPortFlg(VOS_VOID);
 
 /*****************************************************************************
- 函 数 名  : AT_MNTN_TraceInputMsc
- 功能描述  : 管脚信号输入可维可测
- 输入参数  : ucIndex   - 端口索引
-             pstDceMsc - 管脚信号信息(调用者保证非空)
- 输出参数  : 无
- 返 回 值  : VOS_VOID
+ ?? ?? ??  : AT_MNTN_TraceInputMsc
+ ????????  : ????????????????????
+ ????????  : ucIndex   - ????????
+             pstDceMsc - ????????????(??????????????)
+ ????????  : ??
+ ?? ?? ??  : VOS_VOID
 *****************************************************************************/
 VOS_VOID AT_MNTN_TraceInputMsc(
     VOS_UINT8                           ucIndex,
@@ -498,12 +498,12 @@ VOS_VOID AT_MNTN_TraceInputMsc(
 
 
 /*****************************************************************************
- 函 数 名  : AT_MNTN_TraceOutputMsc
- 功能描述  : 管脚信号输出可维可测
- 输入参数  : ucIndex   - 端口索引
-             pstDceMsc - 管脚信号信息(调用者保证非空)
- 输出参数  : 无
- 返 回 值  : VOS_VOID
+ ?? ?? ??  : AT_MNTN_TraceOutputMsc
+ ????????  : ????????????????????
+ ????????  : ucIndex   - ????????
+             pstDceMsc - ????????????(??????????????)
+ ????????  : ??
+ ?? ?? ??  : VOS_VOID
 *****************************************************************************/
 VOS_VOID AT_MNTN_TraceOutputMsc(
     VOS_UINT8                           ucIndex,
@@ -511,12 +511,12 @@ VOS_VOID AT_MNTN_TraceOutputMsc(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_MNTN_TraceStartFlowCtrl
- 功能描述  : 启动流控可维可测
- 输入参数  : ucIndex    - 端口索引
-             enFcDevive - 流控设备
- 输出参数  : 无
- 返 回 值  : VOS_VOID
+ ?? ?? ??  : AT_MNTN_TraceStartFlowCtrl
+ ????????  : ????????????????
+ ????????  : ucIndex    - ????????
+             enFcDevive - ????????
+ ????????  : ??
+ ?? ?? ??  : VOS_VOID
 *****************************************************************************/
 VOS_VOID AT_MNTN_TraceStartFlowCtrl(
     VOS_UINT8                           ucIndex,
@@ -525,12 +525,12 @@ VOS_VOID AT_MNTN_TraceStartFlowCtrl(
 
 
 /*****************************************************************************
- 函 数 名  : AT_MNTN_TraceStopFlowCtrl
- 功能描述  : 停止流控可维可测
- 输入参数  : ucIndex    - 端口索引
-             enFcDevive - 流控设备
- 输出参数  : 无
- 返 回 值  : VOS_VOID
+ ?? ?? ??  : AT_MNTN_TraceStopFlowCtrl
+ ????????  : ????????????????
+ ????????  : ucIndex    - ????????
+             enFcDevive - ????????
+ ????????  : ??
+ ?? ?? ??  : VOS_VOID
 *****************************************************************************/
 VOS_VOID AT_MNTN_TraceStopFlowCtrl(
     VOS_UINT8                           ucIndex,
@@ -539,12 +539,12 @@ VOS_VOID AT_MNTN_TraceStopFlowCtrl(
 
 
 /*****************************************************************************
- 函 数 名  : AT_MNTN_TraceRegFcPoint
- 功能描述  : 注册流控点可维可测
- 输入参数  : ucIndex   - 端口索引
-             enFcPoint - 流控点
- 输出参数  : 无
- 返 回 值  : VOS_VOID
+ ?? ?? ??  : AT_MNTN_TraceRegFcPoint
+ ????????  : ??????????????????
+ ????????  : ucIndex   - ????????
+             enFcPoint - ??????
+ ????????  : ??
+ ?? ?? ??  : VOS_VOID
 *****************************************************************************/
 VOS_VOID AT_MNTN_TraceRegFcPoint(
     VOS_UINT8                           ucIndex,
@@ -553,12 +553,12 @@ VOS_VOID AT_MNTN_TraceRegFcPoint(
 
 
 /*****************************************************************************
- 函 数 名  : AT_MNTN_TraceDeregFcPoint
- 功能描述  : 去注册流控点可维可测
- 输入参数  : ucIndex   - 端口索引
-             enFcPoint - 流控点
- 输出参数  : 无
- 返 回 值  : VOS_VOID
+ ?? ?? ??  : AT_MNTN_TraceDeregFcPoint
+ ????????  : ????????????????????
+ ????????  : ucIndex   - ????????
+             enFcPoint - ??????
+ ????????  : ??
+ ?? ?? ??  : VOS_VOID
 *****************************************************************************/
 VOS_VOID AT_MNTN_TraceDeregFcPoint(
     VOS_UINT8                           ucIndex,
@@ -567,13 +567,13 @@ VOS_VOID AT_MNTN_TraceDeregFcPoint(
 
 
 /*****************************************************************************
- 函 数 名  : AT_MNTN_TraceCmdResult
- 功能描述  : AT命令回复可维可测
- 输入参数  : ucIndex   - 端口索引
-             pucData   - 数据内容
-             usDataLen - 数据长度
- 输出参数  : 无
- 返 回 值  : VOS_VOID
+ ?? ?? ??  : AT_MNTN_TraceCmdResult
+ ????????  : AT????????????????
+ ????????  : ucIndex   - ????????
+             pucData   - ????????
+             usDataLen - ????????
+ ????????  : ??
+ ?? ?? ??  : VOS_VOID
 *****************************************************************************/
 VOS_VOID AT_MNTN_TraceCmdResult(
     VOS_UINT8                           ucIndex,
@@ -583,13 +583,13 @@ VOS_VOID AT_MNTN_TraceCmdResult(
 
 
 /*****************************************************************************
- 函 数 名  : AT_MNTN_TraceCmdBuffer
- 功能描述  : 缓存命令可维可测
- 输入参数  : ucIndex   - 端口索引
-             pucData   - 数据内容
-             usDataLen - 数据长度
- 输出参数  : 无
- 返 回 值  : VOS_VOID
+ ?? ?? ??  : AT_MNTN_TraceCmdBuffer
+ ????????  : ????????????????
+ ????????  : ucIndex   - ????????
+             pucData   - ????????
+             usDataLen - ????????
+ ????????  : ??
+ ?? ?? ??  : VOS_VOID
 *****************************************************************************/
 VOS_VOID AT_MNTN_TraceCmdBuffer(
     VOS_UINT8                           ucIndex,
@@ -599,41 +599,41 @@ VOS_VOID AT_MNTN_TraceCmdBuffer(
 
 
 /*****************************************************************************
- 函 数 名  : AT_MNTN_TraceContextData
- 功能描述  : 把AT外部上下文作为SDT消息发送出去，以便在回放时通过桩函数还原
- 输入参数  : VOS_VOID
- 输出参数  : 无
- 返 回 值  : VOS_VOID
+ ?? ?? ??  : AT_MNTN_TraceContextData
+ ????????  : ??AT??????????????SDT????????????????????????????????????????
+ ????????  : VOS_VOID
+ ????????  : ??
+ ?? ?? ??  : VOS_VOID
 *****************************************************************************/
 VOS_VOID AT_MNTN_TraceContextData(VOS_VOID);
 
 
 /*****************************************************************************
- 函 数 名  : AT_MNTN_TraceClientData
- 功能描述  : 发送AT模块的客户端口数据
- 输入参数  : VOS_VOID
- 输出参数  : 无
- 返 回 值  : VOS_VOID
+ ?? ?? ??  : AT_MNTN_TraceClientData
+ ????????  : ????AT??????????????????
+ ????????  : VOS_VOID
+ ????????  : ??
+ ?? ?? ??  : VOS_VOID
 *****************************************************************************/
 VOS_VOID AT_MNTN_TraceClientData(VOS_VOID);
 
 
 /*****************************************************************************
- 函 数 名  : AT_InitHsUartStats
- 功能描述  : 初始化UART可维可测信息
- 输入参数  : 无
- 输出参数  : 无
- 返 回 值  : VOS_VOID
+ ?? ?? ??  : AT_InitHsUartStats
+ ????????  : ??????UART????????????
+ ????????  : ??
+ ????????  : ??
+ ?? ?? ??  : VOS_VOID
 *****************************************************************************/
 VOS_VOID AT_InitHsUartStats(VOS_VOID);
 
 
 /*****************************************************************************
- 函 数 名  : AT_MODEM_Help
- 功能描述  : 初始化UART可维可测信息
- 输入参数  : VOS_VOID
- 输出参数  : 无
- 返 回 值  : VOS_VOID
+ ?? ?? ??  : AT_MODEM_Help
+ ????????  : ??????UART????????????
+ ????????  : VOS_VOID
+ ????????  : ??
+ ?? ?? ??  : VOS_VOID
 *****************************************************************************/
 VOS_VOID AT_InitModemStats(VOS_VOID);
 

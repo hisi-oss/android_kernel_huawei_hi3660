@@ -73,9 +73,9 @@ extern "C" {
 #define ver_print_error(fmt, ...)   (bsp_trace(BSP_LOG_LEVEL_ERROR, BSP_MODU_VERSION, "[version]: <%s> "fmt, __FUNCTION__, ##__VA_ARGS__))
 
 #define HW_VER_INVALID				(BSP_U32)0XFFFFFFFF
-#define HW_VER_UDP_MASK				(BSP_U32)0XFF000000 	    /*MBB UDP单板掩码*/
-#define HW_VER_UDP_UNMASK			(BSP_U32)(~HW_VER_UDP_MASK) /*MBB UDP掩码取反*/
-#define MODEMID_VENDOR_MASK			(~(BSP_U32)0x3FF)           /*PHONE UDP单板掩码*/
+#define HW_VER_UDP_MASK				(BSP_U32)0XFF000000 	    /*MBB UDP????????*/
+#define HW_VER_UDP_UNMASK			(BSP_U32)(~HW_VER_UDP_MASK) /*MBB UDP????????*/
+#define MODEMID_VENDOR_MASK			(~(BSP_U32)0x3FF)           /*PHONE UDP????????*/
 
 #define HW_VER_V711_UDP				(BSP_U32)0X71000000 /*V711 UDP*/
 #define HW_VER_V750_UDP				(BSP_U32)0X75000000 /*V7R5 UDP*/
@@ -153,16 +153,16 @@ typedef enum
 
 typedef struct
 {
-	u32 board_id;				/*硬件版本号，通过hkadc读取。NV和dts在用*/
-	u32 board_id_udp_masked;	/*屏蔽扣板信息的硬件版本号。ioshare在用*/
-	u32 chip_version;			/*芯片版本号*/
-	u16 chip_type;				/*芯片类型，如CHIP_V711=0x6921*/
-	u8  plat_type;				/*平台类型，如asic/proting/emu*/
-	u8  board_type;				/*平台类型，如BBIT SOC ASIC SFT*/
-	u8  bbit_type;				/*bbit 平台，如dalass bbit/722 BBIT/chicago bbit*/
+	u32 board_id;				/*????????????????hkadc??????NV??dts????*/
+	u32 board_id_udp_masked;	/*??????????????????????????ioshare????*/
+	u32 chip_version;			/*??????????*/
+	u16 chip_type;				/*????????????CHIP_V711=0x6921*/
+	u8  plat_type;				/*????????????asic/proting/emu*/
+	u8  board_type;				/*????????????BBIT SOC ASIC SFT*/
+	u8  bbit_type;				/*bbit ????????dalass bbit/722 BBIT/chicago bbit*/
 	u8  product_type;			/*MBB or PHONE*/
-	u16 product_name;			/*平台名称，如PRODUCT_722，将722 porting/bbit/sft/udp统一归类为722*/
-	u16 cses_type;				/*从boston起，芯片第一版逻辑为es(100)，第二版为cs(110)*/
+	u16 product_name;			/*????????????PRODUCT_722????722 porting/bbit/sft/udp??????????722*/
+	u16 cses_type;				/*??boston????????????????????es(100)??????????cs(110)*/
 	u16 version_magic;			/*0x2017*/
 }BSP_VERSION_INFO_S;
 
@@ -170,7 +170,7 @@ typedef struct
 
 /*****************************************************************************
 *                                                                            *
-*            以下提供给version_balong.c(a/c)                                 *
+*            ??????????version_balong.c(a/c)                                 *
 *                                                                            *
 ******************************************************************************/
 
@@ -188,7 +188,7 @@ typedef struct
 
 /*****************************************************************************
 *                                                                            *
-*            以下提供给version.c(fastboot)                                   *
+*            ??????????version.c(fastboot)                                   *
 *                                                                            *
 ******************************************************************************/
 
@@ -206,7 +206,7 @@ typedef struct
 
 /*****************************************************************************
 *                                                                            *
-*            以下提供给adp_version.c(a/c)                                    *
+*            ??????????adp_version.c(a/c)                                    *
 *                                                                            *
 ******************************************************************************/
 
@@ -220,15 +220,15 @@ typedef struct
 
 typedef struct
 {
-    unsigned char CompId;                            /* 组件号：参见COMP_TYPE */
-    unsigned char CompVer[VER_MAX_LENGTH+1];         /* 最大版本长度 30 字符+ \0 */
+    unsigned char CompId;                            /* ????????????COMP_TYPE */
+    unsigned char CompVer[VER_MAX_LENGTH+1];         /* ???????????? 30 ????+ \0 */
 }VERSIONINFO;
 
 
 
 /*****************************************************************************
 *                                                                            *
-*            以下提供给virtual boardid功能                                   *
+*            ??????????virtual boardid????                                   *
 *                                                                            *
 ******************************************************************************/
 
@@ -257,7 +257,7 @@ typedef enum {
 
 /*****************************************************************************
 *                                                                            *
-*            以下为对外头文件声明                                            *
+*            ????????????????????                                            *
 *                                                                            *
 ******************************************************************************/
 

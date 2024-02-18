@@ -44,10 +44,10 @@ typedef enum _PCI_WLAN_LINK_STATE_
 {
     PCI_WLAN_LINK_DOWN = 0,/*default state, PCIe not ready*/
     PCI_WLAN_LINK_DEEPSLEEP ,/*pcie linkdown, but soc sleep mode*/
-    PCI_WLAN_LINK_UP, /*物理链路已使能*/
-    PCI_WLAN_LINK_MEM_UP, /*IATU已经配置OK，可以访问AXI*/
+    PCI_WLAN_LINK_UP, /*??????????????*/
+    PCI_WLAN_LINK_MEM_UP, /*IATU????????OK??????????AXI*/
     PCI_WLAN_LINK_RES_UP, /*RINGBUF OK*/
-    PCI_WLAN_LINK_WORK_UP , /*业务层可以访问PCIE*/
+    PCI_WLAN_LINK_WORK_UP , /*??????????????PCIE*/
     PCI_WLAN_LINK_BUTT
 }PCI_WLAN_LINK_STATE;
 
@@ -67,47 +67,47 @@ typedef enum _PCI_WLAN_LINK_STATE_
 
 #define HI1103_PMU2_CMU_IR_BASE         pst_pmu2_cmu_ir_ctrl
 
-#define HI1103_PMU2_CMU_IR_PMU2_CMU_ABB_MAN_SEL_W_2_REG  (HI1103_PMU2_CMU_IR_BASE + 0x148)  /* PMU2_CMU_ABB 手动选择 */
+#define HI1103_PMU2_CMU_IR_PMU2_CMU_ABB_MAN_SEL_W_2_REG  (HI1103_PMU2_CMU_IR_BASE + 0x148)  /* PMU2_CMU_ABB ???????? */
 #define HI1103_PMU2_CMU_IR_PMU_RFLDO3_EN_MAN_W_SEL_OFFSET 6
 
-#define HI1103_PMU2_CMU_IR_PMU2_CMU_ABB_STS_2_REG  (HI1103_PMU2_CMU_IR_BASE + 0x15C)  /* PMU2_CMU_ABB 实际状态 */
+#define HI1103_PMU2_CMU_IR_PMU2_CMU_ABB_STS_2_REG  (HI1103_PMU2_CMU_IR_BASE + 0x15C)  /* PMU2_CMU_ABB ???????? */
 
-#define HI1103_PMU2_CMU_IR_PMU2_CMU_ABB_MAN_SEL_W_3_REG  (HI1103_PMU2_CMU_IR_BASE + 0x168)  /* PMU2_CMU_ABB 手动选择 */
+#define HI1103_PMU2_CMU_IR_PMU2_CMU_ABB_MAN_SEL_W_3_REG  (HI1103_PMU2_CMU_IR_BASE + 0x168)  /* PMU2_CMU_ABB ???????? */
 #define HI1103_PMU2_CMU_IR_PMU_RFLDO6_EN_MAN_W_SEL_OFFSET 4
 
-#define HI1103_PMU2_CMU_IR_PMU2_CMU_ABB_STS_3_REG  (HI1103_PMU2_CMU_IR_BASE + 0x17C)  /* PMU2_CMU_ABB 实际状态 */
+#define HI1103_PMU2_CMU_IR_PMU2_CMU_ABB_STS_3_REG  (HI1103_PMU2_CMU_IR_BASE + 0x17C)  /* PMU2_CMU_ABB ???????? */
 
-#define HI1103_PMU2_CMU_IR_PMU2_CMU_ABB_MAN_SEL_W_6_REG  (HI1103_PMU2_CMU_IR_BASE + 0x1C8)  /* PMU2_CMU_ABB 手动选择 */
+#define HI1103_PMU2_CMU_IR_PMU2_CMU_ABB_MAN_SEL_W_6_REG  (HI1103_PMU2_CMU_IR_BASE + 0x1C8)  /* PMU2_CMU_ABB ???????? */
 #define HI1103_PMU2_CMU_IR_PMU_XLDO_EN_MAN_W_SEL_OFFSET 0
 
 
-#define HI1103_PMU2_CMU_IR_PMU2_CMU_ABB_STS_6_REG  (HI1103_PMU2_CMU_IR_BASE + 0x1DC)  /* PMU2_CMU_ABB 实际状态 */
+#define HI1103_PMU2_CMU_IR_PMU2_CMU_ABB_STS_6_REG  (HI1103_PMU2_CMU_IR_BASE + 0x1DC)  /* PMU2_CMU_ABB ???????? */
 
-#define HI1103_PMU2_CMU_IR_PMU2_CMU_ABB_MAN_SEL_W_8_REG  (HI1103_PMU2_CMU_IR_BASE + 0x208)  /* PMU2_CMU_ABB 手动选择 */
-#define HI1103_PMU2_CMU_IR_PMU2_CMU_ABB_MAN_STS_8_REG  (HI1103_PMU2_CMU_IR_BASE + 0x210)  /* PMU2_CMU_ABB 手动状态 */
-#define HI1103_PMU2_CMU_IR_PMU2_CMU_ABB_DBG_SEL_8_REG  (HI1103_PMU2_CMU_IR_BASE + 0x218)  /* PMU2_CMU_ABB 调试选择 */
+#define HI1103_PMU2_CMU_IR_PMU2_CMU_ABB_MAN_SEL_W_8_REG  (HI1103_PMU2_CMU_IR_BASE + 0x208)  /* PMU2_CMU_ABB ???????? */
+#define HI1103_PMU2_CMU_IR_PMU2_CMU_ABB_MAN_STS_8_REG  (HI1103_PMU2_CMU_IR_BASE + 0x210)  /* PMU2_CMU_ABB ???????? */
+#define HI1103_PMU2_CMU_IR_PMU2_CMU_ABB_DBG_SEL_8_REG  (HI1103_PMU2_CMU_IR_BASE + 0x218)  /* PMU2_CMU_ABB ???????? */
 
-#define HI1103_PMU2_CMU_IR_REFDIV_REG             (HI1103_PMU2_CMU_IR_BASE + 0x300)  /* CMU 分频比配置 */
-#define HI1103_PMU2_CMU_IR_FBDIV_REG              (HI1103_PMU2_CMU_IR_BASE + 0x304)  /* CMU 分频比配置 */
-#define HI1103_PMU2_CMU_IR_FRAC_L_REG             (HI1103_PMU2_CMU_IR_BASE + 0x308)  /* CMU 分频比配置 */
-#define HI1103_PMU2_CMU_IR_FRAC_H_REG             (HI1103_PMU2_CMU_IR_BASE + 0x30C)  /* CMU 分频比配置 */
-#define HI1103_PMU2_CMU_IR_POSTDIV_REG            (HI1103_PMU2_CMU_IR_BASE + 0x310)  /* CMU 分频比配置 */
-#define HI1103_PMU2_CMU_IR_CMU_PD_REG             (HI1103_PMU2_CMU_IR_BASE + 0x314)  /* CMU PD 控制 */
-#define HI1103_PMU2_CMU_IR_CMU_GT_W_REG           (HI1103_PMU2_CMU_IR_BASE + 0x318)  /* CMU GT 控制 */
-#define HI1103_PMU2_CMU_IR_TCXO_GT_W_REG          (HI1103_PMU2_CMU_IR_BASE + 0x31C)  /* TCXO GT 控制 */
+#define HI1103_PMU2_CMU_IR_REFDIV_REG             (HI1103_PMU2_CMU_IR_BASE + 0x300)  /* CMU ?????????? */
+#define HI1103_PMU2_CMU_IR_FBDIV_REG              (HI1103_PMU2_CMU_IR_BASE + 0x304)  /* CMU ?????????? */
+#define HI1103_PMU2_CMU_IR_FRAC_L_REG             (HI1103_PMU2_CMU_IR_BASE + 0x308)  /* CMU ?????????? */
+#define HI1103_PMU2_CMU_IR_FRAC_H_REG             (HI1103_PMU2_CMU_IR_BASE + 0x30C)  /* CMU ?????????? */
+#define HI1103_PMU2_CMU_IR_POSTDIV_REG            (HI1103_PMU2_CMU_IR_BASE + 0x310)  /* CMU ?????????? */
+#define HI1103_PMU2_CMU_IR_CMU_PD_REG             (HI1103_PMU2_CMU_IR_BASE + 0x314)  /* CMU PD ???? */
+#define HI1103_PMU2_CMU_IR_CMU_GT_W_REG           (HI1103_PMU2_CMU_IR_BASE + 0x318)  /* CMU GT ???? */
+#define HI1103_PMU2_CMU_IR_TCXO_GT_W_REG          (HI1103_PMU2_CMU_IR_BASE + 0x31C)  /* TCXO GT ???? */
 
 #define HI1103_PMU2_CMU_IR_AON_DIV_1_REG          (HI1103_PMU2_CMU_IR_BASE + 0x418)
 #define HI1103_PMU2_CMU_IR_AON_CRG_CKEN_REG       (HI1103_PMU2_CMU_IR_BASE + 0x420)
 #define HI1103_PMU2_CMU_IR_CLK_SEL_REG            (HI1103_PMU2_CMU_IR_BASE + 0x430)
 
-#define HI1103_PMU2_CMU_IR_FBDIV_FRAC_SLP_REG     (HI1103_PMU2_CMU_IR_BASE + 0x370)  /* CMU 分频比控制 */
+#define HI1103_PMU2_CMU_IR_FBDIV_FRAC_SLP_REG     (HI1103_PMU2_CMU_IR_BASE + 0x370)  /* CMU ?????????? */
 #define HI1103_PMU2_CMU_IR_FBDIV_FRAC_WKUP_OFFSET 1
 
-#define HI1103_PMU2_CMU_IR_CMU_STATUS_GRM_REG     (HI1103_PMU2_CMU_IR_BASE + 0x890)  /* CMU状态查询 */
+#define HI1103_PMU2_CMU_IR_CMU_STATUS_GRM_REG     (HI1103_PMU2_CMU_IR_BASE + 0x890)  /* CMU???????? */
 
 #define HI1103_W_CTL_BASE                          pst_wctrl
 #define HI1103_W_CTL_WTOPCRG_SOFT_CLKEN_REG       (HI1103_W_CTL_BASE + 0x40)
-#define HI1103_W_CTL_W_TCXO_SEL_REG               (HI1103_W_CTL_BASE + 0x80)      /* WLAN TCXO/PLL时钟模式选择寄存器 */
+#define HI1103_W_CTL_W_TCXO_SEL_REG               (HI1103_W_CTL_BASE + 0x80)      /* WLAN TCXO/PLL?????????????????? */
 #define HI1103_W_CTL_CLKMUX_STS_REG               (HI1103_W_CTL_BASE + 0x88)
 
 extern char* g_pcie_link_state_str[PCI_WLAN_LINK_BUTT+1];
@@ -150,7 +150,7 @@ OAL_STATIC OAL_INLINE oal_void oal_pcie_log_record(PCI_LOG_TYPE type)
         }\
     }while(0)
 
-typedef oal_uint32 pcie_dev_ptr;/*Device CPU 指针大小，目前都是32bits*/
+typedef oal_uint32 pcie_dev_ptr;/*Device CPU ??????????????????32bits*/
 
 typedef struct _oal_reg_bits_stru_
 {
@@ -194,9 +194,9 @@ typedef struct _oal_pcie_trans_stat_
 
 typedef struct _pci_addr_map__
 {
-    /*unsigned long 指针长度和CPU位宽等长*/
-    oal_ulong  va;/*虚拟地址*/
-    oal_ulong  pa;/*物理地址*/
+    /*unsigned long ??????????CPU????????*/
+    oal_ulong  va;/*????????*/
+    oal_ulong  pa;/*????????*/
 }pci_addr_map;
 
 typedef struct _pcie_cb_dma_res_
@@ -207,10 +207,10 @@ typedef struct _pcie_cb_dma_res_
 
 typedef struct _pcie_h2d_res_
 {
-    /*device ringbuf 虚拟地址(数据)*/
-    pci_addr_map ringbuf_data_dma_addr;/*ringbuf buf地址*/
-    pci_addr_map ringbuf_ctrl_dma_addr;/*ringbuf 控制结构体地址*/
-    oal_netbuf_head_stru txq;/*正在发送中的netbuf队列*/
+    /*device ringbuf ????????(????)*/
+    pci_addr_map ringbuf_data_dma_addr;/*ringbuf buf????*/
+    pci_addr_map ringbuf_ctrl_dma_addr;/*ringbuf ??????????????*/
+    oal_netbuf_head_stru txq;/*????????????netbuf????*/
     oal_atomic  tx_ringbuf_sync_cond;
     oal_spin_lock_stru lock;
     oal_pcie_h2d_stat stat;
@@ -218,25 +218,25 @@ typedef struct _pcie_h2d_res_
 
 typedef struct _pcie_d2h_res_
 {
-    /*device ringbuf 虚拟地址(数据)*/
-    pci_addr_map ringbuf_data_dma_addr;/*ringbuf buf地址*/
-    pci_addr_map ringbuf_ctrl_dma_addr;/*ringbuf 控制结构体地址*/
-    oal_netbuf_head_stru rxq;/*正在接收中的netbuf队列*/
+    /*device ringbuf ????????(????)*/
+    pci_addr_map ringbuf_data_dma_addr;/*ringbuf buf????*/
+    pci_addr_map ringbuf_ctrl_dma_addr;/*ringbuf ??????????????*/
+    oal_netbuf_head_stru rxq;/*????????????netbuf????*/
     oal_spin_lock_stru lock;
     oal_pcie_d2h_stat stat;
 }pcie_d2h_res;
 
 typedef struct _pcie_h2d_message_res_
 {
-    pci_addr_map ringbuf_data_dma_addr;/*ringbuf buf地址*/
-    pci_addr_map ringbuf_ctrl_dma_addr;/*ringbuf 控制结构体地址*/
+    pci_addr_map ringbuf_data_dma_addr;/*ringbuf buf????*/
+    pci_addr_map ringbuf_ctrl_dma_addr;/*ringbuf ??????????????*/
     oal_spin_lock_stru lock;
 }pcie_h2d_message_res;
 
 typedef struct _pcie_d2h_message_res_
 {
-    pci_addr_map ringbuf_data_dma_addr;/*ringbuf buf地址*/
-    pci_addr_map ringbuf_ctrl_dma_addr;/*ringbuf 控制结构体地址*/
+    pci_addr_map ringbuf_data_dma_addr;/*ringbuf buf????*/
+    pci_addr_map ringbuf_ctrl_dma_addr;/*ringbuf ??????????????*/
     oal_spin_lock_stru lock;
 }pcie_d2h_message_res;
 
@@ -248,8 +248,8 @@ typedef struct _pcie_message_res_
 
 typedef struct _pcie_comm_rb_ctrl_res_
 {
-    pci_addr_map data_daddr;/*ringbuf buf地址*/
-    pci_addr_map ctrl_daddr;/*ringbuf 控制结构体地址*/
+    pci_addr_map data_daddr;/*ringbuf buf????*/
+    pci_addr_map ctrl_daddr;/*ringbuf ??????????????*/
     oal_spin_lock_stru lock;
 }pcie_comm_rb_ctrl_res;
 
@@ -261,11 +261,11 @@ typedef struct _pcie_comm_ringbuf_res_
 typedef struct _oal_pcie_bar_info_
 {
     oal_uint8   bar_idx;
-    oal_uint64  start;/*PCIe在Host分配到的总物理地址大小*/
+    oal_uint64  start;/*PCIe??Host??????????????????????*/
     oal_uint64  end;
 
-    /*PCIe 发出的总线地址空间， 和start 有可能一样，
-      有可能不一样，这个值是配置到BAR 和iatu 的 SRC 地址*/
+    /*PCIe ???????????????????? ??start ????????????
+      ????????????????????????????BAR ??iatu ?? SRC ????*/
     oal_uint64  bus_start;
 
     oal_uint32  size;
@@ -275,26 +275,26 @@ typedef struct _oal_pcie_bar_info_
 typedef struct _oal_pcie_region_
 {
     oal_void*  vaddr;/*virtual address after remap*/
-    oal_uint64 paddr;/*PCIe在Host侧分配到的物理地址*/
+    oal_uint64 paddr;/*PCIe??Host??????????????????*/
 
-    oal_uint64 bus_addr;/*PCIe RC 发出的总线地址*/
+    oal_uint64 bus_addr;/*PCIe RC ??????????????*/
 
-    /*pci为PCI看到的地址和CPU看到的地址
-      每个SOC 大小和地址可能有差异*/
+    /*pci??PCI????????????CPU??????????
+      ????SOC ????????????????????*/
     /*device pci address*/
     oal_uint64 pci_start;
     oal_uint64 pci_end;
-    /*Device侧CPU看到的地址*/
+    /*Device??CPU??????????*/
     oal_uint64 cpu_start;
     oal_uint64 cpu_end;
     oal_uint32 size;
 
-    oal_uint32 flag;/*I/O type,是否需要刷Cache*/
+    oal_uint32 flag;/*I/O type,??????????Cache*/
 
     oal_resource * res;
     char         *name;/*resource name*/
 
-    oal_pcie_bar_info* bar_info;/*iatu 对应的bar信息*/
+    oal_pcie_bar_info* bar_info;/*iatu ??????bar????*/
 }oal_pcie_region;
 
 /*IATU BAR by PCIe mem package*/
@@ -312,7 +312,7 @@ typedef struct _oal_pcie_regions_
     oal_pcie_bar_info *pst_bars;
     oal_int32          bar_nums;
 
-    oal_int32        inited;/*非0表示初始化过*/
+    oal_int32        inited;/*??0????????????*/
 }oal_pcie_regions;
 
 typedef struct _oal_pcie_res__
@@ -322,18 +322,18 @@ typedef struct _oal_pcie_res__
 
     PCI_WLAN_LINK_STATE         link_state;
 
-    pci_addr_map      dev_share_mem;/*Device share mem 管理结构体地址*/
+    pci_addr_map      dev_share_mem;/*Device share mem ??????????????*/
 
-    /*ringbuf 管理结构体,Host存放一份是因为PCIE访问效率没有DDR直接访问高*/
+    /*ringbuf ??????????,Host??????????????PCIE????????????DDR??????????*/
     pcie_ringbuf_res  st_ringbuf;
-    pci_addr_map      st_ringbuf_map;/*device ringbuf在host侧的地址映射*/
+    pci_addr_map      st_ringbuf_map;/*device ringbuf??host????????????*/
 
     pci_addr_map      st_device_stat_map;
     pcie_stats        st_device_stat;
 
     pci_addr_map      st_device_shared_addr_map[PCIE_SHARED_ADDR_BUTT];
 
-    /*RINGBUFF在Host侧对应的资源*/
+    /*RINGBUFF??Host????????????*/
     pcie_h2d_res      st_tx_res[PCIE_H2D_QTYPE_BUTT];
     pcie_d2h_res      st_rx_res;
     pcie_message_res  st_message_res;/*Message Ringbuf*/
@@ -342,19 +342,19 @@ typedef struct _oal_pcie_res__
 
     oal_pcie_trans_stat stat;
 
-    /*根据Soc设计信息表刷新，不同的产品划分不一样,
-      iATU必须对每个region分别映射*/
-    oal_pcie_regions    regions;/*Device地址划分*/
+    /*????Soc????????????????????????????????????,
+      iATU??????????region????????*/
+    oal_pcie_regions    regions;/*Device????????*/
 
     /*Bar1 for iatu by mem package*/
     oal_pcie_iatu_bar st_iatu_bar;
 
-    /*PCIe Device 寄存器基地址,Host Virtual Address*/
+    /*PCIe Device ????????????,Host Virtual Address*/
     oal_void* pst_pci_dma_ctrl_base;
     oal_void* pst_pci_ctrl_base;
     oal_void* pst_pci_dbi_base;
 
-    /*Rx 补充内存线程 2级线程 高优先级线程实时补充+低优先级补充*/
+    /*Rx ???????????? 2?????? ????????????????????+????????????*/
     struct task_struct * pst_rx_hi_task;
     struct task_struct * pst_rx_normal_task;
 
@@ -556,7 +556,7 @@ OAL_STATIC OAL_INLINE oal_uint64 oal_pcie_read_mem64( oal_ulong va)
 extern oal_void oal_pcie_memport_copy(oal_void* dst, oal_void* src, oal_int32 size);
 extern oal_void oal_pcie_mem32_copy(oal_uint32* dst, oal_uint32* src, oal_int32 size);
 extern oal_int32 pcie_memcopy_type;
-/*dst/src 有一端地址在PCIE EP侧，PCIE按burst方式传输*/
+/*dst/src ????????????PCIE EP????PCIE??burst????????*/
 OAL_STATIC OAL_INLINE oal_void oal_pcie_memcopy(oal_ulong dst, oal_ulong src, oal_uint32 size)
 {
 #if (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION)
@@ -584,7 +584,7 @@ OAL_STATIC OAL_INLINE oal_void oal_pcie_memcopy(oal_ulong dst, oal_ulong src, oa
     {
         oal_uint32 i;
         oal_uint32 value;
-        /*最长4字节对齐访问, Test Code 暂时不考虑 单字节 ，双字节*/
+        /*????4????????????, Test Code ?????????? ?????? ????????*/
         if(WARN((dst & 0x3),"invalid dst address 0x%lx", dst)||
         WARN((src & 0x3),"invalid src address 0x%lx", dst) ||
         WARN((size & 0x3),"invalid size address 0x%lx", dst))
@@ -616,7 +616,7 @@ OAL_STATIC OAL_INLINE oal_void oal_pcie_memcopy(oal_ulong dst, oal_ulong src, oa
 
 OAL_STATIC OAL_INLINE oal_uint32 pcie_ringbuf_len(pcie_ringbuf* pst_ringbuf)
 {
-    /*无符号，已经考虑了翻转*/
+    /*??????????????????????*/
     oal_uint32 len = (pst_ringbuf->wr - pst_ringbuf->rd);
     if(0 == len)
     {
@@ -633,7 +633,7 @@ OAL_STATIC OAL_INLINE oal_uint32 pcie_ringbuf_len(pcie_ringbuf* pst_ringbuf)
 #endif
     if(pst_ringbuf->item_mask)
     {
-        /*item len 如果是2的N次幂，则移位*/
+        /*item len ??????2??N????????????*/
         len = len >> pst_ringbuf->item_mask;
     }
     else
@@ -643,7 +643,7 @@ OAL_STATIC OAL_INLINE oal_uint32 pcie_ringbuf_len(pcie_ringbuf* pst_ringbuf)
     return len;
 }
 
-/*打印*/
+/*????*/
 OAL_STATIC OAL_INLINE oal_void oal_pcie_print_bits(oal_void* data, oal_uint32 size)
 {
 #ifdef CONFIG_PRINTK

@@ -56,7 +56,7 @@
 
 
 /*****************************************************************************
-    协议栈打印打点方式下的.C文件宏定义
+    ??????????????????????.C??????????
 *****************************************************************************/
 #define    THIS_FILE_ID PS_FILE_ID_STK_API_C
 
@@ -76,7 +76,7 @@ VOS_UINT32 SI_STK_SendReqMsg(
 
     ulSendPid = WUEPS_PID_AT;
 
-    /* 调用接口获取Modem ID */
+    /* ????????????Modem ID */
     if(VOS_OK != AT_GetModemIdFromClient(ClientId,&enModemID))
     {
       STK_ERROR_LOG("SI_STK_SendReqMsg: AT_GetModemIdFromClient Return Error");
@@ -200,7 +200,7 @@ VOS_UINT32 SI_STK_SetUpCallConfirm(
     MN_CLIENT_ID_T                      ClientId,
     SI_STK_SETUPCALLCONFIRM_ENUM_UINT32 enAction)
 {
-    /* 参数检查 */
+    /* ???????? */
     if (SI_STK_SETUPCALL_BUTT <= enAction)
     {
         STK_ERROR_LOG("SI_STK_SetUpCallConfirm: The Input Para is Error");

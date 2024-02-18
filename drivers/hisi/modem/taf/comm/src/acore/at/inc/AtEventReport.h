@@ -52,7 +52,7 @@
 
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 #include "vos.h"
 #include "TafApsApi.h"
@@ -74,7 +74,7 @@ extern "C" {
 #pragma pack(4)
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
 #define AT_UNKNOWN_CLCK_CLASS  (0)
 
@@ -121,7 +121,7 @@ extern "C" {
          || (AT_CMD_END_SET             == CmdCurrentOpt))
 
 /*****************************************************************************
-  3 枚举定义
+  3 ????????
 *****************************************************************************/
 
 enum AT_CS_CALL_STATE_ENUM
@@ -152,7 +152,7 @@ enum AT_ECALL_TYPE_ENUM
 typedef VOS_UINT8  AT_ECALL_TYPE_ENUM_U8;
 
 /*****************************************************************************
-  4 全局变量声明
+  4 ????????????
 *****************************************************************************/
 extern VOS_UINT32                       g_ulAtAppDialModeCnf;
 
@@ -160,17 +160,17 @@ extern VOS_UINT32                       g_ulLcStartTime;
 
 
 /*****************************************************************************
-  5 消息头定义
+  5 ??????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  6 消息定义
+  6 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  7 STRUCT定义
+  7 STRUCT????
 *****************************************************************************/
 typedef TAF_VOID (*AT_SMS_RSP_PROC_FUN)(
     TAF_UINT8                           ucIndex,
@@ -181,22 +181,22 @@ typedef TAF_VOID (*AT_QRY_PARA_PROC_FUNC)(TAF_UINT8   ucIndex,
                                           TAF_UINT8   OpId,
                                           TAF_VOID    *pPara);
 
-/*lint -e958 -e959 修改人:l60609;原因:64bit*/
+/*lint -e958 -e959 ??????:l60609;????:64bit*/
 typedef struct
 {
-    VOS_UINT32                          QueryType;                              /* 查询类型 */
-    AT_QRY_PARA_PROC_FUNC               AtQryParaProcFunc;                      /* 查询类型对应的处理函数 */
+    VOS_UINT32                          QueryType;                              /* ???????? */
+    AT_QRY_PARA_PROC_FUNC               AtQryParaProcFunc;                      /* ?????????????????????? */
 }AT_QUERY_TYPE_FUNC_STRU;
-/*lint +e958 +e959 修改人:l60609;原因:64bit*/
+/*lint +e958 +e959 ??????:l60609;????:64bit*/
 
-/* Added by f62575 for V9R1 STK升级, 2013-6-26, begin */
+/* Added by f62575 for V9R1 STK????, 2013-6-26, begin */
 
 typedef struct
 {
     TAF_MSG_ERROR_ENUM_UINT32           enMsgErrorCode;
     AT_RRETURN_CODE_ENUM_UINT32         enAtErrorCode;
 }AT_SMS_ERROR_CODE_MAP_STRU;
-/* Added by f62575 for V9R1 STK升级, 2013-6-26, end */
+/* Added by f62575 for V9R1 STK????, 2013-6-26, end */
 
 
 typedef struct
@@ -226,17 +226,17 @@ typedef struct
 #endif
 
 /*****************************************************************************
-  8 UNION定义
+  8 UNION????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  9 OTHERS定义
+  9 OTHERS????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  10 函数声明
+  10 ????????
 *****************************************************************************/
 extern TAF_UINT32 At_ChangeSTKCmdNo(TAF_UINT32 ulCmdType, TAF_UINT8 *ucCmdNo );
 
@@ -247,11 +247,11 @@ VOS_VOID AT_CsUus1InfoEvtIndProc(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_LogPrintMsgProc
- 功能描述  : LOG打印消息处理
- 输入参数  : pstMsg --- 消息指针
- 输出参数  : 无
- 返 回 值  : VOS_VOID
+ ?? ?? ??  : AT_LogPrintMsgProc
+ ????????  : LOG????????????
+ ????????  : pstMsg --- ????????
+ ????????  : ??
+ ?? ?? ??  : VOS_VOID
 *****************************************************************************/
 VOS_VOID AT_LogPrintMsgProc(TAF_MNTN_LOG_PRINT_STRU *pstMsg);
 
@@ -264,26 +264,26 @@ VOS_VOID At_CsAllCallInfoEvtCnfProc(
 
 
 /*****************************************************************************
- 函 数 名  : AT_MnPsEvtProc
- 功能描述  : PS域事件处理函数
- 输入参数  : pstEvt                     - PS域事件
- 输出参数  : 无
- 返 回 值  : VOS_VOID
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_MnPsEvtProc
+ ????????  : PS??????????????
+ ????????  : pstEvt                     - PS??????
+ ????????  : ??
+ ?? ?? ??  : VOS_VOID
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_VOID AT_RcvTafPsEvt(
     TAF_PS_EVT_STRU                     *pstEvt
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsCallEvtPdpErrorInd
- 功能描述  :
- 输入参数  : pEvtInfo                   - 事件内容(不包含EvtId)
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsCallEvtPdpErrorInd
+ ????????  :
+ ????????  : pEvtInfo                   - ????????(??????EvtId)
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsCallEvtPdpErrorInd(
     VOS_UINT8                           ucIndex,
@@ -291,13 +291,13 @@ VOS_UINT32 AT_RcvTafPsCallEvtPdpErrorInd(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsCallEvtPdpActivateCnf
- 功能描述  :
- 输入参数  : pEvtInfo                   - 事件内容(不包含EvtId)
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsCallEvtPdpActivateCnf
+ ????????  :
+ ????????  : pEvtInfo                   - ????????(??????EvtId)
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsCallEvtPdpActivateCnf(
     VOS_UINT8                           ucIndex,
@@ -305,13 +305,13 @@ VOS_UINT32 AT_RcvTafPsCallEvtPdpActivateCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsCallEvtPdpActivateRej
- 功能描述  :
- 输入参数  : pEvtInfo                   - 事件内容(不包含EvtId)
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsCallEvtPdpActivateRej
+ ????????  :
+ ????????  : pEvtInfo                   - ????????(??????EvtId)
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsCallEvtPdpActivateRej(
     VOS_UINT8                           ucIndex,
@@ -319,13 +319,13 @@ VOS_UINT32 AT_RcvTafPsCallEvtPdpActivateRej(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsCallEvtPdpManageInd
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsCallEvtPdpManageInd
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsCallEvtPdpManageInd(
     VOS_UINT8                           ucIndex,
@@ -333,13 +333,13 @@ VOS_UINT32 AT_RcvTafPsCallEvtPdpManageInd(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsCallEvtPdpActivateInd
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsCallEvtPdpActivateInd
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsCallEvtPdpActivateInd(
     VOS_UINT8                           ucIndex,
@@ -347,13 +347,13 @@ VOS_UINT32 AT_RcvTafPsCallEvtPdpActivateInd(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtPdpModifyCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtPdpModifyCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsCallEvtPdpModifyCnf(
     VOS_UINT8                           ucIndex,
@@ -361,13 +361,13 @@ VOS_UINT32 AT_RcvTafPsCallEvtPdpModifyCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsCallEvtPdpModifyRej
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsCallEvtPdpModifyRej
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsCallEvtPdpModifyRej(
     VOS_UINT8                           ucIndex,
@@ -375,13 +375,13 @@ VOS_UINT32 AT_RcvTafPsCallEvtPdpModifyRej(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsCallEvtPdpModifiedInd
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsCallEvtPdpModifiedInd
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsCallEvtPdpModifiedInd(
     VOS_UINT8                           ucIndex,
@@ -389,13 +389,13 @@ VOS_UINT32 AT_RcvTafPsCallEvtPdpModifiedInd(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsCallEvtPdpDeactivateCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsCallEvtPdpDeactivateCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsCallEvtPdpDeactivateCnf(
     VOS_UINT8                           ucIndex,
@@ -403,13 +403,13 @@ VOS_UINT32 AT_RcvTafPsCallEvtPdpDeactivateCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsCallEvtPdpDeactivatedInd
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsCallEvtPdpDeactivatedInd
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsCallEvtPdpDeactivatedInd(
     VOS_UINT8                           ucIndex,
@@ -418,13 +418,13 @@ VOS_UINT32 AT_RcvTafPsCallEvtPdpDeactivatedInd(
 
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsCallEvtCallOrigCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsCallEvtCallOrigCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsCallEvtCallOrigCnf(
     VOS_UINT8                           ucIndex,
@@ -432,13 +432,13 @@ VOS_UINT32 AT_RcvTafPsCallEvtCallOrigCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsCallEvtCallEndCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsCallEvtCallEndCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsCallEvtCallEndCnf(
     VOS_UINT8                           ucIndex,
@@ -446,13 +446,13 @@ VOS_UINT32 AT_RcvTafPsCallEvtCallEndCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsCallEvtCallEndCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsCallEvtCallEndCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsCallEvtCallModifyCnf(
     VOS_UINT8                           ucIndex,
@@ -460,13 +460,13 @@ VOS_UINT32 AT_RcvTafPsCallEvtCallModifyCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsCallEvtCallAnswerCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsCallEvtCallAnswerCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsCallEvtCallAnswerCnf(
     VOS_UINT8                           ucIndex,
@@ -474,13 +474,13 @@ VOS_UINT32 AT_RcvTafPsCallEvtCallAnswerCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsCallEvtCallHangupCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsCallEvtCallHangupCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsCallEvtCallHangupCnf(
     VOS_UINT8                           ucIndex,
@@ -488,13 +488,13 @@ VOS_UINT32 AT_RcvTafPsCallEvtCallHangupCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtSetPrimPdpContextInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtSetPrimPdpContextInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtSetPrimPdpContextInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -502,13 +502,13 @@ VOS_UINT32 AT_RcvTafPsEvtSetPrimPdpContextInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtGetPrimPdpContextInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtGetPrimPdpContextInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtGetPrimPdpContextInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -517,13 +517,13 @@ VOS_UINT32 AT_RcvTafPsEvtGetPrimPdpContextInfoCnf(
 
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtSetSecPdpContextInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_VOID
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtSetSecPdpContextInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_VOID
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtSetSecPdpContextInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -531,13 +531,13 @@ VOS_UINT32 AT_RcvTafPsEvtSetSecPdpContextInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtGetSecPdpContextInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_VOID
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtGetSecPdpContextInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_VOID
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtGetSecPdpContextInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -545,13 +545,13 @@ VOS_UINT32 AT_RcvTafPsEvtGetSecPdpContextInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvPsSetPdpTftInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_VOID
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvPsSetPdpTftInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_VOID
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtSetTftInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -559,13 +559,13 @@ VOS_UINT32 AT_RcvTafPsEvtSetTftInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtGetTftInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_VOID
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtGetTftInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_VOID
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtGetTftInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -573,13 +573,13 @@ VOS_UINT32 AT_RcvTafPsEvtGetTftInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtSetUmtsQosInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtSetUmtsQosInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtSetUmtsQosInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -587,13 +587,13 @@ VOS_UINT32 AT_RcvTafPsEvtSetUmtsQosInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtGetUmtsQosInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtGetUmtsQosInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtGetUmtsQosInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -601,13 +601,13 @@ VOS_UINT32 AT_RcvTafPsEvtGetUmtsQosInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtSetUmtsQosMinInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtSetUmtsQosMinInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtSetUmtsQosMinInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -615,13 +615,13 @@ VOS_UINT32 AT_RcvTafPsEvtSetUmtsQosMinInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtGetUmtsQosMinInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtGetUmtsQosMinInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtGetUmtsQosMinInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -629,13 +629,13 @@ VOS_UINT32 AT_RcvTafPsEvtGetUmtsQosMinInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtGetDynamicUmtsQosInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtGetDynamicUmtsQosInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtGetDynamicUmtsQosInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -643,13 +643,13 @@ VOS_UINT32 AT_RcvTafPsEvtGetDynamicUmtsQosInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtSetPdpStateCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtSetPdpStateCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtSetPdpStateCnf(
     VOS_UINT8                           ucIndex,
@@ -657,13 +657,13 @@ VOS_UINT32 AT_RcvTafPsEvtSetPdpStateCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtCgactQryCnf
- 功能描述  : Cgact查询命令返回
- 输入参数  : pEvtInfo                   - 事件内容, MN_PS_EVT_STRU去除EvtId
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtCgactQryCnf
+ ????????  : Cgact????????????
+ ????????  : pEvtInfo                   - ????????, MN_PS_EVT_STRU????EvtId
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtCgactQryCnf(
     VOS_UINT8                           ucIndex,
@@ -671,13 +671,13 @@ VOS_UINT32 AT_RcvTafPsEvtCgactQryCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtCgeqnegTestCnf
- 功能描述  : Cgeqneg测试命令返回
- 输入参数  : pEvtInfo - 事件内容, MN_PS_EVT_STRU去除EvtId
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtCgeqnegTestCnf
+ ????????  : Cgeqneg????????????
+ ????????  : pEvtInfo - ????????, MN_PS_EVT_STRU????EvtId
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 
 VOS_UINT32 AT_RcvTafPsEvtCgeqnegTestCnf(
@@ -686,13 +686,13 @@ VOS_UINT32 AT_RcvTafPsEvtCgeqnegTestCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtGetPdpStateCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtGetPdpStateCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtGetPdpStateCnf(
     VOS_UINT8                           ucIndex,
@@ -700,13 +700,13 @@ VOS_UINT32 AT_RcvTafPsEvtGetPdpStateCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtGetPdpIpAddrInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtGetPdpIpAddrInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtGetPdpIpAddrInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -714,13 +714,13 @@ VOS_UINT32 AT_RcvTafPsEvtGetPdpIpAddrInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtGetPdpContextInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtGetPdpContextInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtGetPdpContextInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -728,13 +728,13 @@ VOS_UINT32 AT_RcvTafPsEvtGetPdpContextInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtSetAnsModeInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtSetAnsModeInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtSetAnsModeInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -742,13 +742,13 @@ VOS_UINT32 AT_RcvTafPsEvtSetAnsModeInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtGetAnsModeInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtGetAnsModeInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtGetAnsModeInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -756,13 +756,13 @@ VOS_UINT32 AT_RcvTafPsEvtGetAnsModeInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtGetDynamicPrimPdpContextInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtGetDynamicPrimPdpContextInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtGetDynamicPrimPdpContextInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -770,13 +770,13 @@ VOS_UINT32 AT_RcvTafPsEvtGetDynamicPrimPdpContextInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtGetDynamicSecPdpContextInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtGetDynamicSecPdpContextInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtGetDynamicSecPdpContextInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -784,13 +784,13 @@ VOS_UINT32 AT_RcvTafPsEvtGetDynamicSecPdpContextInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtGetDynamicTftInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtGetDynamicTftInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtGetDynamicTftInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -798,13 +798,13 @@ VOS_UINT32 AT_RcvTafPsEvtGetDynamicTftInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtSetEpsQosInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtSetEpsQosInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtSetEpsQosInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -812,13 +812,13 @@ VOS_UINT32 AT_RcvTafPsEvtSetEpsQosInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtGetEpsQosInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtGetEpsQosInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtGetEpsQosInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -826,13 +826,13 @@ VOS_UINT32 AT_RcvTafPsEvtGetEpsQosInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtGetDynamicEpsQosInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtGetDynamicEpsQosInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtGetDynamicEpsQosInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -840,13 +840,13 @@ VOS_UINT32 AT_RcvTafPsEvtGetDynamicEpsQosInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtGetDsFlowInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtGetDsFlowInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtGetDsFlowInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -854,13 +854,13 @@ VOS_UINT32 AT_RcvTafPsEvtGetDsFlowInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtClearDsFlowInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtClearDsFlowInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtClearDsFlowInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -868,13 +868,13 @@ VOS_UINT32 AT_RcvTafPsEvtClearDsFlowInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtConfigDsFlowRptCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtConfigDsFlowRptCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtConfigDsFlowRptCnf(
     VOS_UINT8                           ucIndex,
@@ -882,13 +882,13 @@ VOS_UINT32 AT_RcvTafPsEvtConfigDsFlowRptCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtReportDsFlowInd
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtReportDsFlowInd
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtReportDsFlowInd(
     VOS_UINT8                           ucIndex,
@@ -921,13 +921,13 @@ VOS_UINT32 AT_RcvTafPsEvtGetDsFlowNvWriteCfgCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtSetPdpDnsInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtSetPdpDnsInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtSetPdpDnsInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -935,13 +935,13 @@ VOS_UINT32 AT_RcvTafPsEvtSetPdpDnsInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtGetPdpDnsInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtGetPdpDnsInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtGetPdpDnsInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -949,13 +949,13 @@ VOS_UINT32 AT_RcvTafPsEvtGetPdpDnsInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtSetAuthDataInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtSetAuthDataInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtSetAuthDataInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -963,13 +963,13 @@ VOS_UINT32 AT_RcvTafPsEvtSetAuthDataInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtGetAuthDataInfoCnf
- 功能描述  :
- 输入参数  : VOS_VOID                           *pEvtInfo
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtGetAuthDataInfoCnf
+ ????????  :
+ ????????  : VOS_VOID                           *pEvtInfo
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtGetAuthDataInfoCnf(
     VOS_UINT8                           ucIndex,
@@ -977,13 +977,13 @@ VOS_UINT32 AT_RcvTafPsEvtGetAuthDataInfoCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtGetGprsActiveTypeCnf
- 功能描述  : ID_EVT_TAF_PS_GET_D_GPRS_ACTIVE_TYPE_CNF事件处理函数, 用于PPP拨号
- 输入参数  : pEvtInfo                   - 事件内容, MN_PS_EVT_STRU去除EvtId
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtGetGprsActiveTypeCnf
+ ????????  : ID_EVT_TAF_PS_GET_D_GPRS_ACTIVE_TYPE_CNF????????????, ????PPP????
+ ????????  : pEvtInfo                   - ????????, MN_PS_EVT_STRU????EvtId
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtGetGprsActiveTypeCnf(
     VOS_UINT8                           ucIndex,
@@ -991,13 +991,13 @@ VOS_UINT32 AT_RcvTafPsEvtGetGprsActiveTypeCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtPppDialOrigCnf
- 功能描述  : ID_EVT_TAF_PS_PPP_DIAL_ORIG_CNF事件处理函数, 用于PPP拨号
- 输入参数  : pEvtInfo                   - 事件内容, MN_PS_EVT_STRU去除EvtId
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtPppDialOrigCnf
+ ????????  : ID_EVT_TAF_PS_PPP_DIAL_ORIG_CNF????????????, ????PPP????
+ ????????  : pEvtInfo                   - ????????, MN_PS_EVT_STRU????EvtId
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtPppDialOrigCnf(
     VOS_UINT8                           ucIndex,
@@ -1025,13 +1025,13 @@ VOS_UINT32 AT_RcvTafPsEvtCgmtuValueChgInd(
 );
 #if (FEATURE_ON == FEATURE_IPV6)
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtReportDsFlowInd
- 功能描述  : ID_EVT_TAF_PS_IPV6_INFO_IND事件处理函数, 用于处理IPV6的RA参数
- 输入参数  : pEvtInfo                   - 事件内容,
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : AT_RcvTafPsEvtReportDsFlowInd
+ ????????  : ID_EVT_TAF_PS_IPV6_INFO_IND????????????, ????????IPV6??RA????
+ ????????  : pEvtInfo                   - ????????,
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
+ ????????  :
+ ????????  :
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtReportRaInfo(
     VOS_UINT8                           ucIndex,
@@ -1160,12 +1160,12 @@ VOS_VOID AT_RcvMnCallChannelInfoInd(VOS_VOID *pEvtInfo);
 /* Deleted by k902809 for Iteration 11, Iteration 11 2015-3-30, end */
 
 /*****************************************************************************
- 函 数 名  : At_RcvXlemaQryCnf
- 功能描述  : 收到CALL紧急呼号码查询的处理
- 输入参数  : MN_AT_IND_EVT_STRU   pstData
+ ?? ?? ??  : At_RcvXlemaQryCnf
+ ????????  : ????CALL????????????????????
+ ????????  : MN_AT_IND_EVT_STRU   pstData
              VOS_UINT16           usLen
- 输出参数  : 无
- 返 回 值  : VOS_VOID
+ ????????  : ??
+ ?? ?? ??  : VOS_VOID
 *****************************************************************************/
 VOS_VOID At_RcvXlemaQryCnf(
     MN_AT_IND_EVT_STRU                 *pstData,
@@ -1173,12 +1173,12 @@ VOS_VOID At_RcvXlemaQryCnf(
 );
 
 /*****************************************************************************
- 函 数 名  : AT_GetSsEventErrorCode
- 功能描述  : 从SS Event中获取AT命令错误码
- 输入参数  : VOS_UINT8                           ucIndex -- AT通道索引号
-             TAF_SS_CALL_INDEPENDENT_EVENT_STRU *pEvent  -- SS Event消息
- 输出参数  : 无
- 返 回 值  : AT_RRETURN_CODE_ENUM_UINT32   -- AT命令错误码
+ ?? ?? ??  : AT_GetSsEventErrorCode
+ ????????  : ??SS Event??????AT??????????
+ ????????  : VOS_UINT8                           ucIndex -- AT??????????
+             TAF_SS_CALL_INDEPENDENT_EVENT_STRU *pEvent  -- SS Event????
+ ????????  : ??
+ ?? ?? ??  : AT_RRETURN_CODE_ENUM_UINT32   -- AT??????????
 *****************************************************************************/
 VOS_UINT32 AT_GetSsEventErrorCode(
     VOS_UINT8                           ucIndex,
@@ -1252,12 +1252,12 @@ VOS_VOID At_RcvTafCallSupsCmdCnf(
 
 
 /*****************************************************************************
- 函 数 名  : AT_RcvTafPsEvtGetCidSdfInfoCnf
- 功能描述  : ID_MSG_TAF_GET_CID_SDF_CNF事件处理函数
- 输入参数  : VOS_UINT8                  ucIndex,
-             VOS_VOID                  *pEvtInfo       - 事件内容, MN_PS_EVT_STRU去除EvtId
- 输出参数  : 无
- 返 回 值  : VOS_UINT32
+ ?? ?? ??  : AT_RcvTafPsEvtGetCidSdfInfoCnf
+ ????????  : ID_MSG_TAF_GET_CID_SDF_CNF????????????
+ ????????  : VOS_UINT8                  ucIndex,
+             VOS_VOID                  *pEvtInfo       - ????????, MN_PS_EVT_STRU????EvtId
+ ????????  : ??
+ ?? ?? ??  : VOS_UINT32
 
 *****************************************************************************/
 VOS_UINT32 AT_RcvTafPsEvtGetCidSdfInfoCnf(

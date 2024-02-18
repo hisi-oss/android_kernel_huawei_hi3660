@@ -59,14 +59,14 @@
 static int udiAdpIccInit(void);
 static int udiAdpAcmInit(void);
 
-/* 各模块特性值定义 */
+/* ???????????????? */
 #define UDI_USB_ACM_CAPA        (UDI_CAPA_BLOCK_READ | UDI_CAPA_BLOCK_WRITE | UDI_CAPA_READ_CB | UDI_CAPA_WRITE_CB)
 #define UDI_USB_NCM_NDIS_CAPA   (UDI_CAPA_READ_CB | UDI_CAPA_BUFFER_LIST)
 #define UDI_USB_NCM_CTRL_CAPA   (UDI_CAPA_READ_CB | UDI_CAPA_CTRL_OPT)
 #define UDI_ICC_CAPA            (UDI_CAPA_BLOCK_READ | UDI_CAPA_BLOCK_WRITE | UDI_CAPA_READ_CB | UDI_CAPA_WRITE_CB)
 #define UDI_UART_CAPA           (UDI_CAPA_BLOCK_READ | UDI_CAPA_BLOCK_WRITE)
 
-/* 各模块初始化函数定义 */
+/* ???????????????????? */
 void* g_udiInitFuncTable[(unsigned int)UDI_DEV_MAX+1] =
 {
 
@@ -116,7 +116,7 @@ static int udiAdpAcmInit(void)
 	UDI_DRV_INTEFACE_TABLE* pDrvInterface;
 	unsigned int u32Cnt;
 
-	/* 构造回调函数指针列表 */
+	/* ???????????????????? */
 	pDrvInterface = kmalloc(sizeof(UDI_DRV_INTEFACE_TABLE), GFP_KERNEL);
 	if (NULL == pDrvInterface)
 	{
@@ -125,14 +125,14 @@ static int udiAdpAcmInit(void)
 	}
 	memset((void*)pDrvInterface, 0, sizeof(UDI_DRV_INTEFACE_TABLE));
 
-	/* 只设置需要实现的几个接口 */
+	/* ???????????????????????? */
 	pDrvInterface->udi_open_cb = udiAcmAdpOpen;
 	pDrvInterface->udi_close_cb = (UDI_CLOSE_CB_T)bsp_acm_close;
 	pDrvInterface->udi_write_cb = (UDI_WRITE_CB_T)bsp_acm_write;
 	pDrvInterface->udi_read_cb = (UDI_READ_CB_T)bsp_acm_read;
 	pDrvInterface->udi_ioctl_cb = (UDI_IOCTL_CB_T)bsp_acm_ioctl;
 
-	/*  ACM 都使用同一套驱动函数指针 */
+	/*  ACM ???????????????????????? */
 	for (u32Cnt = UDI_USB_ACM_CTRL; u32Cnt < UDI_USB_ACM_MAX; u32Cnt++)
 	{
 		(void)BSP_UDI_SetCapability((UDI_DEVICE_ID_E)UDI_BUILD_DEV_ID(UDI_DEV_USB_ACM, u32Cnt), UDI_USB_ACM_CAPA);
@@ -144,7 +144,7 @@ static int udiAdpAcmInit(void)
 /*lint -e429 +esym(429,*)*/
 
 /**************************************************************************
-  ICC 适配实现
+  ICC ????????
 **************************************************************************/
 static UDI_HANDLE sg_chnHandleTbl[ICC_CHAN_NUM_MAX] = {0};
 
@@ -161,7 +161,7 @@ static int udiIccAdpOpen(UDI_OPEN_PARAM_S *param, UDI_HANDLE handle)
 	u32ChanId = UDI_GET_DEV_TYPE(param->devid);
 	(void)BSP_UDI_SetPrivate(param->devid, (void*)u32ChanId);
 
-	/* 从param 中解析出各个参数 */
+	/* ??param ???????????????? */
 	pstOpenParam = (ICC_CHAN_ATTR_S *)param->pPrivate;
 	sg_chnHandleTbl[u32ChanId] = handle;     /*lint !e732*/
 
@@ -174,7 +174,7 @@ static int udiAdpIccInit(void)
 	UDI_DRV_INTEFACE_TABLE* pDrvInterface;
 	unsigned int u32Cnt;
 
-	/* 构造回调函数指针列表 */
+	/* ???????????????????? */
 	pDrvInterface = kmalloc(sizeof(UDI_DRV_INTEFACE_TABLE), GFP_KERNEL);
 	if (NULL == pDrvInterface)
 	{
@@ -183,14 +183,14 @@ static int udiAdpIccInit(void)
 	}
 	memset((void*)pDrvInterface, 0, sizeof(UDI_DRV_INTEFACE_TABLE));
 
-	/* 只设置需要实现的几个接口 */
+	/* ???????????????????????? */
 	pDrvInterface->udi_open_cb = (UDI_OPEN_CB_T)udiIccAdpOpen;
 	pDrvInterface->udi_close_cb = (UDI_CLOSE_CB_T)BSP_ICC_Close;
 	pDrvInterface->udi_write_cb = (UDI_WRITE_CB_T)BSP_ICC_Write;
 	pDrvInterface->udi_read_cb = (UDI_READ_CB_T)BSP_ICC_Read;
 	pDrvInterface->udi_ioctl_cb = (UDI_IOCTL_CB_T)BSP_ICC_Ioctl;
 
-	/* 几个 ICC 都使用同一套驱动函数指针 */
+	/* ???? ICC ???????????????????????? */
 	for (u32Cnt = 0; u32Cnt < ICC_CHAN_NUM_MAX; u32Cnt++)
 	{
 		(void)BSP_UDI_SetCapability((UDI_DEVICE_ID_E)UDI_BUILD_DEV_ID(UDI_DEV_ICC, u32Cnt), UDI_ICC_CAPA);

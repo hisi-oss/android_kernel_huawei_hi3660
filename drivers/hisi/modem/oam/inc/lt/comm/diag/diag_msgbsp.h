@@ -119,8 +119,8 @@ enum
 
 typedef struct
 {
-    VOS_UINT32  ulAuid;                     /* 原AUID*/
-    VOS_UINT32  ulSn;                       /* HSO分发，插件命令管理*/
+    VOS_UINT32  ulAuid;                     /* ??AUID*/
+    VOS_UINT32  ulSn;                       /* HSO??????????????????*/
     VOS_UINT32  ulRet;
 }DIAG_BSP_COMM_CNF_STRU;
 
@@ -134,17 +134,17 @@ typedef struct
 }DIAG_BSP_PROC_FUN_STRU;
 
 
-/* 核间透传通信结构体 */
+/* ?????????????????? */
 typedef struct
 {
-     VOS_MSG_HEADER                     /*VOS头 */
+     VOS_MSG_HEADER                     /*VOS?? */
      VOS_UINT32                         ulMsgId;
      DIAG_FRAME_INFO_STRU               stInfo;
 }DIAG_BSP_MSG_A_TRANS_C_STRU;
 
 
 /*****************************************************************************
-描述 : 读NV
+???? : ??NV
 ID   : DIAG_CMD_NV_RD
 REQ : DIAG_CMD_NV_QRY_REQ_STRU
 CNF : DIAG_CMD_NV_QRY_CNF_STRU
@@ -153,23 +153,23 @@ typedef struct
 {
     VOS_UINT32 ulModemid;      /* 0-modem0;1-modem1;2-modem2 */
     VOS_UINT32 ulCount;
-    VOS_UINT32 ulNVId[0];      /* 待获取的NV项Id */
+    VOS_UINT32 ulNVId[0];      /* ????????NV??Id */
 } DIAG_CMD_NV_QRY_REQ_STRU;
 
 typedef struct
 {
-    VOS_UINT32 ulAuid;         /* 原AUID*/
-    VOS_UINT32 ulSn;           /* HSO分发，插件命令管理*/
-    VOS_UINT32 ulRc;           /* 表明执行结果是否成功, 0表示成功，其他的为错误码*/
+    VOS_UINT32 ulAuid;         /* ??AUID*/
+    VOS_UINT32 ulSn;           /* HSO??????????????????*/
+    VOS_UINT32 ulRc;           /* ????????????????????, 0????????????????????????*/
     VOS_UINT32 ulModemid;      /* 0-modem0;1-modem1;2-modem2 */
     VOS_UINT32 ulCount;
-    VOS_UINT32 ulNVId;         /* 获取的NV项Id*/
-    VOS_UINT32 ulDataSize;     /* 获取的NV项数据的大小*/
-    VOS_UINT8  aucData[0];     /* 获取的NV项数据*/
+    VOS_UINT32 ulNVId;         /* ??????NV??Id*/
+    VOS_UINT32 ulDataSize;     /* ??????NV????????????*/
+    VOS_UINT8  aucData[0];     /* ??????NV??????*/
 } DIAG_CMD_NV_QRY_CNF_STRU;
 
 /*****************************************************************************
-描述 : 写NV
+???? : ??NV
 ID   : DIAG_CMD_NV_WR
 REQ : DIAG_CMD_NV_WR_REQ_STRU
 CNF : DIAG_CMD_NV_WR_CNF_STRU
@@ -178,21 +178,21 @@ typedef struct
 {
     VOS_UINT32 ulModemid;      /* 0-modem0;1-modem1;2-modem2 */
     VOS_UINT32 ulCount;
-    VOS_UINT32 ulNVId;         /* 需要写入的NV ID*/
-    VOS_UINT32 ulDataSize;     /* 需要写入的NV项数据的大小*/
-    VOS_UINT8  aucData[0];     /* 数据缓冲区*/
+    VOS_UINT32 ulNVId;         /* ??????????NV ID*/
+    VOS_UINT32 ulDataSize;     /* ??????????NV????????????*/
+    VOS_UINT8  aucData[0];     /* ??????????*/
 } DIAG_CMD_NV_WR_REQ_STRU;
 
 typedef struct
 {
-    VOS_UINT32 ulAuid;         /* 原AUID*/
-    VOS_UINT32 ulSn;           /* HSO分发，插件命令管理*/
+    VOS_UINT32 ulAuid;         /* ??AUID*/
+    VOS_UINT32 ulSn;           /* HSO??????????????????*/
     VOS_UINT32 ulModemid;      /* 0-modem0;1-modem1;2-modem2 */
-    VOS_UINT32 ulRc;           /* 表明执行结果是否成功,0表示成功，其他的为错误码*/
+    VOS_UINT32 ulRc;           /* ????????????????????,0????????????????????????*/
 } DIAG_CMD_NV_WR_CNF_STRU;
 
 /*****************************************************************************
-描述 : getNVidlist
+???? : getNVidlist
 ID   : DIAG_CMD_NV_LIST
 REQ : DIAG_CMD_NV_LIST_REQ_STRU
 CNF : DIAG_CMD_NV_LIST_CNF_STRU
@@ -212,7 +212,7 @@ typedef struct
 } DIAG_CMD_NV_LIST_CNF_STRU;
 
 /*****************************************************************************
-描述 : getNVResumlist
+???? : getNVResumlist
 ID   : DIAG_CMD_NV_RESUM_LIST
 REQ : DIAG_CMD_NV_RESUM_LIST_CNF_STRU
 CNF : DIAG_CMD_NV_RESUM_LIST_CNF_STRU
@@ -227,7 +227,7 @@ typedef struct
 } DIAG_CMD_NV_RESUM_LIST_CNF_STRU;
 
 /*****************************************************************************
-描述 : NV鉴权
+???? : NV????
 ID   : DIAG_CMD_NV_AUTH
 REQ : DIAG_CMD_NV_AUTH_REQ_STRU
 CNF : DIAG_CMD_NV_AUTH_CNF_STRU
@@ -246,10 +246,10 @@ typedef struct
 } DIAG_CMD_NV_AUTH_CNF_STRU;
 
 
-/* C核给A核发送NV鉴权结果 */
+/* C????A??????NV???????? */
 typedef struct
 {
-     VOS_MSG_HEADER                     /*VOS头 */
+     VOS_MSG_HEADER                     /*VOS?? */
      VOS_UINT32                         ulMsgId;
      VOS_UINT32                         ulLevel;
 }DIAG_BSP_NV_AUTH_STRU;
@@ -257,7 +257,7 @@ typedef struct
 #define    DIAG_HDS_CMD_MAX    50
 typedef struct
 {
-     VOS_MSG_HEADER                     /*VOS头 */
+     VOS_MSG_HEADER                     /*VOS?? */
      VOS_UINT32                         ulMsgId;
      VOS_UINT32                         ulCmdNum;
      VOS_UINT32                         ulCmdList[50];

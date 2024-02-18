@@ -48,7 +48,7 @@
 
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 #ifndef __SI_APP_STK_H__
 #define __SI_APP_STK_H__
@@ -69,12 +69,12 @@ extern "C"{
 #endif
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
 
 #define SI_STK_DATA_MAX_LEN             (256)
 
-/* 定义地址最大长度 */
+/* ???????????????? */
 #define SI_STK_ADDR_MAX_LEN             (42)
 
 #define STK_PRINT_MAX_LEN               (1024)
@@ -114,7 +114,7 @@ extern "C"{
 #define SI_STK_INVALID_TA_VALUE         (0xFF)
 
 /*******************************************************************************
-  3 枚举定义
+  3 ????????
 *******************************************************************************/
 enum SI_STK_MBBCMDTYPE_ENUM
 {
@@ -131,9 +131,9 @@ enum SI_STK_MBBCMDTYPE_ENUM
     SI_AT_CMD_SEND_USSD                     = 10,
     SI_AT_CMD_LAUNCH_BROWSER                = 11,
     SI_AT_CMD_SETUP_IDLE_MODE_TEXT          = 12,
-    SI_AT_CMD_LANGUAGENOTIFICATION          = 20,   /*暂时定为20，待APP开发该SAT功能后确认接口*/
-    SI_AT_CMD_SETFRAMES                     = 21,   /*暂时定为21，待APP开发该SAT功能后确认接口*/
-    SI_AT_CMD_GETFRAMESSTATUS               = 22,   /*暂时定为22，待APP开发该SAT功能后确认接口*/
+    SI_AT_CMD_LANGUAGENOTIFICATION          = 20,   /*????????20????APP??????SAT??????????????*/
+    SI_AT_CMD_SETFRAMES                     = 21,   /*????????21????APP??????SAT??????????????*/
+    SI_AT_CMD_GETFRAMESSTATUS               = 22,   /*????????22????APP??????SAT??????????????*/
     SI_AT_CMD_END_SESSION                   = 99,
     SI_STK_MBBCMDTYPE_BUTT
 };
@@ -151,18 +151,18 @@ enum SI_STK_DEVICE_ENUM
 
 enum
 {
-    SI_STK_ERROR_EVENT                      = 0,    /*处理错误统一回复*/
-    SI_STK_CMD_IND_EVENT                    = 1,    /*主动命令广播上报*/
-    SI_STK_TERMINAL_RSP_EVENT               = 2,    /*主动命令执行结果下发回复*/
-    SI_STK_ENVELPOE_RSP_EVENT               = 3,    /*主菜单选择回复*/
-    SI_STK_PROFILESET_RSP_EVENT             = 4,    /*Terminal Profile设置下发，保留未用*/
-    SI_STK_GET_CMD_RSP_EVENT                = 5,    /*获取当前主动命令回复*/
-    SI_STK_CMD_QUERY_RSP_EVENT              = 6,    /*查询当前主动命令回复*/
-    SI_STK_CMD_TIMEOUT_IND_EVENT            = 7,    /*主动命令执行超时回复*/
-    SI_STK_CMD_END_EVENT                    = 8,    /*后续无主动命令执行上报*/
-    SI_STK_CMD_IMSICHG_EVENT                = 9,    /*沃达丰定制流程*/
-    SI_STK_CC_RESULT_IND_EVENT              = 10,   /*Call Control结果上报*/
-    SI_STK_SMSCTRL_RESULT_IND_EVENT         = 11,   /*Sms Control结果上报*/
+    SI_STK_ERROR_EVENT                      = 0,    /*????????????????*/
+    SI_STK_CMD_IND_EVENT                    = 1,    /*????????????????*/
+    SI_STK_TERMINAL_RSP_EVENT               = 2,    /*????????????????????????*/
+    SI_STK_ENVELPOE_RSP_EVENT               = 3,    /*??????????????*/
+    SI_STK_PROFILESET_RSP_EVENT             = 4,    /*Terminal Profile??????????????????*/
+    SI_STK_GET_CMD_RSP_EVENT                = 5,    /*????????????????????*/
+    SI_STK_CMD_QUERY_RSP_EVENT              = 6,    /*????????????????????*/
+    SI_STK_CMD_TIMEOUT_IND_EVENT            = 7,    /*????????????????????*/
+    SI_STK_CMD_END_EVENT                    = 8,    /*??????????????????????*/
+    SI_STK_CMD_IMSICHG_EVENT                = 9,    /*??????????????*/
+    SI_STK_CC_RESULT_IND_EVENT              = 10,   /*Call Control????????*/
+    SI_STK_SMSCTRL_RESULT_IND_EVENT         = 11,   /*Sms Control????????*/
 
     SI_STK_CALLBACK_BUTT
 };
@@ -345,8 +345,8 @@ typedef VOS_UINT8 SI_STK_ADD_INFO_FOR_SS_USSD_SMS_PROBLEM_ENUM8;
 
 enum SI_STK_SETUPCALLCONFIRM_ENUM
 {
-    SI_STK_SETUPCALL_REJECT         = 0x00,   /* 用户拒绝发起呼叫 */
-    SI_STK_SETUPCALL_ALLOW          = 0x01,   /* 用户同意发起呼叫 */
+    SI_STK_SETUPCALL_REJECT         = 0x00,   /* ???????????????? */
+    SI_STK_SETUPCALL_ALLOW          = 0x01,   /* ???????????????? */
     SI_STK_SETUPCALL_BUTT
 };
 typedef VOS_UINT32 SI_STK_SETUPCALLCONFIRM_ENUM_UINT32;
@@ -368,7 +368,7 @@ enum
 };
 typedef VOS_UINT32   SI_STK_CTRL_RESULT;
 
-/* ME 状态 */
+/* ME ???? */
 enum
 {
     SI_STK_ME_STATUS_IDLE                                           = 0,
@@ -379,10 +379,10 @@ typedef VOS_UINT8   SI_STK_ME_STATUS;
 
 enum SI_STK_CTRL_RESULT_TYPE_ENUM
 {
-    SI_STK_MO_CALL_CTRL         = 0x00,   /* mo call control类型 */
-    SI_STK_SS_CALL_CTRL         = 0x01,   /* ss call control类型 */
-    SI_STK_USSD_CALL_CTRL       = 0x02,   /* ussd call control类型 */
-    SI_STK_SMS_CTRL             = 0x03,   /* sms call control类型 */
+    SI_STK_MO_CALL_CTRL         = 0x00,   /* mo call control???? */
+    SI_STK_SS_CALL_CTRL         = 0x01,   /* ss call control???? */
+    SI_STK_USSD_CALL_CTRL       = 0x02,   /* ussd call control???? */
+    SI_STK_SMS_CTRL             = 0x03,   /* sms call control???? */
     SI_STK_CTRL_RESULT_BUTT
 };
 typedef VOS_UINT32 SI_STK_CTRL_RESULT_TYPE_ENUM_UINT32;
@@ -450,8 +450,8 @@ enum SI_STK_ACCESS_TECH_ENUM
 typedef VOS_UINT8 SI_STK_ACCESS_TECH_ENUM_UINT8;
 
 /*****************************************************************************
- 枚举名    : SI_STK_NMR_TYPE_ENUM_UINT32
- 结构说明  : 网络测量类型枚举
+ ??????    : SI_STK_NMR_TYPE_ENUM_UINT32
+ ????????  : ????????????????
 *****************************************************************************/
 enum SI_STK_NMR_TYPE_ENUM
 {
@@ -471,7 +471,7 @@ typedef VOS_UINT8 SI_STK_SEARCH_MODE_ENUM_UINT8;
 
 enum SI_STK_ENVELOPE_SENDERPARA_ENUM
 {
-    /*0~FFFF是NAS内部使用，用于区分TAF的相关模块*/
+    /*0~FFFF??NAS??????????????????TAF??????????*/
     SI_STK_AT_ENVELOPE                  = 0x10000,
     SI_STK_XSMS_ENVELOPE                = 0x20000,
     SI_STK_ENVELOPE_BUTT
@@ -485,24 +485,24 @@ enum STK_NAS_OP_ENUM
 
 
 /*****************************************************************************
-结构名    : SI_STK_MSG_ENUM_UINT32
-结构说明  : STK模块处理的消息ID定义
+??????    : SI_STK_MSG_ENUM_UINT32
+????????  : STK??????????????ID????
 *****************************************************************************/
 
 enum SI_STK_MSG_ENUM
 {
     SI_STK_NULL                     = 0x00,
-    SI_STK_GETMAINMNUE              = 0x01,     /*获取主菜单请求， AT发送*/
-    SI_STK_GETCOMMAND               = 0x02,     /*获取主动命令请求， AT发送*/
-    SI_STK_QUERYCOMMAND             = 0x03,     /*查询主动命令请求，AT发送*/
-    SI_STK_TRDOWN                   = 0x04,     /*主动命令执行结果下发，AT发送*/
-    SI_STK_SIMPLEDOWN               = 0x05,     /*透明数据下发，AT发送*/
-    SI_STK_ENVELOPEDOWN             = 0x06,     /*透明信封命令下发，AT发送*/
-    SI_STK_PROFILESET               = 0x07,     /*设置Terimal  Profile的内容，AT发送，保留*/
-    SI_STK_IMSICHG                  = 0x08,     /*更改IMSI定制*/
-    SI_STK_SETUPCALL_CONFIRM        = 0x09,     /*用户确认是否发起呼叫 AT发送*/
-    SI_STK_MENUSELECTION            = 0x0A,     /*主菜单选中下发，AT发送*/
-    SI_STK_ENVELOPEDWON_REQ         = 0x0B,     /*信封命令下发，目前只有TAF发送的CC MO*/
+    SI_STK_GETMAINMNUE              = 0x01,     /*???????????????? AT????*/
+    SI_STK_GETCOMMAND               = 0x02,     /*?????????????????? AT????*/
+    SI_STK_QUERYCOMMAND             = 0x03,     /*??????????????????AT????*/
+    SI_STK_TRDOWN                   = 0x04,     /*??????????????????????AT????*/
+    SI_STK_SIMPLEDOWN               = 0x05,     /*??????????????AT????*/
+    SI_STK_ENVELOPEDOWN             = 0x06,     /*??????????????????AT????*/
+    SI_STK_PROFILESET               = 0x07,     /*????Terimal  Profile????????AT??????????*/
+    SI_STK_IMSICHG                  = 0x08,     /*????IMSI????*/
+    SI_STK_SETUPCALL_CONFIRM        = 0x09,     /*???????????????????? AT????*/
+    SI_STK_MENUSELECTION            = 0x0A,     /*????????????????AT????*/
+    SI_STK_ENVELOPEDWON_REQ         = 0x0B,     /*??????????????????????TAF??????CC MO*/
     SI_STK_VIA_TRDOWN               = 0x0C,
     SI_STK_MSG_BUTT
 };
@@ -521,7 +521,7 @@ enum SI_STK_CNFMSG_ENUM
 typedef VOS_UINT32 SI_STK_CNFMSG_ENUM_UINT32;
 
 /*****************************************************************************
-  4 单一数据结构定义
+  4 ????????????????
 *****************************************************************************/
 typedef struct
 {
@@ -1122,7 +1122,7 @@ typedef struct
     VOS_UINT8                   *pucTauInfo;
 }SI_STK_TAU_INFO_STRU;
 /*****************************************************************************
-  6 STK命令数据结构定义
+  6 STK????????????????
 *****************************************************************************/
 typedef struct
 {
@@ -1646,7 +1646,7 @@ typedef struct
 
 
 /*****************************************************************************
-  6 STK命令回复数据结构定义
+  6 STK????????????????????
 *****************************************************************************/
 typedef struct
 {
@@ -1799,7 +1799,7 @@ typedef struct
 }SI_STK_GET_FRAMES_STATUS_RSP_STRU;
 
 /*****************************************************************************
-  7 事件下发数据结构定义
+  7 ????????????????????
 *****************************************************************************/
 typedef struct
 {
@@ -1961,7 +1961,7 @@ typedef struct
 }SI_STK_NETWORK_REJ_EVENT_STRU;
 
 /*****************************************************************************
-  8 Envelope命令数据容器定义
+  8 Envelope????????????????
 *****************************************************************************/
 
 typedef struct
@@ -2048,11 +2048,11 @@ typedef struct
 }SI_STK_MMS_NOITFY_STRU;
 
 /*****************************************************************************
-  9 Envelope命令回复数据容器定义
+  9 Envelope????????????????????
 *****************************************************************************/
 /*****************************************************************************
-结构名    : SI_STK_CTRL_DATA_STRU
-结构说明  : CALL CONTROL结果数据结构
+??????    : SI_STK_CTRL_DATA_STRU
+????????  : CALL CONTROL????????????
 *****************************************************************************/
 typedef struct
 {
@@ -2063,8 +2063,8 @@ typedef struct
 }SI_STK_CTRL_DATA_STRU;
 
 /*****************************************************************************
-结构名    : SI_STK_ADDR_INFO_STRU
-结构说明  : CALL CONTROL地址信息结构
+??????    : SI_STK_ADDR_INFO_STRU
+????????  : CALL CONTROL????????????
 *****************************************************************************/
 typedef struct
 {
@@ -2074,8 +2074,8 @@ typedef struct
 }SI_STK_ADDR_INFO_STRU;
 
 /*****************************************************************************
-结构名    : SI_STK_MOSMSCTRL_INFO_STRU
-结构说明  : MO SMS CONTROL结果上报信息结构
+??????    : SI_STK_MOSMSCTRL_INFO_STRU
+????????  : MO SMS CONTROL????????????????
 *****************************************************************************/
 typedef struct
 {
@@ -2084,8 +2084,8 @@ typedef struct
 }SI_STK_MOSMSCTRL_INFO_STRU;
 
 /*****************************************************************************
-结构名    : SI_STK_ALPHAID_INFO_STRU
-结构说明  : ALPHAID结构
+??????    : SI_STK_ALPHAID_INFO_STRU
+????????  : ALPHAID????
 *****************************************************************************/
 typedef struct
 {
@@ -2094,8 +2094,8 @@ typedef struct
 }SI_STK_ALPHAID_INFO_STRU;
 
 /*****************************************************************************
-结构名    : SI_STK_CC_IND_STRU
-结构说明  : MO SMS CONTRL 或 MO CALL CONTROL结果上报结构
+??????    : SI_STK_CC_IND_STRU
+????????  : MO SMS CONTRL ?? MO CALL CONTROL????????????
 *****************************************************************************/
 typedef struct
 {
@@ -2112,8 +2112,8 @@ typedef struct
 }SI_STK_CC_IND_STRU;
 
 /*****************************************************************************
-结构名    : SI_STK_SMS_PP_DL_DATA_INFO_STRU
-结构说明  : 虚拟卡SMS PP DOWNLOAD数据上报结构
+??????    : SI_STK_SMS_PP_DL_DATA_INFO_STRU
+????????  : ??????SMS PP DOWNLOAD????????????
 *****************************************************************************/
 typedef struct
 {
@@ -2165,7 +2165,7 @@ typedef struct
 }SI_STK_ENVELOPE_RSP_STRU;
 
 /*****************************************************************************
-  10 STK命令数据容器定义
+  10 STK????????????????
 *****************************************************************************/
 
 typedef struct
@@ -2214,7 +2214,7 @@ typedef struct
 }SI_STK_DATA_INFO_STRU;
 
 /*****************************************************************************
-  11 STK命令回复数据容器定义
+  11 STK????????????????????
 *****************************************************************************/
 
 typedef struct
@@ -2245,7 +2245,7 @@ typedef struct
 }SI_STK_TERMINAL_RSP_STRU;
 
 /*****************************************************************************
-  12 Envelope&Event数据结构声明
+  12 Envelope&Event????????????
 *****************************************************************************/
 
 typedef struct
@@ -2294,7 +2294,7 @@ typedef struct
 }SI_STK_ENVELOPE_STRU;
 
 /*****************************************************************************
-  13 回调函数数据结构声明
+  13 ????????????????????
 *****************************************************************************/
 
 typedef struct
@@ -2325,7 +2325,7 @@ typedef struct
 
 
 /*****************************************************************************
-  14 外部函数和结构声明
+  14 ??????????????????
 *****************************************************************************/
 typedef TAF_VOID (*pfSTKCmdATPrint)(TAF_UINT16* pusDataLen, SI_STK_DATA_INFO_STRU * pEvent);
 
@@ -2361,8 +2361,8 @@ typedef struct
 }STK_AS_TA_INFO_CNF_STRU;
 
 /*****************************************************************************
- 结构名    : STK_LAS_CELL_FREQ_INFO_STRU
- 结构说明  : LRRC给STK模块的小区频率信息结构
+ ??????    : STK_LAS_CELL_FREQ_INFO_STRU
+ ????????  : LRRC??STK??????????????????????
 *****************************************************************************/
 typedef struct
 {
@@ -2372,8 +2372,8 @@ typedef struct
 }STK_LAS_CELL_FREQ_INFO_STRU;
 
 /*****************************************************************************
- 结构名    : STK_LAS_NMR_INFO_STRU
- 结构说明  : LRRC给STK模块的测量回复
+ ??????    : STK_LAS_NMR_INFO_STRU
+ ????????  : LRRC??STK??????????????
 *****************************************************************************/
 typedef struct
 {
@@ -2410,13 +2410,13 @@ typedef struct
 typedef struct
 {
     VOS_MSG_HEADER
-    VOS_UINT32                          ulMsgName;      /* 消息名 */
-    VOS_UINT16                          usOplmnListLen; /* Oplmn的列表长度*/
-    VOS_UINT8                           aucOplmnList[6];/* Oplmn的列表内容*/
+    VOS_UINT32                          ulMsgName;      /* ?????? */
+    VOS_UINT16                          usOplmnListLen; /* Oplmn??????????*/
+    VOS_UINT8                           aucOplmnList[6];/* Oplmn??????????*/
 }STK_NAS_STEERING_OF_ROAMING_STRU;
 
 /*****************************************************************************
-  6 New STRUCT定义
+  6 New STRUCT????
 *****************************************************************************/
 typedef struct
 {
@@ -2543,7 +2543,7 @@ typedef struct
 }SI_STK_ENVELOPEDWON_CNF_STRU;
 
 /*****************************************************************************
-  15 函数声明
+  15 ????????
 *****************************************************************************/
 extern VOS_UINT32 SI_STK_EnvelopeData_Code(SI_STK_ENVELOPE_STRU *pstENStru,VOS_UINT32 *pulDataLen,VOS_UINT8 *pucData,VOS_UINT32 *pulDataOffset);
 
@@ -2592,7 +2592,7 @@ extern VOS_VOID SI_STK_CCResultInd(SI_STK_ENVELOPE_RSP_STRU *pstRspData);
 
 extern VOS_VOID SI_STK_SMSCtrlResultInd(SI_STK_ENVELOPE_RSP_STRU *pstRspData);
 
-/*单编译接口声明*/
+/*??????????????*/
 
 extern VOS_UINT32 SI_STK_EnvelopeRsp_Decode_Instance(
     MODEM_ID_ENUM_UINT16                enModemID,

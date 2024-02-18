@@ -100,7 +100,7 @@ struct avs_ctrl_s{
 };
 struct avs_ctrl_s g_modem_avs_ctrl = {0,0,NULL,NULL};
 /*
- * hpm_sel = 0 ·µ»Øhpm, =1·µ»Øhpmx
+ * hpm_sel = 0 ????hpm, =1????hpmx
  */
 s32 modem_avs_get_hpm(s32 hpm_sel)
 {

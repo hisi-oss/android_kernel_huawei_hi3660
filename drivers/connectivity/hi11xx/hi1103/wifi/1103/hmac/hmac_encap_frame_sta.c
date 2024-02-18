@@ -9,7 +9,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "wlan_spec.h"
 #include "wlan_mib.h"
@@ -31,12 +31,12 @@ extern "C" {
 #define THIS_FILE_ID OAM_FILE_ID_HMAC_ENCAP_FRAME_STA_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 
@@ -151,7 +151,7 @@ oal_void hmac_assoc_set_siso_mode(mac_vap_stru *pst_mac_vap, oal_uint8 *puc_req_
     hmac_user_stru         *pst_hmac_user;
     mac_frame_ht_cap_stru  *pst_ht_capinfo;
 
-    /* 如果是满足只支持siso入网的黑名单条件，则以SISO方式入网 */
+    /* ????????????????siso??????????????????????SISO???????? */
     pst_hmac_user = mac_res_get_hmac_user_etc(pst_mac_vap->us_assoc_vap_id);
     if (OAL_PTR_NULL == pst_hmac_user)
     {
@@ -211,12 +211,12 @@ oal_uint32 hmac_mgmt_encap_asoc_req_sta_etc(hmac_vap_stru *pst_hmac_sta, oal_uin
         return us_asoc_rsq_len;
     }
 
-    /* 保存起始地址，方便计算长度*/
+    /* ??????????????????????????*/
     puc_req_frame_origin = puc_req_frame;
 
     pst_mac_vap = &(pst_hmac_sta->st_vap_base_info);
 
-    /* 获取device */
+    /* ????device */
     pst_mac_device = mac_res_get_dev_etc(pst_mac_vap->uc_device_id);
     if (OAL_PTR_NULL == pst_mac_device)
     {
@@ -235,7 +235,7 @@ oal_uint32 hmac_mgmt_encap_asoc_req_sta_etc(hmac_vap_stru *pst_hmac_sta, oal_uin
 #endif
 
 #ifdef _PRE_WLAN_FEATURE_M2S
-    /* VHT中的字段需要根据AP的bf能力设置，故在此提前设置MAC_USER的bf能力*/
+    /* VHT????????????????AP??bf????????????????????????MAC_USER??bf????*/
     pst_mac_user = mac_res_get_mac_user_etc(pst_mac_vap->us_assoc_vap_id);
 #if (_PRE_PRODUCT_ID != _PRE_PRODUCT_ID_HI1151) || !defined(WIN32)
     if (OAL_PTR_NULL == pst_mac_user)
@@ -262,8 +262,8 @@ oal_uint32 hmac_mgmt_encap_asoc_req_sta_etc(hmac_vap_stru *pst_hmac_sta, oal_uin
     /*                Set the fields in the frame header                     */
     /*************************************************************************/
 
-    /* 设置 Frame Control field */
-    /* 判断是否为reassoc操作 */
+    /* ???? Frame Control field */
+    /* ??????????reassoc???? */
     if (OAL_PTR_NULL != puc_curr_bssid)
     {
         mac_hdr_set_frame_control(puc_req_frame, WLAN_PROTOCOL_VERSION| WLAN_FC0_TYPE_MGT | WLAN_FC0_SUBTYPE_REASSOC_REQ);
@@ -272,13 +272,13 @@ oal_uint32 hmac_mgmt_encap_asoc_req_sta_etc(hmac_vap_stru *pst_hmac_sta, oal_uin
     {
         mac_hdr_set_frame_control(puc_req_frame, WLAN_PROTOCOL_VERSION| WLAN_FC0_TYPE_MGT | WLAN_FC0_SUBTYPE_ASSOC_REQ);
     }
-    /* 设置 DA address1: AP MAC地址 (BSSID)*/
+    /* ???? DA address1: AP MAC???? (BSSID)*/
     oal_set_mac_addr(puc_req_frame + WLAN_HDR_ADDR1_OFFSET, pst_hmac_sta->st_vap_base_info.auc_bssid);
 
-    /* 设置 SA address2: dot11MACAddress */
+    /* ???? SA address2: dot11MACAddress */
     oal_set_mac_addr(puc_req_frame + WLAN_HDR_ADDR2_OFFSET, mac_mib_get_StationID(&pst_hmac_sta->st_vap_base_info));
 
-    /* 设置 DA address3: AP MAC地址 (BSSID)*/
+    /* ???? DA address3: AP MAC???? (BSSID)*/
     oal_set_mac_addr(puc_req_frame + WLAN_HDR_ADDR3_OFFSET, pst_hmac_sta->st_vap_base_info.auc_bssid);
 
     puc_req_frame += MAC_80211_FRAME_LEN;
@@ -317,67 +317,67 @@ oal_uint32 hmac_mgmt_encap_asoc_req_sta_etc(hmac_vap_stru *pst_hmac_sta, oal_uin
     mac_set_cap_info_sta_etc((oal_void *)pst_mac_vap, puc_req_frame);
     puc_req_frame += MAC_CAP_INFO_LEN;
 
-    /* 设置 Listen Interval IE */
+    /* ???? Listen Interval IE */
     mac_set_listen_interval_ie_etc((oal_void *)pst_mac_vap, puc_req_frame, &uc_ie_len);
     puc_req_frame += uc_ie_len;
 
-    /* Ressoc组帧设置Current AP address */
+    /* Ressoc????????Current AP address */
     if (OAL_PTR_NULL != puc_curr_bssid)
     {
         oal_set_mac_addr(puc_req_frame, puc_curr_bssid);
         puc_req_frame += OAL_MAC_ADDR_LEN;
     }
-    /* 设置 SSID IE */
+    /* ???? SSID IE */
     mac_set_ssid_ie_etc((oal_void *)pst_mac_vap, puc_req_frame, &uc_ie_len, WLAN_FC0_SUBTYPE_ASSOC_REQ);
     puc_req_frame += uc_ie_len;
 #if  defined(_PRE_WIFI_DMT ) || (_PRE_OS_VERSION_WIN32 == _PRE_OS_VERSION)
-    /* 设置 Supported Rates IE */
+    /* ???? Supported Rates IE */
     mac_set_supported_rates_ie_etc((oal_void *)pst_mac_vap, puc_req_frame, &uc_ie_len);
     puc_req_frame += uc_ie_len;
 
-    /* 设置 Extended Supported Rates IE */
+    /* ???? Extended Supported Rates IE */
     mac_set_exsup_rates_ie_etc((oal_void *)pst_mac_vap, puc_req_frame, &uc_ie_len);
     puc_req_frame += uc_ie_len;
 
 #else
-    /* 设置 Supported Rates IE */
+    /* ???? Supported Rates IE */
     hmac_set_supported_rates_ie_asoc_req_etc(pst_hmac_sta, puc_req_frame, &uc_ie_len);
     puc_req_frame += uc_ie_len;
 
-    /* 设置 Extended Supported Rates IE */
+    /* ???? Extended Supported Rates IE */
     hmac_set_exsup_rates_ie_asoc_req_etc(pst_hmac_sta, puc_req_frame, &uc_ie_len);
     puc_req_frame += uc_ie_len;
 #endif
-    /* 设置 Power Capability IE */
+    /* ???? Power Capability IE */
     mac_set_power_cap_ie_etc((oal_void *)pst_mac_vap, puc_req_frame, &uc_ie_len);
     puc_req_frame += uc_ie_len;
 
-    /* 设置 Supported channel IE */
+    /* ???? Supported channel IE */
     mac_set_supported_channel_ie_etc((oal_void *)pst_mac_vap, puc_req_frame, &uc_ie_len);
     puc_req_frame += uc_ie_len;
 
 #if LINUX_VERSION_CODE <= KERNEL_VERSION(2,6,34)
     if (OAL_TRUE == pst_mac_vap->st_cap_flag.bit_wpa2)
     {
-        /* 设置 RSN Capability IE */
+        /* ???? RSN Capability IE */
         mac_set_rsn_ie_etc((oal_void *)pst_mac_vap, OAL_PTR_NULL, puc_req_frame, &uc_ie_len);
         puc_req_frame += uc_ie_len;
     }
     else if (OAL_TRUE == pst_mac_vap->st_cap_flag.bit_wpa)
     {
-        /* 设置 WPA Capability IE */
+        /* ???? WPA Capability IE */
         mac_set_wpa_ie_etc((oal_void *)pst_mac_vap, puc_req_frame, &uc_ie_len);
         puc_req_frame += uc_ie_len;
     }
 #endif
-    /* 填充WMM element */
+    /* ????WMM element */
     if (OAL_TRUE == pst_mac_vap->st_cap_flag.bit_wmm_cap)
     {
         mac_set_wmm_ie_sta_etc((oal_void *)pst_mac_vap, puc_req_frame, &uc_ie_len);
         puc_req_frame += uc_ie_len;
     }
 
-    /* 设置 HT Capability IE  */
+    /* ???? HT Capability IE  */
     mac_set_ht_capabilities_ie_etc((oal_void *)pst_mac_vap, puc_req_frame, &uc_ie_len);
 #ifdef _PRE_WLAN_FEATURE_TXBF_HT
     if ((OAL_TRUE == pst_mac_vap->bit_ap_11ntxbf)
@@ -420,14 +420,14 @@ oal_uint32 hmac_mgmt_encap_asoc_req_sta_etc(hmac_vap_stru *pst_hmac_sta, oal_uin
     }
 #endif //_PRE_WLAN_FEATURE_11K
 
-    /* 设置 Extended Capability IE */
+    /* ???? Extended Capability IE */
     if (hmac_sta_check_need_set_ext_cap_ie(pst_mac_vap) == OAL_TRUE)
     {
         mac_set_ext_capabilities_ie_etc((oal_void *)pst_mac_vap, puc_req_frame, &uc_ie_len);
         puc_req_frame += uc_ie_len;
     }
 
-    /* 设置 VHT Capability IE */
+    /* ???? VHT Capability IE */
     if((OAL_PTR_NULL != pst_scaned_bss) && (OAL_TRUE == pst_scaned_bss->st_bss_dscr_info.en_vht_capable)
        && (OAL_FALSE== pst_scaned_bss->st_bss_dscr_info.en_vendor_vht_capable))
     {
@@ -464,7 +464,7 @@ oal_uint32 hmac_mgmt_encap_asoc_req_sta_etc(hmac_vap_stru *pst_hmac_sta, oal_uin
     puc_req_frame += uc_ie_len;
 #endif
 
-    /* 填充 BCM Vendor VHT IE,解决与BCM AP的私有协议对通问题 */
+    /* ???? BCM Vendor VHT IE,??????BCM AP?????????????????? */
     if ((OAL_PTR_NULL != pst_scaned_bss) && (OAL_TRUE == pst_scaned_bss->st_bss_dscr_info.en_vendor_vht_capable))
     {
         mac_set_vendor_vht_ie(pst_mac_vap, puc_req_frame, &uc_ie_len);
@@ -482,7 +482,7 @@ oal_uint32 hmac_mgmt_encap_asoc_req_sta_etc(hmac_vap_stru *pst_hmac_sta, oal_uin
 
         if (OAL_FALSE == pst_hmac_sta->bit_reassoc_flag
 #if defined(_PRE_WLAN_FEATURE_11K) || defined(_PRE_WLAN_FEATURE_11R) || defined(_PRE_WLAN_FEATURE_11K_EXTERN)
-            || 1 == pst_hmac_sta->bit_voe_11r_auth) /*voe 11r 认证实验室环境必须携带两个mdie否则无法正常漫游*/
+            || 1 == pst_hmac_sta->bit_voe_11r_auth) /*voe 11r ??????????????????????????mdie????????????????*/
 #else
         )
 #endif
@@ -491,7 +491,7 @@ oal_uint32 hmac_mgmt_encap_asoc_req_sta_etc(hmac_vap_stru *pst_hmac_sta, oal_uin
             puc_req_frame += uc_ie_len;
         }
         else
-        {/* Reasoc中包含RIC-Req */
+        {/* Reasoc??????RIC-Req */
             for (en_aci = WLAN_WME_AC_BE; en_aci < WLAN_WME_AC_BUTT; en_aci++)
             {
                 if (mac_mib_get_QAPEDCATableMandatory(&pst_hmac_sta->st_vap_base_info, en_aci))
@@ -536,11 +536,11 @@ oal_uint32 hmac_mgmt_encap_asoc_req_sta_etc(hmac_vap_stru *pst_hmac_sta, oal_uin
 
 #endif
 
-    /* 填充P2P/WPS IE 信息 */
+    /* ????P2P/WPS IE ???? */
     mac_add_app_ie_etc(pst_mac_vap, puc_req_frame, &us_app_ie_len, en_app_ie_type);
     puc_req_frame += us_app_ie_len;
 
-    /* multi-sta特性下新增4地址ie */
+    /* multi-sta??????????4????ie */
 #ifdef _PRE_WLAN_FEATURE_VIRTUAL_MULTI_STA
     mac_set_vender_4addr_ie((oal_void *)pst_mac_vap, puc_req_frame, &uc_ie_len);
     puc_req_frame += uc_ie_len;
@@ -627,15 +627,15 @@ oal_uint16  hmac_mgmt_encap_auth_req_etc(hmac_vap_stru *pst_hmac_sta, oal_uint8 
         puc_mgmt_frame[MAC_80211_FRAME_LEN + 1] = ((us_auth_type & 0xFF00) >> 8);
     }
 
-    /* 设置 Authentication Transaction Sequence Number 为 1 */
+    /* ???? Authentication Transaction Sequence Number ?? 1 */
     puc_mgmt_frame[MAC_80211_FRAME_LEN + 2] = 0x01;
     puc_mgmt_frame[MAC_80211_FRAME_LEN + 3] = 0x00;
 
-    /* 设置 Status Code 为0. 这个包的这个字段没用 . */
+    /* ???? Status Code ??0. ???????????????????? . */
     puc_mgmt_frame[MAC_80211_FRAME_LEN + 4] = 0x00;
     puc_mgmt_frame[MAC_80211_FRAME_LEN + 5] = 0x00;
 
-    /* 设置 认证帧的长度 */
+    /* ???? ???????????? */
     us_auth_req_len = MAC_80211_FRAME_LEN + MAC_AUTH_ALG_LEN + MAC_AUTH_TRANS_SEQ_NUM_LEN +
                    MAC_STATUS_CODE_LEN;
 
@@ -702,7 +702,7 @@ oal_uint16  hmac_mgmt_encap_auth_req_seq3_etc(hmac_vap_stru *pst_sta, oal_uint8 
 
     mac_hdr_set_frame_control(puc_mgmt_frame, WLAN_FC0_SUBTYPE_AUTH);
 
-    /* 将帧保护字段置1 */
+    /* ??????????????1 */
     mac_set_wep(puc_mgmt_frame, 1);
 
     oal_set_mac_addr(((mac_ieee80211_frame_stru *)puc_mgmt_frame)->auc_address1, pst_sta->st_vap_base_info.auc_bssid);
@@ -725,11 +725,11 @@ oal_uint16  hmac_mgmt_encap_auth_req_seq3_etc(hmac_vap_stru *pst_sta, oal_uint8 
     /*                                                                       */
     /*************************************************************************/
 
-    /* 获取认证帧payload */
+    /* ??????????payload */
     us_index = MAC_80211_FRAME_LEN;
     puc_data = (oal_uint8 *)(puc_mgmt_frame + us_index);
 
-    /* 设置 认证帧的长度 */
+    /* ???? ???????????? */
     us_auth_req_len = MAC_80211_FRAME_LEN + MAC_AUTH_ALG_LEN + MAC_AUTH_TRANS_SEQ_NUM_LEN +
                       MAC_STATUS_CODE_LEN;
 

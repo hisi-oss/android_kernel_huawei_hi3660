@@ -11,7 +11,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 /*lint -e322*/
 #include <linux/compiler.h>
@@ -39,9 +39,9 @@ extern "C" {
 /*lint +e322*/
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
-/* 32字节序大小端转换 */
+/* 32???????????????? */
 #define OAL_SWAP_BYTEORDER_32(_val)        \
         ((((_val) & 0x000000FF) << 24) +     \
         (((_val) & 0x0000FF00) << 8) +       \
@@ -50,14 +50,14 @@ extern "C" {
 
 #define OAL_CONST                                   const
 
-/* 获取CORE ID */
+/* ????CORE ID */
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
 #define OAL_GET_CORE_ID()    (0)
-#else                                   /* 非offload架构 */
+#else                                   /* ??offload???? */
 #ifdef _PRE_WLAN_FEATURE_SMP_SUPPORT
 #define OAL_GET_CORE_ID()    smp_processor_id()
 #else
-#define OAL_GET_CORE_ID()    (0)        /* 主要给E5平台使用 */
+#define OAL_GET_CORE_ID()    (0)        /* ??????E5???????? */
 #endif
 #endif
 
@@ -71,17 +71,17 @@ typedef struct file              oal_file_stru;
 #define OAL_FUNC_NAME           __func__
 #define OAL_RET_ADDR            ((oal_ulong)__builtin_return_address(0))
 
-/* 将几个字符串按照指定格式合成一个字符串 */
+/* ?????????????????????????????????????? */
 #define OAL_SPRINTF             snprintf
 #define OAL_SSCANF              sscanf
 
-/* 内存读屏障 */
+/* ?????????? */
 #define OAL_RMB()               rmb()
 
-/* 内存写屏障 */
+/* ?????????? */
 #define OAL_WMB()               wmb()
 
-/* 内存屏障 */
+/* ???????? */
 #define OAL_MB()                mb()
 
 #define OAL_OFFSET_OF          offsetof
@@ -106,7 +106,7 @@ typedef struct file              oal_file_stru;
 
 #define OAL_VSPRINTF            vsnprintf
 
-/* E5平台描述符用，注意，host侧平台不同，MEM_BASE_ADDR需要修改 */
+/* E5????????????????????host????????????MEM_BASE_ADDR???????? */
 #if(_PRE_TARGET_PRODUCT_TYPE_E5 == _PRE_CONFIG_TARGET_PRODUCT)
 extern oal_uint32 gul_dscr_fstvirt_addr;
 extern oal_uint32 gul_dscr_fstphy_addr;
@@ -124,9 +124,9 @@ extern oal_uint32 gul_dscr_fstvirt_addr;
 extern oal_uint32 gul_dscr_fstphy_addr;
 
 #ifdef _PRE_CPE_711_PLATFORM
-#define  OAL_PLAT_MEM_BASE_ADDR  0x15E00000   /* DDR起始地址0xA0000000 - V200芯片物理地址偏移0x40000000 */
+#define  OAL_PLAT_MEM_BASE_ADDR  0x15E00000   /* DDR????????0xA0000000 - V200????????????????0x40000000 */
 #elif defined _PRE_CPE_722_PLATFORM
-#define  OAL_PLAT_MEM_BASE_ADDR  0x60000000   /* DDR起始地址0x55E00000 - V200芯片物理地址偏移0x40000000 */
+#define  OAL_PLAT_MEM_BASE_ADDR  0x60000000   /* DDR????????0x55E00000 - V200????????????????0x40000000 */
 #endif
 
 #define OAL_DSCR_VIRT_TO_PHY(_virt_addr)    (((oal_uint)(_virt_addr) - (gul_dscr_fstvirt_addr)) + (gul_dscr_fstphy_addr) - OAL_PLAT_MEM_BASE_ADDR)
@@ -144,7 +144,7 @@ extern oal_uint32 gul_dscr_fstphy_addr;
 #define OAL_DSCR_PHY_TO_VIRT(_phy_addr)     phys_to_virt((_phy_addr) + OAL_PLAT_MEM_BASE_ADDR)
 #endif
 
-/* 物理地址和虚拟地址之间的转换,作为netbuf用 */
+/* ????????????????????????????,????netbuf?? */
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,38))
 #define OAL_VIRT_TO_PHY_ADDR(_virt_addr)            (virt_to_phys((const volatile void *)(_virt_addr)) - OAL_PLAT_MEM_BASE_ADDR)
 #else
@@ -179,7 +179,7 @@ typedef struct kobject              oal_kobject;
 
 /* hi1102-cb for sys interface  51/02 */
 
-/*检查size1不大于size2, 其中size1/2可以使用sizeof(a)*/
+/*????size1??????size2, ????size1/2????????sizeof(a)*/
 #define     SIZE_OF_SIZE1_NOT_LARGER_THAN_SIZE2_BY_NAME(name ,size1, size2) \
 static inline char size_of_##name##_size1_not_larger_than_size2(void) \
 { \
@@ -187,7 +187,7 @@ static inline char size_of_##name##_size1_not_larger_than_size2(void) \
     return __dummy1[0]; \
 }
 
-/*检查结构体的大小是否不大于特定值*/
+/*????????????????????????????????*/
 #define    SIZE_OF_TYPE_NOT_LARGER_THAN_DETECT(type, size) \
 static inline char size_of_##type##_not_larger_than_##size(void) \
 { \
@@ -208,41 +208,41 @@ static inline char size_of_##type##_not_larger_than_##size(void) \
 
 
 /*****************************************************************************
-  3 枚举定义
+  3 ????????
 *****************************************************************************/
 
 /*****************************************************************************
-  4 全局变量声明
-*****************************************************************************/
-
-
-/*****************************************************************************
-  5 消息头定义
+  4 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  6 消息定义
+  5 ??????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  7 STRUCT定义
+  6 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  8 UNION定义
+  7 STRUCT????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  9 OTHERS定义
+  8 UNION????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  10 函数声明
+  9 OTHERS????
+*****************************************************************************/
+
+
+/*****************************************************************************
+  10 ????????
 *****************************************************************************/
 
 /* #define random_ether_addr(addr) eth_random_addr(addr) */
@@ -551,7 +551,7 @@ OAL_STATIC OAL_INLINE unsigned long long oal_simple_strtoull(const oal_int8 *cp,
 
 OAL_STATIC OAL_INLINE oal_int  oal_strtol(OAL_CONST oal_int8 *pc_nptr, oal_int8 **ppc_endptr, oal_int32 l_base)
 {
-    /* 跳过空格 */
+    /* ???????? */
     while (' ' == (*pc_nptr))
     {
         pc_nptr++;
@@ -590,7 +590,7 @@ OAL_STATIC OAL_INLINE oal_uint32  oal_kallsyms_lookup_name(OAL_CONST oal_uint8 *
 OAL_STATIC OAL_INLINE oal_void oal_dump_stack(oal_void)
 {
 #if(_PRE_CONFIG_TARGET_PRODUCT != _PRE_TARGET_PRODUCT_TYPE_WS835DMB)
-    //835产品调用dump_stack会触发系统重启
+    //835????????dump_stack??????????????
     dump_stack();
 #endif
 }
@@ -605,7 +605,7 @@ OAL_STATIC OAL_INLINE oal_void  oal_msleep(oal_uint32 ul_usecs)
 OAL_STATIC OAL_INLINE oal_void  oal_usleep_range(oal_ulong min_us, oal_ulong max_us)
 {
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 44))
-    usleep_range(min_us, max_us);/*微妙级睡眠，可能让出CPU*/
+    usleep_range(min_us, max_us);/*????????????????????CPU*/
 #else
     OAL_REFERENCE(max_us);
     oal_udelay(min_us);
