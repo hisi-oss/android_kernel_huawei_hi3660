@@ -113,7 +113,7 @@ static void timer_int_clear(struct timer_device *device)
 }
 static s32 timer_disable(struct timer_device *device)
 {
-	/*最后1bit写0,关闭之前先清中断*/
+	/*????1bit??0,????????????????*/
 	u32 ret = 0;
 	ret = readl(TIMER_INTSTATUS(device->base_addr));
 	if (ret )
@@ -135,13 +135,13 @@ static s32 timer_config_init(struct timer_device *device)
 	u32 readValue = 0;
 	(void)timer_disable(device);
 	timer_set_value(device,device->timer_ctrl.timeout);
-	if (TIMER_ONCE_COUNT == device->timer_ctrl.mode||TIMER_FREERUN_COUNT == device->timer_ctrl.mode)/*自由模式,第2bit写0*/
+	if (TIMER_ONCE_COUNT == device->timer_ctrl.mode||TIMER_FREERUN_COUNT == device->timer_ctrl.mode)/*????????,??2bit??0*/
 	{
 		readValue = readl(TIMER_CONTROLREG(device->base_addr));
 		readValue &= (~0x2);
 		writel(readValue,TIMER_CONTROLREG(device->base_addr));
 	}
-	else/*周期模式,第2bit写1*/
+	else/*????????,??2bit??1*/
 	{
 		readValue = readl(TIMER_CONTROLREG(device->base_addr));
 		readValue |= 0x2;

@@ -46,10 +46,10 @@ PATCH_GLOBALS_STUR              g_st_global[ENUM_INFO_TOTAL];
 RINGBUF_STRU                    g_stringbuf;
 uint8                          *g_pucDataBuf_t;
 
-/* xmodem 索引 */
+/* xmodem ???? */
 uint8                           g_index = 1;
 
-/* log 打印级别 */
+/* log ???????? */
 int32                           g_debuglevel_patch = 2;
 
 int32                           g_usemalloc = 0;
@@ -57,7 +57,7 @@ int32                           g_usemalloc = 0;
 
 unsigned short CRC_table[256] =
 {
-/* CRC 余式表 */
+/* CRC ?????? */
     0X0000, 0X1021, 0X2042, 0X3063, 0X4084, 0X50A5, 0X60C6, 0X70E7,
     0X8108, 0X9129, 0XA14A, 0XB16B, 0XC18C, 0XD1AD, 0XE1CE, 0XF1EF,
     0X1231, 0X0210, 0X3273, 0X2252, 0X52B5, 0X4294, 0X72F7, 0X62D6,
@@ -129,7 +129,7 @@ int32 pm_uart_set_baudrate(int64 baudrate)
 
 /*****************************************************************************
  Prototype    : patch_Crc16
- Description  : CRC校验
+ Description  : CRC????
  Input        : int8 *ptr
                 uint16 l_count
  Output       :
@@ -280,11 +280,11 @@ int32 patch_xmodem_send(uint8 *data, int32 len, uint8 expect)
         st_patch_pkt.Head       = SOH;
         st_patch_pkt.PacketNum  = g_index;
 
-        /* 构包 */
+        /* ???? */
 //        OS_MEM_CPY(pst_patch_pkt->packet_data, flag, l_sendlen);
 //        flag = flag + l_sendlen;
 
-        /* 数据长度不够128个 */
+        /* ????????????128?? */
         if (XMODE_DATA_LEN > l_sendlen)
         {
             PS_PRINT_DBG("data_len  %d\n", l_sendlen);
@@ -729,8 +729,8 @@ int32 recv_expect_result_t(uint8 expect, int32 type)
             return SUCC;
         }
         /*
-         * NAK: 文件传输时重发标识
-         * MSG_FORM_DRV_N:其他重发标识
+         * NAK: ??????????????????
+         * MSG_FORM_DRV_N:????????????
          */
         else if ((MSG_FORM_DRV_N == auc_buf[0]) || (NAK == auc_buf[0])
               || (MSG_FORM_DRV_C == auc_buf[0]))
@@ -740,7 +740,7 @@ int32 recv_expect_result_t(uint8 expect, int32 type)
         }
         else
         {
-            /* 对于错误的结果，有十次的机会， */
+            /* ?????????????????????????????? */
             if (ENUM_INFO_SDIO == type)
             {
                 PATCH_SEND_N_SDIO;
@@ -895,8 +895,8 @@ int32 patch_send_char(int8 num, int32 wait, int32 type)
     for(i = 0; i < HOST_DEV_TIMEOUT; i++)
     {
         /*
-         * sdio 接口发送时，会四字节对齐，发送四个
-         * uart 接口发送时，只发送一个
+         * sdio ??????????????????????????????????
+         * uart ??????????????????????
          */
         l_ret = send_msg_t(auc_buf, 1, type);
         if (0 > l_ret)
@@ -1017,7 +1017,7 @@ int32 patch_down_file(uint8 *puc_file, int32 type)
         l_len = 128;
 #endif
         PS_PRINT_DBG("kernel_read len[%d] [%d]\n", l_len, l_count);
-        /* 正常读取文件 */
+        /* ???????????? */
         if ((0 < l_len) && (l_len <= READ_PATCH_BUF_LEN))
         {
             l_ret = patch_send_file(g_pucDataBuf_t, l_len, ACK, type);
@@ -1028,7 +1028,7 @@ int32 patch_down_file(uint8 *puc_file, int32 type)
                 break;
             }
         }
-        /* 文件已经读取完成*/
+        /* ????????????????*/
         else if(0 == l_len)
         {
             if (ENUM_INFO_SDIO == type)
@@ -1045,7 +1045,7 @@ int32 patch_down_file(uint8 *puc_file, int32 type)
             PS_PRINT_DBG("read file[%d] [%d] send EOT\n", l_count, l_len);
             break;
         }
-        /* 读取文件出错 */
+        /* ???????????? */
         else
         {
             if (ENUM_INFO_SDIO == type)
@@ -1345,7 +1345,7 @@ int32 patch_number_type(uint8 *Key, uint8 *Value, int32 type)
             PS_PRINT_ERR("send %s,%s fail \n", Key, Value);
             return l_ret;
         }
-        /* G 是device 相应操作完成标志 */
+        /* G ??device ???????????????? */
         PS_PRINT_DBG("recv g form device\n");
         l_ret = patch_wait_g_form_dev(type);
         if (0 > l_ret)
@@ -1357,7 +1357,7 @@ int32 patch_number_type(uint8 *Key, uint8 *Value, int32 type)
     else if (!OS_STR_CMP((int8 *)Key, BRT_CMD_KEYWORD))
     {
 
-        /* 修改波特率 */
+        /* ?????????? */
         l_ret = patch_int_para_send(Key, Value, type);
         if (0 > l_ret)
         {
@@ -1370,7 +1370,7 @@ int32 patch_number_type(uint8 *Key, uint8 *Value, int32 type)
 
         num = patch_string_to_num(Value);
 
-        /* 增加调用修改波特率函数 */
+        /* ?????????????????????? */
 
         l_ret = pm_uart_set_baudrate(num);
         if (0 > l_ret)
@@ -1381,7 +1381,7 @@ int32 patch_number_type(uint8 *Key, uint8 *Value, int32 type)
         ringbuf_flush();
         msleep(10);
         PATCH_SEND_N_UART;
-        /* G 是device 相应操作完成标志 */
+        /* G ??device ???????????????? */
         PS_PRINT_DBG("recv g form device\n");
         l_ret = patch_wait_g_retry_form_dev(type);
 
@@ -1518,8 +1518,8 @@ int32 patch_file_type(uint8 *Key, uint8 *Value, int32 type)
     PS_PRINT_DBG("Key = %s, Value = %s\n", Key, Value);
 
     /*
-     * 根据关键字的最后一个字符，确定发送地址之后，device的返回值
-     * 所以配置文件的关键字不能随意修改
+     * ????????????????????????????????????????????device????????
+     * ????????????????????????????????
      */
     OS_MEM_SET(data, 0, DATA_BUF_LEN);
     data_len = OS_STR_LEN(Key);
@@ -1528,7 +1528,7 @@ int32 patch_file_type(uint8 *Key, uint8 *Value, int32 type)
     data[data_len] = COMPART_KEYWORD;
     data_len++;
 
-    /*兼容wifibootloader配置设置*/
+    /*????wifibootloader????????*/
     tmp1 = Value;
     while( ' ' == *tmp1)
     {
@@ -1577,11 +1577,11 @@ int32 patch_file_type(uint8 *Key, uint8 *Value, int32 type)
         return -EFAIL;
     }
 
-    /* 删除头部的空格 */
+    /* ?????????????? */
     l_len = OS_STR_LEN((int8 *)tmp);
     for(i = i + 1; i < l_len; i++)
     {
-        if (('/' == tmp[i]) || ('.' == tmp[i]))  /* 兼容绝对路径和相对路径 */
+        if (('/' == tmp[i]) || ('.' == tmp[i]))  /* ?????????????????????? */
         {
             break;
         }
@@ -1597,7 +1597,7 @@ int32 patch_file_type(uint8 *Key, uint8 *Value, int32 type)
 
         return l_ret;
     }
-    /* G 是 DEVICE 完成相应操作标志 */
+    /* G ?? DEVICE ???????????????? */
     l_ret = patch_wait_g_form_dev(type);
 
     return l_ret;
@@ -1708,7 +1708,7 @@ uint8 *patch_del_space(uint8 *string, int32 *len)
         return NULL;
     }
 
-    /* 删除尾部的空格 */
+    /* ?????????????? */
     for(i = *len - 1; i >= 0; i--)
     {
         if (COMPART_KEYWORD != string[i])
@@ -1717,21 +1717,21 @@ uint8 *patch_del_space(uint8 *string, int32 *len)
         }
         string[i] = '\0';
     }
-    /* 出错 */
+    /* ???? */
     if (i < 0)
     {
         PS_PRINT_ERR(" string is Space bar\n");
         return NULL;
     }
-    /* 在for语句中减去1，这里加上1 */
+    /* ??for??????????1??????????1 */
     *len = i + 1;
 
-    /* 删除头部的空格 */
+    /* ?????????????? */
     for(i = 0; i < *len; i++)
     {
         if (' ' != string[i])
         {
-            /* 减去空格的个数 */
+            /* ?????????????? */
             *len = *len - i;
             return &string[i];
         }
@@ -1826,17 +1826,17 @@ int32 patch_parse_cmd(uint8 *buf, uint8 *cmd_name, uint8 *cmd_para)
         return ERROR_TYPE_CMD;
     }
 
-    /* 注释行 */
+    /* ?????? */
     if ('@' == buf[0])
     {
         return ERROR_TYPE_CMD;
     }
 
-    /* 错误行，或者退出命令行 */
+    /* ?????????????????????? */
     link = OS_STR_CHR((int8 *)begin, '=');
     if (NULL == link)
     {
-        /* 退出命令行 */
+        /* ?????????? */
         if (NULL != OS_STR_STR((int8 *)buf, QUIT_CMD_KEYWORD))
         {
             return QUIT_TYPE_CMD;
@@ -1845,7 +1845,7 @@ int32 patch_parse_cmd(uint8 *buf, uint8 *cmd_name, uint8 *cmd_para)
         return ERROR_TYPE_CMD;
     }
 
-    /* 错误行，没有结束符 */
+    /* ?????????????????? */
     end = OS_STR_CHR(link, ';');
     if (NULL == end)
     {
@@ -1854,14 +1854,14 @@ int32 patch_parse_cmd(uint8 *buf, uint8 *cmd_name, uint8 *cmd_para)
 
     l_cmdlen = link - begin;
 
-    /* 删除关键字的两边空格 */
+    /* ???????????????????? */
     handle = patch_del_space((uint8 *)begin, &l_cmdlen);
     if (NULL == handle)
     {
         return ERROR_TYPE_CMD;
     }
 
-    /* 判断命令类型 */
+    /* ???????????? */
     if (!OS_MEM_CMP(handle, (uint8 *)FILE_TYPE_CMD_KEY, OS_STR_LEN((uint8 *)FILE_TYPE_CMD_KEY)))
     {
         handle = OS_STR_STR(handle, (uint8 *)FILE_TYPE_CMD_KEY) + OS_STR_LEN(FILE_TYPE_CMD_KEY);
@@ -1880,7 +1880,7 @@ int32 patch_parse_cmd(uint8 *buf, uint8 *cmd_name, uint8 *cmd_para)
     }
     OS_MEM_CPY(cmd_name, handle, l_cmdlen);
 
-    /* 删除值两边空格 */
+    /* ?????????????? */
     begin = link + 1;
     l_paralen = end - begin;
 
@@ -1947,12 +1947,12 @@ void *patch_malloc_cmd_buf(uint8 *buf, int32 type)
     uint8          *flag;
     uint8          *p_buf;
 
-    /* 统计命令个数 */
+    /* ???????????? */
     flag    = buf;
     g_st_global[type].l_count = 0;
     while(NULL != flag)
     {
-        /* 一个正确的命令行结束符为 ; */
+        /* ???????????????????????? ; */
         flag = OS_STR_CHR(flag, CMD_LINE_SIGN);
         if (NULL == flag)
         {
@@ -1963,8 +1963,8 @@ void *patch_malloc_cmd_buf(uint8 *buf, int32 type)
     }
     PS_PRINT_DBG("l_count = %d\n", g_st_global[type].l_count);
 
-    /* 申请存储命令空间 */
-    /* 比实际多分一个命令空间。这样的防止配置文件最后一个命令不是退出命令 */
+    /* ???????????????? */
+    /* ?????????????????????????????????????????????????????????????????? */
     l_len = (g_st_global[type].l_count + 1) * sizeof(struct cmd_type_st);
     p_buf = OS_KMALLOC_GFP(l_len);
     if (NULL == p_buf)
@@ -2012,17 +2012,17 @@ int32 patch_parse_cfg(uint8 *buf, int32 buf_len, int32 type)
         return -EFAIL;
     }
 
-    /* 解析CMD BUF*/
+    /* ????CMD BUF*/
     flag = buf;
-    /* 申请的存储命令空间够用，buf没有读取完成 */
+    /* ????????????????????????buf???????????? */
     // l_len = buf_len - 1;
     l_len = buf_len;
     i = 0;
     while((i < g_st_global[type].l_count) && (flag < &buf[l_len]))
     {
         /*
-         *获取配置文件中的一行,配置文件必须是unix格式.
-         *配置文件中的某一行含有字符 @ 则认为该行为注释行
+         *????????????????????,??????????????unix????.
+         *?????????????????????????? @ ??????????????????
          */
         begin = flag;
         end   = OS_STR_CHR(flag, '\n');
@@ -2031,7 +2031,7 @@ int32 patch_parse_cfg(uint8 *buf, int32 buf_len, int32 type)
             PS_PRINT_INFO("end is null\n");
             break;
         }
-        if (end == begin)           /* 该行只有一个换行符 */
+        if (end == begin)           /* ?????????????????? */
         {
             PS_PRINT_DBG("blank line\n");
             flag = end + 1;
@@ -2043,14 +2043,14 @@ int32 patch_parse_cfg(uint8 *buf, int32 buf_len, int32 type)
         OS_MEM_SET(cmd_para, 0, PARA_LEN);
 
         cmd_type = patch_parse_cmd(begin,cmd_name, cmd_para);
-        if (ERROR_TYPE_CMD != cmd_type)/* 正确的命令类型，增加 */
+        if (ERROR_TYPE_CMD != cmd_type)/* ???????????????????? */
         {
 //            PS_PRINT_ERR("cmd[%d]type[%d], name[%s], para[%s]\n",
 //                        i, cmd_type, cmd_name, cmd_para);
             g_st_global[type].pst_cmd[i].cmd_type = cmd_type;
             OS_MEM_CPY(g_st_global[type].pst_cmd[i].cmd_name, cmd_name, CMD_LEN);
             OS_MEM_CPY(g_st_global[type].pst_cmd[i].cmd_para, cmd_para, PARA_LEN);
-            /* 获取配置版本号 */
+            /* ?????????????? */
             if (!OS_MEM_CMP(g_st_global[type].pst_cmd[i].cmd_name,
                             VER_CMD_KEYWORD,
                             OS_STR_LEN(VER_CMD_KEYWORD)))
@@ -2071,14 +2071,14 @@ int32 patch_parse_cfg(uint8 *buf, int32 buf_len, int32 type)
     }
     PS_PRINT_DBG("Read cmd OK\n");
 
-    /* 如果最后一个命令不是退出命令，则增加一个退出命令 */
+    /* ???????????????????????????????????????????????? */
     if (QUIT_TYPE_CMD != g_st_global[type].pst_cmd[i-1].cmd_type)
     {
         g_st_global[type].pst_cmd[i].cmd_type = QUIT_TYPE_CMD;
-        i++;            /* 方便统计命令个数 */
+        i++;            /* ???????????????? */
     }
 
-    /* 根据实际命令个数，修改最终的命令个数 */
+    /* ???????????????????????????????????? */
     g_st_global[type].l_count = i;
     PS_PRINT_DBG("type[%d], cmd count[%d]\n", type, g_st_global[type].l_count);
 
@@ -2114,7 +2114,7 @@ int32 patch_get_cfg(uint8 *cfg, int32 type)
         return -EFAIL;
     }
 
-    /* 配置文件必须小于1024 */
+    /* ????????????????1024 */
     l_readlen = patch_read_cfg(cfg, buf);
     if(0 > l_readlen)
     {
@@ -2157,7 +2157,7 @@ int32 patch_execute_cmd(int32 cmd_type, uint8 *cmd_name, uint8 *cmd_para,int32 t
 {
     int32 l_ret;
 
-    /* 清空上次操作遗留下来的数据，读取结果时以长度为判断，buf就不用清空了 */
+    /* ????????????????????????????????????????????????????buf???????????? */
     g_st_global[type].l_Recvbuf1_len = 0;
     g_st_global[type].l_Recvbuf2_len = 0;
 
@@ -2326,7 +2326,7 @@ int32 patch_download_patch(int32 type)
 
     }
 
-    /* 执行条件:: 命令行没有读完，命令不是错误命令  */
+    /* ????????:: ????????????????????????????????  */
     for (i = 0; i < g_st_global[type].l_count; i++)
     {
         PS_PRINT_DBG("cmd[%d]type[%d], name[%s], para[%s]\n",

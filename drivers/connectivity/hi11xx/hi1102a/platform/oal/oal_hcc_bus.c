@@ -9,7 +9,7 @@ extern "C" {
 #define HI11XX_LOG_MODULE_NAME "[HCC_BUS]"
 #define HI11XX_LOG_MODULE_NAME_VAR hcc_bus_loglevel
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #if (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION)
 #include "board.h"
@@ -32,7 +32,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 */
 #if (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION)
 static oal_int32 hcc_bus_pm_state_switch_event(struct notifier_block *unused,
@@ -76,7 +76,7 @@ module_param(hcc_bus_auto_bindcpu, uint, S_IRUGO|S_IWUSR);
 oal_uint32 hcc_bus_manual_bindcpu = 1;
 module_param(hcc_bus_manual_bindcpu, uint, S_IRUGO|S_IWUSR);
 
-/*pps 按照大包计算*/
+/*pps ????????????*/
 oal_uint32 hcc_bus_auto_bindcpu_limit = (200*1024*128)/1500;
 module_param(hcc_bus_auto_bindcpu_limit, uint, S_IRUGO|S_IWUSR);
 
@@ -109,7 +109,7 @@ oal_uint32 hcc_bus_auto_bindcpu = 0;
 oal_uint32 hcc_bus_manual_bindcpu = 1;
 oal_uint32 hcc_bus_current_pps = 0x0;
 oal_uint32 hcc_bus_wakelock_debug = 0x0;
-/*pps 按照大包计算*/
+/*pps ????????????*/
 oal_uint32 hcc_bus_auto_sdio_bindcpu_limit = (300*1024*128)/1500;
 oal_uint32 hcc_bus_auto_pcie_bindcpu_limit = (450*1024*128)/1500;
 oal_uint32 hcc_bus_auto_switch_limit       = (350*1024*128)/1500;
@@ -128,7 +128,7 @@ oal_int32  g_switch_total_count = 0;
 oal_uint32 g_hcc_tx_err_cnt = 0;
 extern oal_bool_enum g_wlan_pm_switch;
 /*****************************************************************************
-  3 函数声明
+  3 ????????
 *****************************************************************************/
 oal_int32 oal_register_gpio_intr(hcc_bus_dev *pst_bus_dev);
 oal_void  oal_unregister_gpio_intr(hcc_bus_dev *pst_bus_dev);
@@ -140,13 +140,13 @@ oal_int32 hcc_bus_auto_sched_is_support(oal_uint32 dev_id);
 oal_int32 hcc_switch_bus_request(oal_uint32 dev_id, oal_uint32 target, oal_int32 is_sync);
 
 /*****************************************************************************
-  4 函数实现
+  4 ????????
 *****************************************************************************/
 
 hcc_bus*  g_hisi_wifi_bus = OAL_PTR_NULL;
 //struct semaphore bus_wake_sema;
 #if (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION)
-/*根据以下结构体来枚举 IP设备*/
+/*???????????????????? IP????*/
 OAL_STATIC hcc_bus_dev g_bus_dev_res[] =
 {
     {
@@ -179,7 +179,7 @@ oal_uint32       bus_dump_mem_flag = 0;
 module_param(bus_dump_mem_flag, uint, S_IRUGO | S_IWUSR);
 
 oal_atomic g_wakeup_dev_wait_ack;
-oal_atomic g_bus_powerup_dev_wait_ack;/*ip 上电握手标记*/
+oal_atomic g_bus_powerup_dev_wait_ack;/*ip ????????????*/
 oal_uint32 g_ul_pm_wakeup_event = OAL_FALSE;
 /*lint -e19*/
 oal_module_symbol(g_ul_pm_wakeup_event);
@@ -346,7 +346,7 @@ oal_void hcc_bus_chan_init_from_string(hcc_bus_dev*  pst_bus_dev, char* bus_sele
                     oal_print_hi11xx_log(HI11XX_LOG_INFO, "hisi wifi support pcie %s", default_select);
                 }
 
-                /*动态切换开关，由驱动来仲裁哪2种接口切换*/
+                /*????????????????????????????2??????????*/
                 if(!oal_memcmp(start, "switchon", OAL_STRLEN("switchon")))
                 {
                     pst_bus_dev->bus_switch_enable = 1;
@@ -577,7 +577,7 @@ oal_int32 hcc_switch_bus(oal_uint32 dev_id, oal_uint32 bus_type)
     oal_int32 ret = OAL_SUCC;
     hcc_bus* old_bus;
     hcc_bus_dev* pst_bus_dev  = hcc_get_bus_dev(dev_id);
-    /*暂时只允许在关机状态切换*/
+    /*????????????????????????*/
     if(OAL_WARN_ON(HCC_CHIP_110X_DEV != dev_id))
     {
         return -OAL_EINVAL;
@@ -737,7 +737,7 @@ OAL_STATIC oal_int32 hcc_bus_notify_devip_powerctrl(hcc_bus* pst_bus, oal_uint32
     oal_memcopy((oal_void*)oal_netbuf_data(pst_netbuf) + OAL_SIZEOF(oal_uint16), (oal_void*)&st_switch_info, OAL_SIZEOF(st_switch_info));
 #endif
 
-    /*高优先级发送*/
+    /*????????????*/
     hcc_hdr_param_init(&st_hcc_transfer_param,
                     HCC_ACTION_TYPE_BUS,
                     0,
@@ -749,7 +749,7 @@ OAL_STATIC oal_int32 hcc_bus_notify_devip_powerctrl(hcc_bus* pst_bus, oal_uint32
 
 }
 
-/*异常下电，不需要等response*/
+/*??????????????????response*/
 oal_int32 hcc_bus_switch_ip_power_down_excep(void* data)
 {
     /*target ip power down process*/
@@ -782,14 +782,14 @@ oal_int32 hcc_bus_switch_ip_power_down_excep(void* data)
 
     if(OAL_SUCC != hcc_bus_notify_devip_powerctrl(target_bus,  0, 0))
     {
-        /*通知老的IP下电*/
+        /*????????IP????*/
         oal_print_hi11xx_log(HI11XX_LOG_INFO, "hcc_bus_switch_thread send power down bus %s message failed", hcc_bus_get_bus_type_str(target_bus->bus_type));
     }
 
     return OAL_SUCC;
 }
 
-/*正常下电，等待response*/
+/*??????????????response*/
 oal_int32 hcc_bus_switch_ip_power_down(void* data)
 {
     /*target ip power down process*/
@@ -820,7 +820,7 @@ oal_int32 hcc_bus_switch_ip_power_down(void* data)
 
     if(OAL_SUCC != hcc_bus_notify_devip_powerctrl(target_bus,  0, 1))
     {
-        /*通知老的IP下电*/
+        /*????????IP????*/
         oal_print_hi11xx_log(HI11XX_LOG_INFO, "hcc_bus_switch_thread send power down bus %d message failed", target_bus->bus_id);
     }
 
@@ -869,18 +869,18 @@ oal_int32 hcc_bus_switch_ip_power_on(void* data)
         return -OAL_ENODEV;
     }
 
-    /*ip上电*/
-    /*通知Device 给目标IP上电*/
+    /*ip????*/
+    /*????Device ??????IP????*/
     if(OAL_SUCC != hcc_bus_notify_devip_powerctrl(target_bus, 1, 1))
     {
-        /*通知上电失败，忽略这次切换操作*/
+        /*??????????????????????????????*/
         oal_print_hi11xx_log(HI11XX_LOG_ERR, "hcc_bus_switch_thread power up bus %s failed", hcc_bus_get_bus_type_str(target_bus->bus_type));
         DECLARE_DFT_TRACE_KEY_INFO("hcc_bus_switch_thread response timeout failed", OAL_DFT_TRACE_FAIL);
         g_switch_pwr_ret = -OAL_EBUSY;
         return -OAL_EBUSY;
     }
 
-    /*等待上电完成*/
+    /*????????????*/
     ret = oal_wait_for_completion_interruptible_timeout(&pst_bus_dev->st_switch_powerup_ready, (oal_uint32)OAL_MSECS_TO_JIFFIES(10000));
     if(0 == ret)
     {
@@ -969,7 +969,7 @@ oal_int32 hcc_bus_test_powercrcle(oal_int32 test_cnt)
 
     hcc_bus_power_action(target_bus, HCC_BUS_SW_POWER_PATCH_LOAD_PREPARE);
 
-    /*Host发起目标IP硬件初始化*/
+    /*Host????????IP??????????*/
     hcc_bus_power_ctrl_register(target_bus, HCC_BUS_CTRL_POWER_UP, hcc_bus_switch_ip_power_on, (void*)target_bus);
     ret = hcc_bus_power_action(target_bus, HCC_BUS_SW_POWER_UP);
     if(OAL_SUCC != ret || OAL_SUCC != g_switch_pwr_ret)
@@ -980,7 +980,7 @@ oal_int32 hcc_bus_test_powercrcle(oal_int32 test_cnt)
         return -OAL_EFAIL;
     }
     oal_print_hi11xx_log(HI11XX_LOG_INFO, "[%s]:%d", __FUNCTION__, __LINE__);
-    /*资源初始化*/
+    /*??????????*/
     ret = hcc_bus_reinit(target_bus);
     if(OAL_SUCC != ret)
     {
@@ -993,8 +993,8 @@ oal_int32 hcc_bus_test_powercrcle(oal_int32 test_cnt)
         return -OAL_EFAIL;
     }
     oal_print_hi11xx_log(HI11XX_LOG_INFO, "[%s]:%d", __FUNCTION__, __LINE__);
-    /*Host发起目标IP软件初始化*/
-    /*ip初始化 不需要下载PATCH 此时WCPU在正常运行*/
+    /*Host????????IP??????????*/
+    /*ip?????? ??????????PATCH ????WCPU??????????*/
     ret = hcc_bus_power_action(target_bus, HCC_BUS_SW_POWER_PATCH_LAUCH);
     if(OAL_SUCC != ret)
     {
@@ -1066,7 +1066,7 @@ oal_int32 hcc_bus_test_powerup(oal_int32 target)
 
     hcc_bus_power_action(target_bus, HCC_BUS_SW_POWER_PATCH_LOAD_PREPARE);
 
-    /*Host发起目标IP硬件初始化*/
+    /*Host????????IP??????????*/
     hcc_bus_power_ctrl_register(target_bus, HCC_BUS_CTRL_POWER_UP, hcc_bus_switch_ip_power_on, (void*)target_bus);
     ret = hcc_bus_power_action(target_bus, HCC_BUS_SW_POWER_UP);
     if(OAL_SUCC != ret || OAL_SUCC != g_switch_pwr_ret)
@@ -1077,7 +1077,7 @@ oal_int32 hcc_bus_test_powerup(oal_int32 target)
         return -OAL_EFAIL;
     }
     oal_print_hi11xx_log(HI11XX_LOG_INFO, "[%s]:%d", __FUNCTION__, __LINE__);
-    /*资源初始化*/
+    /*??????????*/
     ret = hcc_bus_reinit(target_bus);
     if(OAL_SUCC != ret)
     {
@@ -1090,8 +1090,8 @@ oal_int32 hcc_bus_test_powerup(oal_int32 target)
         return -OAL_EFAIL;
     }
     oal_print_hi11xx_log(HI11XX_LOG_INFO, "[%s]:%d", __FUNCTION__, __LINE__);
-    /*Host发起目标IP软件初始化*/
-    /*ip初始化 不需要下载PATCH 此时WCPU在正常运行*/
+    /*Host????????IP??????????*/
+    /*ip?????? ??????????PATCH ????WCPU??????????*/
     ret = hcc_bus_power_action(target_bus, HCC_BUS_SW_POWER_PATCH_LAUCH);
     if(OAL_SUCC != ret)
     {
@@ -1186,7 +1186,7 @@ OAL_STATIC oal_int32 hcc_bus_switch_thread(oal_void *data)
 
         old_bus = pst_bus_dev->cur_bus;
 
-        /*判断WLAN上下电状态*/
+        /*????WLAN??????????*/
 
         /*process target_bus*/
 
@@ -1222,7 +1222,7 @@ OAL_STATIC oal_int32 hcc_bus_switch_thread(oal_void *data)
 
         g_switch_pwr_ret = OAL_SUCC;
 
-        /*Host发起目标IP硬件初始化*/
+        /*Host????????IP??????????*/
         hcc_bus_power_ctrl_register(target_bus, HCC_BUS_CTRL_POWER_UP, hcc_bus_switch_ip_power_on, (void*)target_bus);
         ret = hcc_bus_power_action(target_bus, HCC_BUS_SW_POWER_UP);
         if(OAL_SUCC != ret || OAL_SUCC != g_switch_pwr_ret)
@@ -1235,7 +1235,7 @@ OAL_STATIC oal_int32 hcc_bus_switch_thread(oal_void *data)
             continue;
         }
         oal_print_hi11xx_log(HI11XX_LOG_INFO, "[%s]:%d", __FUNCTION__, __LINE__);
-        /*资源初始化*/
+        /*??????????*/
         ret = hcc_bus_reinit(target_bus);
         if(OAL_SUCC != ret)
         {
@@ -1249,8 +1249,8 @@ OAL_STATIC oal_int32 hcc_bus_switch_thread(oal_void *data)
             continue;
         }
         oal_print_hi11xx_log(HI11XX_LOG_INFO, "[%s]:%d", __FUNCTION__, __LINE__);
-        /*Host发起目标IP软件初始化*/
-        /*ip初始化 不需要下载PATCH 此时WCPU在正常运行*/
+        /*Host????????IP??????????*/
+        /*ip?????? ??????????PATCH ????WCPU??????????*/
         ret = hcc_bus_power_action(target_bus, HCC_BUS_SW_POWER_PATCH_LAUCH);
         if(OAL_SUCC != ret)
         {
@@ -1275,12 +1275,12 @@ OAL_STATIC oal_int32 hcc_bus_switch_thread(oal_void *data)
             hcc_bus_stop_auto_pps_task(pst_bus_dev);
         }
 
-        /*硬件初始化完成，切换软件*/
-        /*暂停hcc 线程,或者hcc_tx锁*/
+        /*????????????????????????*/
+        /*????hcc ????,????hcc_tx??*/
         oal_get_time_cost_start(cost);
         hcc_tx_transfer_lock(pst_bus_dev->hcc);
 
-        /*挂起发送通道,等待通道清空, 清空后WCPU会切换bus*/
+        /*????????????,????????????, ??????WCPU??????bus*/
         ret = hcc_bus_switch_suspend_tx(old_bus);
 
         ret = hcc_bus_switch_clean_res(old_bus);
@@ -1301,7 +1301,7 @@ OAL_STATIC oal_int32 hcc_bus_switch_thread(oal_void *data)
             continue;
         }
 
-        /*重入问题*/
+        /*????????*/
         hcc_switch_bus(pst_bus_dev->dev_id, target_bus->bus_type);
 
         if(old_bus == pst_bus_dev->cur_bus)
@@ -1316,10 +1316,10 @@ OAL_STATIC oal_int32 hcc_bus_switch_thread(oal_void *data)
                                 hcc_bus_get_bus_type_str(old_bus->bus_type), hcc_bus_get_bus_type_str(target_bus->bus_type));
         }
 
-        /*发消息通知DEV锁住DMA调度关闭消息接口，等待IP空闲*/
+        /*??????????DEV????DMA??????????????????????IP????*/
 
-        /*切换完成恢复发送通道, 上面Host bus 切换有时间差，
-          所有完成后需要重新调度受影响的任务*/
+        /*????????????????????, ????Host bus ??????????????
+          ??????????????????????????????????*/
         hcc_bus_sched_gpio_task(pst_bus_dev->cur_bus, 0);
 
         ret = hcc_bus_switch_resume_tx(pst_bus_dev->cur_bus);
@@ -1340,7 +1340,7 @@ OAL_STATIC oal_int32 hcc_bus_switch_thread(oal_void *data)
             ret = hcc_bus_power_ctrl_register(old_bus,
                                                 HCC_BUS_CTRL_POWER_DOWN, hcc_bus_switch_ip_power_down, (oal_void*)old_bus);
             hcc_bus_power_action(old_bus, HCC_BUS_SW_POWER_DOWN);
-            /*此时不管低功耗是否打开，old_bus已经持有一把锁，需要释放,并且锁住new_bus*/
+            /*????????????????????????old_bus????????????????????????,????????new_bus*/
             hcc_bus_wake_lock(pst_bus_dev->cur_bus);
             hcc_bus_wake_unlock(old_bus);
             hcc_bus_rx_transfer_unlock(old_bus);
@@ -1435,7 +1435,7 @@ oal_int32 hi110x_hcc_dev_bindcpu(oal_int32 is_bind)
 
     if(hcc_bus_auto_bindcpu_is_support(dev_id))
     {
-        /*自动绑核打开直接返回*/
+        /*????????????????????*/
         return OAL_SUCC;
     }
 
@@ -1475,7 +1475,7 @@ oal_int32 hcc_dev_bindcpu(oal_uint32 dev_id, oal_int32 is_bind)
 }
 EXPORT_SYMBOL_GPL(hcc_dev_bindcpu);
 
-/*bus性能调度*/
+/*bus????????*/
 oal_int32 hcc_bus_performance_core_schedule(oal_uint32 dev_id)
 {
     oal_uint32 run_time;
@@ -1530,7 +1530,7 @@ oal_int32 hcc_bus_performance_core_schedule(oal_uint32 dev_id)
             {
                 if(HDEV_TO_HBUS(pst_bus_dev)->bus_type != HCC_BUS_SDIO)
                 {
-                    /*低吞吐不需要重复切换*/
+                    /*????????????????????*/
                     hcc_switch_bus_request(dev_id, HCC_BUS_SDIO, 0);
                 }
             }
@@ -1684,7 +1684,7 @@ oal_int32 hcc_switch_bus_request(oal_uint32 dev_id, oal_uint32 target, oal_int32
 
     if(is_sync)
     {
-        /*等待切换完成*/
+        /*????????????*/
         ret = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT(pst_bus_dev->st_swtich_ack_wq,
                                            ((HCC_BUS_SWITCH_STATE_ABORT == pst_bus_dev->switch_state)
                                            || (HCC_BUS_SWITCH_STATE_END == pst_bus_dev->switch_state)),
@@ -1851,7 +1851,7 @@ oal_int32 hcc_message_register(struct hcc_handler* hcc, oal_uint8 msg,
         pst_bus_tmp = OAL_DLIST_GET_ENTRY(pst_entry, hcc_bus, list);
         if(pst_bus_tmp->bus_dev == hcc->bus_dev)
         {
-            /*注册在当前设备上的所有BUS 都需要注册*/
+            /*??????????????????????BUS ??????????*/
             ret = hcc_bus_message_register(pst_bus_tmp, msg, cb, data);
             if(OAL_SUCC != ret)
             {
@@ -1882,7 +1882,7 @@ oal_void hcc_message_unregister(struct hcc_handler* hcc, oal_uint8 msg)
         pst_bus_tmp = OAL_DLIST_GET_ENTRY(pst_entry, hcc_bus, list);
         if(pst_bus_tmp->bus_dev == hcc->bus_dev)
         {
-            /*注册在当前设备上的所有BUS 都需要注册*/
+            /*??????????????????????BUS ??????????*/
             hcc_bus_message_unregister(pst_bus_tmp, msg);
         }
     }
@@ -1960,7 +1960,7 @@ OAL_STATIC oal_void hcc_dev_res_exit_by_id(oal_int32 dev_max)
         {
             oal_unregister_gpio_intr(pst_bus_dev);
         }
-        /* 注销GPIO流控 */
+        /* ????GPIO???? */
         oal_unregister_gpio_flowctrl_intr(pst_bus_dev);
     }
 }
@@ -2309,7 +2309,7 @@ oal_void hcc_bus_rx_irq_memalloc_work_submit(hcc_bus *hi_bus)
         return;
     }
     oal_spin_lock(&hi_bus->st_mealloc_lock);
-    /* 挂载在系统的wokrqueue上 */
+    /* ????????????wokrqueue?? */
     schedule_work(&hi_bus->st_bus_irq_memalloc_work);
     oal_spin_unlock(&hi_bus->st_mealloc_lock);
 }
@@ -2411,7 +2411,7 @@ oal_int32 hcc_bus_device_init_ready(void *data)
 	return OAL_SUCC;
 }
 
-/*检查DEVICE WAKEUP HOST gpio 是否拉高。*/
+/*????DEVICE WAKEUP HOST gpio ??????????*/
 oal_int32 oal_dev2host_gpio_hold_time_check(oal_uint32 switch_timeout, oal_uint32 hold_time)
 {
     oal_ulong timeout;
@@ -2874,7 +2874,7 @@ oal_int32 oal_register_gpio_intr(hcc_bus_dev *pst_bus_dev)
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 44))
    ret = request_irq(wlan_irq, hcc_bus_wlan_gpio_irq, IRQF_NO_SUSPEND | IRQF_TRIGGER_RISING | IRQF_DISABLED, "wifi_gpio_intr", pst_bus_dev);
 #else
-    /*低版本内核没有IRQF_NO_SUSPEND标记*/
+    /*??????????????IRQF_NO_SUSPEND????*/
    ret = request_irq(wlan_irq, hcc_bus_wlan_gpio_irq, IRQF_TRIGGER_RISING | IRQF_DISABLED, "wifi_gpio_intr", pst_bus_dev);
 #endif
    if (ret < 0)
@@ -2910,12 +2910,12 @@ OAL_STATIC oal_void oal_flowctrl_gpio_intr_enable(hcc_bus_dev *pst_bus_dev, oal_
 {
     if (en_enable)
     {
-        /* 使能GPIO流控中断 */
+        /* ????GPIO???????? */
         enable_irq(pst_bus_dev->l_flowctrl_irq);
     }
     else
     {
-        /* 关闭GPIO流控中断 */
+        /* ????GPIO???????? */
         disable_irq_nosync(pst_bus_dev->l_flowctrl_irq);
     }
 }
@@ -2943,12 +2943,12 @@ OAL_STATIC irqreturn_t hcc_bus_flowctrl_gpio_irq(oal_int32 l_irq, oal_void *p_de
 
     if(OAL_LIKELY(pst_bus->opt_ops->flowctrl_gpio_handler))
     {
-        /* 执行GPIO流控逻辑(oal_sdio_gpio_flowctrl_irq) */
+        /* ????GPIO????????(oal_sdio_gpio_flowctrl_irq) */
         pst_bus->opt_ops->flowctrl_gpio_handler(pst_bus, l_irq);
     }
     else
     {
-        /* flowctrl_gpio_handler不存在, 关闭GPIO流控功能 */
+        /* flowctrl_gpio_handler??????, ????GPIO???????? */
         oal_print_hi11xx_log(HI11XX_LOG_ERR, "flowctrl_gpio_handler is NULL, irq:%d, bus_dev id:%u, disable gpio interrupt!",
                                 l_irq, pst_bus_dev->dev_id);
         oal_flowctrl_gpio_intr_enable(pst_bus_dev, OAL_FALSE);
@@ -2972,11 +2972,11 @@ oal_int32 oal_register_gpio_flowctrl_intr(hcc_bus_dev *pst_bus_dev)
 
     pst_bus_dev->l_flowctrl_irq = pst_board->flowctrl_irq;
 
-    /* 调用内核接口注册GPIO流控中断, 中断触发时回调hcc_bus_flowctrl_gpio_irq */
+    /* ????????????????GPIO????????, ??????????????hcc_bus_flowctrl_gpio_irq */
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 44))
     ret = request_irq(flowctrl_irq, hcc_bus_flowctrl_gpio_irq, IRQF_NO_SUSPEND | IRQF_TRIGGER_RISING | IRQF_TRIGGER_FALLING | IRQF_DISABLED, "wifi_gpio_flowctrl_intr", pst_bus_dev);
 #else
-    /* 低版本内核没有IRQF_NO_SUSPEND标记 */
+    /* ??????????????IRQF_NO_SUSPEND???? */
     ret = request_irq(flowctrl_irq, hcc_bus_flowctrl_gpio_irq, IRQF_TRIGGER_RISING | IRQF_TRIGGER_FALLING | IRQF_DISABLED, "wifi_gpio_flowctrl_intr", pst_bus_dev);
 #endif
 
@@ -2986,7 +2986,7 @@ oal_int32 oal_register_gpio_flowctrl_intr(hcc_bus_dev *pst_bus_dev)
         return OAL_FAIL;
     }
 
-    /* 初始化GPIO流控中断为使能状态 */
+    /* ??????GPIO?????????????????? */
     oal_flowctrl_gpio_intr_enable(pst_bus_dev, OAL_FALSE);
     oal_flowctrl_gpio_intr_enable(pst_bus_dev, OAL_TRUE);
 
@@ -3000,10 +3000,10 @@ oal_void oal_unregister_gpio_flowctrl_intr(hcc_bus_dev *pst_bus_dev)
 {
     if (pst_bus_dev->en_flowctrl_gpio_registered)
     {
-        /* 关闭GPIO流控中断 */
+        /* ????GPIO???????? */
         oal_flowctrl_gpio_intr_enable(pst_bus_dev, OAL_FALSE);
 
-        /* 注销GPIO流控中断 */
+        /* ????GPIO???????? */
         free_irq(pst_bus_dev->l_flowctrl_irq, pst_bus_dev);
 
         pst_bus_dev->en_flowctrl_gpio_registered = OAL_FALSE;
@@ -3019,21 +3019,21 @@ oal_uint32 hcc_bus_flowctrl_init(oal_uint8 uc_hcc_flowctrl_type)
 {
     hcc_bus_dev *pst_bus_dev = hcc_get_bus_dev(0);
 
-    /* 流控类型: 0.SDIO 1.GPIO*/
+    /* ????????: 0.SDIO 1.GPIO*/
     if (0 == uc_hcc_flowctrl_type)
     {
         oal_print_hi11xx_log(HI11XX_LOG_WARN, "flowctrl type = SDIO, already init");
         return OAL_SUCC;
     }
 
-    /* hcc已注册GPIO中断 */
+    /* hcc??????GPIO???? */
     if (pst_bus_dev->en_flowctrl_gpio_registered)
     {
         oal_print_hi11xx_log(HI11XX_LOG_ERR, "flowctrl type = GPIO, already init");
         return OAL_SUCC;
     }
 
-    /* Step1: 申请管脚 */
+    /* Step1: ???????? */
     if (BOARD_SUCC != board_flowctrl_gpio_init())
     {
         oal_print_hi11xx_log(HI11XX_LOG_ERR, "request flowctrl gpio failed!");
@@ -3041,10 +3041,10 @@ oal_uint32 hcc_bus_flowctrl_init(oal_uint8 uc_hcc_flowctrl_type)
         return OAL_FAIL;
     }
 
-    /* Step2: 获取管脚对应中断号 */
+    /* Step2: ?????????????????? */
     board_flowctrl_irq_init();
 
-    /* Step3: 使用中断号注册GPIO中断 */
+    /* Step3: ??????????????GPIO???? */
     if (OAL_SUCC != oal_register_gpio_flowctrl_intr(pst_bus_dev))
     {
         oal_print_hi11xx_log(HI11XX_LOG_ERR, "request flowctrl gpio irq failed!");
@@ -3063,7 +3063,7 @@ oal_void oal_wlan_gpio_intr_enable(hcc_bus_dev *pst_bus_dev,oal_uint32  ul_en)
     oal_spin_lock_irq_save(&pst_bus_dev->st_irq_lock, &flags);
     if (ul_en)
     {
-        /*不再支持中断开关嵌套*/
+        /*????????????????????*/
         if(pst_bus_dev->ul_irq_stat)
         {
             enable_irq(pst_bus_dev->ul_wlan_irq);
@@ -3415,7 +3415,7 @@ hcc_init_fail:
     return -OAL_EFAIL;
 }
 
-/*枚举接口设备*/
+/*????????????*/
 oal_int32 oal_wifi_platform_load_dev(oal_void)
 {
     oal_int32 ret = OAL_SUCC;
@@ -3440,7 +3440,7 @@ failed_load_pcie:
     return ret;
 }
 
-/*卸载接口设备*/
+/*????????????*/
 oal_void oal_wifi_platform_unload_dev(oal_void)
 {
     oal_wifi_platform_unload_pcie();
@@ -3503,13 +3503,13 @@ oal_int32 oal_trigger_bus_exception(hcc_bus *hi_bus, oal_int32 is_sync)
     return OAL_SUCC;
 }
 
-/*枚举接口设备*/
+/*????????????*/
 oal_int32 oal_wifi_platform_load_dev(oal_void)
 {
     return OAL_SUCC;
 }
 
-/*卸载接口设备*/
+/*????????????*/
 oal_void oal_wifi_platform_unload_dev(oal_void)
 {
 }
@@ -3582,7 +3582,7 @@ oal_int32 hcc_transfer_rx_register(struct hcc_handler* hcc, oal_void* data,hcc_b
         pst_bus_tmp = OAL_DLIST_GET_ENTRY(pst_entry, hcc_bus, list);
         if(pst_bus_tmp->bus_dev == hcc->bus_dev)
         {
-            /*注册在当前设备上的所有BUS 都需要注册*/
+            /*??????????????????????BUS ??????????*/
             ret = hcc_bus_transfer_rx_register(pst_bus_tmp, data, rx);
             if(OAL_SUCC != ret)
             {
@@ -3690,7 +3690,7 @@ void oal_set_thread_affinity(struct task_struct *pst_thread)
         return;
 #if (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION)
 #ifdef CONFIG_NR_CPUS
-    /*固定绑定到CPU 1~7，内核自己调度*/
+    /*??????????CPU 1~7??????????????*/
     cpumask_setall(&cpu_mask);
     cpumask_clear_cpu(0, &cpu_mask);
     set_cpus_allowed_ptr(pst_thread, &cpu_mask);

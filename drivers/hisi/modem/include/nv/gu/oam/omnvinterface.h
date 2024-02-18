@@ -2,7 +2,7 @@
 
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 #include "vos.h"
 
@@ -21,14 +21,14 @@ extern "C" {
 #pragma pack(push, 4)
 #endif
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
-/* 测试卡配置信息 */
+/* ?????????????? */
 #define USIMM_TEST_CARD_CFG_NUM                     (8)
 #define USIMM_TEST_CARD_PLMN_LEN                    (3)
 #define USIMM_CDMATEST_CARD_PLMN_LEN                (2)
 
-/*老化测试项的个数*/
+/*????????????????*/
 #define OM_AGING_TEST_NUM                           (20)
 
 #define SYS_ZSP_LDF_NUM                             (64)
@@ -55,11 +55,11 @@ extern "C" {
 #define VSIM_FILE_WRITE_COUNT                       (1)
 #define VSIM_FILE_READ_COUNT                        (1)
 
-#define VSIM_KEYLEN_MAX                             (128)                   /* 密钥长度不超过128字节 */
+#define VSIM_KEYLEN_MAX                             (128)                   /* ??????????????128???? */
 
 #define VSIM_EF_LOCI_LEN                            (11)
 #define VSIM_EF_PS_LOCI_LEN                         (14)
-#define VSIM_EF_FPLMN_LEN                           (60)                    /* FPLMN按照20组来实现 */
+#define VSIM_EF_FPLMN_LEN                           (60)                    /* FPLMN????20???????? */
 
 #define ESN_NV_DATA_LEN                             (8)
 #define MEID_NV_DATA_LEN                            (8)
@@ -70,29 +70,29 @@ extern "C" {
 #define USIMM_PLMN_DATA_MAX_LEN                     (32)
 
 /*****************************************************************************
-  3 枚举定义
+  3 ????????
 *****************************************************************************/
 
 enum SC_APSEC_DEFAULT_KEY_VER_ENUM
 {
-    SC_APSEC_DEFAULT_KEY_VER_TEST       =   0,              /* 测试版本 */
-    SC_APSEC_DEFAULT_KEY_VER_DCM        =   1,              /* Docomo版本 */
+    SC_APSEC_DEFAULT_KEY_VER_TEST       =   0,              /* ???????? */
+    SC_APSEC_DEFAULT_KEY_VER_DCM        =   1,              /* Docomo???? */
     SC_APSEC_DEFAULT_KEY_VER_BUTT,
 };
 typedef VOS_UINT8 SC_APSEC_DEFAULT_KEY_VER_ENUM_UINT8;
 
 enum OM_OUTPUT_PORT
 {
-    OM_OUTPUT_SHELL = 0,        /*底软提供的SHELL通道*/
-    OM_OUTPUT_FS,               /*写文件系统方式*/
-    OM_OUTPUT_SDT,              /*输出到SDT上*/
+    OM_OUTPUT_SHELL = 0,        /*??????????SHELL????*/
+    OM_OUTPUT_FS,               /*??????????????*/
+    OM_OUTPUT_SDT,              /*??????SDT??*/
     OM_OUTPUT_BUTT
 };
 typedef VOS_UINT32      OM_OUTPUT_PORT_ENUM_UINT32;
 
 /*****************************************************************************
- 枚举名    : AT_PHY_PORT_ENUM
- 枚举说明  : 物理端口号枚举值
+ ??????    : AT_PHY_PORT_ENUM
+ ????????  : ????????????????
 *****************************************************************************/
 enum AT_PHY_PORT_ENUM
 {
@@ -107,16 +107,16 @@ typedef VOS_UINT32  AT_PHY_PORT_ENUM_UINT32;
 
 enum
 {
-    CPM_IND_PORT = AT_PORT_BUTT,    /* OM数据上报端口 */
-    CPM_CFG_PORT,                   /* OM配置端口 */
+    CPM_IND_PORT = AT_PORT_BUTT,    /* OM???????????? */
+    CPM_CFG_PORT,                   /* OM???????? */
     CPM_SD_PORT,
-    CPM_WIFI_OM_IND_PORT,           /* WIFI下OM数据上报端口 */
-    CPM_WIFI_OM_CFG_PORT,           /* WIFI下OM配置下发端口 */
-    CPM_WIFI_AT_PORT,               /* WIFI下AT端口 */
+    CPM_WIFI_OM_IND_PORT,           /* WIFI??OM???????????? */
+    CPM_WIFI_OM_CFG_PORT,           /* WIFI??OM???????????? */
+    CPM_WIFI_AT_PORT,               /* WIFI??AT???? */
     CPM_HSIC_IND_PORT,
     CPM_HSIC_CFG_PORT,
-    CPM_VCOM_IND_PORT,              /* VCOM上OM数据上报接口 */
-    CPM_VCOM_CFG_PORT,              /* VCOM上OM配置接口 */
+    CPM_VCOM_IND_PORT,              /* VCOM??OM???????????? */
+    CPM_VCOM_CFG_PORT,              /* VCOM??OM???????? */
     CPM_FS_PORT,
     CPM_PORT_BUTT
 };
@@ -158,8 +158,8 @@ typedef VOS_UINT8 VSIM_ACTIVE_TYPE_ENUM_UINT8;
 
 enum USIMM_CARD_STATUS_REG_TYPE_ENUM
 {
-    USIMM_CARD_STATUS_REG_TYPE_E5       = 0,    /* 注册E5类型的卡状态变更回调函数 */
-    USIMM_CARD_STATUS_REG_TYPE_M2M      = 1,    /* 注册M2M类型的卡状态变更回调函数 */
+    USIMM_CARD_STATUS_REG_TYPE_E5       = 0,    /* ????E5???????????????????????? */
+    USIMM_CARD_STATUS_REG_TYPE_M2M      = 1,    /* ????M2M???????????????????????? */
     USIMM_CARD_STATUS_REG_TYPE_BUTT
 };
 
@@ -186,21 +186,21 @@ enum ESN_MEID_FLAG_ENUM
 typedef VOS_UINT8 ESN_MEID_FLAG_ENUM_UINT8;
 
 /*****************************************************************************
-  4 全局变量声明
+  4 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  5 消息头定义
+  5 ??????????
 *****************************************************************************/
 
 /*****************************************************************************
-  6 消息定义
+  6 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  7 STRUCT定义
+  7 STRUCT????
 *****************************************************************************/
 
 typedef struct
@@ -290,21 +290,21 @@ typedef struct
 typedef struct
 {
     MODEM_ID_ENUM_UINT16                enModemID;
-    VOS_UINT16                          usNetworkMode;  /*网络模式*/
+    VOS_UINT16                          usNetworkMode;  /*????????*/
     VOS_UINT16                          usBand;
-    VOS_UINT16                          usSlotCnt;      /*时隙数*/
+    VOS_UINT16                          usSlotCnt;      /*??????*/
     VOS_UINT16                          usChannel;
-    VOS_UINT16                          usPower;        /*PA功率*/
-    VOS_UINT16                          usModType;      /*发射调制模式*/
+    VOS_UINT16                          usPower;        /*PA????*/
+    VOS_UINT16                          usModType;      /*????????????*/
 }OM_RF_CONFIG_STRU;
 
 
 
 typedef struct
 {
-    VOS_UINT32                          ulIsEnable;     /*是否启动老化测试，VOS_YES/VOS_NO*/
-    VOS_UINT32                          ulTimerLen;     /*定时器长度，单位为毫秒*/
-    VOS_UINT32                          ulNumber;       /*指示下面测试项的个数*/
+    VOS_UINT32                          ulIsEnable;     /*??????????????????VOS_YES/VOS_NO*/
+    VOS_UINT32                          ulTimerLen;     /*??????????????????????*/
+    VOS_UINT32                          ulNumber;       /*????????????????????*/
     OM_RF_CONFIG_STRU                   astOmRfConfig[OM_AGING_TEST_NUM];
 }OM_AGING_TEST_NV_STRU;
 
@@ -396,23 +396,23 @@ typedef struct
 
 typedef struct
 {
-    VOS_UINT8                           ucTempOverCount;     /*在正常模式下温度连续超过告警门限或低功耗门限的极限次数*/
-    VOS_UINT8                           ucTempRsumeCount;    /*在低功耗模式或告警模式下温度连续低于告警门的极限次数*/
-    VOS_UINT8                           ucTempCloseCount;    /*在降速模式下温度连续超过告警门限的极限次数*/
-    VOS_UINT8                           ucTempPowerOffCount; /*超过下电门限的极限次数*/
-    VOS_UINT32                          ulWaitTimer;         /*等待定时器时长*/
+    VOS_UINT8                           ucTempOverCount;     /*??????????????????????????????????????????????????????*/
+    VOS_UINT8                           ucTempRsumeCount;    /*????????????????????????????????????????????????????*/
+    VOS_UINT8                           ucTempCloseCount;    /*??????????????????????????????????????????*/
+    VOS_UINT8                           ucTempPowerOffCount; /*??????????????????????*/
+    VOS_UINT32                          ulWaitTimer;         /*??????????????*/
 }TEMP_PARA_CTRL_STRU;
 
 
 typedef struct
 {
-    VOS_UINT32                          ulIsEnable;           /*是否需要启动保护机制, 0为关闭，1为开启*/
-    VOS_UINT32                          ulLocation;           /*使用哪里的温度作为温保的输入，该参数直接作为入参进入底软的函数,目前的取值范围是0到6 */
-    VOS_INT32                           lPowerOffThreshold;   /*进入下电模式的门限*/
-    VOS_INT32                           lCloseAdcThreshold;   /*进入低功耗模式的温度门限*/
-    VOS_INT32                           lAlarmAdcThreshold;   /*需要进行给出警报的温度门限*/
-    VOS_INT32                           lResumeAdcThreshold;  /*恢复到正常模式的温度门限*/
-    VOS_INT32                           lSIMPowerOffThreshold;  /*E5形态下SIM过温保护门限*/
+    VOS_UINT32                          ulIsEnable;           /*????????????????????, 0????????1??????*/
+    VOS_UINT32                          ulLocation;           /*??????????????????????????????????????????????????????????????,????????????????0??6 */
+    VOS_INT32                           lPowerOffThreshold;   /*??????????????????*/
+    VOS_INT32                           lCloseAdcThreshold;   /*????????????????????????*/
+    VOS_INT32                           lAlarmAdcThreshold;   /*??????????????????????????*/
+    VOS_INT32                           lResumeAdcThreshold;  /*????????????????????????*/
+    VOS_INT32                           lSIMPowerOffThreshold;  /*E5??????SIM????????????*/
     TEMP_PARA_CTRL_STRU                 stTempCtrlPara;
 }SPY_TEMP_PROTECT_NV_STRU;
 
@@ -429,15 +429,15 @@ typedef VOS_UINT32 CPM_CBT_PORT_ENUM_UINT32;
 
 typedef struct
 {
-    CPM_OM_PORT_ENUM_UINT32             enPortNum;         /* 物理通道类型 */
-    CPM_CBT_PORT_ENUM_UINT32            enCbtPortNum;      /* 校准通道类型 */
+    CPM_OM_PORT_ENUM_UINT32             enPortNum;         /* ???????????? */
+    CPM_CBT_PORT_ENUM_UINT32            enCbtPortNum;      /* ???????????? */
 }OM_CHANNLE_PORT_CFG_STRU;
 
 
 typedef struct
 {
-    OM_OUTPUT_PORT_ENUM_UINT32          enPortType;     /*端口类型*/
-    VOS_UINT32                          ulMaxFileSize;  /*文件记录的最大大小*/
+    OM_OUTPUT_PORT_ENUM_UINT32          enPortType;     /*????????*/
+    VOS_UINT32                          ulMaxFileSize;  /*??????????????????*/
 }OM_PORT_CFG_STRU;
 
 
@@ -449,8 +449,8 @@ typedef struct
 
 typedef struct
 {
-    VOS_UINT32                          ulResult;       /* 校准结果 */
-    VOS_UINT32                          ulLogFileSize;  /* 单个LOG文件大小 */
+    VOS_UINT32                          ulResult;       /* ???????? */
+    VOS_UINT32                          ulLogFileSize;  /* ????LOG???????? */
 }LOG_FILE_SAVE_CONFIG_STRU;
 
 
@@ -549,20 +549,20 @@ typedef struct
     VOS_UINT32                          ulP2ActiveAID           : 1;
     VOS_UINT32                          ulWarningDataInd        : 1;
 
-    VOS_UINT32                          bMeidPesnAPWriteEnable  : 1;  /* Meid Pesn是否由AP写入，默认是modem卡初始化写入 */
+    VOS_UINT32                          bMeidPesnAPWriteEnable  : 1;  /* Meid Pesn??????AP????????????modem???????????? */
     VOS_UINT32                          ulADFActiveAll          : 1;
 
-    /* 当CSIM APP不存在且对应AID存在,卡初始化按ICC初始化控制项。产线定制项是否开启，hisi默认关闭 */
+    /* ??CSIM APP????????????AID????,??????????ICC??????????????????????????????????hisi???????? */
     VOS_UINT32                          ulCsimAppAidCheck       : 1;
 
-    /* 规避楚天龙某一批次卡存在CSIM初始化流程写完文件后，发送STATSU命令，卡不停返回60的问题 */
+    /* ????????????????????????CSIM??????????????????????????STATSU????????????????60?????? */
     VOS_UINT32                          ulCsimReselectFile      : 1;
 
     VOS_UINT32                          ulImsAccessCustomFlg    : 1;
 
     VOS_UINT32                          ulDocomoReadOPFileFlg   : 1;
 
-    /* 针对CGLA是否需&0x6F 定制项 */
+    /* ????CGLA??????&0x6F ?????? */
     VOS_UINT32                          ulCglaGetRspCustomFlg   : 1;
 
     VOS_UINT32                          ulRsv                   : 10;
@@ -820,9 +820,9 @@ typedef struct
     VOS_UINT8                           aucPasswords[8];
     VOS_UINT16                          usUsed;
     VOS_UINT16                          usTotal;
-    VOS_UINT8                           ucAnrMaxNum;        /*Balong支持的ANR的最大值*/
-    VOS_UINT8                           ucEmailFlag;        /*Balong支持Email标记*/
-    VOS_UINT8                           ucSPBFlag;         /*复合电话本支持标记，为1时表示支持*/
+    VOS_UINT8                           ucAnrMaxNum;        /*Balong??????ANR????????*/
+    VOS_UINT8                           ucEmailFlag;        /*Balong????Email????*/
+    VOS_UINT8                           ucSPBFlag;         /*??????????????????????1??????????*/
     VOS_UINT8                           ucRsv;
 }SI_PB_CTRL_INFO_ST;
 
@@ -873,7 +873,7 @@ typedef struct
 
 typedef struct
 {
-    VOS_UINT16                          usDualIMSIEnable;      /* 上一次选择的ITEM ID */
+    VOS_UINT16                          usDualIMSIEnable;      /* ????????????ITEM ID */
     VOS_UINT16                          usMatchStrCnt;
     SI_STK_MATCH_STRING_STRU            astMatchStr[3];
 }SI_STK_IMSICHG_MATCH_STRU;
@@ -906,47 +906,47 @@ typedef struct
 
 typedef struct
 {
-    VOS_UINT32 ulSocpDelayWriteFlg;/* SOCP延迟写入功能启动标记 */
-    VOS_UINT32 ulIndSocpLevel;     /* IND通道目的BUFFER发送水线 */
-    VOS_UINT32 ulCfgSocpLevel;     /* CFG通道目的BUFFER发送水线 */
-    VOS_UINT32 ulTimeOutValue;     /* SOCP目的BUFFER的超时时间 */
+    VOS_UINT32 ulSocpDelayWriteFlg;/* SOCP???????????????????? */
+    VOS_UINT32 ulIndSocpLevel;     /* IND????????BUFFER???????? */
+    VOS_UINT32 ulCfgSocpLevel;     /* CFG????????BUFFER???????? */
+    VOS_UINT32 ulTimeOutValue;     /* SOCP????BUFFER?????????? */
 }NV_SOCP_SDLOG_CFG_STRU;
 
 
 typedef struct
 {
-    VOS_UINT8                           ucAlmStatus; /* 告警状态,默认0:close;1:open  */
-    VOS_UINT8                           ucAlmLevel;  /* 故障&告警级别：
-                                                                Warning：0x04代表提示，
-                                                                Minor：0x03代表次要
-                                                                Major：0x02代表重要
-                                                                Critical：0x01代表紧急（默认）
-                                                              说明：值为0x03， 0x03/0x02/0x01都上报 */
+    VOS_UINT8                           ucAlmStatus; /* ????????,????0:close;1:open  */
+    VOS_UINT8                           ucAlmLevel;  /* ????&??????????
+                                                                Warning??0x04??????????
+                                                                Minor??0x03????????
+                                                                Major??0x02????????
+                                                                Critical??0x01????????????????
+                                                              ??????????0x03?? 0x03/0x02/0x01?????? */
     VOS_UINT8                          aucReportBitMap[2]; /* A0000000 00000DCB
-                                                              A代表主动上报开关
-                                                              B代表语音质量特性开关
-                                                              C代表搜网特性故障主动上报开关
-                                                              D代表RAT频繁切换主动上报开关
+                                                              A????????????????
+                                                              B????????????????????
+                                                              C????????????????????????????
+                                                              D????RAT????????????????????
                                                            */
 }NV_ID_ERR_LOG_CTRL_INFO_STRU;
 
 
 typedef struct
 {
-    VOS_UINT32                          ulAlarmid;        /* 告警标识 */
-    VOS_UINT32                          ulAlarmidDetail;  /* 告警相关性，32bit，每个bit代表一种相关性，0代表和该相关性无关 */
+    VOS_UINT32                          ulAlarmid;        /* ???????? */
+    VOS_UINT32                          ulAlarmidDetail;  /* ????????????32bit??????bit????????????????0?????????????????? */
 }OM_ALARM_ID_DETAIL_STRU;
 
 
 typedef struct
 {
-    OM_ALARM_ID_DETAIL_STRU          astOmAlarmidRelationship[40]; /* 预设40组 */
+    OM_ALARM_ID_DETAIL_STRU          astOmAlarmidRelationship[40]; /* ????40?? */
 }NV_ALARM_ID_RELATIONSHIP_STRU;
 
 
 typedef struct
 {
-    VOS_UINT32                          ulFTMDetail; /* 工程模式相关性，32bit，每个bit代表一种相关性，0代表和该相关性无关 */
+    VOS_UINT32                          ulFTMDetail; /* ????????????????32bit??????bit????????????????0?????????????????? */
 }NV_ID_FTM_DETAIL_STRU;
 
 
@@ -987,18 +987,18 @@ typedef struct
 typedef struct
 {
     VSIM_ALGORITHM_TYPE_ENUM_UINT32     enAlgorithm;
-    VOS_UINT32                          ulDHLen;         /* DH算法生成因子的长度 */
-    VSIM_KEYDATA_STRU                   stCPrivateKey;   /* 单板测私钥 */
-    VSIM_KEYDATA_STRU                   stCPublicKey;    /* 单板测公钥 */
-    VSIM_KEYDATA_STRU                   stSPublicKey;    /* 服务器公钥 */
+    VOS_UINT32                          ulDHLen;         /* DH?????????????????? */
+    VSIM_KEYDATA_STRU                   stCPrivateKey;   /* ?????????? */
+    VSIM_KEYDATA_STRU                   stCPublicKey;    /* ?????????? */
+    VSIM_KEYDATA_STRU                   stSPublicKey;    /* ?????????? */
 }NVIM_VSIM_HVSDH_NV_STRU;
 
 
 typedef struct
 {
-    VOS_UINT8                           ucABBSwitch;    /*对应模式使用的ABB物理通道，0为ABB CH0，1为ABB CH1，2为当前模式使用用两个通道*/
-    VOS_UINT8                           ucRFSwitch;     /*对应模式使用的RF物理通道，0为RF使用mipi0控制PA-Star上电；1为RF使用mipi1控制PA-Star上电，或者使用Smart-Star的BUCK6来上电，2为当前模式使用两个RFIC*/
-    VOS_UINT8                           ucTCXOSwitch;   /*对应模式使用的TCXO，0为TCXO0，1为TCXO */
+    VOS_UINT8                           ucABBSwitch;    /*??????????????ABB??????????0??ABB CH0??1??ABB CH1??2????????????????????????*/
+    VOS_UINT8                           ucRFSwitch;     /*??????????????RF??????????0??RF????mipi0????PA-Star??????1??RF????mipi1????PA-Star??????????????Smart-Star??BUCK6????????2??????????????????RFIC*/
+    VOS_UINT8                           ucTCXOSwitch;   /*??????????????TCXO??0??TCXO0??1??TCXO */
     VOS_UINT8                           ucRsv1;
 }NV_MODE_BASIC_PARA_STRU;
 
@@ -1006,21 +1006,21 @@ typedef struct
 
 typedef struct
 {
-    NV_MODE_BASIC_PARA_STRU             astModeBasicParam[2];    /*不同制式的通道属性*/
+    NV_MODE_BASIC_PARA_STRU             astModeBasicParam[2];    /*??????????????????*/
 }NV_GUMODE_CHAN_PARA_STRU;
 
 
 
 typedef struct
 {
-    VOS_UINT8                           aucXMLBaseBoardId[24]; /* 记录base board xml 名称 */
+    VOS_UINT8                           aucXMLBaseBoardId[24]; /* ????base board xml ???? */
 }NV_RECORD_BASE_BOARD_XML_STRU;
 
 
 
 typedef struct
 {
-    VOS_UINT8                           aucXMLCurrentBoardId[24]; /* 记录Currnet board xml 名称 */
+    VOS_UINT8                           aucXMLCurrentBoardId[24]; /* ????Currnet board xml ???? */
 }NV_RECORD_CURRENT_BOARD_XML_STRU;
 
 
@@ -1040,17 +1040,17 @@ typedef struct
 
 typedef struct
 {
-    EVENT_RESEND_FLAG_ENUM_UINT8            enResendFlag;   /*1开启，0关闭*/
-    VOS_UINT8                               ucRetryTime;    /*重试次数，如果设置为0为不重发*/
-    VOS_UINT8                               ucTimerLen;     /*间隔时间，单位为秒, 如果设置为0为不重发*/
+    EVENT_RESEND_FLAG_ENUM_UINT8            enResendFlag;   /*1??????0????*/
+    VOS_UINT8                               ucRetryTime;    /*????????????????????0????????*/
+    VOS_UINT8                               ucTimerLen;     /*??????????????????, ??????????0????????*/
     VOS_UINT8                               ucRsv;
 }NV_EVENT_RESEND_CFG_STRU;
 
 
 enum USIMM_DL_T_MODE_ENUM
 {
-    USIMM_DL_T_MODE_T0        = 0,    /* 支持T=0模式 */
-    USIMM_DL_T_MODE_T1        = 1,    /* 支持T=1模式 */
+    USIMM_DL_T_MODE_T0        = 0,    /* ????T=0???? */
+    USIMM_DL_T_MODE_T1        = 1,    /* ????T=1???? */
     USIMM_DL_T_MODE_BUTT
 };
 typedef VOS_UINT32      USIMM_DL_T_MODE_ENUM_UINT32;
@@ -1058,8 +1058,8 @@ typedef VOS_UINT32      USIMM_DL_T_MODE_ENUM_UINT32;
 
 enum USIMM_T1_ERR_DETECT_MODE_ENUM
 {
-    USIMM_T1_ERR_DETECT_MODE_ISO_IEC_7816_3  = 0,           /* NV默认值，遵循ISO_IEC 7816-3 2006规范，EDC根据ATR中的指示来确定(LRC或CRC) */
-    USIMM_T1_ERR_DETECT_MODE_TS102221        = 1,           /* 遵循TS_102221v110000p规范，EDC只使用LRC */
+    USIMM_T1_ERR_DETECT_MODE_ISO_IEC_7816_3  = 0,           /* NV????????????ISO_IEC 7816-3 2006??????EDC????ATR??????????????(LRC??CRC) */
+    USIMM_T1_ERR_DETECT_MODE_TS102221        = 1,           /* ????TS_102221v110000p??????EDC??????LRC */
 
     USIMM_T1_ERR_DETECT_MODE_BUTT
 };
@@ -1068,8 +1068,8 @@ typedef VOS_UINT32 USIMM_T1_ERR_DETECT_MODE_ENUM_UINT32;
 
 enum USIMM_DL_T1_GCF_FLAG_ENUM
 {
-    USIMM_DL_T1_GCF_DISABLE       = 0,    /* 当前不在GCF测试 */
-    USIMM_DL_T1_GCF_ENABLE        = 1,    /* 当前GCF测试使能 */
+    USIMM_DL_T1_GCF_DISABLE       = 0,    /* ????????GCF???? */
+    USIMM_DL_T1_GCF_ENABLE        = 1,    /* ????GCF???????? */
     USIMM_DL_T1_GCF_BUTT
 };
 typedef VOS_UINT32      USIMM_DL_T1_GCF_FLAG_ENUM_UINT32;
@@ -1110,7 +1110,7 @@ typedef struct
 
 typedef struct
 {
-    VOS_BOOL                            bEnable;       /*使能标志位*/
+    VOS_BOOL                            bEnable;       /*??????????*/
     VOS_UINT32                          ulRsv;
 }NV_DDR_ADJUST_ENABLE_STRU;
 
@@ -1154,9 +1154,9 @@ typedef struct
 
 enum SC_PERS_PLATFORM_ENUM
 {
-    SC_PERS_PLATFORM_G,   /* 非电信模式锁网锁卡 */
+    SC_PERS_PLATFORM_G,   /* ?????????????????? */
 
-    SC_PERS_PLATFORM_C,   /* 电信模式锁网锁卡 */
+    SC_PERS_PLATFORM_C,   /* ???????????????? */
 
     SC_PERS_PLATFORM_BUT,
 };
@@ -1178,10 +1178,10 @@ typedef struct
 
 typedef struct
 {
-    VOS_UINT8                   ucSiWaitGpsPseudoCnfTimeLen;   /* NI流程等待GPS伪距信息回复时间:单位秒 */
-    VOS_UINT8                   ucNiWaitGpsPseudoCnfTimeLen;   /* 非NI流程等待GPS伪距信息回复时间:单位秒 */
-    VOS_UINT8                   ucWaitCasRefLocIndTimeLen;     /* 等待CAS REF LOC IND消息超时时间:单位秒 */
-    VOS_UINT8                   ucMsaMaxPilotCnt;              /* MSA流程最大Pilot数目 */
+    VOS_UINT8                   ucSiWaitGpsPseudoCnfTimeLen;   /* NI????????GPS????????????????:?????? */
+    VOS_UINT8                   ucNiWaitGpsPseudoCnfTimeLen;   /* ??NI????????GPS????????????????:?????? */
+    VOS_UINT8                   ucWaitCasRefLocIndTimeLen;     /* ????CAS REF LOC IND????????????:?????? */
+    VOS_UINT8                   ucMsaMaxPilotCnt;              /* MSA????????Pilot???? */
 
     VOS_UINT8                   ucRsv[8];
 }NV_XPDS_FEATURE_CONTROL_STRU;
@@ -1196,24 +1196,24 @@ typedef struct
 
 typedef struct
 {
-    VOS_UINT8                           ucEnable;               /* 1为开启，0为关闭 */
+    VOS_UINT8                           ucEnable;               /* 1????????0?????? */
     VOS_UINT8                           ucRsv;
-    VOS_UINT16                          usProtectTime;          /* 保护时长，单位为秒 */
+    VOS_UINT16                          usProtectTime;          /* ?????????????????? */
 }USIMM_ACK_PROTECT_NV_STRU;
 
 
 typedef struct
 {
-    VOS_UINT8                           ucEnable;               /* 1为开启，0为关闭 默认开启 */
-    VOS_UINT8                           ucInitCheckTimeLen;     /* 初始检测时长，单位为秒，默认为5s */
-    VOS_UINT8                           ucCheckTimeLen;         /* 多次检测后，定时器拉长，单位为秒，默认为60s */
+    VOS_UINT8                           ucEnable;               /* 1????????0?????? ???????? */
+    VOS_UINT8                           ucInitCheckTimeLen;     /* ??????????????????????????????5s */
+    VOS_UINT8                           ucCheckTimeLen;         /* ????????????????????????????????????????60s */
     VOS_UINT8                           ucRcv;
 }USIMM_CHECK_KEY_FILE_NV_STRU;
 
 
 typedef struct
 {
-    VOS_UINT8                           ucDisableRealIsim;               /* 1为禁止真实ISIM，0为不禁止真实ISIM */
+    VOS_UINT8                           ucDisableRealIsim;               /* 1??????????ISIM??0????????????ISIM */
     VOS_UINT8                           aucRsv[3];
 }USIMM_DISABLE_REAL_ISIM_CTRL_NV_STRU;
 
@@ -1253,12 +1253,12 @@ typedef struct
 }USIMM_PLMN_DIGIT_NV_CTRL_STRU;
 
 /*****************************************************************************
-  8 UNION定义
+  8 UNION????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  9 OTHERS定义
+  9 OTHERS????
 *****************************************************************************/
 
 #if (VOS_OS_VER != VOS_WIN32)

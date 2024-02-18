@@ -47,7 +47,7 @@
 */
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "GuNasLogFilter.h"
 #include "MnMsgApi.h"
@@ -70,7 +70,7 @@
 #define    AT_SMS_MODE              (1)
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 typedef VOS_UINT32 (*pGuNasMsgFilterProcFunc)(
     PS_MSG_HEADER_STRU                 *pstMsg
@@ -100,7 +100,7 @@ GUNAS_MSG_FILTER_PROC_TBL_FUNC              g_astGuNasMsgFilterProcFuncTbl[] =
 
 VOS_CHAR*                                       g_apcATFileterTable[]=
 {
-        /* USIM相关 */
+        /* USIM???? */
         "AT+CPIN"           ,
         "\r\n+CPIN:"        ,
         "AT+CLCK"           ,
@@ -149,7 +149,7 @@ VOS_CHAR*                                       g_apcATFileterTable[]=
         "\r\n^CRLA:"        ,
         "\r\n^USIMICCID:"   ,
 
-        /* 短信相关 */
+        /* ???????? */
         "AT+CMGS"           ,
         "AT+CMGW"           ,
         "AT+CMGC"           ,
@@ -159,11 +159,11 @@ VOS_CHAR*                                       g_apcATFileterTable[]=
         "\r\n+CMGS:"        ,
         "\r\n+CDS:"         ,
 
-        /* SIM LOCK相关 */
+        /* SIM LOCK???? */
         "AT^SIMLOCKUNLOCK"  ,
         "AT^CMLCK"          ,
 
-        /* 电话本相关 */
+        /* ?????????? */
         "AT+CPBS"           ,
         "\r\n+CPBS:"        ,
         "AT+CPBR"           ,
@@ -186,7 +186,7 @@ VOS_CHAR*                                       g_apcATFileterTable[]=
 
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 
@@ -261,7 +261,7 @@ VOS_UINT32 GUNAS_FilterAtToAtMsg(
             {
                 if (AT_SMS_MODE == g_stParseContext[pstAtMsg->ucIndex].ucMode)
                 {
-                    /* 短信模式直接进行过滤 */
+                    /* ???????????????????? */
                     MN_NORM_LOG1("GUNAS_FilterAtToAtMsg: TRUE,SMS MODE, ulMsgName ", pstAtMsg->enMsgId);
                     return VOS_TRUE;
                 }
@@ -291,7 +291,7 @@ VOS_UINT32 GUNAS_FilterAtToMmaMsg(
 {
     switch (pstMsg->ulMsgName)
     {
-        /* 补充业务相关的信息 */
+        /* ?????????????????? */
         case TAF_MSG_MMA_OP_PIN_REQ:
         case TAF_MSG_MMA_SET_PIN:
         case TAF_MSG_MMA_ME_PERSONAL_REQ:
@@ -310,7 +310,7 @@ VOS_UINT32 GUNAS_FilterAtToMtaMsg(
 {
     switch (pstMsg->ulMsgName)
     {
-        /* 补充业务相关的信息 */
+        /* ?????????????????? */
         case ID_AT_MTA_SIMLOCKUNLOCK_SET_REQ:
             MN_NORM_LOG1("GUNAS_FilterAtToMtaMsg: TRUE ulMsgName ", pstMsg->ulMsgName);
             return VOS_TRUE;
@@ -327,7 +327,7 @@ VOS_UINT32 GUNAS_FilterAtToPihMsg(
 {
     switch (pstMsg->ulMsgName)
     {
-        /* 补充业务相关的信息 */
+        /* ?????????????????? */
         /* SI_PIH_FDN_ENABLE_REQ */
         case AT_PIH_FDN_ENABLE_REQ:
         /* SI_PIH_FDN_DISALBE_REQ */
@@ -347,7 +347,7 @@ VOS_UINT32 GUNAS_FilterAtToTafMsg(
 {
     switch (pstMsg->ulMsgName)
     {
-        /* 短信相关的信息 */
+        /* ?????????????? */
         case MN_MSG_MSGTYPE_SEND_RPDATA_DIRECT:
         case MN_MSG_MSGTYPE_SEND_RPDATA_FROMMEM:
         case MN_MSG_MSGTYPE_WRITE:
@@ -356,7 +356,7 @@ VOS_UINT32 GUNAS_FilterAtToTafMsg(
             MN_NORM_LOG1("GUNAS_FilterAtToTafMsg: TRUE ulMsgName ", pstMsg->ulMsgName);
             return VOS_TRUE;
 
-        /* 补充业务相关的信息 */
+        /* ?????????????????? */
         case TAF_MSG_ACTIVATESS_MSG:
         case TAF_MSG_DEACTIVATESS_MSG:
         case TAF_MSG_REGPWD_MSG:

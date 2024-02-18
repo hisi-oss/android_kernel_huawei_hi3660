@@ -11,14 +11,14 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 #include "oal_types.h"
 #include "oal_mm.h"
 #include "arch/oal_util.h"
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
 
 #define OAL_VA_START            va_start
@@ -26,29 +26,29 @@ extern "C" {
 
 #define OAL_VA_LIST             va_list
 
-/* 拼接为16 bit或者 32bit */
+/* ??????16 bit???? 32bit */
 #define OAL_MAKE_WORD16(lsb, msb) ((((oal_uint16)(msb) << 8) & 0xFF00) | (lsb))
 #define OAL_MAKE_WORD32(lsw, msw) ((((oal_uint32)(msw) << 16) & 0xFFFF0000) | (lsw))
 #define OAL_JOIN_WORD32(lsb, ssb, asb, msb) (((oal_uint32)(msb) << 24) | ((oal_uint32)(asb) << 16) | ((oal_uint32)(ssb) << 8) | (lsb))
 #define OAL_JOIN_WORD20(lsw, msw) ((((oal_uint32)(msw) << 10) & 0xFFC00) | (lsw & 0x3FF))
 
-/* 计算为字节对齐后填充后的长度 */
+/* ???????????????????????????? */
 #define PADDING(x, size)           (((x) + (size) - 1) & (~ ((size) - 1)))
 
 /* increment with wrap-around */
 #define OAL_INCR(_l, _sz)   (_l)++; (_l) &= ((_sz) - 1)
 #define OAL_DECR(_l, _sz)   (_l)--; (_l) &= ((_sz) - 1)
 
-/* 获取大小 */
+/* ???????? */
 #define OAL_SIZEOF                                  sizeof
 
-/* 获取数组大小 */
+/* ???????????? */
 #define OAL_ARRAY_SIZE(_ast_array)                  (sizeof(_ast_array) / sizeof((_ast_array)[0]))
 
-/* 四字节对齐 */
+/* ?????????? */
 #define OAL_GET_4BYTE_ALIGN_VALUE(_ul_size)         (((_ul_size) + 0x03) & (~0x03))
 
-/* 获取当前线程信息 */
+/* ???????????????? */
 #define OAL_CURRENT_TASK     (current_thread_info()->task)
 
 #define OAL_SWAP_BYTEORDER_16(_val) ((((_val) & 0x00FF) << 8) + (((_val) & 0xFF00) >> 8))
@@ -91,30 +91,30 @@ extern "C" {
 #define oal_atomic_inc_return   atomic_inc_return
 #endif
 
-#if 0  /* 编不过 */
+#if 0  /* ?????? */
 #ifndef current
 #define current (0)
 #endif
 #endif
 
-/* 比较宏 */
+/* ?????? */
 #define OAL_MIN(_A, _B) (((_A) < (_B))? (_A) : (_B))
 
-/* 比较宏 */
+/* ?????? */
 #define OAL_MAX(_A, _B) (((_A) > (_B))? (_A) : (_B))
 
 #define OAL_SUB(_A, _B) (((_A) > (_B))? ((_A) - (_B)) : (0))
 
 #define OAL_ABSOLUTE_SUB(_A, _B) (((_A) > (_B))? ((_A) - (_B)) : ((_B) - (_A)))
 
-/* 从某个设备读取某个寄存器地址的32-bit寄存器的值。*/
+/* ??????????????????????????????32-bit????????????*/
 #define OAL_REG_READ32(_addr)    \
         *((OAL_VOLATILE oal_uint32 *)(_addr))
 
 #define OAL_REG_READ16(_addr)    \
     *((OAL_VOLATILE oal_uint16 *)(_addr))
 
-/* 往某个设备某个32-bit寄存器地址写入某个值 */
+/* ??????????????32-bit???????????????????? */
 #define OAL_REG_WRITE32(_addr, _val)    \
     (*((OAL_VOLATILE oal_uint32 *)(_addr)) = (_val))
 #define OAL_REG_WRITE16(_addr, _val)    \
@@ -166,10 +166,10 @@ extern "C" {
 
 #define BIT(nr)                 (1UL << (nr))
 
-#define OAL_BITS_PER_BYTE       8   /* 一个字节中包含的bit数目 */
+#define OAL_BITS_PER_BYTE       8   /* ????????????????bit???? */
 
 
-/* 位操作 */
+/* ?????? */
 #define OAL_SET_BIT(_val)                           (1 << (_val))
 #define OAL_LEFT_SHIFT(_data, _num)                 ((_data) << (_num))
 #define OAL_RGHT_SHIFT(_data, _num)                 ((_data) >> (_num))
@@ -179,7 +179,7 @@ extern "C" {
     }while(0)
 #define OAL_GET_BITS(_data, _bits, _pos)      (((_data) >> (_pos)) & (((oal_uint32)1 << (_bits)) - 1))
 
-/* 位数定义 */
+/* ???????? */
 #define NUM_1_BITS                        1
 #define NUM_2_BITS                        2
 #define NUM_3_BITS                        3
@@ -213,7 +213,7 @@ extern "C" {
 #define NUM_31_BITS                       31
 #define NUM_32_BITS                       32
 
-/* 位偏移定义 */
+/* ?????????? */
 #define BIT_OFFSET_0                        0
 #define BIT_OFFSET_1                        1
 #define BIT_OFFSET_2                        2
@@ -247,43 +247,43 @@ extern "C" {
 #define BIT_OFFSET_30                       30
 #define BIT_OFFSET_31                       31
 
-/*定点数四舍五入，并取整数部分, fract_bits为小数位数*/
+/*????????????????????????????, fract_bits??????????*/
 #define _ROUND_POS(fix_num, fract_bits) (((fix_num) + (1 << ((fract_bits) - 1))) >> (fract_bits))
 #define _ROUND_NEG(fix_num, fract_bits) -_ROUND_POS(-(fix_num), fract_bits)
 #define OAL_ROUND(fix_num, fract_bits) ((fix_num) > 0 ? _ROUND_POS(fix_num, fract_bits) : _ROUND_NEG(fix_num, fract_bits))
 
 
-#define OAL_RSSI_INIT_MARKER     0x320    /* RSSI平滑值初始值*/
-#define OAL_RSSI_MAX_DELTA       24       /*最大步长 24/8 = 3*/
+#define OAL_RSSI_INIT_MARKER     0x320    /* RSSI????????????*/
+#define OAL_RSSI_MAX_DELTA       24       /*???????? 24/8 = 3*/
 #define OAL_RSSI_FRACTION_BITS   3
-#define OAL_RSSI_SIGNAL_MIN      -103     /*上报RSSI下边界*/
-#define OAL_RSSI_SIGNAL_MAX      5        /*上报RSSI上边界*/
-#define OAL_SNR_INIT_VALUE       0x7F     /* SNR上报的初始值 */
-#define OAL_RSSI_INIT_VALUE      (-128)   /* RSSI的初始值 */
+#define OAL_RSSI_SIGNAL_MIN      -103     /*????RSSI??????*/
+#define OAL_RSSI_SIGNAL_MAX      5        /*????RSSI??????*/
+#define OAL_SNR_INIT_VALUE       0x7F     /* SNR???????????? */
+#define OAL_RSSI_INIT_VALUE      (-128)   /* RSSI???????? */
 
 #define OAL_IPV6_ADDR_LEN 16
 
 /*****************************************************************************
-  3 枚举定义
+  3 ????????
 *****************************************************************************/
 
 /*****************************************************************************
-  4 全局变量声明
-*****************************************************************************/
-
-
-/*****************************************************************************
-  5 消息头定义
+  4 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  6 消息定义
+  5 ??????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  7 STRUCT定义
+  6 ????????
+*****************************************************************************/
+
+
+/*****************************************************************************
+  7 STRUCT????
 *****************************************************************************/
 #define HI11XX_LOG_ERR  0
 #define HI11XX_LOG_WARN 1
@@ -345,17 +345,17 @@ struct _hwifi_panic_log_
 #endif
 
 /*****************************************************************************
-  8 UNION定义
+  8 UNION????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  9 OTHERS定义
+  9 OTHERS????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  10 函数声明
+  10 ????????
 *****************************************************************************/
 #ifdef _PRE_CONFIG_HISI_PANIC_DUMP_SUPPORT
 
@@ -408,7 +408,7 @@ OAL_STATIC OAL_INLINE oal_void  oal_strtoaddr(const oal_int8 *pc_param, oal_uint
 {
     oal_uint8   uc_char_index;
 
-    /* 获取mac地址,16进制转换 */
+    /* ????mac????,16???????? */
     for (uc_char_index = 0; uc_char_index < 12; uc_char_index++)
     {
         if ((':' == *pc_param) || ('-' == *pc_param))
@@ -431,15 +431,15 @@ OAL_STATIC OAL_INLINE oal_void  oal_strtoaddr(const oal_int8 *pc_param, oal_uint
 }
 
 /*****************************************************************************
- 函 数 名  : oal_strtoipv6
- 功能描述  : 字符串转ipv6地址
- 输入参数  : pc_param: ipv6地址字符串, 格式 xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx
- 输出参数  : puc_mac_addr: 转换成16进制后的ipv6地址
- 返 回 值  :
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : oal_strtoipv6
+ ????????  : ????????ipv6????
+ ????????  : pc_param: ipv6??????????, ???? xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx
+ ????????  : puc_mac_addr: ??????16????????ipv6????
+ ?? ?? ??  :
+ ????????  :
+ ????????  :
 
- 修改历史      :
+ ????????      :
 
 
 *****************************************************************************/
@@ -447,7 +447,7 @@ OAL_STATIC OAL_INLINE oal_void  oal_strtoipv6(const oal_int8 *pc_param, oal_uint
 {
     oal_uint8   uc_char_index;
 
-    /* 获取ipv6地址,16进制转换 */
+    /* ????ipv6????,16???????? */
     for (uc_char_index = 0; uc_char_index < OAL_IPV6_ADDR_LEN*2; uc_char_index++)
     {
         if ((':' == *pc_param))
@@ -460,7 +460,7 @@ OAL_STATIC OAL_INLINE oal_void  oal_strtoipv6(const oal_int8 *pc_param, oal_uint
 
             continue;
         }
-        /* 将ipv6字符串转换为16进制数组 */
+        /* ??ipv6????????????16???????? */
         puc_ipv6_addr[uc_char_index>>1] =
         (oal_uint8)(((puc_ipv6_addr[uc_char_index>>1])<<4) * (uc_char_index % 2) +
                                         oal_strtohex(pc_param));
@@ -955,7 +955,7 @@ OAL_STATIC OAL_INLINE oal_void  oal_reset_lut_index_status(oal_uint8 *puc_lut_id
 
 OAL_STATIC OAL_INLINE oal_uint32* oal_get_virt_addr(oal_uint32 *pul_phy_addr)
 {
-    /* 空指针无需转化 */
+    /* ?????????????? */
     if (OAL_PTR_NULL == pul_phy_addr)
     {
         return pul_phy_addr;
@@ -968,7 +968,7 @@ extern oal_int32 oal_dump_stack_str(oal_uint8 *puc_str, oal_uint32 ul_max_size);
 
 OAL_STATIC OAL_INLINE oal_int8 oal_get_real_rssi(oal_int16 s_scaled_rssi)
 {
-    /*四舍五入*/
+    /*????????*/
     return OAL_ROUND(s_scaled_rssi, OAL_RSSI_FRACTION_BITS);
 }
 
@@ -976,25 +976,25 @@ OAL_STATIC OAL_INLINE oal_void oal_rssi_smooth(oal_int16 *ps_old_rssi, oal_int8 
 {
     oal_int16 s_delta;
 
-    /*若上报的值超过了合法范围，则不进行平滑操作，函数直接返回*/
+    /*????????????????????????????????????????????????????????*/
     if(c_new_rssi < OAL_RSSI_SIGNAL_MIN || c_new_rssi > OAL_RSSI_SIGNAL_MAX)
     {
         return;
     }
 
-    /* 若上报的值为0，则是描述符未填rssi值,不进行平滑 */
+    /* ????????????0????????????????rssi??,?????????? */
     if(0 == c_new_rssi)
     {
         return;
     }
 
-    /*判断为初始值,芯片上报的rssi作为平滑结果*/
+    /*????????????,??????????rssi????????????*/
     if (OAL_RSSI_INIT_MARKER == *ps_old_rssi)
     {
         *ps_old_rssi = (oal_int16)c_new_rssi << OAL_RSSI_FRACTION_BITS;
     }
 
-    /*old_rssi四舍五入后计算delta*/
+    /*old_rssi??????????????delta*/
     s_delta = (oal_int16)c_new_rssi - oal_get_real_rssi(*ps_old_rssi);
 
     if (s_delta > OAL_RSSI_MAX_DELTA)

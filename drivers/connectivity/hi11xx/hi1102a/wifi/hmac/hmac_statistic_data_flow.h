@@ -11,62 +11,62 @@ extern "C" {
 
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 #include "hmac_main.h"
 #ifdef _PRE_PLAT_FEATURE_CUSTOMIZE
 #include "hisi_customize_wifi.h"
 #endif
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
-#define WLAN_STATIS_DATA_TIMER_PERIOD    (100)          /*定时器100ms定时*/
+#define WLAN_STATIS_DATA_TIMER_PERIOD    (100)          /*??????100ms????*/
 #define WLAN_THROUGHPUT_STA_PERIOD        (20)
-#define WLAN_THROUGHPUT_LOAD_LOW          (10)           /* 低负载10M */
-/* WIFI测吞吐量较大时将收发中断绑定在大核 */
+#define WLAN_THROUGHPUT_LOAD_LOW          (10)           /* ??????10M */
+/* WIFI?????????????????????????????????? */
 #define WLAN_IRQ_AFFINITY_IDLE_CPU   0
 #define WLAN_IRQ_AFFINITY_BUSY_CPU   4
 
 /*****************************************************************************
-  3 枚举定义
+  3 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  4 全局变量声明
+  4 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  5 消息头定义
+  5 ??????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  6 消息定义
+  6 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  7 STRUCT定义
+  7 STRUCT????
 *****************************************************************************/
 typedef struct {
-    oal_uint8               uc_timer_cycles; /* 定时器周期数 */
-    oal_uint8               uc_req_irq_cpu;  /* 是否绑定大核 */
-    oal_uint8               uc_txop_limit_en;/* 是否开启txop */
+    oal_uint8               uc_timer_cycles; /* ???????????? */
+    oal_uint8               uc_req_irq_cpu;  /* ???????????? */
+    oal_uint8               uc_txop_limit_en;/* ????????txop */
     oal_uint8               uc_res;
     oal_uint32              ul_tx_pkts;
     oal_uint32              ul_rx_pkts;
-    oal_uint32              ul_tx_bytes;  /* WIFI 业务发送帧统计 */
-    oal_uint32              ul_rx_bytes;   /* WIFI 业务接收帧统计 */
-    oal_uint32              ul_pre_time; /*用于计算吞吐率*/
-    oal_uint32              ul_total_sdio_pps; /*吞吐速率*/
+    oal_uint32              ul_tx_bytes;  /* WIFI ?????????????? */
+    oal_uint32              ul_rx_bytes;   /* WIFI ?????????????? */
+    oal_uint32              ul_pre_time; /*??????????????*/
+    oal_uint32              ul_total_sdio_pps; /*????????*/
     oal_uint32              ul_tx_pps;
     oal_uint32              ul_rx_pps;
     frw_timeout_stru        st_statis_data_timer;
 }wifi_txrx_pkt_statis_stru;
 
-/* 当前wifi业务负载 */
+/* ????wifi???????? */
 typedef struct
 {
     oal_bool_enum_uint8         en_wifi_rx_busy;
@@ -97,13 +97,13 @@ typedef enum
 typedef oal_uint8 oal_h2d_freq_cmd_enum_uint8;
 
 typedef struct {
-    oal_uint8  uc_device_type;   /*device主频类型*/
-    oal_uint8  uc_reserve[3];   /*保留字段*/
+    oal_uint8  uc_device_type;   /*device????????*/
+    oal_uint8  uc_reserve[3];   /*????????*/
 } device_speed_freq_level_stru;
 typedef struct {
-    oal_uint32  ul_speed_level;    /*吞吐量门限*/
-    oal_uint32  ul_min_cpu_freq;  /*CPU主频下限*/
-    oal_uint32  ul_min_ddr_freq;   /*DDR主频下限*/
+    oal_uint32  ul_speed_level;    /*??????????*/
+    oal_uint32  ul_min_cpu_freq;  /*CPU????????*/
+    oal_uint32  ul_min_ddr_freq;   /*DDR????????*/
 } host_speed_freq_level_stru;
 typedef struct {
     oal_bool_enum_uint8  en_irq_bindcpu;
@@ -120,17 +120,17 @@ extern thread_bindcpu_stru g_st_thread_bindcpu;
 
 #endif
 /*****************************************************************************
-  8 UNION定义
+  8 UNION????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  9 OTHERS定义
+  9 OTHERS????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  10 函数声明
+  10 ????????
 *****************************************************************************/
 extern oal_void                 hmac_wifi_statistic_rx_packets(oal_uint32 ul_pkt_count);
 extern oal_void                 hmac_wifi_statistic_tx_packets(oal_uint32 ul_pkt_count);

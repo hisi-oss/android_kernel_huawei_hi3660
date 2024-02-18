@@ -47,7 +47,7 @@
 */
 
 /******************************************************************************
-1 头文件包含
+1 ??????????
 ******************************************************************************/
 #include "v_id.h"
 #include "RnicProcMsg.h"
@@ -59,17 +59,17 @@
 
 
 /*****************************************************************************
-协议栈打印打点方式下的.C文件宏定义
+??????????????????????.C??????????
 *****************************************************************************/
 
 #define    THIS_FILE_ID        PS_FILE_ID_RNIC_INITS_C
 
 /*****************************************************************************
-2 全局变量定义
+2 ????????????
 *****************************************************************************/
 
 /*****************************************************************************
-3 函数实现
+3 ????????
 *****************************************************************************/
 
 VOS_INT RNIC_CCpuResetCallback(
@@ -79,12 +79,12 @@ VOS_INT RNIC_CCpuResetCallback(
 {
     RNIC_CCPU_RESET_IND_STRU           *pstMsg = VOS_NULL_PTR;
 
-    /* 复位前 */
+    /* ?????? */
     if (MDRV_RESET_CB_BEFORE == enParam)
     {
         printk("\n RNIC_CCpuResetCallback before reset enter, %u \n", VOS_GetSlice());
 
-        /* 构造消息 */
+        /* ???????? */
         pstMsg = (RNIC_CCPU_RESET_IND_STRU*)PS_ALLOC_MSG_WITH_HEADER_LEN(ACPU_PID_RNIC,
                                                                     sizeof(RNIC_CCPU_RESET_IND_STRU));
         if (VOS_NULL_PTR == pstMsg)
@@ -93,18 +93,18 @@ VOS_INT RNIC_CCpuResetCallback(
             return VOS_ERROR;
         }
 
-        /* 填写消息头 */
+        /* ?????????? */
         pstMsg->ulReceiverPid               = ACPU_PID_RNIC;
         pstMsg->enMsgId                     = ID_RNIC_CCPU_RESET_START_IND;
 
-        /* 发消息 */
+        /* ?????? */
         if (VOS_OK != PS_SEND_MSG(ACPU_PID_RNIC, pstMsg))
         {
             printk("\n RNIC_CCpuResetCallback before reset send msg fail, %u \n", VOS_GetSlice());
             return VOS_ERROR;
         }
 
-        /* 等待回复信号量初始为锁状态，等待消息处理完后信号量解锁。 */
+        /* ???????????????????????????????????????????????????????? */
         if (VOS_OK != VOS_SmP(RNIC_GetResetSem(), RNIC_RESET_TIMEOUT_LEN))
         {
             printk("\n RNIC_CCpuResetCallback before reset Vos_SmP fail, %u \n", VOS_GetSlice());
@@ -115,10 +115,10 @@ VOS_INT RNIC_CCpuResetCallback(
 
         return VOS_OK;
     }
-    /* 复位后 */
+    /* ?????? */
     else if (MDRV_RESET_CB_AFTER == enParam)
     {
-        /* 记录复位的次数 */
+        /* ?????????????? */
         RNIC_DBG_SAVE_CCPU_RESET_SUCCESS_NUM(1);
 
         return VOS_OK;
@@ -140,11 +140,11 @@ VOS_UINT32 RNIC_PidInit (enum VOS_INIT_PHASE_DEFINE enPhase)
     {
         case VOS_IP_LOAD_CONFIG:
 
-            /* 初始化RNIC上下文信息 */
+            /* ??????RNIC?????????? */
             pstRnicCtx = RNIC_GetRnicCtxAddr();
             RNIC_InitCtx(pstRnicCtx);
 
-            /* 给低软注册回调函数，用于C核单独复位的处理 */
+            /* ????????????????????????C???????????????? */
             mdrv_sysboot_register_reset_notify(NAS_RNIC_FUNC_PROC_NAME,
                                      RNIC_CCpuResetCallback,
                                      0,
@@ -183,7 +183,7 @@ VOS_UINT32 RNIC_FidInit (enum VOS_INIT_PHASE_DEFINE enPhase)
     {
         case VOS_IP_LOAD_CONFIG:
 
-            /* 网卡模块注册PID */
+            /* ????????????PID */
             ulRslt = VOS_RegisterPIDInfo(ACPU_PID_RNIC,
                                 (Init_Fun_Type)RNIC_PidInit,
                                 (Msg_Fun_Type)RNIC_ProcMsg);

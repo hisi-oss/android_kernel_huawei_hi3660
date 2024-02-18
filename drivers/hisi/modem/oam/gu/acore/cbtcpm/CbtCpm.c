@@ -49,7 +49,7 @@
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 **************************************************************************** */
 #include "CbtCpm.h"
 
@@ -58,24 +58,24 @@
 #define    THIS_FILE_ID        PS_FILE_ID_CBT_CPM_C
 
 /* ****************************************************************************
-  2 全局变量定义
+  2 ????????????
 **************************************************************************** */
 CBTCPM_RCV_FUNC                g_pCbtRcvFunc = VOS_NULL_PTR;
 CBTCPM_SEND_FUNC               g_pCbtSndFunc = VOS_NULL_PTR;
 
 /*****************************************************************************
-  3 外部引用声明
+  3 ????????????
 *****************************************************************************/
 extern VOS_UINT32 CBTSCM_SoftDecodeDataRcv(VOS_UINT8 *pucBuffer, VOS_UINT32 ulLen);
 
-/*AT提供给OM注册端口接收函数的接口*/
+/*AT??????OM??????????????????????*/
 extern VOS_VOID AT_RcvFuncReg(AT_PHY_PORT_ENUM_UINT32 ulPhyPort, CBTCPM_RCV_FUNC pRcvFunc);
 
-/*AT提供给OM查询发送数据的函数接口*/
+/*AT??????OM??????????????????????*/
 extern CBTCPM_SEND_FUNC AT_QuerySndFunc(AT_PHY_PORT_ENUM_UINT32 ulPhyPort);
 
 /*****************************************************************************
-  4 函数实现
+  4 ????????
 *****************************************************************************/
 
 
@@ -109,16 +109,16 @@ CBTCPM_SEND_FUNC CBTCPM_GetSndFunc(VOS_VOID)
 
 VOS_UINT32 CBTCPM_NotifyChangePort(AT_PHY_PORT_ENUM_UINT32 enPhyPort)
 {
-    /* NAS走UART口做校准 */
+    /* NAS??UART???????? */
     if (CPM_IND_PORT > enPhyPort)
     {
-        /* 从AT获得发送数据的函数指针 */
+        /* ??AT?????????????????????? */
         CBTCPM_PortSndReg(AT_QuerySndFunc(enPhyPort));
 
-        /* 用AT的端口做校准，不从USB或VCOM上收数据 */
+        /* ??AT??????????????????USB??VCOM???????? */
         CBTCPM_PortRcvReg(VOS_NULL_PTR);
 
-        /* 将校准通道的接收函数给AT模块 */
+        /* ??????????????????????AT???? */
         AT_RcvFuncReg(enPhyPort, CBTSCM_SoftDecodeDataRcv);
 
         return VOS_OK;

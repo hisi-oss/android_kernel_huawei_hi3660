@@ -9,7 +9,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "hmac_main.h"
 #include "mac_vap.h"
@@ -29,13 +29,13 @@ extern "C" {
 
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 
 
 
 /*****************************************************************************
-3 函数实现
+3 ????????
 *****************************************************************************/
 
 
@@ -60,7 +60,7 @@ OAL_STATIC oal_uint32  hmac_wds_find_node(
             continue;
         }
 
-        /* 相同的MAC地址 */
+        /* ??????MAC???? */
         if (!oal_compare_mac_addr(pst_node->auc_mac, puc_addr))
         {
             *ppst_wds_node = pst_node;
@@ -93,7 +93,7 @@ oal_uint32  hmac_wds_find_sta(
             continue;
         }
 
-        /* 相同的MAC地址 */
+        /* ??????MAC???? */
         if (!oal_compare_mac_addr(pst_sta->auc_mac, puc_addr))
         {
             *ppst_wds_sta = pst_sta;
@@ -206,7 +206,7 @@ OAL_STATIC oal_uint32 hmac_wds_del_all_node_sta_entry(hmac_vap_stru *pst_hmac_va
                 break;
             }
 
-            /* 相同的MAC地址 */
+            /* ??????MAC???? */
             if (!oal_compare_mac_addr(pst_sta->pst_related_node->auc_mac, puc_node_mac)
                 && (OAL_SUCC != hmac_wds_del_sta_entry(pst_hmac_vap, pst_sta->auc_mac, pst_sta)))
             {
@@ -513,7 +513,7 @@ oal_uint32  hmac_find_valid_user_by_wds_sta(
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 放在指针空判断后 vap开启了Multi-STA本地能力位 */
+    /* ???????????????? vap??????Multi-STA?????????? */
     if (WDS_MODE_ROOTAP != pst_hmac_vap->st_wds_table.en_wds_vap_mode)
     {
         return ul_ret;
@@ -701,7 +701,7 @@ oal_uint32  hmac_wds_node_ergodic(
         return OAL_SUCC;
     }
 
-    /* 查找报文源MAC是否是Root AP WDS Table里的STA */
+    /* ??????????MAC??????Root AP WDS Table????STA */
     find_sta_ret = hmac_wds_find_sta(pst_hmac_vap, src_addr, &pst_wds_sta);
 
     for (ul_hash_value = 0; ul_hash_value < WDS_HASH_NUM; ul_hash_value++)
@@ -716,7 +716,7 @@ oal_uint32  hmac_wds_node_ergodic(
                 continue;
             }
 
-            /* 如果检测到广播报文源地址是对应repeater ap下的sta 不应该往这个repeater发送广播报文 */
+            /* ??????????????????????????????repeater ap????sta ????????????repeater???????????? */
             if ((find_sta_ret == OAL_SUCC) && (pst_wds_sta != OAL_PTR_NULL) && (pst_wds_sta->pst_related_node != OAL_PTR_NULL)
                 && !oal_compare_mac_addr(pst_node->auc_mac, pst_wds_sta->pst_related_node->auc_mac))
             {
@@ -724,7 +724,7 @@ oal_uint32  hmac_wds_node_ergodic(
                 continue;
             }
 
-            /* 执行函数 */
+            /* ???????? */
             (*pst_hmac_wds_node)(pst_hmac_vap, pst_node->auc_mac, pst_arg);
         }
     }
@@ -765,7 +765,7 @@ OAL_STATIC oal_uint32  hmac_wds_find_neigh(
             continue;
         }
 
-        /* 相同的MAC地址 */
+        /* ??????MAC???? */
         if (!oal_compare_mac_addr(pst_neigh->auc_mac, puc_addr))
         {
             *ppst_neigh = pst_neigh;
@@ -984,7 +984,7 @@ oal_uint32  hmac_wds_table_create_timer(hmac_vap_stru *pst_hmac_vap)
         return OAL_SUCC;
     }
 
-    /* 删除WDS定时器 */
+    /* ????WDS?????? */
     if (OAL_TRUE == pst_hmac_vap->st_wds_table.st_wds_timer.en_is_registerd)
     {
         FRW_TIMER_DESTROY_TIMER(&(pst_hmac_vap->st_wds_table.st_wds_timer));
@@ -1261,7 +1261,7 @@ oal_uint32  hmac_vap_set_wds_user(
 
 #ifdef _PRE_WLAN_FEATURE_VIRTUAL_MULTI_STA
 
-/* 4地址ie check接口 用于驱动上报帧给产品,产品判断后输出用户是否支持4地址 */
+/* 4????ie check???? ????????????????????,??????????????????????????4???? */
 typedef oal_int32 (*p_vmsta_a4_check_func)(oal_uint8 *puc_data, oal_uint32 ul_len);
 
 OAL_STATIC p_vmsta_a4_check_func g_p_vmsta_user_a4_support = OAL_PTR_NULL;
@@ -1299,7 +1299,7 @@ oal_bool_enum_uint8 hmac_vmsta_get_user_a4_support(
     }
 
     pst_hmac_user = (hmac_user_stru *)mac_res_get_hmac_user_etc(us_user_idx);
-    /* 复用wds用户标识，如果能力交互是用户支持4地址通信，则会设置该标识为TRUE */
+    /* ????wds????????????????????????????????4??????????????????????????TRUE */
     return pst_hmac_user->uc_is_wds;
 }
 
@@ -1314,7 +1314,7 @@ oal_uint32 hmac_vmsta_set_vap_a4_enable(mac_vap_stru *pst_mac_vap)
         OAM_ERROR_LOG0(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{hmac_vmsta_set_vap_a4_enable::mac_res_get_hmac_vap null pointer}");
         return OAL_FAIL;
     }
-    /* 复用wds VAP标识，如果上层传入4地址IE，则会设置VAP为对应的wds模式 */
+    /* ????wds VAP??????????????????4????IE??????????VAP????????wds???? */
     if (WLAN_VAP_MODE_BSS_AP == pst_mac_vap->en_vap_mode)
     {
         pst_hmac_vap->st_wds_table.en_wds_vap_mode = WDS_MODE_ROOTAP;
@@ -1333,7 +1333,7 @@ oal_uint32 hmac_vmsta_set_vap_a4_enable(mac_vap_stru *pst_mac_vap)
 
 oal_bool_enum_uint8 hmac_vmsta_check_vap_a4_support(oal_uint8 *puc_ie, oal_uint32 ul_ie_len)
 {
-    /* 产品已注册接口则调用接口进行a4 check */
+    /* ????????????????????????????a4 check */
     if (OAL_PTR_NULL != g_p_vmsta_vap_a4_support)
     {
         if (VMSTA_4ADDR_SUPPORT == g_p_vmsta_vap_a4_support(puc_ie, ul_ie_len))
@@ -1347,7 +1347,7 @@ oal_bool_enum_uint8 hmac_vmsta_check_vap_a4_support(oal_uint8 *puc_ie, oal_uint3
 
 oal_bool_enum_uint8 hmac_vmsta_check_user_a4_support(oal_uint8 *puc_frame, oal_uint32 ul_frame_len)
 {
-    /* 产品已注册接口则调用接口进行a4 check */
+    /* ????????????????????????????a4 check */
     if (OAL_PTR_NULL != g_p_vmsta_user_a4_support)
     {
         if (VMSTA_4ADDR_SUPPORT == g_p_vmsta_user_a4_support(puc_frame, ul_frame_len))
@@ -1384,12 +1384,12 @@ oal_void hmac_wds_init_table(hmac_vap_stru *pst_hmac_vap)
 
 OAL_STATIC oal_uint32 hmac_wds_tx_event( hmac_vap_stru *pst_vap, hmac_user_stru *pst_user, oal_netbuf_stru *pst_buf)
 {
-    frw_event_stru          *pst_event;        /* 事件结构体 */
+    frw_event_stru          *pst_event;        /* ?????????? */
     frw_event_mem_stru      *pst_event_mem;
     dmac_tx_event_stru      *pst_dtx_stru;
     oal_uint32               ul_ret = OAL_SUCC;
 
-    /* 封装802.11头 */
+    /* ????802.11?? */
      ul_ret = hmac_tx_encap_etc(pst_vap, pst_user, pst_buf);
      if (OAL_UNLIKELY((OAL_SUCC != ul_ret)))
      {
@@ -1399,7 +1399,7 @@ OAL_STATIC oal_uint32 hmac_wds_tx_event( hmac_vap_stru *pst_vap, hmac_user_stru 
          return ul_ret;
      }
 
-     /* 抛事件，传给DMAC */
+     /* ????????????DMAC */
      pst_event_mem = FRW_EVENT_ALLOC(OAL_SIZEOF(dmac_tx_event_stru));
      if (OAL_UNLIKELY(OAL_PTR_NULL == pst_event_mem))
      {
@@ -1412,7 +1412,7 @@ OAL_STATIC oal_uint32 hmac_wds_tx_event( hmac_vap_stru *pst_vap, hmac_user_stru 
 
      pst_event = frw_get_event_stru(pst_event_mem);
 
-     /* 填写事件头 */
+     /* ?????????? */
      FRW_EVENT_HDR_INIT(&(pst_event->st_event_hdr),
                       FRW_EVENT_TYPE_HOST_DRX,
                       DMAC_TX_HOST_DRX,
@@ -1425,7 +1425,7 @@ OAL_STATIC oal_uint32 hmac_wds_tx_event( hmac_vap_stru *pst_vap, hmac_user_stru 
      pst_dtx_stru             = (dmac_tx_event_stru *)pst_event->auc_event_data;
      pst_dtx_stru->pst_netbuf = pst_buf;
 
-     /* 调度事件 */
+     /* ???????? */
      ul_ret = frw_event_dispatch_event_etc(pst_event_mem);
      if (OAL_UNLIKELY(OAL_SUCC != ul_ret))
      {
@@ -1433,7 +1433,7 @@ OAL_STATIC oal_uint32 hmac_wds_tx_event( hmac_vap_stru *pst_vap, hmac_user_stru 
          OAM_STAT_VAP_INCR(pst_vap->st_vap_base_info.uc_vap_id, tx_abnormal_msdu_dropped, 1);
      }
 
-     /* 释放事件 */
+     /* ???????? */
      FRW_EVENT_FREE(pst_event_mem);
 
      return ul_ret;
@@ -1445,7 +1445,7 @@ oal_uint32 hmac_wds_tx_broadcast_pkt(hmac_vap_stru *pst_vap, oal_uint8 *puc_addr
 {
     oal_netbuf_stru         *pst_buf = (oal_netbuf_stru *)pst_arg;
     oal_netbuf_stru         *pst_copy_buf;
-    hmac_user_stru          *pst_user;      /* 目标STA结构体 */
+    hmac_user_stru          *pst_user;      /* ????STA?????? */
     oal_uint32               ul_ret;
     oal_uint16               us_user_idx = MAC_INVALID_USER_ID;
 

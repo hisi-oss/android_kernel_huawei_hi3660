@@ -53,11 +53,11 @@ extern "C"
 {
 #endif
 
-/*底软cmdid注册规则:31-28bit(组件ID):0x9; 27-24bit(模指示); 23-19bit(消息类型):0x0; 18-0bit(消息ID):自己定义*/
+/*????cmdid????????:31-28bit(????ID):0x9; 27-24bit(??????); 23-19bit(????????):0x0; 18-0bit(????ID):????????*/
 /* BSP CFG BEGIN*/
 #define DIAG_CMD_LOG_SET                        (0x90035308)
 
-/* 文件操作类（0x5600-0x56ff）*/
+/* ????????????0x5600-0x56ff??*/
 #define DIAG_CMD_FS_QUERY_DIR                   (0x90015601)
 #define DIAG_CMD_FS_SCAN_DIR                    (0x90015602)
 #define DIAG_CMD_FS_MAKE_DIR                    (0x90015603)
@@ -67,7 +67,7 @@ extern "C"
 #define DIAG_CMD_FS_DELETE                      (0x90015607)
 #define DIAG_CMD_FS_SPACE                       (0x90015608)
 
-/* NV操作类（0x5500-0x55ff）*/
+/* NV????????0x5500-0x55ff??*/
 #define DIAG_CMD_NV_WR                          (0x90015001)
 #define DIAG_CMD_NV_RD                          (0x90015003)
 #define DIAG_CMD_GET_NV_LIST                    (0x90015005)

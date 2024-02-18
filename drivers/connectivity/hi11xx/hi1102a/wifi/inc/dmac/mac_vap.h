@@ -11,7 +11,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 #include "oal_ext_if.h"
 #include "wlan_mib.h"
@@ -24,51 +24,51 @@ extern "C" {
 #define THIS_FILE_ID OAM_FILE_ID_MAC_VAP_H
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
-#define MAC_NUM_DR_802_11A              8    /* 11A 5g模式时的数据速率(DR)个数 */
-#define MAC_NUM_BR_802_11A              3    /* 11A 5g模式时的基本速率(BR)个数 */
-#define MAC_NUM_NBR_802_11A             5    /* 11A 5g模式时的非基本速率(NBR)个数 */
+#define MAC_NUM_DR_802_11A              8    /* 11A 5g????????????????(DR)???? */
+#define MAC_NUM_BR_802_11A              3    /* 11A 5g????????????????(BR)???? */
+#define MAC_NUM_NBR_802_11A             5    /* 11A 5g??????????????????(NBR)???? */
 
-#define MAC_NUM_DR_802_11B              4    /* 11B 2.4G模式时的数据速率(DR)个数 */
-#define MAC_NUM_BR_802_11B              2    /* 11B 2.4G模式时的数据速率(BR)个数 */
-#define MAC_NUM_NBR_802_11B             2    /* 11B 2.4G模式时的数据速率(NBR)个数 */
+#define MAC_NUM_DR_802_11B              4    /* 11B 2.4G????????????????(DR)???? */
+#define MAC_NUM_BR_802_11B              2    /* 11B 2.4G????????????????(BR)???? */
+#define MAC_NUM_NBR_802_11B             2    /* 11B 2.4G????????????????(NBR)???? */
 
-#define MAC_NUM_DR_802_11G              8    /* 11G 2.4G模式时的数据速率(DR)个数 */
-#define MAC_NUM_BR_802_11G              3    /* 11G 2.4G模式时的基本速率(BR)个数 */
-#define MAC_NUM_NBR_802_11G             5    /* 11G 2.4G模式时的非基本速率(NBR)个数 */
+#define MAC_NUM_DR_802_11G              8    /* 11G 2.4G????????????????(DR)???? */
+#define MAC_NUM_BR_802_11G              3    /* 11G 2.4G????????????????(BR)???? */
+#define MAC_NUM_NBR_802_11G             5    /* 11G 2.4G??????????????????(NBR)???? */
 
-#define MAC_NUM_DR_802_11G_MIXED        12   /* 11G 混合模式时的数据速率(DR)个数 */
-#define MAC_NUM_BR_802_11G_MIXED_ONE    4    /* 11G 混合1模式时的基本速率(BR)个数 */
-#define MAC_NUM_NBR_802_11G_MIXED_ONE   8    /* 11G 混合1模式时的非基本速率(NBR)个数 */
+#define MAC_NUM_DR_802_11G_MIXED        12   /* 11G ????????????????????(DR)???? */
+#define MAC_NUM_BR_802_11G_MIXED_ONE    4    /* 11G ????1????????????????(BR)???? */
+#define MAC_NUM_NBR_802_11G_MIXED_ONE   8    /* 11G ????1??????????????????(NBR)???? */
 
-#define MAC_NUM_BR_802_11G_MIXED_TWO    7    /* 11G 混合2模式时的基本速率(BR)个数 */
-#define MAC_NUM_NBR_802_11G_MIXED_TWO   5    /* 11G 混合2模式时的非基本速率(NBR)个数 */
+#define MAC_NUM_BR_802_11G_MIXED_TWO    7    /* 11G ????2????????????????(BR)???? */
+#define MAC_NUM_NBR_802_11G_MIXED_TWO   5    /* 11G ????2??????????????????(NBR)???? */
 
-/* 11N MCS相关的内容 */
+/* 11N MCS?????????? */
 
-#define MAC_MAX_RATE_SINGLE_NSS_20M_11N 0  /* 1个空间流20MHz的最大速率*/
-#define MAC_MAX_RATE_SINGLE_NSS_40M_11N 0 /* 1个空间流40MHz的最大速率*/
-#define MAC_MAX_RATE_DOUBLE_NSS_20M_11N 0 /* 1个空间流80MHz的最大速率*/
-#define MAC_MAX_RATE_DOUBLE_NSS_40M_11N 0 /* 2个空间流20MHz的最大速率*/
+#define MAC_MAX_RATE_SINGLE_NSS_20M_11N 0  /* 1????????20MHz??????????*/
+#define MAC_MAX_RATE_SINGLE_NSS_40M_11N 0 /* 1????????40MHz??????????*/
+#define MAC_MAX_RATE_DOUBLE_NSS_20M_11N 0 /* 1????????80MHz??????????*/
+#define MAC_MAX_RATE_DOUBLE_NSS_40M_11N 0 /* 2????????20MHz??????????*/
 
-/* 11AC MCS相关的内容 */
-#define MAC_MAX_SUP_MCS7_11AC_EACH_NSS   0   /* 11AC各空间流支持的最大MCS序号，支持0-7*/
-#define MAC_MAX_SUP_MCS8_11AC_EACH_NSS   1   /* 11AC各空间流支持的最大MCS序号，支持0-8*/
-#define MAC_MAX_SUP_MCS9_11AC_EACH_NSS   2   /* 11AC各空间流支持的最大MCS序号，支持0-9*/
-#define MAC_MAX_UNSUP_MCS_11AC_EACH_NSS  3   /* 11AC各空间流支持的最大MCS序号，不支持n个空间流*/
+/* 11AC MCS?????????? */
+#define MAC_MAX_SUP_MCS7_11AC_EACH_NSS   0   /* 11AC??????????????????MCS??????????0-7*/
+#define MAC_MAX_SUP_MCS8_11AC_EACH_NSS   1   /* 11AC??????????????????MCS??????????0-8*/
+#define MAC_MAX_SUP_MCS9_11AC_EACH_NSS   2   /* 11AC??????????????????MCS??????????0-9*/
+#define MAC_MAX_UNSUP_MCS_11AC_EACH_NSS  3   /* 11AC??????????????????MCS????????????n????????*/
 
-/* 按照协议要求(9.4.2.158.3章节)，修改为long gi速率 */
-#define MAC_MAX_RATE_SINGLE_NSS_20M_11AC 86  /* 1个空间流20MHz的最大速率*/
-#define MAC_MAX_RATE_SINGLE_NSS_40M_11AC 180 /* 1个空间流40MHz的最大速率*/
-#define MAC_MAX_RATE_SINGLE_NSS_80M_11AC 390 /* 1个空间流80MHz的最大速率*/
-#define MAC_MAX_RATE_DOUBLE_NSS_20M_11AC 173 /* 2个空间流20MHz的最大速率*/
-#define MAC_MAX_RATE_DOUBLE_NSS_40M_11AC 360 /* 2个空间流40MHz的最大速率*/
-#define MAC_MAX_RATE_DOUBLE_NSS_80M_11AC 780 /* 2个空间流80MHz的最大速率*/
+/* ????????????(9.4.2.158.3????)????????long gi???? */
+#define MAC_MAX_RATE_SINGLE_NSS_20M_11AC 86  /* 1????????20MHz??????????*/
+#define MAC_MAX_RATE_SINGLE_NSS_40M_11AC 180 /* 1????????40MHz??????????*/
+#define MAC_MAX_RATE_SINGLE_NSS_80M_11AC 390 /* 1????????80MHz??????????*/
+#define MAC_MAX_RATE_DOUBLE_NSS_20M_11AC 173 /* 2????????20MHz??????????*/
+#define MAC_MAX_RATE_DOUBLE_NSS_40M_11AC 360 /* 2????????40MHz??????????*/
+#define MAC_MAX_RATE_DOUBLE_NSS_80M_11AC 780 /* 2????????80MHz??????????*/
 
 
-#define MAC_VAP_USER_HASH_INVALID_VALUE      0xFFFFFFFF                         /* HSAH非法值 */
-#define MAC_VAP_USER_HASH_MAX_VALUE         (WLAN_ASSOC_USER_MAX_NUM_LIMIT * 2)       /* 2为扩展因子 */
+#define MAC_VAP_USER_HASH_INVALID_VALUE      0xFFFFFFFF                         /* HSAH?????? */
+#define MAC_VAP_USER_HASH_MAX_VALUE         (WLAN_ASSOC_USER_MAX_NUM_LIMIT * 2)       /* 2?????????? */
 
 #define MAC_VAP_CAP_ENABLE                   1
 #define MAC_VAP_CAP_DISABLE                  0
@@ -83,7 +83,7 @@ extern "C" {
     & (MAC_VAP_USER_HASH_MAX_VALUE - 1))
 
 #ifdef _PRE_WLAN_FEATURE_PROXYSTA
-#define MAC_VAP_PROXY_STA_HASH_MAX_VALUE     16       /* 硬件索引为16~31，最多16个,其实最多创建15个proxy sta */
+#define MAC_VAP_PROXY_STA_HASH_MAX_VALUE     16       /* ??????????16~31??????16??,????????????15??proxy sta */
 #define MAC_PROXYSTA_CALCULATE_HASH_VALUE(_puc_mac_addr)     \
     ((_puc_mac_addr)[ETHER_ADDR_LEN - 1] & (MAC_VAP_PROXY_STA_HASH_MAX_VALUE - 1))
 #endif
@@ -107,35 +107,35 @@ extern "C" {
 
 #define MAC_DATA_CONTAINER_HEADER_LEN 4
 #define MAC_DATA_CONTAINER_MAX_LEN    512
-#define MAC_DATA_CONTAINER_MIN_LEN    8  /*至少要包含1个事件*/
+#define MAC_DATA_CONTAINER_MIN_LEN    8  /*??????????1??????*/
 #define MAC_DATA_HEADER_LEN           4
 
 #define MAC_SEND_TWO_DEAUTH_FLAG    0xf000
 
-#define MAC_DBB_SCALING_2G_RATE_NUM 12                /*2G rate速率的个数*/
-#define MAC_DBB_SCALING_5G_RATE_NUM 8                /*2G rate速率的个数*/
-#define MAC_DBB_SCALING_2G_RATE_OFFSET 0                /*2G Rate dbb scaling 索引偏移值*/
-#define MAC_DBB_SCALING_2G_HT20_MCS_OFFSET 12                /*2G HT20 dbb scaling 索引偏移值*/
-#define MAC_DBB_SCALING_2G_HT40_MCS_OFFSET 20                /*2G HT40 dbb scaling 索引偏移值*/
-#define MAC_DBB_SCALING_2G_HT40_MCS32_OFFSET 61                /*2G HT40 mcs32 dbb scaling 索引偏移值*/
-#define MAC_DBB_SCALING_5G_RATE_OFFSET 28                /*5G Rate dbb scaling 索引偏移值*/
-#define MAC_DBB_SCALING_5G_HT20_MCS_OFFSET 40                /*5G HT20 dbb scaling 索引偏移值*/
-#define MAC_DBB_SCALING_5G_HT20_MCS8_OFFSET 36                /*5G HT20 mcs8 dbb scaling 索引偏移值*/
-#define MAC_DBB_SCALING_5G_HT40_MCS_OFFSET 48                /*5G HT40 dbb scaling 索引偏移值*/
-#define MAC_DBB_SCALING_5G_HT40_MCS32_OFFSET 60                /*5G HT40 mcs32 dbb scaling 索引偏移值*/
-#define MAC_DBB_SCALING_5G_HT80_MCS_OFFSET 66                /*5G HT80 dbb scaling 索引偏移值*/
-#define MAC_DBB_SCALING_5G_HT80_MCS0_DELTA_OFFSET 2                /*5G HT80 mcs0/1 dbb scaling 索引偏移值回退值*/
-#define MAC_DBB_SCALING_CFG_BITS 8                /*dbb scaling配置寄存器位数*/
-#define MAC_DBB_SCALING_FIX_POINT_BITS 8                /*dbb scaling 定点化放大倍数 256 (8 bits)*/
+#define MAC_DBB_SCALING_2G_RATE_NUM 12                /*2G rate??????????*/
+#define MAC_DBB_SCALING_5G_RATE_NUM 8                /*2G rate??????????*/
+#define MAC_DBB_SCALING_2G_RATE_OFFSET 0                /*2G Rate dbb scaling ??????????*/
+#define MAC_DBB_SCALING_2G_HT20_MCS_OFFSET 12                /*2G HT20 dbb scaling ??????????*/
+#define MAC_DBB_SCALING_2G_HT40_MCS_OFFSET 20                /*2G HT40 dbb scaling ??????????*/
+#define MAC_DBB_SCALING_2G_HT40_MCS32_OFFSET 61                /*2G HT40 mcs32 dbb scaling ??????????*/
+#define MAC_DBB_SCALING_5G_RATE_OFFSET 28                /*5G Rate dbb scaling ??????????*/
+#define MAC_DBB_SCALING_5G_HT20_MCS_OFFSET 40                /*5G HT20 dbb scaling ??????????*/
+#define MAC_DBB_SCALING_5G_HT20_MCS8_OFFSET 36                /*5G HT20 mcs8 dbb scaling ??????????*/
+#define MAC_DBB_SCALING_5G_HT40_MCS_OFFSET 48                /*5G HT40 dbb scaling ??????????*/
+#define MAC_DBB_SCALING_5G_HT40_MCS32_OFFSET 60                /*5G HT40 mcs32 dbb scaling ??????????*/
+#define MAC_DBB_SCALING_5G_HT80_MCS_OFFSET 66                /*5G HT80 dbb scaling ??????????*/
+#define MAC_DBB_SCALING_5G_HT80_MCS0_DELTA_OFFSET 2                /*5G HT80 mcs0/1 dbb scaling ????????????????*/
+#define MAC_DBB_SCALING_CFG_BITS 8                /*dbb scaling??????????????*/
+#define MAC_DBB_SCALING_FIX_POINT_BITS 8                /*dbb scaling ?????????????? 256 (8 bits)*/
 #ifdef _PRE_PLAT_FEATURE_CUSTOMIZE
-#define MAC_NUM_2G_BAND 3   /* 2g band数 */
-#define MAC_NUM_5G_BAND 7   /* 5g band数 */
+#define MAC_NUM_2G_BAND 3   /* 2g band?? */
+#define MAC_NUM_5G_BAND 7   /* 5g band?? */
 #endif
 
 #ifdef _PRE_WLAN_FEATURE_VOWIFI
-/* VoWiFi相关参数的宏定义 */
-#define MAC_VOWIFI_PERIOD_MIN   1   /* 单位s */
-#define MAC_VOWIFI_PERIOD_MAX   30  /* 单位s */
+/* VoWiFi???????????????? */
+#define MAC_VOWIFI_PERIOD_MIN   1   /* ????s */
+#define MAC_VOWIFI_PERIOD_MAX   30  /* ????s */
 #define MAC_VOWIFI_TRIGGER_COUNT_MIN   1
 #define MAC_VOWIFI_TRIGGER_COUNT_MAX   100
 #define MAC_VOWIFI_LOW_THRESHOLD_MIN   -100
@@ -145,7 +145,7 @@ extern "C" {
 
 #define MAC_VAP_VOWIFI_MODE_DEFAULT    VOWIFI_MODE_BUTT
 #define MAC_VAP_VOWIFI_TRIGGER_COUNT_DEFAULT   5
-#define MAC_VAP_VOWIFI_PERIOD_DEFAULT_MS       1000  /* 单位ms */
+#define MAC_VAP_VOWIFI_PERIOD_DEFAULT_MS       1000  /* ????ms */
 #define MAC_VAP_VOWIFI_HIGH_THRES_DEFAULT      -65
 #define MAC_VAP_VOWIFI_LOW_THRES_DEFAULT       -80
 
@@ -181,24 +181,24 @@ extern "C" {
 #define MAX_FTM_RANGE_ENTRY_COUNT                      15
 #define MAX_FTM_ERROR_ENTRY_COUNT                      11
 #define MAX_MINIMUN_AP_COUNT                           14
-#define MAX_REPEATER_NUM                               3        /* 支持的最大定位ap数量 */
+#define MAX_REPEATER_NUM                               3        /* ??????????????ap???? */
 #endif
 
 /*****************************************************************************
-  3 枚举定义
+  3 ????????
 *****************************************************************************/
-/* VAP状态机，AP STA共用一个状态枚举 */
+/* VAP????????AP STA???????????????? */
 typedef enum
 {
-    /* ap sta公共状态 */
+    /* ap sta???????? */
     MAC_VAP_STATE_INIT               = 0,
     MAC_VAP_STATE_UP                 = 1,       /* VAP UP */
     MAC_VAP_STATE_PAUSE              = 2,       /* pause , for ap &sta */
 
-    /* ap 独有状态 */
+    /* ap ???????? */
     MAC_VAP_STATE_AP_WAIT_START      = 3,
 
-    /* sta独有状态 */
+    /* sta???????? */
     MAC_VAP_STATE_STA_FAKE_UP        = 4,
     MAC_VAP_STATE_STA_WAIT_SCAN      = 5,
     MAC_VAP_STATE_STA_SCAN_COMP      = 6,
@@ -209,43 +209,43 @@ typedef enum
     MAC_VAP_STATE_STA_WAIT_ASOC      = 11,
     MAC_VAP_STATE_STA_OBSS_SCAN      = 12,
     MAC_VAP_STATE_STA_BG_SCAN        = 13,
-    MAC_VAP_STATE_STA_LISTEN         = 14,/* p2p0 监听 */
+    MAC_VAP_STATE_STA_LISTEN         = 14,/* p2p0 ???? */
 #ifdef _PRE_WLAN_FEATURE_ROAM
-    MAC_VAP_STATE_ROAMING            = 15,/* 漫游 */
+    MAC_VAP_STATE_ROAMING            = 15,/* ???? */
 #endif //_PRE_WLAN_FEATURE_ROAM
-    MAC_VAP_STATE_STA_NBFH_COMP      = 16,/* 窄带跳频 */
+    MAC_VAP_STATE_STA_NBFH_COMP      = 16,/* ???????? */
     MAC_VAP_STATE_BUTT,
 }mac_vap_state_enum;
 typedef oal_uint8  mac_vap_state_enum_uint8;
 
-/* 芯片验证，控制帧/管理帧类型 */
+/* ????????????????/?????????? */
 typedef enum
 {
 
-    MAC_TEST_MGMT_BCST   =  0,/* 非beacon广播管理帧 */
-    MAC_TEST_MGMT_MCST  =   1,/* 非beacon组播管理帧 */
-    MAC_TEST_ATIM_UCST =    2,/* 单播ATIM帧 */
-    MAC_TEST_UCST =         3,/* 单播管理帧 */
-    MAC_TEST_CTL_BCST =     4,/* 广播控制帧 */
-    MAC_TEST_CTL_MCST =     5,/* 组播控制帧 */
-    MAC_TEST_CTL_UCST =     6,/* 单播控制帧 */
-    MAC_TEST_ACK_UCST =     7,/* ACK控制帧 */
-    MAC_TEST_CTS_UCST =     8,/* CTS控制帧 */
-    MAC_TEST_RTS_UCST =     9,/* RTS控制帧 */
-    MAC_TEST_BA_UCST =      10,/* BA控制帧 */
-    MAC_TEST_CF_END_UCST =  11,/* CF-End控制帧 */
-    MAC_TEST_TA_RA_EUQAL =  12,/* RA,TA相同帧 */
+    MAC_TEST_MGMT_BCST   =  0,/* ??beacon?????????? */
+    MAC_TEST_MGMT_MCST  =   1,/* ??beacon?????????? */
+    MAC_TEST_ATIM_UCST =    2,/* ????ATIM?? */
+    MAC_TEST_UCST =         3,/* ?????????? */
+    MAC_TEST_CTL_BCST =     4,/* ?????????? */
+    MAC_TEST_CTL_MCST =     5,/* ?????????? */
+    MAC_TEST_CTL_UCST =     6,/* ?????????? */
+    MAC_TEST_ACK_UCST =     7,/* ACK?????? */
+    MAC_TEST_CTS_UCST =     8,/* CTS?????? */
+    MAC_TEST_RTS_UCST =     9,/* RTS?????? */
+    MAC_TEST_BA_UCST =      10,/* BA?????? */
+    MAC_TEST_CF_END_UCST =  11,/* CF-End?????? */
+    MAC_TEST_TA_RA_EUQAL =  12,/* RA,TA?????? */
     MAC_TEST_MAX_TYPE_NUM
 }mac_test_frame_type;
 typedef oal_uint8 mac_test_frame_type_enum_uint8;
 
-/* 功率设置维测命令类型 */
+/* ???????????????????? */
 typedef enum
 {
-    MAC_SET_POW_RF_REG_CTL  = 0,    /* 功率是否RF寄存器控 */
-    MAC_SET_POW_MAG_LEVEL,          /* 管理帧功率等级 */
-    MAC_SET_POW_CTL_LEVEL,          /* 控制帧功率等级 */
-    MAC_SET_POW_SHOW_LOG,           /* 日志显示 */
+    MAC_SET_POW_RF_REG_CTL  = 0,    /* ????????RF???????? */
+    MAC_SET_POW_MAG_LEVEL,          /* ?????????????? */
+    MAC_SET_POW_CTL_LEVEL,          /* ?????????????? */
+    MAC_SET_POW_SHOW_LOG,           /* ???????? */
 
     MAC_SET_POW_BUTT
 } mac_set_pow_type_enum;
@@ -262,11 +262,11 @@ typedef enum
     MAC_VAP_CONFIG_MBCAST_MGMT_5G,
 
 #ifdef _PRE_WLAN_FEATURE_WEB_CFG_FIXED_RATE
-    MAC_VAP_CONFIG_MODE_UCAST_DATA,                                 /* 区分协议设置单播数据帧参数的起始枚举 */
-    MAC_VAP_CONFIG_VHT_UCAST_DATA = MAC_VAP_CONFIG_MODE_UCAST_DATA, /* 针对11ac用户设置单播数据帧参数 */
-    MAC_VAP_CONFIG_HT_UCAST_DATA,                                   /* 针对11n用户设置单播数据帧参数 */
-    MAC_VAP_CONFIG_11AG_UCAST_DATA,                                 /* 针对11a/11g用户设置单播数据帧参数 */
-    MAC_VAP_CONFIG_11B_UCAST_DATA,                                  /* 针对11b用户设置单播数据帧参数 */
+    MAC_VAP_CONFIG_MODE_UCAST_DATA,                                 /* ???????????????????????????????????? */
+    MAC_VAP_CONFIG_VHT_UCAST_DATA = MAC_VAP_CONFIG_MODE_UCAST_DATA, /* ????11ac?????????????????????? */
+    MAC_VAP_CONFIG_HT_UCAST_DATA,                                   /* ????11n?????????????????????? */
+    MAC_VAP_CONFIG_11AG_UCAST_DATA,                                 /* ????11a/11g?????????????????????? */
+    MAC_VAP_CONFIG_11B_UCAST_DATA,                                  /* ????11b?????????????????????? */
 #endif
 
     MAC_VAP_CONFIG_BUTT,
@@ -277,7 +277,7 @@ typedef oal_uint8 mac_vap_config_dscr_frame_type_uint8;
 
 typedef enum
 {
-    /* 业务调度算法配置参数,请添加到对应的START和END之间 */
+    /* ????????????????????,??????????????START??END???? */
     MAC_ALG_CFG_SCHEDULE_START,
 
     MAC_ALG_CFG_SCHEDULE_VI_CTRL_ENA,
@@ -312,7 +312,7 @@ typedef enum
 
     MAC_ALG_CFG_SCHEDULE_END,
 
-    /* AUTORATE算法配置参数，请添加到对应的START和END之间*/
+    /* AUTORATE????????????????????????????START??END????*/
     MAC_ALG_CFG_AUTORATE_START,
 
     MAC_ALG_CFG_AUTORATE_ENABLE,
@@ -366,7 +366,7 @@ typedef enum
 
     MAC_ALG_CFG_AUTORATE_END,
 
-    /*AUTORATE算法日志配置参数，请添加到对应的START和END之间 */
+    /*AUTORATE????????????????????????????????START??END???? */
     MAC_ALG_CFG_AUTORATE_LOG_START,
 
     MAC_ALG_CFG_AUTORATE_STAT_LOG_START,
@@ -380,7 +380,7 @@ typedef enum
 
     MAC_ALG_CFG_AUTORATE_LOG_END,
 
-    /*AUTORATE算法系统测试命令，请添加到对应的START和END之间 */
+    /*AUTORATE????????????????????????????????START??END???? */
     MAC_ALG_CFG_AUTORATE_TEST_START,
 
     MAC_ALG_CFG_AUTORATE_DISPLAY_RATE_SET,
@@ -390,7 +390,7 @@ typedef enum
 
     MAC_ALG_CFG_AUTORATE_TEST_END,
 
-    /* SMARTANT算法配置参数， 请添加到对应的START和END之间*/
+    /* SMARTANT?????????????? ??????????????START??END????*/
     MAC_ALG_CFG_SMARTANT_START,
 
     MAC_ALG_CFG_SMARTANT_ENABLE,
@@ -407,7 +407,7 @@ typedef enum
     MAC_ALG_CFG_SMARTANT_SET_ANT_CHANGE_THRESHOLD,
 
     MAC_ALG_CFG_SMARTANT_END,
-    /* TXBF算法配置参数，请添加到对应的START和END之间*/
+    /* TXBF????????????????????????????START??END????*/
     MAC_ALG_CFG_TXBF_START,
     MAC_ALG_CFG_TXBF_MASTER_SWITCH,
     MAC_ALG_CFG_TXBF_TXMODE_ENABLE,
@@ -426,13 +426,13 @@ typedef enum
     MAC_ALG_CFG_TXBF_PROBE_COUNT,
     MAC_ALG_CFG_TXBF_LOG_ENABLE,
     MAC_ALG_CFG_TXBF_END,
-    /* TXBF LOG配置参数，请添加到对应的START和END之间*/
+    /* TXBF LOG????????????????????????START??END????*/
     MAC_ALG_CFG_TXBF_LOG_START,
     MAC_ALG_CFG_TXBF_RECORD_LOG_START,
     MAC_ALG_CFG_TXBF_LOG_OUTPUT,
     MAC_ALG_CFG_TXBF_LOG_END,
 
-    /* 抗干扰算法配置参数，请添加到对应的START和END之间 */
+    /* ??????????????????????????????????START??END???? */
     MAC_ALG_CFG_ANTI_INTF_START,
 
     MAC_ALG_CFG_ANTI_INTF_IMM_ENABLE,
@@ -452,7 +452,7 @@ typedef enum
 
     MAC_ALG_CFG_ANTI_INTF_END,
 
-    /* EDCA优化算法配置参数，请添加到对应的START和END之间 */
+    /* EDCA????????????????????????????????START??END???? */
     MAC_ALG_CFG_EDCA_OPT_START,
 
     MAC_ALG_CFG_EDCA_OPT_CO_CH_DET_CYCLE,
@@ -473,7 +473,7 @@ typedef enum
 
     MAC_ALG_CFG_EDCA_OPT_END,
 
-    /* CCA优化算法配置参数，请添加到对应的START和END之间 */
+    /* CCA????????????????????????????????START??END???? */
     MAC_ALG_CFG_CCA_OPT_START,
 
     MAC_ALG_CFG_CCA_OPT_ALG_EN_MODE,
@@ -494,13 +494,13 @@ typedef enum
     MAC_ALG_CFG_CCA_OPT_NON_INTF_DUTY_CYC_TH,
     MAC_ALG_CFG_CCA_OPT_END,
 
-    /*CCA OPT算法日志配置参数，请添加到对应的START和END之间 */
+    /*CCA OPT????????????????????????????????START??END???? */
     MAC_ALG_CFG_CCA_OPT_LOG_START,
     MAC_ALG_CFG_CCA_OPT_STAT_LOG_START,
     MAC_ALG_CFG_CCA_OPT_STAT_LOG_WRITE,
     MAC_ALG_CFG_CCA_OPT_LOG_END,
 
-    /* TPC算法配置参数, 请添加到对应的START和END之间*/
+    /* TPC????????????, ??????????????START??END????*/
     MAC_ALG_CFG_TPC_START,
 
     MAC_ALG_CFG_TPC_MODE,
@@ -522,7 +522,7 @@ typedef enum
 
     MAC_ALG_CFG_TPC_END,
 
-    /*TPC算法日志配置参数，请添加到对应的START和END之间 */
+    /*TPC????????????????????????????????START??END???? */
     MAC_ALG_CFG_TPC_LOG_START,
 
     MAC_ALG_CFG_TPC_STAT_LOG_START,
@@ -535,7 +535,7 @@ typedef enum
 
     MAC_ALG_CFG_TPC_LOG_END,
 
-    /*TEMP_PRO算法日志配置参数，请添加到对应的START和END之间 */
+    /*TEMP_PRO????????????????????????????????START??END???? */
     MAC_ALG_CFG_TEMP_PRO_START,
     MAC_ALG_CFG_TEMP_PRO_GET_INFO,
     MAC_ALG_CFG_TEMP_PRO_END,
@@ -644,7 +644,7 @@ typedef struct
 
 
 #ifdef _PRE_WLAN_FEATURE_ROAM
-/* 漫游扫描信道正交属性参数,命令行传入*/
+/* ????????????????????????,??????????*/
 typedef enum
 {
     ROAM_SCAN_CHANNEL_ORG_0       = 0, /* no scan */
@@ -669,29 +669,29 @@ typedef enum{
 typedef oal_uint8 mac_dyn_cali_cfg_enum_uint8;
 #endif
 /*****************************************************************************
-  4 全局变量声明
+  4 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  5 消息头定义
+  5 ??????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  6 消息定义
+  6 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  7 STRUCT定义
+  7 STRUCT????
 *****************************************************************************/
 #ifdef _PRE_WLAN_FEATURE_MULTI_NETBUF_AMSDU
 typedef struct
 {
-    /* 定制化是否打开amsdu_ampdu联合聚合 */
+    /* ??????????????amsdu_ampdu???????? */
     oal_uint8    uc_tx_amsdu_ampdu_en;
-    /* 当前聚合是否为amsdu聚合 */
+    /* ??????????????amsdu???? */
     oal_uint8    uc_cur_amsdu_ampdu_enable;
     oal_uint16   us_amsdu_ampdu_throughput_high;
     oal_uint16   us_amsdu_ampdu_throughput_low;
@@ -714,13 +714,13 @@ typedef struct
 }mac_tcp_ack_buf_switch_stru;
 extern mac_tcp_ack_buf_switch_stru g_st_tcp_ack_buf_switch;
 
-/* channel结构体 */
+/* channel?????? */
 typedef struct
 {
-    oal_uint8                           uc_chan_number;     /* 主20MHz信道号 */
-    wlan_channel_band_enum_uint8        en_band;            /* 频段 */
-    wlan_channel_bandwidth_enum_uint8   en_bandwidth;       /* 带宽模式 */
-    oal_uint8                           uc_idx;             /* 信道索引号 */
+    oal_uint8                           uc_chan_number;     /* ??20MHz?????? */
+    wlan_channel_band_enum_uint8        en_band;            /* ???? */
+    wlan_channel_bandwidth_enum_uint8   en_bandwidth;       /* ???????? */
+    oal_uint8                           uc_idx;             /* ?????????? */
 }mac_channel_stru;
 
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
@@ -735,204 +735,204 @@ typedef struct                          /* hi1102-cb */
 
 typedef struct
 {
-    oal_uint8                            uc_announced_channel;     /* 新信道号 */
-    wlan_channel_bandwidth_enum_uint8    en_announced_bandwidth;   /* 新带宽模式 */
-    oal_uint8                            uc_ch_switch_cnt;         /* 信道切换计数 */
-    wlan_ch_switch_status_enum_uint8     en_ch_switch_status;      /* 信道切换状态 */
-    wlan_bw_switch_status_enum_uint8     en_bw_switch_status;      /* 带宽切换状态 */
-    oal_bool_enum_uint8                  en_csa_present_in_bcn;    /* Beacon帧中是否包含CSA IE */
+    oal_uint8                            uc_announced_channel;     /* ???????? */
+    wlan_channel_bandwidth_enum_uint8    en_announced_bandwidth;   /* ?????????? */
+    oal_uint8                            uc_ch_switch_cnt;         /* ???????????? */
+    wlan_ch_switch_status_enum_uint8     en_ch_switch_status;      /* ???????????? */
+    wlan_bw_switch_status_enum_uint8     en_bw_switch_status;      /* ???????????? */
+    oal_bool_enum_uint8                  en_csa_present_in_bcn;    /* Beacon????????????CSA IE */
 
     oal_uint8                            uc_start_chan_idx;
     oal_uint8                            uc_end_chan_idx;
     wlan_channel_bandwidth_enum_uint8    en_user_pref_bandwidth;
 
-    /* VAP为STA时，特有成员
+    /* VAP??STA????????????
      *
      *  ---|--------|--------------------|-----------------|-----------
      *     0        3                    0                 0
      *     X        A                    B                 C
      *
-     *  sta的信道切换可通过上图帮助理解, 数字为切换计数器，
-     *  X->A A之前为未发生任务信道切换时,切换计数器为0
-     *  从A->B时间段为sta等待切换状态: en_waiting_to_shift_channel为true
-     *  从B->C为sta信道切换中,即等待ap加beacon状态: en_waiting_for_ap为true
-     *  C-> 为sta收到了ap的beacon，标准信道切换结束
+     *  sta????????????????????????????, ??????????????????
+     *  X->A A??????????????????????????,????????????0
+     *  ??A->B????????sta????????????: en_waiting_to_shift_channel??true
+     *  ??B->C??sta??????????,??????ap??beacon????: en_waiting_for_ap??true
+     *  C-> ??sta??????ap??beacon??????????????????
      *
-     *  A点通常中收到csa ie(beacon/action...), B点通常为tbtt中断中切换计数器变为
-     *  0或者csa ie中计数器为0，C点则为收到beacon
+     *  A????????????csa ie(beacon/action...), B????????tbtt????????????????????
+     *  0????csa ie??????????0??C??????????beacon
      *
-     *  从A->C的过程中，会过滤重复收到的csa ie或者信道切换动作
+     *  ??A->C??????????????????????????csa ie????????????????
      *
      */
-    //oal_bool_enum_uint8                  en_bw_change;             /* STA是否需要进行带宽切换 */
+    //oal_bool_enum_uint8                  en_bw_change;             /* STA???????????????????? */
     //oal_bool_enum_uint8                  en_waiting_for_ap;
-    oal_uint8                            uc_new_channel;           /* 可以考虑跟上面合并 */
-    wlan_channel_bandwidth_enum_uint8    en_new_bandwidth;         /* 可以考虑跟上面合并 */
-    oal_uint8                            uc_new_ch_swt_cnt;        /* 可以考虑跟上面合并 */
-    oal_bool_enum_uint8                  en_waiting_to_shift_channel;  /* 等待切换信道 */
+    oal_uint8                            uc_new_channel;           /* ?????????????????? */
+    wlan_channel_bandwidth_enum_uint8    en_new_bandwidth;         /* ?????????????????? */
+    oal_uint8                            uc_new_ch_swt_cnt;        /* ?????????????????? */
+    oal_bool_enum_uint8                  en_waiting_to_shift_channel;  /* ???????????? */
     oal_bool_enum_uint8                  en_channel_swt_cnt_zero;
 
     oal_bool_enum_uint8                  en_te_b;
-    oal_uint8                            bit_wait_bw_change : 4 ;        /* 收到action帧,等待切换带宽 */
-    oal_uint8                            bit_bad_ap         : 4 ;        /* 场景识别出ap发送beacon带csa但不切信道 */
-    oal_uint8                            uc_ch_swt_start_cnt;            /* ap上一次发送的切换个数 */
-    oal_uint8                            uc_csa_rsv_cnt;                 /* ap csa 计数不减的计数 */
+    oal_uint8                            bit_wait_bw_change : 4 ;        /* ????action??,???????????? */
+    oal_uint8                            bit_bad_ap         : 4 ;        /* ??????????ap????beacon??csa?????????? */
+    oal_uint8                            uc_ch_swt_start_cnt;            /* ap???????????????????? */
+    oal_uint8                            uc_csa_rsv_cnt;                 /* ap csa ?????????????? */
     wlan_csa_mode_tx_enum_uint8          en_csa_mode;
     oal_uint8                            uc_resv[1];
     oal_uint32                           ul_chan_report_for_te_a;
 
-    /* ROM化后资源扩展指针 */
+    /* ROM???????????????? */
     oal_uint8                            _rom[4];
 }mac_ch_switch_info_stru;
 
 typedef struct
 {
-    oal_uint8   uc_mac_rate; /* MAC对应速率 */
-    oal_uint8   uc_phy_rate; /* PHY对应速率 */
-    oal_uint8   uc_mbps;     /* 速率 */
+    oal_uint8   uc_mac_rate; /* MAC???????? */
+    oal_uint8   uc_phy_rate; /* PHY???????? */
+    oal_uint8   uc_mbps;     /* ???? */
     oal_uint8   auc_resv[1];
 }mac_data_rate_stru;
 
 typedef struct
 {
-    oal_uint8           uc_rs_nrates;   /* 速率个数 */
+    oal_uint8           uc_rs_nrates;   /* ???????? */
     oal_uint8           auc_resv[3];
     mac_data_rate_stru  ast_rs_rates[WLAN_RATE_MAXSIZE];
 }mac_rateset_stru;
 
 typedef struct
 {
-    oal_uint8         uc_br_rate_num;   /* 基本速率个数 */
-    oal_uint8         uc_nbr_rate_num;  /* 非基本速率个数 */
-    oal_uint8         uc_max_rate;      /* 最大基本速率 */
-    oal_uint8         uc_min_rate;      /* 最小基本速率 */
+    oal_uint8         uc_br_rate_num;   /* ???????????? */
+    oal_uint8         uc_nbr_rate_num;  /* ?????????????? */
+    oal_uint8         uc_max_rate;      /* ???????????? */
+    oal_uint8         uc_min_rate;      /* ???????????? */
     mac_rateset_stru  st_rate;
 }mac_curr_rateset_stru;
 
-/* wme参数 */
+/* wme???? */
 typedef struct
 {
     oal_uint32    ul_aifsn;          /* AIFSN parameters */
-    oal_uint32    ul_logcwmin;       /* cwmin in exponential form, 单位2^n -1 slot */
-    oal_uint32    ul_logcwmax;       /* cwmax in exponential form, 单位2^n -1 slot */
+    oal_uint32    ul_logcwmin;       /* cwmin in exponential form, ????2^n -1 slot */
+    oal_uint32    ul_logcwmax;       /* cwmax in exponential form, ????2^n -1 slot */
     oal_uint32    ul_txop_limit;     /* txopLimit, us */
 }mac_wme_param_stru;
 
-/* MAC vap能力特性标识 */
+/* MAC vap???????????? */
 typedef struct
 {
     oal_uint32  bit_uapsd                          : 1,
                 bit_txop_ps                        : 1,
                 bit_wpa                            : 1,
                 bit_wpa2                           : 1,
-                bit_dsss_cck_mode_40mhz            : 1,                 /* 是否允许在40M上使用DSSS/CCK, 1-允许, 0-不允许 */
+                bit_dsss_cck_mode_40mhz            : 1,                 /* ??????????40M??????DSSS/CCK, 1-????, 0-?????? */
                 bit_rifs_tx_on                     : 1,
-                bit_tdls_prohibited                : 1,                 /* tdls全局禁用开关， 0-不关闭, 1-关闭 */
-                bit_tdls_channel_switch_prohibited : 1,                 /* tdls信道切换全局禁用开关， 0-不关闭, 1-关闭 */
-                bit_hide_ssid                      : 1,                 /* AP开启隐藏ssid,  0-关闭, 1-开启*/
-                bit_wps                            : 1,                 /* AP WPS功能:0-关闭, 1-开启 */
-                bit_11ac2g                         : 1,                 /* 2.4G下的11ac:0-关闭, 1-开启 */
-                bit_keepalive                      : 1,                 /* vap KeepAlive功能开关: 0-关闭, 1-开启*/
-                bit_smps                           : 2,                 /* vap 当前SMPS能力 */
-                bit_dpd_enbale                     : 1,                 /* dpd是否开启 */
-                bit_dpd_done                       : 1,                 /* dpd是否完成 */
-                bit_11ntxbf                        : 1,                 /* 11n txbf能力 */
-                bit_disable_2ght40                 : 1,                 /* 2ght40禁止位，1-禁止，0-不禁止 */
-                bit_peer_obss_scan                 : 1,                 /* 对端支持obss scan能力: 0-不支持, 1-支持 */
-                bit_ip_filter                      : 1,                 /* rx方向ip包过滤的功能 */
+                bit_tdls_prohibited                : 1,                 /* tdls?????????????? 0-??????, 1-???? */
+                bit_tdls_channel_switch_prohibited : 1,                 /* tdls?????????????????????? 0-??????, 1-???? */
+                bit_hide_ssid                      : 1,                 /* AP????????ssid,  0-????, 1-????*/
+                bit_wps                            : 1,                 /* AP WPS????:0-????, 1-???? */
+                bit_11ac2g                         : 1,                 /* 2.4G????11ac:0-????, 1-???? */
+                bit_keepalive                      : 1,                 /* vap KeepAlive????????: 0-????, 1-????*/
+                bit_smps                           : 2,                 /* vap ????SMPS???? */
+                bit_dpd_enbale                     : 1,                 /* dpd???????? */
+                bit_dpd_done                       : 1,                 /* dpd???????? */
+                bit_11ntxbf                        : 1,                 /* 11n txbf???? */
+                bit_disable_2ght40                 : 1,                 /* 2ght40????????1-??????0-?????? */
+                bit_peer_obss_scan                 : 1,                 /* ????????obss scan????: 0-??????, 1-???? */
+                bit_ip_filter                      : 1,                 /* rx????ip???????????? */
 #ifdef _PRE_WLAN_NARROW_BAND
-                bit_nb                             : 1,                 /* 硬件是否支持窄带 */
-                bit_2040_autoswitch                : 1,                 /* 是否支持随环境自动2040带宽切换 */
+                bit_nb                             : 1,                 /* ???????????????? */
+                bit_2040_autoswitch                : 1,                 /* ??????????????????2040???????? */
                 bit_resv                           : 10;
 #else
-                bit_2040_autoswitch                : 1,                 /* 是否支持随环境自动2040带宽切换 */
+                bit_2040_autoswitch                : 1,                 /* ??????????????????2040???????? */
                 bit_resv                           : 11;
 #endif
 }mac_cap_flag_stru;
 
-/* VAP收发包统计 */
+/* VAP?????????? */
 typedef struct
 {
-    /* net_device用统计信息, net_device统计经过以太网的报文 */
-    oal_uint32  ul_rx_packets_to_lan;               /* 接收流程到LAN的包数 */
-    oal_uint32  ul_rx_bytes_to_lan;                 /* 接收流程到LAN的字节数 */
-    oal_uint32  ul_rx_dropped_packets;              /* 接收流程中丢弃的包数 */
-    oal_uint32  ul_rx_vap_non_up_dropped;           /* vap没有up丢弃的包的个数 */
-    oal_uint32  ul_rx_dscr_error_dropped;           /* 描述符出错丢弃的包的个数 */
-    oal_uint32  ul_rx_first_dscr_excp_dropped;      /* 描述符首包异常丢弃的包的个数 */
-    oal_uint32  ul_rx_alg_filter_dropped;           /* 算法过滤丢弃的包的个数 */
-    oal_uint32  ul_rx_feature_ap_dropped;           /* AP特性帧过滤丢包个数 */
-    oal_uint32  ul_rx_null_frame_dropped;           /* 收到NULL帧的数目 */
-    oal_uint32  ul_rx_transmit_addr_checked_dropped;/* 发送端地址过滤失败丢弃 */
-    oal_uint32  ul_rx_dest_addr_checked_dropped;    /* 目的地址过滤失败丢弃 */
-    oal_uint32  ul_rx_multicast_dropped;            /* 组播帧失败(netbuf copy失败)丢弃 */
+    /* net_device??????????, net_device???????????????????? */
+    oal_uint32  ul_rx_packets_to_lan;               /* ??????????LAN?????? */
+    oal_uint32  ul_rx_bytes_to_lan;                 /* ??????????LAN???????? */
+    oal_uint32  ul_rx_dropped_packets;              /* ???????????????????? */
+    oal_uint32  ul_rx_vap_non_up_dropped;           /* vap????up?????????????? */
+    oal_uint32  ul_rx_dscr_error_dropped;           /* ???????????????????????? */
+    oal_uint32  ul_rx_first_dscr_excp_dropped;      /* ???????????????????????????? */
+    oal_uint32  ul_rx_alg_filter_dropped;           /* ?????????????????????? */
+    oal_uint32  ul_rx_feature_ap_dropped;           /* AP?????????????????? */
+    oal_uint32  ul_rx_null_frame_dropped;           /* ????NULL???????? */
+    oal_uint32  ul_rx_transmit_addr_checked_dropped;/* ?????????????????????? */
+    oal_uint32  ul_rx_dest_addr_checked_dropped;    /* ???????????????????? */
+    oal_uint32  ul_rx_multicast_dropped;            /* ??????????(netbuf copy????)???? */
 
-    oal_uint32  ul_tx_packets_from_lan;             /* 发送流程LAN过来的包数 */
-    oal_uint32  ul_tx_bytes_from_lan;               /* 发送流程LAN过来的字节数 */
-    oal_uint32  ul_tx_dropped_packets;              /* 发送流程中丢弃的包数 */
+    oal_uint32  ul_tx_packets_from_lan;             /* ????????LAN?????????? */
+    oal_uint32  ul_tx_bytes_from_lan;               /* ????????LAN???????????? */
+    oal_uint32  ul_tx_dropped_packets;              /* ???????????????????? */
 
-    /* 其它报文统计信息 */
+    /* ???????????????? */
 
 }mac_vap_stats_stru;
 #ifdef _PRE_WLAN_FEATURE_CUSTOM_SECURITY
-/* 黑名单 */
+/* ?????? */
 typedef struct
 {
-    oal_uint8                       auc_mac_addr[OAL_MAC_ADDR_LEN];       /* mac地址          */
-    oal_uint8                       auc_reserved[2];                      /* 字节对齐         */
-    oal_uint32                      ul_cfg_time;                          /* 加入黑名单的时间 */
-    oal_uint32                      ul_aging_time;                        /* 老化时间         */
-    oal_uint32                      ul_drop_counter;                      /* 报文丢弃统计     */
+    oal_uint8                       auc_mac_addr[OAL_MAC_ADDR_LEN];       /* mac????          */
+    oal_uint8                       auc_reserved[2];                      /* ????????         */
+    oal_uint32                      ul_cfg_time;                          /* ???????????????? */
+    oal_uint32                      ul_aging_time;                        /* ????????         */
+    oal_uint32                      ul_drop_counter;                      /* ????????????     */
 } mac_blacklist_stru;
 
-/* 自动黑名单 */
+/* ?????????? */
 typedef struct
 {
-    oal_uint8                       auc_mac_addr[OAL_MAC_ADDR_LEN];       /* mac地址  */
-    oal_uint8                       auc_reserved[2];                      /* 字节对齐 */
-    oal_uint32                      ul_cfg_time;                          /* 初始时间 */
-    oal_uint32                      ul_asso_counter;                      /* 关联计数 */
+    oal_uint8                       auc_mac_addr[OAL_MAC_ADDR_LEN];       /* mac????  */
+    oal_uint8                       auc_reserved[2];                      /* ???????? */
+    oal_uint32                      ul_cfg_time;                          /* ???????? */
+    oal_uint32                      ul_asso_counter;                      /* ???????? */
 } mac_autoblacklist_stru;
 
-/* 自动黑名单信息 */
+/* ?????????????? */
 typedef struct
 {
-    oal_uint8                       uc_enabled;                             /* 使能标志 0:未使能  1:使能 */
-    oal_uint8                       list_num;                               /* 有多少个自动黑名单        */
-    oal_uint8                       auc_reserved[2];                        /* 字节对齐                  */
-    oal_uint32                      ul_threshold;                           /* 门限                      */
-    oal_uint32                      ul_reset_time;                          /* 重置时间                  */
-    oal_uint32                      ul_aging_time;                          /* 老化时间                  */
-    mac_autoblacklist_stru          ast_autoblack_list[WLAN_BLACKLIST_MAX]; /* 自动黑名单表              */
+    oal_uint8                       uc_enabled;                             /* ???????? 0:??????  1:???? */
+    oal_uint8                       list_num;                               /* ??????????????????        */
+    oal_uint8                       auc_reserved[2];                        /* ????????                  */
+    oal_uint32                      ul_threshold;                           /* ????                      */
+    oal_uint32                      ul_reset_time;                          /* ????????                  */
+    oal_uint32                      ul_aging_time;                          /* ????????                  */
+    mac_autoblacklist_stru          ast_autoblack_list[WLAN_BLACKLIST_MAX]; /* ????????????              */
 } mac_autoblacklist_info_stru;
 
 
-/* 黑白名单信息 */
+/* ???????????? */
 typedef struct
 {
-    oal_uint8                          uc_mode;                                  /* 黑白名单模式   */
-    oal_uint8                          uc_list_num;                              /* 名单数         */
-    oal_uint8                          auc_reserved[2];                          /* 字节对齐       */
-    mac_autoblacklist_info_stru        st_autoblacklist_info;                    /* 自动黑名单信息 */
-    mac_blacklist_stru                 ast_black_list[WLAN_BLACKLIST_MAX];       /* 有效黑白名单表 */
+    oal_uint8                          uc_mode;                                  /* ????????????   */
+    oal_uint8                          uc_list_num;                              /* ??????         */
+    oal_uint8                          auc_reserved[2];                          /* ????????       */
+    mac_autoblacklist_info_stru        st_autoblacklist_info;                    /* ?????????????? */
+    mac_blacklist_stru                 ast_black_list[WLAN_BLACKLIST_MAX];       /* ?????????????? */
 } mac_blacklist_info_stru;
 
-/* 隔离信息 */
+/* ???????? */
 typedef struct
 {
-    oal_uint8                           uc_type;                                  /* 隔离类型   */
-    oal_uint8                           uc_mode;                                  /* 隔离模式bit0：广播隔离 bit1：组播隔离 bit2：单播隔离   */
-    oal_uint8                           uc_forward;                               /* forwarding方式 */
-    oal_uint8                           auc_reserved[1];                          /* 字节对齐       */
-    oal_uint32                          ul_counter_bcast;                         /* 广播隔离计数器 */
-    oal_uint32                          ul_counter_mcast;                         /* 组播隔离计数器 */
-    oal_uint32                          ul_counter_ucast;                         /* 单播隔离计数器 */
+    oal_uint8                           uc_type;                                  /* ????????   */
+    oal_uint8                           uc_mode;                                  /* ????????bit0?????????? bit1?????????? bit2??????????   */
+    oal_uint8                           uc_forward;                               /* forwarding???? */
+    oal_uint8                           auc_reserved[1];                          /* ????????       */
+    oal_uint32                          ul_counter_bcast;                         /* ?????????????? */
+    oal_uint32                          ul_counter_mcast;                         /* ?????????????? */
+    oal_uint32                          ul_counter_ucast;                         /* ?????????????? */
 } mac_isolation_info_stru;
 #endif  /* _PRE_WLAN_FEATURE_CUSTOM_SECURITY */
 typedef struct
 {
     oal_uint16                          us_user_idx;
-    wlan_protocol_enum_uint8            en_avail_protocol_mode; /* 用户协议模式 */
+    wlan_protocol_enum_uint8            en_avail_protocol_mode; /* ???????????? */
     wlan_protocol_enum_uint8            en_cur_protocol_mode;
     wlan_protocol_enum_uint8            en_protocol_mode;
     oal_uint8                           auc_resv[3];
@@ -944,23 +944,23 @@ typedef struct
     oal_uint8                           uc_arg1;
     oal_uint8                           uc_arg2;
 
-    /* 协议模式信息 */
+    /* ???????????? */
     wlan_protocol_enum_uint8            en_cur_protocol_mode;
     wlan_protocol_enum_uint8            en_protocol_mode;
-    oal_uint8                           en_avail_protocol_mode; /* 用户和VAP协议模式交集, 供算法调用 */
+    oal_uint8                           en_avail_protocol_mode; /* ??????VAP????????????, ?????????? */
 
-    wlan_bw_cap_enum_uint8              en_bandwidth_cap;       /* 用户带宽能力信息 */
-    wlan_bw_cap_enum_uint8              en_avail_bandwidth;     /* 用户和VAP带宽能力交集,供算法调用 */
-    wlan_bw_cap_enum_uint8              en_cur_bandwidth;       /* 默认值与en_avail_bandwidth相同,供算法调用修改 */
+    wlan_bw_cap_enum_uint8              en_bandwidth_cap;       /* ???????????????? */
+    wlan_bw_cap_enum_uint8              en_avail_bandwidth;     /* ??????VAP????????????,?????????? */
+    wlan_bw_cap_enum_uint8              en_cur_bandwidth;       /* ????????en_avail_bandwidth????,?????????????? */
 
     oal_bool_enum_uint8                 en_user_pmf;
-    mac_user_asoc_state_enum_uint8      en_user_asoc_state;     /* 用户关联状态 */
+    mac_user_asoc_state_enum_uint8      en_user_asoc_state;     /* ???????????? */
 }mac_h2d_usr_info_stru;
 
 
 typedef struct
 {
-    mac_user_cap_info_stru              st_user_cap_info;                   /* 用户能力信息 */
+    mac_user_cap_info_stru              st_user_cap_info;                   /* ???????????? */
     oal_uint16                          us_user_idx;
     oal_uint8                           auc_resv[2];
 }mac_h2d_usr_cap_stru;
@@ -971,17 +971,17 @@ typedef struct
 {
     oal_uint16                          us_user_idx;
 
-    /* vht速率集信息 */
+    /* vht?????????? */
     mac_vht_hdl_stru                    st_vht_hdl;
 
-    /* ht速率集信息 */
+    /* ht?????????? */
     mac_user_ht_hdl_stru                 st_ht_hdl;
 
-    /* legacy速率集信息 */
+    /* legacy?????????? */
     oal_uint8                           uc_avail_rs_nrates;
     oal_uint8                           auc_avail_rs_rates[WLAN_RATE_MAXSIZE];
 
-    wlan_protocol_enum_uint8            en_protocol_mode;                            /* 用户协议模式 */
+    wlan_protocol_enum_uint8            en_protocol_mode;                            /* ???????????? */
 }mac_h2d_usr_rate_info_stru;
 
 
@@ -995,10 +995,10 @@ typedef struct
 typedef struct
 {
     oal_uint16                          us_user_idx;
-    wlan_protocol_enum_uint8            en_avail_protocol_mode; /* 用户协议模式 */
-    wlan_bw_cap_enum_uint8              en_bandwidth_cap;       /* 用户带宽能力信息 */
-    wlan_bw_cap_enum_uint8              en_avail_bandwidth;     /* 用户和VAP带宽能力交集,供算法调用 */
-    wlan_bw_cap_enum_uint8              en_cur_bandwidth;       /* 默认值与en_avail_bandwidth相同,供算法调用修改 */
+    wlan_protocol_enum_uint8            en_avail_protocol_mode; /* ???????????? */
+    wlan_bw_cap_enum_uint8              en_bandwidth_cap;       /* ???????????????? */
+    wlan_bw_cap_enum_uint8              en_avail_bandwidth;     /* ??????VAP????????????,?????????? */
+    wlan_bw_cap_enum_uint8              en_cur_bandwidth;       /* ????????en_avail_bandwidth????,?????????????? */
     oal_uint8                           auc_rsv[2];
 }mac_h2d_user_bandwidth_stru;
 
@@ -1006,9 +1006,9 @@ typedef struct
 {
     mac_channel_stru                    st_channel;
     oal_uint16                          us_user_idx;
-    wlan_bw_cap_enum_uint8              en_bandwidth_cap;       /* 用户带宽能力信息 */
-    wlan_bw_cap_enum_uint8              en_avail_bandwidth;     /* 用户和VAP带宽能力交集,供算法调用 */
-    wlan_bw_cap_enum_uint8              en_cur_bandwidth;       /* 默认值与en_avail_bandwidth相同,供算法调用修改 */
+    wlan_bw_cap_enum_uint8              en_bandwidth_cap;       /* ???????????????? */
+    wlan_bw_cap_enum_uint8              en_avail_bandwidth;     /* ??????VAP????????????,?????????? */
+    wlan_bw_cap_enum_uint8              en_cur_bandwidth;       /* ????????en_avail_bandwidth????,?????????????? */
     oal_uint8                           auc_rsv[3];
 }mac_d2h_syn_info_stru;
 
@@ -1048,8 +1048,8 @@ enum
 typedef oal_uint8 oal_freq_sync_enum_uint8;
 
 typedef struct {
-    oal_uint32  ul_speed_level;    /*吞吐量门限*/
-    oal_uint32  ul_cpu_freq_level;  /*CPU频率level*/
+    oal_uint32  ul_speed_level;    /*??????????*/
+    oal_uint32  ul_cpu_freq_level;  /*CPU????level*/
 } device_level_stru;
 
 typedef struct
@@ -1065,11 +1065,11 @@ typedef struct
 #ifdef _PRE_WLAN_FEATURE_TXBF
 typedef struct
 {
-    oal_uint8   bit_imbf_receive_cap            :   1,  /*隐式TxBf接收能力*/
-                bit_exp_comp_txbf_cap           :   1, /*应用压缩矩阵进行TxBf的能力*/
-                bit_min_grouping                :   2,  /*0=不分组，1=1,2分组，2=1,4分组，3=1,2,4分组*/
-                bit_csi_bfee_max_rows           :   2,  /*bfer支持的来自bfee的CSI显示反馈的最大行数*/
-                bit_channel_est_cap             :   2;  /*信道估计的能力，0=1空时流，依次递增*/
+    oal_uint8   bit_imbf_receive_cap            :   1,  /*????TxBf????????*/
+                bit_exp_comp_txbf_cap           :   1, /*????????????????TxBf??????*/
+                bit_min_grouping                :   2,  /*0=????????1=1,2??????2=1,4??????3=1,2,4????*/
+                bit_csi_bfee_max_rows           :   2,  /*bfer??????????bfee??CSI??????????????????*/
+                bit_channel_est_cap             :   2;  /*????????????????0=1????????????????*/
     oal_uint8   auc_resv0[3];
 }mac_vap_txbf_add_stru;
 #endif
@@ -1077,29 +1077,29 @@ typedef struct
 typedef struct
 {
     /*word 0*/
-    wlan_prot_mode_enum_uint8           en_protection_mode;                              /* 保护模式 */
-    oal_uint8                           uc_obss_non_erp_aging_cnt;                       /*指示OBSS中non erp 站点的老化时间*/
-    oal_uint8                           uc_obss_non_ht_aging_cnt;                        /*指示OBSS中non ht 站点的老化时间*/
-    oal_uint8                           bit_auto_protection        : 1;                  /*指示保护策略是否开启，OAL_SWITCH_ON 打开， OAL_SWITCH_OFF 关闭*/
-    oal_uint8                           bit_obss_non_erp_present   : 1;                  /*指示obss中是否存在non ERP的站点*/
-    oal_uint8                           bit_obss_non_ht_present    : 1;                  /*指示obss中是否存在non HT的站点*/
-    oal_uint8                           bit_rts_cts_protect_mode   : 1;                  /*指rts_cts 保护机制是否打开, OAL_SWITCH_ON 打开， OAL_SWITCH_OFF 关闭*/
-    oal_uint8                           bit_lsig_txop_protect_mode : 1;                  /*指示L-SIG protect是否打开, OAL_SWITCH_ON 打开， OAL_SWITCH_OFF 关闭*/
+    wlan_prot_mode_enum_uint8           en_protection_mode;                              /* ???????? */
+    oal_uint8                           uc_obss_non_erp_aging_cnt;                       /*????OBSS??non erp ??????????????*/
+    oal_uint8                           uc_obss_non_ht_aging_cnt;                        /*????OBSS??non ht ??????????????*/
+    oal_uint8                           bit_auto_protection        : 1;                  /*??????????????????????OAL_SWITCH_ON ?????? OAL_SWITCH_OFF ????*/
+    oal_uint8                           bit_obss_non_erp_present   : 1;                  /*????obss??????????non ERP??????*/
+    oal_uint8                           bit_obss_non_ht_present    : 1;                  /*????obss??????????non HT??????*/
+    oal_uint8                           bit_rts_cts_protect_mode   : 1;                  /*??rts_cts ????????????????, OAL_SWITCH_ON ?????? OAL_SWITCH_OFF ????*/
+    oal_uint8                           bit_lsig_txop_protect_mode : 1;                  /*????L-SIG protect????????, OAL_SWITCH_ON ?????? OAL_SWITCH_OFF ????*/
     oal_uint8                           bit_reserved               : 3;
 
     /*word 1*/
-    oal_uint8                           uc_sta_no_short_slot_num;                       /* 不支持short slot的STA个数*/
-    oal_uint8                           uc_sta_no_short_preamble_num;                   /* 不支持short preamble的STA个数*/
-    oal_uint8                           uc_sta_non_erp_num;                             /* 不支持ERP的STA个数*/
-    oal_uint8                           uc_sta_non_ht_num;                              /* 不支持HT的STA个数 */
+    oal_uint8                           uc_sta_no_short_slot_num;                       /* ??????short slot??STA????*/
+    oal_uint8                           uc_sta_no_short_preamble_num;                   /* ??????short preamble??STA????*/
+    oal_uint8                           uc_sta_non_erp_num;                             /* ??????ERP??STA????*/
+    oal_uint8                           uc_sta_non_ht_num;                              /* ??????HT??STA???? */
     /*word 2*/
-    oal_uint8                           uc_sta_non_gf_num;                              /* 支持ERP/HT,不支持GF的STA个数 */
-    oal_uint8                           uc_sta_20M_only_num;                            /* 只支持20M 频段的STA个数*/
-    oal_uint8                           uc_sta_no_40dsss_cck_num;                       /* 不用40M DSSS-CCK STA个数  */
-    oal_uint8                           uc_sta_no_lsig_txop_num;                        /* 不支持L-SIG TXOP Protection STA个数 */
+    oal_uint8                           uc_sta_non_gf_num;                              /* ????ERP/HT,??????GF??STA???? */
+    oal_uint8                           uc_sta_20M_only_num;                            /* ??????20M ??????STA????*/
+    oal_uint8                           uc_sta_no_40dsss_cck_num;                       /* ????40M DSSS-CCK STA????  */
+    oal_uint8                           uc_sta_no_lsig_txop_num;                        /* ??????L-SIG TXOP Protection STA???? */
 } mac_protection_stru;
 
-/*用于同步保护相关的参数*/
+/*??????????????????????*/
 typedef struct
 {
     oal_uint32             ul_sync_mask;
@@ -1118,9 +1118,9 @@ typedef struct
 
 typedef struct
 {
-    oal_uint8                          *puc_ie;                                         /* APP 信息元素 */
-    oal_uint32                          ul_ie_len;                                      /* APP 信息元素长度 */
-    oal_uint32                          ul_ie_max_len;                                  /* APP 信息元素最大长度 */
+    oal_uint8                          *puc_ie;                                         /* APP ???????? */
+    oal_uint32                          ul_ie_len;                                      /* APP ???????????? */
+    oal_uint32                          ul_ie_max_len;                                  /* APP ???????????????? */
 } mac_app_ie_stru;
 
 #ifdef _PRE_WLAN_FEATURE_PROXYSTA
@@ -1147,7 +1147,7 @@ typedef struct
 {
     mac_ether_header_stru               st_eth_hdr;
     oal_uint8                           auc_rsv[2];
-    oal_uint16                          us_proxy_num; /* 记录处理过帧的条数 */
+    oal_uint16                          us_proxy_num; /* ?????????????????? */
     oal_uint16                          us_type;
     oal_err_code_enum_uint32            en_rst;
 }mac_vap_proxyarp_debug_stru;
@@ -1158,13 +1158,13 @@ typedef struct
     oal_dlist_head_stru                 ast_ipv4_head[MAC_VAP_USER_HASH_MAX_VALUE];
     oal_dlist_head_stru                 ast_ipv6_head[MAC_VAP_USER_HASH_MAX_VALUE];
     oal_bool_enum_uint8                 en_is_proxyarp;
-    oal_uint8                           uc_ipv4_num;        /* 记录ipv4的条数 */
-    oal_uint8                           uc_ipv6_num;        /* 记录ipv6的条数 */
+    oal_uint8                           uc_ipv4_num;        /* ????ipv4?????? */
+    oal_uint8                           uc_ipv6_num;        /* ????ipv6?????? */
     oal_bool_enum_uint8                 en_2wlan;
 
 #ifdef _PRE_DEBUG_MODE
-    /* 调试使用,最多记录MAC_VAP_USER_HASH_MAX_VALUE条记录 */
-    oal_uint16                          us_idx_cur; /* 循环指向当前记录的位置 */
+    /* ????????,????????MAC_VAP_USER_HASH_MAX_VALUE?????? */
+    oal_uint16                          us_idx_cur; /* ?????????????????????? */
     oal_uint8                           auc_rsv[2];
     mac_vap_proxyarp_debug_stru         ast_vap_proxyarp_dbg[MAC_VAP_USER_HASH_MAX_VALUE];
 #endif
@@ -1172,13 +1172,13 @@ typedef struct
 #endif
 
 
-/* 协议参数 对应cfgid: WLAN_CFGID_MODE */
+/* ???????? ????cfgid: WLAN_CFGID_MODE */
 typedef struct
 {
-    wlan_protocol_enum_uint8            en_protocol;    /* 协议 */
-    wlan_channel_band_enum_uint8        en_band;        /* 频带 */
-    wlan_channel_bandwidth_enum_uint8   en_bandwidth;   /* 带宽 */
-    oal_uint8                           en_channel_idx; /* 主20M信道号 */
+    wlan_protocol_enum_uint8            en_protocol;    /* ???? */
+    wlan_channel_band_enum_uint8        en_band;        /* ???? */
+    wlan_channel_bandwidth_enum_uint8   en_bandwidth;   /* ???? */
+    oal_uint8                           en_channel_idx; /* ??20M?????? */
 }mac_cfg_mode_param_stru;
 
 #ifdef _PRE_WLAN_DFT_STAT
@@ -1188,7 +1188,7 @@ typedef struct
 {
     mac_vap_dft_stats_stru             *pst_vap_dft_stats;
     frw_timeout_stru                    st_vap_dft_timer;
-    oal_uint32                          ul_flg;             /* 开始统计标志 */
+    oal_uint32                          ul_flg;             /* ???????????? */
 
 
 }mac_vap_dft_stru;
@@ -1217,7 +1217,7 @@ typedef enum mac_rate_info_flags {
 
 
 #ifdef _PRE_WLAN_FEATURE_STA_PM
-/* STA UAPSD 配置命令 */
+/* STA UAPSD ???????? */
 typedef  struct
 {
     oal_uint8       uc_max_sp_len;
@@ -1239,7 +1239,7 @@ typedef enum
 #endif
 
 #ifdef _PRE_WLAN_FEATURE_TXOPPS
-/* STA txopps aid同步 */
+/* STA txopps aid???? */
 typedef	 struct
 {
     oal_uint16                           us_partial_aid;
@@ -1249,7 +1249,7 @@ typedef	 struct
 #endif
 
 #ifdef _PRE_WLAN_FEATURE_VOWIFI
-/* vowifi质量评估参数配置命令集合 */
+/* vowifi???????????????????????? */
 typedef enum
 {
     VOWIFI_SET_MODE = 0,
@@ -1268,22 +1268,22 @@ typedef enum
 }mac_vowifi_cmd_enum;
 typedef oal_uint8 mac_vowifi_cmd_enum_uint8;
 
-/* vowifi质量评估参数配置命令结构体 */
+/* vowifi?????????????????????????? */
 typedef struct
 {
-    mac_vowifi_cmd_enum_uint8   en_vowifi_cfg_cmd; /* 配置命令 */
-    oal_uint8                   uc_value;          /* 配置值 */
+    mac_vowifi_cmd_enum_uint8   en_vowifi_cfg_cmd; /* ???????? */
+    oal_uint8                   uc_value;          /* ?????? */
     oal_uint8                   auc_resv[2];
 }mac_cfg_vowifi_stru;
 
 
-/* VoWiFi信号质量评估 的 配置参数结构体 */
+/* VoWiFi???????????? ?? ?????????????? */
 typedef enum
 {
     VOWIFI_DISABLE_REPORT   = 0,
     VOWIFI_LOW_THRES_REPORT,
     VOWIFI_HIGH_THRES_REPORT,
-    VOWIFI_CLOSE_REPORT     = 3,/*关闭VoWIFI*/
+    VOWIFI_CLOSE_REPORT     = 3,/*????VoWIFI*/
 
     VOWIFI_MODE_BUTT        = 3
 } mac_vowifi_mode;
@@ -1297,102 +1297,102 @@ typedef struct
     2: enable report when rssi higher than threshold(vowifi_high_thres)
 */
     mac_vowifi_mode_enum_uint8  en_vowifi_mode;
-    oal_uint8                   uc_trigger_count_thres;   /*【1，100】, the continuous counters of lower or higher than threshold which will trigger the report to host */
+    oal_uint8                   uc_trigger_count_thres;   /*??1??100??, the continuous counters of lower or higher than threshold which will trigger the report to host */
     oal_int8                    c_rssi_low_thres;         /* [-1, -100],vowifi_low_thres */
     oal_int8                    c_rssi_high_thres;        /* [-1, -100],vowifi_high_thres */
-    oal_uint16                  us_rssi_period_ms;        /* 单位ms, 范围【1s，30s】, the period of monitor the RSSI when host suspended */
+    oal_uint16                  us_rssi_period_ms;        /* ????ms, ??????1s??30s??, the period of monitor the RSSI when host suspended */
 
-    oal_bool_enum_uint8         en_vowifi_reported;       /* 标记vowifi是否上报过一次"状态切换申请"，避免多次上报 */
-    oal_uint8                   uc_cfg_cmd_cnt;           /* 上层下发的配置vowifi参数的次数统计，用于辨别是否整套参数都下发齐全，防止下发参数流程和vowifi触发上报流程重叠 */
+    oal_bool_enum_uint8         en_vowifi_reported;       /* ????vowifi??????????????"????????????"?????????????? */
+    oal_uint8                   uc_cfg_cmd_cnt;           /* ??????????????vowifi??????????????????????????????????????????????????????????????????vowifi???????????????? */
 
-    /* ROM化后资源扩展指针 */
+    /* ROM???????????????? */
     oal_void                   *_rom;
 }mac_vowifi_param_stru;
 
 #endif /* _PRE_WLAN_FEATURE_VOWIFI */
 
-#define MAC_VAP_INVAILD    (0x0) /*0为vap无效*/
+#define MAC_VAP_INVAILD    (0x0) /*0??vap????*/
 #define MAC_VAP_VAILD      (0x2b)
 
 #ifdef _PRE_WLAN_NARROW_BAND
 typedef struct
 {
-    oal_bool_enum_uint8             en_open;         /* 打开关闭此特性 */
+    oal_bool_enum_uint8             en_open;         /* ?????????????? */
     mac_narrow_bw_enum_uint8        en_bw;           /* 1M,5M,10M */
     oal_uint8                       auc_rsv[2];
 }mac_cfg_narrow_bw_stru;
 #endif
 
-/* VAP的数据结构 */
+/* VAP?????????? */
 typedef struct
 {
-    /* VAP为AP或者STA均有成员 */
+    /* VAP??AP????STA???????? */
     /* word0~word1 */
-    oal_uint8                           uc_vap_id;                                      /* vap ID   *//* 即资源池索引值 */
-    oal_uint8                           uc_device_id;                                   /* 设备ID   */
+    oal_uint8                           uc_vap_id;                                      /* vap ID   *//* ?????????????? */
+    oal_uint8                           uc_device_id;                                   /* ????ID   */
     oal_uint8                           uc_chip_id;                                     /* chip ID  */
-    wlan_vap_mode_enum_uint8            en_vap_mode;                                    /* vap模式  */
+    wlan_vap_mode_enum_uint8            en_vap_mode;                                    /* vap????  */
     oal_uint32                          ul_core_id;
 
     /* word2~word3 */
-    oal_uint8                           auc_bssid[WLAN_MAC_ADDR_LEN];                   /* BSSID，非MAC地址，MAC地址是mib中的auc_dot11StationID  */
-    mac_vap_state_enum_uint8            en_vap_state;                                   /* VAP状态 */
-    wlan_protocol_enum_uint8            en_protocol;                                    /* 工作的协议模式 */
+    oal_uint8                           auc_bssid[WLAN_MAC_ADDR_LEN];                   /* BSSID????MAC??????MAC??????mib????auc_dot11StationID  */
+    mac_vap_state_enum_uint8            en_vap_state;                                   /* VAP???? */
+    wlan_protocol_enum_uint8            en_protocol;                                    /* ?????????????? */
 
     /* word4~word5 */
-    mac_channel_stru                    st_channel;                                     /* vap所在的信道 */
+    mac_channel_stru                    st_channel;                                     /* vap?????????? */
     mac_ch_switch_info_stru             st_ch_switch_info;
 
     /* word6 */
-    oal_uint8                           bit_has_user_bw_limit   :   1;                  /* 该vap是否存在user限速 */
-    oal_uint8                           bit_vap_bw_limit        :   1;                  /* 该vap是否已限速 */
-    oal_uint8                           bit_voice_aggr          :   1;                  /* 该vap是否针对VO业务支持聚合 */
-    oal_uint8                           bit_one_tx_tcp_be       :   1;                  /* 该vap是否只有1路发送TCP BE业务 */
+    oal_uint8                           bit_has_user_bw_limit   :   1;                  /* ??vap????????user???? */
+    oal_uint8                           bit_vap_bw_limit        :   1;                  /* ??vap?????????? */
+    oal_uint8                           bit_voice_aggr          :   1;                  /* ??vap????????VO???????????? */
+    oal_uint8                           bit_one_tx_tcp_be       :   1;                  /* ??vap????????1??????TCP BE???? */
     oal_uint8                           bit_resv                :   4;
 
-    oal_uint8                           uc_tx_power;                                    /* 传输功率, 单位dBm */
-    oal_uint8                           uc_channel_utilization;                         /* 当前信道利用率 */
-    oal_uint8                           uc_wmm_params_update_count;                     /* 初始为0，AP模式下，每跟新一次wmm参数这个变量加1,在beacon帧和assoc rsp中会填写，4bit，不能超过15；STA模式下解析帧并更新这个值 */
+    oal_uint8                           uc_tx_power;                                    /* ????????, ????dBm */
+    oal_uint8                           uc_channel_utilization;                         /* ?????????????? */
+    oal_uint8                           uc_wmm_params_update_count;                     /* ??????0??AP??????????????????wmm??????????????1,??beacon????assoc rsp??????????4bit??????????15??STA???????????????????????? */
 
     /* word7 */
-    oal_uint16                          us_user_nums;                                   /* VAP下已挂接的用户个数 */
-    oal_uint16                          us_multi_user_idx;                              /* 组播用户ID */
-    oal_uint8                           auc_cache_user_mac_addr[WLAN_MAC_ADDR_LEN];     /* cache user对应的MAC地址 */
-    oal_uint16                          us_cache_user_id;                               /* cache user对应的userID*/
-    oal_dlist_head_stru                 ast_user_hash[MAC_VAP_USER_HASH_MAX_VALUE];     /* hash数组,使用HASH结构内的DLIST */
-    oal_dlist_head_stru                 st_mac_user_list_head;                          /* 关联用户节点双向链表,使用USER结构内的DLIST */
+    oal_uint16                          us_user_nums;                                   /* VAP?????????????????? */
+    oal_uint16                          us_multi_user_idx;                              /* ????????ID */
+    oal_uint8                           auc_cache_user_mac_addr[WLAN_MAC_ADDR_LEN];     /* cache user??????MAC???? */
+    oal_uint16                          us_cache_user_id;                               /* cache user??????userID*/
+    oal_dlist_head_stru                 ast_user_hash[MAC_VAP_USER_HASH_MAX_VALUE];     /* hash????,????HASH????????DLIST */
+    oal_dlist_head_stru                 st_mac_user_list_head;                          /* ????????????????????,????USER????????DLIST */
 
     /* word8 */
-    wlan_nss_enum_uint8                 en_vap_rx_nss;                                  /* vap的接收空间流个数 */
+    wlan_nss_enum_uint8                 en_vap_rx_nss;                                  /* vap???????????????? */
 
-    /* word9 增加的SPE 端口号,一个VAP对应一个端口号 */
+    /* word9 ??????SPE ??????,????VAP?????????????? */
 #if (defined(CONFIG_BALONG_SPE) && defined(_PRE_WLAN_SPE_SUPPORT))
-    oal_uint32                          ul_spe_portnum;                                 /* 用于保存netdev初始化的spe端口 */
+    oal_uint32                          ul_spe_portnum;                                 /* ????????netdev????????spe???? */
 #endif
 
-    /*vap为静态资源，标记VAP有没有被申请。,
-      DMAC OFFLOAD模式VAP被删除后过滤缓冲的帧*/
+    /*vap????????????????VAP??????????????,
+      DMAC OFFLOAD????VAP????????????????????*/
     oal_uint8                           uc_init_flag;
     oal_uint8                           auc_resv1[2];
 
-    /* 加密相关 */
-    /*结构体需要保证4字节对齐*/
-    //mac_key_mgmt_stru                   st_key_mgmt;                                    /*用于保存自身ptk gtk等密钥信息，在AP/STA模式下均需要使用*/
+    /* ???????? */
+    /*??????????????4????????*/
+    //mac_key_mgmt_stru                   st_key_mgmt;                                    /*????????????ptk gtk??????????????AP/STA????????????????*/
 
-    mac_cap_flag_stru                   st_cap_flag;                                    /* vap能力特性标识 */
+    mac_cap_flag_stru                   st_cap_flag;                                    /* vap???????????? */
 #if(_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1151)
-    mac_vap_stats_stru                  st_vap_stats;                                   /* VAP收发包统计 */
+    mac_vap_stats_stru                  st_vap_stats;                                   /* VAP?????????? */
 #endif
-    wlan_mib_ieee802dot11_stru         *pst_mib_info;                                   /* mib信息(当时配置vap时，可以直接将指针值为NULL，节省空间)  */
+    wlan_mib_ieee802dot11_stru         *pst_mib_info;                                   /* mib????(????????vap??????????????????????NULL??????????)  */
 
-    mac_curr_rateset_stru               st_curr_sup_rates;                              /* 当前支持的速率集 */
-    mac_curr_rateset_stru               ast_sta_sup_rates_ie[WLAN_BAND_BUTT];           /* 只在sta全信道扫描时使用，用于填写支持的速率集ie，分2.4和5G */
+    mac_curr_rateset_stru               st_curr_sup_rates;                              /* ???????????????? */
+    mac_curr_rateset_stru               ast_sta_sup_rates_ie[WLAN_BAND_BUTT];           /* ????sta??????????????????????????????????????ie????2.4??5G */
 
 
 #ifdef _PRE_WLAN_DFT_STAT
-    /* user 链表维测 */
-    oal_uint32          ul_dlist_cnt;     /* dlsit统计 */
-    oal_uint32          ul_hash_cnt;     /* hash个数统计 */
+    /* user ???????? */
+    oal_uint32          ul_dlist_cnt;     /* dlsit???? */
+    oal_uint32          ul_hash_cnt;     /* hash???????? */
 
 #endif
 
@@ -1400,29 +1400,29 @@ typedef struct
     mac_vap_txbf_add_stru               st_txbf_add_cap;
 #endif
 
-    /* VAP为AP或者STA均有成员 定义结束*/
+    /* VAP??AP????STA???????? ????????*/
 
 
-    /* VAP为AP特有成员， 定义开始*/
-    mac_protection_stru                 st_protection;                                   /*与保护相关变量*/
+    /* VAP??AP?????????? ????????*/
+    mac_protection_stru                 st_protection;                                   /*??????????????*/
     mac_app_ie_stru                     ast_app_ie[OAL_APP_IE_NUM];
-    /* VAP为AP特定成员， 定义结束*/
+    /* VAP??AP?????????? ????????*/
 
-    /* VAP为STA特有成员， 定义开始*/
+    /* VAP??STA?????????? ????????*/
 
-    oal_uint16                          us_sta_aid;                                     /* VAP为STA模式时保存AP分配给STA的AID(从响应帧获取),取值范围1~2007; VAP为AP模式时，不用此成员变量 */
-    oal_uint8                           uc_assoc_vap_id;                                /* VAP为STA模式时保存user(ap)的资源池索引；VAP为AP模式时，不用此成员变量 */
-    oal_uint8                           uc_wmm_cap;                                     /* 保存与STA关联的AP是否支持wmm能力信息 */
+    oal_uint16                          us_sta_aid;                                     /* VAP??STA??????????AP??????STA??AID(????????????),????????1~2007; VAP??AP?????????????????????? */
+    oal_uint8                           uc_assoc_vap_id;                                /* VAP??STA??????????user(ap)??????????????VAP??AP?????????????????????? */
+    oal_uint8                           uc_wmm_cap;                                     /* ??????STA??????AP????????wmm???????? */
 
-    oal_uint8                           uc_uapsd_cap;                                   /* 保存与STA关联的AP是否支持uapsd能力信息 */
-    oal_uint16                          us_assoc_user_cap_info;                         /* sta要关联的用户的能力信息 */
-    oal_uint8                           bit_ap_11ntxbf              : 1,                /* sta要关联的用户的11n txbf能力信息 */
+    oal_uint8                           uc_uapsd_cap;                                   /* ??????STA??????AP????????uapsd???????? */
+    oal_uint16                          us_assoc_user_cap_info;                         /* sta?????????????????????? */
+    oal_uint8                           bit_ap_11ntxbf              : 1,                /* sta??????????????11n txbf???????? */
                                         bit_sta_rx_beacon_tsf_sync  : 1,
                                         bit_resv7                   : 6;
-    /* VAP为STA特定成员， 定义结束*/
+    /* VAP??STA?????????? ????????*/
 
 #ifdef _PRE_WLAN_FEATURE_PROXYSTA
-    mac_vap_psta_stru                   st_psta;                                /* Proxy STA 特性相关结构体 */
+    mac_vap_psta_stru                   st_psta;                                /* Proxy STA ?????????????? */
 #endif
 
 #ifdef _PRE_WLAN_FEATURE_PROXY_ARP
@@ -1433,58 +1433,58 @@ typedef struct
 #endif
 
 //#ifdef _PRE_WLAN_FEATURE_ALWAYS_TX
-    /* 常发测试使用 */
-    oal_uint8                           bit_al_tx_flag  :1;                             /* 常发标志 */
-    oal_uint8                           bit_payload_flag:2;                             /* payload内容:0:全0  1:全1  2:random */
-    oal_uint8                           bit_first_run:1;                                /* 常发关闭再次打开标志 */
+    /* ???????????? */
+    oal_uint8                           bit_al_tx_flag  :1;                             /* ???????? */
+    oal_uint8                           bit_payload_flag:2;                             /* payload????:0:??0  1:??1  2:random */
+    oal_uint8                           bit_first_run:1;                                /* ???????????????????? */
     oal_uint8                           bit_reserved:4;
     //oal_uint8                           auc_resv5[3];
 //#endif
 
 //#ifdef _PRE_WLAN_FEATURE_P2P
-    wlan_p2p_mode_enum_uint8            en_p2p_mode;                                    /* 0:非P2P设备; 1:P2P_GO; 2:P2P_Device; 3:P2P_CL */
-    oal_uint8                           uc_p2p_gocl_hal_vap_id;                         /* p2p go / cl的hal vap id */
+    wlan_p2p_mode_enum_uint8            en_p2p_mode;                                    /* 0:??P2P????; 1:P2P_GO; 2:P2P_Device; 3:P2P_CL */
+    oal_uint8                           uc_p2p_gocl_hal_vap_id;                         /* p2p go / cl??hal vap id */
     oal_uint8                           uc_p2p_listen_channel;                          /* P2P Listen channel */
     //oal_uint8                           auc_resv6[1];
 //#endif    /* _PRE_WLAN_FEATURE_P2P */
 
 #ifdef _PRE_WLAN_FEATURE_STA_PM
-    mac_cfg_uapsd_sta_stru              st_sta_uapsd_cfg;       /* UAPSD的配置信息 */
+    mac_cfg_uapsd_sta_stru              st_sta_uapsd_cfg;       /* UAPSD?????????? */
 #endif
 
 #if (_PRE_WLAN_FEATURE_PMF != _PRE_PMF_NOT_SUPPORT)
-    oal_bool_enum_uint8                 en_user_pmf_cap;        /* STA侧在未创建user前，存储目标user的pmf使能信息 */
+    oal_bool_enum_uint8                 en_user_pmf_cap;        /* STA??????????user????????????user??pmf???????? */
 #endif
 
     oal_spin_lock_stru                  st_cache_user_lock;     /* cache_user lock */
 #ifdef _PRE_WLAN_FEATURE_VOWIFI
-    mac_vowifi_param_stru               *pst_vowifi_cfg_param;  /* 上层下发的"VoWiFi信号质量评估"参数结构体 */
+    mac_vowifi_param_stru               *pst_vowifi_cfg_param;  /* ??????????"VoWiFi????????????"?????????? */
 #endif /* _PRE_WLAN_FEATURE_VOWIFI */
 
-    /* ROM化后资源扩展指针 */
+    /* ROM???????????????? */
     oal_void                            *_rom;
 }mac_vap_stru;
 
-/* cfg id对应的get set函数 */
+/* cfg id??????get set???? */
 typedef struct
 {
     wlan_cfgid_enum_uint16          en_cfgid;
-    oal_uint8                       auc_resv[2];    /* 字节对齐 */
+    oal_uint8                       auc_resv[2];    /* ???????? */
     oal_uint32                      (*p_get_func)(mac_vap_stru *pst_vap, oal_uint8 *puc_len, oal_uint8 *puc_param);
     oal_uint32                      (*p_set_func)(mac_vap_stru *pst_vap, oal_uint8 uc_len, oal_uint8 *puc_param);
 }mac_cfgid_stru;
 
 
-/* cfg id对应的参数结构体 */
-/* 创建VAP参数结构体, 对应cfgid: WLAN_CFGID_ADD_VAP */
+/* cfg id???????????????? */
+/* ????VAP??????????, ????cfgid: WLAN_CFGID_ADD_VAP */
 typedef struct
 {
     wlan_vap_mode_enum_uint8  en_vap_mode;
     oal_uint8                 uc_cfg_vap_indx;
-    oal_uint16                us_muti_user_id;          /* 添加vap 对应的muti user index */
+    oal_uint16                us_muti_user_id;          /* ????vap ??????muti user index */
 
-    oal_uint8                 uc_vap_id;                /* 需要添加的vap id */
-    wlan_p2p_mode_enum_uint8  en_p2p_mode;              /* 0:非P2P设备; 1:P2P_GO; 2:P2P_Device; 3:P2P_CL */
+    oal_uint8                 uc_vap_id;                /* ??????????vap id */
+    wlan_p2p_mode_enum_uint8  en_p2p_mode;              /* 0:??P2P????; 1:P2P_GO; 2:P2P_Device; 3:P2P_CL */
 #ifdef _PRE_WLAN_FEATURE_PROXYSTA
     psta_mode_enum_uint8      en_psta_mode;
     oal_uint8                 uc_rep_id;
@@ -1508,10 +1508,10 @@ typedef struct
 
 typedef mac_cfg_add_vap_param_stru mac_cfg_del_vap_param_stru;
 
-/* 启用VAP参数结构体 对应cfgid: WLAN_CFGID_START_VAP */
+/* ????VAP?????????? ????cfgid: WLAN_CFGID_START_VAP */
 typedef struct
 {
-    oal_bool_enum_uint8         en_mgmt_rate_init_flag;              /* start vap时候，管理帧速率是否需要初始化 */
+    oal_bool_enum_uint8         en_mgmt_rate_init_flag;              /* start vap?????????????????????????????? */
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
     oal_uint8            uc_protocol;
     oal_uint8            uc_band;
@@ -1523,7 +1523,7 @@ typedef struct
     wlan_p2p_mode_enum_uint8   en_p2p_mode;
     oal_uint8                  auc_resv2[3];
 #endif
-    oal_net_device_stru       *pst_net_dev;     /* 此成员仅供Host(WAL&HMAC)使用，Device侧(DMAC&ALG&HAL层)不使用 */
+    oal_net_device_stru       *pst_net_dev;     /* ??????????Host(WAL&HMAC)??????Device??(DMAC&ALG&HAL??)?????? */
 }mac_cfg_start_vap_param_stru;
 typedef mac_cfg_start_vap_param_stru mac_cfg_down_vap_param_stru;
 
@@ -1536,7 +1536,7 @@ typedef struct
 #endif
 
 
-/* 设置mac地址参数 对应cfgid: WLAN_CFGID_STATION_ID */
+/* ????mac???????? ????cfgid: WLAN_CFGID_STATION_ID */
 typedef struct
 {
     oal_uint8                   auc_station_id[WLAN_MAC_ADDR_LEN];
@@ -1544,7 +1544,7 @@ typedef struct
     oal_uint8                   auc_resv[1];
 }mac_cfg_staion_id_param_stru;
 
-/* SSID参数 对应cfgid: WLAN_CFGID_SSID */
+/* SSID???? ????cfgid: WLAN_CFGID_SSID */
 typedef struct
 {
     oal_uint8   uc_ssid_len;
@@ -1552,16 +1552,16 @@ typedef struct
     oal_int8    ac_ssid[WLAN_SSID_MAX_LEN];
 }mac_cfg_ssid_param_stru;
 
-/* HOSTAPD 设置工作频段，信道和带宽参数 */
+/* HOSTAPD ???????????????????????????? */
 typedef struct
 {
-    wlan_channel_band_enum_uint8        en_band;        /* 频带 */
-    wlan_channel_bandwidth_enum_uint8   en_bandwidth;   /* 带宽 */
-    oal_uint8                           uc_channel;     /* 信道编号 */
-    oal_uint8                           auc_resv[1];    /* 保留位 */
+    wlan_channel_band_enum_uint8        en_band;        /* ???? */
+    wlan_channel_bandwidth_enum_uint8   en_bandwidth;   /* ???? */
+    oal_uint8                           uc_channel;     /* ???????? */
+    oal_uint8                           auc_resv[1];    /* ?????? */
 }mac_cfg_channel_param_stru;
 
-/* HOSTAPD 设置wiphy 物理设备信息，包括RTS 门限值，分片报文门限值 */
+/* HOSTAPD ????wiphy ??????????????????RTS ?????????????????????? */
 typedef struct
 {
     oal_uint8  uc_frag_threshold_changed;
@@ -1571,20 +1571,20 @@ typedef struct
     oal_uint32 ul_rts_threshold;
 }mac_cfg_wiphy_param_stru;
 
-/* HOSTAPD 设置 Beacon 信息 */
+/* HOSTAPD ???? Beacon ???? */
 typedef struct
 {
     oal_int32                l_interval;                                                /* beacon interval */
     oal_int32                l_dtim_period;                                             /* DTIM period     */
     oal_bool_enum_uint8      en_privacy;
     oal_uint8                uc_crypto_mode;                                            /* WPA/WPA2 */
-    oal_uint8                uc_group_crypto;                                           /* 组播密钥类型 */
-    oal_bool_enum_uint8      uc_hidden_ssid;                                            /* 隐藏ssid */
-    oal_uint8                auc_auth_type[MAC_AUTHENTICATION_SUITE_NUM];               /* akm 类型 */
-    oal_uint8                auc_pairwise_crypto_wpa[MAC_PAIRWISE_CIPHER_SUITES_NUM];   /* wpa单播密钥类型 */
-    oal_uint8                auc_pairwise_crypto_wpa2[MAC_PAIRWISE_CIPHER_SUITES_NUM];  /* rsn单播密钥类型 */
-    oal_uint8                uc_group_mgmt_cipher;                                      /* 管理帧密钥类型 */
-    oal_uint16               us_rsn_capability;                                         /* rsn能力 */
+    oal_uint8                uc_group_crypto;                                           /* ???????????? */
+    oal_bool_enum_uint8      uc_hidden_ssid;                                            /* ????ssid */
+    oal_uint8                auc_auth_type[MAC_AUTHENTICATION_SUITE_NUM];               /* akm ???? */
+    oal_uint8                auc_pairwise_crypto_wpa[MAC_PAIRWISE_CIPHER_SUITES_NUM];   /* wpa???????????? */
+    oal_uint8                auc_pairwise_crypto_wpa2[MAC_PAIRWISE_CIPHER_SUITES_NUM];  /* rsn???????????? */
+    oal_uint8                uc_group_mgmt_cipher;                                      /* ?????????????? */
+    oal_uint16               us_rsn_capability;                                         /* rsn???? */
 
     oal_bool_enum_uint8      en_shortgi_20;
     oal_bool_enum_uint8      en_shortgi_40;
@@ -1596,58 +1596,58 @@ typedef struct
 }mac_beacon_param_stru;
 
 
-/* 设置log模块开关的配置命令参数 */
+/* ????log?????????????????????? */
 typedef struct
 {
-    oam_module_id_enum_uint16           en_mod_id;      /* 对应的模块id */
-    oal_bool_enum_uint8                 en_switch;      /* 对应的开关设置 */
+    oam_module_id_enum_uint16           en_mod_id;      /* ??????????id */
+    oal_bool_enum_uint8                 en_switch;      /* ?????????????? */
     oal_uint8                           auc_resv[1];
 }mac_cfg_log_module_param_stru;
 
-/* 用户相关的配置命令参数 */
+/* ?????????????????????? */
 typedef struct
 {
-    oal_uint8               auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* MAC地址 */
-    oal_bool_enum_uint8     en_ht_cap;                          /* ht能力 */
+    oal_uint8               auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* MAC???? */
+    oal_bool_enum_uint8     en_ht_cap;                          /* ht???? */
     oal_uint8               auc_resv[3];
-    oal_uint16              us_user_idx;                        /* 用户索引 */
+    oal_uint16              us_user_idx;                        /* ???????? */
 }mac_cfg_add_user_param_stru;
 
 typedef mac_cfg_add_user_param_stru mac_cfg_del_user_param_stru;
 
-/* 接收帧的FCS统计信息 */
+/* ????????FCS???????? */
 typedef struct
 {
-    oal_uint32  ul_data_op;         /* 数据操作模式:<0>保留,<1>清除 */
-    oal_uint32  ul_print_info;      /* 打印数据内容:<0>所有数据 <1>总帧数 <2>self fcs correct, <3>other fcs correct, <4>fcs error  */
+    oal_uint32  ul_data_op;         /* ????????????:<0>????,<1>???? */
+    oal_uint32  ul_print_info;      /* ????????????:<0>???????? <1>?????? <2>self fcs correct, <3>other fcs correct, <4>fcs error  */
 }mac_cfg_rx_fcs_info_stru;
 
-/* 剔除用户配置命令参数 */
+/* ???????????????????? */
 typedef struct
 {
-    oal_uint8               auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* MAC地址 */
-    oal_uint16              us_reason_code;                     /* 去关联 reason code */
+    oal_uint8               auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* MAC???? */
+    oal_uint16              us_reason_code;                     /* ?????? reason code */
 #ifdef _PRE_WLAN_FEATURE_HILINK
-    oal_uint8               uc_rej_user;                        /* 禁止sta连接 */
-    oal_uint8               uc_kick_user;                       /* 类型:允许/禁止连接 */
+    oal_uint8               uc_rej_user;                        /* ????sta???? */
+    oal_uint8               uc_kick_user;                       /* ????:????/???????? */
     oal_uint8               auc_rsv[2];
 #endif
 }mac_cfg_kick_user_param_stru;
 
 #ifdef _PRE_WLAN_FEATURE_PROXYSTA
-/* 设置Proxy STA OMA配置命令参数 */
+/* ????Proxy STA OMA???????????? */
 typedef struct
 {
-    oal_uint8               auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* Proxy STA OMA地址 */
+    oal_uint8               auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* Proxy STA OMA???? */
     oal_uint8               auc_resv[2];
 }mac_cfg_set_oma_param_stru;
 
 #endif
 
-/* 暂停tid配置命令参数 */
+/* ????tid???????????? */
 typedef struct
 {
-    oal_uint8               auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* MAC地址 */
+    oal_uint8               auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* MAC???? */
     oal_uint8               uc_tid;
     oal_uint8               uc_is_paused;
 }mac_cfg_pause_tid_param_stru;
@@ -1696,14 +1696,14 @@ typedef struct
     oal_uint8                                   auc_ip_pkt_data[4];
 }mac_vowifi_nat_keep_alive_start_info_stru;
 
-/* 配置用户是否为vip */
+/* ??????????????vip */
 typedef struct
 {
-    oal_uint8               auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* MAC地址 */
+    oal_uint8               auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* MAC???? */
     oal_uint8               uc_vip_flag;
 }mac_cfg_user_vip_param_stru;
 
-/* 暂停tid配置命令参数 */
+/* ????tid???????????? */
 typedef struct
 {
     oal_uint8               uc_aggr_tx_on;
@@ -1712,7 +1712,7 @@ typedef struct
 }mac_cfg_ampdu_tx_on_param_stru;
 
 #ifdef _PRE_WLAN_FEATURE_OFFLOAD_FLOWCTL
-/* 设置host某个队列的每次调度报文个数，low_waterline, high_waterline */
+/* ????host????????????????????????????low_waterline, high_waterline */
 typedef struct
 {
     oal_uint8               uc_queue_type;
@@ -1723,7 +1723,7 @@ typedef struct
 }mac_cfg_flowctl_param_stru;
 #endif
 
-/* 使能qempty命令 */
+/* ????qempty???? */
 typedef struct
 {
     oal_uint8   uc_is_on;
@@ -1731,7 +1731,7 @@ typedef struct
 }mac_cfg_resume_qempty_stru;
 
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC != _PRE_MULTI_CORE_MODE)
-/* 使能rx intr fifo命令 */
+/* ????rx intr fifo???? */
 typedef struct
 {
     oal_uint8   uc_is_on;
@@ -1739,7 +1739,7 @@ typedef struct
 }mac_cfg_resume_rx_intr_fifo_stru;
 #endif
 
-/* 发送mpdu/ampdu命令参数  */
+/* ????mpdu/ampdu????????  */
 typedef struct
 {
     oal_uint8               uc_tid;
@@ -1747,47 +1747,47 @@ typedef struct
     oal_uint16              us_packet_len;
     oal_uint8               auc_ra_mac[OAL_MAC_ADDR_LEN];
 }mac_cfg_mpdu_ampdu_tx_param_stru;
-/* AMPDU相关的配置命令参数 */
+/* AMPDU?????????????????? */
 typedef struct
 {
-    oal_uint8                       auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* 用户的MAC ADDR */
-    oal_uint8                       uc_tidno;                           /* 对应的tid号 */
-    oal_uint8                       auc_reserve[1];                      /* 确认策略 */
+    oal_uint8                       auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* ??????MAC ADDR */
+    oal_uint8                       uc_tidno;                           /* ??????tid?? */
+    oal_uint8                       auc_reserve[1];                      /* ???????? */
 }mac_cfg_ampdu_start_param_stru;
 
 typedef mac_cfg_ampdu_start_param_stru mac_cfg_ampdu_end_param_stru;
 
-/* BA会话相关的配置命令参数 */
+/* BA?????????????????????? */
 typedef struct
 {
-    oal_uint8                       auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* 用户的MAC ADDR */
-    oal_uint8                       uc_tidno;                           /* 对应的tid号 */
-    mac_ba_policy_enum_uint8        en_ba_policy;                       /* BA确认策略 */
-    oal_uint16                      us_buff_size;                       /* BA窗口的大小 */
-    oal_uint16                      us_timeout;                         /* BA会话的超时时间 */
+    oal_uint8                       auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* ??????MAC ADDR */
+    oal_uint8                       uc_tidno;                           /* ??????tid?? */
+    mac_ba_policy_enum_uint8        en_ba_policy;                       /* BA???????? */
+    oal_uint16                      us_buff_size;                       /* BA?????????? */
+    oal_uint16                      us_timeout;                         /* BA?????????????? */
 }mac_cfg_addba_req_param_stru;
 
 typedef struct
 {
-    oal_uint8                       auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* 用户的MAC ADDR */
-    oal_uint8                       uc_tidno;                           /* 对应的tid号 */
-    mac_delba_initiator_enum_uint8  en_direction;                       /* 删除ba会话的发起端 */
-    oal_uint8                       auc_reserve[1];                     /* 删除原因 */
+    oal_uint8                       auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* ??????MAC ADDR */
+    oal_uint8                       uc_tidno;                           /* ??????tid?? */
+    mac_delba_initiator_enum_uint8  en_direction;                       /* ????ba???????????? */
+    oal_uint8                       auc_reserve[1];                     /* ???????? */
 }mac_cfg_delba_req_param_stru;
 
 #ifdef _PRE_WLAN_FEATURE_CSI
 typedef struct
 {
-    oal_bool_enum_uint8             en_csi;                             /* csi使能 */
-    oal_bool_enum_uint8             en_ta_check;                        /* 上报CSI时是否check ta */
-    oal_bool_enum_uint8             en_ftm_check;                       /* 上报CSI时是否check ftm */
-    oal_uint8                       auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* csi对应的MAC ADDR */
+    oal_bool_enum_uint8             en_csi;                             /* csi???? */
+    oal_bool_enum_uint8             en_ta_check;                        /* ????CSI??????check ta */
+    oal_bool_enum_uint8             en_ftm_check;                       /* ????CSI??????check ftm */
+    oal_uint8                       auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* csi??????MAC ADDR */
     oal_uint8                       auc_resv[3];
 }mac_cfg_csi_param_stru;
 #endif
 
 #ifdef _PRE_WLAN_FEATURE_WMMAC
-/*TSPEC相关的配置命令参数*/
+/*TSPEC??????????????????*/
 typedef struct
 {
     mac_ts_info_stru  ts_info;
@@ -1805,14 +1805,14 @@ typedef struct
 typedef struct
 {
     oal_switch_enum_uint8                  en_wmm_ac_switch;
-    oal_switch_enum_uint8                  en_auth_flag;/*WMM AC认证开关 */
-    wlan_wme_ac_type_enum_uint8            en_ac_type;/*ac值*/
+    oal_switch_enum_uint8                  en_auth_flag;/*WMM AC???????? */
+    wlan_wme_ac_type_enum_uint8            en_ac_type;/*ac??*/
     oal_uint8                              auc_rsv[1];
-    oal_uint32                             ul_limit_time;/*配置medium time,单位:32 us*/
+    oal_uint32                             ul_limit_time;/*????medium time,????:32 us*/
 }mac_cfg_wmm_ac_param_stru;
 #endif
 
-/* 发送功率参数配置参数 */
+/* ???????????????????? */
 typedef struct
 {
     mac_set_pow_type_enum_uint8             en_type;
@@ -1823,36 +1823,36 @@ typedef struct
 typedef struct
 {
     oal_uint8                           auc_mac_addr[6];
-    oal_uint8                           uc_amsdu_max_num;   /* amsdu最大个数 */
+    oal_uint8                           uc_amsdu_max_num;   /* amsdu???????? */
     oal_uint8                           auc_reserve[3];
-    oal_uint16                          us_amsdu_max_size;  /* amsdu最大长度 */
+    oal_uint16                          us_amsdu_max_size;  /* amsdu???????? */
 
 }mac_cfg_amsdu_start_param_stru;
 
-/* 设置用户配置参数 */
+/* ???????????????? */
 typedef struct
 {
     oal_uint8                               uc_function_index;
     oal_uint8                               auc_reserve[2];
-    mac_vap_config_dscr_frame_type_uint8    en_type;       /* 配置的帧类型 */
+    mac_vap_config_dscr_frame_type_uint8    en_type;       /* ???????????? */
     oal_int32                               l_value;
 }mac_cfg_set_dscr_param_stru;
 
 typedef struct
 {
     mac_vap_stru                *pst_mac_vap;
-    oal_int8                     pc_param[4];      /* 查询或配置信息 */
+    oal_int8                     pc_param[4];      /* ?????????????? */
 }mac_cfg_event_stru;
 
-/* non-HT协议模式下速率配置结构体 */
+/* non-HT???????????????????????? */
 typedef struct
 {
-    wlan_legacy_rate_value_enum_uint8       en_rate;            /* 速率值 */
-    wlan_phy_protocol_enum_uint8            en_protocol_mode;   /* 对应的协议 */
-    oal_uint8                               auc_reserve[2];     /* 保留 */
+    wlan_legacy_rate_value_enum_uint8       en_rate;            /* ?????? */
+    wlan_phy_protocol_enum_uint8            en_protocol_mode;   /* ?????????? */
+    oal_uint8                               auc_reserve[2];     /* ???? */
 }mac_cfg_non_ht_rate_stru;
 
-/* 配置发送描述符内部元素结构体 */
+/* ???????????????????????????? */
 typedef enum
 {
     RF_PAYLOAD_ALL_ZERO = 0,
@@ -1864,7 +1864,7 @@ typedef oal_uint8 mac_rf_payload_enum_uint8;
 
 typedef struct
 {
-    oal_uint8                        uc_param;      /* 查询或配置信息 */
+    oal_uint8                        uc_param;      /* ?????????????? */
     wlan_phy_protocol_enum_uint8     en_protocol_mode;
     mac_rf_payload_enum_uint8        en_payload_flag;
     wlan_tx_ack_policy_enum_uint8    en_ack_policy;
@@ -1879,52 +1879,52 @@ typedef struct
 }mac_cfg_dbb_scaling_stru;
 
 
-/* 频偏较正命令格式 */
+/* ???????????????? */
 typedef struct
 {
-    oal_uint16                  us_idx;             /* 全局数组索引值 */
-    oal_uint16                  us_chn;             /* 配置信道 */
-    oal_int16                   as_corr_data[8];     /* 校正数据 */
+    oal_uint16                  us_idx;             /* ?????????????? */
+    oal_uint16                  us_chn;             /* ???????? */
+    oal_int16                   as_corr_data[8];     /* ???????? */
 }mac_cfg_freq_skew_stru;
 
-/* wfa edca参数配置 */
+/* wfa edca???????? */
 typedef struct
 {
-    oal_bool_enum_uint8             en_switch;      /* 开关 */
+    oal_bool_enum_uint8             en_switch;      /* ???? */
     wlan_wme_ac_type_enum_uint8     en_ac;          /* AC */
-    oal_uint16                      us_val;         /* 数据 */
+    oal_uint16                      us_val;         /* ???? */
 }mac_edca_cfg_stru;
 
-/* PPM调整命令格式 */
+/* PPM???????????? */
 typedef struct
 {
-    oal_int8                     c_ppm_val;         /* PPM差值 */
-    oal_uint8                    uc_clock_freq;     /* 时钟频率 */
+    oal_int8                     c_ppm_val;         /* PPM???? */
+    oal_uint8                    uc_clock_freq;     /* ???????? */
     oal_uint8                    uc_resv[1];
 }mac_cfg_adjust_ppm_stru;
 
 typedef struct
 {
-    oal_uint8                    uc_pcie_pm_level;  /* pcie低功耗级别,0->normal;1->L0S;2->L1;3->L1PM;4->L1s */
+    oal_uint8                    uc_pcie_pm_level;  /* pcie??????????,0->normal;1->L0S;2->L1;3->L1PM;4->L1s */
     oal_uint8                    uc_resv[3];
 }mac_cfg_pcie_pm_level_stru;
 
-/* 用户信息相关的配置命令参数 */
+/* ?????????????????????????? */
 typedef struct
 {
-    oal_uint16              us_user_idx;                        /* 用户索引 */
+    oal_uint16              us_user_idx;                        /* ???????? */
     oal_uint8               auc_reserve[2];
 
 }mac_cfg_user_info_param_stru;
 
-/* 管制域配置命令结构体 */
+/* ???????????????????? */
 typedef struct
 {
     oal_void *p_mac_regdom;
 
 }mac_cfg_country_stru;
 
-/* 管制域最大发送功率配置 */
+/* ?????????????????????? */
 typedef struct
 {
     oal_uint8 uc_pwr;
@@ -1933,14 +1933,14 @@ typedef struct
 }mac_cfg_regdomain_max_pwr_stru;
 
 
-/* 获取当前管制域国家码字符配置命令结构体 */
+/* ?????????????????????????????????????? */
 typedef struct
 {
     oal_int8    ac_country[3];
     oal_uint8   auc_resv[1];
 }mac_cfg_get_country_stru;
 
-/* query消息格式:2字节WID x N */
+/* query????????:2????WID x N */
 typedef struct
 {
     wlan_tidno_enum_uint8  en_tid;
@@ -1973,27 +1973,27 @@ typedef struct
 #else
     oal_uint8           auc_resv[2];
 #endif
-    oal_uint32          ul_tx_rate;         /* 当前发送速率 */
-    oal_uint32          ul_tx_rate_min;     /* 一段时间内最小发送速率 */
-    oal_uint32          ul_tx_rate_max;     /* 一段时间内最大发送速率 */
-    oal_uint32          ul_rx_rate;         /* 当前接收速率 */
-    oal_uint32          ul_rx_rate_min;     /* 一段时间内最小接收速率 */
-    oal_uint32          ul_rx_rate_max;     /* 一段时间内最大接收速率 */
+    oal_uint32          ul_tx_rate;         /* ???????????? */
+    oal_uint32          ul_tx_rate_min;     /* ?????????????????????? */
+    oal_uint32          ul_tx_rate_max;     /* ?????????????????????? */
+    oal_uint32          ul_rx_rate;         /* ???????????? */
+    oal_uint32          ul_rx_rate_min;     /* ?????????????????????? */
+    oal_uint32          ul_rx_rate_max;     /* ?????????????????????? */
 }mac_cfg_query_rate_stru;
 
 #ifdef _PRE_WLAN_RF_CALI
-/* 设置校准参数 */
+/* ???????????? */
 typedef struct
 {
-    oal_uint8               uc_chain_idx;        /* 通道 */
+    oal_uint8               uc_chain_idx;        /* ???? */
     oal_uint8               uc_band_idx;         /* subband */
-    oal_uint16              us_vref_value;       /* vref值 */
+    oal_uint16              us_vref_value;       /* vref?? */
 }mac_cfg_set_cali_vref_stru;
 #endif
 
-/* 以下为解析内核配置参数转化为驱动内部参数下发的结构体*/
+/* ????????????????????????????????????????????????????*/
 
-/* 解析内核配置的扫描参数后，下发给驱动的扫描参数 */
+/* ?????????????????????????????????????????????? */
 typedef struct
 {
     oal_ssids_stru              st_ssids[WLAN_SCAN_REQ_MAX_SSID];
@@ -2010,10 +2010,10 @@ typedef struct
     oal_uint32                  *pul_channels_2G;
     oal_uint32                  *pul_channels_5G;
 
-    /* WLAN/P2P 特性情况下，p2p0 和p2p-p2p0 cl 扫描时候，需要使用不同设备，增加bit_is_p2p0_scan来区分 */
-    oal_uint8                    bit_is_p2p0_scan : 1;   /* 是否为p2p0 发起扫描 */
-    oal_uint8                    bit_rsv          : 7;   /* 保留位 */
-    oal_uint8                    auc_rsv[3];             /* 保留位 */
+    /* WLAN/P2P ????????????p2p0 ??p2p-p2p0 cl ????????????????????????????????bit_is_p2p0_scan?????? */
+    oal_uint8                    bit_is_p2p0_scan : 1;   /* ??????p2p0 ???????? */
+    oal_uint8                    bit_rsv          : 7;   /* ?????? */
+    oal_uint8                    auc_rsv[3];             /* ?????? */
 }mac_cfg80211_scan_param_stru;
 
 
@@ -2022,7 +2022,7 @@ typedef struct
     mac_cfg80211_scan_param_stru  *pst_mac_cfg80211_scan_param;
 }mac_cfg80211_scan_param_pst_stru;
 
-/* 解析内核配置的connect参数后，下发给驱动的connect参数 */
+/* ??????????????connect????????????????????connect???? */
 typedef struct
 {
     oal_uint8               wpa_versions;
@@ -2055,44 +2055,44 @@ typedef oal_uint8 mac_nl80211_mfp_enum_uint8;
 
 typedef struct
 {
-    oal_uint8                           uc_channel;              /* ap所在信道编号，eg 1,2,11,36,40... */
-    oal_uint8                           uc_ssid_len;            /* SSID 长度 */
+    oal_uint8                           uc_channel;              /* ap??????????????eg 1,2,11,36,40... */
+    oal_uint8                           uc_ssid_len;            /* SSID ???? */
     mac_nl80211_mfp_enum_uint8          en_mfp;
     oal_uint8                           uc_wapi;
 
     oal_uint8                          *puc_ie;
-    oal_uint8                           auc_ssid[WLAN_SSID_MAX_LEN];  /* 期望关联的AP SSID  */
-    oal_uint8                           auc_bssid[WLAN_MAC_ADDR_LEN]; /* 期望关联的AP BSSID  */
+    oal_uint8                           auc_ssid[WLAN_SSID_MAX_LEN];  /* ??????????AP SSID  */
+    oal_uint8                           auc_bssid[WLAN_MAC_ADDR_LEN]; /* ??????????AP BSSID  */
     oal_uint8                           auc_rsv[1];
 
-    oal_bool_enum_uint8                 en_privacy;             /* 是否加密标志 */
-    oal_nl80211_auth_type_enum_uint8    en_auth_type;           /* 认证类型，OPEN or SHARE-KEY */
+    oal_bool_enum_uint8                 en_privacy;             /* ???????????? */
+    oal_nl80211_auth_type_enum_uint8    en_auth_type;           /* ??????????OPEN or SHARE-KEY */
 
-    oal_uint8                           uc_wep_key_len;         /* WEP KEY长度 */
-    oal_uint8                           uc_wep_key_index;       /* WEP KEY索引 */
-    oal_uint8                          *puc_wep_key;            /* WEP KEY密钥 */
+    oal_uint8                           uc_wep_key_len;         /* WEP KEY???? */
+    oal_uint8                           uc_wep_key_index;       /* WEP KEY???? */
+    oal_uint8                          *puc_wep_key;            /* WEP KEY???? */
 
-    mac_cfg80211_crypto_settings_stru   st_crypto;              /* 密钥套件信息 */
+    mac_cfg80211_crypto_settings_stru   st_crypto;              /* ???????????? */
     oal_uint32                          ul_ie_len;
 }mac_cfg80211_connect_param_stru;
 
 typedef struct
 {
-    oal_bool_enum_uint8                 en_privacy;             /* 是否加密标志 */
-    oal_nl80211_auth_type_enum_uint8    en_auth_type;           /* 认证类型，OPEN or SHARE-KEY */
-    oal_uint8                           uc_wep_key_len;         /* WEP KEY长度 */
-    oal_uint8                           uc_wep_key_index;       /* WEP KEY索引 */
-    oal_uint8                           auc_wep_key[WLAN_WEP104_KEY_LEN];            /* WEP KEY密钥 */
-    mac_nl80211_mfp_enum_uint8          en_mgmt_proteced;       /* 此条链接pmf是否使能 */
-    wlan_pmf_cap_status_uint8           en_pmf_cap;             /* 设备pmf能力 */
+    oal_bool_enum_uint8                 en_privacy;             /* ???????????? */
+    oal_nl80211_auth_type_enum_uint8    en_auth_type;           /* ??????????OPEN or SHARE-KEY */
+    oal_uint8                           uc_wep_key_len;         /* WEP KEY???? */
+    oal_uint8                           uc_wep_key_index;       /* WEP KEY???? */
+    oal_uint8                           auc_wep_key[WLAN_WEP104_KEY_LEN];            /* WEP KEY???? */
+    mac_nl80211_mfp_enum_uint8          en_mgmt_proteced;       /* ????????pmf???????? */
+    wlan_pmf_cap_status_uint8           en_pmf_cap;             /* ????pmf???? */
     oal_bool_enum_uint8                 en_wps_enable;
 
-    mac_cfg80211_crypto_settings_stru   st_crypto;              /* 密钥套件信息 */
+    mac_cfg80211_crypto_settings_stru   st_crypto;              /* ???????????? */
 #ifdef _PRE_WLAN_FEATURE_11R
-    oal_uint8                           auc_mde[8];             /* MD IE信息 */
+    oal_uint8                           auc_mde[8];             /* MD IE???? */
 #endif //_PRE_WLAN_FEATURE_11R
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
-    oal_int8                            c_rssi;                 /* 关联AP的RSSI信息 */
+    oal_int8                            c_rssi;                 /* ????AP??RSSI???? */
     oal_uint8                           auc_rsv[3];
 #endif /* _PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE */
 }mac_cfg80211_connect_security_stru;
@@ -2104,7 +2104,7 @@ typedef struct
 typedef struct
 {
     oal_uint16            us_mdid;                   /* Mobile Domain ID */
-    oal_uint16            us_len;                    /* FTE 的长度 */
+    oal_uint16            us_len;                    /* FTE ?????? */
     oal_uint8             auc_ie[MAC_MAX_FTE_LEN];
 }mac_cfg80211_ft_ies_stru;
 
@@ -2128,7 +2128,7 @@ typedef struct
     oal_uint8       auc_rsv[2];
 }mac_cfg80211_init_port_stru;
 
-/* 解析内核配置的disconnect参数后，下发给驱动的disconnect参数 */
+/* ??????????????disconnect????????????????????disconnect???? */
 typedef struct mac_cfg80211_disconnect_param_tag
 {
     oal_uint16              us_reason_code; /* disconnect reason code */
@@ -2179,9 +2179,9 @@ typedef oal_uint8   mac_lpm_state_enum_uint8;
 
 typedef struct mac_cfg_lpm_sleep_para_tag
 {
-    mac_lpm_state_enum_uint8         uc_pm_switch;  /*睡眠唤醒开关*/
+    mac_lpm_state_enum_uint8         uc_pm_switch;  /*????????????*/
     oal_uint8                        uc_rsv;
-    oal_uint16                       us_sleep_ms;   /*睡眠时间，毫秒*/
+    oal_uint16                       us_sleep_ms;   /*??????????????*/
 
 }mac_cfg_lpm_sleep_para_stru;
 
@@ -2200,8 +2200,8 @@ typedef struct mac_cfg_lpm_psm_param_tag
 
 typedef struct mac_cfg_lpm_smps_stub
 {
-    oal_uint8                       uc_stub_type;   /*0:off, 1:单流，2:双流*/
-    oal_uint8                       uc_rts_en;    /*是否发RTS*/
+    oal_uint8                       uc_stub_type;   /*0:off, 1:??????2:????*/
+    oal_uint8                       uc_rts_en;    /*??????RTS*/
 }mac_cfg_lpm_smps_stub_stru;
 
 
@@ -2217,7 +2217,7 @@ typedef struct mac_cfg_lpm_txopps_tx_stub
 {
     oal_uint8                       uc_stub_on;   /*0:off, 1:on*/
     oal_uint8                       auc_rsv[1];
-    oal_uint16                      us_begin_num;  /* 第n个报文打桩 */
+    oal_uint16                      us_begin_num;  /* ??n?????????? */
 }mac_cfg_lpm_txopps_tx_stub_stru;
 
 typedef struct mac_cfg_lpm_wow_en
@@ -2231,10 +2231,10 @@ typedef struct mac_cfg_lpm_tx_data_tag
     oal_uint16  us_num;
     oal_uint16  us_len;
     oal_uint8   uc_ac;
-    oal_uint8   uc_positive;                          /*0:被动probe request，1:主动 */
+    oal_uint8   uc_positive;                          /*0:????probe request??1:???? */
     oal_uint8   uc_psm;                               /*0:psm=0,1:psm=1*/
     oal_uint8   uc_rsv[1];
-    oal_uint8   auc_da[WLAN_MAC_ADDR_LEN];            /*发送probe request时，复用为指定BSSID*/
+    oal_uint8   auc_da[WLAN_MAC_ADDR_LEN];            /*????probe request??????????????BSSID*/
     //oal_uint8   auc_sa[WLAN_MAC_ADDR_LEN];
 }mac_cfg_lpm_tx_data_stru;
 
@@ -2278,12 +2278,12 @@ typedef struct
 
 typedef struct
 {
-    oal_int32   l_is_psm;                           /* 是否进入节能 */
-    oal_int32   l_is_qos;                           /* 是否发qosnull */
-    oal_int32   l_tidno;                            /* tid号 */
+    oal_int32   l_is_psm;                           /* ???????????? */
+    oal_int32   l_is_qos;                           /* ??????qosnull */
+    oal_int32   l_tidno;                            /* tid?? */
 }mac_cfg_tx_nulldata_stru;
 
-/* 设置以太网开关需要的参数 */
+/* ???????????????????????? */
 typedef struct
 {
     oam_ota_frame_direction_type_enum_uint8 en_frame_direction;
@@ -2291,7 +2291,7 @@ typedef struct
     oal_uint8               auc_user_macaddr[WLAN_MAC_ADDR_LEN];
 }mac_cfg_eth_switch_param_stru;
 
-/* 设置80211单播帧开关需要的参数 */
+/* ????80211???????????????????? */
 typedef struct
 {
     oam_ota_frame_direction_type_enum_uint8 en_frame_direction;
@@ -2303,7 +2303,7 @@ typedef struct
     oal_uint8                               auc_user_macaddr[WLAN_MAC_ADDR_LEN];
 }mac_cfg_80211_ucast_switch_stru;
 #ifdef _PRE_DEBUG_MODE_USER_TRACK
-/* 获取用户收发参数开关需要的参数结构 */
+/* ?????????????????????????????????? */
 typedef struct
 {
     oal_uint8                               auc_user_macaddr[WLAN_MAC_ADDR_LEN];
@@ -2313,16 +2313,16 @@ typedef struct
 }mac_cfg_report_txrx_param_stru;
 #endif
 #ifdef _PRE_WLAN_FEATURE_TXOPPS
-/* 软件配置mac txopps使能寄存器需要的三个参数 */
+/* ????????mac txopps???????????????????????? */
 typedef struct
 {
-    oal_switch_enum_uint8 en_machw_txopps_en;               /* sta是否使能txopps */
-    oal_switch_enum_uint8 en_machw_txopps_condition1;       /* txopps条件1 */
-    oal_switch_enum_uint8 en_machw_txopps_condition2;       /* txopps条件2 */
+    oal_switch_enum_uint8 en_machw_txopps_en;               /* sta????????txopps */
+    oal_switch_enum_uint8 en_machw_txopps_condition1;       /* txopps????1 */
+    oal_switch_enum_uint8 en_machw_txopps_condition2;       /* txopps????2 */
     oal_uint8             auc_resv[1];
 }mac_txopps_machw_param_stru;
 #endif
-/* 设置80211组播\广播帧开关需要的参数 */
+/* ????80211????\???????????????????? */
 typedef struct
 {
     oam_ota_frame_direction_type_enum_uint8 en_frame_direction;
@@ -2333,7 +2333,7 @@ typedef struct
     oal_uint8                               auc_resv[3];
 }mac_cfg_80211_mcast_switch_stru;
 
-/* 设置probe request和probe response开关需要的参数 */
+/* ????probe request??probe response?????????????? */
 typedef struct
 {
     oam_ota_frame_direction_type_enum_uint8 en_frame_direction;
@@ -2342,7 +2342,7 @@ typedef struct
     oal_switch_enum_uint8                   en_dscr_switch;
 }mac_cfg_probe_switch_stru;
 
-/* 获取mpdu数目需要的参数 */
+/* ????mpdu?????????????? */
 typedef struct
 {
     oal_uint8                   auc_user_macaddr[WLAN_MAC_ADDR_LEN];
@@ -2369,15 +2369,15 @@ typedef struct
 
 typedef struct
 {
-    oal_uint8                   uc_aggr_num_switch; /* 控制聚合个数开关 */
-    oal_uint8                   uc_aggr_num;        /* 聚合个数 */
+    oal_uint8                   uc_aggr_num_switch; /* ???????????????? */
+    oal_uint8                   uc_aggr_num;        /* ???????? */
     oal_uint8                   auc_resv[2];
 }mac_cfg_aggr_num_stru;
 
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC != _PRE_MULTI_CORE_MODE)
 typedef struct
 {
-    oal_uint8                   uc_mmss_val;        /* 最小帧间距 */
+    oal_uint8                   uc_mmss_val;        /* ?????????? */
     oal_uint8                   auc_resv[3];
 }mac_cfg_ampdu_mmss_stru;
 #endif
@@ -2385,8 +2385,8 @@ typedef struct
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC != _PRE_MULTI_CORE_MODE)
 typedef struct
 {
-    oal_uint16                  us_pll_int;         /* 整数分频系数 */
-    oal_uint16                  us_pll_frac;        /* 小数分频系数 */
+    oal_uint16                  us_pll_int;         /* ???????????? */
+    oal_uint16                  us_pll_frac;        /* ???????????? */
 }mac_cfg_freq_adjust_stru;
 #endif
 
@@ -2480,9 +2480,9 @@ typedef struct
 
 typedef struct
 {
-    /* software_retry值 */
+    /* software_retry?? */
     oal_uint8   uc_software_retry;
-    /* 是否取test设置的值，为0则为正常流程所设 */
+    /* ??????test????????????0???????????????? */
     oal_uint8   uc_retry_test;
 
     oal_uint8   uc_pad[2];
@@ -2592,7 +2592,7 @@ typedef struct
 }mac_cfg_dump_memory_stru;
 
 #ifdef _PRE_WLAN_PERFORM_STAT
-/* 统计量类型 */
+/* ?????????? */
 typedef enum
 {
     MAC_STAT_TYPE_TID_DELAY,
@@ -2607,30 +2607,30 @@ typedef oal_uint8    mac_stat_type_enum_uint8;
 
 typedef struct
 {
-    mac_stat_type_enum_uint8    en_stat_type;                       /* 统计类型 */
+    mac_stat_type_enum_uint8    en_stat_type;                       /* ???????? */
     oal_uint8                   uc_vap_id;                          /* vap id */
-    oal_uint8                   auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* MAC地址 */
+    oal_uint8                   auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* MAC???? */
     oal_uint8                   uc_tidno;                           /* tidno */
-    oal_uint16                  us_stat_period;                     /* 统计周期 */
-    oal_uint16                  us_stat_num;                        /* 统计次数 */
+    oal_uint16                  us_stat_period;                     /* ???????? */
+    oal_uint16                  us_stat_num;                        /* ???????? */
 }mac_cfg_stat_param_stru;
 
 typedef struct
 {
-    mac_stat_type_enum_uint8    en_stat_type;                       /* 统计类型 */
+    mac_stat_type_enum_uint8    en_stat_type;                       /* ???????? */
     oal_uint8                   uc_vap_id;                          /* vap id */
-    oal_uint8                   auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* MAC地址 */
+    oal_uint8                   auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* MAC???? */
     oal_uint8                   uc_tidno;                           /* tidno */
 }mac_cfg_display_param_stru;
 
-/* 统计tid */
+/* ????tid */
 typedef struct
 {
     oal_uint8               uc_vap_id;                          /* vap id */
-    oal_uint8               auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* MAC地址 */
+    oal_uint8               auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* MAC???? */
     oal_uint8               uc_tidno;                           /* tidno */
-    oal_uint16              us_stat_period;                     /* 统计周期 */
-    oal_uint32              ul_stat_num;                        /* 统计次数 */
+    oal_uint16              us_stat_period;                     /* ???????? */
+    oal_uint32              ul_stat_num;                        /* ???????? */
 }mac_ioctl_stat_param_stru;
 
 #endif
@@ -2667,69 +2667,69 @@ typedef struct
 #endif
 
 
-/* 算法参数枚举，参数值 */
+/* ???????????????????? */
 typedef struct
 {
-    mac_alg_cfg_enum_uint8              en_alg_cfg;     /* 配置命令枚举 */
-    oal_uint8                           uc_resv[3];     /* 字节对齐 */
-    oal_uint32                          ul_value;       /* 配置参数值 */
+    mac_alg_cfg_enum_uint8              en_alg_cfg;     /* ???????????? */
+    oal_uint8                           uc_resv[3];     /* ???????? */
+    oal_uint32                          ul_value;       /* ?????????? */
 }mac_ioctl_alg_param_stru;
 
-/* AUTORATE LOG 算法参数枚举，参数值 */
+/* AUTORATE LOG ???????????????????? */
 typedef struct
 {
-    mac_alg_cfg_enum_uint8  en_alg_cfg;     /* 配置命令枚举 */
-    oal_uint8               auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* MAC地址 */
-    oal_uint8               uc_ac_no;                           /* AC类型 */
+    mac_alg_cfg_enum_uint8  en_alg_cfg;     /* ???????????? */
+    oal_uint8               auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* MAC???? */
+    oal_uint8               uc_ac_no;                           /* AC???? */
     oal_uint8               auc_resv[2];
-    oal_uint16              us_value;                           /*配置参数值 */
+    oal_uint16              us_value;                           /*?????????? */
 }mac_ioctl_alg_ar_log_param_stru;
 
-/* AUTORATE 测试相关的命令参数 */
+/* AUTORATE ?????????????????? */
 typedef struct
 {
-    mac_alg_cfg_enum_uint8  en_alg_cfg;                         /* 配置命令枚举 */
-    oal_uint8               auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* MAC地址 */
+    mac_alg_cfg_enum_uint8  en_alg_cfg;                         /* ???????????? */
+    oal_uint8               auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* MAC???? */
     oal_uint8               auc_resv[1];
-    oal_uint16              us_value;                           /* 命令参数 */
+    oal_uint16              us_value;                           /* ???????? */
 }mac_ioctl_alg_ar_test_param_stru;
 
-/* TXMODE LOG 算法参数枚举，参数值 */
+/* TXMODE LOG ???????????????????? */
 typedef struct
 {
-    mac_alg_cfg_enum_uint8  en_alg_cfg;     /* 配置命令枚举 */
-    oal_uint8               uc_ac_no;                           /* AC类型 */
-    oal_uint8               auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* MAC地址 */
+    mac_alg_cfg_enum_uint8  en_alg_cfg;     /* ???????????? */
+    oal_uint8               uc_ac_no;                           /* AC???? */
+    oal_uint8               auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* MAC???? */
     oal_uint8               auc_resv1[2];
-    oal_uint16              us_value;                           /*配置参数值 */
+    oal_uint16              us_value;                           /*?????????? */
 }mac_ioctl_alg_txbf_log_param_stru;
-/* 算法配置命令接口 */
+/* ???????????????? */
 typedef struct
 {
     oal_uint8       uc_argc;
     oal_uint8       auc_argv_offset[DMAC_ALG_CONFIG_MAX_ARG];
 }mac_ioctl_alg_config_stru;
 
-/* TPC LOG 算法参数枚举，参数值 */
+/* TPC LOG ???????????????????? */
 typedef struct
 {
-    mac_alg_cfg_enum_uint8  en_alg_cfg;                         /* 配置命令枚举 */
-    oal_uint8               auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* MAC地址 */
-    oal_uint8               uc_ac_no;                           /* AC类型 */
-    oal_uint16              us_value;                           /* 配置参数值 */
-    oal_int8               *pc_frame_name;                      /* 获取特定帧功率使用该变量 */
+    mac_alg_cfg_enum_uint8  en_alg_cfg;                         /* ???????????? */
+    oal_uint8               auc_mac_addr[WLAN_MAC_ADDR_LEN];    /* MAC???? */
+    oal_uint8               uc_ac_no;                           /* AC???? */
+    oal_uint16              us_value;                           /* ?????????? */
+    oal_int8               *pc_frame_name;                      /* ???????????????????????? */
 }mac_ioctl_alg_tpc_log_param_stru;
 
-/* cca opt LOG 算法参数枚举，参数值 */
+/* cca opt LOG ???????????????????? */
 typedef struct
 {
-    mac_alg_cfg_enum_uint8  en_alg_cfg;                         /* 配置命令枚举 */
-    oal_uint16              us_value;                           /* 统计总时间 */
+    mac_alg_cfg_enum_uint8  en_alg_cfg;                         /* ???????????? */
+    oal_uint16              us_value;                           /* ?????????? */
     oal_uint8               auc_resv;
 }mac_ioctl_alg_cca_opt_log_param_stru;
 
 #ifdef _PRE_DEBUG_MODE
-/* 扫描测试命令 */
+/* ???????????? */
 typedef struct
 {
     oal_int8                            ac_scan_type[15];
@@ -2737,16 +2737,16 @@ typedef struct
 }mac_ioctl_scan_test_config_stru;
 #endif
 
-/*RTS 发送参数*/
+/*RTS ????????*/
 typedef struct
 {
-    wlan_legacy_rate_value_enum_uint8   auc_rate[HAL_TX_RATE_MAX_NUM];           /*发送速率，单位mpbs*/
-    wlan_phy_protocol_enum_uint8        auc_protocol_mode[HAL_TX_RATE_MAX_NUM] ; /*协议模式, 取值参见wlan_phy_protocol_enum_uint8*/
+    wlan_legacy_rate_value_enum_uint8   auc_rate[HAL_TX_RATE_MAX_NUM];           /*??????????????mpbs*/
+    wlan_phy_protocol_enum_uint8        auc_protocol_mode[HAL_TX_RATE_MAX_NUM] ; /*????????, ????????wlan_phy_protocol_enum_uint8*/
     wlan_channel_band_enum_uint8        en_band;
     oal_uint8                           auc_recv[3];
 }mac_cfg_rts_tx_param_stru;
 
-/* 组播转单播 发送参数 */
+/* ?????????? ???????? */
 typedef struct
 {
     oal_uint8 uc_m2u_mcast_mode;
@@ -2754,13 +2754,13 @@ typedef struct
 }mac_cfg_m2u_snoop_on_param_stru;
 
 
-/* 加组播转单播黑名单 */
+/* ?????????????????? */
 typedef struct
 {
     oal_uint32 ul_deny_group_addr;
 }mac_add_m2u_deny_table_stru;
 
-/* 清空组播转单播黑名单 */
+/* ???????????????????? */
 typedef struct
 {
     oal_uint8 uc_m2u_clear_deny_table;
@@ -2796,12 +2796,12 @@ typedef struct
 typedef struct
 {
     oal_uint64                          ull_cookie;
-    oal_uint32                          ul_listen_duration;         /* 监听时间   */
-    oal_uint8                           uc_listen_channel;          /* 监听的信道 */
-    wlan_channel_bandwidth_enum_uint8   en_listen_channel_type;     /* 监听信道类型 */
-    oal_uint8                           uc_home_channel;            /* 监听结束返回的信道 */
-    wlan_channel_bandwidth_enum_uint8   en_home_channel_type;       /* 监听结束，返回主信道类型 */
-    mac_vap_state_enum_uint8            en_last_vap_state;          /* P2P0和P2P_CL 公用VAP 结构，保存进入监听前VAP 的状态，便于监听结束时恢复该状态 */
+    oal_uint32                          ul_listen_duration;         /* ????????   */
+    oal_uint8                           uc_listen_channel;          /* ?????????? */
+    wlan_channel_bandwidth_enum_uint8   en_listen_channel_type;     /* ???????????? */
+    oal_uint8                           uc_home_channel;            /* ?????????????????? */
+    wlan_channel_bandwidth_enum_uint8   en_home_channel_type;       /* ???????????????????????? */
+    mac_vap_state_enum_uint8            en_last_vap_state;          /* P2P0??P2P_CL ????VAP ????????????????????VAP ???????????????????????????????? */
     wlan_channel_band_enum_uint8        en_band;
     oal_ieee80211_channel_stru          st_listen_channel;
 
@@ -2825,7 +2825,7 @@ typedef struct
 }mac_device_pool_id_stru;
 #endif
 
-/* WPAS 管理帧发送结构 */
+/* WPAS ?????????????? */
 typedef struct
 {
     oal_int32               channel;
@@ -2835,7 +2835,7 @@ typedef struct
     OAL_CONST oal_uint8    *puc_frame;
 } mac_mgmt_frame_stru;
 
-/* STA PS 发送参数 */
+/* STA PS ???????? */
 #ifdef _PRE_WLAN_FEATURE_STA_PM
 typedef struct
 {
@@ -2854,8 +2854,8 @@ typedef struct
 #ifdef _PRE_PSM_DEBUG_MODE
 typedef struct
 {
-    oal_uint8   uc_psm_info_enable      :2;  //开启psm的统计维测输出
-    oal_uint8   uc_psm_debug_mode       :2;  //开启psm的debug打印模式
+    oal_uint8   uc_psm_info_enable      :2;  //????psm??????????????
+    oal_uint8   uc_psm_debug_mode       :2;  //????psm??debug????????
     oal_uint8   uc_psm_resd             :4;
 }mac_cfg_ps_info_stru;
 #endif
@@ -2864,31 +2864,31 @@ typedef struct
 typedef struct
 {
     oal_uint8   uc_show_ip_addr                 :4;  //show ip addr
-    oal_uint8   uc_show_arpoffload_info         :4;	 //show arpoffload 维测
+    oal_uint8   uc_show_arpoffload_info         :4;	 //show arpoffload ????
 }mac_cfg_arpoffload_info_stru;
 
 typedef struct
 {
-    oal_uint8   uc_in_suspend; //亮暗屏
-    oal_uint8   uc_arpoffload_switch; //arpoffload开关
-    oal_uint8   uc_apf_switch; //apf开关
+    oal_uint8   uc_in_suspend; //??????
+    oal_uint8   uc_arpoffload_switch; //arpoffload????
+    oal_uint8   uc_apf_switch; //apf????
 }mac_cfg_suspend_stru;
 
 typedef enum {
-    MAC_STA_PM_SWITCH_OFF         = 0,        /* 关闭低功耗 */
-    MAC_STA_PM_SWITCH_ON          = 1,        /* 打开低功耗 */
-    MAC_STA_PM_MANUAL_MODE_ON     = 2,        /* 开启手动sta pm mode */
-    MAC_STA_PM_MANUAL_MODE_OFF    = 3,        /* 关闭手动sta pm mode */
-    MAC_STA_PM_SWITCH_BUTT,                   /* 最大类型 */
+    MAC_STA_PM_SWITCH_OFF         = 0,        /* ?????????? */
+    MAC_STA_PM_SWITCH_ON          = 1,        /* ?????????? */
+    MAC_STA_PM_MANUAL_MODE_ON     = 2,        /* ????????sta pm mode */
+    MAC_STA_PM_MANUAL_MODE_OFF    = 3,        /* ????????sta pm mode */
+    MAC_STA_PM_SWITCH_BUTT,                   /* ???????? */
 }mac_pm_switch_enum;
 typedef oal_uint8 mac_pm_switch_enum_uint8;
 
 typedef enum {
-    MAC_STA_PM_CTRL_TYPE_HOST   = 0,        /* 低功耗控制类型 HOST  */
-    MAC_STA_PM_CTRL_TYPE_DBAC   = 1,        /* 低功耗控制类型 DBAC  */
-    MAC_STA_PM_CTRL_TYPE_ROAM   = 2,        /* 低功耗控制类型 ROAM  */
-    MAC_STA_PM_CTRL_TYPE_CMD    = 3,        /* 低功耗控制类型 CMD   */
-    MAC_STA_PM_CTRL_TYPE_BUTT,              /* 最大类型，应小于 8  */
+    MAC_STA_PM_CTRL_TYPE_HOST   = 0,        /* ?????????????? HOST  */
+    MAC_STA_PM_CTRL_TYPE_DBAC   = 1,        /* ?????????????? DBAC  */
+    MAC_STA_PM_CTRL_TYPE_ROAM   = 2,        /* ?????????????? ROAM  */
+    MAC_STA_PM_CTRL_TYPE_CMD    = 3,        /* ?????????????? CMD   */
+    MAC_STA_PM_CTRL_TYPE_BUTT,              /* ???????????????? 8  */
 }mac_pm_ctrl_type_enum;
 typedef oal_uint8 mac_pm_ctrl_type_enum_uint8;
 
@@ -2898,7 +2898,7 @@ typedef struct
     mac_pm_switch_enum_uint8        uc_pm_enable;          /*mac_pm_switch_enum*/
 }mac_cfg_ps_open_stru;
 
-/* P2P OPS 节能配置参数 */
+/* P2P OPS ???????????? */
 typedef struct
 {
     oal_uint8       en_ops_ctrl;
@@ -2907,7 +2907,7 @@ typedef struct
     oal_uint8       auc_rsv[1];
 }mac_cfg_p2p_ops_param_stru;
 
-/* P2P NOA节能配置参数 */
+/* P2P NOA???????????? */
 typedef struct
 {
     oal_uint32      ul_start_time;
@@ -2917,10 +2917,10 @@ typedef struct
     oal_uint8       auc_rsv[3];
 }mac_cfg_p2p_noa_param_stru;
 
-/* P2P 节能控制命令 */
+/* P2P ???????????? */
 typedef struct
 {
-    oal_uint8       uc_p2p_statistics_ctrl;/* 0:清除P2P 统计值； 1:打印输出统计值 */
+    oal_uint8       uc_p2p_statistics_ctrl;/* 0:????P2P ???????? 1:?????????????? */
     oal_uint8       auc_rsv[3];
 
 }mac_cfg_p2p_stat_param_stru;
@@ -2937,7 +2937,7 @@ typedef enum
     WPAS_CONNECT_STATE_BUTT
 }wpas_connect_state_enum;
 typedef oal_uint32 wpas_connect_state_enum_uint32;
-/* roam trigger 数据结构体 */
+/* roam trigger ?????????? */
 typedef struct
 {
     oal_int8                      c_trigger_2G;
@@ -2945,7 +2945,7 @@ typedef struct
     oal_uint8                     auc_resv[2];
 }mac_roam_trigger_stru;
 
-/* roam hmac 同步 dmac数据结构体 */
+/* roam hmac ???? dmac?????????? */
 typedef struct
 {
     oal_uint16                      us_sta_aid;
@@ -2960,16 +2960,16 @@ typedef struct
 #ifdef _PRE_PLAT_FEATURE_CUSTOMIZE
 
 #ifdef _PRE_WLAN_FIT_BASED_REALTIME_CALI
-/* 动态校准参数枚举，参数值 */
+/* ???????????????????????? */
 typedef struct
 {
-    mac_dyn_cali_cfg_enum_uint8         en_dyn_cali_cfg;     /* 配置命令枚举 */
-    oal_uint8                           uc_resv;          /* 字节对齐 */
-    oal_uint16                          us_value;            /* 配置参数值 */
+    mac_dyn_cali_cfg_enum_uint8         en_dyn_cali_cfg;     /* ???????????? */
+    oal_uint8                           uc_resv;          /* ???????? */
+    oal_uint16                          us_value;            /* ?????????? */
 }mac_ioctl_dyn_cali_param_stru;
 #endif
 
-/* 定制化 linkloss门限配置参数 */
+/* ?????? linkloss???????????? */
 typedef struct
 {
     oal_uint8                   uc_linkloss_threshold_wlan_bt;
@@ -2977,7 +2977,7 @@ typedef struct
     oal_uint8                   uc_linkloss_threshold_wlan_normal;
     oal_uint8                   auc_resv[1];
 }mac_cfg_linkloss_threshold;
-/* 定制化 power ref 2g 5g配置参数 */
+/* ?????? power ref 2g 5g???????? */
 typedef struct
 {
     oal_uint32                  ul_power_ref_5g;
@@ -2985,15 +2985,15 @@ typedef struct
 /* customize rf cfg struct */
 typedef struct
 {
-    oal_int8                    c_rf_gain_db_mult4;      /*外部PA/LNA bypass时的增益(精度0.25dB)*/
-    oal_int8                    c_rf_gain_db_mult10;     /*外部PA/LNA bypass时的增益(精度0.1dB)*/
+    oal_int8                    c_rf_gain_db_mult4;      /*????PA/LNA bypass????????(????0.25dB)*/
+    oal_int8                    c_rf_gain_db_mult10;     /*????PA/LNA bypass????????(????0.1dB)*/
 }mac_cfg_gain_db_per_band;
 
-/* FCC认证 参数结构体 */
+/* FCC???? ?????????? */
 typedef struct
 {
-    oal_uint8       uc_index;           /* 下标表示偏移 */
-    oal_uint8       uc_max_txpower;     /* 最大发送功率 */
+    oal_uint8       uc_index;           /* ???????????? */
+    oal_uint8       uc_max_txpower;     /* ???????????? */
     oal_uint8       uc_dbb_scale;       /* dbb scale */
     oal_uint8       uc_resv;
 }mac_cus_band_edge_limit_stru;
@@ -3003,7 +3003,7 @@ typedef struct
 extern oal_uint8 g_uc_uapsd_cap;
 #endif
 
-/* 1102 wiphy Vendor CMD参数 对应cfgid: WLAN_CFGID_VENDOR_CMD */
+/* 1102 wiphy Vendor CMD???? ????cfgid: WLAN_CFGID_VENDOR_CMD */
 typedef struct mac_vendor_cmd_channel_list_info
 {
     oal_uint8 uc_channel_num_2g;
@@ -3012,18 +3012,18 @@ typedef struct mac_vendor_cmd_channel_list_info
     oal_uint8 auc_channel_list_5g[MAC_CHANNEL_FREQ_5_BUTT];
 }mac_vendor_cmd_channel_list_stru;
 
-/*CHR2.0使用的STA统计信息*/
+/*CHR2.0??????STA????????*/
 typedef  struct
 {
-    oal_uint8                        uc_distance;                               /*算法的tpc距离，对应dmac_alg_tpc_user_distance_enum*/
-    oal_uint8                        uc_cca_intr;                               /*算法的cca_intr干扰，对应alg_cca_opt_intf_enum*/
+    oal_uint8                        uc_distance;                               /*??????tpc??????????dmac_alg_tpc_user_distance_enum*/
+    oal_uint8                        uc_cca_intr;                               /*??????cca_intr??????????alg_cca_opt_intf_enum*/
     oal_uint8                        auc_reserve[2];
-    oal_uint32                       ul_bcn_cnt;                                /*收到的beacon计数*/
-    oal_uint32                       ul_bcn_tout_cnt;                           /*beacon丢失的计数*/
+    oal_uint32                       ul_bcn_cnt;                                /*??????beacon????*/
+    oal_uint32                       ul_bcn_tout_cnt;                           /*beacon??????????*/
 }station_info_extend_stru;
 
 #ifdef _PRE_WLAN_FEATURE_FTM
-/* FTM调试开关相关的结构体 */
+/* FTM???????????????????? */
 typedef struct
 {
     oal_uint8             uc_channel_num;
@@ -3063,21 +3063,21 @@ typedef struct
     oal_uint8                           uc_minimum_ap_count;
     oal_uint8                           aauc_bssid[MAX_MINIMUN_AP_COUNT][WLAN_MAC_ADDR_LEN];
     oal_uint8                           auc_channel[MAX_MINIMUN_AP_COUNT];
-} mac_send_ftm_range_req_stru; /*和ftm_range_req_stru 同步修改*/
+} mac_send_ftm_range_req_stru; /*??ftm_range_req_stru ????????*/
 
 typedef struct
 {
     oal_uint32                      ul_cmd_bit_map;
 
-    oal_bool_enum_uint8             en_ftm_initiator_bit0;        /* ftm_initiator命令*/
-    mac_send_iftmr_stru             st_send_iftmr_bit1;           /* 发送iftmr命令*/
-    oal_bool_enum_uint8             en_enable_bit2;               /* 使能FTM*/
-    oal_bool_enum_uint8             en_cali_bit3;                 /* FTM环回*/
-    mac_send_ftm_stru               st_send_ftm_bit4;             /* 发送ftm命令*/
-    oal_bool_enum_uint8             en_ftm_resp_bit5;             /* ftm_resp命令*/
-    mac_set_ftm_time_stru           st_ftm_time_bit6;             /* ftm_time命令*/
-    mac_send_ftm_range_req_stru     st_send_range_req_bit7;       /* 发送ftm_range_req命令*/
-    oal_bool_enum_uint8             en_ftm_range_bit8;            /* ftm_range命令*/
+    oal_bool_enum_uint8             en_ftm_initiator_bit0;        /* ftm_initiator????*/
+    mac_send_iftmr_stru             st_send_iftmr_bit1;           /* ????iftmr????*/
+    oal_bool_enum_uint8             en_enable_bit2;               /* ????FTM*/
+    oal_bool_enum_uint8             en_cali_bit3;                 /* FTM????*/
+    mac_send_ftm_stru               st_send_ftm_bit4;             /* ????ftm????*/
+    oal_bool_enum_uint8             en_ftm_resp_bit5;             /* ftm_resp????*/
+    mac_set_ftm_time_stru           st_ftm_time_bit6;             /* ftm_time????*/
+    mac_send_ftm_range_req_stru     st_send_range_req_bit7;       /* ????ftm_range_req????*/
+    oal_bool_enum_uint8             en_ftm_range_bit8;            /* ftm_range????*/
     oal_uint8                       uc_get_cali_reserv_bit9;
     oal_bool_enum_uint8             en_multipath_bit12;
     oal_uint8                       _rom[4];
@@ -3123,12 +3123,12 @@ typedef struct
 
 
 /*****************************************************************************
-  8 UNION定义
+  8 UNION????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  9 OTHERS定义
+  9 OTHERS????
 *****************************************************************************/
 //extern oal_void mac_vap_set_p2p_channel(mac_vap_stru *pst_mac_vap, mac_channel_stru * pst_p2p_home_channel);
 
@@ -3388,7 +3388,7 @@ OAL_STATIC OAL_INLINE oal_bool_enum_uint8  mac_mib_get_FortyMHzOperationImplemen
 {
     return (WLAN_BAND_2G == pst_mac_vap->st_channel.en_band) ?
             pst_mac_vap->pst_mib_info->st_phy_ht.en_dot112GFortyMHzOperationImplemented :
-            pst_mac_vap->pst_mib_info->st_phy_ht.en_dot115GFortyMHzOperationImplemented;/* [false alarm]:返回值是oal_bool_enum_uint8 和函数类型一致*/
+            pst_mac_vap->pst_mib_info->st_phy_ht.en_dot115GFortyMHzOperationImplemented;/* [false alarm]:????????oal_bool_enum_uint8 ??????????????*/
 }
 
 
@@ -3702,7 +3702,7 @@ OAL_STATIC OAL_INLINE oal_bool_enum_uint8 mac_mib_get_ShortGIOptionInFortyImplem
 {
     return (WLAN_BAND_2G == pst_mac_vap->st_channel.en_band) ?
             pst_mac_vap->pst_mib_info->st_phy_ht.en_dot112GShortGIOptionInFortyImplemented :
-            pst_mac_vap->pst_mib_info->st_phy_ht.en_dot115GShortGIOptionInFortyImplemented;/* [false alarm]:返回值是oal_bool_enum_uint8 和函数类型一致*/
+            pst_mac_vap->pst_mib_info->st_phy_ht.en_dot115GShortGIOptionInFortyImplemented;/* [false alarm]:????????oal_bool_enum_uint8 ??????????????*/
 }
 
 
@@ -3796,7 +3796,7 @@ OAL_STATIC OAL_INLINE oal_uint8 mac_mib_get_rsn_group_mgmt_suite(mac_vap_stru *p
 }
 
 /*****************************************************************************
-  10 函数声明
+  10 ????????
 *****************************************************************************/
 extern oal_uint32 mac_vap_init(
                     mac_vap_stru               *pst_vap,
@@ -3823,7 +3823,7 @@ extern oal_uint32 mac_vap_add_assoc_user(mac_vap_stru *pst_vap, oal_uint16 us_us
 extern oal_uint32 mac_vap_check_signal_bridge(mac_vap_stru *pst_mac_vap);
 
 /*****************************************************************************
-    mib操作函数
+    mib????????
 *****************************************************************************/
 extern oal_uint8   mac_vap_get_bandwith(wlan_bw_cap_enum_uint8 en_dev_cap, wlan_channel_bandwidth_enum_uint8 en_bss_cap);
 extern oal_uint32  mac_mib_get_beacon_period(mac_vap_stru *pst_mac_vap, oal_uint8 *puc_len, oal_uint8 *puc_param);

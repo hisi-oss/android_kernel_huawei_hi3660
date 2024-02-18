@@ -9,7 +9,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "oal_types.h"
 #include "mac_vap.h"
@@ -18,10 +18,10 @@ extern "C" {
 #define THIS_FILE_ID OAM_FILE_ID_MAC_IE_RAM_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 #ifdef _PRE_WLAN_FEATURE_OPMODE_NOTIFY
 
@@ -35,9 +35,9 @@ oal_rom_cb_result_enum_uint8  mac_ie_proc_opmode_field_cb(mac_vap_stru *pst_mac_
 oal_void mac_ie_modify_vht_ie_short_gi_80(mac_vap_stru *pst_mac_vap, oal_uint8 *puc_payload_addr_start, oal_uint8 *puc_payload_addr_end)
 {
     /*
-     * mib中short gi 80被初始化为使能
-     * 但VAP作为AP时, 会将其赋为上层下发的值
-     * 因此理论上只有STA发送的帧(probe request/assoc request)需要修改
+     * mib??short gi 80??????????????
+     * ??VAP????AP??, ??????????????????????
+     * ??????????????STA????????(probe request/assoc request)????????
      */
     mac_vht_cap_info_stru *pst_vht_capinfo        = OAL_PTR_NULL;
     oal_uint8             *puc_ie                 = OAL_PTR_NULL;

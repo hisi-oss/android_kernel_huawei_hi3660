@@ -11,11 +11,11 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
 
 #define CHR_SYSTEM_OFFSET                   (19)
@@ -28,10 +28,10 @@ extern "C" {
 #define CHR_ERROR_MASK                      (0xFF)
 
 /*****************************************************************************
-  3 枚举定义
+  3 ????????
 *****************************************************************************/
 /****************************************************************************
-                        CHR ERRNO 错误码结构
+                        CHR ERRNO ??????????
 |---------------------------------------------------------------------------|
 | 31~24 (8)bits| 23~19 (5)bits | 18~16 (3)bits | 15~8 (8)bits | 7~0 (8)bits |
 |---------------------------------------------------------------------------|
@@ -39,17 +39,17 @@ extern "C" {
 |---------------------------------------------------------------------------|
 
 |---------------------------------------------------------------------------|
-|   位段   |      取值       |                    用途                      |
+|   ????   |      ????       |                    ????                      |
 |---------------------------------------------------------------------------|
-| Reserved |      保留       |                    保留                      |
+| Reserved |      ????       |                    ????                      |
 |---------------------------------------------------------------------------|
-| system   | CHR_SYSTEM_ENUM | 标识异常子系统 plat wifi gnss bt fm nfc ir   |
+| system   | CHR_SYSTEM_ENUM | ?????????????? plat wifi gnss bt fm nfc ir   |
 |---------------------------------------------------------------------------|
-| layer    | CHR_LAYER_ENUM  | 标识异常所处位置   dev      drv      hal     |
+| layer    | CHR_LAYER_ENUM  | ????????????????   dev      drv      hal     |
 |---------------------------------------------------------------------------|
-| event    |CHR_XX_EVENT_ENUM| 标识异常触发事件                             |
+| event    |CHR_XX_EVENT_ENUM| ????????????????                             |
 |---------------------------------------------------------------------------|
-| error    |CHR_XX_ERROR_ENUM| 标识异常触发因素,详细描述触发异常事件的原因  |
+| error    |CHR_XX_ERROR_ENUM| ????????????????,??????????????????????????  |
 |---------------------------------------------------------------------------|
 *****************************************************************************/
 
@@ -143,12 +143,12 @@ typedef enum
     CHR_WIFI_DRV_ERROR_SYS_VERSION                = 0x02,
     CHR_WIFI_DRV_ERROR_POWER_ON                   = 0x03,   /*cover*/
     CHR_WIFI_DRV_ERROR_CUSTOM_CALL                = 0x04,
-    CHR_WIFI_DRV_ERROR_POWER_ON_SET_MAC_ADDR      = 0x05,   /*新增*/
-    CHR_WIFI_DRV_ERROR_POWER_ON_NON_BUS           = 0x06,   /*新增*/
-    CHR_WIFI_DRV_ERROR_POWER_ON_SDIO_NO_READY     = 0x07,   /*新增*/
-    CHR_WIFI_DRV_ERROR_POWER_ON_NO_CUSTOM_CALL    = 0x08,   /*新增*/
-    CHR_WIFI_DRV_ERROR_POWER_ON_CALL_TIMEOUT      = 0x09,   /*新增*/
-    CHR_WIFI_DRV_ERROR_POWER_ON_DEVICE_MEM_CHECK  = 0x0A,   /*新增*/
+    CHR_WIFI_DRV_ERROR_POWER_ON_SET_MAC_ADDR      = 0x05,   /*????*/
+    CHR_WIFI_DRV_ERROR_POWER_ON_NON_BUS           = 0x06,   /*????*/
+    CHR_WIFI_DRV_ERROR_POWER_ON_SDIO_NO_READY     = 0x07,   /*????*/
+    CHR_WIFI_DRV_ERROR_POWER_ON_NO_CUSTOM_CALL    = 0x08,   /*????*/
+    CHR_WIFI_DRV_ERROR_POWER_ON_CALL_TIMEOUT      = 0x09,   /*????*/
+    CHR_WIFI_DRV_ERROR_POWER_ON_DEVICE_MEM_CHECK  = 0x0A,   /*????*/
 
     /* CHR_WIFI_DRV_EVENT_SCAN */
     CHR_WIFI_DRV_ERROR_SCAN_REFUSED            = 0x01,
@@ -177,13 +177,13 @@ typedef enum
     CHR_WIFI_DRV_ERROR_DEVICE_PANIC            = 0x04,
     CHR_WIFI_DRV_ERROR_SDIO_TRANS_FAIL         = 0x05,
     CHR_WIFI_DRV_ERROR_EXCEPTION_HANDLE        = 0x06,
-    CHR_WIFI_DRV_ERROR_EXCEPTION_WIFI_HANDLE   = 0x07,    /*新增，Exception的DFR处理*/
-    CHR_WIFI_DRV_ERROR_EXCEPTION_BFGX_HANDLE   = 0x08,    /*新增，Exception的DFR处理*/
-    CHR_WIFI_DRV_ERROR_EXCEPTION_RESET         = 0x09,    /*新增，Reset 的DFR处理*/
-    CHR_WIFI_DRV_ERROR_BFGX_SYSTEM_RESET       = 0x0A,    /*新增，BFGX_SYSTEM Reset 的DFR处理*/
-    CHR_WIFI_DRV_ERROR_BFGX_SUB_SYSTEM_RESET   = 0x0B,    /*新增，Reset 的DFR处理*/
-    CHR_WIFI_DRV_ERROR_WIFI_SYSTEM_RESET       = 0x0C,    /*新增，WIFI_SYSTEM Reset 的DFR处理*/
-    CHR_WIFI_DRV_ERROR_WIFI_SUB_SYSTEM_RESET   = 0x0D,    /*新增，Reset 的DFR处理*/
+    CHR_WIFI_DRV_ERROR_EXCEPTION_WIFI_HANDLE   = 0x07,    /*??????Exception??DFR????*/
+    CHR_WIFI_DRV_ERROR_EXCEPTION_BFGX_HANDLE   = 0x08,    /*??????Exception??DFR????*/
+    CHR_WIFI_DRV_ERROR_EXCEPTION_RESET         = 0x09,    /*??????Reset ??DFR????*/
+    CHR_WIFI_DRV_ERROR_BFGX_SYSTEM_RESET       = 0x0A,    /*??????BFGX_SYSTEM Reset ??DFR????*/
+    CHR_WIFI_DRV_ERROR_BFGX_SUB_SYSTEM_RESET   = 0x0B,    /*??????Reset ??DFR????*/
+    CHR_WIFI_DRV_ERROR_WIFI_SYSTEM_RESET       = 0x0C,    /*??????WIFI_SYSTEM Reset ??DFR????*/
+    CHR_WIFI_DRV_ERROR_WIFI_SUB_SYSTEM_RESET   = 0x0D,    /*??????Reset ??DFR????*/
 
     /* CHR_WIFI_DRV_EVENT_FAKELINK */
     CHR_WIFI_DRV_ERROR_RX_NO_BUFFER            = 0x01,
@@ -202,9 +202,9 @@ typedef enum
     CHR_WIFI_DEV_ERROR_SDIO_ENUM               = 0x04,
     CHR_WIFI_DEV_ERROR_IOMUX                   = 0x05,
     CHR_WIFI_DEV_ERROR_UART                    = 0x06,
-    CHR_WIFI_DEV_ERROR_HW_RESET                = 0x07,   /*新增*/
-    CHR_WIFI_DEV_ERROR_WAKEUP_GPIO             = 0x08,   /*新增*/
-    CHR_WIFI_DEV_ERROR_POWER_GPIO              = 0x09,   /*新增*/
+    CHR_WIFI_DEV_ERROR_HW_RESET                = 0x07,   /*????*/
+    CHR_WIFI_DEV_ERROR_WAKEUP_GPIO             = 0x08,   /*????*/
+    CHR_WIFI_DEV_ERROR_POWER_GPIO              = 0x09,   /*????*/
 
     /* CHR_WIFI_DEV_ANTS_MSW_FAILED */
     CHR_WIFI_DEV_ERROR_MSW_MODEM_PREEMPTIVE    = 0x01,
@@ -348,22 +348,22 @@ typedef enum
     CHR_PLAT_DRV_ERROR_BFGX_RECOVERY      = 0x13,   /* wifi-bfgx_status_recovery_etc */
     CHR_PLAT_DRV_ERROR_DEVICE_PANIC       = 0x14,   /*add  */
 
-    CHR_PLAT_DRV_ERROR_SDIO_FAIL_FIRMWARE_DOWN     = 0x15,  /*新增*/
-    CHR_PLAT_DRV_ERROR_CFG_FAIL_FIRMWARE_DOWN      = 0x16,  /*新增*/
-    CHR_PLAT_DRV_ERROR_RESUME_FIRMWARE_DOWN        = 0x17,  /*新增*/
+    CHR_PLAT_DRV_ERROR_SDIO_FAIL_FIRMWARE_DOWN     = 0x15,  /*????*/
+    CHR_PLAT_DRV_ERROR_CFG_FAIL_FIRMWARE_DOWN      = 0x16,  /*????*/
+    CHR_PLAT_DRV_ERROR_RESUME_FIRMWARE_DOWN        = 0x17,  /*????*/
 
     CHR_PLAT_DRV_ERROR_PCIE_LINK_DOWN              = 0x18,
-    CHR_PLAT_DRV_ERROR_WKUP_GPIO_PCIE_LINK_DOWN    = 0x19,  /*新增*/
-    CHR_PLAT_DRV_ERROR_INTX_ISR_PCIE_LINK_DOWN     = 0x1A,  /*新增*/
-    CHR_PLAT_DRV_ERROR_D2H_EDMA_PCIE_LINK_DOWN     = 0x1B,  /*新增*/
-    CHR_PLAT_DRV_ERROR_D2H_TRANSFER_PCIE_LINK_DOWN = 0x1C,  /*新增*/
+    CHR_PLAT_DRV_ERROR_WKUP_GPIO_PCIE_LINK_DOWN    = 0x19,  /*????*/
+    CHR_PLAT_DRV_ERROR_INTX_ISR_PCIE_LINK_DOWN     = 0x1A,  /*????*/
+    CHR_PLAT_DRV_ERROR_D2H_EDMA_PCIE_LINK_DOWN     = 0x1B,  /*????*/
+    CHR_PLAT_DRV_ERROR_D2H_TRANSFER_PCIE_LINK_DOWN = 0x1C,  /*????*/
 
-    CHR_PLAT_DRV_ERROR_SDIO_WR_FAIL                = 0x1D,  /*新增*/
-    CHR_PLAT_DRV_ERROR_SDIO_INIT_PROB_FAIL         = 0x1F,  /*新增*/
-    CHR_PLAT_DRV_ERROR_SDIO_INIT_RX_DATA_PROC      = 0x20,  /*新增*/
-    CHR_PLAT_DRV_ERROR_SDIO_INIT_ISR               = 0x21,  /*新增*/
+    CHR_PLAT_DRV_ERROR_SDIO_WR_FAIL                = 0x1D,  /*????*/
+    CHR_PLAT_DRV_ERROR_SDIO_INIT_PROB_FAIL         = 0x1F,  /*????*/
+    CHR_PLAT_DRV_ERROR_SDIO_INIT_RX_DATA_PROC      = 0x20,  /*????*/
+    CHR_PLAT_DRV_ERROR_SDIO_INIT_ISR               = 0x21,  /*????*/
 
-    CHR_PLAT_DRV_ERROR_SLEEP_FORBID                = 0x22,  /*新增*/
+    CHR_PLAT_DRV_ERROR_SLEEP_FORBID                = 0x22,  /*????*/
 
     CHR_PLAT_DRV_ERROR_WIFI_SUBSYS_DFR_SUCC        = 0x23,
     CHR_PLAT_DRV_ERROR_WIFI_SYSTEM_DFR_SUCC        = 0x24,
@@ -371,7 +371,7 @@ typedef enum
     CHR_PLAT_DRV_ERROR_BFGX_SYSTEM_DFR_SUCC        = 0x26,
 }CHR_PLAT_ERROR_ENUM;
 
-/************************ CHR ERRNO 错误码各位段组装 *************************/
+/************************ CHR ERRNO ???????????????? *************************/
 #define CHR_COMBINE_EVENT_ERROR(event, error)   \
     (((event & CHR_EVENT_MASK) << CHR_EVENT_OFFSET) | ((error & CHR_ERROR_MASK) << CHR_ERROR_OFFSET))
 
@@ -425,37 +425,37 @@ typedef enum
     (CHR_SYSTEM_IR | CHR_LAYER_HAL | CHR_COMBINE_EVENT_ERROR(event, error))
 
 /*****************************************************************************
-  4 全局变量声明
+  4 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  5 消息头定义
+  5 ??????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  6 消息定义
+  6 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  7 STRUCT定义
+  7 STRUCT????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  8 UNION定义
+  8 UNION????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  9 OTHERS定义
+  9 OTHERS????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  10 函数声明
+  10 ????????
 *****************************************************************************/
 
 #ifdef __cplusplus

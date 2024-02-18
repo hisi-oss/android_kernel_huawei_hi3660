@@ -9,7 +9,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "hmac_fsm.h"
 #include "hmac_mgmt_bss_comm.h"
@@ -29,9 +29,9 @@ extern "C" {
 #define THIS_FILE_ID OAM_FILE_ID_HMAC_FSM_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
-/* 全局状态机函数表 */
+/* ???????????????? */
 OAL_STATIC hmac_fsm_func   g_pa_hmac_ap_fsm_func[MAC_VAP_AP_STATE_BUTT][HMAC_FSM_AP_INPUT_TYPE_BUTT];
 OAL_STATIC hmac_fsm_func   g_pa_hmac_sta_fsm_func[MAC_VAP_STA_STATE_BUTT][HMAC_FSM_STA_INPUT_TYPE_BUTT];
 
@@ -52,7 +52,7 @@ oal_void  hmac_fsm_change_state_etc(hmac_vap_stru *pst_hmac_vap, mac_vap_state_e
     oal_uint32 ul_ret;
     en_old_state = pst_hmac_vap->st_vap_base_info.en_vap_state;
 
-    /*将vap状态改变信息上报*/
+    /*??vap????????????????*/
     mac_vap_state_change_etc(&pst_hmac_vap->st_vap_base_info, en_vap_state);
 
     ul_ret = hmac_config_vap_state_syn_etc(&(pst_hmac_vap->st_vap_base_info), sizeof(en_vap_state), (oal_uint8 *)(&en_vap_state));
@@ -99,12 +99,12 @@ oal_void  hmac_fsm_change_state_etc(hmac_vap_stru *pst_hmac_vap, mac_vap_state_e
 }
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 oal_uint32  hmac_fsm_null_fn_etc(hmac_vap_stru *pst_hmac_vap, oal_void *p_param)
 {
-    /* 什么都不做 */
+    /* ?????????? */
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
 #ifdef _PRE_WLAN_WAKEUP_SRC_PARSE
     if(OAL_TRUE == wlan_pm_wkup_src_debug_get())
@@ -131,7 +131,7 @@ OAL_STATIC oal_void hmac_fsm_init_ap(oal_void)
         }
     }
 
-    /* 接收管理帧输入
+    /* ??????????????
     +----------------------------------+---------------------
      | FSM State                        | FSM Function
      +----------------------------------+---------------------
@@ -160,7 +160,7 @@ OAL_STATIC oal_void hmac_fsm_init_sta(oal_void)
 {
     oal_uint32  ul_state;
 
-    /* 初始化扫描请求输入函数 HMAC_FSM_INPUT_SCAN_REQ
+    /* ?????????????????????? HMAC_FSM_INPUT_SCAN_REQ
      +----------------------------------+---------------------
      | FSM State                        | FSM Function
      +----------------------------------+---------------------
@@ -274,7 +274,7 @@ OAL_STATIC oal_void hmac_fsm_init_sta(oal_void)
         g_pa_hmac_sta_fsm_func[ul_state][HMAC_FSM_INPUT_RX_MGMT] = hmac_fsm_null_fn_etc;
     }
 
-    /* 增加 HMAC_FSM_INPUT_RX_MGMT事件 处理函数 */
+    /* ???? HMAC_FSM_INPUT_RX_MGMT???? ???????? */
     /* g_pa_hmac_sta_fsm_func[MAC_VAP_STATE_STA_JOIN_COMP][HMAC_FSM_INPUT_RX_MGMT]      = hmac_sta_scan_comp_rx;*/
     //g_pa_hmac_sta_fsm_func[MAC_VAP_STATE_STA_WAIT_JOIN][HMAC_FSM_INPUT_RX_MGMT]      = hmac_sta_wait_join_rx_etc;
     g_pa_hmac_sta_fsm_func[MAC_VAP_STATE_STA_WAIT_AUTH_SEQ2][HMAC_FSM_INPUT_RX_MGMT] = hmac_sta_wait_auth_seq2_rx_etc;
@@ -286,7 +286,7 @@ OAL_STATIC oal_void hmac_fsm_init_sta(oal_void)
     g_pa_hmac_sta_fsm_func[MAC_VAP_STATE_ROAMING][HMAC_FSM_INPUT_RX_MGMT]            = hmac_sta_roam_rx_mgmt_etc;
 #endif //_PRE_WLAN_FEATURE_ROAM
 
-    /* 增加 HotSpot中状态机sta侧处理函数 */
+    /* ???? HotSpot????????sta?????????? */
 #if defined(_PRE_WLAN_FEATURE_HS20) || defined(_PRE_WLAN_FEATURE_P2P) || defined(_PRE_WLAN_FEATURE_HILINK)
     g_pa_hmac_sta_fsm_func[MAC_VAP_STATE_STA_SCAN_COMP][HMAC_FSM_INPUT_RX_MGMT]      = hmac_sta_not_up_rx_mgmt_etc;
     g_pa_hmac_sta_fsm_func[MAC_VAP_STATE_STA_WAIT_SCAN][HMAC_FSM_INPUT_RX_MGMT]      = hmac_sta_not_up_rx_mgmt_etc;
@@ -297,7 +297,7 @@ OAL_STATIC oal_void hmac_fsm_init_sta(oal_void)
     g_pa_hmac_sta_fsm_func[MAC_VAP_STATE_STA_LISTEN][HMAC_FSM_INPUT_RX_MGMT]         = hmac_sta_not_up_rx_mgmt_etc;
 #endif
 
-    /* 初始化timer0超时请求输入函数 HMAC_FSM_INPUT_TIMER0_OUT
+    /* ??????timer0???????????????? HMAC_FSM_INPUT_TIMER0_OUT
      +----------------------------------+---------------------
      | FSM State                        | FSM Function
      +----------------------------------+---------------------
@@ -326,7 +326,7 @@ OAL_STATIC oal_void hmac_fsm_init_sta(oal_void)
     g_pa_hmac_sta_fsm_func[MAC_VAP_STATE_STA_WAIT_AUTH_SEQ4][HMAC_FSM_INPUT_TIMER0_OUT] = hmac_sta_auth_timeout_etc;
     g_pa_hmac_sta_fsm_func[MAC_VAP_STATE_STA_WAIT_ASOC][HMAC_FSM_INPUT_TIMER0_OUT]      = hmac_sta_wait_asoc_timeout_etc;
 
-    /* 初始化HMAC_FSM_INPUT_MISC事件请求的处理函数
+    /* ??????HMAC_FSM_INPUT_MISC??????????????????
        +----------------------------------+---------------------
        | FSM State                        | FSM Function
        +----------------------------------+---------------------
@@ -371,7 +371,7 @@ OAL_STATIC oal_void hmac_fsm_init_sta(oal_void)
     g_pa_hmac_sta_fsm_func[MAC_VAP_STATE_STA_FAKE_UP][HMAC_FSM_INPUT_LISTEN_REQ]   = hmac_p2p_remain_on_channel_etc;
     g_pa_hmac_sta_fsm_func[MAC_VAP_STATE_STA_SCAN_COMP][HMAC_FSM_INPUT_LISTEN_REQ] = hmac_p2p_remain_on_channel_etc;
     
-    g_pa_hmac_sta_fsm_func[MAC_VAP_STATE_STA_LISTEN][HMAC_FSM_INPUT_LISTEN_REQ]    = hmac_p2p_remain_on_channel_etc;//在监听状态接收到新的监听命令，则执行新的监听。
+    g_pa_hmac_sta_fsm_func[MAC_VAP_STATE_STA_LISTEN][HMAC_FSM_INPUT_LISTEN_REQ]    = hmac_p2p_remain_on_channel_etc;//??????????????????????????????????????????????
     g_pa_hmac_sta_fsm_func[MAC_VAP_STATE_UP][HMAC_FSM_INPUT_LISTEN_REQ]            = hmac_p2p_remain_on_channel_etc;
 
     /* Initialize the elements in the HMAC_FSM_INPUT_LISTEN_TIMEOUT          */
@@ -427,10 +427,10 @@ OAL_STATIC oal_void hmac_fsm_init_sta(oal_void)
 
 oal_void  hmac_fsm_init_etc(oal_void)
 {
-    /* 初始化ap状态机函数表 */
+    /* ??????ap???????????? */
     hmac_fsm_init_ap();
 
-    /* 初始化sta状态机函数表 */
+    /* ??????sta???????????? */
     hmac_fsm_init_sta();
 }
 

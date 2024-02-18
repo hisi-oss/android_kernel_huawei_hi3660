@@ -114,7 +114,7 @@ DIAG_BBP_PROC_FUN_STRU g_DiagBbpFunc[] = {
 
 /*****************************************************************************
  Function Name     : diag_DrxSampleGetChnSizeProc
- Description     : 低功耗数采获取通道大小
+ Description     : ??????????????????????
  Input             :VOS_UINT8* pstReq
                 VOS_UINT32 ulCmdSn
  Output          : None
@@ -138,7 +138,7 @@ VOS_UINT32 diag_DrxSampleGetChnSizeProc(DIAG_FRAME_INFO_STRU *pData)
     /*lint -save -e826*/
     psCdmaSample = (DIAG_CMD_DRX_SAMPLE_GET_CHNSIZE_REQ_STRU*)((VOS_UINT8*)(pData->aucData)+sizeof(MSP_DIAG_DATA_REQ_STRU));
     
-    /*AP在发送给CP命令时，需要把数采地址空间信息一起发送过去*/
+    /*AP????????CP??????????????????????????????????????????*/
     ulLen = (VOS_UINT32)sizeof(DIAG_BBP_MSG_A_TRANS_C_STRU)-VOS_MSG_HEAD_LENGTH + pData->ulMsgLen+(VOS_UINT32)sizeof(DIAG_BBP_DS_ADDR_INFO_STRU);
     
     pstInfo = (DIAG_BBP_MSG_A_TRANS_C_STRU*)VOS_AllocMsg(MSP_PID_DIAG_APP_AGENT, ulLen);
@@ -180,7 +180,7 @@ DIAG_ERROR:
 
 
 /*                        
- #if (VOS_OS_VER == VOS_LINUX) // 新版本中如果命令执行失败，stCnfDrxSample.ulRet 返回错误码  
+ #if (VOS_OS_VER == VOS_LINUX) // ??????????????????????????stCnfDrxSample.ulRet ??????????  
     stCnfDrxSample.ulRet = ERR_MSP_DIAG_SAMPLE_START_FAIL;
  #endif   
 */  
@@ -198,7 +198,7 @@ DIAG_ERROR:
 
 /*****************************************************************************
  Function Name   : diag_BbpMsgProc
- Description     : MSP bbp部分消息处理函数
+ Description     : MSP bbp????????????????
  Input           : None
  Output          : None
  Return          : None
@@ -230,7 +230,7 @@ VOS_UINT32 diag_BbpMsgProc(DIAG_FRAME_INFO_STRU *pData)
     }
 
 
-    /* GU的BBP命令采用透传处理机制 */
+    /* GU??BBP???????????????????? */
     if((DIAG_MODE_GSM == pData->stID.mode4b) || (DIAG_MODE_UMTS == pData->stID.mode4b))
     {
         return diag_TransReqProcEntry(pData, &g_stBbpTransHead);
@@ -242,7 +242,7 @@ VOS_UINT32 diag_BbpMsgProc(DIAG_FRAME_INFO_STRU *pData)
         goto DIAG_ERROR;
     }
 
-    /*AP在发送给CP命令时，需要把数采地址空间信息一起发送过去*/
+    /*AP????????CP??????????????????????????????????????????*/
     ulLen = (VOS_UINT32)sizeof(DIAG_BBP_MSG_A_TRANS_C_STRU)-VOS_MSG_HEAD_LENGTH + pData->ulMsgLen;
     pstInfo = (DIAG_BBP_MSG_A_TRANS_C_STRU*)VOS_AllocMsg(MSP_PID_DIAG_APP_AGENT, ulLen);
     if(VOS_NULL == pstInfo)
@@ -277,7 +277,7 @@ DIAG_ERROR:
 /*lint -save -e423 */
 /*****************************************************************************
  Function Name   : diag_BbpMsgInit
- Description     : MSP bbp部分初始化
+ Description     : MSP bbp??????????
  Input           : None
  Output          : None
  Return          : None
@@ -289,17 +289,17 @@ VOS_VOID diag_BbpMsgInit(VOS_VOID)
 
     VOS_UINT32 ulRet;
 
-    /* 创建节点保护信号量, Diag Trans Bbp */
+    /* ??????????????????, Diag Trans Bbp */
     ulRet = VOS_SmBCreate("DTB", 1, VOS_SEMA4_FIFO,&g_stBbpTransHead.TransSem);
     if(VOS_OK != ulRet)
     {
         diag_printf("diag_BbpMsgInit VOS_SmBCreate failed.\n");
     }
 
-    /* 初始化请求链表 */
+    /* ?????????????? */
     blist_head_init(&g_stBbpTransHead.TransHead);
 
-    /*注册message消息回调*/
+    /*????message????????*/
     DIAG_MsgProcReg(DIAG_MSG_TYPE_BBP,diag_BbpMsgProc); 
     printk(KERN_ERR"diag modem:modem_reserver define !");
 
@@ -315,15 +315,15 @@ VOS_VOID diag_BbpMsgInit(VOS_VOID)
 }
 extern unsigned long simple_strtoul(const char *cp, char **endp, unsigned int base);
 /*****************************************************************************
-* 函 数 名  : socp_logbuffer_sizeparse
+* ?? ?? ??  : socp_logbuffer_sizeparse
 *
-* 功能描述  : 在代码编译阶段将CMD LINE中的BUFFER大小参数解析出来
+* ????????  : ????????????????CMD LINE????BUFFER????????????????
 *
-* 输入参数  : 无
+* ????????  : ??
 *
-* 输出参数  : 无
+* ????????  : ??
 *
-* 返 回 值  : 无
+* ?? ?? ??  : ??
 *****************************************************************************/
 static int __init diag_BbpDrxDdrEnable(char *pucChar)
 {
@@ -352,15 +352,15 @@ early_param("modem_socp_enable",diag_BbpDrxDdrEnable);
 
 
 /*****************************************************************************
-* 函 数 名  : modem_cdma_bbpds_reserve_area
+* ?? ?? ??  : modem_cdma_bbpds_reserve_area
 *
-* 功能描述  : 在代码编译阶段将动态预留内存申请出来
+* ????????  : ????????????????????????????????????
 *
-* 输入参数  : 无
+* ????????  : ??
 *
-* 输出参数  : 无
+* ????????  : ??
 *
-* 返 回 值  : 无
+* ?? ?? ??  : ??
 *****************************************************************************/
 static int modem_cdma_bbpds_reserve_area(struct reserved_mem *rmem)
 {

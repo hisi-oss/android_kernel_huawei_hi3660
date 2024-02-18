@@ -11,7 +11,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 #include "oal_types.h"
 #include "oal_util.h"
@@ -32,7 +32,7 @@ extern "C" {
 #include "oal_gpio.h"
 #endif
 
-/*infusion检查对预编译宏支持不好，在此定义宏支持infusion检查，正式代码不需要*/
+/*infusion??????????????????????????????????????infusion????????????????????*/
 #ifdef _PRE_INFUSION_CHECK
 #include "oal_infusion.h"
 #endif
@@ -43,12 +43,12 @@ extern "C" {
 #include "oal_fsm.h"
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  3 枚举定义
+  3 ????????
 *****************************************************************************/
 typedef enum
 {
@@ -60,12 +60,12 @@ typedef enum
 typedef oal_uint8 oal_trace_direction_enum_uint8;
 
 #if (_PRE_WLAN_FEATURE_BLACKLIST_LEVEL != _PRE_WLAN_FEATURE_BLACKLIST_NONE)
-/* 黑名单模式 */
+/* ?????????? */
 typedef enum
 {
-    CS_BLACKLIST_MODE_NONE,            /* 关闭         */
-    CS_BLACKLIST_MODE_BLACK,           /* 黑名单       */
-    CS_BLACKLIST_MODE_WHITE,           /* 白名单       */
+    CS_BLACKLIST_MODE_NONE,            /* ????         */
+    CS_BLACKLIST_MODE_BLACK,           /* ??????       */
+    CS_BLACKLIST_MODE_WHITE,           /* ??????       */
 
     CS_BLACKLIST_MODE_BUTT
 }cs_blacklist_mode_enum;
@@ -73,27 +73,27 @@ typedef oal_uint8 cs_blacklist_mode_enum_uint8;
 #endif
 
 #ifdef _PRE_WLAN_REPORT_WIFI_ABNORMAL
-//上报驱动异常状态，并期望上层解决
+//????????????????????????????????
 typedef enum
 {
-    OAL_ABNORMAL_FRW_TIMER_BROKEN   = 0,    //frw定时器断链
-    OAL_ABNORMAL_OTHER              = 1,    //其他异常
+    OAL_ABNORMAL_FRW_TIMER_BROKEN   = 0,    //frw??????????
+    OAL_ABNORMAL_OTHER              = 1,    //????????
 
     OAL_ABNORMAL_BUTT
 }oal_wifi_abnormal_reason_enum;
 
 typedef enum
 {
-    OAL_ACTION_RESTART_VAP          = 0,    //重启vap，上层暂未实现
-    OAL_ACTION_REBOOT               = 1,    //重启板子
+    OAL_ACTION_RESTART_VAP          = 0,    //????vap??????????????
+    OAL_ACTION_REBOOT               = 1,    //????????
 
     OAL_ACTION_BUTT
 }oal_product_action_enum;
 
 #if (_PRE_TARGET_PRODUCT_TYPE_ONT == _PRE_CONFIG_TARGET_PRODUCT)
-//extern 上层函数，5v2 vendorID 固定为5200
+//extern ??????????5v2 vendorID ??????5200
 extern void (*g_pf_abnormal_action)(int vendorID, int reason, int action, void *arg,  int size);
-//arg 参数收地址，size 参数空间大小(字节数); 需要调用者保证参数和大小对应
+//arg ????????????size ????????????(??????); ????????????????????????????
 #define OAL_REPORT_WIFI_ABNORMAL(_l_reason, _l_action, _p_arg, _l_size)            g_pf_abnormal_action(5200, _l_reason, _l_action, _p_arg,  _l_size)
 #else
 #define OAL_REPORT_WIFI_ABNORMAL(_l_reason, _l_action, _p_arg, _l_size)
@@ -102,22 +102,22 @@ extern void (*g_pf_abnormal_action)(int vendorID, int reason, int action, void *
 #endif
 
 #if (_PRE_TARGET_PRODUCT_TYPE_ONT == _PRE_CONFIG_TARGET_PRODUCT)
-//下面定义需要和ont定义一致
+//??????????????ont????????
 typedef enum
 {
-    OAL_WIFI_STA_LEAVE          = 21,    //STA 离开
-    OAL_WIFI_STA_JOIN           = 22,    //STA 加入
+    OAL_WIFI_STA_LEAVE          = 21,    //STA ????
+    OAL_WIFI_STA_JOIN           = 22,    //STA ????
 
     OAL_WIFI_BUTT
 }oal_wifi_sta_action_report_enum;
-//sta上下线通知
+//sta??????????
 extern void (*g_pf_wifi_asynchronous_event_report)(oal_uint32 uiIfIndex,   oal_uint32 uiEvent, void* pValue, oal_uint32 uiValueLen);
 #define OAL_WIFI_REPORT_STA_ACTION(_ul_ifindex, _ul_eventID, _p_arg, _l_size)            g_pf_wifi_asynchronous_event_report(_ul_ifindex, _ul_eventID, _p_arg, _l_size)
 #else
 typedef enum
 {
-    OAL_WIFI_STA_LEAVE          = 0,    //STA 离开
-    OAL_WIFI_STA_JOIN           = 1,    //STA 加入
+    OAL_WIFI_STA_LEAVE          = 0,    //STA ????
+    OAL_WIFI_STA_JOIN           = 1,    //STA ????
 
     OAL_WIFI_BUTT
 }oal_wifi_sta_action_report_enum;
@@ -126,7 +126,7 @@ typedef enum
 
 
 /*****************************************************************************
-  4 全局变量声明
+  4 ????????????
 *****************************************************************************/
 extern oal_void                       *g_pst_5115_sys_ctl;
 #ifdef _PRE_WLAN_FEATURE_PCIE_ADAPT_5116
@@ -142,30 +142,30 @@ extern oal_void                       *g_pst_5610_gpio2;
 #endif
 
 /*****************************************************************************
-  5 消息头定义
+  5 ??????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  6 消息定义
+  6 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  7 STRUCT定义
+  7 STRUCT????
 *****************************************************************************/
 
 /*****************************************************************************
-  8 UNION定义
+  8 UNION????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  9 OTHERS定义
+  9 OTHERS????
 *****************************************************************************/
 
 /*****************************************************************************
-  10 函数声明
+  10 ????????
 *****************************************************************************/
 extern oal_int32   oal_main_init(oal_void);
 extern oal_void    oal_main_exit(oal_void);

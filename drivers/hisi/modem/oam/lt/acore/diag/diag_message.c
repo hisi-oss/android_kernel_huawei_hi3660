@@ -76,7 +76,7 @@ PS-----trans
       |
       |-PS_REPLAY
       |
-      |-MMA鉴权
+      |-MMA????
       |
       |-RTT GTR
 
@@ -94,7 +94,7 @@ BSP----Read NV/Write NV/NV_IMPORT/NV_EXPORT/GetNvIdList/BackupNv/NVID filterlist
       |
       |-SYSVIEW_SWT/SYSVIEW_IND/AXI_DATA_CFG/AXI_REG_CFG/AXI_DATA_CTRL/AXI_MON_CFG/AXI_MON_START/AXI_MON_TERMINATE/UTRACE_START/UTRACE_TERMINATE/CPU_SWT
 
-GUBBP---BBP dump/配置BBP数采/停止BBP数采/配置BBP上报/配置BBP收到EDMA错误消息后通知PC
+GUBBP---BBP dump/????BBP????/????BBP????/????BBP????/????BBP????EDMA??????????????PC
 ******************************************************************************/
 
 struct DIAG_MESSAGE_PROC_STRU g_aFnMsgTbl[DIAG_MSG_TYPE_BUTT] =
@@ -117,7 +117,7 @@ VOS_UINT32 diag_MessageProc(DIAG_FRAME_INFO_STRU *pData);
 
 /*****************************************************************************
  Function Name   : diag_MessageInit
- Description     : DIAG message层初始化接口
+ Description     : DIAG message????????????
 
  History         :
     1.c64416         2014-11-18  Draft Enact
@@ -131,7 +131,7 @@ VOS_VOID diag_MessageInit(VOS_VOID)
 
 /*****************************************************************************
  Function Name   : diag_MessageProc
- Description     : DIAG message层处理接口
+ Description     : DIAG message??????????
 
  History         :
     1.c64416         2014-11-18  Draft Enact
@@ -163,7 +163,7 @@ VOS_UINT32 diag_MessageProc(DIAG_FRAME_INFO_STRU *pData)
 
 /*****************************************************************************
  Function Name   : DIAG_MsgProcReg
- Description     : 诊断命令解包回调注册接口
+ Description     : ????????????????????????
 
  History         :
     1.c64416         2014-11-18  Draft Enact
@@ -183,7 +183,7 @@ VOS_UINT32 DIAG_MsgProcReg (DIAG_MESSAGE_TYPE_U32 ulMsgType, DIAG_MESSAGE_FUNC p
 
 /*****************************************************************************
  Function Name   : DIAG_MsgReport
- Description     : DIAG message 层上报接口
+ Description     : DIAG message ??????????
 
  History         :
     1.c64416         2014-11-18  Draft Enact
@@ -195,7 +195,7 @@ VOS_UINT32 DIAG_MsgReport (MSP_DIAG_CNF_INFO_STRU *pstDiagInfo, VOS_VOID *pstDat
 
     diag_PTR(EN_DIAG_PTR_MESSAGE_REPORT);
 
-    /*检查DIAG是否初始化且HSO是否连接上*/
+    /*????DIAG????????????HSO??????????*/
     if(!DIAG_IS_CONN_ON)
     {
         return ERR_MSP_NO_INITILIZATION;

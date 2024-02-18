@@ -9,7 +9,7 @@ extern "C" {
 
 #if defined(_PRE_WLAN_FEATURE_MCAST) || defined(_PRE_WLAN_FEATURE_HERA_MCAST)
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "hmac_m2u.h"
 #include "hmac_tx_data.h"
@@ -22,12 +22,12 @@ extern "C" {
 #define THIS_FILE_ID OAM_FILE_ID_HMAC_M2U_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 
@@ -88,7 +88,7 @@ oal_uint32  hmac_m2u_remove_expired_member(hmac_m2u_grp_list_entry_stru *pst_grp
         return OAL_FAIL;
     }
 
-    /* 遍历一个组，每次取出组中成员，超时则删除该成员 */
+    /* ?????????????????????????????????????????????? */
     OAL_DLIST_SEARCH_FOR_EACH_SAFE(pst_grp_member_entry, pst_grp_member_entry_temp, &(pst_grp_list->st_src_list))
     {
         pst_grp_member = (hmac_m2u_grp_member_stru *)OAL_DLIST_GET_ENTRY(pst_grp_member_entry,
@@ -128,7 +128,7 @@ OAL_STATIC oal_void  hmac_m2u_remove_one_member(hmac_m2u_grp_list_entry_stru *ps
         return;
     }
 
-    /* 遍历一个组播组删除指定成员 */
+    /* ?????????????????????????? */
     OAL_DLIST_SEARCH_FOR_EACH_SAFE(pst_grp_member_entry, pst_grp_member_entry_temp, &(pst_grp_list->st_src_list))
     {
         pst_grp_member = (hmac_m2u_grp_member_stru *)OAL_DLIST_GET_ENTRY(pst_grp_member_entry,
@@ -162,7 +162,7 @@ OAL_STATIC hmac_m2u_grp_member_stru *hmac_m2u_find_member_src(hmac_m2u_grp_list_
     hmac_m2u_grp_member_stru *pst_grp_member;
     oal_dlist_head_stru      *pst_grp_member_entry;
 
-    /* 遍历一个组播组，找到该组中src ip匹配的成员 */
+    /* ??????????????????????????src ip?????????? */
     OAL_DLIST_SEARCH_FOR_EACH(pst_grp_member_entry, &(pst_grp_list->st_src_list))
     {
         pst_grp_member = (hmac_m2u_grp_member_stru *)OAL_DLIST_GET_ENTRY(pst_grp_member_entry,
@@ -185,7 +185,7 @@ OAL_STATIC hmac_m2u_grp_member_stru *hmac_m2u_find_member(hmac_m2u_grp_list_entr
     hmac_m2u_grp_member_stru *pst_grp_member;
     oal_dlist_head_stru      *pst_grp_member_entry;
 
-    /* 遍历一个组播组，找到该组中地址匹配的成员 */
+    /* ???????????????????????????????????????? */
     OAL_DLIST_SEARCH_FOR_EACH(pst_grp_member_entry, &(pst_grp_list->st_src_list))
     {
         pst_grp_member = (hmac_m2u_grp_member_stru *)OAL_DLIST_GET_ENTRY(pst_grp_member_entry,
@@ -217,7 +217,7 @@ OAL_STATIC hmac_m2u_grp_list_entry_stru *hmac_m2u_find_group_list(hmac_vap_stru 
 
     pst_snp_list = &(pst_m2u->st_m2u_snooplist);
 
-    /* 遍历组播组链表，找到地址匹配的组播组 */
+    /* ???????????????????????????????????? */
     OAL_DLIST_SEARCH_FOR_EACH(pst_grp_list_entry, &(pst_snp_list->st_grp_list))
     {
         pst_grp_list_member = (hmac_m2u_grp_list_entry_stru *)OAL_DLIST_GET_ENTRY(pst_grp_list_entry,
@@ -304,7 +304,7 @@ oal_uint32 hmac_m2u_update_snoop_list(hmac_m2u_list_update_stru *pst_list_entry)
         }
     }
 
-    /* 如果待更新的节点有指定的组播源，如果链表中存在指定该组播源的该节点，则更新该节点的状态，否则重新创建加入链表 */
+    /* ???????????????????????????????????????????????????????????????????????????????????????????????????????????? */
     if(!OAL_IPV6_IS_UNSPECIFIED_ADDR(pst_list_entry->auc_src_ip_addr))
     {
         OAM_INFO_LOG4(pst_list_entry->pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_update_snoop_list::pst_list_entry is assigned src_ip_addr,the first 4 byte: [%x], [%x],[%x],[%x]}\r\n",
@@ -328,7 +328,7 @@ oal_uint32 hmac_m2u_update_snoop_list(hmac_m2u_list_update_stru *pst_list_entry)
         pst_grp_member_list = hmac_m2u_find_member(pst_grp_list, pst_list_entry->auc_new_member_mac);
         if (OAL_PTR_NULL != pst_grp_member_list)
         {
-            /* 存在该节点，并且该组中的该节点的有指定的组播源，清空组中的所有该节点，如果更新节点的cmd为INC 再add */
+            /* ????????????????????????????????????????????????????????????????????????????????????cmd??INC ??add */
             if (!OAL_IPV6_IS_UNSPECIFIED_ADDR(pst_grp_member_list->auc_src_ip_addr))
             {
                 hmac_m2u_remove_one_member(pst_grp_list, pst_list_entry->pst_hmac_vap, pst_list_entry->auc_new_member_mac);
@@ -338,7 +338,7 @@ oal_uint32 hmac_m2u_update_snoop_list(hmac_m2u_list_update_stru *pst_list_entry)
                     ul_ret = hmac_m2u_add_member_list(pst_grp_list, pst_list_entry);
                 }
             }
-            /* 原组中的该节点未指定组播源，如果待更新节点的CMD为EXC，则删除原组播组中的该节点 */
+            /* ????????????????????????????????????????????CMD??EXC?????????????????????????? */
             else if (HMAC_M2U_CMD_EXCLUDE_LIST == pst_list_entry->en_cmd)
             {
                 OAM_INFO_LOG1(pst_list_entry->pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_update_snoop_list::pst_list_entry->en_cmd is [%d].}", pst_list_entry->en_cmd);
@@ -355,7 +355,7 @@ oal_uint32 hmac_m2u_update_snoop_list(hmac_m2u_list_update_stru *pst_list_entry)
                                  pst_m2u->st_m2u_snooplist.us_total_sta_num,pst_grp_list->uc_sta_num);
             }
         }
-        /* 特定组中不存在该节点，并且更新节点的CMD不为EXC则ADD */
+        /* ????????????????????????????????????CMD????EXC??ADD */
         else
         {
             if (HMAC_M2U_CMD_EXCLUDE_LIST != pst_list_entry->en_cmd)
@@ -397,7 +397,7 @@ oal_void hmac_m2u_show_snoop_deny_table(hmac_vap_stru *pst_hmac_vap)
     }
     for (uc_idx = 0 ; uc_idx < pst_snp_list->uc_deny_count_ipv4; uc_idx++)
     {
-         /* 打印黑名单的IPv4地址 */
+         /* ????????????IPv4???? */
         OAM_WARNING_LOG4(0, OAM_SF_M2U, "{hmac_m2u_show_snoop_deny_table:: deny addr_ipv4 = %x.%x.%x.%x}\r\n",
                                                 (oal_uint32)((pst_snp_list->aul_deny_group[uc_idx] >> 24) & 0xff),
                                                 (oal_uint32)((pst_snp_list->aul_deny_group[uc_idx] >> 16) & 0xff),
@@ -406,7 +406,7 @@ oal_void hmac_m2u_show_snoop_deny_table(hmac_vap_stru *pst_hmac_vap)
     }
     for (uc_idx = 0 ; uc_idx < pst_snp_list->uc_deny_count_ipv6; uc_idx++)
     {
-        /* 打印黑名单的IPv6地址 */
+        /* ????????????IPv6???? */
         OAM_WARNING_LOG4(0, OAM_SF_M2U, "{hmac_m2u_show_snoop_deny_table::  deny addr_ipv6 = [%08x]:[%08x]:[%08x]:[%08x]}\r\n",
                                                 OAL_HOST2NET_LONG(*(oal_uint32*)(&pst_snp_list->aul_deny_group_ipv6[uc_idx][0])),
                                                 OAL_HOST2NET_LONG(*(oal_uint32*)(&pst_snp_list->aul_deny_group_ipv6[uc_idx][4])),
@@ -454,15 +454,15 @@ OAL_STATIC oal_uint32 hmac_m2u_snoop_is_denied_ipv4(hmac_vap_stru *pst_hmac_vap,
 }
 
 /*****************************************************************************
- 函 数 名  : hmac_m2u_snoop_is_denied_ipv6
- 功能描述  : 所加入组播组的IPv6地址是否在黑名单内
- 输入参数  : pst_hmac_vap vap结构体; ul_grpaddr 组播组的IPv6地址
- 输出参数  : OAL_FALSE OR OAL_TRUE
- 返 回 值  :
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : hmac_m2u_snoop_is_denied_ipv6
+ ????????  : ??????????????IPv6??????????????????
+ ????????  : pst_hmac_vap vap??????; ul_grpaddr ????????IPv6????
+ ????????  : OAL_FALSE OR OAL_TRUE
+ ?? ?? ??  :
+ ????????  :
+ ????????  :
 
- 修改历史      :
+ ????????      :
 
 
 *****************************************************************************/
@@ -550,7 +550,7 @@ oal_void hmac_m2u_add_snoop_ipv4_deny_entry(hmac_vap_stru *pst_hmac_vap, oal_uin
     pst_snp_list = &(pst_m2u->st_m2u_snooplist);
     uc_idx = pst_snp_list->uc_deny_count_ipv4;
 
-    if (uc_idx + pst_snp_list->uc_deny_count_ipv6 > HMAC_M2U_GRPADDR_FILTEROUT_NUM) /* ipv4和ipv6目前的黑名单个数相加超过最大黑名单个数 */
+    if (uc_idx + pst_snp_list->uc_deny_count_ipv6 > HMAC_M2U_GRPADDR_FILTEROUT_NUM) /* ipv4??ipv6?????????????????????????????????????? */
     {
         return;
     }
@@ -581,7 +581,7 @@ oal_void hmac_m2u_add_snoop_ipv6_deny_entry(hmac_vap_stru *pst_hmac_vap, oal_uin
     }
     pst_snp_list = &(pst_m2u->st_m2u_snooplist);
     uc_idx = pst_snp_list->uc_deny_count_ipv6;
-    if (uc_idx + pst_snp_list->uc_deny_count_ipv4 > HMAC_M2U_GRPADDR_FILTEROUT_NUM)/* ipv4和ipv6目前的黑名单个数相加超过最大黑名单个数 */
+    if (uc_idx + pst_snp_list->uc_deny_count_ipv4 > HMAC_M2U_GRPADDR_FILTEROUT_NUM)/* ipv4??ipv6?????????????????????????????????????? */
     {
         return;
     }
@@ -736,7 +736,7 @@ oal_uint32 hmac_m2u_print_all_snoop_list(hmac_vap_stru *pst_hmac_vap, oal_snoop_
             pst_grp_list_member = (hmac_m2u_grp_list_entry_stru *)OAL_DLIST_GET_ENTRY(pst_grp_list_entry,
                                                                                hmac_m2u_grp_list_entry_stru,
                                                                                st_grp_entry);
-            /* 打印组播组的mac地址 */
+            /* ????????????mac???? */
             oal_memset(ac_tmp_buff, 0, OAL_SIZEOF(ac_tmp_buff));
             OAL_SPRINTF(ac_tmp_buff, OAL_SIZEOF(ac_tmp_buff), " group addr = [%02x]:[%02x]::xx::[%02x]:[%02x] vlan tag = 0x%x \n",
                                                         pst_grp_list_member->auc_group_mac[0],
@@ -751,13 +751,13 @@ oal_uint32 hmac_m2u_print_all_snoop_list(hmac_vap_stru *pst_hmac_vap, oal_snoop_
             }
             uc_sta_cnt = 0;
             oam_print_etc(ac_tmp_buff);
-            /* 打印组播组成员的mac地址以及组播源地址 */
+            /* ????????????????mac?????????????????? */
             OAL_DLIST_SEARCH_FOR_EACH_SAFE(pst_grp_member_entry, pst_grp_member_entry_temp, &(pst_grp_list_member->st_src_list))
             {
                 pst_grp_member = (hmac_m2u_grp_member_stru *)OAL_DLIST_GET_ENTRY(pst_grp_member_entry,
                                                                          hmac_m2u_grp_member_stru,
                                                                          st_member_entry);
-                /* 打印组播组内成员的src ip地址和 mac地址 */
+                /* ??????????????????src ip?????? mac???? */
                 oal_memset(ac_tmp_buff, 0, OAL_SIZEOF(ac_tmp_buff));
                 if (OAL_IPV6_ADDR_SIZE == pst_grp_member->uc_src_ip_addr_len)
                 {
@@ -846,16 +846,16 @@ oal_void hmac_m2u_get_group_mac(oal_uint8 *puc_group_mac, oal_uint8 *puc_group_i
 {
     if (OAL_IPV6_ADDR_SIZE == uc_ip_len)
     {
-        //ipv6下，组播mac最后4字节由IP地址映射而来
+        //ipv6????????mac????4??????IP????????????
         puc_group_mac[0] = 0x33;
         puc_group_mac[1] = 0x33;
         puc_group_mac   += 2;
-        puc_group_ip    += 12; //取最后4个字节
+        puc_group_ip    += 12; //??????4??????
         oal_memcopy(puc_group_mac,puc_group_ip,4);
     }
     else
     {
-        //ipv4下，组播mac最后23bit由IP地址映射而来
+        //ipv4????????mac????23bit??IP????????????
         puc_group_mac[0] = 0x01;
         puc_group_mac[1] = 0x0;
         puc_group_mac[2] = 0x5e;
@@ -905,7 +905,7 @@ oal_uint32 hmac_m2u_igmp_v3_update(hmac_vap_stru *pst_hmac_vap, hmac_m2u_list_up
     oal_uint32                           ul_group_ip;                       /* to hold group ip address from group record */
     oal_uint16                           us_no_grec;                        /* no of group records  */
     oal_uint16                           us_no_srec;                        /* no of source records */
-    oal_uint32                          *pul_src_addr;                      /* 组播源的IP地址 */
+    oal_uint32                          *pul_src_addr;                      /* ????????IP???? */
     mac_igmp_v3_grec_stru               *pst_grec;                          /* igmp group record */
     hmac_m2u_grp_list_entry_stru        *pst_grp_list;
     hmac_m2u_grp_member_stru            *pst_grp_member_list;
@@ -925,7 +925,7 @@ oal_uint32 hmac_m2u_igmp_v3_update(hmac_vap_stru *pst_hmac_vap, hmac_m2u_list_up
     while (us_no_grec)
     {
         pst_list_entry->en_cmd = pst_grec->uc_grec_type;
-        ul_group_ip            = pst_grec->ul_grec_group_ip;////获取组播组ip地址
+        ul_group_ip            = pst_grec->ul_grec_group_ip;////??????????ip????
 
         if (hmac_m2u_snoop_is_denied_ipv4(pst_hmac_vap, OAL_NET2HOST_LONG(ul_group_ip)))
         {
@@ -939,7 +939,7 @@ oal_uint32 hmac_m2u_igmp_v3_update(hmac_vap_stru *pst_hmac_vap, hmac_m2u_list_up
             us_no_grec--;
             continue;
         }
-        /* 非IGMPV3六种cmd的异常处理 */
+        /* ??IGMPV3????cmd?????????? */
         if (!IS_IGMPV3_MODE(pst_grec->uc_grec_type))
         {
             OAM_INFO_LOG1(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_igmp_v3_update::uc_grec_type is [%x] not inside the six cmd.}", pst_grec->uc_grec_type);
@@ -953,7 +953,7 @@ oal_uint32 hmac_m2u_igmp_v3_update(hmac_vap_stru *pst_hmac_vap, hmac_m2u_list_up
         hmac_m2u_get_group_mac(pst_list_entry->auc_grp_mac , (oal_uint8*)(&ul_group_ip), OAL_IPV4_ADDR_SIZE);
         pst_list_entry->uc_src_ip_addr_len = OAL_IPV4_ADDR_SIZE;
 
-        /* IGMP V3 exc的处理 */
+        /* IGMP V3 exc?????? */
         if ( IGMPV3_CHANGE_TO_EXCLUDE == (pst_grec->uc_grec_type)||
             IGMPV3_MODE_IS_EXCLUDE == (pst_grec->uc_grec_type))
         {
@@ -961,7 +961,7 @@ oal_uint32 hmac_m2u_igmp_v3_update(hmac_vap_stru *pst_hmac_vap, hmac_m2u_list_up
             pst_list_entry->en_cmd = HMAC_M2U_CMD_EXCLUDE_LIST;
             pst_grp_list = hmac_m2u_find_group_list(pst_hmac_vap, pst_list_entry);
 
-            /* 更新组播组内成员的状态，如果组播组内存在该目标成员，则清空目标成员 */
+            /* ?????????????????????????????????????????????????????????????????? */
             if (OAL_PTR_NULL == pst_grp_list)
             {
                 OAM_INFO_LOG0(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_igmp_v3_update::pst_grp_list is null.}");
@@ -971,7 +971,7 @@ oal_uint32 hmac_m2u_igmp_v3_update(hmac_vap_stru *pst_hmac_vap, hmac_m2u_list_up
                 hmac_m2u_remove_one_member(pst_grp_list, pst_hmac_vap, pst_list_entry->auc_new_member_mac);
             }
 
-            /* 更新组播组内成员的状态，如果组播组内不存在该目标成员，该成员inc所有src ip */
+            /* ????????????????????????????????????????????????????????????inc????src ip */
             if (0 == us_no_srec)
             {
                 OAM_INFO_LOG1(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_igmp_v3_update::not exist the user us_no_srec is %d.}", us_no_srec);
@@ -981,7 +981,7 @@ oal_uint32 hmac_m2u_igmp_v3_update(hmac_vap_stru *pst_hmac_vap, hmac_m2u_list_up
             }
         }
 
-        /* IGMP V3 INC的处理 */
+        /* IGMP V3 INC?????? */
         else if (IGMPV3_CHANGE_TO_INCLUDE == (pst_grec->uc_grec_type) ||
                   IGMPV3_MODE_IS_INCLUDE == (pst_grec->uc_grec_type))
         {
@@ -1005,7 +1005,7 @@ oal_uint32 hmac_m2u_igmp_v3_update(hmac_vap_stru *pst_hmac_vap, hmac_m2u_list_up
 
         pul_src_addr = (oal_uint32 *)((oal_uint8 *)pst_grec + OAL_SIZEOF(mac_igmp_v3_grec_stru));
 
-        /* 同一组播组内不同src ip的链表更新 */
+        /* ????????????????src ip?????????? */
         while (us_no_srec)
         {
             *(oal_uint32*)(pst_list_entry->auc_src_ip_addr) = *pul_src_addr;
@@ -1013,7 +1013,7 @@ oal_uint32 hmac_m2u_igmp_v3_update(hmac_vap_stru *pst_hmac_vap, hmac_m2u_list_up
             {
                 ul_ret = hmac_m2u_update_snoop_list(pst_list_entry);
             }
-            /* block old source时清空该成员 */
+            /* block old source???????????? */
             else
             {
                 pst_grp_list = hmac_m2u_find_group_list(pst_hmac_vap, pst_list_entry);
@@ -1041,7 +1041,7 @@ oal_uint32 hmac_m2u_igmp_v3_update(hmac_vap_stru *pst_hmac_vap, hmac_m2u_list_up
             pul_src_addr++;
             us_no_srec--;
         }
-        /* 取下一个组播组 */
+        /* ?????????????? */
         pst_grec = (mac_igmp_v3_grec_stru *)((oal_uint8 *)pst_grec + IGMPV3_GRP_REC_LEN(pst_grec));
         us_no_grec--;
     }
@@ -1063,7 +1063,7 @@ oal_uint32 hmac_m2u_mld_v1_update(hmac_vap_stru *pst_hmac_vap, hmac_m2u_list_upd
         return ul_ret;
     }
 
-    /* 初始化组播组地址 */
+    /* ???????????????? */
     hmac_m2u_get_group_mac(pst_list_entry->auc_grp_mac,pst_mld_head->auc_group_ip,OAL_IPV6_ADDR_SIZE);
 
     if (MLDV1_DONE_TYPE != pst_mld_head->uc_type)
@@ -1086,7 +1086,7 @@ oal_uint32 hmac_m2u_mld_v2_update(hmac_vap_stru *pst_hmac_vap, hmac_m2u_list_upd
     //oal_uint8                           *puc_group_ip;                      /* to hold group ip address from group record */
     oal_uint16                           us_no_grec;                        /* no of group records  */
     oal_uint16                           us_no_srec;                        /* no of source records */
-    oal_uint8                           *puc_src_addr;                      /* 组播源的IP地址 */
+    oal_uint8                           *puc_src_addr;                      /* ????????IP???? */
     mac_mld_v2_group_record_stru        *pst_grec;                          /* igmp group record */
     hmac_m2u_grp_list_entry_stru        *pst_grp_list;
     hmac_m2u_grp_member_stru            *pst_grp_member_list;
@@ -1106,7 +1106,7 @@ oal_uint32 hmac_m2u_mld_v2_update(hmac_vap_stru *pst_hmac_vap, hmac_m2u_list_upd
     while (us_no_grec)
     {
         pst_list_entry->en_cmd = pst_grec->uc_grec_type;
-        //puc_group_ip = pst_grec->auc_group_ip;////获取组播组ip地址
+        //puc_group_ip = pst_grec->auc_group_ip;////??????????ip????
         if (hmac_m2u_snoop_is_denied_ipv6(pst_hmac_vap, pst_grec->auc_group_ip))
         {
             OAM_WARNING_LOG4(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_mld_v2_update::auc_group_ip [%08x]:[%08x]:[%08x]:[%08x] is denied}\r\n}",
@@ -1119,7 +1119,7 @@ oal_uint32 hmac_m2u_mld_v2_update(hmac_vap_stru *pst_hmac_vap, hmac_m2u_list_upd
             continue;
         }
 
-        /* 非MLDV2六种cmd的异常处理 */
+        /* ??MLDV2????cmd?????????? */
         if (!IS_MLDV2_MODE(pst_grec->uc_grec_type))
         {
             OAM_WARNING_LOG1(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_mld_v2_update::uc_grec_type is [%x] not inside the six cmd.}", pst_grec->uc_grec_type);
@@ -1135,7 +1135,7 @@ oal_uint32 hmac_m2u_mld_v2_update(hmac_vap_stru *pst_hmac_vap, hmac_m2u_list_upd
         hmac_m2u_get_group_mac(pst_list_entry->auc_grp_mac , pst_grec->auc_group_ip ,OAL_IPV6_ADDR_SIZE);
         pst_list_entry->uc_src_ip_addr_len = OAL_IPV6_ADDR_SIZE;
 
-        /* MLD V2 exc的处理 */
+        /* MLD V2 exc?????? */
         if ( MLDV2_CHANGE_TO_EXCLUDE == (pst_grec->uc_grec_type)||
             MLDV2_MODE_IS_EXCLUDE == (pst_grec->uc_grec_type))
         {
@@ -1143,7 +1143,7 @@ oal_uint32 hmac_m2u_mld_v2_update(hmac_vap_stru *pst_hmac_vap, hmac_m2u_list_upd
             pst_list_entry->en_cmd = HMAC_M2U_CMD_EXCLUDE_LIST;
             pst_grp_list = hmac_m2u_find_group_list(pst_hmac_vap, pst_list_entry);
 
-            /* 更新组播组内成员的状态，如果组播组内存在该目标成员，则清空目标成员 */
+            /* ?????????????????????????????????????????????????????????????????? */
             if (OAL_PTR_NULL == pst_grp_list)
             {
                 OAM_INFO_LOG0(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_mld_v2_update::pst_grp_list is null.}");
@@ -1153,7 +1153,7 @@ oal_uint32 hmac_m2u_mld_v2_update(hmac_vap_stru *pst_hmac_vap, hmac_m2u_list_upd
                 hmac_m2u_remove_one_member(pst_grp_list, pst_hmac_vap, pst_list_entry->auc_new_member_mac);
             }
 
-            /* 更新组播组内成员的状态，如果组播组内不存在该目标成员，该成员inc所有src ip */
+            /* ????????????????????????????????????????????????????????????inc????src ip */
             if (0 == us_no_srec)
             {
                 OAM_INFO_LOG1(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_mld_v2_update::not exist the user us_no_srec is %d.}", us_no_srec);
@@ -1163,7 +1163,7 @@ oal_uint32 hmac_m2u_mld_v2_update(hmac_vap_stru *pst_hmac_vap, hmac_m2u_list_upd
             }
         }
 
-        /* MLD V2 INC的处理 */
+        /* MLD V2 INC?????? */
         else if (MLDV2_CHANGE_TO_INCLUDE == (pst_grec->uc_grec_type) ||
                   MLDV2_MODE_IS_INCLUDE == (pst_grec->uc_grec_type))
         {
@@ -1183,7 +1183,7 @@ oal_uint32 hmac_m2u_mld_v2_update(hmac_vap_stru *pst_hmac_vap, hmac_m2u_list_upd
 
         puc_src_addr = (oal_uint8 *)pst_grec + OAL_SIZEOF(mac_mld_v2_group_record_stru);
 
-        /* 同一组播组内不同src ip的链表更新 */
+        /* ????????????????src ip?????????? */
         while (us_no_srec)
         {
             oal_memcopy(pst_list_entry->auc_src_ip_addr , puc_src_addr, OAL_IPV6_ADDR_SIZE);
@@ -1191,7 +1191,7 @@ oal_uint32 hmac_m2u_mld_v2_update(hmac_vap_stru *pst_hmac_vap, hmac_m2u_list_upd
             {
                 ul_ret = hmac_m2u_update_snoop_list(pst_list_entry);
             }
-            /* block old source时清空该成员 */
+            /* block old source???????????? */
             else
             {
                 pst_grp_list = hmac_m2u_find_group_list(pst_hmac_vap, pst_list_entry);
@@ -1218,7 +1218,7 @@ oal_uint32 hmac_m2u_mld_v2_update(hmac_vap_stru *pst_hmac_vap, hmac_m2u_list_upd
             puc_src_addr += OAL_IPV6_ADDR_SIZE;
             us_no_srec--;
         }
-        /* 取下一个组播组 */
+        /* ?????????????? */
         pst_grec = (mac_mld_v2_group_record_stru *)((oal_uint8 *)pst_grec + MLDV2_GRP_REC_LEN(pst_grec));
         us_no_grec--;
     }
@@ -1235,7 +1235,7 @@ oal_void hmac_m2u_snoop_inspecting_ipv4(hmac_vap_stru *pst_hmac_vap, hmac_user_s
     mac_igmp_v3_report_stru         *pst_igmpr3;                           /* igmp header for v3 */
     oal_uint8                        uc_ip_hdr_len;
 
-    /* 取ip头 */
+    /* ??ip?? */
     pst_ip_hdr = (mac_ip_header_stru *)puc_buf;
 
     if (IPPROTO_IGMP != pst_ip_hdr->uc_protocol)
@@ -1246,7 +1246,7 @@ oal_void hmac_m2u_snoop_inspecting_ipv4(hmac_vap_stru *pst_hmac_vap, hmac_user_s
     pst_list_entry->pst_hmac_vap  = pst_hmac_vap;
     pst_list_entry->pst_hmac_user = pst_hmac_user;
 
-    /* bit序不同，取不同的ip头长度*/
+    /* bit????????????????ip??????*/
     if (OAL_BITFIELD_BIG_ENDIAN ==  oal_netbuf_get_bitfield())
     {
         uc_ip_hdr_len = pst_ip_hdr->uc_version_ihl & 0x0F;
@@ -1266,21 +1266,21 @@ oal_void hmac_m2u_snoop_inspecting_ipv4(hmac_vap_stru *pst_hmac_vap, hmac_user_s
     /* v3 igmp */
     pst_igmpr3 = (mac_igmp_v3_report_stru *) pst_igmp;
 
-    /* 如果报文不是IGMP report报文或leave报文,不进行链表更新 */
+    /* ????????????IGMP report??????leave????,?????????????? */
     if (!IS_IGMP_REPORT_LEAVE_PACKET(pst_igmp->uc_type))
     {
        OAM_WARNING_LOG1(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_snoop_inspecting_ipv4::not igmp report[%x].}", pst_igmp->uc_type);
        return;
     }
 
-    /* IGMP v1 v2 报文的链表更新  */
+    /* IGMP v1 v2 ??????????????  */
     if (pst_igmp->uc_type != MAC_IGMPV3_REPORT_TYPE)
     {
         OAM_INFO_LOG1(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_snoop_inspecting_ipv4::v1v2 update[%x].}", pst_igmp->uc_type);
         hmac_m2u_igmp_v1v2_update(pst_hmac_vap, pst_list_entry, pst_igmp);
     }
 
-    /* IGMP v3 report 报文的链表更新*/
+    /* IGMP v3 report ??????????????*/
     else
     {
         OAM_INFO_LOG1(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_snoop_inspecting_ipv4::v3 update[%x].}", pst_igmp->uc_type);
@@ -1299,16 +1299,16 @@ oal_void hmac_m2u_snoop_inspecting_ipv6(hmac_vap_stru *pst_hmac_vap, hmac_user_s
     mac_mld_v1_head_stru        *pst_mld_head;
     oal_icmp6hdr_stru           *pst_icmp_head;
 
-     /* 取ip头 */
+     /* ??ip?? */
     pst_ip_hdr = (oal_ipv6hdr_stru *)(puc_buf);
-    pst_icmp_head = (oal_icmp6hdr_stru*)(pst_ip_hdr + 1);//跳过IPV6 头获取ICMPV6头
+    pst_icmp_head = (oal_icmp6hdr_stru*)(pst_ip_hdr + 1);//????IPV6 ??????ICMPV6??
 
     if ((OAL_IPPROTO_ICMPV6 != pst_icmp_head->icmp6_type) || (0x0 != pst_ip_hdr->nexthdr))
     {
         return;
     }
 
-    pst_mld_head = (mac_mld_v1_head_stru*)(pst_icmp_head + 1);//跳过IPV6 头获取ICMPV6头
+    pst_mld_head = (mac_mld_v1_head_stru*)(pst_icmp_head + 1);//????IPV6 ??????ICMPV6??
     if (!IS_MLD_REPORT_LEAVE_PACKET(pst_mld_head->uc_type))
     {
        return;
@@ -1318,14 +1318,14 @@ oal_void hmac_m2u_snoop_inspecting_ipv6(hmac_vap_stru *pst_hmac_vap, hmac_user_s
     pst_list_entry->pst_hmac_user = pst_hmac_user;
     pst_mldv2 = (mac_mld_v2_report_stru *) pst_mld_head;
 
-    /* MLD v1  报文的链表更新  */
+    /* MLD v1  ??????????????  */
     if (pst_mld_head->uc_type != MLDV2_REPORT_TYPE)
     {
         OAM_INFO_LOG1(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_snoop_inspecting_ipv6::v1 update[%x].}", pst_mld_head->uc_type);
         hmac_m2u_mld_v1_update(pst_hmac_vap, pst_list_entry, pst_mld_head);
     }
 
-    /* MLD v2 report 报文的链表更新*/
+    /* MLD v2 report ??????????????*/
     else
     {
         OAM_INFO_LOG1(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_snoop_inspecting_ipv6::v2 update[%x].}", pst_mld_head->uc_type);
@@ -1354,35 +1354,35 @@ oal_void hmac_m2u_snoop_inspecting(hmac_vap_stru *pst_hmac_vap, hmac_user_stru *
         return;
     }
 
-    /* 获取以太网头 */
+    /* ???????????? */
     pst_ether_header  = (mac_ether_header_stru *)oal_netbuf_data(pst_buf);
     puc_src_addr  = pst_ether_header->auc_ether_shost;
     oal_set_mac_addr(st_list_entry.auc_new_member_mac, puc_src_addr);
 
 /*lint -e778*/
-    /* 带vlan tag 的情况*/
+    /* ??vlan tag ??????*/
     if (ETHER_IS_WITH_VLAN_TAG(pst_ether_header->us_ether_type))
     {
-        pst_vlan_tag = (mac_vlan_tag_stru*)(oal_netbuf_data(pst_buf) + (ETHER_ADDR_LEN << 1));  //偏移2个mac地址的长度,获取外层vlan tag
+        pst_vlan_tag = (mac_vlan_tag_stru*)(oal_netbuf_data(pst_buf) + (ETHER_ADDR_LEN << 1));  //????2??mac??????????,????????vlan tag
         oal_memcopy(&(st_list_entry.st_outer_vlan_tag), pst_vlan_tag, OAL_SIZEOF(mac_vlan_tag_stru));
 
-        pst_vlan_tag += 1;//判断内层tag
+        pst_vlan_tag += 1;//????????tag
         if (ETHER_IS_WITH_VLAN_TAG(pst_vlan_tag->us_tpid))
         {
-            pst_vlan_tag += 1;//不考虑内层tag，跳过
+            pst_vlan_tag += 1;//??????????tag??????
         }
 
-        us_ether_data_type = *((oal_uint16*)(pst_vlan_tag));//跳过tag后获取eth  type
-        puc_ip_head        = (oal_uint8*)(pst_vlan_tag ) + 2;//跳过 type 指向ip头起始地址
+        us_ether_data_type = *((oal_uint16*)(pst_vlan_tag));//????tag??????eth  type
+        puc_ip_head        = (oal_uint8*)(pst_vlan_tag ) + 2;//???? type ????ip??????????
     }
-     /* 非vlan  的情况*/
+     /* ??vlan  ??????*/
     else
     {
         puc_ip_head = (oal_uint8*)(pst_ether_header + 1);
         us_ether_data_type = pst_ether_header->us_ether_type;
     }
 
-    /* ap模式的接收处理 */
+    /* ap?????????????? */
     if ((WLAN_VAP_MODE_BSS_AP == pst_hmac_vap->st_vap_base_info.en_vap_mode) &&
             (!ETHER_IS_BROADCAST(pst_ether_header->auc_ether_dhost)))
     {
@@ -1403,7 +1403,7 @@ oal_void hmac_m2u_snoop_inspecting(hmac_vap_stru *pst_hmac_vap, hmac_user_stru *
         }
     }
 /*lint +e778*/
-    /* STA模式的接收处理 去掉自定义的tunnel协议头 */
+    /* STA?????????????? ????????????tunnel?????? */
     if (OAL_HOST2NET_SHORT(ETHER_TUNNEL_TYPE) == pst_ether_header->us_ether_type &&
         WLAN_VAP_MODE_BSS_STA == pst_hmac_vap->st_vap_base_info.en_vap_mode)
     {
@@ -1473,7 +1473,7 @@ OAL_STATIC oal_uint8 hmac_m2u_count_member_src_list(hmac_m2u_grp_list_entry_stru
                                                                          hmac_m2u_grp_member_stru,
                                                                          st_member_entry);
 
-        /* 组播源地址符合，模式是inc，加入到输出的table中 */
+        /* ??????????????????????inc??????????????table?? */
         if (!oal_memcmp(puc_src_ip_addr, pst_grp_member->auc_src_ip_addr, pst_grp_member->uc_src_ip_addr_len))
         {
             if (HMAC_M2U_CMD_INCLUDE_LIST == pst_grp_member->en_mode)
@@ -1489,7 +1489,7 @@ OAL_STATIC oal_uint8 hmac_m2u_count_member_src_list(hmac_m2u_grp_list_entry_stru
         }
         else
         {
-            /* 组播源未匹配，但模式为exc的情况也加入到输出table中 */
+            /* ??????????????????????exc??????????????????table?? */
             if (HMAC_M2U_CMD_EXCLUDE_LIST == pst_grp_member->en_mode)
             {
                 if (uc_count > MAX_STA_NUM_OF_ONE_GROUP)
@@ -1578,7 +1578,7 @@ OAL_STATIC oal_void hmac_m2u_clean_snp_list(hmac_vap_stru *pst_hmac_vap)
     oal_dlist_head_stru           *pst_grp_list_entry;
     oal_dlist_head_stru           *pst_grp_list_entry_temp;
 
-    /* 获取snoop链表头 */
+    /* ????snoop?????? */
     pst_m2u      = (hmac_m2u_stru *)(pst_hmac_vap->pst_m2u);
     pst_snp_list = &(pst_m2u->st_m2u_snooplist);
 
@@ -1641,7 +1641,7 @@ oal_void hmac_m2u_cleanup_snoopwds_node(hmac_user_stru *pst_hmac_user)
             hmac_m2u_remove_node_grp(pst_grp_list, pst_hmac_user,&uc_sta_num_removed);
             pst_snp_list->us_total_sta_num -= uc_sta_num_removed;
             OAM_INFO_LOG1(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_cleanup_snoopwds_node::removed [%d] sta  }",uc_sta_num_removed);
-            if (OAL_TRUE == (oal_dlist_is_empty(&(pst_grp_list->st_src_list)))) //删除没有用户的组播组
+            if (OAL_TRUE == (oal_dlist_is_empty(&(pst_grp_list->st_src_list)))) //????????????????????
             {
                 oal_dlist_delete_entry(&(pst_grp_list->st_grp_entry));
                 OAL_MEM_FREE(pst_grp_list, OAL_TRUE);
@@ -1656,12 +1656,12 @@ oal_void hmac_m2u_cleanup_snoopwds_node(hmac_user_stru *pst_hmac_user)
 
 oal_uint32 hmac_m2u_tx_event( hmac_vap_stru *pst_vap, hmac_user_stru *pst_user, oal_netbuf_stru *pst_buf)
 {
-    frw_event_stru          *pst_event;        /* 事件结构体 */
+    frw_event_stru          *pst_event;        /* ?????????? */
     frw_event_mem_stru      *pst_event_mem;
     dmac_tx_event_stru      *pst_dtx_stru;
     oal_uint32               ul_ret = OAL_SUCC;
 
-    /* 封装802.11头 */
+    /* ????802.11?? */
      ul_ret = hmac_tx_encap_etc(pst_vap, pst_user, pst_buf);
      if (OAL_UNLIKELY((OAL_SUCC != ul_ret)))
      {
@@ -1671,7 +1671,7 @@ oal_uint32 hmac_m2u_tx_event( hmac_vap_stru *pst_vap, hmac_user_stru *pst_user, 
          return ul_ret;
      }
 
-     /* 抛事件，传给DMAC */
+     /* ????????????DMAC */
      pst_event_mem = FRW_EVENT_ALLOC(OAL_SIZEOF(dmac_tx_event_stru));
      if (OAL_UNLIKELY(OAL_PTR_NULL == pst_event_mem))
      {
@@ -1685,7 +1685,7 @@ oal_uint32 hmac_m2u_tx_event( hmac_vap_stru *pst_vap, hmac_user_stru *pst_user, 
      pst_event = frw_get_event_stru(pst_event_mem);
 
 
-     /* 填写事件头 */
+     /* ?????????? */
      FRW_EVENT_HDR_INIT(&(pst_event->st_event_hdr),
                       FRW_EVENT_TYPE_HOST_DRX,
                       DMAC_TX_HOST_DRX,
@@ -1698,7 +1698,7 @@ oal_uint32 hmac_m2u_tx_event( hmac_vap_stru *pst_vap, hmac_user_stru *pst_user, 
      pst_dtx_stru             = (dmac_tx_event_stru *)pst_event->auc_event_data;
      pst_dtx_stru->pst_netbuf = pst_buf;
 
-     /* 调度事件 */
+     /* ???????? */
      ul_ret = frw_event_dispatch_event_etc(pst_event_mem);
      if (OAL_UNLIKELY(OAL_SUCC != ul_ret))
      {
@@ -1706,7 +1706,7 @@ oal_uint32 hmac_m2u_tx_event( hmac_vap_stru *pst_vap, hmac_user_stru *pst_user, 
          OAM_STAT_VAP_INCR(pst_vap->st_vap_base_info.uc_vap_id, tx_abnormal_msdu_dropped, 1);
      }
 
-     /* 释放事件 */
+     /* ???????? */
      FRW_EVENT_FREE(pst_event_mem);
 
      return ul_ret;
@@ -1731,7 +1731,7 @@ oal_void hmac_m2u_convert_loop_end(oal_netbuf_stru *pst_copy_buf, oal_netbuf_str
 
 oal_void hmac_m2u_snoop_convert_count(hmac_vap_stru *pst_vap, oal_uint8 uc_ucast_sta_cnt, oal_uint32 ul_ret, oal_netbuf_stru *pst_buf)
 {
-    /* ucast event fail 的发送计数 */
+    /* ucast event fail ?????????? */
     if (OAL_SUCC != ul_ret)
     {
         if (uc_ucast_sta_cnt > 0)
@@ -1744,7 +1744,7 @@ oal_void hmac_m2u_snoop_convert_count(hmac_vap_stru *pst_vap, oal_uint8 uc_ucast
         }
         hmac_free_netbuf_list_etc(pst_buf);
     }
-    /* ucast发送成功的已发送组播和单播的计数 */
+    /* ucast???????????????????????????????? */
     else
     {
         if (uc_ucast_sta_cnt > 0)
@@ -1767,20 +1767,20 @@ oal_void hmac_m2u_snoop_change_mac_hdr(hmac_m2u_stru *pst_m2u, mac_ether_header_
 
     pst_ether_hdr  = (mac_ether_header_stru *)oal_netbuf_data(pst_buf);
     oal_set_mac_addr(auc_srcmac, pst_ether_hdr->auc_ether_shost);
-    /* 加自定义tunnel协议 */
+    /* ????????tunnel???? */
     if (pst_m2u->en_mcast_mode & BIT0)   /* en_mcast_mode = 1 */
     {
       pst_mcast_tunHdr = (mcast_tunnel_hdr_stru *) oal_netbuf_push(pst_buf, OAL_SIZEOF(mcast_tunnel_hdr_stru));
       *pst_ucast_ether_hdr = (mac_ether_header_stru *)oal_netbuf_push(pst_buf, OAL_SIZEOF(mac_ether_header_stru));
       pst_mcast_tunHdr->proto = MAC_ETH_PROTOCOL_SUBTYPE;
 
-      /* 拷贝原始组播源地址 */
+      /* ?????????????????? */
       oal_set_mac_addr(&((*pst_ucast_ether_hdr)->auc_ether_shost[0]), auc_srcmac);
 
-      /*拷贝新的协议类型 */
+      /*???????????????? */
       (*pst_ucast_ether_hdr)->us_ether_type = OAL_HOST2NET_SHORT(ETHER_TUNNEL_TYPE);
     }
-    /* 不加自定义tunnel协议 */
+    /* ??????????tunnel???? */
     else                                /* en_mcast_mode = 2 */
     {
         *pst_ucast_ether_hdr = (mac_ether_header_stru *)oal_netbuf_data(pst_buf);
@@ -1867,7 +1867,7 @@ oal_uint32 hmac_m2u_sta_convert(hmac_vap_stru *pst_vap, oal_netbuf_stru *pst_buf
         return HMAC_TX_PASS ;
     }
 
-    /* 遍历vap下所有用户 */
+    /* ????vap?????????? */
     OAL_DLIST_SEARCH_FOR_EACH_SAFE(pst_entry, pst_dlist_tmp, &(pst_mac_vap->st_mac_user_list_head))
     {
         if (uc_ucast_sta_cnt > 1)
@@ -1880,17 +1880,17 @@ oal_uint32 hmac_m2u_sta_convert(hmac_vap_stru *pst_vap, oal_netbuf_stru *pst_buf
         {
             hmac_free_netbuf_list_etc(pst_buf);
             OAM_ERROR_LOG0(pst_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_sta_convert::pst_user_tmp null.}");
-            /* 组播转单播发送循环的末尾处理 */
+            /* ???????????????????????????? */
             hmac_m2u_convert_loop_end(pst_copy_buf, &pst_buf, &uc_ucast_sta_cnt, &uc_ucast_sta_idx);
             continue;
         }
 
-        /* 如果用户尚未关联成功 */
+        /* ???????????????????? */
         if (MAC_USER_STATE_ASSOC != pst_user_tmp->en_user_asoc_state)
         {
             hmac_free_netbuf_list_etc(pst_buf);
             OAM_WARNING_LOG0(pst_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_sta_convert::sta not assoc.}");
-            /* 组播转单播发送循环的末尾处理 */
+            /* ???????????????????????????? */
             hmac_m2u_convert_loop_end(pst_copy_buf, &pst_buf, &uc_ucast_sta_cnt, &uc_ucast_sta_idx);
             continue;
         }
@@ -1900,19 +1900,19 @@ oal_uint32 hmac_m2u_sta_convert(hmac_vap_stru *pst_vap, oal_netbuf_stru *pst_buf
         {
             hmac_free_netbuf_list_etc(pst_buf);
             OAM_ERROR_LOG1(pst_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_sta_convert::pst_hmac_user_tmp null.idx:%u}",pst_user_tmp->us_assoc_id);
-            /* 组播转单播发送循环的末尾处理 */
+            /* ???????????????????????????? */
             hmac_m2u_convert_loop_end(pst_copy_buf, &pst_buf, &uc_ucast_sta_cnt, &uc_ucast_sta_idx);
             continue;
         }
 
         puc_dstmac  = pst_user_tmp->auc_user_mac_addr;
 
-        /* 发送的目的地址和发来的源地址相同的异常处理 */
+        /* ?????????????????????????????????????????? */
         if (!oal_compare_mac_addr(puc_dstmac, puc_srcmac))
         {
             hmac_free_netbuf_list_etc(pst_buf);
             OAM_INFO_LOG0(pst_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_sta_convert::dstmac == srcmac.}");
-            /* 组播转单播发送循环的末尾处理 */
+            /* ???????????????????????????? */
             hmac_m2u_convert_loop_end(pst_copy_buf, &pst_buf, &uc_ucast_sta_cnt, &uc_ucast_sta_idx);
             continue;
         }
@@ -1920,17 +1920,17 @@ oal_uint32 hmac_m2u_sta_convert(hmac_vap_stru *pst_vap, oal_netbuf_stru *pst_buf
         us_user_idx = pst_user_tmp->us_assoc_id;
         pst_tx_ctl  = (mac_tx_ctl_stru *)OAL_NETBUF_CB(pst_buf);
 
-        /* 组播转单播 CB字段处理 */
+        /* ?????????? CB???????? */
         MAC_GET_CB_IS_MCAST(pst_tx_ctl)     = OAL_FALSE;
         MAC_GET_CB_ACK_POLACY(pst_tx_ctl)   = WLAN_TX_NORMAL_ACK;
         MAC_GET_CB_TX_USER_IDX(pst_tx_ctl)  = us_user_idx;
         MAC_GET_CB_WME_TID_TYPE(pst_tx_ctl) = pst_m2u->en_tid_num;                     //WLAN_TIDNO_BEST_EFFORT;
         MAC_GET_CB_WME_AC_TYPE(pst_tx_ctl)  = WLAN_WME_TID_TO_AC(pst_m2u->en_tid_num); //WLAN_WME_AC_BE;
 
-        /* 组播转单播，mac头的封装 */
+        /* ????????????mac???????? */
         hmac_m2u_snoop_change_mac_hdr(pst_m2u, &pst_ucast_ether_hdr, pst_buf);
 
-        /* 将DA替换成关联设备的MAC */
+        /* ??DA????????????????MAC */
         oal_set_mac_addr(&pst_ucast_ether_hdr->auc_ether_dhost[0], puc_dstmac);
 
         ul_ret = hmac_tx_ucast_process_etc(pst_vap, pst_buf, pst_user, pst_tx_ctl);
@@ -1938,7 +1938,7 @@ oal_uint32 hmac_m2u_sta_convert(hmac_vap_stru *pst_vap, oal_netbuf_stru *pst_buf
         {
             if (HMAC_TX_BUFF != ul_ret)
             {
-                 /* 不等于HMAC_TX_BUFF，不缓存的直接释放 */
+                 /* ??????HMAC_TX_BUFF?????????????????? */
                  OAM_WARNING_LOG1(pst_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_sta_convert::hmac_tx_ucast_process_etc not pass or buff, ul_ret = [%d]}", ul_ret);
                  OAM_STAT_VAP_INCR(pst_vap->st_vap_base_info.uc_vap_id, tx_m2u_ucast_droped, 1);
                  hmac_free_netbuf_list_etc(pst_buf);
@@ -1949,10 +1949,10 @@ oal_uint32 hmac_m2u_sta_convert(hmac_vap_stru *pst_vap, oal_netbuf_stru *pst_buf
 
         ul_ret = hmac_m2u_tx_event(pst_vap, pst_user, pst_buf);
 
-        /* 组播转单播发送计数统计 */
+        /* ?????????????????????? */
         hmac_m2u_snoop_convert_count(pst_vap, uc_ucast_sta_cnt, ul_ret, pst_buf);
 
-        /* 组播转单播发送循环的末尾处理 */
+        /* ???????????????????????????? */
         hmac_m2u_convert_loop_end(pst_copy_buf, &pst_buf, &uc_ucast_sta_cnt, &uc_ucast_sta_idx);
     }
 
@@ -1991,7 +1991,7 @@ oal_uint32 hmac_m2u_snoop_convert(hmac_vap_stru *pst_vap, oal_netbuf_stru *pst_b
     hmac_m2u_list_update_stru         st_list_entry;
 #endif
 
-    /* 未打开组转单播开关，发送原组播 */
+    /* ?????????????????????????????? */
     if (OAL_FALSE == pst_m2u->en_snoop_enable)
     {
         OAM_WARNING_LOG1(pst_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_snoop_convert::snoop is [%d] not enable}", pst_m2u->en_snoop_enable);
@@ -2001,24 +2001,24 @@ oal_uint32 hmac_m2u_snoop_convert(hmac_vap_stru *pst_vap, oal_netbuf_stru *pst_b
     pst_ether_hdr  = (mac_ether_header_stru *)oal_netbuf_data(pst_buf);
 
 /*lint -e778*/
-      /* 带vlan tag 的情况*/
+      /* ??vlan tag ??????*/
     if (ETHER_IS_WITH_VLAN_TAG(pst_ether_hdr->us_ether_type))
     {
-        pst_vlan_tag = (mac_vlan_tag_stru*)(oal_netbuf_data(pst_buf) + (ETHER_ADDR_LEN << 1));  //偏移2个mac地址的长度,获取外层vlan tag
+        pst_vlan_tag = (mac_vlan_tag_stru*)(oal_netbuf_data(pst_buf) + (ETHER_ADDR_LEN << 1));  //????2??mac??????????,????????vlan tag
         pst_vlan_tag += 1;
-        if (ETHER_IS_WITH_VLAN_TAG(pst_vlan_tag->us_tpid))                  //双层tag的情况，内层tag不考虑
+        if (ETHER_IS_WITH_VLAN_TAG(pst_vlan_tag->us_tpid))                  //????tag????????????tag??????
         {
-            us_ether_data_type = *((oal_uint16*)(pst_vlan_tag + 1));        //跳过内层tag后获取eth  type
-            puc_ip_head = (oal_uint8*)(pst_vlan_tag + 1) + 2;               //跳过 type 和内层指向ip头起始地址
+            us_ether_data_type = *((oal_uint16*)(pst_vlan_tag + 1));        //????????tag??????eth  type
+            puc_ip_head = (oal_uint8*)(pst_vlan_tag + 1) + 2;               //???? type ??????????ip??????????
         }
         else
         {
-             us_ether_data_type = *((oal_uint16*)pst_vlan_tag);             //跳过tag后获取eth  type
-             puc_ip_head = (oal_uint8*)pst_vlan_tag + 2;                    //跳过 type 和tag指向ip头起始地址
+             us_ether_data_type = *((oal_uint16*)pst_vlan_tag);             //????tag??????eth  type
+             puc_ip_head = (oal_uint8*)pst_vlan_tag + 2;                    //???? type ??tag????ip??????????
         }
-        pst_vlan_tag -= 1;                                                  //指向外层tag，作为参数传递到下层
+        pst_vlan_tag -= 1;                                                  //????????tag????????????????????
     }
-     /* 非vlan  的情况*/
+     /* ??vlan  ??????*/
     else
     {
         puc_ip_head = (oal_uint8*)(pst_ether_hdr + 1);
@@ -2030,7 +2030,7 @@ oal_uint32 hmac_m2u_snoop_convert(hmac_vap_stru *pst_vap, oal_netbuf_stru *pst_b
     oal_set_mac_addr(auc_grpmac, pst_ether_hdr->auc_ether_dhost);
 
 /*lint -e778*/
-    /* 部分组播控制管理帧，进行组播转单播，发送给每一个关联STA */
+    /* ????????????????????????????????????????????????????STA */
     if (OAL_IS_MDNSV4_MAC((oal_uint8*)pst_ether_hdr, us_ether_data_type) ||
         OAL_IS_MDNSV6_MAC((oal_uint8*)pst_ether_hdr, us_ether_data_type) ||
         OAL_IS_ICMPV6_PROTO(us_ether_data_type, puc_ip_head) ||
@@ -2048,7 +2048,7 @@ oal_uint32 hmac_m2u_snoop_convert(hmac_vap_stru *pst_vap, oal_netbuf_stru *pst_b
         *((oal_uint32*)auc_src_ip_addr) = pst_ip_header->ul_saddr;
         ul_grp_addr = OAL_HOST2NET_LONG(pst_ip_header->ul_daddr);
 
-        /* 该组在黑名单内,不进行组播转单播，组播处理 */
+        /* ??????????????,?????????????????????????? */
         if (hmac_m2u_snoop_is_denied_ipv4(pst_vap, ul_grp_addr))
         {
             OAM_INFO_LOG4(pst_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_snoop_convert::group_addr [%x].[%x].[%x].[%x] is denied}\r\n}",
@@ -2092,7 +2092,7 @@ oal_uint32 hmac_m2u_snoop_convert(hmac_vap_stru *pst_vap, oal_netbuf_stru *pst_b
         oal_memcopy(&(st_list_entry.st_outer_vlan_tag), pst_vlan_tag, OAL_SIZEOF(mac_vlan_tag_stru));
     }
     pst_grp_list_member = hmac_m2u_find_group_list(pst_vap, &st_list_entry);
-    /* 组播snoop表中不存在当前组播帧所在的组播组,组播转发处理*/
+    /* ????snoop????????????????????????????????,????????????*/
     if (OAL_PTR_NULL == pst_grp_list_member)
     {
         OAM_INFO_LOG0(pst_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_snoop_convert:: pst_grp_list_member is null}");
@@ -2100,9 +2100,9 @@ oal_uint32 hmac_m2u_snoop_convert(hmac_vap_stru *pst_vap, oal_netbuf_stru *pst_b
         return HMAC_TX_PASS ;
     }
 #endif
-    uc_ucast_sta_cnt = hmac_m2u_get_snooplist_member(pst_vap, auc_grpmac, auc_src_ip_addr, auc_ucast_sta_mac[0],pst_vlan_tag);//找出接收该组播的 sta 个数及他们的mac
+    uc_ucast_sta_cnt = hmac_m2u_get_snooplist_member(pst_vap, auc_grpmac, auc_src_ip_addr, auc_ucast_sta_mac[0],pst_vlan_tag);//???????????????? sta ????????????mac
 
-    /* 如果没有STA需要此netbuf,不进行组播转单播处理 */
+    /* ????????STA??????netbuf,???????????????????? */
     if (0 == uc_ucast_sta_cnt)
     {
         OAM_INFO_LOG0(pst_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_snoop_convert:: no user need this packet}");
@@ -2116,7 +2116,7 @@ oal_uint32 hmac_m2u_snoop_convert(hmac_vap_stru *pst_vap, oal_netbuf_stru *pst_b
         return HMAC_TX_PASS ;
     }
 
-    /* 如果有用户需要该netbuf，但不需要组播转单播，直接发送原组播 */
+    /* ????????????????netbuf???????????????????????????????????? */
     if (HMAC_M2U_MCAST_MAITAIN == pst_m2u->en_mcast_mode)  /* en_mcast_mode = 0 */
     {
         OAM_INFO_LOG2(pst_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_snoop_convert:: %d user found , mcast mode is %d}", uc_ucast_sta_cnt, pst_m2u->en_mcast_mode);
@@ -2126,7 +2126,7 @@ oal_uint32 hmac_m2u_snoop_convert(hmac_vap_stru *pst_vap, oal_netbuf_stru *pst_b
 
     pst_tx_ctl = (mac_tx_ctl_stru *)OAL_NETBUF_CB(pst_buf);
 
-    /* 组播转单播 CB字段处理 */
+    /* ?????????? CB???????? */
     MAC_GET_CB_IS_MCAST(pst_tx_ctl)     = OAL_FALSE;
     MAC_GET_CB_ACK_POLACY(pst_tx_ctl)   = WLAN_TX_NORMAL_ACK;
     MAC_GET_CB_TX_USER_IDX(pst_tx_ctl)  = MAC_INVALID_USER_ID;
@@ -2144,20 +2144,20 @@ oal_uint32 hmac_m2u_snoop_convert(hmac_vap_stru *pst_vap, oal_netbuf_stru *pst_b
             pst_copy_buf = oal_netbuf_copy(pst_buf, GFP_ATOMIC);
         }
 
-        /* 发送的目的地址和发来的源地址相同的异常处理 */
+        /* ?????????????????????????????????????????? */
         if (!oal_compare_mac_addr(puc_dstmac, auc_srcmac))
         {
             hmac_free_netbuf_list_etc(pst_buf);
             OAM_STAT_VAP_INCR(pst_vap->st_vap_base_info.uc_vap_id, tx_m2u_ucast_droped, 1);
             OAM_INFO_LOG0(pst_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_snoop_convert::dstmac == srcmac.}");
 
-            /* 组播转单播发送循环的末尾处理 */
+            /* ???????????????????????????? */
             hmac_m2u_convert_loop_end(pst_copy_buf, &pst_buf, &uc_ucast_sta_cnt, &uc_ucast_sta_idx);
             continue;
         }
 
-        /* 如果接收端的STA的地址为空，则说明至少有一个STA加入到这个组后又离开了 */
-        /* 这样的情况需要丢弃该帧 */
+        /* ????????????STA????????????????????????????STA?????????????????????? */
+        /* ?????????????????????? */
         if (!oal_compare_mac_addr(puc_dstmac, auc_empty_entry_mac))
         {
             OAM_INFO_LOG2(pst_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_snoop_convert::dstmac == NULL && uc_ucast_sta_cnt is %d && discard mcast is %d}", uc_ucast_sta_cnt, pst_m2u->en_discard_mcast);
@@ -2165,17 +2165,17 @@ oal_uint32 hmac_m2u_snoop_convert(hmac_vap_stru *pst_vap, oal_netbuf_stru *pst_b
             {
                 hmac_free_netbuf_list_etc(pst_buf);
                 OAM_STAT_VAP_INCR(pst_vap->st_vap_base_info.uc_vap_id, tx_m2u_ucast_droped, 1);
-                /* 组播转单播发送循环的末尾处理 */
+                /* ???????????????????????????? */
                 hmac_m2u_convert_loop_end(pst_copy_buf, &pst_buf, &uc_ucast_sta_cnt, &uc_ucast_sta_idx);
                 continue;
             }
-            /* 如果只有一个地址为空的STA用户,将该MAC地址还原成组播组的MAC地址 */
+            /* ??????????????????????STA????,????MAC??????????????????MAC???? */
             else
             {
                 uc_ucast_sta_cnt = 0;
                 puc_dstmac = pst_ether_hdr->auc_ether_dhost;
 
-                /* 组播CB字段处理 */
+                /* ????CB???????? */
                 MAC_GET_CB_IS_MCAST(pst_tx_ctl)      = OAL_TRUE;
                 MAC_GET_CB_ACK_POLACY(pst_tx_ctl)    = WLAN_TX_NO_ACK;
                 MAC_GET_CB_WME_TID_TYPE(pst_tx_ctl)  = WLAN_TIDNO_BCAST;
@@ -2183,20 +2183,20 @@ oal_uint32 hmac_m2u_snoop_convert(hmac_vap_stru *pst_vap, oal_netbuf_stru *pst_b
             }
         }
 
-        /* 组播用户的查找 */
+        /* ?????????????? */
         if ((ETHER_IS_MULTICAST(puc_dstmac)) && (!ETHER_IS_BROADCAST(puc_dstmac)))
         {
             us_user_idx = pst_vap->st_vap_base_info.us_multi_user_idx;
             ul_ret = HMAC_TX_PASS;
         }
 
-        /* 组播转单播用户的查找 */
+        /* ???????????????????? */
         else
         {
             ul_ret = mac_vap_find_user_by_macaddr_etc(&(pst_vap->st_vap_base_info), puc_dstmac, &us_user_idx);
         }
 
-         /* 用户未找到，丢弃该帧 */
+         /* ???????????????????? */
         if (OAL_UNLIKELY(OAL_SUCC != ul_ret))
         {
             OAM_WARNING_LOG1(pst_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_snoop_convert::find user fail[%d].}", ul_ret);
@@ -2206,7 +2206,7 @@ oal_uint32 hmac_m2u_snoop_convert(hmac_vap_stru *pst_vap, oal_netbuf_stru *pst_b
             continue;
         }
 
-        /* 转成HMAC的USER结构体 */
+        /* ????HMAC??USER?????? */
         pst_user = (hmac_user_stru *)mac_res_get_hmac_user_etc(us_user_idx);
         if (OAL_UNLIKELY(OAL_PTR_NULL == pst_user))
         {
@@ -2216,28 +2216,28 @@ oal_uint32 hmac_m2u_snoop_convert(hmac_vap_stru *pst_vap, oal_netbuf_stru *pst_b
             hmac_m2u_convert_loop_end(pst_copy_buf, &pst_buf, &uc_ucast_sta_cnt, &uc_ucast_sta_idx);
             continue;
         }
-        /* 用户状态判断 */
+        /* ???????????? */
         if (OAL_UNLIKELY(MAC_USER_STATE_ASSOC != pst_user->st_user_base_info.en_user_asoc_state))
         {
             if (uc_ucast_sta_cnt > 0)
             {
                 hmac_m2u_cleanup_snoopwds_node(pst_user);
             }
-            /* 发送失败计数 */
+            /* ???????????? */
             hmac_m2u_snoop_convert_count(pst_vap, uc_ucast_sta_cnt, OAL_FAIL, pst_buf);
             OAM_WARNING_LOG1(pst_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_snoop_convert::asoc state is [%d].}", pst_user->st_user_base_info.en_user_asoc_state);
-            /* 组播转单播发送循环的末尾处理 */
+            /* ???????????????????????????? */
             hmac_m2u_convert_loop_end(pst_copy_buf, &pst_buf, &uc_ucast_sta_cnt, &uc_ucast_sta_idx);
             continue;
         }
 
-        /* 目标user指针 */
+        /* ????user???? */
         MAC_GET_CB_TX_USER_IDX(pst_tx_ctl) = us_user_idx;
 
-        /* 组播转单播,单播以太网头的封装 */
+        /* ??????????,?????????????????? */
         if (uc_ucast_sta_cnt > 0)
         {
-            /* 组播转单播，mac头的封装 */
+            /* ????????????mac???????? */
             hmac_m2u_snoop_change_mac_hdr(pst_m2u, &pst_ucast_ether_hdr, pst_buf);
 #if defined (_PRE_WLAN_FEATURE_WDS) || defined (_PRE_WLAN_FEATURE_VIRTUAL_MULTI_STA)
             if (OAL_TRUE == pst_user->uc_is_wds)
@@ -2245,7 +2245,7 @@ oal_uint32 hmac_m2u_snoop_convert(hmac_vap_stru *pst_vap, oal_netbuf_stru *pst_b
                 hmac_vap_stru           *pst_hmac_vap;
                 hmac_wds_stas_stru      *pst_sta = OAL_PTR_NULL;
                 pst_hmac_vap = (hmac_vap_stru *)mac_res_get_hmac_vap(pst_user->st_user_base_info.uc_vap_id);
-                if (OAL_SUCC == hmac_wds_find_sta(pst_hmac_vap,&auc_srcmac[0], &pst_sta)) /* 发送目的地址对应的sta挂在当前repeater下 */
+                if (OAL_SUCC == hmac_wds_find_sta(pst_hmac_vap,&auc_srcmac[0], &pst_sta)) /* ??????????????????sta????????repeater?? */
                 {
                     hmac_free_netbuf_list_etc(pst_buf);
                     OAM_STAT_VAP_INCR(pst_vap->st_vap_base_info.uc_vap_id, tx_m2u_ucast_droped, 1);
@@ -2270,23 +2270,23 @@ oal_uint32 hmac_m2u_snoop_convert(hmac_vap_stru *pst_vap, oal_netbuf_stru *pst_b
             {
                 if (HMAC_TX_BUFF != ul_ret)
                 {
-                    /* 不等于HMAC_TX_BUFF，不缓存的直接释放 */
+                    /* ??????HMAC_TX_BUFF?????????????????? */
                     OAM_WARNING_LOG1(pst_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_snoop_convert::hmac_tx_ucast_process_etc not pass or buff, ul_ret = [%d]}", ul_ret);
                     OAM_STAT_VAP_INCR(pst_vap->st_vap_base_info.uc_vap_id, tx_m2u_ucast_droped, 1);
                     hmac_free_netbuf_list_etc(pst_buf);
                 }
 
-                /* 组播转单播发送循环的末尾处理 */
+                /* ???????????????????????????? */
                 hmac_m2u_convert_loop_end(pst_copy_buf, &pst_buf, &uc_ucast_sta_cnt, &uc_ucast_sta_idx);
                 continue;
             }
         }
         ul_ret = hmac_m2u_tx_event(pst_vap, pst_user, pst_buf);
 
-        /* 组播转单播发送计数统计 */
+        /* ?????????????????????? */
         hmac_m2u_snoop_convert_count(pst_vap, uc_ucast_sta_cnt, ul_ret, pst_buf);
 
-        /* 组播转单播发送循环的末尾处理 */
+        /* ???????????????????????????? */
         hmac_m2u_convert_loop_end(pst_copy_buf, &pst_buf, &uc_ucast_sta_cnt, &uc_ucast_sta_idx);
 
     }while (uc_ucast_sta_cnt > 0 && pst_m2u->en_snoop_enable);
@@ -2319,32 +2319,32 @@ oal_void hmac_m2u_unicast_convert_multicast(hmac_vap_stru *pst_vap, oal_netbuf_s
     mac_ip_header_stru                 *pst_ip_header;
 
 
-/* pst_netbuf未转化为以太网格式的帧,此时只有8个字节的snap头空间*/
+/* pst_netbuf??????????????????????,????????8????????snap??????*/
     pst_snap = (mac_llc_snap_stru *)oal_netbuf_data(pst_netbuf);
     us_ether_type = pst_snap->us_ether_type;
 
 /*lint -e778*/
-      /* 带vlan tag 的情况*/
+      /* ??vlan tag ??????*/
     if (ETHER_IS_WITH_VLAN_TAG(us_ether_type))
     {
-        pst_vlan_tag = (mac_vlan_tag_stru*)(oal_netbuf_data(pst_netbuf) + ETHER_ADDR_LEN);  //偏移1个mac地址的长度,获取外层vlan tag
+        pst_vlan_tag = (mac_vlan_tag_stru*)(oal_netbuf_data(pst_netbuf) + ETHER_ADDR_LEN);  //????1??mac??????????,????????vlan tag
         pst_vlan_tag += 1;
-        if (ETHER_IS_WITH_VLAN_TAG(pst_vlan_tag->us_tpid))                  //双层tag的情况，内层tag不考虑
+        if (ETHER_IS_WITH_VLAN_TAG(pst_vlan_tag->us_tpid))                  //????tag????????????tag??????
         {
-            us_ether_data_type = *((oal_uint16*)(pst_vlan_tag + 1));        //跳过内层tag后获取eth  type
-            puc_ip_head = (oal_uint8*)(pst_vlan_tag + 1) + 2;               //跳过 type 和内层指向ip头起始地址
+            us_ether_data_type = *((oal_uint16*)(pst_vlan_tag + 1));        //????????tag??????eth  type
+            puc_ip_head = (oal_uint8*)(pst_vlan_tag + 1) + 2;               //???? type ??????????ip??????????
         }
         else
         {
-             us_ether_data_type = *((oal_uint16*)pst_vlan_tag);             //跳过tag后获取eth  type
-             puc_ip_head = (oal_uint8*)pst_vlan_tag + 2;                    //跳过 type 和tag指向ip头起始地址
+             us_ether_data_type = *((oal_uint16*)pst_vlan_tag);             //????tag??????eth  type
+             puc_ip_head = (oal_uint8*)pst_vlan_tag + 2;                    //???? type ??tag????ip??????????
         }
-        pst_vlan_tag -= 1;                                                  //指向外层tag，作为参数传递到下层
+        pst_vlan_tag -= 1;                                                  //????????tag????????????????????
     }
-     /* 非vlan  的情况*/
+     /* ??vlan  ??????*/
     else
     {
-        puc_ip_head = (oal_uint8*)(oal_netbuf_data(pst_netbuf) + ETHER_ADDR_LEN + 2);  //偏移8个字节长度的snap头空间
+        puc_ip_head = (oal_uint8*)(oal_netbuf_data(pst_netbuf) + ETHER_ADDR_LEN + 2);  //????8????????????snap??????
         us_ether_data_type = *((oal_uint16*)(oal_netbuf_data(pst_netbuf) + ETHER_ADDR_LEN));
         pst_vlan_tag = OAL_PTR_NULL;
     }
@@ -2383,7 +2383,7 @@ oal_void hmac_m2u_adaptive_list_init(hmac_vap_stru *pst_hmac_vap)
     oal_uint32          ul_loop  = 0;
     hmac_m2u_stru      *pst_m2u  = (hmac_m2u_stru *)(pst_hmac_vap->pst_m2u);
 
-    /* 初始化链表 */
+    /* ?????????? */
     for (ul_loop = 0; ul_loop < HMAC_M2U_ADAPTIVE_STA_HASHSIZE; ul_loop++)
     {
         oal_dlist_init_head(&(pst_m2u->ast_m2u_adaptive_hash[ul_loop]));
@@ -2400,10 +2400,10 @@ OAL_STATIC oal_void hmac_m2u_clean_adaptive_list(hmac_vap_stru *pst_hmac_vap)
     oal_dlist_head_stru                 *pst_sta_list_entry_temp;
     oal_uint32                           ul_loop = 0;
 
-    /* 获取配网STA链表头 */
+    /* ????????STA?????? */
     pst_m2u = (hmac_m2u_stru *)(pst_hmac_vap->pst_m2u);
 
-    /* 删除链表 */
+    /* ???????? */
     for (ul_loop = 0; ul_loop < HMAC_M2U_ADAPTIVE_STA_HASHSIZE; ul_loop++)
     {
         OAL_DLIST_SEARCH_FOR_EACH_SAFE(pst_sta_list_entry, pst_sta_list_entry_temp, &(pst_m2u->ast_m2u_adaptive_hash[ul_loop]))
@@ -2429,10 +2429,10 @@ OAL_STATIC hmac_m2u_adaptive_hash_stru *hmac_m2u_find_adaptive_list(hmac_vap_str
         return OAL_PTR_NULL;
     }
 
-    /* 获取HASH桶值 以及HASH链表 */
+    /* ????HASH???? ????HASH???? */
     uc_hash = (oal_uint8)HMAC_ADAPTIVE_CAL_HASH_VALUE(pst_adaptive_list_entry->auc_new_member_mac);
 
-    /* 遍历配网STA组链表，找到地址匹配的配网STA */
+    /* ????????STA??????????????????????????STA */
     OAL_DLIST_SEARCH_FOR_EACH(pst_sta_list_entry, &(pst_m2u->ast_m2u_adaptive_hash[uc_hash]))
     {
         pst_hash_adaptive = OAL_DLIST_GET_ENTRY(pst_sta_list_entry, hmac_m2u_adaptive_hash_stru, st_adaptive_entry);
@@ -2460,7 +2460,7 @@ OAL_STATIC hmac_m2u_adaptive_hash_stru *hmac_m2u_create_adaptive_list(hmac_vap_s
         return pst_hash_adaptive;
     }
 
-    /* 获取HASH桶值 以及HASH链表 */
+    /* ????HASH???? ????HASH???? */
     uc_hash = (oal_uint8)HMAC_ADAPTIVE_CAL_HASH_VALUE(pst_adaptive_list_entry->auc_new_member_mac);
 
     pst_hash_adaptive = hmac_m2u_find_adaptive_list(pst_hmac_vap, pst_adaptive_list_entry);
@@ -2512,7 +2512,7 @@ oal_void hmac_m2u_adaptive_inspecting(hmac_vap_stru *pst_hmac_vap, oal_netbuf_st
         return;
     }
 
-    /* 获取以太网头 */
+    /* ???????????? */
     pst_ether_header  = (mac_ether_header_stru *)oal_netbuf_data(pst_buf);
     puc_src_addr  = pst_ether_header->auc_ether_shost;
     oal_set_mac_addr(st_adaptive_list_entry.auc_new_member_mac, puc_src_addr);
@@ -2520,19 +2520,19 @@ oal_void hmac_m2u_adaptive_inspecting(hmac_vap_stru *pst_hmac_vap, oal_netbuf_st
     st_adaptive_list_entry.ul_timestamp = (oal_uint32)OAL_TIME_GET_STAMP_MS();
 
 /*lint -e778*/
-    /* 带vlan tag 的情况*/
+    /* ??vlan tag ??????*/
     if (ETHER_IS_WITH_VLAN_TAG(pst_ether_header->us_ether_type))
     {
-        pst_vlan_tag = (mac_vlan_tag_stru*)(oal_netbuf_data(pst_buf) + (ETHER_ADDR_LEN << 1));  //偏移2个mac地址的长度,获取外层vlan tag
+        pst_vlan_tag = (mac_vlan_tag_stru*)(oal_netbuf_data(pst_buf) + (ETHER_ADDR_LEN << 1));  //????2??mac??????????,????????vlan tag
         oal_memcopy(&(st_adaptive_list_entry.st_outer_vlan_tag), pst_vlan_tag, OAL_SIZEOF(mac_vlan_tag_stru));
 
-        pst_vlan_tag += 1;//判断内层tag
+        pst_vlan_tag += 1;//????????tag
         if (ETHER_IS_WITH_VLAN_TAG(pst_vlan_tag->us_tpid))
         {
-            pst_vlan_tag += 1;//不考虑内层tag，跳过
+            pst_vlan_tag += 1;//??????????tag??????
         }
     }
-     /* 非vlan  的情况*/
+     /* ??vlan  ??????*/
     else
     {
         pst_vlan_tag = OAL_PTR_NULL;
@@ -2682,7 +2682,7 @@ oal_uint32 hmac_m2u_multicast_drop(hmac_vap_stru *pst_vap, oal_netbuf_stru *pst_
     mac_vlan_tag_stru      *pst_vlan_tag;
     hmac_m2u_stru          *pst_m2u = (hmac_m2u_stru *)(pst_vap->pst_m2u);
 
-    /* 未打开组转单播开关，直接返回不处理 */
+    /* ?????????????????????????????????? */
     if (OAL_FALSE == pst_m2u->en_snoop_enable)
     {
         OAM_WARNING_LOG1(pst_vap->st_vap_base_info.uc_vap_id, OAM_SF_M2U, "{hmac_m2u_multicast_drop::snoop is [%d] not enable}", pst_m2u->en_snoop_enable);
@@ -2691,24 +2691,24 @@ oal_uint32 hmac_m2u_multicast_drop(hmac_vap_stru *pst_vap, oal_netbuf_stru *pst_
     pst_ether_hdr  = (mac_ether_header_stru *)oal_netbuf_data(pst_buf);
 
 /*lint -e778*/
-      /* 带vlan tag 的情况*/
+      /* ??vlan tag ??????*/
     if (ETHER_IS_WITH_VLAN_TAG(pst_ether_hdr->us_ether_type))
     {
-        pst_vlan_tag = (mac_vlan_tag_stru*)(oal_netbuf_data(pst_buf) + (ETHER_ADDR_LEN << 1));  //偏移2个mac地址的长度,获取外层vlan tag
+        pst_vlan_tag = (mac_vlan_tag_stru*)(oal_netbuf_data(pst_buf) + (ETHER_ADDR_LEN << 1));  //????2??mac??????????,????????vlan tag
         pst_vlan_tag += 1;
-        if (ETHER_IS_WITH_VLAN_TAG(pst_vlan_tag->us_tpid))                  //双层tag的情况，内层tag不考虑
+        if (ETHER_IS_WITH_VLAN_TAG(pst_vlan_tag->us_tpid))                  //????tag????????????tag??????
         {
-            us_ether_data_type = *((oal_uint16*)(pst_vlan_tag + 1));        //跳过内层tag后获取eth  type
-            puc_ip_head = (oal_uint8*)(pst_vlan_tag + 1) + 2;               //跳过 type 和内层指向ip头起始地址
+            us_ether_data_type = *((oal_uint16*)(pst_vlan_tag + 1));        //????????tag??????eth  type
+            puc_ip_head = (oal_uint8*)(pst_vlan_tag + 1) + 2;               //???? type ??????????ip??????????
         }
         else
         {
-             us_ether_data_type = *((oal_uint16*)pst_vlan_tag);             //跳过tag后获取eth  type
-             puc_ip_head = (oal_uint8*)pst_vlan_tag + 2;                    //跳过 type 和tag指向ip头起始地址
+             us_ether_data_type = *((oal_uint16*)pst_vlan_tag);             //????tag??????eth  type
+             puc_ip_head = (oal_uint8*)pst_vlan_tag + 2;                    //???? type ??tag????ip??????????
         }
-        pst_vlan_tag -= 1;                                                  //指向外层tag，作为参数传递到下层
+        pst_vlan_tag -= 1;                                                  //????????tag????????????????????
     }
-     /* 非vlan  的情况*/
+     /* ??vlan  ??????*/
     else
     {
         puc_ip_head = (oal_uint8*)(pst_ether_hdr + 1);
@@ -2717,31 +2717,31 @@ oal_uint32 hmac_m2u_multicast_drop(hmac_vap_stru *pst_vap, oal_netbuf_stru *pst_
     }
 /*lint +e778*/
 
-    /* 异频组播转发开关未打开 */
+    /* ?????????????????????? */
     if (OAL_FALSE == pst_m2u->en_frequency_enable)
     {
-        /* 异频组播转发关闭，不满足智能家居单品特征 */
+        /* ???????????????????????????????????????? */
         if ((OAL_FALSE == hmac_m2u_sa_is_hwsmart(us_ether_data_type, puc_ip_head)) && (pst_m2u->en_discard_mcast))
         {
            return HMAC_TX_DROP_NOSMART;
         }
     }
-    /* 异频组播转发开关打开 */
+    /* ???????????????????? */
     else
     {
-        /* 组播报文属于异频转发 */
+        /* ???????????????????? */
         if (hmac_m2u_multicast_is_frequency(pst_vap, pst_ether_hdr->auc_ether_shost))
         {
-            /* 组播报文来源STA不在配网模式 */
+            /* ????????????STA???????????? */
             if (((OAL_FALSE == pst_m2u->en_adaptive_enable) || (OAL_FALSE == hmac_m2u_sta_is_adaptive(pst_vap, pst_ether_hdr->auc_ether_shost, pst_vlan_tag))) && (pst_m2u->en_discard_mcast))
             {
                 return HMAC_TX_DROP_NOADAP;
             }
         }
-        /* 组播报文不属于异频转发 */
+        /* ?????????????????????? */
         else
         {
-            /* 组播报文不属于异频转发,不满足智能家居单品特征 */
+            /* ??????????????????????,?????????????????????? */
             if ((OAL_FALSE == hmac_m2u_sa_is_hwsmart(us_ether_data_type, puc_ip_head)) && (pst_m2u->en_discard_mcast))
             {
                 return HMAC_TX_DROP_NOSMART;
@@ -2767,7 +2767,7 @@ oal_uint32  hmac_m2u_remove_old_sta(oal_void *p_arg)
         return OAL_FAIL;
     }
 
-    /* 遍历配网STA组链表，找到地址匹配的配网STA */
+    /* ????????STA??????????????????????????STA */
     for (ul_loop = 0; ul_loop < HMAC_M2U_ADAPTIVE_STA_HASHSIZE; ul_loop++)
     {
         OAL_DLIST_SEARCH_FOR_EACH_SAFE(pst_sta_list_entry, pst_sta_list_entry_temp, &(pst_m2u->ast_m2u_adaptive_hash[ul_loop]))
@@ -2840,7 +2840,7 @@ oal_void hmac_m2u_attach(hmac_vap_stru *pst_hmac_vap)
     pst_snp_list = &(pst_m2u->st_m2u_snooplist);
 
     oal_memset(pst_m2u, 0, OAL_SIZEOF(hmac_m2u_stru));
-    /* 启动定时器 */
+    /* ?????????? */
     FRW_TIMER_CREATE_TIMER(&(pst_m2u->st_snooplist_timer),
                            hmac_m2u_time_fn,
                            HMAC_DEF_M2U_TIMER,
@@ -2857,14 +2857,14 @@ oal_void hmac_m2u_attach(hmac_vap_stru *pst_hmac_vap)
     else
 #endif
     {
-        pst_m2u->en_snoop_enable = OAL_TRUE;  /* 默认使能，组播转发时需要根据snoop表确认是否有用户再转发 */
+        pst_m2u->en_snoop_enable = OAL_TRUE;  /* ????????????????????????????snoop?????????????????????? */
 #ifdef _PRE_WLAN_FEATURE_HERA_MCAST
-        pst_m2u->en_adaptive_enable  = OAL_TRUE;  /* 配网模式识别默认使能 */
-        pst_m2u->en_frequency_enable = OAL_TRUE;  /* 异频组播转发默认使能 */
+        pst_m2u->en_adaptive_enable  = OAL_TRUE;  /* ???????????????????? */
+        pst_m2u->en_frequency_enable = OAL_TRUE;  /* ???????????????????? */
 #endif
     }
 #ifdef _PRE_WLAN_FEATURE_HERA_MCAST
-        /* 启动配网老化定时器 */
+        /* ?????????????????? */
     FRW_TIMER_CREATE_TIMER(&(pst_m2u->st_adaptivelist_timer),
                                hmac_m2u_remove_old_sta,
                                1000,
@@ -2879,13 +2879,13 @@ oal_void hmac_m2u_attach(hmac_vap_stru *pst_hmac_vap)
     pst_m2u->ul_adaptive_timeout      = HMAC_DEF_ADAPTIVE_TIMEOUT;
     pst_m2u->uc_adaptive_num          = HMAC_DEF_NUM_OF_ADAPTIVE;
 #endif
-    /* 特殊业务组播 IPV4 */
+    /* ???????????? IPV4 */
     pst_snp_list->aul_special_group_ipv4[0]= HMAC_M2U_SPECIAL_GROUP1;     /* 224.0.0.1 */
     pst_snp_list->aul_special_group_ipv4[1]= HMAC_M2U_SPECIAL_GROUP2;     /* 224.0.0.2 */
     pst_snp_list->aul_special_group_ipv4[2]= HMAC_M2U_RIPV2_GROUP;        /* 224.0.0.9 */
     pst_snp_list->aul_special_group_ipv4[3]= HMAC_M2U_SPECIAL_GROUP3;     /* 224.0.0.22 */
     pst_snp_list->aul_special_group_ipv4[4]= HMAC_M2U_UPNP_GROUP;         /* 239.255.255.250 */
-    /* 特殊业务组播 IPV6 */
+    /* ???????????? IPV6 */
     /*IPV6 ff02::1*/
     oal_memset(pst_snp_list->aul_special_group_ipv6[0],  0, OAL_IPV6_ADDR_SIZE);
     pst_snp_list->aul_special_group_ipv6[0][0]  = 0xff;
@@ -2919,15 +2919,15 @@ oal_void hmac_m2u_attach(hmac_vap_stru *pst_hmac_vap)
     pst_m2u->en_discard_mcast         = OAL_TRUE;
     pst_m2u->ul_timeout               = HMAC_DEF_M2U_TIMEOUT;
 
-    pst_m2u->en_mcast_mode            = HMAC_M2U_MCAST_TRANSLATE;  /*默认打开组播转单播开关*/
+    pst_m2u->en_mcast_mode            = HMAC_M2U_MCAST_TRANSLATE;  /*??????????????????????*/
 
-    /*永久组播组(224.0.0.0~224.0.0.255)中的组播已加入到组播黑名单；不在此范围中的组播组，添加到aul_deny_group*/
-    pst_snp_list->uc_deny_count_ipv4  = DEFAULT_IPV4_DENY_GROUP_COUNT; /*默认额外添加1个组播为黑名单*/
+    /*??????????(224.0.0.0~224.0.0.255)????????????????????????????????????????????????????????aul_deny_group*/
+    pst_snp_list->uc_deny_count_ipv4  = DEFAULT_IPV4_DENY_GROUP_COUNT; /*????????????1??????????????*/
     pst_snp_list->aul_deny_group[0]   = HMAC_M2U_DENY_GROUP;       /* 239.255.255.1 */
 
     pst_snp_list->uc_deny_count_ipv6  = DEFAULT_IPV6_DENY_GROUP_COUNT;
     oal_memset(pst_snp_list->aul_deny_group_ipv6[0],  0, OAL_IPV6_ADDR_SIZE);
-    pst_snp_list->aul_deny_group_ipv6[0][0]  = 0xff;/*IPV6 LLMNR协议ff02::1:3*/
+    pst_snp_list->aul_deny_group_ipv6[0][0]  = 0xff;/*IPV6 LLMNR????ff02::1:3*/
     pst_snp_list->aul_deny_group_ipv6[0][1]  = 0x2;
     pst_snp_list->aul_deny_group_ipv6[0][13] = 0x1;
     pst_snp_list->aul_deny_group_ipv6[0][15] = 0x3;

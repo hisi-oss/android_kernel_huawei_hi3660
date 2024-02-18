@@ -222,7 +222,7 @@ extern VOS_UINT32 CSD_FidInit(enum VOS_INIT_PHASE_DEFINE enInitPhase);
 
 extern VOS_UINT32 TAF_AGENT_FidInit(enum VOS_INIT_PHASE_DEFINE enPhase);
 
-/* DSP 上移  */
+/* DSP ????  */
 extern VOS_UINT32 UPHY_APM_FidInit ( enum VOS_INIT_PHASE_DEFINE ip );
 extern VOS_UINT32 UPHY_UCOM_WphyFidInit ( enum VOS_INIT_PHASE_DEFINE ip );
 extern VOS_UINT32 UPHY_UCOM_GphyFidInit ( enum VOS_INIT_PHASE_DEFINE ip );
@@ -234,7 +234,7 @@ extern VOS_UINT32 UPHY_UCOM_WmeasFidInit(enum VOS_INIT_PHASE_DEFINE InitPhrase);
 extern VOS_UINT32 UPHY_INIT_FidInit ( enum VOS_INIT_PHASE_DEFINE ip );
 extern VOS_UINT32 RCM_DRV_FidInit ( enum VOS_INIT_PHASE_DEFINE ip );
 
-/* DSP 上移 end */
+/* DSP ???? end */
 
 /* Voice in ACPU start */
 extern VOS_UINT32 VOICE_NormalFidInit(enum VOS_INIT_PHASE_DEFINE enInitPhrase);
@@ -333,7 +333,7 @@ extern VOS_UINT32 EDA_FidInit (enum VOS_INIT_PHASE_DEFINE ip);
 #endif
 
 /************************* MACRO & TYPE DEFINITION ***************************/
-/* VOS编程模式下的用户模块划分信息 */
+/* VOS???????????????????????????? */
 #if (OSA_CPU_CCPU == VOS_OSA_CPU)
 BEGIN_FID_DEFINITION()
 /* add your FID here, e.g.
@@ -581,9 +581,9 @@ END_FID_DEFINITION()
 
 #endif
 
-/* 为了和MAPS2000兼容, 暂时转定义下述PID */
+/* ??????MAPS2000????, ??????????????PID */
 #define WUEPS_PID_RRCF                  WUEPS_PID_WRR
-/* GU NAS PID转定义 */
+/* GU NAS PID?????? */
 #define WUEPS_PID_LMM                   PS_PID_MM
 #define WUEPS_PID_ESM                   PS_PID_ESM
 #define PS_PID_APP                      PS_PID_OM

@@ -213,7 +213,7 @@ OAL_STATIC oal_int32 oal_sdio_power_action(hcc_bus *pst_bus, HCC_BUS_POWER_ACTIO
         oal_wlan_gpio_intr_enable_etc(HBUS_TO_DEV(pst_bus), OAL_FALSE);
         hcc_disable_etc(HBUS_TO_HCC(pst_bus), OAL_TRUE);
 #ifdef CONFIG_MMC
-        /*下电之前关闭 SDIO HOST 控制器时钟*/
+        /*???????????? SDIO HOST ??????????*/
         mmc_power_save_host(hi_sdio->func->card->host);
 #endif
     }
@@ -226,7 +226,7 @@ OAL_STATIC oal_int32 oal_sdio_power_action(hcc_bus *pst_bus, HCC_BUS_POWER_ACTIO
         hcc_bus_disable_state(pst_bus, OAL_BUS_STATE_ALL);
         /*close sdio master*/
 #ifdef CONFIG_MMC
-        /*关闭 SDIO HOST 控制器时钟, 此时slave已经下电*/
+        /*???? SDIO HOST ??????????, ????slave????????*/
         mmc_power_save_host(hi_sdio->func->card->host);
 #endif
 
@@ -247,10 +247,10 @@ OAL_STATIC oal_int32 oal_sdio_power_action(hcc_bus *pst_bus, HCC_BUS_POWER_ACTIO
 
     if(HCC_BUS_POWER_PATCH_LAUCH == action)
     {
-        /*Patch下载完后 初始化通道资源，然后等待业务初始化完成*/
+        /*Patch???????? ??????????????????????????????????????*/
         oal_wlan_gpio_intr_enable_etc(HBUS_TO_DEV(pst_bus), OAL_TRUE);
 
-        /*第一个中断有可能在中断使能之前上报，强制调度一次RX Thread*/
+        /*????????????????????????????????????????????????RX Thread*/
         up(&pst_bus->rx_sema);
 
         if(0 == oal_wait_for_completion_timeout(&pst_bus->st_device_ready, (oal_uint32)OAL_MSECS_TO_JIFFIES(HOST_WAIT_BOTTOM_INIT_TIMEOUT)))
@@ -266,7 +266,7 @@ OAL_STATIC oal_int32 oal_sdio_power_action(hcc_bus *pst_bus, HCC_BUS_POWER_ACTIO
             }
             else
             {
-                /*强制调度成功，说明有可能是GPIO中断未响应*/
+                /*??????????????????????????GPIO??????????*/
                 oal_print_hi11xx_log(HI11XX_LOG_WARN, KERN_WARNING"[E]retry succ, maybe gpio interrupt issue");
                 DECLARE_DFT_TRACE_KEY_INFO("sdio gpio int issue",OAL_DFT_TRACE_FAIL);
             }
@@ -327,7 +327,7 @@ oal_int32 sdio_dev_init_etc(struct sdio_func *func)
         oal_print_hi11xx_log(HI11XX_LOG_ERR, "failed to set sdio blk size! ret=%d", ret);
     }
 
-	/*func 1 enable 之后, device 发的消息会被这里清掉*/
+	/*func 1 enable ????, device ????????????????????*/
 #if 0
     /* before enable sdio function 1, clear its interrupt flag, no matter it exist or not */
     oal_sdio_writeb(func, HISDIO_FUNC1_INT_MASK, HISDIO_REG_FUNC1_INT_STATUS, &ret);
@@ -374,14 +374,14 @@ oal_int32 oal_sdio_shutdown_pre_respone(oal_void* data)
 oal_int32 oal_sdio_switch_clean_res(hcc_bus* pst_bus)
 {
     oal_int32 ret;
-    /*清空SDIO 通道，通知Device关闭发送通道，
-      等待DMA完成所有传输后返回*/
+    /*????SDIO ??????????Device??????????????
+      ????DMA??????????????????*/
 
     struct oal_sdio* hi_sdio = (struct oal_sdio*)pst_bus->data;
 
     OAL_INIT_COMPLETION(&hi_sdio->st_sdio_shutdown_response);
 
-    /*清理SDIO聚合报文*/
+    /*????SDIO????????*/
     hcc_restore_assemble_netbuf_list(HBUS_TO_HCC(pst_bus));
 
     ret = oal_sdio_send_msg_etc(pst_bus, H2D_MSG_SHUTDOWN_IP_PRE);
@@ -415,7 +415,7 @@ oal_int32 oal_sdio_reinit(hcc_bus* pst_bus)
     time_start = ktime_get();
 
     oal_print_hi11xx_log(HI11XX_LOG_INFO, "wake_sema_count=%d", pst_bus->sr_wake_sema.count);
-    sema_init(&pst_bus->sr_wake_sema, 1);/*S/R信号量*/
+    sema_init(&pst_bus->sr_wake_sema, 1);/*S/R??????*/
 
     ret = mmc_power_save_host(hi_sdio->func->card->host);
     hi_sdio->func->card->host->pm_flags &= ~MMC_PM_KEEP_POWER;
@@ -652,7 +652,7 @@ OAL_STATIC OAL_INLINE oal_int32 oal_sdio_msg_stat(struct oal_sdio *hi_sdio, oal_
     }
 #ifdef CONFIG_SDIO_D2H_MSG_ACK
     /*read from old register*/
-    /*当使用0x30寄存器时需要下发CMD52读0x2B 才会产生HOST2ARM ACK中断*/
+    /*??????0x30????????????????CMD52??0x2B ????????HOST2ARM ACK????*/
     (void)oal_sdio_readb(hi_sdio->func, HISDIO_REG_FUNC1_MSG_HIGH_FROM_DEV, &ret);
     if (ret)
     {
@@ -709,7 +709,7 @@ oal_int32 oal_sdio_msg_irq_etc(struct oal_sdio *hi_sdio)
     oal_sdio_release_host(hi_sdio);
     hcc_bus_rx_transfer_unlock(hi_sdio->pst_bus);
 
-    /*优先处理Panic消息*/
+    /*????????Panic????*/
     if(test_and_clear_bit(D2H_MSG_DEVICE_PANIC, &msg64))
     {
         bit = D2H_MSG_DEVICE_PANIC;
@@ -798,7 +798,7 @@ oal_int32 oal_sdio_extend_buf_get(struct oal_sdio *hi_sdio)
 			                    HISDIO_COMM_REG_SEQ_GET(hi_sdio->sdio_extend->credit_info));
             oal_print_hex_dump((oal_void*)hi_sdio->sdio_extend,sizeof(struct hisdio_extend_func),32,"extend :");
 
-            /* 此credit更新只在调试时使用 */
+            /* ??credit?????????????????? */
             if(oal_sdio_credit_info_update_etc(hi_sdio))
             {
                 if(OAL_LIKELY(hi_sdio->credit_update_cb))
@@ -2432,7 +2432,7 @@ oal_int32 oal_sdio_transfer_rebuild_sglist(struct oal_sdio *hi_sdio,
 #if defined(CONFIG_HISDIO_H2D_SCATT_LIST_ASSEMBLE)
     if(SDIO_WRITE == rw)
     {
-        /*发送内存拷贝，合并成一块内存*/
+        /*????????????????????????????*/
         skb_queue_walk_safe(head, netbuf, tmp)
         {
             oal_memcopy(hi_sdio->tx_scatt_buff.buff + offset, OAL_NETBUF_DATA(netbuf), OAL_NETBUF_LEN(netbuf));
@@ -2441,7 +2441,7 @@ oal_int32 oal_sdio_transfer_rebuild_sglist(struct oal_sdio *hi_sdio,
 
         align_t = HISDIO_ALIGN_4_OR_BLK(offset);
         align_len = align_t - offset;
-        offset = align_t;/*对齐长度用内存填充*/
+        offset = align_t;/*??????????????????*/
 
         /*build tx sg list*/
         left_size = offset;
@@ -2481,7 +2481,7 @@ oal_int32 oal_sdio_transfer_rebuild_sglist(struct oal_sdio *hi_sdio,
 
         align_t = HISDIO_ALIGN_4_OR_BLK(offset);
         align_len = align_t - offset;
-        offset = align_t;/*对齐长度用内存填充*/
+        offset = align_t;/*??????????????????*/
 
         /*build rx sg list*/
         left_size = offset;
@@ -2551,7 +2551,7 @@ oal_int32 oal_sdio_transfer_restore_sglist(struct oal_sdio *hi_sdio,
 
     if(SDIO_READ == rw)
     {
-        /*接收内存拷贝，分散成离散内存*/
+        /*????????????????????????????*/
         skb_queue_walk_safe(head, netbuf, tmp)
         {
             oal_memcopy(OAL_NETBUF_DATA(netbuf), hi_sdio->rx_scatt_buff.buff + offset,  OAL_NETBUF_LEN(netbuf));
@@ -2715,7 +2715,7 @@ OAL_STATIC oal_int32 oal_sdio_suspend(struct device *dev)
 
     if(hi_sdio->pst_bus != HDEV_TO_HBUS(HBUS_TO_DEV(hi_sdio->pst_bus)))
     {
-        /*sdio非当前接口*/
+        /*sdio??????????*/
         oal_print_hi11xx_log(HI11XX_LOG_INFO, "sdio is not current bus, return");
         return OAL_SUCC;
     }
@@ -2780,7 +2780,7 @@ OAL_STATIC oal_int32 oal_sdio_resume(struct device *dev)
 
     if(hi_sdio->pst_bus != HDEV_TO_HBUS(HBUS_TO_DEV(hi_sdio->pst_bus)))
     {
-        /*sdio非当前接口*/
+        /*sdio??????????*/
         oal_print_hi11xx_log(HI11XX_LOG_INFO, "sdio is not current bus, return");
         return OAL_SUCC;
     }
@@ -2908,7 +2908,7 @@ OAL_STATIC oal_int32 oal_sdio_trigger_probe(oal_void)
         oal_sdio_claim_host(_hi_sdio_);
         hcc_bus_disable_state(_hi_sdio_->pst_bus, OAL_BUS_STATE_ALL);
 #ifndef HAVE_HISI_NFC
-        /*等到读取完nfc低电的log数据再拉低GPIO*/
+        /*??????????nfc??????log??????????GPIO*/
         //oal_sdio_power_action(_hi_sdio_->pst_bus, 0);
         hi_wlan_power_set_etc(0);
 #endif
@@ -2968,7 +2968,7 @@ oal_int32 oal_sdio_func_probe(struct oal_sdio* hi_sdio)
     oal_sdio_claim_host(hi_sdio);
     hcc_bus_disable_state(hi_sdio->pst_bus, OAL_BUS_STATE_ALL);
 #ifndef HAVE_HISI_NFC
-    /*等到读取完nfc低电的log数据再拉低GPIO*/
+    /*??????????nfc??????log??????????GPIO*/
     hi_wlan_power_set_etc(0);
 #endif
     oal_sdio_release_host(hi_sdio);
@@ -3425,7 +3425,7 @@ OAL_STATIC oal_int32 oal_sdio_gpio_irq(hcc_bus *hi_bus, oal_int32 irq)
 
     if(0 == ul_state)
     {
-        /*0==HOST_DISALLOW_TO_SLEEP表示不允许休眠*/
+        /*0==HOST_DISALLOW_TO_SLEEP??????????????*/
         hi_bus->data_int_count++;
 
         oal_print_hi11xx_log(HI11XX_LOG_DBG, "Gpio Rx Data Interrupt.");
@@ -3435,7 +3435,7 @@ OAL_STATIC oal_int32 oal_sdio_gpio_irq(hcc_bus *hi_bus, oal_int32 irq)
     }
     else
     {
-        /*1==HOST_ALLOW_TO_SLEEP表示当前是休眠，唤醒host*/
+        /*1==HOST_ALLOW_TO_SLEEP????????????????????host*/
         if(OAL_WARN_ON(!hi_bus->pst_pm_callback->pm_wakeup_host))
         {
             oal_print_hi11xx_log(HI11XX_LOG_DBG, "%s error:hi_bus->pst_pm_callback->pm_wakeup_host is null",__FUNCTION__);

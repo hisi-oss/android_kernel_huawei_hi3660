@@ -84,7 +84,7 @@ VOS_UINT32 msp_ServiceProc(SOCP_DECODER_DST_ENUM_U32 enChanID,VOS_UINT8 *pucData
 
     diag_PTR(EN_DIAG_PTR_MSP_SERVICE_1);
 
-    /*入参检查*/
+    /*????????*/
     if(pucData == VOS_NULL)
     {
         diag_PTR(EN_DIAG_PTR_MSP_SERVICE_ERR1);
@@ -107,7 +107,7 @@ VOS_UINT32 msp_ServiceProc(SOCP_DECODER_DST_ENUM_U32 enChanID,VOS_UINT8 *pucData
 
     VOS_MemCpy_s(pData, ulTotalLen, pucData,ulSize);
 
-    /*回卷指针可能为空*/
+    /*????????????????*/
     if((VOS_NULL != pucRBData)&&(0 != ulRBSize))
     {
         VOS_MemCpy_s(pData+ulSize, ulTotalLen - ulSize, pucRBData,ulRBSize);

@@ -72,11 +72,11 @@ extern "C" {
 #define ACCESS_REGISTER_FN_SUB_ID_DDR_MODEM_SEC (0x55bbcce9UL)
 #define ACCESS_REGISTER_FN_MAIN_ID              (0xc500aa01UL)
 
-/* DIAG给TL-PHY发消息的MsgID */
+/* DIAG??TL-PHY????????MsgID */
 #define MSG_ID_DIAG2TLPHY_CHAN_ADDR_INFO         0x30002404
 
-#define SOCP_STOP_CMD                            0   /* 收到工具下发finish命令停止socp数采通道 */
-#define SOCP_STOP_TIMER                          1   /* SOCP数采通道定时器超时停止 */
+#define SOCP_STOP_CMD                            0   /* ????????????finish????????socp???????? */
+#define SOCP_STOP_TIMER                          1   /* SOCP?????????????????????? */
 
 /*****************************************************************************
   3 Massage Declare
@@ -92,7 +92,7 @@ extern "C" {
    5 STRUCT
 *****************************************************************************/
 /*****************************************************************************
-描述 :
+???? :
 ID   : DIAG_CMD_DRX_SAMPLE_REG_WR
 REQ : DIAG_CMD_DRX_SAMPLE_REG_WR_REQ_STRU
 CNF : DIAG_CMD_DRX_SAMPLE_REG_WR_CNF_STRU
@@ -108,23 +108,23 @@ typedef struct
 
 typedef struct
 {
-    VOS_UINT32  ulAuid;                     /* 原AUID*/
-    VOS_UINT32  ulSn;                       /* HSO分发，插件命令管理*/
-    VOS_UINT32   ulRet;  /*命令执行返回值，成功返回0，失败返回-1*/
+    VOS_UINT32  ulAuid;                     /* ??AUID*/
+    VOS_UINT32  ulSn;                       /* HSO??????????????????*/
+    VOS_UINT32   ulRet;  /*????????????????????????0??????????-1*/
 } DIAG_CMD_DRX_SAMPLE_REG_WR_CNF_STRU;
 
 typedef struct
 {
-    VOS_UINT32  ulAuid;                     /* 原AUID*/
-    VOS_UINT32  ulSn;                       /* HSO分发，插件命令管理*/
+    VOS_UINT32  ulAuid;                     /* ??AUID*/
+    VOS_UINT32  ulSn;                       /* HSO??????????????????*/
     VOS_UINT32   ulDrxSampleType;
     VOS_UINT32   ulDrxSampleAddr;
-    VOS_UINT32   ulRet;  /*命令执行返回值，成功返回0，失败返回-1*/
+    VOS_UINT32   ulRet;  /*????????????????????????0??????????-1*/
 } DIAG_CMD_DRX_SAMPLE_GET_ADDR_CNF_STRU;
 
 
 /*****************************************************************************
-描述 : 配置SOCP 基地址
+???? : ????SOCP ??????
 ID   : DIAG_CMD_DRX_SAMPLE_REG_WR
 REQ : DIAG_CMD_DRX_SAMPLE_CFG_CHNADDR_REQ_STRU
 CNF : DIAG_CMD_DRX_SAMPLE_CFG_CHNADDR_CNF_STRU
@@ -139,11 +139,11 @@ typedef struct
 
 typedef struct
 {
-    VOS_UINT32  ulAuid;                     /* 原AUID*/
-    VOS_UINT32  ulSn;                       /* HSO分发，插件命令管理*/
+    VOS_UINT32  ulAuid;                     /* ??AUID*/
+    VOS_UINT32  ulSn;                       /* HSO??????????????????*/
 	VOS_UINT8   ulProductName[DIAG_PRODUCT_VERSION_LENGTH];
 	VOS_UINT8   ulSolutiongName[DIAG_PRODUCT_VERSION_LENGTH];
-    VOS_UINT32   ulRet;  /*命令执行返回值，成功返回0，失败返回-1*/
+    VOS_UINT32   ulRet;  /*????????????????????????0??????????-1*/
 } DIAG_CMD_DRX_SAMPLE_GET_VERSION_CNF_STRU;
 
 
@@ -154,20 +154,20 @@ typedef enum
 	SOCP_BBP_DMA_LOG_COM_CHNSIZE = 0x2000,
 }DIAG_SOCP_SAMPLE_CHNSIZE_E;
 
-/* DIAG_CMD_DRX_DATA_SAMPLE_REG_WR_REQ命令对应的CNF，底软Sleep模块接收到该命令后即可返回成功*/
+/* DIAG_CMD_DRX_DATA_SAMPLE_REG_WR_REQ??????????CNF??????Sleep??????????????????????????????*/
 typedef struct
 {
-    VOS_UINT32  ulAuid;                     /* 原AUID*/
-    VOS_UINT32  ulSn;                       /* HSO分发，插件命令管理*/
-    VOS_UINT32   ulChnType;  /*通道类型*/
-    VOS_UINT32   ulChnAddr;  /*通道内存起始地址*/
-	VOS_UINT32   ulChnSize;  /*通道大小*/
-    VOS_UINT32   ulRet;      /*命令执行返回值，成功返回0，失败返回-1*/
+    VOS_UINT32  ulAuid;                     /* ??AUID*/
+    VOS_UINT32  ulSn;                       /* HSO??????????????????*/
+    VOS_UINT32   ulChnType;  /*????????*/
+    VOS_UINT32   ulChnAddr;  /*????????????????*/
+	VOS_UINT32   ulChnSize;  /*????????*/
+    VOS_UINT32   ulRet;      /*????????????????????????0??????????-1*/
 } DIAG_CMD_DRX_SAMPLE_GET_CHNSIZE_CNF_STRU;
 
 
 /*****************************************************************************
-描述 : 使能SOCP 通道
+???? : ????SOCP ????
 ID   : DIAG_CMD_DRX_SAMPLE_REG_WR
 REQ : DIAG_CMD_DRX_SAMPLE_ABLE_CHN_REQ_STRU
 CNF : DIAG_CMD_DRX_SAMPLE_ABLE_CHN_CNF_STRU
@@ -186,17 +186,17 @@ typedef struct
 
 typedef struct
 {
-    VOS_UINT32  ulAuid;                     /* 原AUID*/
-    VOS_UINT32  ulSn;                       /* HSO分发，插件命令管理*/
-    VOS_UINT32   ulRet;  /*命令执行返回值，成功返回0，失败返回-1*/
+    VOS_UINT32  ulAuid;                     /* ??AUID*/
+    VOS_UINT32  ulSn;                       /* HSO??????????????????*/
+    VOS_UINT32   ulRet;  /*????????????????????????0??????????-1*/
 } DIAG_CMD_DRX_SAMPLE_ABLE_CHN_CNF_STRU;
 
 
 typedef struct
 {
-    VOS_UINT32  ulAuid;                     /* 原AUID*/
-    VOS_UINT32  ulSn;                       /* HSO分发，插件命令管理*/
-    VOS_UINT32   ulRet;  /*命令执行返回值，成功返回0，失败返回-1*/
+    VOS_UINT32  ulAuid;                     /* ??AUID*/
+    VOS_UINT32  ulSn;                       /* HSO??????????????????*/
+    VOS_UINT32   ulRet;  /*????????????????????????0??????????-1*/
 } DIAG_CMD_DRX_SAMPLE_COMM_CNF_STRU;
 
 typedef VOS_UINT32 (*DIAG_BBP_PROC)(DIAG_FRAME_INFO_STRU * pData);
@@ -218,10 +218,10 @@ typedef struct
     VOS_UINT64      ulAddr;
 }DIAG_BBP_DS_ADDR_INFO_STRU;
 
-/* 核间透传通信结构体 */
+/* ?????????????????? */
 typedef struct
 {
-     VOS_MSG_HEADER                     /*VOS头 */
+     VOS_MSG_HEADER                     /*VOS?? */
      VOS_UINT32                         ulMsgId;
      DIAG_FRAME_INFO_STRU                 stInfo;
 }DIAG_BBP_MSG_A_TRANS_C_STRU;

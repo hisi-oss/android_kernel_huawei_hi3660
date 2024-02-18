@@ -58,7 +58,7 @@ extern "C" {
 
 
 /*
- *  NV ID 的添加按从小到大排列
+ *  NV ID ????????????????????
  */
 
 typedef enum
@@ -121,7 +121,7 @@ typedef enum
 	NV_ID_DRV_PAPOWER_UNIT  		   	   = 0xd13A,
 	NV_ID_DRV_FEM_SHARE_POWER              = 0xd13d,
 	NV_ID_DRV_DM_UART5_CFG				   = 0xd140,
-	/*0xd13b--0xd140nv id 在k3V3+中已使用，请勿再使用*/
+	/*0xd13b--0xd140nv id ??k3V3+????????????????????*/
 	NV_ID_DRV_MMC_FEATURE	               = 0xd141,
 	NV_ID_DRV_PA_RF_SWITCH                 = 0xd142,
 	NV_ID_DRV_DIALUP_ACSHELL			   = 0xd143,
@@ -151,7 +151,7 @@ typedef enum
 	NV_ID_DRV_ADC_NORMAL_CONVERT_CONFIG    = 0xd16a,
 	NV_ID_DRV_ADC_FACTORY_CONVERT_CONFIG   = 0xd16b,
 
-    /*按大小顺序添加*/
+    /*??????????????*/
     NV_ID_DRV_ID_MAX                       = 0xd1ff
 
 }NV_ID_DRV_ENUM;

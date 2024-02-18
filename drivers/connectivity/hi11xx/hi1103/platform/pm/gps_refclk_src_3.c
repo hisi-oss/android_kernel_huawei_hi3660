@@ -219,7 +219,7 @@ static int hi_gps_probe(struct platform_device *pdev)
     hi_gps_info_t = hi_gps_info;
 
 #ifdef CONFIG_HI110X_GPS_REFCLK_INTERFACE
-    /*lint -save -e611*/ /*屏蔽可疑强转告警*/
+    /*lint -save -e611*/ /*????????????????*/
     register_gps_set_ref_clk_func((void*)set_gps_ref_clk_enable_hi110x_etc);
     /*lint -restore*/
     printk(KERN_INFO "[GPS] gps register func pointer succ.\n");

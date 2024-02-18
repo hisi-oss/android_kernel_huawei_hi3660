@@ -9,7 +9,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "oal_ext_if.h"
 #include "oal_profiling.h"
@@ -111,7 +111,7 @@ extern "C" {
 #define MAX_EQUIPMENT_GET_ARGS_SIZE 300
 #endif
 #if (defined(CONFIG_BALONG_SPE) && defined(_PRE_WLAN_SPE_SUPPORT))
-#define WAL_MAX_SPE_PKT_NUM       512      /* SPE定义的发送和接收描述符以及对应的包的个数 */
+#define WAL_MAX_SPE_PKT_NUM       512      /* SPE???????????????????????????????????????? */
 extern oal_int32 wifi_spe_port_alloc(oal_net_device_stru *pst_netdev, struct spe_port_attr *pst_attr);
 extern void wifi_spe_port_free(oal_uint32 ul_port_num);
 #endif
@@ -123,23 +123,23 @@ extern void wifi_spe_port_free(oal_uint32 ul_port_num);
 #endif
 
 /*****************************************************************************
-  2 结构体定义
+  2 ??????????
 *****************************************************************************/
 typedef struct
 {
-    oal_int8                    *pc_country;          /* 国家字符串 */
-    mac_dfs_domain_enum_uint8    en_dfs_domain;       /* DFS 雷达标准 */
+    oal_int8                    *pc_country;          /* ?????????? */
+    mac_dfs_domain_enum_uint8    en_dfs_domain;       /* DFS ???????? */
 }wal_dfs_domain_entry_stru;
 
 typedef struct
 {
-    oal_uint32 ul_ap_max_user;                      /* ap最大用户数 */
-    oal_int8   ac_ap_mac_filter_mode[257];          /* AP mac地址过滤命令参数,最长256 */
-    oal_int32  l_ap_power_flag;                     /* AP上电标志 */
+    oal_uint32 ul_ap_max_user;                      /* ap?????????? */
+    oal_int8   ac_ap_mac_filter_mode[257];          /* AP mac????????????????,????256 */
+    oal_int32  l_ap_power_flag;                     /* AP???????? */
 }wal_ap_config_stru;
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 mac_rssi_cfg_table_stru g_ast_mac_rssi_config_table[] =
 {
@@ -183,7 +183,7 @@ hmac_car_cfg_table_stru g_ast_hmac_car_config_table[] =
 
 OAL_STATIC oal_proc_dir_entry_stru *g_pst_proc_entry = OAL_PTR_NULL;
 
-OAL_STATIC wal_ap_config_stru g_st_ap_config_info = {0};    /* AP配置信息,需要在vap 创建后下发的 */
+OAL_STATIC wal_ap_config_stru g_st_ap_config_info = {0};    /* AP????????,??????vap ???????????? */
 
 #if (_PRE_OS_VERSION_WIN32 == _PRE_OS_VERSION)
 /*Just For UT*/
@@ -236,9 +236,9 @@ OAL_STATIC struct notifier_block wal_hipriv_notifier_ipv6 = {
 #endif
 
 #ifdef _PRE_PLAT_FEATURE_CUSTOMIZE
-/* 每次上下电由配置vap完成的定制化只配置一次，wlan p2p iface不再重复配置 */
+/* ????????????????vap????????????????????????wlan p2p iface???????????? */
 OAL_STATIC oal_uint8 g_uc_cfg_once_flag = OAL_FALSE;
-/* TBD:后续可考虑开wifi时间只在staut或aput第一次上电时从ini配置文件中读取参数 */
+/* TBD:????????????wifi????????staut??aput??????????????ini?????????????????? */
 //OAL_STATIC oal_uint8 g_uc_cfg_flag = OAL_FALSE;
 #ifdef _PRE_WLAN_FEATURE_AUTO_FREQ
 extern host_speed_freq_level_stru g_host_speed_freq_level_etc[4];
@@ -250,7 +250,7 @@ extern oal_bool_enum_uint8 g_aen_tas_switch_en[];
 #endif
 
 #if (_PRE_OS_VERSION_WIN32 == _PRE_OS_VERSION) && (_PRE_TEST_MODE == _PRE_TEST_MODE_UT)
-/* UT模式下调用frw_event_process_all_event */
+/* UT??????????frw_event_process_all_event */
 extern oal_void  frw_event_process_all_event_etc(oal_uint ui_data);
 #endif
 
@@ -262,7 +262,7 @@ extern  hmac_dfr_info_stru    g_st_dfr_info_etc;
 extern OAL_CONST wal_hipriv_cmd_entry_stru  g_ast_hipriv_cmd_debug_etc[];
 #endif
 
-/* 静态函数声明 */
+/* ???????????? */
 OAL_STATIC oal_uint32  wal_hipriv_vap_log_level(oal_net_device_stru *pst_net_dev, oal_int8 *pc_param);
 OAL_STATIC oal_uint32  wal_hipriv_set_mcast_data_dscr_param(oal_net_device_stru *pst_net_dev, oal_int8 *pc_param);
 
@@ -611,8 +611,8 @@ extern oal_uint32  wal_hipriv_chip_check(oal_net_device_stru *pst_net_dev, oal_i
 extern oal_uint32  wal_hipriv_set_txpower(oal_net_device_stru *pst_net_dev, oal_int8 *pc_param);
 
 /*****************************************************************************
-  私有命令函数表. 私有命令格式:
-         设备名 命令名 参数
+  ??????????????. ????????????:
+         ?????? ?????? ????
   hipriv "Hisilicon0 create vap0"
 *****************************************************************************/
 /*Android private command strings*/
@@ -635,13 +635,13 @@ extern oal_uint32  wal_hipriv_set_txpower(oal_net_device_stru *pst_net_dev, oal_
 #define CMD_SET_STA_PM_ON       "SET_STA_PM_ON"
 
 #ifdef _PRE_WLAN_FEATURE_TAS_ANT_SWITCH
-/* TAS天线切换命令 */
+/* TAS???????????? */
 #define CMD_SET_MEMO_CHANGE     "SET_ANT_CHANGE"
-/* 测量天线 */
+/* ???????? */
 #define CMD_MEASURE_TAS_RSSI    "SET_TAS_MEASURE"
-/* 抬功率 */
+/* ?????? */
 #define CMD_SET_TAS_TXPOWER     "SET_TAS_TXPOWER"
-/* 获取天线 */
+/* ???????? */
 #define CMD_TAS_GET_ANT         "TAS_GET_ANT"
 #endif
 
@@ -751,175 +751,175 @@ oal_int8 *g_pac_mib_operation_cmd_name[] =
 
 OAL_STATIC OAL_CONST wal_hipriv_cmd_entry_stru  g_ast_hipriv_cmd[] =
 {
-    /************************商用对外发布的私有命令*******************/
-    {"info",                    wal_hipriv_vap_info_etc},               /* 打印vap的所有参数信息: hipriv "vap0 info" */
-    {"setcountry",              wal_hipriv_setcountry},             /*设置国家码命令 hipriv "Hisilicon0 setcountry param"param取值为大写的国家码字，例如 CN US*/
-    {"getcountry",              wal_hipriv_getcountry},             /*查询国家码命令 hipriv "Hisilicon0 getcountry"*/
+    /************************??????????????????????*******************/
+    {"info",                    wal_hipriv_vap_info_etc},               /* ????vap??????????????: hipriv "vap0 info" */
+    {"setcountry",              wal_hipriv_setcountry},             /*?????????????? hipriv "Hisilicon0 setcountry param"param?????????????????????????? CN US*/
+    {"getcountry",              wal_hipriv_getcountry},             /*?????????????? hipriv "Hisilicon0 getcountry"*/
 #ifdef _PRE_WLAN_FEATURE_GREEN_AP
-    {"green_ap_en",             wal_hipriv_green_ap_en},            /* green AP开关: hipriv "wlan0 green_ap_en 0 | 1" */
+    {"green_ap_en",             wal_hipriv_green_ap_en},            /* green AP????: hipriv "wlan0 green_ap_en 0 | 1" */
 #endif
 #ifdef _PRE_WLAN_FEATURE_IP_FILTER
-    {"ip_filter",               wal_hipriv_set_ip_filter_etc},          /* ip filter(功能调试接口)hipriv "wlan0 ip_filter cmd param0 param1 ...."
-                                                                       举例:启动功能 "wlan0 ip_filter set_rx_filter_enable 1/0"
-                                                                           清空黑名单 "wlan0 ip_filter clear_rx_filters"
-                                                                           设置黑名单 "wlan0 ip_filter add_rx_filter_items 条目个数(0/1/2...) 名单内容(protocol0 port0 protocol1 port1...)",目前该调试接口仅支持20对条目
+    {"ip_filter",               wal_hipriv_set_ip_filter_etc},          /* ip filter(????????????)hipriv "wlan0 ip_filter cmd param0 param1 ...."
+                                                                       ????:???????? "wlan0 ip_filter set_rx_filter_enable 1/0"
+                                                                           ?????????? "wlan0 ip_filter clear_rx_filters"
+                                                                           ?????????? "wlan0 ip_filter add_rx_filter_items ????????(0/1/2...) ????????(protocol0 port0 protocol1 port1...)",????????????????????20??????
                                                                     */
 #endif //_PRE_WLAN_FEATURE_IP_FILTER
 
-    {"userinfo",                wal_hipriv_user_info},              /* 打印指定mac地址user的所有参数信息: hipriv "vap0 userinfo XX XX XX XX XX XX(16进制oal_strtohex)" */
-    {"reginfo",                 wal_hipriv_reg_info},               /* 打印寄存器信息: hipriv "Hisilicon0 reginfo 16|32(51没有16位寄存器读取功能) regtype(soc/mac/phy) startaddr endaddr" */
-    {"pcie_pm_level",           wal_hipriv_pcie_pm_level},          /* 设置pcie低功耗级别 hipriv "Hisilicon0 pcie_pm_level level(01/2/3/4)" */
-    {"regwrite",                wal_hipriv_reg_write},              /* 打印寄存器信息: hipriv "Hisilicon0 regwrite 32/16(51没有16位写寄存器功能) regtype(soc/mac/phy) addr val" addr val必须都是16进制0x开头 */
-    {"dump_all_dscr",           wal_hipriv_dump_all_rx_dscr},       /* 打印所有的接收描述符, hipriv "Hisilicon0 dump_all_dscr" */
-    {"random_mac_addr_scan",    wal_hipriv_set_random_mac_addr_scan}, /* 设置随机mac addr扫描开关，sh hipriv.sh "Hisilicon0 random_mac_addr_scan 0|1(打开|关闭)" */
-    {"bgscan_enable",           wal_hipriv_bgscan_enable},        /* 扫描停止测试命令 hipriv "Hisilicon0 bgscan_enable param1" param1取值'0' '1',对应关闭和打开背景扫描, '2' 表示关闭所有扫描 */
-    {"2040_coexistence",        wal_hipriv_set_2040_coext_support},                /* 设置20/40共存使能: hipriv "vap0 2040_coexistence 0|1" 0表示20/40MHz共存使能，1表示20/40MHz共存不使能 */
+    {"userinfo",                wal_hipriv_user_info},              /* ????????mac????user??????????????: hipriv "vap0 userinfo XX XX XX XX XX XX(16????oal_strtohex)" */
+    {"reginfo",                 wal_hipriv_reg_info},               /* ??????????????: hipriv "Hisilicon0 reginfo 16|32(51????16????????????????) regtype(soc/mac/phy) startaddr endaddr" */
+    {"pcie_pm_level",           wal_hipriv_pcie_pm_level},          /* ????pcie?????????? hipriv "Hisilicon0 pcie_pm_level level(01/2/3/4)" */
+    {"regwrite",                wal_hipriv_reg_write},              /* ??????????????: hipriv "Hisilicon0 regwrite 32/16(51????16??????????????) regtype(soc/mac/phy) addr val" addr val????????16????0x???? */
+    {"dump_all_dscr",           wal_hipriv_dump_all_rx_dscr},       /* ????????????????????, hipriv "Hisilicon0 dump_all_dscr" */
+    {"random_mac_addr_scan",    wal_hipriv_set_random_mac_addr_scan}, /* ????????mac addr??????????sh hipriv.sh "Hisilicon0 random_mac_addr_scan 0|1(????|????)" */
+    {"bgscan_enable",           wal_hipriv_bgscan_enable},        /* ???????????????? hipriv "Hisilicon0 bgscan_enable param1" param1????'0' '1',??????????????????????, '2' ???????????????? */
+    {"2040_coexistence",        wal_hipriv_set_2040_coext_support},                /* ????20/40????????: hipriv "vap0 2040_coexistence 0|1" 0????20/40MHz??????????1????20/40MHz?????????? */
 
 #ifdef _PRE_WLAN_FEATURE_STA_PM
-    {"set_ps_mode",             wal_hipriv_sta_ps_mode},           /* 设置PSPOLL能力 sh hipriv.sh 'wlan0 set_ps_mode 3'*/
+    {"set_ps_mode",             wal_hipriv_sta_ps_mode},           /* ????PSPOLL???? sh hipriv.sh 'wlan0 set_ps_mode 3'*/
 #ifdef _PRE_PSM_DEBUG_MODE
-    {"psm_info_debug",          wal_hipriv_sta_ps_info},            /* sta psm的维测统计信息 sh hipriv.sh 'wlan0 psm_info_debug 1' */
+    {"psm_info_debug",          wal_hipriv_sta_ps_info},            /* sta psm?????????????? sh hipriv.sh 'wlan0 psm_info_debug 1' */
 #endif
 #endif
 #ifdef _PRE_WLAN_FEATURE_SMPS
-    {"smps_vap_mode",          wal_hipriv_set_smps_vap_mode},            /* 配置vap的smps模式 sh hipriv.sh 'wlan0 smps_vap_mode 1/2/3' static/dynamic/disable*/
-//    {"smps_mode",              wal_hipriv_set_smps_mode},                /* 配置device的smps模式 sh hipriv.sh 'Hisilicon0 smps_mode 1/2/3' static/dynamic/disable  其中03 device1只能配置为STATIC*/
-//    {"smps_mode_info",         wal_hipriv_get_smps_mode_info},           /* 查看vap和所在device的smps模式 sh hipriv.sh 'wlan0 smps_mode_info'  1/2/3 = static/dynamic/disable  其中03 device1只能配置为STATIC*/
+    {"smps_vap_mode",          wal_hipriv_set_smps_vap_mode},            /* ????vap??smps???? sh hipriv.sh 'wlan0 smps_vap_mode 1/2/3' static/dynamic/disable*/
+//    {"smps_mode",              wal_hipriv_set_smps_mode},                /* ????device??smps???? sh hipriv.sh 'Hisilicon0 smps_mode 1/2/3' static/dynamic/disable  ????03 device1??????????STATIC*/
+//    {"smps_mode_info",         wal_hipriv_get_smps_mode_info},           /* ????vap??????device??smps???? sh hipriv.sh 'wlan0 smps_mode_info'  1/2/3 = static/dynamic/disable  ????03 device1??????????STATIC*/
 #endif
 #ifdef _PRE_WLAN_FEATURE_UAPSD
     {"uapsd_en_cap",           wal_hipriv_set_uapsd_cap},        /* hipriv "vap0 uapsd_en_cap 0\1" */
 #endif
 #ifdef _PRE_WLAN_FEATURE_STA_UAPSD
-    {"set_uapsd_para",          wal_hipriv_set_uapsd_para},        /* 设置uapsd的参数信息 sh hipriv.sh 'wlan0 set_uapsd_para 3 1 1 1 1 */
+    {"set_uapsd_para",          wal_hipriv_set_uapsd_para},        /* ????uapsd?????????? sh hipriv.sh 'wlan0 set_uapsd_para 3 1 1 1 1 */
 #endif
-    {"create",                  wal_hipriv_add_vap},                /* 创建vap私有命令为: hipriv "Hisilicon0 create vap0 ap|sta" */
+    {"create",                  wal_hipriv_add_vap},                /* ????vap??????????: hipriv "Hisilicon0 create vap0 ap|sta" */
 #ifdef _PRE_WLAN_FEATURE_ALWAYS_TX
-    {"al_tx",                   wal_hipriv_always_tx},               /* 设置常发模式:       hipriv "vap0 al_tx <value: 0/1/2>  <len>" 由于mac限制，11a,b,g下只支持4095以下数据发送,可以使用set_mcast_data对速率进行设置*/
-    {"al_tx_1102",              wal_hipriv_always_tx},               /* al_tx_02命令先保留 */
-    {"al_tx_num",               wal_hipriv_always_tx_num},           /* 设置常发数目:       hipriv "vap0 al_tx_num <value>" */
-    //{"al_tx_duty_ratio",        wal_hipriv_always_tx_duty_ratio},  /* 设置常发占空比:     hipriv "vap0 al_tx_duty_ratio <value>  " value的值小于100 */
-    {"al_tx_hw_cfg ",           wal_hipriv_always_tx_hw_cfg},        /* 设置硬件常发模式:   hipriv "vap0 al_tx_hw_cfg devid XXX XXX" 对devid mode和速率进行配置*/
-    /* 设置硬件常发:       hipriv "vap0 al_tx_hw  0/1/2/3  0/1/2/3  content len times"
-    1. 0/1/2/3 为开关。bit 1对应dev0/dev1的选择，bit 0对应开关。如果配置关闭的话，下面的配置就不需要再配了。
-    用户只要配置对应的dev为开/关就能够关闭或者开启或者关闭硬件常发。
-    2. 0/1/2/3 常发帧的内容。0:全0。1:全1。2:随机。 3:重复byte的数据。
-    3. content，当第2项配置为3时，此值生效，否则可以不填。
-    4. len数据长度。
-    5. 帧发送的次数                   */
-    {"al_tx_hw",                wal_hipriv_always_tx_hw},              /* 设置硬件常发:       hipriv "vap0 al_tx_hw <switch(x)|device id(x)| flag(xx)|xxxx> <content> <len> <times> <ifs>"*/
-    //{"al_tx_hw_duty_ratio",     wal_hipriv_always_tx_hw_duty_ratio}, /* 设置硬件常发占空比: hipriv "vap0 al_tx_hw_duty_ratio <value 1~100>"*/
+    {"al_tx",                   wal_hipriv_always_tx},               /* ????????????:       hipriv "vap0 al_tx <value: 0/1/2>  <len>" ????mac??????11a,b,g????????4095????????????,????????set_mcast_data??????????????*/
+    {"al_tx_1102",              wal_hipriv_always_tx},               /* al_tx_02?????????? */
+    {"al_tx_num",               wal_hipriv_always_tx_num},           /* ????????????:       hipriv "vap0 al_tx_num <value>" */
+    //{"al_tx_duty_ratio",        wal_hipriv_always_tx_duty_ratio},  /* ??????????????:     hipriv "vap0 al_tx_duty_ratio <value>  " value????????100 */
+    {"al_tx_hw_cfg ",           wal_hipriv_always_tx_hw_cfg},        /* ????????????????:   hipriv "vap0 al_tx_hw_cfg devid XXX XXX" ??devid mode??????????????*/
+    /* ????????????:       hipriv "vap0 al_tx_hw  0/1/2/3  0/1/2/3  content len times"
+    1. 0/1/2/3 ????????bit 1????dev0/dev1????????bit 0??????????????????????????????????????????????????????
+    ??????????????????dev????/??????????????????????????????????????
+    2. 0/1/2/3 ??????????????0:??0??1:??1??2:?????? 3:????byte????????
+    3. content??????2????????3????????????????????????????
+    4. len??????????
+    5. ????????????                   */
+    {"al_tx_hw",                wal_hipriv_always_tx_hw},              /* ????????????:       hipriv "vap0 al_tx_hw <switch(x)|device id(x)| flag(xx)|xxxx> <content> <len> <times> <ifs>"*/
+    //{"al_tx_hw_duty_ratio",     wal_hipriv_always_tx_hw_duty_ratio}, /* ??????????????????: hipriv "vap0 al_tx_hw_duty_ratio <value 1~100>"*/
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1151)
     {"al_tx_51",                wal_hipriv_always_tx_51},
 #endif
 #endif
-    {"al_rx",                   wal_hipriv_always_rx},               /* 设置常收模式:               hipriv "vap0 al_rx <value: 0/1/2>" */
+    {"al_rx",                   wal_hipriv_always_rx},               /* ????????????:               hipriv "vap0 al_rx <value: 0/1/2>" */
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1151)
     {"al_rx_51",                wal_hipriv_always_rx_51},
 #endif
-    {"rate",                    wal_hipriv_set_rate_etc },               /* 设置non-HT模式下的速率:     hipriv "vap0 rate  <value>" */
-    {"mcs",                     wal_hipriv_set_mcs_etc  },               /* 设置HT模式下的速率:         hipriv "vap0 mcs   <value>" */
-    {"mcsac",                   wal_hipriv_set_mcsac_etc},               /* 设置VHT模式下的速率:        hipriv "vap0 mcsac <value>" */
+    {"rate",                    wal_hipriv_set_rate_etc },               /* ????non-HT????????????:     hipriv "vap0 rate  <value>" */
+    {"mcs",                     wal_hipriv_set_mcs_etc  },               /* ????HT????????????:         hipriv "vap0 mcs   <value>" */
+    {"mcsac",                   wal_hipriv_set_mcsac_etc},               /* ????VHT????????????:        hipriv "vap0 mcsac <value>" */
 #ifdef _PRE_WLAN_FEATURE_11AX
-    {"mcsax",                   wal_hipriv_set_mcsax},               /* 设置VHT模式下的速率:        hipriv "vap0 mcsac <value>" */
+    {"mcsax",                   wal_hipriv_set_mcsax},               /* ????VHT????????????:        hipriv "vap0 mcsac <value>" */
 #endif
-    {"freq",                    wal_hipriv_set_freq},                    /* 设置AP 信道 */
-    {"mode",                    wal_hipriv_set_mode},                    /* 设置AP 协议模式 */
-    {"bw",                      wal_hipriv_set_bw   },               /* 设置带宽:                   hipriv "vap0 bw    <value>" */
-    {"set_mcast_data",          wal_hipriv_set_mcast_data_dscr_param},    /* 打印描述符信息: hipriv "vap0 set_mcast_data <param name> <value>" */
-    {"rx_fcs_info",             wal_hipriv_rx_fcs_info},            /* 打印接收帧的FCS正确与错误信息:hipriv "vap0 rx_fcs_info 0/1 1/2/3/4" 0/1  0代表不清除，1代表清除 */
-    {"set_regdomain_pwr",       wal_hipriv_set_regdomain_pwr},      /* 设置管制域最大发送功率，hipriv "Hisilicon0 set_regdomain_pwr 20",单位dBm */
-    {"add_user",                wal_hipriv_add_user},               /* 设置添加用户的配置命令: hipriv "vap0 add_user xx xx xx xx xx xx(mac地址) 0 | 1(HT能力位) "  该命令针对某一个VAP */
-    {"del_user",                wal_hipriv_del_user},               /* 设置删除用户的配置命令: hipriv "vap0 del_user xx xx xx xx xx xx(mac地址)" 该命令针对某一个VAP */
-    {"alg_cfg",                 wal_hipriv_alg_cfg_etc},                /* 算法参数配置: hipriv "vap0 alg_cfg sch_vi_limit 10"*/
+    {"freq",                    wal_hipriv_set_freq},                    /* ????AP ???? */
+    {"mode",                    wal_hipriv_set_mode},                    /* ????AP ???????? */
+    {"bw",                      wal_hipriv_set_bw   },               /* ????????:                   hipriv "vap0 bw    <value>" */
+    {"set_mcast_data",          wal_hipriv_set_mcast_data_dscr_param},    /* ??????????????: hipriv "vap0 set_mcast_data <param name> <value>" */
+    {"rx_fcs_info",             wal_hipriv_rx_fcs_info},            /* ????????????FCS??????????????:hipriv "vap0 rx_fcs_info 0/1 1/2/3/4" 0/1  0????????????1???????? */
+    {"set_regdomain_pwr",       wal_hipriv_set_regdomain_pwr},      /* ????????????????????????hipriv "Hisilicon0 set_regdomain_pwr 20",????dBm */
+    {"add_user",                wal_hipriv_add_user},               /* ??????????????????????: hipriv "vap0 add_user xx xx xx xx xx xx(mac????) 0 | 1(HT??????) "  ????????????????VAP */
+    {"del_user",                wal_hipriv_del_user},               /* ??????????????????????: hipriv "vap0 del_user xx xx xx xx xx xx(mac????)" ????????????????VAP */
+    {"alg_cfg",                 wal_hipriv_alg_cfg_etc},                /* ????????????: hipriv "vap0 alg_cfg sch_vi_limit 10"*/
 #ifdef _PRE_WLAN_FEATURE_EDCA_OPT_AP
-    {"set_edca_switch_sta",        wal_hipriv_set_edca_opt_switch_sta},       /* STA是否开启私有edca参数优化机制 */
+    {"set_edca_switch_sta",        wal_hipriv_set_edca_opt_switch_sta},       /* STA????????????edca???????????? */
 #endif
-    {"alg_tpc_log",             wal_hipriv_tpc_log},                /* tpc算法日志参数配置:*/
+    {"alg_tpc_log",             wal_hipriv_tpc_log},                /* tpc????????????????:*/
 #if (defined(_PRE_PRODUCT_ID_HI110X_DEV) || defined(_PRE_PRODUCT_ID_HI110X_HOST))
     {"sdio_flowctrl",           wal_hipriv_sdio_flowctrl},
 #endif
 #ifdef _PRE_WLAN_DELAY_STATISTIC
-    /* 报文时间戳调试开关: hipriv "Hisilicon0 pkt_time_switch on |off */
+    /* ??????????????????: hipriv "Hisilicon0 pkt_time_switch on |off */
     {"pkt_time_switch",         wal_hipriv_pkt_time_switch},
 #endif
 #ifdef _PRE_WLAN_FEATURE_DFS
     {"radartool",               wal_hipriv_dfs_radartool},
 #endif
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
-    {"aifsn_cfg",               wal_hipriv_aifsn_cfg},              /* wfa使用，固定指定AC的aifsn值, sh hipriv.sh "Hisilicon0 aifsn_cfg 0|1(恢复|配置) 0|1|2|3(be-vo) val" */
-    {"cw_cfg",                  wal_hipriv_cw_cfg},                 /* wfa使用，固定指定AC的cwmaxmin值, sh hipriv.sh "Hisilicon0 cw_cfg 0|1(恢复|配置) 0|1|2|3(be-vo) val" */
+    {"aifsn_cfg",               wal_hipriv_aifsn_cfg},              /* wfa??????????????AC??aifsn??, sh hipriv.sh "Hisilicon0 aifsn_cfg 0|1(????|????) 0|1|2|3(be-vo) val" */
+    {"cw_cfg",                  wal_hipriv_cw_cfg},                 /* wfa??????????????AC??cwmaxmin??, sh hipriv.sh "Hisilicon0 cw_cfg 0|1(????|????) 0|1|2|3(be-vo) val" */
 #endif
 #ifdef _PRE_WLAN_FEATURE_11K
     {"send_neighbor_req",       wal_hipriv_send_neighbor_req},          /* sh hipriv.sh "wlan0 send_neighbor_req WiFi1" */
     {"beacon_req_table_switch", wal_hipriv_beacon_req_table_switch}, /* sh hipriv.sh "wlan0 beacon_req_table_switch 0/1" */
 #endif
-    {"voe_enable",              wal_hipriv_voe_enable},             /* VOE功能使能控制，默认关闭 sh hipriv.sh "wlan0 voe_enable 0/1" (Bit0:11r  Bit1:11V Bit2:11K Bit3:是否强制包含IE70(voe 认证需要),Bit4:11r认证,B5-B6:11k auth operating class  Bit7:读取信息)*/
+    {"voe_enable",              wal_hipriv_voe_enable},             /* VOE?????????????????????? sh hipriv.sh "wlan0 voe_enable 0/1" (Bit0:11r  Bit1:11V Bit2:11K Bit3:????????????IE70(voe ????????),Bit4:11r????,B5-B6:11k auth operating class  Bit7:????????)*/
 
-    {"log_level",               wal_hipriv_vap_log_level},          /* VAP级别日志级别 hipriv "VAPX log_level {1|2}"  Warning与Error级别日志以VAP为维度 */
+    {"log_level",               wal_hipriv_vap_log_level},          /* VAP???????????? hipriv "VAPX log_level {1|2}"  Warning??Error??????????VAP?????? */
 #if defined(_PRE_WLAN_FEATURE_EQUIPMENT_TEST) && (defined _PRE_WLAN_FIT_BASED_REALTIME_CALI)
-    {"cali_power",              wal_hipriv_cali_power},             /*ant_value是0或1时，实测的功率值下发给wifi驱动进行修正 hipriv.sh "Hisilicon0 cali_power ant_value subband_value pow_value0 pow_value 1 pow_value 2"；ant_value为2时，获取多项式值*/
-    {"set_power_param",         wal_hipriv_set_polynomial_para},    /* 设置多项式值 hipriv.sh "Hisilicon0 set_power_param subband ant0_param ant1_param" */
+    {"cali_power",              wal_hipriv_cali_power},             /*ant_value??0??1??????????????????????wifi???????????? hipriv.sh "Hisilicon0 cali_power ant_value subband_value pow_value0 pow_value 1 pow_value 2"??ant_value??2????????????????*/
+    {"set_power_param",         wal_hipriv_set_polynomial_para},    /* ???????????? hipriv.sh "Hisilicon0 set_power_param subband ant0_param ant1_param" */
     {"set_load_mode",         wal_hipriv_set_load_mode},
 #endif
 #ifdef _PRE_PLAT_FEATURE_CUSTOMIZE
-    {"load_ini_gain",           wal_hipriv_load_ini_power_gain}, /* 刷新定制化文件中功率增益相关参数 hipriv.sh "Hisilicon0 load_ini_gain" */
+    {"load_ini_gain",           wal_hipriv_load_ini_power_gain}, /* ???????????????????????????????? hipriv.sh "Hisilicon0 load_ini_gain" */
 #endif
 
 #if (defined _PRE_WLAN_RF_CALI) || (defined _PRE_WLAN_RF_CALI_1151V2)
-    {"auto_cali",        wal_hipriv_auto_cali},      /* 启动校准自动化:hipriv "Hisilicon0 auto_cali" */
-    {"cali_vref",        wal_hipriv_set_cali_vref},  /* 校准参数修改:hipriv "wlan0 cali_vref value" */
+    {"auto_cali",        wal_hipriv_auto_cali},      /* ??????????????:hipriv "Hisilicon0 auto_cali" */
+    {"cali_vref",        wal_hipriv_set_cali_vref},  /* ????????????:hipriv "wlan0 cali_vref value" */
 #endif
 #ifdef _PRE_WLAN_FEATURE_SINGLE_CHIP_DUAL_BAND
-    {"restrict_band",    wal_hipriv_set_restrict_band}, /* 设置限定工作的频带 */
+    {"restrict_band",    wal_hipriv_set_restrict_band}, /* ?????????????????? */
 #endif
 #if defined(_PRE_WLAN_FEATURE_DBAC) && defined(_PRE_WLAN_FEATRUE_DBAC_DOUBLE_AP_MODE)
-    {"omit_acs",         wal_hipriv_set_omit_acs},      /* 设置忽略ACS */
+    {"omit_acs",         wal_hipriv_set_omit_acs},      /* ????????ACS */
 #endif
 
 #ifdef _PRE_WLAN_FEATURE_WDS
-    {"wds_vap_mode",   wal_hipriv_wds_vap_mode}, /* 设置vap的 wds使能: hipriv "wlan0 wds_vap_mode 0/1/2/3" 第二个参数 0:关闭WDS, 1:RootAP模式, 2:RepeaterAP模式下的STA Vap, 3:RepeaterAP模式下的AP Vap */
-    {"wds_vap_show",   wal_hipriv_wds_vap_show}, /* 打印WDS Vap的配置信息和状态信息 */
-    {"wds_sta_add",   wal_hipriv_wds_sta_add}, /* 添加WDS STA信息到 WDS表中: hipriv "wlan0 wds_sta_add StaMac PeerNodeMac" 第二个参数 StaMac为新添加的 WDS STA的 Mac地址, 第三个参数 PeerNodeMac为WDS STA绑定的WDS对端节点的Mac(对端为STA模式的Vap,如果该对端节点不存在，则添加失败) */
-    {"wds_sta_del",   wal_hipriv_wds_sta_del}, /* 删除WDS表中对应WDS STA信息: hipriv "wlan0 wds_sta_del StaMac" 第二个参数 StaMac为新添加的 WDS STA的 Mac地址 */
-    {"wds_sta_age",   wal_hipriv_wds_sta_age}, /* 设置WDS表中WDS STA有效时间: hipriv "wlan0 wds_sta_age AgeTime" 第二个参数 WDS Sta最长不活跃时间(单位为秒) */
+    {"wds_vap_mode",   wal_hipriv_wds_vap_mode}, /* ????vap?? wds????: hipriv "wlan0 wds_vap_mode 0/1/2/3" ?????????? 0:????WDS, 1:RootAP????, 2:RepeaterAP????????STA Vap, 3:RepeaterAP????????AP Vap */
+    {"wds_vap_show",   wal_hipriv_wds_vap_show}, /* ????WDS Vap???????????????????? */
+    {"wds_sta_add",   wal_hipriv_wds_sta_add}, /* ????WDS STA?????? WDS????: hipriv "wlan0 wds_sta_add StaMac PeerNodeMac" ?????????? StaMac?????????? WDS STA?? Mac????, ?????????? PeerNodeMac??WDS STA??????WDS??????????Mac(??????STA??????Vap,????????????????????????????????) */
+    {"wds_sta_del",   wal_hipriv_wds_sta_del}, /* ????WDS????????WDS STA????: hipriv "wlan0 wds_sta_del StaMac" ?????????? StaMac?????????? WDS STA?? Mac???? */
+    {"wds_sta_age",   wal_hipriv_wds_sta_age}, /* ????WDS????WDS STA????????: hipriv "wlan0 wds_sta_age AgeTime" ?????????? WDS Sta??????????????(????????) */
 #endif
 
 #ifdef _PRE_WLAN_FEATURE_DHCP_REQ_DISABLE
-    {"dhcp_req_disable",         wal_hipriv_dhcp_req_disable_switch},           /* dhcp_req_disable模块的开关的命令: hipriv "vap0 dhcp_req_disable 0 | 1" */
+    {"dhcp_req_disable",         wal_hipriv_dhcp_req_disable_switch},           /* dhcp_req_disable????????????????: hipriv "vap0 dhcp_req_disable 0 | 1" */
 #endif
 #ifdef _PRE_WLAN_FEATURE_SMPS
-    {"smps_mode",       wal_hipriv_set_smps_mode},      /* 设置smps mode */
+    {"smps_mode",       wal_hipriv_set_smps_mode},      /* ????smps mode */
 #endif
-    {"rssi_limit",      wal_hipriv_rssi_limit},         /* rssi门限开关和阈值 */
+    {"rssi_limit",      wal_hipriv_rssi_limit},         /* rssi?????????????? */
 #ifdef _PRE_WLAN_FEATURE_CAR
-    {"car_cfg",         wal_hipriv_car_cfg},            /* car限速参数配置: */
+    {"car_cfg",         wal_hipriv_car_cfg},            /* car????????????: */
 #endif
 #ifdef _PRE_FEATURE_FAST_AGING
-    {"fast_aging",       wal_hipriv_fast_aging_cfg},    /* 快速老化 */
+    {"fast_aging",       wal_hipriv_fast_aging_cfg},    /* ???????? */
 #endif
 
 #ifdef _PRE_WLAN_FEATURE_TCP_ACK_BUFFER
-    {"tcp_ack_buf",       wal_hipriv_tcp_ack_buf_cfg},    /* 快速老化 */
+    {"tcp_ack_buf",       wal_hipriv_tcp_ack_buf_cfg},    /* ???????? */
 #endif
 
 #ifdef _PRE_WLAN_REPORT_PRODUCT_LOG
-    {"product_log_flag",         wal_hipriv_report_product_log_cfg},            /* 产品log上报配置，hipriv "wlan0 product_log_flag 0/1/2"; 0/1表示关开，2表示查询当前开关 */
+    {"product_log_flag",         wal_hipriv_report_product_log_cfg},            /* ????log??????????hipriv "wlan0 product_log_flag 0/1/2"; 0/1??????????2???????????????? */
 #endif
 
 #ifdef _PRE_WLAN_PRODUCT_1151V200
-    {"80m_rts_debug",         wal_hipriv_80m_rts_debug},                        /* 80M rts debug模式，hipriv "wlan0 80m_rts_debug 0/1"; 0/1表示关开 */
+    {"80m_rts_debug",         wal_hipriv_80m_rts_debug},                        /* 80M rts debug??????hipriv "wlan0 80m_rts_debug 0/1"; 0/1???????? */
 #endif
 #ifdef _PRE_WLAN_FEATURE_NEGTIVE_DET
-    {"pk_mode_debug",         wal_hipriv_pk_mode_debug},                        /* pkmode功能的门限调整接口 hipriv "wlan0 pk_mode_debug 0/1(high/low) 0/1/2/3/4(BW) 0/1/2/3(protocol) 吞吐门限值" */
+    {"pk_mode_debug",         wal_hipriv_pk_mode_debug},                        /* pkmode?????????????????? hipriv "wlan0 pk_mode_debug 0/1(high/low) 0/1/2/3/4(BW) 0/1/2/3(protocol) ??????????" */
 #endif
 #ifdef _PRE_WLAN_FEATURE_APF
     {"apf_filter_list",       wal_hipriv_apf_filter_list},
 #endif
-    {"remove_app_ie",         wal_hipriv_remove_app_ie},      /* 通过eid移除用户态下发的某个IE hipriv "wlan0 remove_app_ie 0/1 eid" 0恢复该ie,1屏蔽该ie */
+    {"remove_app_ie",         wal_hipriv_remove_app_ie},      /* ????eid????????????????????IE hipriv "wlan0 remove_app_ie 0/1 eid" 0??????ie,1??????ie */
 };
 
 /*****************************************************************************
-  net_device上挂接的net_device_ops函数
+  net_device????????net_device_ops????
 *****************************************************************************/
 #if (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION)
 oal_net_device_ops_stru g_st_wal_net_dev_ops_etc =
@@ -969,16 +969,16 @@ oal_net_device_ops_stru g_st_wal_net_dev_ops_etc =
 oal_ethtool_ops_stru g_st_wal_ethtool_ops_etc = { 0 };
 #endif
 /*****************************************************************************
-  标准ioctl命令函数表.
+  ????ioctl??????????.
 *****************************************************************************/
 
 /*****************************************************************************
-  私有ioctl命令参数定义定义
+  ????ioctl????????????????
 *****************************************************************************/
 OAL_STATIC OAL_CONST oal_iw_priv_args_stru g_ast_iw_priv_args[] =
 {
 #ifdef _PRE_WLAN_FEATURE_HILINK_HERA_PRODUCT
-    {WAL_IOCTL_PRIV_SET_MGMT_FRAME_FILTERS,  OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, 0, "set_app_filter"},     /* 参数类型是char, 个数为24 */
+    {WAL_IOCTL_PRIV_SET_MGMT_FRAME_FILTERS,  OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, 0, "set_app_filter"},     /* ??????????char, ??????24 */
 #endif
 #ifdef _PRE_WLAN_FEATURE_HILINK_HERA_PRODUCT_DEBUG
     {WAL_IOCTL_PRIV_SET_VENDOR_REQ,  OAL_IW_PRIV_TYPE_CHAR | 64, 0, "set_vendor_req"},
@@ -997,17 +997,17 @@ OAL_STATIC OAL_CONST oal_iw_priv_args_stru g_ast_iw_priv_args[] =
 #endif
 
 #ifdef _PRE_WLAN_FEATURE_WDS
-    {WLAN_CFGID_WDS_VAP_MODE,   OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1,  0,  "wds_vap_mode"},  /* 设置VAP的WDS模式使能 */
+    {WLAN_CFGID_WDS_VAP_MODE,   OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1,  0,  "wds_vap_mode"},  /* ????VAP??WDS???????? */
     {WLAN_CFGID_WDS_STA_ADD,    OAL_IW_PRIV_TYPE_CHAR | 40,                         0,  "wds_sta_add"},
     {WLAN_CFGID_WDS_STA_DEL,    OAL_IW_PRIV_TYPE_CHAR | 40,                         0,  "wds_sta_del"},
-    {WLAN_CFGID_WDS_VAP_MODE,   0,   OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, "get_wds_vap_mode"},  /*读取VAP的WDS模式使能 */
+    {WLAN_CFGID_WDS_VAP_MODE,   0,   OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, "get_wds_vap_mode"},  /*????VAP??WDS???????? */
 #endif
 #if (_PRE_WLAN_FEATURE_BLACKLIST_LEVEL != _PRE_WLAN_FEATURE_BLACKLIST_NONE)
     {WLAN_CFGID_ADD_BLACK_LIST,     OAL_IW_PRIV_TYPE_CHAR | 40, 0, "blkwhtlst_add"},
     {WLAN_CFGID_DEL_BLACK_LIST,     OAL_IW_PRIV_TYPE_CHAR | 40, 0, "blkwhtlst_del"},
     {WLAN_CFGID_CLR_BLACK_LIST,     OAL_IW_PRIV_TYPE_CHAR | 40, 0, "blkwhtlst_clr"},
-    {WLAN_CFGID_BLACKLIST_MODE,     OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, 0, "blkwhtlst_mode"},  /* 配置黑名单模式 */
-    {WLAN_CFGID_BLACKLIST_MODE,     0, OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, "get_blkwhtmode"},  /*黑名单模式打印 */
+    {WLAN_CFGID_BLACKLIST_MODE,     OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, 0, "blkwhtlst_mode"},  /* ?????????????? */
+    {WLAN_CFGID_BLACKLIST_MODE,     0, OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, "get_blkwhtmode"},  /*?????????????? */
 #endif
 
 #ifdef _PRE_WLAN_FEATURE_20_40_80_COEXIST
@@ -1020,7 +1020,7 @@ OAL_STATIC OAL_CONST oal_iw_priv_args_stru g_ast_iw_priv_args[] =
     {WLAN_CFGID_SET_FRW_MAX_EVENT,         OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, 0, "set_frw_max"},
 #endif
 #ifdef _PRE_FEATURE_WAVEAPP_CLASSIFY
-    {WLAN_CFGID_GET_WAVEAPP_FLAG,         0, OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, "get_waveapp_flag"}, /*获取当前waveapp仪器识别的标记*/
+    {WLAN_CFGID_GET_WAVEAPP_FLAG,         0, OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, "get_waveapp_flag"}, /*????????waveapp??????????????*/
 #endif
 #ifdef _PRE_WLAN_WEB_CMD_COMM
     {WAL_IOCTL_PRIV_SET_HWADDR,                OAL_IW_PRIV_TYPE_CHAR | 24, 0, "sethwaddr"}, /*set hwaddr*/
@@ -1042,19 +1042,19 @@ OAL_STATIC OAL_CONST oal_iw_priv_args_stru g_ast_iw_priv_args[] =
     {WLAN_CFGID_HIDE_SSID,       0, OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, "get_ssidhide"},
     {WLAN_CFGID_GLOBAL_SHORTGI,  OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, 0, "shortgi"},
     {WLAN_CFGID_GLOBAL_SHORTGI,  0, OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, "get_shortgi"},
-    {WLAN_CFGID_SET_TXBEAMFORM, OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, 0, "txbeamform"}, /* 设置txbeamform */
+    {WLAN_CFGID_SET_TXBEAMFORM, OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, 0, "txbeamform"}, /* ????txbeamform */
     {WLAN_CFGID_SET_TXBEAMFORM,  0, OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, "get_txbeamform"},
-    {WLAN_CFGID_SET_NOFORWARD,  OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, 0, "noforward"},  /* 设置noforward */
+    {WLAN_CFGID_SET_NOFORWARD,  OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, 0, "noforward"},  /* ????noforward */
     {WLAN_CFGID_SET_NOFORWARD,  0, OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, "get_noforward"},
-    {WLAN_CFGID_SET_RTS_THRESHHOLD,  OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, 0, "rts_th"},  /* 设置rts_threshold */
+    {WLAN_CFGID_SET_RTS_THRESHHOLD,  OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, 0, "rts_th"},  /* ????rts_threshold */
     {WLAN_CFGID_SET_RTS_THRESHHOLD,  0, OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, "get_rts_th"},
-    {WLAN_CFGID_FRAG_THRESHOLD_REG,  OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, 0, "frag_th"},  /* 设置frag_threshold */
+    {WLAN_CFGID_FRAG_THRESHOLD_REG,  OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, 0, "frag_th"},  /* ????frag_threshold */
     {WLAN_CFGID_FRAG_THRESHOLD_REG,  0, OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, "get_frag_th"},
     {WLAN_CFGID_ASSOC_NUM,  0, OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, "get_assoc_num"},
     {WLAN_CFGID_NOISE,      0, OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, "get_noise"},
     {WLAN_CFGID_GET_BW,     0, OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, "get_bw"},
     {WLAN_CFGID_PMF,        0, OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, "get_pmf"},
-    {WLAN_CFGID_GET_TEMP,   0, OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, "get_temp"},  /*读取RF  实时温度 */
+    {WLAN_CFGID_GET_TEMP,   0, OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, "get_temp"},  /*????RF  ???????? */
     {WLAN_CFGID_GET_BAND,   0, OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, "get_band"},
     {WLAN_CFGID_GET_BCAST_RATE, 0, OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1, "get_bcast_rate"},
 #ifdef _PRE_WLAN_FEATURE_BAND_STEERING
@@ -1164,13 +1164,13 @@ OAL_STATIC OAL_CONST oal_iw_priv_args_stru g_ast_iw_priv_args[] =
 };
 
 /*****************************************************************************
-  私有ioctl命令函数表.
+  ????ioctl??????????.
 *****************************************************************************/
 #ifdef _PRE_WLAN_WEB_CMD_COMM
 OAL_STATIC OAL_CONST oal_iw_handler g_ast_iw_priv_handlers[] =
 {
-    (oal_iw_handler)wal_ioctl_set_param,                /* SIOCWFIRSTPRIV+0 */  /* sub-ioctl set 入口 */
-    (oal_iw_handler)wal_ioctl_get_param,                /* SIOCWFIRSTPRIV+1 */  /* sub-ioctl get 入口 */
+    (oal_iw_handler)wal_ioctl_set_param,                /* SIOCWFIRSTPRIV+0 */  /* sub-ioctl set ???? */
+    (oal_iw_handler)wal_ioctl_get_param,                /* SIOCWFIRSTPRIV+1 */  /* sub-ioctl get ???? */
     OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+2 */  /* setkey */
     (oal_iw_handler)wal_ioctl_set_wme_params,           /* SIOCWFIRSTPRIV+3 */  /* setwmmparams */
     (oal_iw_handler)wal_ioctl_priv_set_essid,           /* SIOCWFIRSTPRIV+4 */  /* set essid */
@@ -1186,14 +1186,14 @@ OAL_STATIC OAL_CONST oal_iw_handler g_ast_iw_priv_handlers[] =
     OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+14 */  /* getmac */
     (oal_iw_handler)wal_ioctl_set_param_char,           /* SIOCWFIRSTPRIV+15 */  /* setmac */
     OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+16 */  /* chanswitch */
-    (oal_iw_handler)wal_ioctl_priv_get_mode,            /* SIOCWFIRSTPRIV+17 */  /* 获取模式, 例: iwpriv vapN get_mode */
-    OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+18 */  /* 设置模式, 例: iwpriv vapN mode 11g */
+    (oal_iw_handler)wal_ioctl_priv_get_mode,            /* SIOCWFIRSTPRIV+17 */  /* ????????, ??: iwpriv vapN get_mode */
+    OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+18 */  /* ????????, ??: iwpriv vapN mode 11g */
     (oal_iw_handler)wal_ioctl_priv_get_essid,           /* SIOCWFIRSTPRIV+19 */  /* get essid */
     OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+20 */  /* null */
-    (oal_iw_handler)wal_ioctl_get_assoc_list,           /* SIOCWFIRSTPRIV+21 */  /* APUT取得关联STA列表 */
-    (oal_iw_handler)wal_ioctl_set_mac_filters,          /* SIOCWFIRSTPRIV+22 */  /* APUT设置STA过滤 */
-    (oal_iw_handler)wal_ioctl_set_ap_config,            /* SIOCWFIRSTPRIV+23 */  /* 设置APUT参数 */
-    (oal_iw_handler)wal_ioctl_set_ap_sta_disassoc,      /* SIOCWFIRSTPRIV+24 */  /* APUT去关联STA */
+    (oal_iw_handler)wal_ioctl_get_assoc_list,           /* SIOCWFIRSTPRIV+21 */  /* APUT????????STA???? */
+    (oal_iw_handler)wal_ioctl_set_mac_filters,          /* SIOCWFIRSTPRIV+22 */  /* APUT????STA???? */
+    (oal_iw_handler)wal_ioctl_set_ap_config,            /* SIOCWFIRSTPRIV+23 */  /* ????APUT???? */
+    (oal_iw_handler)wal_ioctl_set_ap_sta_disassoc,      /* SIOCWFIRSTPRIV+24 */  /* APUT??????STA */
     (oal_iw_handler)wal_ioctl_get_sta_stat_info,        /* SIOCWFIRSTPRIV+25 */  /* getStatistics */
     OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+26 */  /* sendmgmt */
 #ifdef _PRE_WLAN_FEATURE_EQUIPMENT_TEST
@@ -1222,8 +1222,8 @@ OAL_STATIC OAL_CONST oal_iw_handler g_ast_iw_priv_handlers[] =
 #else
 OAL_STATIC OAL_CONST oal_iw_handler g_ast_iw_priv_handlers[] =
 {
-    OAL_PTR_NULL,                /* SIOCWFIRSTPRIV+0 */  /* sub-ioctl set 入口 */
-    OAL_PTR_NULL,                /* SIOCWFIRSTPRIV+1 */  /* sub-ioctl get 入口 */
+    OAL_PTR_NULL,                /* SIOCWFIRSTPRIV+0 */  /* sub-ioctl set ???? */
+    OAL_PTR_NULL,                /* SIOCWFIRSTPRIV+1 */  /* sub-ioctl get ???? */
     OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+2 */  /* setkey */
     OAL_PTR_NULL,           /* SIOCWFIRSTPRIV+3 */  /* setwmmparams */
     OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+4 */  /* delkey */
@@ -1239,14 +1239,14 @@ OAL_STATIC OAL_CONST oal_iw_handler g_ast_iw_priv_handlers[] =
     OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+14 */  /* setchanlist */
     OAL_PTR_NULL,           /* SIOCWFIRSTPRIV+15 */  /* setmac */
     OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+16 */  /* chanswitch */
-    OAL_PTR_NULL,                 /* SIOCWFIRSTPRIV+17 */  /* 获取模式, 例: iwpriv vapN get_mode */
-    OAL_PTR_NULL,                 /* SIOCWFIRSTPRIV+18 */  /* 设置模式, 例: iwpriv vapN mode 11g */
+    OAL_PTR_NULL,                 /* SIOCWFIRSTPRIV+17 */  /* ????????, ??: iwpriv vapN get_mode */
+    OAL_PTR_NULL,                 /* SIOCWFIRSTPRIV+18 */  /* ????????, ??: iwpriv vapN mode 11g */
     OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+19 */  /* getappiebuf */
     OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+20 */  /* null */
-    (oal_iw_handler)wal_ioctl_get_assoc_list,           /* SIOCWFIRSTPRIV+21 */  /* APUT取得关联STA列表 */
-    (oal_iw_handler)wal_ioctl_set_mac_filters,          /* SIOCWFIRSTPRIV+22 */  /* APUT设置STA过滤 */
-    (oal_iw_handler)wal_ioctl_set_ap_config,            /* SIOCWFIRSTPRIV+23 */  /* 设置APUT参数 */
-    (oal_iw_handler)wal_ioctl_set_ap_sta_disassoc,      /* SIOCWFIRSTPRIV+24 */  /* APUT去关联STA */
+    (oal_iw_handler)wal_ioctl_get_assoc_list,           /* SIOCWFIRSTPRIV+21 */  /* APUT????????STA???? */
+    (oal_iw_handler)wal_ioctl_set_mac_filters,          /* SIOCWFIRSTPRIV+22 */  /* APUT????STA???? */
+    (oal_iw_handler)wal_ioctl_set_ap_config,            /* SIOCWFIRSTPRIV+23 */  /* ????APUT???? */
+    (oal_iw_handler)wal_ioctl_set_ap_sta_disassoc,      /* SIOCWFIRSTPRIV+24 */  /* APUT??????STA */
     OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+25 */  /* getStatistics */
     OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+26 */  /* sendmgmt */
 #ifdef _PRE_WLAN_FEATURE_EQUIPMENT_TEST
@@ -1271,11 +1271,11 @@ OAL_STATIC OAL_CONST oal_iw_handler g_ast_iw_priv_handlers[] =
 
 #ifdef _PRE_WLAN_WEB_CMD_COMM
 /*****************************************************************************
-  私有ioctl命令参数定义定义
+  ????ioctl????????????????
 *****************************************************************************/
 OAL_STATIC OAL_CONST oal_iw_priv_args_stru g_ast_iw_priv_cfg_args[] =
 {
-    {WAL_IOCTL_PRIV_SET_MODE,       OAL_IW_PRIV_TYPE_CHAR | 24, 0, "mode"},     /* 参数类型是char, 个数为24 */
+    {WAL_IOCTL_PRIV_SET_MODE,       OAL_IW_PRIV_TYPE_CHAR | 24, 0, "mode"},     /* ??????????char, ??????24 */
     {WAL_IOCTL_PRIV_GET_MODE,       0, OAL_IW_PRIV_TYPE_CHAR | 24, "get_mode"},
     {WAL_IOCTL_PRIV_SETPARAM,       OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 2, 0, "setparam"},
     {WAL_IOCTL_PRIV_GETPARAM,       OAL_IW_PRIV_TYPE_INT | OAL_IW_PRIV_SIZE_FIXED | 1,
@@ -1319,12 +1319,12 @@ OAL_STATIC OAL_CONST oal_iw_priv_args_stru g_ast_iw_priv_cfg_args[] =
 };
 
 /*****************************************************************************
-  私有ioctl命令函数表.
+  ????ioctl??????????.
 *****************************************************************************/
 OAL_STATIC OAL_CONST oal_iw_handler g_ast_iw_priv_cfg_handlers[] =
 {
-    (oal_iw_handler)wal_ioctl_set_param,                /* SIOCWFIRSTPRIV+0 */  /* sub-ioctl set 入口 */
-    (oal_iw_handler)wal_ioctl_get_param,                /* SIOCWFIRSTPRIV+1 */  /* sub-ioctl get 入口 */
+    (oal_iw_handler)wal_ioctl_set_param,                /* SIOCWFIRSTPRIV+0 */  /* sub-ioctl set ???? */
+    (oal_iw_handler)wal_ioctl_get_param,                /* SIOCWFIRSTPRIV+1 */  /* sub-ioctl get ???? */
     OAL_PTR_NULL,                                                    /* SIOCWFIRSTPRIV+2 */  /* setkey */
     OAL_PTR_NULL,                                                   /* SIOCWFIRSTPRIV+3 */  /* setwmmparams */
     OAL_PTR_NULL,                                                    /* SIOCWFIRSTPRIV+4 */  /* delkey */
@@ -1340,14 +1340,14 @@ OAL_STATIC OAL_CONST oal_iw_handler g_ast_iw_priv_cfg_handlers[] =
     OAL_PTR_NULL,                                                   /* SIOCWFIRSTPRIV+14 */  /* setchanlist */
     OAL_PTR_NULL,                                                   /* SIOCWFIRSTPRIV+15 */  /* kickmac */
     OAL_PTR_NULL,                                                   /* SIOCWFIRSTPRIV+16 */  /* chanswitch */
-    (oal_iw_handler)wal_ioctl_priv_get_mode,                 /* SIOCWFIRSTPRIV+17 */  /* 获取模式, 例: iwpriv vapN get_mode */
-    (oal_iw_handler)wal_ioctl_priv_set_mode,                 /* SIOCWFIRSTPRIV+18 */  /* 设置模式, 例: iwpriv vapN mode 11g */
+    (oal_iw_handler)wal_ioctl_priv_get_mode,                 /* SIOCWFIRSTPRIV+17 */  /* ????????, ??: iwpriv vapN get_mode */
+    (oal_iw_handler)wal_ioctl_priv_set_mode,                 /* SIOCWFIRSTPRIV+18 */  /* ????????, ??: iwpriv vapN mode 11g */
     OAL_PTR_NULL,                                           /* SIOCWFIRSTPRIV+19 */  /* get essid */
     OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+20 */  /* null */
-    OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+21 */  /* APUT取得关联STA列表 */
-    OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+22 */  /* APUT设置STA过滤 */
-    OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+23 */  /* 设置APUT参数 */
-    OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+24 */  /* APUT去关联STA */
+    OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+21 */  /* APUT????????STA???? */
+    OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+22 */  /* APUT????STA???? */
+    OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+23 */  /* ????APUT???? */
+    OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+24 */  /* APUT??????STA */
     OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+25 */  /* getStatistics */
     OAL_PTR_NULL,                                       /* SIOCWFIRSTPRIV+26 */  /* sendmgmt */
 #ifdef _PRE_WLAN_FEATURE_EQUIPMENT_TEST
@@ -1377,12 +1377,12 @@ oal_iw_handler_def_stru g_st_iw_cfg_handler_def =
 #elif (_PRE_OS_VERSION_WIN32 == _PRE_OS_VERSION)
 oal_iw_handler_def_stru g_st_iw_cfg_handler_def =
 {
-    OAL_PTR_NULL,                      /* 标准ioctl handler */
+    OAL_PTR_NULL,                      /* ????ioctl handler */
     0,
     OAL_ARRAY_SIZE(g_ast_iw_priv_cfg_handlers),
-    {0, 0},                                 /* 字节对齐 */
+    {0, 0},                                 /* ???????? */
     OAL_ARRAY_SIZE(g_ast_iw_priv_cfg_args),
-    g_ast_iw_priv_cfg_handlers,                 /* 私有ioctl handler */
+    g_ast_iw_priv_cfg_handlers,                 /* ????ioctl handler */
     g_ast_iw_priv_cfg_args,
     OAL_PTR_NULL
 };
@@ -1391,7 +1391,7 @@ oal_iw_handler_def_stru g_st_iw_cfg_handler_def =
 #endif
 
 /*****************************************************************************
-  无线配置iw_handler_def定义
+  ????????iw_handler_def????
 *****************************************************************************/
 #if (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION)
 oal_iw_handler_def_stru g_st_iw_handler_def_etc =
@@ -1417,19 +1417,19 @@ oal_iw_handler_def_stru g_st_iw_handler_def_etc =
 #elif (_PRE_OS_VERSION_WIN32 == _PRE_OS_VERSION)
 oal_iw_handler_def_stru g_st_iw_handler_def_etc =
 {
-    OAL_PTR_NULL,                      /* 标准ioctl handler */
+    OAL_PTR_NULL,                      /* ????ioctl handler */
     0,
     OAL_ARRAY_SIZE(g_ast_iw_priv_handlers),
-    {0, 0},                                 /* 字节对齐 */
+    {0, 0},                                 /* ???????? */
     OAL_ARRAY_SIZE(g_ast_iw_priv_args),
-    g_ast_iw_priv_handlers,                 /* 私有ioctl handler */
+    g_ast_iw_priv_handlers,                 /* ????ioctl handler */
     g_ast_iw_priv_args,
     OAL_PTR_NULL
 };
 #endif
 
 /*****************************************************************************
-  协议模式字符串定义
+  ??????????????????
 *****************************************************************************/
 OAL_CONST wal_ioctl_mode_map_stru g_ast_mode_map_etc[] =
 {
@@ -1469,12 +1469,12 @@ OAL_CONST wal_ioctl_mode_map_stru g_ast_mode_map_etc[] =
     {"11ac2g20",            WLAN_VHT_MODE,  WLAN_BAND_2G,   WLAN_BAND_WIDTH_20M},
     {"11ac2g40plus",        WLAN_VHT_MODE,  WLAN_BAND_2G,   WLAN_BAND_WIDTH_40PLUS},
     {"11ac2g40minus",       WLAN_VHT_MODE,  WLAN_BAND_2G,   WLAN_BAND_WIDTH_40MINUS},
-    /* 11n only and 11ac only, 都是20M带宽 */
+    /* 11n only and 11ac only, ????20M???? */
     {"11nonly2g",           WLAN_HT_ONLY_MODE,   WLAN_BAND_2G,   WLAN_BAND_WIDTH_20M},
     {"11nonly5g",           WLAN_HT_ONLY_MODE,   WLAN_BAND_5G,   WLAN_BAND_WIDTH_20M},
     {"11aconly",            WLAN_VHT_ONLY_MODE,  WLAN_BAND_5G,   WLAN_BAND_WIDTH_20M},
 
-/* 1151产测以及ONT网页设置协议模式时不会携带带宽扩展方向信息 */
+/* 1151????????ONT?????????????????????????????????????????? */
     {"11ng40",              WLAN_HT_MODE,   WLAN_BAND_2G,   WLAN_BAND_WIDTH_40M},
     {"11ac2g40",            WLAN_VHT_MODE,  WLAN_BAND_2G,   WLAN_BAND_WIDTH_40M},
     {"11na40",              WLAN_HT_MODE,   WLAN_BAND_5G,   WLAN_BAND_WIDTH_40M},
@@ -1499,7 +1499,7 @@ OAL_CONST wal_ioctl_mode_map_stru g_ast_mode_map_etc[] =
 };
 
 
-/* 注意! 这里的参数定义需要与 g_dmac_config_set_dscr_param中的函数顺序严格一致! */
+/* ????! ???????????????????? g_dmac_config_set_dscr_param????????????????????! */
 OAL_CONST oal_int8   *pauc_tx_dscr_param_name_etc[WAL_DSCR_PARAM_BUTT] =
 {
     "pgl",
@@ -1666,82 +1666,82 @@ OAL_CONST wal_ioctl_alg_cfg_stru g_ast_alg_cfg_map_etc[] =
     {"txbf_log_sta",            MAC_ALG_CFG_TXBF_RECORD_LOG_START},
     {"txbf_log_out",            MAC_ALG_CFG_TXBF_LOG_OUTPUT},
 #endif
-    {"ar_enable",               MAC_ALG_CFG_AUTORATE_ENABLE},                   /* 开启或关闭速率自适应算法: sh hipriv.sh "vap0 alg_cfg ar_enable [1|0]" */
-    {"ar_use_lowest",           MAC_ALG_CFG_AUTORATE_USE_LOWEST_RATE},          /* 开启或关闭使用最低速率: sh hipriv.sh "vap0 alg_cfg ar_use_lowest [1|0]" */
-    {"ar_short_num",            MAC_ALG_CFG_AUTORATE_SHORT_STAT_NUM},           /* 设置短期统计的包数目:sh hipriv.sh "vap0 alg_cfg ar_short_num [包数目]" */
-    {"ar_short_shift",          MAC_ALG_CFG_AUTORATE_SHORT_STAT_SHIFT},         /* 设置短期统计的包位移值:sh hipriv.sh "vap0 alg_cfg ar_short_shift [位移值]" */
-    {"ar_long_num",             MAC_ALG_CFG_AUTORATE_LONG_STAT_NUM},            /* 设置长期统计的包数目:sh hipriv.sh "vap0 alg_cfg ar_long_num [包数目]" */
-    {"ar_long_shift",           MAC_ALG_CFG_AUTORATE_LONG_STAT_SHIFT},          /* 设置长期统计的包位移值:sh hipriv.sh "vap0 alg_cfg ar_long_shift [位移值]" */
-    {"ar_min_probe_up_no",      MAC_ALG_CFG_AUTORATE_MIN_PROBE_UP_INTVL_PKTNUM},   /* 设置最小探测包间隔:sh hipriv.sh "vap0 alg_cfg ar_min_probe_no [包数目]" */
-    {"ar_min_probe_down_no",    MAC_ALG_CFG_AUTORATE_MIN_PROBE_DOWN_INTVL_PKTNUM},   /* 设置最小探测包间隔:sh hipriv.sh "vap0 alg_cfg ar_min_probe_no [包数目]" */
-    {"ar_max_probe_no",         MAC_ALG_CFG_AUTORATE_MAX_PROBE_INTVL_PKTNUM},   /* 设置最大探测包间隔:sh hipriv.sh "vap0 alg_cfg ar_max_probe_no [包数目]" */
-    {"ar_keep_times",           MAC_ALG_CFG_AUTORATE_PROBE_INTVL_KEEP_TIMES},   /* 设置探测间隔保持次数:sh hipriv.sh "vap0 alg_cfg ar_keep_times [次数]" */
-    {"ar_delta_ratio",          MAC_ALG_CFG_AUTORATE_DELTA_GOODPUT_RATIO},      /* 设置goodput突变门限(千分比，如300):sh hipriv.sh "vap0 alg_cfg ar_delta_ratio [千分比]" */
-    {"ar_vi_per_limit",         MAC_ALG_CFG_AUTORATE_VI_PROBE_PER_LIMIT},       /* 设置vi的per门限(千分比，如300):sh hipriv.sh "vap0 alg_cfg ar_vi_per_limit [千分比]" */
-    {"ar_vo_per_limit",         MAC_ALG_CFG_AUTORATE_VO_PROBE_PER_LIMIT},       /* 设置vo的per门限(千分比，如300):sh hipriv.sh "vap0 alg_cfg ar_vo_per_limit [千分比]" */
-    {"ar_ampdu_time",           MAC_ALG_CFG_AUTORATE_AMPDU_DURATION},           /* 设置ampdu的durattion值:sh hipriv.sh "vap0 alg_cfg ar_ampdu_time [时间值]" */
-    {"ar_cont_loss_num",        MAC_ALG_CFG_AUTORATE_MCS0_CONT_LOSS_NUM},       /* 设置mcs0的传输失败门限:sh hipriv.sh "vap0 alg_cfg ar_cont_loss_num [包数目]" */
-    {"ar_11b_diff_rssi",        MAC_ALG_CFG_AUTORATE_UP_PROTOCOL_DIFF_RSSI},    /* 设置升回11b的rssi门限:sh hipriv.sh "vap0 alg_cfg ar_11b_diff_rssi [数值]" */
-    {"ar_rts_mode",             MAC_ALG_CFG_AUTORATE_RTS_MODE},                 /* 设置rts模式:sh hipriv.sh "vap0 alg_cfg ar_rts_mode [0(都不开)|1(都开)|2(rate[0]动态RTS, rate[1..3]都开RTS)|3(rate[0]不开RTS, rate[1..3]都开RTS)]" */
-    {"ar_legacy_loss",          MAC_ALG_CFG_AUTORATE_LEGACY_1ST_LOSS_RATIO_TH}, /* 设置Legacy首包错误率门限:sh hipriv.sh "vap0 alg_cfg ar_legacy_loss [数值]" */
-    {"ar_ht_vht_loss",          MAC_ALG_CFG_AUTORATE_HT_VHT_1ST_LOSS_RATIO_TH}, /* 设置Legacy首包错误率门限:sh hipriv.sh "vap0 alg_cfg ar_ht_vht_loss [数值]" */
-    {"ar_stat_log_do",          MAC_ALG_CFG_AUTORATE_STAT_LOG_START},           /* 开始速率统计日志:sh hipriv.sh "vap0 alg_cfg ar_stat_log_do [mac地址] [业务类别] [包数目]" 如: sh hipriv.sh "vap0 alg_cfg ar_stat_log_do 06:31:04:E3:81:02 1 1000" */
-    {"ar_sel_log_do",           MAC_ALG_CFG_AUTORATE_SELECTION_LOG_START},      /* 开始速率选择日志:sh hipriv.sh "vap0 alg_cfg ar_sel_log_do [mac地址] [业务类别] [包数目]" 如: sh hipriv.sh "vap0 alg_cfg ar_sel_log_do 06:31:04:E3:81:02 1 200" */
-    {"ar_fix_log_do",           MAC_ALG_CFG_AUTORATE_FIX_RATE_LOG_START},       /* 开始固定速率日志:sh hipriv.sh "vap0 alg_cfg ar_fix_log_do [mac地址] [tidno] [per门限]" 如: sh hipriv.sh "vap0 alg_cfg ar_sel_log_do 06:31:04:E3:81:02 1 200" */
-    {"ar_aggr_log_do",          MAC_ALG_CFG_AUTORATE_AGGR_STAT_LOG_START},      /* 开始聚合自适应日志:sh hipriv.sh "vap0 alg_cfg ar_fix_log_do [mac地址] [tidno]" 如: sh hipriv.sh "vap0 alg_cfg ar_sel_log_do 06:31:04:E3:81:02 1 " */
-    {"ar_st_log_out",           MAC_ALG_CFG_AUTORATE_STAT_LOG_WRITE},           /* 打印速率统计日志:sh hipriv.sh "vap0 alg_cfg ar_st_log_out 06:31:04:E3:81:02" */
-    {"ar_sel_log_out",          MAC_ALG_CFG_AUTORATE_SELECTION_LOG_WRITE},      /* 打印速率选择日志:sh hipriv.sh "vap0 alg_cfg ar_sel_log_out 06:31:04:E3:81:02" */
-    {"ar_fix_log_out",          MAC_ALG_CFG_AUTORATE_FIX_RATE_LOG_WRITE},       /* 打印固定速率日志:sh hipriv.sh "vap0 alg_cfg ar_fix_log_out 06:31:04:E3:81:02" */
-    {"ar_aggr_log_out",         MAC_ALG_CFG_AUTORATE_AGGR_STAT_LOG_WRITE},      /* 打印固定速率日志:sh hipriv.sh "vap0 alg_cfg ar_fix_log_out 06:31:04:E3:81:02" */
-    {"ar_disp_rateset",         MAC_ALG_CFG_AUTORATE_DISPLAY_RATE_SET},         /* 打印速率集合:sh hipriv.sh "vap0 alg_cfg ar_disp_rateset 06:31:04:E3:81:02" */
-    {"ar_cfg_fix_rate",         MAC_ALG_CFG_AUTORATE_CONFIG_FIX_RATE},          /* 配置固定速率:sh hipriv.sh "vap0 alg_cfg ar_cfg_fix_rate 06:31:04:E3:81:02 0" */
-    {"ar_disp_rx_rate",         MAC_ALG_CFG_AUTORATE_DISPLAY_RX_RATE},          /* 打印接收速率集合:sh hipriv.sh "vap0 alg_cfg ar_disp_rx_rate 06:31:04:E3:81:02" */
-    {"ar_log_enable",           MAC_ALG_CFG_AUTORATE_LOG_ENABLE},               /* 开启或关闭速率自适应日志: sh hipriv.sh "vap0 alg_cfg ar_log_enable [1|0]" */
-    {"ar_max_vo_rate",          MAC_ALG_CFG_AUTORATE_VO_RATE_LIMIT},            /* 设置最大的VO速率: sh hipriv.sh "vap0 alg_cfg ar_max_vo_rate [速率值]" */
-    {"ar_fading_per_th",        MAC_ALG_CFG_AUTORATE_JUDGE_FADING_PER_TH},      /* 设置深衰弱的per门限值: sh hipriv.sh "vap0 alg_cfg ar_fading_per_th [per门限值(千分数)]"*/
-    {"ar_aggr_opt",             MAC_ALG_CFG_AUTORATE_AGGR_OPT},                 /* 设置聚合自适应开关: sh hipriv.sh "vap0 alg_cfg ar_aggr_opt [1|0]"*/
-    {"ar_aggr_pb_intvl",        MAC_ALG_CFG_AUTORATE_AGGR_PROBE_INTVL_NUM},     /* 设置聚合自适应探测间隔: sh hipriv.sh "vap0 alg_cfg ar_aggr_pb_intvl [探测间隔]"*/
-    {"ar_aggr_st_shift",        MAC_ALG_CFG_AUTORATE_AGGR_STAT_SHIFT},          /* 设置聚合自适应统计移位值: sh hipriv.sh "vap0 alg_cfg ar_aggr_st_shift [统计移位值]"*/
-    {"ar_dbac_aggrtime",        MAC_ALG_CFG_AUTORATE_DBAC_AGGR_TIME},           /* 设置DBAC模式下的最大聚合时间: sh hipriv.sh "vap0 alg_cfg ar_dbac_aggrtime [最大聚合时间(us)]"*/
-    {"ar_dbg_vi_status",        MAC_ALG_CFG_AUTORATE_DBG_VI_STATUS},            /* 设置调试用的VI状态: sh hipriv.sh "vap0 alg_cfg ar_dbg_vi_status [0/1/2]"*/
-    {"ar_dbg_aggr_log",         MAC_ALG_CFG_AUTORATE_DBG_AGGR_LOG},             /* 聚合自适应log开关: sh hipriv.sh "vap0 alg_cfg ar_dbg_aggr_log [0/1]"*/
-    {"ar_aggr_pck_num",         MAC_ALG_CFG_AUTORATE_AGGR_NON_PROBE_PCK_NUM},   /* 最优速率变化时不进行聚合探测的报文数: sh hipriv.sh "vap0 alg_cfg ar_aggr_pck_num [报文数]"*/
-    {"ar_min_aggr_idx",         MAC_ALG_CFG_AUTORATE_AGGR_MIN_AGGR_TIME_IDX},   /* 最小聚合时间索引: sh hipriv.sh "vap0 alg_cfg ar_aggr_min_idx [索引值]"*/
-    {"ar_250us_dper_th",        MAC_ALG_CFG_AUTORATE_AGGR_250US_DELTA_PER_TH},  /* 设置聚合250us向上的deltaPER门限: sh hipriv.sh "vap0 alg_cfg ar_250us_dper_th [门限值]"*/
-    {"ar_max_aggr_num",         MAC_ALG_CFG_AUTORATE_MAX_AGGR_NUM},             /* 设置最大聚合数目: sh hipriv.sh "vap0 alg_cfg ar_max_aggr_num [聚合数目]" */
-    {"ar_1mpdu_per_th",         MAC_ALG_CFG_AUTORATE_LIMIT_1MPDU_PER_TH},       /* 设置最低阶MCS限制聚合为1的PER门限: sh hipriv.sh "vap0 alg_cfg ar_1mpdu_per_th [per门限值(千分数)]" */
+    {"ar_enable",               MAC_ALG_CFG_AUTORATE_ENABLE},                   /* ????????????????????????: sh hipriv.sh "vap0 alg_cfg ar_enable [1|0]" */
+    {"ar_use_lowest",           MAC_ALG_CFG_AUTORATE_USE_LOWEST_RATE},          /* ??????????????????????: sh hipriv.sh "vap0 alg_cfg ar_use_lowest [1|0]" */
+    {"ar_short_num",            MAC_ALG_CFG_AUTORATE_SHORT_STAT_NUM},           /* ????????????????????:sh hipriv.sh "vap0 alg_cfg ar_short_num [??????]" */
+    {"ar_short_shift",          MAC_ALG_CFG_AUTORATE_SHORT_STAT_SHIFT},         /* ??????????????????????:sh hipriv.sh "vap0 alg_cfg ar_short_shift [??????]" */
+    {"ar_long_num",             MAC_ALG_CFG_AUTORATE_LONG_STAT_NUM},            /* ????????????????????:sh hipriv.sh "vap0 alg_cfg ar_long_num [??????]" */
+    {"ar_long_shift",           MAC_ALG_CFG_AUTORATE_LONG_STAT_SHIFT},          /* ??????????????????????:sh hipriv.sh "vap0 alg_cfg ar_long_shift [??????]" */
+    {"ar_min_probe_up_no",      MAC_ALG_CFG_AUTORATE_MIN_PROBE_UP_INTVL_PKTNUM},   /* ??????????????????:sh hipriv.sh "vap0 alg_cfg ar_min_probe_no [??????]" */
+    {"ar_min_probe_down_no",    MAC_ALG_CFG_AUTORATE_MIN_PROBE_DOWN_INTVL_PKTNUM},   /* ??????????????????:sh hipriv.sh "vap0 alg_cfg ar_min_probe_no [??????]" */
+    {"ar_max_probe_no",         MAC_ALG_CFG_AUTORATE_MAX_PROBE_INTVL_PKTNUM},   /* ??????????????????:sh hipriv.sh "vap0 alg_cfg ar_max_probe_no [??????]" */
+    {"ar_keep_times",           MAC_ALG_CFG_AUTORATE_PROBE_INTVL_KEEP_TIMES},   /* ????????????????????:sh hipriv.sh "vap0 alg_cfg ar_keep_times [????]" */
+    {"ar_delta_ratio",          MAC_ALG_CFG_AUTORATE_DELTA_GOODPUT_RATIO},      /* ????goodput????????(??????????300):sh hipriv.sh "vap0 alg_cfg ar_delta_ratio [??????]" */
+    {"ar_vi_per_limit",         MAC_ALG_CFG_AUTORATE_VI_PROBE_PER_LIMIT},       /* ????vi??per????(??????????300):sh hipriv.sh "vap0 alg_cfg ar_vi_per_limit [??????]" */
+    {"ar_vo_per_limit",         MAC_ALG_CFG_AUTORATE_VO_PROBE_PER_LIMIT},       /* ????vo??per????(??????????300):sh hipriv.sh "vap0 alg_cfg ar_vo_per_limit [??????]" */
+    {"ar_ampdu_time",           MAC_ALG_CFG_AUTORATE_AMPDU_DURATION},           /* ????ampdu??durattion??:sh hipriv.sh "vap0 alg_cfg ar_ampdu_time [??????]" */
+    {"ar_cont_loss_num",        MAC_ALG_CFG_AUTORATE_MCS0_CONT_LOSS_NUM},       /* ????mcs0??????????????:sh hipriv.sh "vap0 alg_cfg ar_cont_loss_num [??????]" */
+    {"ar_11b_diff_rssi",        MAC_ALG_CFG_AUTORATE_UP_PROTOCOL_DIFF_RSSI},    /* ????????11b??rssi????:sh hipriv.sh "vap0 alg_cfg ar_11b_diff_rssi [????]" */
+    {"ar_rts_mode",             MAC_ALG_CFG_AUTORATE_RTS_MODE},                 /* ????rts????:sh hipriv.sh "vap0 alg_cfg ar_rts_mode [0(??????)|1(????)|2(rate[0]????RTS, rate[1..3]????RTS)|3(rate[0]????RTS, rate[1..3]????RTS)]" */
+    {"ar_legacy_loss",          MAC_ALG_CFG_AUTORATE_LEGACY_1ST_LOSS_RATIO_TH}, /* ????Legacy??????????????:sh hipriv.sh "vap0 alg_cfg ar_legacy_loss [????]" */
+    {"ar_ht_vht_loss",          MAC_ALG_CFG_AUTORATE_HT_VHT_1ST_LOSS_RATIO_TH}, /* ????Legacy??????????????:sh hipriv.sh "vap0 alg_cfg ar_ht_vht_loss [????]" */
+    {"ar_stat_log_do",          MAC_ALG_CFG_AUTORATE_STAT_LOG_START},           /* ????????????????:sh hipriv.sh "vap0 alg_cfg ar_stat_log_do [mac????] [????????] [??????]" ??: sh hipriv.sh "vap0 alg_cfg ar_stat_log_do 06:31:04:E3:81:02 1 1000" */
+    {"ar_sel_log_do",           MAC_ALG_CFG_AUTORATE_SELECTION_LOG_START},      /* ????????????????:sh hipriv.sh "vap0 alg_cfg ar_sel_log_do [mac????] [????????] [??????]" ??: sh hipriv.sh "vap0 alg_cfg ar_sel_log_do 06:31:04:E3:81:02 1 200" */
+    {"ar_fix_log_do",           MAC_ALG_CFG_AUTORATE_FIX_RATE_LOG_START},       /* ????????????????:sh hipriv.sh "vap0 alg_cfg ar_fix_log_do [mac????] [tidno] [per????]" ??: sh hipriv.sh "vap0 alg_cfg ar_sel_log_do 06:31:04:E3:81:02 1 200" */
+    {"ar_aggr_log_do",          MAC_ALG_CFG_AUTORATE_AGGR_STAT_LOG_START},      /* ??????????????????:sh hipriv.sh "vap0 alg_cfg ar_fix_log_do [mac????] [tidno]" ??: sh hipriv.sh "vap0 alg_cfg ar_sel_log_do 06:31:04:E3:81:02 1 " */
+    {"ar_st_log_out",           MAC_ALG_CFG_AUTORATE_STAT_LOG_WRITE},           /* ????????????????:sh hipriv.sh "vap0 alg_cfg ar_st_log_out 06:31:04:E3:81:02" */
+    {"ar_sel_log_out",          MAC_ALG_CFG_AUTORATE_SELECTION_LOG_WRITE},      /* ????????????????:sh hipriv.sh "vap0 alg_cfg ar_sel_log_out 06:31:04:E3:81:02" */
+    {"ar_fix_log_out",          MAC_ALG_CFG_AUTORATE_FIX_RATE_LOG_WRITE},       /* ????????????????:sh hipriv.sh "vap0 alg_cfg ar_fix_log_out 06:31:04:E3:81:02" */
+    {"ar_aggr_log_out",         MAC_ALG_CFG_AUTORATE_AGGR_STAT_LOG_WRITE},      /* ????????????????:sh hipriv.sh "vap0 alg_cfg ar_fix_log_out 06:31:04:E3:81:02" */
+    {"ar_disp_rateset",         MAC_ALG_CFG_AUTORATE_DISPLAY_RATE_SET},         /* ????????????:sh hipriv.sh "vap0 alg_cfg ar_disp_rateset 06:31:04:E3:81:02" */
+    {"ar_cfg_fix_rate",         MAC_ALG_CFG_AUTORATE_CONFIG_FIX_RATE},          /* ????????????:sh hipriv.sh "vap0 alg_cfg ar_cfg_fix_rate 06:31:04:E3:81:02 0" */
+    {"ar_disp_rx_rate",         MAC_ALG_CFG_AUTORATE_DISPLAY_RX_RATE},          /* ????????????????:sh hipriv.sh "vap0 alg_cfg ar_disp_rx_rate 06:31:04:E3:81:02" */
+    {"ar_log_enable",           MAC_ALG_CFG_AUTORATE_LOG_ENABLE},               /* ????????????????????????: sh hipriv.sh "vap0 alg_cfg ar_log_enable [1|0]" */
+    {"ar_max_vo_rate",          MAC_ALG_CFG_AUTORATE_VO_RATE_LIMIT},            /* ??????????VO????: sh hipriv.sh "vap0 alg_cfg ar_max_vo_rate [??????]" */
+    {"ar_fading_per_th",        MAC_ALG_CFG_AUTORATE_JUDGE_FADING_PER_TH},      /* ????????????per??????: sh hipriv.sh "vap0 alg_cfg ar_fading_per_th [per??????(??????)]"*/
+    {"ar_aggr_opt",             MAC_ALG_CFG_AUTORATE_AGGR_OPT},                 /* ??????????????????: sh hipriv.sh "vap0 alg_cfg ar_aggr_opt [1|0]"*/
+    {"ar_aggr_pb_intvl",        MAC_ALG_CFG_AUTORATE_AGGR_PROBE_INTVL_NUM},     /* ??????????????????????: sh hipriv.sh "vap0 alg_cfg ar_aggr_pb_intvl [????????]"*/
+    {"ar_aggr_st_shift",        MAC_ALG_CFG_AUTORATE_AGGR_STAT_SHIFT},          /* ????????????????????????: sh hipriv.sh "vap0 alg_cfg ar_aggr_st_shift [??????????]"*/
+    {"ar_dbac_aggrtime",        MAC_ALG_CFG_AUTORATE_DBAC_AGGR_TIME},           /* ????DBAC????????????????????: sh hipriv.sh "vap0 alg_cfg ar_dbac_aggrtime [????????????(us)]"*/
+    {"ar_dbg_vi_status",        MAC_ALG_CFG_AUTORATE_DBG_VI_STATUS},            /* ????????????VI????: sh hipriv.sh "vap0 alg_cfg ar_dbg_vi_status [0/1/2]"*/
+    {"ar_dbg_aggr_log",         MAC_ALG_CFG_AUTORATE_DBG_AGGR_LOG},             /* ??????????log????: sh hipriv.sh "vap0 alg_cfg ar_dbg_aggr_log [0/1]"*/
+    {"ar_aggr_pck_num",         MAC_ALG_CFG_AUTORATE_AGGR_NON_PROBE_PCK_NUM},   /* ????????????????????????????????????: sh hipriv.sh "vap0 alg_cfg ar_aggr_pck_num [??????]"*/
+    {"ar_min_aggr_idx",         MAC_ALG_CFG_AUTORATE_AGGR_MIN_AGGR_TIME_IDX},   /* ????????????????: sh hipriv.sh "vap0 alg_cfg ar_aggr_min_idx [??????]"*/
+    {"ar_250us_dper_th",        MAC_ALG_CFG_AUTORATE_AGGR_250US_DELTA_PER_TH},  /* ????????250us??????deltaPER????: sh hipriv.sh "vap0 alg_cfg ar_250us_dper_th [??????]"*/
+    {"ar_max_aggr_num",         MAC_ALG_CFG_AUTORATE_MAX_AGGR_NUM},             /* ????????????????: sh hipriv.sh "vap0 alg_cfg ar_max_aggr_num [????????]" */
+    {"ar_1mpdu_per_th",         MAC_ALG_CFG_AUTORATE_LIMIT_1MPDU_PER_TH},       /* ??????????MCS??????????1??PER????: sh hipriv.sh "vap0 alg_cfg ar_1mpdu_per_th [per??????(??????)]" */
 
-    {"ar_btcoxe_probe",         MAC_ALG_CFG_AUTORATE_BTCOEX_PROBE_ENABLE},      /* 开启或关闭共存探测机制: sh hipriv.sh "vap0 alg_cfg ar_btcoxe_probe [1|0]" */
-    {"ar_btcoxe_aggr",          MAC_ALG_CFG_AUTORATE_BTCOEX_AGGR_ENABLE},       /* 开启或关闭共存聚合机制: sh hipriv.sh "vap0 alg_cfg ar_btcoxe_aggr [1|0]" */
-    {"ar_coxe_intvl",           MAC_ALG_CFG_AUTORATE_COEX_STAT_INTVL},          /* 设置共存统计时间间隔参数: sh hipriv.sh "vap0 alg_cfg ar_coxe_intvl [统计周期ms]"*/
-    {"ar_coxe_low_th",          MAC_ALG_CFG_AUTORATE_COEX_LOW_ABORT_TH},        /* 设置共存abort低比例门限参数: sh hipriv.sh "vap0 alg_cfg ar_coxe_low_th [千分数]"*/
-    {"ar_coxe_high_th",         MAC_ALG_CFG_AUTORATE_COEX_HIGH_ABORT_TH},       /* 设置共存abort高比例门限参数: sh hipriv.sh "vap0 alg_cfg ar_coxe_high_th [千分数]"*/
-    {"ar_coxe_agrr_th",         MAC_ALG_CFG_AUTORATE_COEX_AGRR_NUM_ONE_TH},     /* 设置共存聚合数目为1的门限参数: sh hipriv.sh "vap0 alg_cfg ar_coxe_agrr_th [千分数]"*/
+    {"ar_btcoxe_probe",         MAC_ALG_CFG_AUTORATE_BTCOEX_PROBE_ENABLE},      /* ??????????????????????: sh hipriv.sh "vap0 alg_cfg ar_btcoxe_probe [1|0]" */
+    {"ar_btcoxe_aggr",          MAC_ALG_CFG_AUTORATE_BTCOEX_AGGR_ENABLE},       /* ??????????????????????: sh hipriv.sh "vap0 alg_cfg ar_btcoxe_aggr [1|0]" */
+    {"ar_coxe_intvl",           MAC_ALG_CFG_AUTORATE_COEX_STAT_INTVL},          /* ????????????????????????: sh hipriv.sh "vap0 alg_cfg ar_coxe_intvl [????????ms]"*/
+    {"ar_coxe_low_th",          MAC_ALG_CFG_AUTORATE_COEX_LOW_ABORT_TH},        /* ????????abort??????????????: sh hipriv.sh "vap0 alg_cfg ar_coxe_low_th [??????]"*/
+    {"ar_coxe_high_th",         MAC_ALG_CFG_AUTORATE_COEX_HIGH_ABORT_TH},       /* ????????abort??????????????: sh hipriv.sh "vap0 alg_cfg ar_coxe_high_th [??????]"*/
+    {"ar_coxe_agrr_th",         MAC_ALG_CFG_AUTORATE_COEX_AGRR_NUM_ONE_TH},     /* ??????????????????1??????????: sh hipriv.sh "vap0 alg_cfg ar_coxe_agrr_th [??????]"*/
 
-    {"ar_dyn_bw_en",            MAC_ALG_CFG_AUTORATE_DYNAMIC_BW_ENABLE},        /* 动态带宽特性使能开关: sh hipriv.sh "vap0 alg_cfg ar_dyn_bw_en [0/1]" */
-    {"ar_thpt_wave_opt",        MAC_ALG_CFG_AUTORATE_THRPT_WAVE_OPT},           /* 吞吐量波动优化开关: sh hipriv.sh "vap0 alg_cfg ar_thpt_wave_opt [0/1]" */
-    {"ar_gdpt_diff_th",         MAC_ALG_CFG_AUTORATE_GOODPUT_DIFF_TH},          /* 设置判断吞吐量波动的goodput差异比例门限(千分数): sh hipriv.sh "vap0 alg_cfg ar_gdpt_diff_th [goodput相差比例门限(千分数)]" */
-    {"ar_per_worse_th",         MAC_ALG_CFG_AUTORATE_PER_WORSE_TH},             /* 设置判断吞吐量波动的PER变差的门限(千分数): sh hipriv.sh "vap0 alg_cfg ar_per_worse_th [PER变差门限(千分数)]" */
-    {"ar_cts_no_ack_num",       MAC_ALG_CFG_AUTORATE_RX_CTS_NO_BA_NUM},         /* 设置发RTS收到CTS但发DATA都不回BA的发送完成中断次数门限: sh hipriv.sh "vap0 alg_cfg ar_cts_no_ba_num [次数]" */
-    {"ar_vo_aggr",              MAL_ALG_CFG_AUTORATE_VOICE_AGGR},               /* 设置是否支持voice业务聚合: sh hipriv.sh "vap0 alg_cfg ar_vo_aggr [0/1]" */
-    {"ar_fast_smth_shft",       MAC_ALG_CFG_AUTORATE_FAST_SMOOTH_SHIFT},        /* 设置快速平滑统计的平滑因子偏移量: sh hipriv.sh "vap0 alg_cfg ar_fast_smth_shft [偏移量]" (取255表示取消快速平滑)*/
-    {"ar_fast_smth_aggr_num",   MAC_ALG_CFG_AUTORATE_FAST_SMOOTH_AGGR_NUM},     /* 设置快速平滑统计的最小聚合数目门限: sh hipriv.sh "vap0 alg_cfg ar_fast_smth_aggr_num [最小聚合数目]" */
-    {"ar_sgi_punish_per",       MAC_ALG_CFG_AUTORATE_SGI_PUNISH_PER},           /* 设置short GI惩罚的PER门限值(千分数): sh hipriv.sh "vap0 alg_cfg ar_sgi_punish_per [PER门限值(千分数)]" */
-    {"ar_sgi_punish_num",       MAC_ALG_CFG_AUTORATE_SGI_PUNISH_NUM},           /* 设置short GI惩罚的等待探测数目: sh hipriv.sh "vap0 alg_cfg ar_sgi_punish_num [等待探测数目]" */
+    {"ar_dyn_bw_en",            MAC_ALG_CFG_AUTORATE_DYNAMIC_BW_ENABLE},        /* ????????????????????: sh hipriv.sh "vap0 alg_cfg ar_dyn_bw_en [0/1]" */
+    {"ar_thpt_wave_opt",        MAC_ALG_CFG_AUTORATE_THRPT_WAVE_OPT},           /* ??????????????????: sh hipriv.sh "vap0 alg_cfg ar_thpt_wave_opt [0/1]" */
+    {"ar_gdpt_diff_th",         MAC_ALG_CFG_AUTORATE_GOODPUT_DIFF_TH},          /* ????????????????????goodput????????????(??????): sh hipriv.sh "vap0 alg_cfg ar_gdpt_diff_th [goodput????????????(??????)]" */
+    {"ar_per_worse_th",         MAC_ALG_CFG_AUTORATE_PER_WORSE_TH},             /* ????????????????????PER??????????(??????): sh hipriv.sh "vap0 alg_cfg ar_per_worse_th [PER????????(??????)]" */
+    {"ar_cts_no_ack_num",       MAC_ALG_CFG_AUTORATE_RX_CTS_NO_BA_NUM},         /* ??????RTS????CTS????DATA??????BA??????????????????????: sh hipriv.sh "vap0 alg_cfg ar_cts_no_ba_num [????]" */
+    {"ar_vo_aggr",              MAL_ALG_CFG_AUTORATE_VOICE_AGGR},               /* ????????????voice????????: sh hipriv.sh "vap0 alg_cfg ar_vo_aggr [0/1]" */
+    {"ar_fast_smth_shft",       MAC_ALG_CFG_AUTORATE_FAST_SMOOTH_SHIFT},        /* ????????????????????????????????: sh hipriv.sh "vap0 alg_cfg ar_fast_smth_shft [??????]" (??255????????????????)*/
+    {"ar_fast_smth_aggr_num",   MAC_ALG_CFG_AUTORATE_FAST_SMOOTH_AGGR_NUM},     /* ??????????????????????????????????: sh hipriv.sh "vap0 alg_cfg ar_fast_smth_aggr_num [????????????]" */
+    {"ar_sgi_punish_per",       MAC_ALG_CFG_AUTORATE_SGI_PUNISH_PER},           /* ????short GI??????PER??????(??????): sh hipriv.sh "vap0 alg_cfg ar_sgi_punish_per [PER??????(??????)]" */
+    {"ar_sgi_punish_num",       MAC_ALG_CFG_AUTORATE_SGI_PUNISH_NUM},           /* ????short GI??????????????????: sh hipriv.sh "vap0 alg_cfg ar_sgi_punish_num [????????????]" */
 #ifdef _PRE_WLAN_FEATURE_MWO_DET
-    {"ar_fourth_rate",          MAL_ALG_CFG_AUTORATE_LAST_RATE_RANK_INDEX},     /*设置第四速率等级，在微波炉周期的8ms 发射期用*/
-    {"ar_mwo_det_debug",        MAL_ALG_CFG_AUTORATE_MWO_DET_DEBUG},            /*设置autorate内微波炉检测算法的维测信息的打印开关*/
-    {"ar_mwo_per_log",          MAL_ALG_CFG_AUTORATE_MWO_DET_PER_LOG},          /*设置微波炉检测状态下per统计的时长，默认统计时间为3000ms,单位ms */
+    {"ar_fourth_rate",          MAL_ALG_CFG_AUTORATE_LAST_RATE_RANK_INDEX},     /*????????????????????????????????8ms ????????*/
+    {"ar_mwo_det_debug",        MAL_ALG_CFG_AUTORATE_MWO_DET_DEBUG},            /*????autorate????????????????????????????????????*/
+    {"ar_mwo_per_log",          MAL_ALG_CFG_AUTORATE_MWO_DET_PER_LOG},          /*????????????????????per??????????????????????????3000ms,????ms */
 #endif
-    {"ar_rxch_agc_opt",         MAC_ALG_CFG_AUTORATE_RXCH_AGC_OPT},             /* 设置接收通道AGC优化使能开关: sh hipriv.sh "vap0 alg_cfg ar_rxch_agc_opt [1/0]" */
-    {"ar_rxch_agc_log",         MAC_ALG_CFG_AUTORATE_RXCH_AGC_LOG},             /* 设置接收通道AGC优化日志开关: sh hipriv.sh "vap0 alg_cfg ar_rxch_agc_log [1/0]" */
-    {"ar_weak_rssi_th",         MAC_ALG_CFG_AUTORATE_WEAK_RSSI_TH},             /* 设置接收通道AGC优化的弱信号RSSI门限: sh hipriv.sh "vap0 alg_cfg ar_weak_rssi_th [RSSI绝对值]" (例如: RSSI为-90dBm, 则参数值为90) */
-    {"ar_rxch_stat_period",     MAC_ALG_CFG_AUTORATE_RXCH_STAT_PERIOD},         /* 设置接收通道的统计周期(间隔报文数): sh hipriv.sh "vap0 alg_cfg ar_weak_rssi_th [报文数目]" */
-    {"ar_rts_one_tcp_dbg",      MAC_ALG_CFG_AUTORATE_RTS_ONE_TCP_DBG},          /* 设置RTS针对单用户TCP优化的调试开关: sh hipriv.sh "vap0 alg_cfg ar_rts_one_tcp_dbg [1/0]" */
-    {"ar_scan_user_opt",        MAC_ALG_CFG_AUTORATE_SCAN_USER_OPT},            /* 设置针对扫描用户的优化: sh hipriv.sh "vap0 alg_cfg ar_scan_user_opt [1/0]" */
-    {"ar_max_tx_cnt",           MAC_ALG_CFG_AUTORATE_MAX_TX_COUNT},             /* 设置每个速率等级的最大传输次数: sh hipriv.sh "vap0 alg_cfg ar_max_tx_cnt [传输次数]" */
-    {"ar_80M_40M_switch",       MAC_ALG_CFG_AUTORATE_80M_40M_SWITCH},           /* 设置是否开启80M 切40M的开关  sh hipriv.sh "vap0 alg_cfg ar_80M_40M_switch [1/0]" */
-    {"ar_40M_switch_thr",       MAC_ALG_CFG_AUTORATE_40M_SWITCH_THR},           /* 设置80M 切40M mcs门限  sh hipriv.sh "vap0 alg_cfg ar_40M_switch_thr [mcs]" */
+    {"ar_rxch_agc_opt",         MAC_ALG_CFG_AUTORATE_RXCH_AGC_OPT},             /* ????????????AGC????????????: sh hipriv.sh "vap0 alg_cfg ar_rxch_agc_opt [1/0]" */
+    {"ar_rxch_agc_log",         MAC_ALG_CFG_AUTORATE_RXCH_AGC_LOG},             /* ????????????AGC????????????: sh hipriv.sh "vap0 alg_cfg ar_rxch_agc_log [1/0]" */
+    {"ar_weak_rssi_th",         MAC_ALG_CFG_AUTORATE_WEAK_RSSI_TH},             /* ????????????AGC????????????RSSI????: sh hipriv.sh "vap0 alg_cfg ar_weak_rssi_th [RSSI??????]" (????: RSSI??-90dBm, ??????????90) */
+    {"ar_rxch_stat_period",     MAC_ALG_CFG_AUTORATE_RXCH_STAT_PERIOD},         /* ??????????????????????(??????????): sh hipriv.sh "vap0 alg_cfg ar_weak_rssi_th [????????]" */
+    {"ar_rts_one_tcp_dbg",      MAC_ALG_CFG_AUTORATE_RTS_ONE_TCP_DBG},          /* ????RTS??????????TCP??????????????: sh hipriv.sh "vap0 alg_cfg ar_rts_one_tcp_dbg [1/0]" */
+    {"ar_scan_user_opt",        MAC_ALG_CFG_AUTORATE_SCAN_USER_OPT},            /* ??????????????????????: sh hipriv.sh "vap0 alg_cfg ar_scan_user_opt [1/0]" */
+    {"ar_max_tx_cnt",           MAC_ALG_CFG_AUTORATE_MAX_TX_COUNT},             /* ??????????????????????????????: sh hipriv.sh "vap0 alg_cfg ar_max_tx_cnt [????????]" */
+    {"ar_80M_40M_switch",       MAC_ALG_CFG_AUTORATE_80M_40M_SWITCH},           /* ????????????80M ??40M??????  sh hipriv.sh "vap0 alg_cfg ar_80M_40M_switch [1/0]" */
+    {"ar_40M_switch_thr",       MAC_ALG_CFG_AUTORATE_40M_SWITCH_THR},           /* ????80M ??40M mcs????  sh hipriv.sh "vap0 alg_cfg ar_40M_switch_thr [mcs]" */
     {"ar_collision_det",        MAC_ALG_CFG_AUTORATE_COLLISION_DET_EN},
     {"sm_train_num",            MAC_ALG_CFG_SMARTANT_TRAINING_PACKET_NUMBER},
     {"sm_change_ant",           MAC_ALG_CFG_SMARTANT_CHANGE_ANT},
@@ -1756,75 +1756,75 @@ OAL_CONST wal_ioctl_alg_cfg_stru g_ast_alg_cfg_map_etc[] =
     {"sm_change_freq",          MAC_ALG_CFG_SMARTANT_SET_ANT_CHANGE_FREQ},
     {"sm_change_th",            MAC_ALG_CFG_SMARTANT_SET_ANT_CHANGE_THRESHOLD},
 
-    {"anti_inf_imm_en",         MAC_ALG_CFG_ANTI_INTF_IMM_ENABLE},      /* 弱干扰免疫中non-direct使能: sh hipriv.sh "vap0 alg_cfg anti_inf_imm_en 0|1" */
-    {"anti_inf_unlock_en",      MAC_ALG_CFG_ANTI_INTF_UNLOCK_ENABLE},   /* 弱干扰免疫中dynamic unlock使能: sh hipriv.sh "vap0 alg_cfg anti_inf_unlock_en 0|1" */
-    {"anti_inf_stat_time",      MAC_ALG_CFG_ANTI_INTF_RSSI_STAT_CYCLE}, /* 弱干扰免疫中rssi统计周期: sh hipriv.sh "vap0 anti_inf_stat_time [time]" */
-    {"anti_inf_off_time",       MAC_ALG_CFG_ANTI_INTF_UNLOCK_CYCLE},    /* 弱干扰免疫中unlock关闭周期: sh hipriv.sh "vap0 anti_inf_off_time [time]" */
-    {"anti_inf_off_dur",        MAC_ALG_CFG_ANTI_INTF_UNLOCK_DUR_TIME}, /* 弱干扰免疫中unlock关闭持续时间: sh hipriv.sh "vap0 anti_inf_off_dur [time]" */
-    {"anti_inf_nav_en",         MAC_ALG_CFG_ANTI_INTF_NAV_IMM_ENABLE},  /* 抗干扰nav免疫使能: sh hipriv.sh "vap0 alg_cfg anti_inf_nav_en 0|1" */
-    {"anti_inf_gd_th",          MAC_ALG_CFG_ANTI_INTF_GOODPUT_FALL_TH}, /* 弱干扰免疫goodput下降门限: sh hipriv.sh "vap0 alg_cfg anti_inf_gd_th [num]" */
-    {"anti_inf_keep_max",       MAC_ALG_CFG_ANTI_INTF_KEEP_CYC_MAX_NUM},/* 弱干扰免疫探测保持最大周期数: sh hipriv.sh "vap0 alg_cfg anti_inf_keep_max [num]" */
-    {"anti_inf_keep_min",       MAC_ALG_CFG_ANTI_INTF_KEEP_CYC_MIN_NUM},/* 弱干扰免疫探测保持最大周期数: sh hipriv.sh "vap0 alg_cfg anti_inf_keep_min [num]" */
-    {"anti_inf_per_pro_en",     MAC_ALG_CFG_ANTI_INTF_PER_PROBE_EN},    /* 弱干扰免疫是否使能tx time探测: sh hipriv.sh "vap0 anti_inf_tx_pro_en 0|1" */
-    {"anti_inf_txtime_th",      MAC_ALG_CFG_ANTI_INTF_TX_TIME_FALL_TH}, /* tx time下降门限: sh hipriv.sh "vap0 alg_cfg anti_inf_txtime_th [val]"*/
-    {"anti_inf_per_th",         MAC_ALG_CFG_ANTI_INTF_PER_FALL_TH},     /* per下降门限: sh hipriv.sh "vap0 alg_cfg anti_inf_per_th [val]"*/
-    {"anti_inf_gd_jitter_th",   MAC_ALG_CFG_ANTI_INTF_GOODPUT_JITTER_TH},/* goodput抖动门限: sh hipriv.sh "vap0 alg_cfg anti_inf_gd_jitter_th [val]"*/
-    {"anti_inf_debug_mode",     MAC_ALG_CFG_ANTI_INTF_DEBUG_MODE},      /* 弱干扰免疫debug的打印信息: sh hipriv.sh "vap0 alg_cfg anti_inf_debug_mode 0|1|2" */
+    {"anti_inf_imm_en",         MAC_ALG_CFG_ANTI_INTF_IMM_ENABLE},      /* ????????????non-direct????: sh hipriv.sh "vap0 alg_cfg anti_inf_imm_en 0|1" */
+    {"anti_inf_unlock_en",      MAC_ALG_CFG_ANTI_INTF_UNLOCK_ENABLE},   /* ????????????dynamic unlock????: sh hipriv.sh "vap0 alg_cfg anti_inf_unlock_en 0|1" */
+    {"anti_inf_stat_time",      MAC_ALG_CFG_ANTI_INTF_RSSI_STAT_CYCLE}, /* ????????????rssi????????: sh hipriv.sh "vap0 anti_inf_stat_time [time]" */
+    {"anti_inf_off_time",       MAC_ALG_CFG_ANTI_INTF_UNLOCK_CYCLE},    /* ????????????unlock????????: sh hipriv.sh "vap0 anti_inf_off_time [time]" */
+    {"anti_inf_off_dur",        MAC_ALG_CFG_ANTI_INTF_UNLOCK_DUR_TIME}, /* ????????????unlock????????????: sh hipriv.sh "vap0 anti_inf_off_dur [time]" */
+    {"anti_inf_nav_en",         MAC_ALG_CFG_ANTI_INTF_NAV_IMM_ENABLE},  /* ??????nav????????: sh hipriv.sh "vap0 alg_cfg anti_inf_nav_en 0|1" */
+    {"anti_inf_gd_th",          MAC_ALG_CFG_ANTI_INTF_GOODPUT_FALL_TH}, /* ??????????goodput????????: sh hipriv.sh "vap0 alg_cfg anti_inf_gd_th [num]" */
+    {"anti_inf_keep_max",       MAC_ALG_CFG_ANTI_INTF_KEEP_CYC_MAX_NUM},/* ????????????????????????????: sh hipriv.sh "vap0 alg_cfg anti_inf_keep_max [num]" */
+    {"anti_inf_keep_min",       MAC_ALG_CFG_ANTI_INTF_KEEP_CYC_MIN_NUM},/* ????????????????????????????: sh hipriv.sh "vap0 alg_cfg anti_inf_keep_min [num]" */
+    {"anti_inf_per_pro_en",     MAC_ALG_CFG_ANTI_INTF_PER_PROBE_EN},    /* ??????????????????tx time????: sh hipriv.sh "vap0 anti_inf_tx_pro_en 0|1" */
+    {"anti_inf_txtime_th",      MAC_ALG_CFG_ANTI_INTF_TX_TIME_FALL_TH}, /* tx time????????: sh hipriv.sh "vap0 alg_cfg anti_inf_txtime_th [val]"*/
+    {"anti_inf_per_th",         MAC_ALG_CFG_ANTI_INTF_PER_FALL_TH},     /* per????????: sh hipriv.sh "vap0 alg_cfg anti_inf_per_th [val]"*/
+    {"anti_inf_gd_jitter_th",   MAC_ALG_CFG_ANTI_INTF_GOODPUT_JITTER_TH},/* goodput????????: sh hipriv.sh "vap0 alg_cfg anti_inf_gd_jitter_th [val]"*/
+    {"anti_inf_debug_mode",     MAC_ALG_CFG_ANTI_INTF_DEBUG_MODE},      /* ??????????debug??????????: sh hipriv.sh "vap0 alg_cfg anti_inf_debug_mode 0|1|2" */
 
-    {"intf_det_cycle",          MAC_ALG_CFG_INTF_DET_CYCLE},            /* 设置干扰检测周期(ms):sh hipriv.sh "vap0 alg_cfg intf_det_cycle [val]" */
-    {"intf_det_mode",           MAC_ALG_CFG_INTF_DET_MODE},             /* 设置干扰检测模式(同频开/邻频叠频开/都开):sh hipriv.sh "vap0 alg_cfg intf_det_mode 0|1" */
-    {"intf_det_debug",          MAC_ALG_CFG_INTF_DET_DEBUG},            /* 设置干扰检测debug模式(每个bit表示一类):sh hipriv.sh "vap0 alg_cfg intf_det_debug 0|1" */
-    {"intf_det_cothr_sta",      MAC_ALG_CFG_INTF_DET_COCH_THR_STA},     /* 设置干扰检测sta阈值(千分之x):sh hipriv.sh "vap0 alg_cfg intf_det_cothr_sta [val]" */
-    {"intf_det_nointf_thr_sta", MAC_ALG_CFG_INTF_DET_COCH_NOINTF_STA},  /* 设置干扰检测sta无干扰阈值(千分之x):sh hipriv.sh "vap0 alg_cfg intf_det_nointf_thr_sta [val]" */
-    {"intf_det_cothr_udp",      MAC_ALG_CFG_INTF_DET_COCH_THR_UDP},     /* 设置干扰检测ap udp阈值(千分之x):sh hipriv.sh "vap0 alg_cfg intf_det_cothr_udp [val]" */
-    {"intf_det_cothr_tcp",      MAC_ALG_CFG_INTF_DET_COCH_THR_TCP},     /* 设置干扰检测ap tcp阈值(千分之x):sh hipriv.sh "vap0 alg_cfg intf_det_cothr_tcp [val]" */
-    {"intf_det_adjscan_cyc",    MAC_ALG_CFG_INTF_DET_ADJCH_SCAN_CYC},   /* 设置干扰检测邻频干扰扫描周期:sh hipriv.sh "vap0 alg_cfg intf_det_adjscan_cyc [val]" */
-    {"intf_det_adjratio_thr",   MAC_ALG_CFG_INTF_DET_ADJRATIO_THR},     /* 设置干扰检测邻频叠频干扰繁忙度阈值(千分之x):sh hipriv.sh "vap0 alg_cfg intf_det_adjratio_thr [val]" */
-    {"intf_det_sync_th",        MAC_ALG_CFG_INTF_DET_SYNC_THR},         /* 设置干扰检测邻频叠频干扰sync error阈值(千分之x):sh hipriv.sh "vap0 alg_cfg intf_det_sync_th [val]"*/
-    {"intf_det_ave_rssi",       MAC_ALG_CFG_INTF_DET_AVE_RSSI},         /* 设置干扰检测零频叠频干扰平均rssi阈值(千分之x):sh hipriv.sh "vap0 alg_cfg intf_det_ave_rssi [val]"*/
-    {"intf_det_no_adjratio_th", MAC_ALG_CFG_INTF_DET_NO_ADJRATIO_TH},   /* 设置干扰检测非邻/叠频干扰繁忙度阈值(千分之x):sh hipriv.sh "vap0 alg_cfg intf_det_no_adjratio_th [val]" */
-    {"intf_det_no_adjcyc_th",   MAC_ALG_CFG_INTF_DET_NO_ADJCYC_TH},     /* 设置干扰检测非邻/叠频干扰计数阈值:sh hipriv.sh "vap0 alg_cfg intf_det_no_adjcyc_th [val]" */
-    {"intf_det_collision_th",   MAC_ALG_CFG_INTF_DET_COLLISION_TH},     /* 设置干扰检测非邻/叠频干扰计数阈值:sh hipriv.sh "vap0 alg_cfg intf_det_collision_th [val] */
+    {"intf_det_cycle",          MAC_ALG_CFG_INTF_DET_CYCLE},            /* ????????????????(ms):sh hipriv.sh "vap0 alg_cfg intf_det_cycle [val]" */
+    {"intf_det_mode",           MAC_ALG_CFG_INTF_DET_MODE},             /* ????????????????(??????/??????????/????):sh hipriv.sh "vap0 alg_cfg intf_det_mode 0|1" */
+    {"intf_det_debug",          MAC_ALG_CFG_INTF_DET_DEBUG},            /* ????????????debug????(????bit????????):sh hipriv.sh "vap0 alg_cfg intf_det_debug 0|1" */
+    {"intf_det_cothr_sta",      MAC_ALG_CFG_INTF_DET_COCH_THR_STA},     /* ????????????sta????(??????x):sh hipriv.sh "vap0 alg_cfg intf_det_cothr_sta [val]" */
+    {"intf_det_nointf_thr_sta", MAC_ALG_CFG_INTF_DET_COCH_NOINTF_STA},  /* ????????????sta??????????(??????x):sh hipriv.sh "vap0 alg_cfg intf_det_nointf_thr_sta [val]" */
+    {"intf_det_cothr_udp",      MAC_ALG_CFG_INTF_DET_COCH_THR_UDP},     /* ????????????ap udp????(??????x):sh hipriv.sh "vap0 alg_cfg intf_det_cothr_udp [val]" */
+    {"intf_det_cothr_tcp",      MAC_ALG_CFG_INTF_DET_COCH_THR_TCP},     /* ????????????ap tcp????(??????x):sh hipriv.sh "vap0 alg_cfg intf_det_cothr_tcp [val]" */
+    {"intf_det_adjscan_cyc",    MAC_ALG_CFG_INTF_DET_ADJCH_SCAN_CYC},   /* ????????????????????????????:sh hipriv.sh "vap0 alg_cfg intf_det_adjscan_cyc [val]" */
+    {"intf_det_adjratio_thr",   MAC_ALG_CFG_INTF_DET_ADJRATIO_THR},     /* ??????????????????????????????????(??????x):sh hipriv.sh "vap0 alg_cfg intf_det_adjratio_thr [val]" */
+    {"intf_det_sync_th",        MAC_ALG_CFG_INTF_DET_SYNC_THR},         /* ????????????????????????sync error????(??????x):sh hipriv.sh "vap0 alg_cfg intf_det_sync_th [val]"*/
+    {"intf_det_ave_rssi",       MAC_ALG_CFG_INTF_DET_AVE_RSSI},         /* ????????????????????????????rssi????(??????x):sh hipriv.sh "vap0 alg_cfg intf_det_ave_rssi [val]"*/
+    {"intf_det_no_adjratio_th", MAC_ALG_CFG_INTF_DET_NO_ADJRATIO_TH},   /* ????????????????/??????????????????(??????x):sh hipriv.sh "vap0 alg_cfg intf_det_no_adjratio_th [val]" */
+    {"intf_det_no_adjcyc_th",   MAC_ALG_CFG_INTF_DET_NO_ADJCYC_TH},     /* ????????????????/????????????????:sh hipriv.sh "vap0 alg_cfg intf_det_no_adjcyc_th [val]" */
+    {"intf_det_collision_th",   MAC_ALG_CFG_INTF_DET_COLLISION_TH},     /* ????????????????/????????????????:sh hipriv.sh "vap0 alg_cfg intf_det_collision_th [val] */
 #ifdef _PRE_WLAN_PRODUCT_1151V200
-    {"intf_det_ch_busy_log",    MAC_ALG_CFG_INTF_DET_CH_BUSY_LOG},      /* 设置干扰检测中信道繁忙度打印开关:sh hipriv.sh "Hisilicon0 alg_cfg intf_det_ch_busy_log 0/1" */
+    {"intf_det_ch_busy_log",    MAC_ALG_CFG_INTF_DET_CH_BUSY_LOG},      /* ????????????????????????????????:sh hipriv.sh "Hisilicon0 alg_cfg intf_det_ch_busy_log 0/1" */
 #endif
-    {"neg_det_noprobe_th",      MAC_ALG_CFG_NEG_DET_NONPROBE_TH},       /* 设置检测到负增益后不探测阈值:sh hipriv.sh "vap0 alg_cfg neg_det_noprobe_th [val]" */
-    {"intf_det_stat_log_do",    MAC_ALG_CFG_INTF_DET_STAT_LOG_START},   /* 开始统计日志:sh hipriv.sh "vap0 alg_intf_det_log intf_det_stat_log_do [val]" */
-    {"intf_det_stat_log_out",   MAC_ALG_CFG_INTF_DET_STAT_LOG_WRITE},   /* 打印统计日志:sh hipriv.sh "vap0 alg_intf_det_log intf_det_stat_log_out" */
+    {"neg_det_noprobe_th",      MAC_ALG_CFG_NEG_DET_NONPROBE_TH},       /* ????????????????????????????:sh hipriv.sh "vap0 alg_cfg neg_det_noprobe_th [val]" */
+    {"intf_det_stat_log_do",    MAC_ALG_CFG_INTF_DET_STAT_LOG_START},   /* ????????????:sh hipriv.sh "vap0 alg_intf_det_log intf_det_stat_log_do [val]" */
+    {"intf_det_stat_log_out",   MAC_ALG_CFG_INTF_DET_STAT_LOG_WRITE},   /* ????????????:sh hipriv.sh "vap0 alg_intf_det_log intf_det_stat_log_out" */
 
-    {"edca_opt_en_ap",          MAC_ALG_CFG_EDCA_OPT_AP_EN_MODE},       /* ap模式下edca优化使能模式: sh hipriv.sh "vap0 alg_cfg edca_opt_en_ap 0|1|2" */
-    {"edca_opt_en_sta",         MAC_ALG_CFG_EDCA_OPT_STA_EN},           /* sta模式下edca优化使能模式: sh hipriv.sh "vap0 alg_cfg edca_opt_en_sta 0|1" */
-    {"txop_limit_en_sta",       MAC_ALG_CFG_TXOP_LIMIT_STA_EN},         /* sta模式下edca txop limit优化使能模式: sh hipriv.sh "vap0 alg_cfg txop_limit_en_sta 0|1" */
-    {"edca_opt_sta_weight",     MAC_ALG_CFG_EDCA_OPT_STA_WEIGHT},       /* sta模式下edca优化的weighting系数: sh hipriv.sh "vap0 alg_cfg edca_opt_sta_weight 0~3"*/
-    {"edca_opt_debug_mode",     MAC_ALG_CFG_EDCA_OPT_DEBUG_MODE},       /* 是否打印相关信息，仅用于本地版本调试 */
-    {"edca_opt_one_tcp_opt",    MAC_ALG_CFG_EDCA_ONE_BE_TCP_OPT},       /* 针对单用户BE TCP业务的优化开关: sh hipriv.sh "vap0 alg_cfg edca_opt_one_tcp_opt 0|1" */
-    {"edca_opt_one_tcp_dbg",    MAC_ALG_CFG_EDCA_ONE_BE_TCP_DBG},       /* 针对单用户BE TCP业务的调试开关: sh hipriv.sh "vap0 alg_cfg edca_opt_one_tcp_dbg 0|1" */
-    {"edca_opt_one_tcp_th_no_intf",  MAC_ALG_CFG_EDCA_ONE_BE_TCP_TH_NO_INTF},    /* 针对单用户BE TCP业务的EDCA参数无干扰选择阈值: sh hipriv.sh "vap0 alg_cfg edca_opt_one_tcp_th_no_intf [val]" */
-    {"edca_opt_one_tcp_th_intf",     MAC_ALG_CFG_EDCA_ONE_BE_TCP_TH_INTF},       /* 针对单用户BE TCP业务的EDCA参数干扰选择阈值: sh hipriv.sh "vap0 alg_cfg edca_opt_one_tcp_th_intf [val]" */
+    {"edca_opt_en_ap",          MAC_ALG_CFG_EDCA_OPT_AP_EN_MODE},       /* ap??????edca????????????: sh hipriv.sh "vap0 alg_cfg edca_opt_en_ap 0|1|2" */
+    {"edca_opt_en_sta",         MAC_ALG_CFG_EDCA_OPT_STA_EN},           /* sta??????edca????????????: sh hipriv.sh "vap0 alg_cfg edca_opt_en_sta 0|1" */
+    {"txop_limit_en_sta",       MAC_ALG_CFG_TXOP_LIMIT_STA_EN},         /* sta??????edca txop limit????????????: sh hipriv.sh "vap0 alg_cfg txop_limit_en_sta 0|1" */
+    {"edca_opt_sta_weight",     MAC_ALG_CFG_EDCA_OPT_STA_WEIGHT},       /* sta??????edca??????weighting????: sh hipriv.sh "vap0 alg_cfg edca_opt_sta_weight 0~3"*/
+    {"edca_opt_debug_mode",     MAC_ALG_CFG_EDCA_OPT_DEBUG_MODE},       /* ???????????????????????????????????? */
+    {"edca_opt_one_tcp_opt",    MAC_ALG_CFG_EDCA_ONE_BE_TCP_OPT},       /* ??????????BE TCP??????????????: sh hipriv.sh "vap0 alg_cfg edca_opt_one_tcp_opt 0|1" */
+    {"edca_opt_one_tcp_dbg",    MAC_ALG_CFG_EDCA_ONE_BE_TCP_DBG},       /* ??????????BE TCP??????????????: sh hipriv.sh "vap0 alg_cfg edca_opt_one_tcp_dbg 0|1" */
+    {"edca_opt_one_tcp_th_no_intf",  MAC_ALG_CFG_EDCA_ONE_BE_TCP_TH_NO_INTF},    /* ??????????BE TCP??????EDCA??????????????????: sh hipriv.sh "vap0 alg_cfg edca_opt_one_tcp_th_no_intf [val]" */
+    {"edca_opt_one_tcp_th_intf",     MAC_ALG_CFG_EDCA_ONE_BE_TCP_TH_INTF},       /* ??????????BE TCP??????EDCA????????????????: sh hipriv.sh "vap0 alg_cfg edca_opt_one_tcp_th_intf [val]" */
 
-    {"cca_opt_alg_en_mode",         MAC_ALG_CFG_CCA_OPT_ALG_EN_MODE},           /* CCA优化功能使能: sh hipriv.sh "vap0 alg_cfg cca_opt_alg_en_mode 0|1" */
-    {"cca_opt_debug_mode",          MAC_ALG_CFG_CCA_OPT_DEBUG_MODE},            /* CCA优化DEBUG模式启动: sh hipriv.sh "vap0 alg_cfg cca_opt_debug_mode 0|1" */
-    {"cca_opt_set_cca_th_debug",    MAC_ALG_CFG_CCA_OPT_SET_CCA_TH_DEBUG},      /* CCA优化信道扫描的时间(ms):sh hipriv.sh "vap0 alg_cfg cca_opt_set_sync_err_th [time]" */
-    {"cca_opt_log",                 MAC_ALG_CFG_CCA_OPT_LOG},                   /* CCA log开关 sh hipriv.sh "vap0 alg_cfg cca_opt_log 0|1"*/
+    {"cca_opt_alg_en_mode",         MAC_ALG_CFG_CCA_OPT_ALG_EN_MODE},           /* CCA????????????: sh hipriv.sh "vap0 alg_cfg cca_opt_alg_en_mode 0|1" */
+    {"cca_opt_debug_mode",          MAC_ALG_CFG_CCA_OPT_DEBUG_MODE},            /* CCA????DEBUG????????: sh hipriv.sh "vap0 alg_cfg cca_opt_debug_mode 0|1" */
+    {"cca_opt_set_cca_th_debug",    MAC_ALG_CFG_CCA_OPT_SET_CCA_TH_DEBUG},      /* CCA??????????????????(ms):sh hipriv.sh "vap0 alg_cfg cca_opt_set_sync_err_th [time]" */
+    {"cca_opt_log",                 MAC_ALG_CFG_CCA_OPT_LOG},                   /* CCA log???? sh hipriv.sh "vap0 alg_cfg cca_opt_log 0|1"*/
 
-    {"tpc_mode",                MAC_ALG_CFG_TPC_MODE},                          /* 设置TPC工作模式 */
-    {"tpc_dbg",                 MAC_ALG_CFG_TPC_DEBUG},                         /* 设置TPC的debug开关 */
-    {"tpc_log",                 MAC_ALG_CFG_TPC_LOG},                           /* 设置TPC的log开关:sh hipriv.sh "vap0 alg_cfg tpc_log 1 */
-    {"tpc_stat_log_do",         MAC_ALG_CFG_TPC_STAT_LOG_START},                /* 开始功率统计日志:sh hipriv.sh "vap0 alg_tpc_log tpc_stat_log_do [mac地址] [业务类别] [包数目]" 如: sh hipriv.sh "vap0 alg_tpc_log tpc_stat_log_do 06:31:04:E3:81:02 1 1000" */
-    {"tpc_stat_log_out",        MAC_ALG_CFG_TPC_STAT_LOG_WRITE},                /* 打印功率统计日志:sh hipriv.sh "vap0 alg_tpc_log tpc_stat_log_out 06:31:04:E3:81:02" */
-    {"tpc_pkt_log_do",          MAC_ALG_CFG_TPC_PER_PKT_LOG_START},             /* 开始每包统计日志:sh hipriv.sh "vap0 alg_tpc_log tpc_pkt_log_do [mac地址] [业务类别] [包数目]" 如: sh hipriv.sh "vap0 alg_tpc_log tpc_pkt_log_do 06:31:04:E3:81:02 1 1000" */
-    {"tpc_get_frame_pow",       MAC_ALG_CFG_TPC_GET_FRAME_POW},                 /* 获取特殊帧功率:sh hipriv.sh "vap0 alg_tpc_log tpc_get_frame_pow beacon_pow" */
-    {"tpc_reset_stat",          MAC_ALG_CFG_TPC_RESET_STAT},                    /*释放统计内存*/
-    {"tpc_reset_pkt",           MAC_ALG_CFG_TPC_RESET_PKT},                     /*释放每包内存*/
-    {"tpc_over_temp_th",        MAC_ALG_CFG_TPC_OVER_TMP_TH},                   /* TPC过温门限 */
-    {"tpc_dpd_enable_rate",     MAC_ALG_CFG_TPC_DPD_ENABLE_RATE},               /* 配置DPD生效的速率INDEX */
-    {"tpc_target_rate_11b",     MAC_ALG_CFG_TPC_TARGET_RATE_11B},               /* 11b目标速率设置 */
-    {"tpc_target_rate_11ag",    MAC_ALG_CFG_TPC_TARGET_RATE_11AG},              /* 11ag目标速率设置 */
-    {"tpc_target_rate_11n20",   MAC_ALG_CFG_TPC_TARGET_RATE_HT40},              /* 11n20目标速率设置 */
-    {"tpc_target_rate_11n40",   MAC_ALG_CFG_TPC_TARGET_RATE_HT40},              /* 11n40目标速率设置 */
-    {"tpc_target_rate_11ac20",  MAC_ALG_CFG_TPC_TARGET_RATE_VHT20},             /* 11ac20目标速率设置 */
-    {"tpc_target_rate_11ac40",  MAC_ALG_CFG_TPC_TARGET_RATE_VHT40},             /* 11ac40目标速率设置 */
-    {"tpc_target_rate_11ac80",  MAC_ALG_CFG_TPC_TARGET_RATE_VHT80},             /* 11ac80目标速率设置 */
+    {"tpc_mode",                MAC_ALG_CFG_TPC_MODE},                          /* ????TPC???????? */
+    {"tpc_dbg",                 MAC_ALG_CFG_TPC_DEBUG},                         /* ????TPC??debug???? */
+    {"tpc_log",                 MAC_ALG_CFG_TPC_LOG},                           /* ????TPC??log????:sh hipriv.sh "vap0 alg_cfg tpc_log 1 */
+    {"tpc_stat_log_do",         MAC_ALG_CFG_TPC_STAT_LOG_START},                /* ????????????????:sh hipriv.sh "vap0 alg_tpc_log tpc_stat_log_do [mac????] [????????] [??????]" ??: sh hipriv.sh "vap0 alg_tpc_log tpc_stat_log_do 06:31:04:E3:81:02 1 1000" */
+    {"tpc_stat_log_out",        MAC_ALG_CFG_TPC_STAT_LOG_WRITE},                /* ????????????????:sh hipriv.sh "vap0 alg_tpc_log tpc_stat_log_out 06:31:04:E3:81:02" */
+    {"tpc_pkt_log_do",          MAC_ALG_CFG_TPC_PER_PKT_LOG_START},             /* ????????????????:sh hipriv.sh "vap0 alg_tpc_log tpc_pkt_log_do [mac????] [????????] [??????]" ??: sh hipriv.sh "vap0 alg_tpc_log tpc_pkt_log_do 06:31:04:E3:81:02 1 1000" */
+    {"tpc_get_frame_pow",       MAC_ALG_CFG_TPC_GET_FRAME_POW},                 /* ??????????????:sh hipriv.sh "vap0 alg_tpc_log tpc_get_frame_pow beacon_pow" */
+    {"tpc_reset_stat",          MAC_ALG_CFG_TPC_RESET_STAT},                    /*????????????*/
+    {"tpc_reset_pkt",           MAC_ALG_CFG_TPC_RESET_PKT},                     /*????????????*/
+    {"tpc_over_temp_th",        MAC_ALG_CFG_TPC_OVER_TMP_TH},                   /* TPC???????? */
+    {"tpc_dpd_enable_rate",     MAC_ALG_CFG_TPC_DPD_ENABLE_RATE},               /* ????DPD??????????INDEX */
+    {"tpc_target_rate_11b",     MAC_ALG_CFG_TPC_TARGET_RATE_11B},               /* 11b???????????? */
+    {"tpc_target_rate_11ag",    MAC_ALG_CFG_TPC_TARGET_RATE_11AG},              /* 11ag???????????? */
+    {"tpc_target_rate_11n20",   MAC_ALG_CFG_TPC_TARGET_RATE_HT40},              /* 11n20???????????? */
+    {"tpc_target_rate_11n40",   MAC_ALG_CFG_TPC_TARGET_RATE_HT40},              /* 11n40???????????? */
+    {"tpc_target_rate_11ac20",  MAC_ALG_CFG_TPC_TARGET_RATE_VHT20},             /* 11ac20???????????? */
+    {"tpc_target_rate_11ac40",  MAC_ALG_CFG_TPC_TARGET_RATE_VHT40},             /* 11ac40???????????? */
+    {"tpc_target_rate_11ac80",  MAC_ALG_CFG_TPC_TARGET_RATE_VHT80},             /* 11ac80???????????? */
 
 #ifdef _PRE_WLAN_FEATURE_MU_TRAFFIC_CTL
     {"traffic_ctl_enable",      MAC_ALG_CFG_TRAFFIC_CTL_ENABLE},
@@ -1845,10 +1845,10 @@ OAL_CONST wal_ioctl_alg_cfg_stru g_ast_alg_cfg_map_etc[] =
 
 
 #ifdef _PRE_WLAN_FEATURE_MWO_DET
-    {"mwo_det_enable",          MAC_ALG_CFG_MWO_DET_ENABLE},                    /* 微波炉检测使能信号*/
-    {"mwo_det_end_rssi_th",     MAC_ALG_CFG_MWO_DET_END_RSSI_TH},               /* 停止微波炉信号发送时间计时的天线口功率门限（单位dBm）*/
-    {"mwo_det_start_rssi_th",   MAC_ALG_CFG_MWO_DET_START_RSSI_TH},             /* 启动微波炉信号发送时间计时的天线口功率门限（单位dBm）*/
-    {"mwo_det_debug",           MAC_ALG_CFG_MWO_DET_DEBUG},                     /*发送描述符中anti_intf_1thr,c2 大于本门限选择无干扰速率，c2小于此门限选择有干扰速率*/
+    {"mwo_det_enable",          MAC_ALG_CFG_MWO_DET_ENABLE},                    /* ??????????????????*/
+    {"mwo_det_end_rssi_th",     MAC_ALG_CFG_MWO_DET_END_RSSI_TH},               /* ????????????????????????????????????????????????dBm??*/
+    {"mwo_det_start_rssi_th",   MAC_ALG_CFG_MWO_DET_START_RSSI_TH},             /* ????????????????????????????????????????????????dBm??*/
+    {"mwo_det_debug",           MAC_ALG_CFG_MWO_DET_DEBUG},                     /*????????????anti_intf_1thr,c2 ??????????????????????????c2????????????????????????*/
 #endif
 
     {OAL_PTR_NULL}
@@ -1863,21 +1863,21 @@ OAL_CONST wal_ioctl_tlv_stru   g_ast_set_tlv_table[] =
     {"auto_freq",       WLAN_CFGID_SET_DEVICE_FREQ},
 #endif
 
-    {"set_adc_dac_freq",  WLAN_CFGID_SET_ADC_DAC_FREQ},             /* 设置ADC DAC频率 */
+    {"set_adc_dac_freq",  WLAN_CFGID_SET_ADC_DAC_FREQ},             /* ????ADC DAC???? */
 
     {"rx_ampdu_num",  WLAN_CFGID_SET_ADDBA_RSP_BUFFER},
     /* cmd: wlan0 set_val xx */
-    {"tx_ampdu_type",   WLAN_CFGID_SET_TX_AMPDU_TYPE},   /* 设置聚合类型的开关*/
-    {"tx_ampdu_amsdu",  WLAN_CFGID_AMSDU_AMPDU_SWITCH},  /* 设置tx amsdu ampdu联合聚合功能的开关*/
-    {"rx_ampdu_amsdu",  WLAN_CFGID_SET_RX_AMPDU_AMSDU},  /* 设置rx ampdu amsdu 联合聚合功能的开关*/
+    {"tx_ampdu_type",   WLAN_CFGID_SET_TX_AMPDU_TYPE},   /* ??????????????????*/
+    {"tx_ampdu_amsdu",  WLAN_CFGID_AMSDU_AMPDU_SWITCH},  /* ????tx amsdu ampdu??????????????????*/
+    {"rx_ampdu_amsdu",  WLAN_CFGID_SET_RX_AMPDU_AMSDU},  /* ????rx ampdu amsdu ??????????????????*/
 
     {"sk_pacing_shift", WLAN_CFGID_SET_SK_PACING_SHIFT},
 
-    {"trx_stat_log_en", WLAN_CFGID_SET_TRX_STAT_LOG}, /* 设置tcp ack缓存时吞吐量统计维测开关，其他模块可参考 */
-    {"mimo_blacklist",  WLAN_CFGID_MIMO_BLACKLIST},   /* 设置探测MIMO黑名单机制开关 */
+    {"trx_stat_log_en", WLAN_CFGID_SET_TRX_STAT_LOG}, /* ????tcp ack???????????????????????????????????????? */
+    {"mimo_blacklist",  WLAN_CFGID_MIMO_BLACKLIST},   /* ????????MIMO?????????????? */
 #ifdef _PRE_WLAN_FEATURE_DFS_ENABLE
     /* cmd: wlan0 set_val dfs_debug 0|1 */
-    {"dfs_debug",  WLAN_CFGID_SET_DFS_MODE},             /* 设置dfs是否为检测率模式的开关*/
+    {"dfs_debug",  WLAN_CFGID_SET_DFS_MODE},             /* ????dfs??????????????????????*/
 #endif
 
     {OAL_PTR_NULL}
@@ -2002,7 +2002,7 @@ OAL_CONST wal_dfs_domain_entry_stru g_ast_dfs_domain_table_etc[] =
 
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 oal_uint32  wal_get_cmd_one_arg_etc(oal_int8 *pc_cmd, oal_int8 *pc_arg, oal_uint32 *pul_cmd_offset)
@@ -2018,7 +2018,7 @@ oal_uint32  wal_get_cmd_one_arg_etc(oal_int8 *pc_cmd, oal_int8 *pc_arg, oal_uint
 
     pc_cmd_copy = pc_cmd;
 
-    /* 去掉字符串开始的空格 */
+    /* ???????????????????? */
     while (' ' == *pc_cmd_copy)
     {
         ++pc_cmd_copy;
@@ -2039,7 +2039,7 @@ oal_uint32  wal_get_cmd_one_arg_etc(oal_int8 *pc_cmd, oal_int8 *pc_arg, oal_uint
 
     pc_arg[ul_pos]  = '\0';
 
-    /* 字符串到结尾，返回错误码(命令码之后无) */
+    /* ????????????????????????(????????????) */
     if (0 == ul_pos)
     {
         OAM_INFO_LOG0(0, OAM_SF_ANY, "{wal_get_cmd_one_arg_etc::return param pc_arg is null!}\r\n");
@@ -2055,7 +2055,7 @@ oal_uint32  wal_get_cmd_one_arg_etc(oal_int8 *pc_cmd, oal_int8 *pc_arg, oal_uint
 oal_uint8* wal_get_reduce_sar_ctrl_params(oal_uint8 uc_tx_power_lvl)
 {
 #ifdef _PRE_WLAN_FEATURE_TPC_OPT
-    wlan_cust_nvram_params     *pst_cust_nv_params = hwifi_get_nvram_params_etc();  /* 最大发送功率定制化数组 */
+    wlan_cust_nvram_params     *pst_cust_nv_params = hwifi_get_nvram_params_etc();  /* ?????????????????????? */
     if ((uc_tx_power_lvl <= CUS_NUM_OF_SAR_LVL) && (uc_tx_power_lvl > 0))
     {
         uc_tx_power_lvl--;
@@ -2088,10 +2088,10 @@ oal_uint32  wal_hipriv_set_fix_rate_pre_config(oal_net_device_stru *pst_net_dev,
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 配置无效固定速率时，开启autorate，恢复聚合开关值  */
+    /* ????????????????????????autorate????????????????  */
     if(OAL_FALSE == en_fix_rate_enable)
     {
-        /*  开启autorate算法  */
+        /*  ????autorate????  */
         ul_ret = wal_hipriv_alg_cfg_etc(pst_net_dev, ac_autorate_en_cmd);
         if(OAL_SUCC != ul_ret)
         {
@@ -2101,7 +2101,7 @@ oal_uint32  wal_hipriv_set_fix_rate_pre_config(oal_net_device_stru *pst_net_dev,
 
         if(OAL_TRUE == pst_mac_vap->st_fix_rate_pre_para.en_rate_cfg_tag)
         {
-            /*  恢复ampdu聚合  */
+            /*  ????ampdu????  */
             uc_ampdu_cfg_idx = pst_mac_vap->st_fix_rate_pre_para.en_tx_ampdu_last;
             ul_ret = wal_hipriv_ampdu_tx_on(pst_net_dev, ac_sw_ampdu_cmd[uc_ampdu_cfg_idx]);
             if(OAL_SUCC != ul_ret)
@@ -2110,14 +2110,14 @@ oal_uint32  wal_hipriv_set_fix_rate_pre_config(oal_net_device_stru *pst_net_dev,
                 return OAL_FAIL;
             }
 
-            /*记录固定速率配置标记为未配置状态*/
+            /*????????????????????????????????*/
             pst_mac_vap->st_fix_rate_pre_para.en_rate_cfg_tag = OAL_FALSE;
         }
 
         return OAL_SUCC;
     }
 
-    /*  关闭autorate算法  */
+    /*  ????autorate????  */
     ul_ret = wal_hipriv_alg_cfg_etc(pst_net_dev, ac_autorate_dis_cmd);
     if(OAL_SUCC != ul_ret)
     {
@@ -2125,17 +2125,17 @@ oal_uint32  wal_hipriv_set_fix_rate_pre_config(oal_net_device_stru *pst_net_dev,
         return OAL_FAIL;
     }
 
-    /*11abg模式下配置固定速率前关闭ampdu聚合*/
+    /*11abg????????????????????????ampdu????*/
     if(WAL_DSCR_PARAM_RATE == pc_stu->uc_function_index)
     {
         if(OAL_TRUE != pst_mac_vap->st_fix_rate_pre_para.en_rate_cfg_tag)
         {
-            /*  记录ampdu开关状态  */
+            /*  ????ampdu????????  */
             pst_mac_vap->st_fix_rate_pre_para.en_tx_ampdu_last = mac_mib_get_CfgAmpduTxAtive(pst_mac_vap);
-            pst_mac_vap->st_fix_rate_pre_para.en_rate_cfg_tag = OAL_TRUE;     /*记录固定速率配置标记为已配置状态*/
+            pst_mac_vap->st_fix_rate_pre_para.en_rate_cfg_tag = OAL_TRUE;     /*????????????????????????????????*/
         }
 
-        /*  关闭ampdu聚合  */
+        /*  ????ampdu????  */
         ul_ret = wal_hipriv_ampdu_tx_on(pst_net_dev, ac_sw_ampdu_cmd[WAL_AMPDU_DISABLE]);
         if(OAL_SUCC != ul_ret)
         {
@@ -2165,7 +2165,7 @@ oal_uint32  wal_hipriv_process_rate_params(oal_net_device_stru *pst_net_dev, oal
         return ul_ret;
     }
 
-    /*  配置无效速率值255时恢复自动速率 */
+    /*  ??????????????255?????????????? */
     l_val = oal_strtol(ac_arg, OAL_PTR_NULL, 0);
     if(WAL_IOCTL_IS_INVALID_FIXED_RATE(l_val,pc_stu))
     {
@@ -2182,7 +2182,7 @@ oal_uint32  wal_hipriv_process_rate_params(oal_net_device_stru *pst_net_dev, oal
     {
         case WAL_DSCR_PARAM_RATE:
             pst_set_non_ht_rate_param = (mac_cfg_non_ht_rate_stru*)(&(pc_stu->l_value));
-            /* 解析参数*/
+            /* ????????*/
             for (en_param_index = 0; en_param_index < WLAN_LEGACY_RATE_VALUE_BUTT; en_param_index++)
             {
                 if(!oal_strcmp(pauc_non_ht_rate_tbl[en_param_index], ac_arg))
@@ -2192,7 +2192,7 @@ oal_uint32  wal_hipriv_process_rate_params(oal_net_device_stru *pst_net_dev, oal
                 }
             }
 
-            /* 根据速率配置TX描述符中的协议模式 */
+            /* ????????????TX?????????????????? */
             if (en_param_index <= WLAN_SHORT_11b_11_M_BPS)
             {
                 pst_set_non_ht_rate_param->en_protocol_mode = WLAN_11B_PHY_PROTOCOL_MODE;
@@ -2429,7 +2429,7 @@ oal_uint32  wal_alloc_cfg_event_etc
     pst_vap = OAL_NET_DEV_PRIV(pst_net_dev);
     if (OAL_UNLIKELY(OAL_PTR_NULL == pst_vap))
     {
-        /* 规避wifi关闭状态下，下发hipriv命令显示error日志 */
+        /* ????wifi????????????????hipriv????????error???? */
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_alloc_cfg_event_etc::OAL_NET_DEV_PRIV(pst_net_dev) is null ptr! pst_net_dev=[%p]}", pst_net_dev);
         return OAL_ERR_CODE_PTR_NULL;
     }
@@ -2446,11 +2446,11 @@ oal_uint32  wal_alloc_cfg_event_etc
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    *ppst_event_mem = pst_event_mem;    /* 出参赋值 */
+    *ppst_event_mem = pst_event_mem;    /* ???????? */
 
     pst_event = frw_get_event_stru(pst_event_mem);
 
-    /* 填写事件头 */
+    /* ?????????? */
     FRW_EVENT_HDR_INIT(&(pst_event->st_event_hdr),
                        FRW_EVENT_TYPE_HOST_CRX,
                        WAL_HOST_CRX_SUBTYPE_CFG,
@@ -2474,7 +2474,7 @@ oal_uint32  wal_alloc_cfg_event_etc
     }
 
 
-    *ppst_cfg_msg = (wal_msg_stru *)((oal_uint8*)pst_event->auc_event_data + us_resp_len);  /* 出参赋值 */
+    *ppst_cfg_msg = (wal_msg_stru *)((oal_uint8*)pst_event->auc_event_data + us_resp_len);  /* ???????? */
 
     return OAL_SUCC;
 }
@@ -2529,7 +2529,7 @@ oal_int32 wal_send_cfg_event_etc(oal_net_device_stru      *pst_net_dev,
         return -OAL_EINVAL;
     }
 
-    /* 申请事件 */
+    /* ???????? */
     ul_ret = wal_alloc_cfg_event_etc(pst_net_dev, &pst_event_mem,
                                 ((OAL_TRUE == en_need_rsp) ? &st_msg_request : NULL),
                                 &pst_cfg_msg,
@@ -2540,13 +2540,13 @@ oal_int32 wal_send_cfg_event_etc(oal_net_device_stru      *pst_net_dev,
         return -OAL_ENOMEM;
     }
 
-    /* 填写配置消息 */
+    /* ???????????? */
     WAL_CFG_MSG_HDR_INIT(&(pst_cfg_msg->st_msg_hdr),
                          en_msg_type,
                          us_len,
                          WAL_GET_MSG_SN());
 
-    /* 填写WID消息 */
+    /* ????WID???? */
     oal_memcopy(pst_cfg_msg->auc_msg_data, puc_param, us_len);
 
 #ifdef _PRE_DEBUG_MODE
@@ -2561,7 +2561,7 @@ oal_int32 wal_send_cfg_event_etc(oal_net_device_stru      *pst_net_dev,
         wal_msg_request_add_queue_etc(&st_msg_request);
     }
 
-/* 分发事件 */
+/* ???????? */
 #ifdef _PRE_WLAN_FEATURE_SMP_SUPPORT
     pst_mac_vap = OAL_NET_DEV_PRIV(pst_net_dev);
     if (OAL_UNLIKELY(OAL_PTR_NULL == pst_mac_vap))
@@ -2577,7 +2577,7 @@ oal_int32 wal_send_cfg_event_etc(oal_net_device_stru      *pst_net_dev,
 #endif
     FRW_EVENT_FREE(pst_event_mem);
 
-    /* win32 UT模式，触发一次事件调度 */
+    /* win32 UT?????????????????????? */
 #if (_PRE_OS_VERSION_WIN32 == _PRE_OS_VERSION) && (_PRE_TEST_MODE == _PRE_TEST_MODE_UT)
     frw_event_process_all_event_etc(0);
 #endif
@@ -2599,7 +2599,7 @@ oal_int32 wal_send_cfg_event_etc(oal_net_device_stru      *pst_net_dev,
     }
 
     /***************************************************************************
-        等待事件返回
+        ????????????
     ***************************************************************************/
     wal_wake_lock();
 
@@ -2618,7 +2618,7 @@ oal_int32 wal_send_cfg_event_etc(oal_net_device_stru      *pst_net_dev,
 
     if (OAL_WARN_ON(0 == l_ret))
     {
-        /* 超时 .*/
+        /* ???? .*/
         OAM_ERROR_LOG0(0, OAM_SF_ANY, "{wal_send_cfg_event_etc:: wait queue timeout,10s!}\r\n");
         OAL_IO_PRINT("[E]timeout,request info:%p,ret=%u,addr:0x%lx\n", st_msg_request.pst_resp_mem,
                                                st_msg_request.ul_ret,
@@ -2629,9 +2629,9 @@ oal_int32 wal_send_cfg_event_etc(oal_net_device_stru      *pst_net_dev,
         }
         wal_wake_unlock();
         DECLARE_DFT_TRACE_KEY_INFO("wal_send_cfg_timeout",OAL_DFT_TRACE_FAIL);
-        /*打印CFG EVENT内存，方便定位。*/
+        /*????CFG EVENT????????????????*/
         oal_print_hex_dump((oal_uint8 *)pst_cfg_msg, (WAL_MSG_WRITE_MSG_HDR_LENGTH + us_len), 32, "cfg event: ");
-        //上行小包100%跑流，cpu 100%会触发打印，串口打印太多，取消打印
+        //????????100%??????cpu 100%??????????????????????????????????
         //frw_event_queue_info_etc();
 #if (_PRE_FRW_FEATURE_PROCCESS_ENTITY_TYPE == _PRE_FRW_FEATURE_PROCCESS_ENTITY_THREAD)
 #ifndef  CONFIG_HI110X_KERNEL_MODULES_BUILD_SUPPORT
@@ -2667,7 +2667,7 @@ oal_int32 wal_send_cfg_event_etc(oal_net_device_stru      *pst_net_dev,
         wal_wake_unlock();
         return -OAL_EFAUL;
     }
-    /* 发送配置事件返回的状态信息 */
+    /* ?????????????????????????? */
     /*lint -e613*/
     *ppst_rsp_msg  = pst_rsp_msg;
     /*lint +e613*/
@@ -2754,13 +2754,13 @@ oal_int32  wal_cfg_vap_h2d_event_etc(oal_net_device_stru *pst_net_dev)
     }
 
     /***************************************************************************
-    抛事件到wal层处理
+    ????????wal??????
     ***************************************************************************/
-    /* 填写消息 */
+    /* ???????? */
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_CFG_VAP_H2D, OAL_SIZEOF(mac_cfg_vap_h2d_stru));
     ((mac_cfg_vap_h2d_stru *)st_write_msg.auc_value)->pst_net_dev = pst_cfg_net_dev;
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_cfg_net_dev,
              WAL_MSG_TYPE_WRITE,
              WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(mac_cfg_vap_h2d_stru),
@@ -2774,7 +2774,7 @@ oal_int32  wal_cfg_vap_h2d_event_etc(oal_net_device_stru *pst_net_dev)
         return l_ret;
     }
 
-    /* 处理返回消息 */
+    /* ???????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_err_code)
     {
@@ -2837,12 +2837,12 @@ OAL_STATIC oal_int32  wal_host_dev_config(oal_net_device_stru *pst_net_dev, wlan
     }
 
     /***************************************************************************
-    抛事件到wal层处理
+    ????????wal??????
     ***************************************************************************/
-    /* 填写消息 */
+    /* ???????? */
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, en_wid, 0);
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_cfg_net_dev,
              WAL_MSG_TYPE_WRITE,
              WAL_MSG_WRITE_MSG_HDR_LENGTH,
@@ -2856,7 +2856,7 @@ OAL_STATIC oal_int32  wal_host_dev_config(oal_net_device_stru *pst_net_dev, wlan
         return l_ret;
     }
 
-    /* 处理返回消息 */
+    /* ???????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_err_code)
     {
@@ -2912,12 +2912,12 @@ oal_int32 hwifi_config_host_global_ini_param(oal_void)
     oal_uint8                       uc_flag = OAL_FALSE;
     oal_uint8                       uc_index;
 #endif /* #ifdef _PRE_WLAN_FEATURE_AUTO_FREQ */
-    /******************************************** 性能 ********************************************/
+    /******************************************** ???? ********************************************/
     l_val = hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_AMPDU_TX_MAX_NUM);
     g_st_wlan_customize_etc.ul_ampdu_tx_max_num = (WLAN_AMPDU_TX_MAX_NUM >= l_val && 1 <= l_val) ? (oal_uint32)l_val : g_st_wlan_customize_etc.ul_ampdu_tx_max_num;
     OAL_IO_PRINT("hwifi_config_host_global_ini_param::ampdu_tx_max_num:%d", g_st_wlan_customize_etc.ul_ampdu_tx_max_num);
 #ifdef _PRE_WLAN_FEATURE_ROAM
-    /******************************************** 漫游 ********************************************/
+    /******************************************** ???? ********************************************/
     l_val = hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_ROAM_SWITCH);
     g_st_wlan_customize_etc.uc_roam_switch          = (0 == l_val || 1 == l_val) ? (oal_uint8)l_val : g_st_wlan_customize_etc.uc_roam_switch;
     l_val = hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_SCAN_ORTHOGONAL);
@@ -3004,7 +3004,7 @@ oal_int32 hwifi_config_host_global_ini_param(oal_void)
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
     l_val = hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_RX_DYN_BYPASS_EXTLNA);
     g_st_rx_dyn_bypass_extlna_switch.uc_ini_en = (l_val > 0) ? OAL_TRUE : OAL_FALSE;
-    g_st_rx_dyn_bypass_extlna_switch.uc_cur_status = OAL_TRUE;/* 默认低功耗场景 */
+    g_st_rx_dyn_bypass_extlna_switch.uc_cur_status = OAL_TRUE;/* ?????????????? */
     l_val = hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_RX_DYN_BYPASS_EXTLNA_HIGH);
     g_st_rx_dyn_bypass_extlna_switch.us_throughput_high = (l_val > 0) ? (oal_uint16)l_val : 100;
     l_val = hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_RX_DYN_BYPASS_EXTLNA_LOW);
@@ -3063,7 +3063,7 @@ oal_int32 hwifi_config_host_global_ini_param(oal_void)
 
 #endif
 #ifdef _PRE_WLAN_FEATURE_AUTO_FREQ
-    /******************************************** 自动调频 ********************************************/
+    /******************************************** ???????? ********************************************/
     /* config g_host_speed_freq_level_etc */
     pc_tmp = (oal_int8*)&ast_host_speed_freq_level_tmp;
 
@@ -3106,7 +3106,7 @@ oal_int32 hwifi_config_host_global_ini_param(oal_void)
         }
     }
 #endif /* #ifdef _PRE_WLAN_FEATURE_AUTO_FREQ */
-    /******************************************** 扫描 ********************************************/
+    /******************************************** ???? ********************************************/
     l_val = hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_RANDOM_MAC_ADDR_SCAN);
     g_st_wlan_customize_etc.uc_random_mac_addr_scan = !!l_val;
 
@@ -3163,7 +3163,7 @@ OAL_STATIC oal_void hwifi_config_init_ini_country(oal_net_device_stru *pst_cfg_n
         OAM_ERROR_LOG1(0, OAM_SF_ANY, "{hwifi_config_init_ini_country::wal_send_cfg_event_etc return err code [%d]!}\r\n", l_ret);
     }
 
-    /* 开关wifi定制化配置国家码 */
+    /* ????wifi???????????????? */
     g_st_cust_country_code_ignore_flag.en_country_code_ingore_hipriv_flag = OAL_FALSE;
 }
 #endif
@@ -3176,7 +3176,7 @@ OAL_STATIC oal_void hwifi_config_init_ini_pm(oal_net_device_stru *pst_cfg_net_de
     oal_int32                   l_ret;
     oal_int32                   l_switch;
 
-    /* 开关 */
+    /* ???? */
     l_switch = !!hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_POWERMGMT_SWITCH);
 
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_PM_EN, OAL_SIZEOF(oal_int32));
@@ -3305,7 +3305,7 @@ oal_void hwifi_cfg_pwr_ref_delta(mac_cfg_customize_rf       *pst_customize_rf)
 OAL_STATIC oal_uint32 hwifi_cfg_front_end(oal_uint8 *puc_param)
 {
     mac_cfg_customize_rf       *pst_customize_rf;
-    oal_uint8                   uc_idx;                 /*结构体数组下标*/
+    oal_uint8                   uc_idx;                 /*??????????????*/
     oal_int32                   l_mult4;
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_HOST)
     oal_int8                    c_mult4_rf[2];
@@ -3313,10 +3313,10 @@ OAL_STATIC oal_uint32 hwifi_cfg_front_end(oal_uint8 *puc_param)
 
     pst_customize_rf = (mac_cfg_customize_rf *)puc_param;
 
-    /* 配置: 2g rf */
+    /* ????: 2g rf */
     for (uc_idx = 0; uc_idx < MAC_NUM_2G_BAND; ++uc_idx)
     {
-        /* 获取各2p4g 各band 0.25db及0.1db精度的线损值 */
+        /* ??????2p4g ??band 0.25db??0.1db???????????? */
         l_mult4  = hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_RF_RX_INSERTION_LOSS_2G_BAND_START + uc_idx);
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_HOST)
         /* rf0 */
@@ -3338,7 +3338,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_front_end(oal_uint8 *puc_param)
 #endif //#if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_HOST)
         else
         {
-            /* 值超出有效范围 */
+            /* ?????????????? */
             OAM_ERROR_LOG2(0, OAM_SF_CFG, "{hwifi_cfg_front_end::ini_id[%d]value out of range, 2g mult4[0x%0x}!}",
                           WLAN_CFG_INIT_RF_RX_INSERTION_LOSS_2G_BAND_START + uc_idx, l_mult4);
             return OAL_FAIL;
@@ -3348,10 +3348,10 @@ OAL_STATIC oal_uint32 hwifi_cfg_front_end(oal_uint8 *puc_param)
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_HOST)
     hwifi_cfg_pwr_ref_delta(pst_customize_rf);
 
-    /* 通道radio cap */
+    /* ????radio cap */
     pst_customize_rf->uc_chn_radio_cap = (oal_uint8)hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_CHANN_RADIO_CAP);
 
-    /*2g 外部fem */
+    /*2g ????fem */
     /* RF0 */
     pst_customize_rf->ast_ext_rf[WLAN_BAND_2G][WLAN_RF_CHANNEL_ZERO].c_lna_bypass_gain_db = (oal_int8)CUS_GET_LOW_16BIT(hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_RF_LNA_BYPASS_GAIN_DB_2G));
     pst_customize_rf->ast_ext_rf[WLAN_BAND_2G][WLAN_RF_CHANNEL_ZERO].c_lna_gain_db        = (oal_int8)CUS_GET_LOW_16BIT(hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_RF_LNA_GAIN_DB_2G));
@@ -3386,7 +3386,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_front_end(oal_uint8 *puc_param)
         pst_customize_rf->ast_ext_rf[WLAN_BAND_2G][WLAN_RF_CHANNEL_ONE].uc_pa_gain_lvl_num == 0 || pst_customize_rf->ast_ext_rf[WLAN_BAND_2G][WLAN_RF_CHANNEL_ONE].uc_pa_gain_lvl_num > MAC_EXT_PA_GAIN_MAX_LVL ||
         pst_customize_rf->ast_ext_rf[WLAN_BAND_2G][WLAN_RF_CHANNEL_ONE].c_lna_gain_db < LNA_GAIN_DB_MIN || pst_customize_rf->ast_ext_rf[WLAN_BAND_2G][WLAN_RF_CHANNEL_ONE].c_lna_gain_db > LNA_GAIN_DB_MAX))
     {
-        /* 值超出有效范围 */
+        /* ?????????????? */
         OAM_ERROR_LOG4(0, OAM_SF_CFG,
         "{hwifi_cfg_front_end::2g gain db out of range! rf0 lna_bypass[%d] pa_b0[%d] lna gain[%d] pa_b1[%d]}",
         pst_customize_rf->ast_ext_rf[WLAN_BAND_2G][WLAN_RF_CHANNEL_ONE].c_lna_bypass_gain_db,
@@ -3397,7 +3397,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_front_end(oal_uint8 *puc_param)
         return OAL_FAIL;
     }
 
-    /* 2g定制化RF部分PA偏置寄存器  */
+    /* 2g??????RF????PA??????????  */
     for (uc_idx = 0; uc_idx < CUS_RF_PA_BIAS_REG_NUM; uc_idx++)
     {
         pst_customize_rf->aul_2g_pa_bias_rf_reg[uc_idx] = (oal_uint32)hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_TX2G_PA_GATE_VCTL_REG236 + uc_idx);
@@ -3406,11 +3406,11 @@ OAL_STATIC oal_uint32 hwifi_cfg_front_end(oal_uint8 *puc_param)
 
     if (OAL_TRUE == mac_device_check_5g_enable_per_chip())
     {
-        /* 配置: 5g rf */
-        /* 配置: fem口到天线口的负增益 */
+        /* ????: 5g rf */
+        /* ????: fem?????????????????? */
         for (uc_idx = 0; uc_idx < MAC_NUM_5G_BAND; ++uc_idx)
         {
-            /* 获取各5g 各band 0.25db及0.1db精度的线损值 */
+            /* ??????5g ??band 0.25db??0.1db???????????? */
             l_mult4  = hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_RF_RX_INSERTION_LOSS_5G_BAND_START + uc_idx);
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_HOST)
             c_mult4_rf[0]  = (oal_int8)(l_mult4 & 0xFF);
@@ -3429,7 +3429,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_front_end(oal_uint8 *puc_param)
 #endif //#if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_HOST)
             else
             {
-                /* 值超出有效范围 */
+                /* ?????????????? */
                 OAM_ERROR_LOG2(0, OAM_SF_CFG, "{hwifi_cfg_front_end::ini_id[%d]value out of range, 5g mult4[0x%0x}!}\r\n",
                           WLAN_CFG_INIT_RF_RX_INSERTION_LOSS_5G_BAND_START + uc_idx, l_mult4);
                 return OAL_FAIL;
@@ -3437,7 +3437,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_front_end(oal_uint8 *puc_param)
         }
 
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_HOST)
-        /*5g 外部fem */
+        /*5g ????fem */
         /* RF0 */
         pst_customize_rf->ast_ext_rf[WLAN_BAND_5G][WLAN_RF_CHANNEL_ZERO].c_lna_bypass_gain_db = (oal_int8)CUS_GET_LOW_16BIT(hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_RF_LNA_BYPASS_GAIN_DB_5G));
         pst_customize_rf->ast_ext_rf[WLAN_BAND_5G][WLAN_RF_CHANNEL_ZERO].c_lna_gain_db        = (oal_int8)CUS_GET_LOW_16BIT(hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_RF_LNA_GAIN_DB_5G));
@@ -3478,7 +3478,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_front_end(oal_uint8 *puc_param)
             pst_customize_rf->ast_ext_rf[WLAN_BAND_5G][WLAN_RF_CHANNEL_ONE].uc_pa_gain_lvl_num == 0 || pst_customize_rf->ast_ext_rf[WLAN_BAND_5G][WLAN_RF_CHANNEL_ONE].uc_pa_gain_lvl_num > MAC_EXT_PA_GAIN_MAX_LVL ||
             pst_customize_rf->ast_ext_rf[WLAN_BAND_5G][WLAN_RF_CHANNEL_ONE].c_lna_gain_db < LNA_GAIN_DB_MIN || pst_customize_rf->ast_ext_rf[WLAN_BAND_5G][WLAN_RF_CHANNEL_ONE].c_lna_gain_db > LNA_GAIN_DB_MAX))
         {
-            /* 值超出有效范围 */
+            /* ?????????????? */
             OAM_ERROR_LOG4(0, OAM_SF_CFG,
             "{hwifi_cfg_front_end::2g gain db out of range! rf0 lna_bypass[%d] pa_b0[%d] lna gain[%d] pa_b1[%d]}",
             pst_customize_rf->ast_ext_rf[WLAN_BAND_5G][WLAN_RF_CHANNEL_ONE].c_lna_bypass_gain_db,
@@ -3489,7 +3489,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_front_end(oal_uint8 *puc_param)
             return OAL_FAIL;
         }
 #else
-        /*5g 外部fem */
+        /*5g ????fem */
         pst_customize_rf->st_ext_rf.c_lna_bypass_gain_db    = (oal_int8)hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_RF_LNA_BYPASS_GAIN_DB_5G);
         pst_customize_rf->st_ext_rf.c_lna_gain_db           = (oal_int8)hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_RF_LNA_GAIN_DB_5G);
         pst_customize_rf->st_ext_rf.c_pa_gain_b0_db         = (oal_int8)hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_RF_PA_GAIN_DB_B0_5G);
@@ -3505,7 +3505,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_front_end(oal_uint8 *puc_param)
             pst_customize_rf->st_ext_rf.c_lna_gain_db < LNA_GAIN_DB_MIN ||
             pst_customize_rf->st_ext_rf.c_lna_gain_db > LNA_GAIN_DB_MAX)
         {
-            /* 值超出有效范围 */
+            /* ?????????????? */
             OAM_ERROR_LOG0(0, OAM_SF_CFG, "{hwifi_cfg_front_end::gain db rx or tx 5g lna gain db or out of range!}");
             return OAL_FAIL;
         }
@@ -3515,7 +3515,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_front_end(oal_uint8 *puc_param)
     pst_customize_rf->uc_far_dist_pow_gain_switch = (oal_uint8)!!hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_FAR_DIST_POW_GAIN_SWITCH);
     pst_customize_rf->uc_far_dist_dsss_scale_promote_switch = (oal_uint8)!!hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_FAR_DIST_DSSS_SCALE_PROMOTE_SWITCH);
 
-    /* 配置: cca能量门限调整值 */
+    /* ????: cca?????????????? */
     {
         oal_int8 c_delta_cca_ed_high_20th_2g = (oal_int8)hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_DELTA_CCA_ED_HIGH_20TH_2G);
         oal_int8 c_delta_cca_ed_high_40th_2g = (oal_int8)hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_DELTA_CCA_ED_HIGH_40TH_2G);
@@ -3523,7 +3523,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_front_end(oal_uint8 *puc_param)
         oal_int8 c_delta_cca_ed_high_40th_5g = (oal_int8)hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_DELTA_CCA_ED_HIGH_40TH_5G);
         oal_int8 c_delta_cca_ed_high_80th_5g = (oal_int8)hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_DELTA_CCA_ED_HIGH_80TH_5G);
 
-        /* 检查每一项的调整幅度是否超出最大限制 */
+        /* ???????????????????????????????????? */
         if (CUS_DELTA_CCA_ED_HIGH_TH_OUT_OF_RANGE(c_delta_cca_ed_high_20th_2g)
            || CUS_DELTA_CCA_ED_HIGH_TH_OUT_OF_RANGE(c_delta_cca_ed_high_40th_2g)
            || CUS_DELTA_CCA_ED_HIGH_TH_OUT_OF_RANGE(c_delta_cca_ed_high_20th_5g)
@@ -3581,7 +3581,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_init_cus_dyn_cali(mac_cus_dy_cali_param_stru *pu
     {
         puc_dyn_cali_param->uc_rf_id = uc_rf_idx;
 
-        /* 动态校准二次项系数入参检查 */
+        /* ?????????????????????????? */
         for (uc_dy_cal_param_idx = 0; uc_dy_cal_param_idx < DY_CALI_PARAMS_NUM; uc_dy_cal_param_idx++)
         {
             if (!g_ast_pro_line_params[uc_rf_idx][uc_dy_cal_param_idx].l_pow_par2)
@@ -3608,7 +3608,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_init_cus_dyn_cali(mac_cus_dy_cali_param_stru *pu
             pc_token = oal_strtok(auc_nv_pa_params, pc_end, &pc_ctx);
             pc_token = oal_strtok(pc_token, pc_sep, &pc_ctx);
             uc_idx = 0;
-            /* 获取定制化系数 */
+            /* ?????????????? */
             while ((OAL_PTR_NULL != pc_token) && (uc_idx < MAC_2G_CHANNEL_NUM))
             {
                 puc_dyn_cali_param->ac_dp_init[uc_idx] = (oal_int8)oal_strtol(pc_token, OAL_PTR_NULL, 10);
@@ -3632,7 +3632,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_init_cus_dyn_cali(mac_cus_dy_cali_param_stru *pu
 
         for (uc_idx = HWIFI_CFG_DYN_PWR_CALI_2G_SNGL_MODE_11B; uc_idx  <= HWIFI_CFG_DYN_PWR_CALI_2G_SNGL_MODE_OFDM40; uc_idx++)
         {
-            /* 获取产线计算DPN值修正 */
+            /* ????????????DPN?????? */
             puc_cust_nvram_info = hwifi_get_nvram_param(uc_dpn_2g_nv_id);
             uc_dpn_2g_nv_id++;
 
@@ -3739,16 +3739,16 @@ OAL_STATIC oal_uint32 hwifi_cfg_init_cus_dyn_cali(mac_cus_dy_cali_param_stru *pu
 OAL_STATIC oal_uint32 hwifi_cfg_front_end(oal_uint8 *puc_param)
 {
     mac_cfg_customize_rf*       pst_customize_rf;
-    oal_uint8                   uc_idx;                 /*结构体数组下标*/
+    oal_uint8                   uc_idx;                 /*??????????????*/
     oal_int32                   l_mult4;
     oal_int32                   l_mult10;
 
     pst_customize_rf = (mac_cfg_customize_rf *)puc_param;
 
-    /* 配置: 2g rf */
+    /* ????: 2g rf */
     for (uc_idx = 0; uc_idx < MAC_NUM_2G_BAND; ++uc_idx)
     {
-        /* 获取各2p4g 各band 0.25db及0.1db精度的线损值 */
+        /* ??????2p4g ??band 0.25db??0.1db???????????? */
         l_mult4  = hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_RF_LINE_TXRX_GAIN_DB_2G_BAND_START + 2*uc_idx);
         l_mult10 = hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_RF_LINE_TXRX_GAIN_DB_2G_BAND_START + 2*uc_idx + 1);
 
@@ -3760,7 +3760,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_front_end(oal_uint8 *puc_param)
         }
         else
         {
-            /* 值超出有效范围 */
+            /* ?????????????? */
             OAM_ERROR_LOG3(0, OAM_SF_CFG, "{hwifi_cfg_front_end::ini_id[%d]value out of range, 2g mult4[0x%0x}mult10[0x%0x]!}\r\n",
                           WLAN_CFG_INIT_RF_LINE_TXRX_GAIN_DB_2G_BAND_START + 2*uc_idx, l_mult4, l_mult10);
             return OAL_FAIL;
@@ -3769,11 +3769,11 @@ OAL_STATIC oal_uint32 hwifi_cfg_front_end(oal_uint8 *puc_param)
 
     if (OAL_TRUE == mac_device_check_5g_enable_per_chip())
     {
-        /* 配置: 5g rf */
-        /* 配置: fem口到天线口的负增益 */
+        /* ????: 5g rf */
+        /* ????: fem?????????????????? */
         for (uc_idx = 0; uc_idx < MAC_NUM_5G_BAND; ++uc_idx)
         {
-            /* 获取各5g 各band 0.25db及0.1db精度的线损值 */
+            /* ??????5g ??band 0.25db??0.1db???????????? */
             l_mult4  = hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_RF_LINE_TXRX_GAIN_DB_5G_BAND_START + 2*uc_idx);
             l_mult10 = hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_RF_LINE_TXRX_GAIN_DB_5G_BAND_START + 2*uc_idx + 1);
 
@@ -3784,7 +3784,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_front_end(oal_uint8 *puc_param)
             }
             else
             {
-                /* 值超出有效范围 */
+                /* ?????????????? */
                 OAM_ERROR_LOG3(0, OAM_SF_CFG, "{hwifi_cfg_front_end::ini_id[%d]value out of range, 5g mult4[0x%0x}mult10[0x%0x]!}\r\n",
                           WLAN_CFG_INIT_RF_LINE_TXRX_GAIN_DB_5G_BAND_START + 2*uc_idx, l_mult4, l_mult10);
                 return OAL_FAIL;
@@ -3792,7 +3792,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_front_end(oal_uint8 *puc_param)
         }
 
 
-        /*5g 外部fem */
+        /*5g ????fem */
         pst_customize_rf->st_ext_rf.c_lna_bypass_gain_db    = (oal_int8)hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_RF_LINE_RX_GAIN_DB_5G);
         pst_customize_rf->st_ext_rf.c_lna_gain_db           = (oal_int8)hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_LNA_GAIN_DB_5G);
         pst_customize_rf->st_ext_rf.c_pa_gain_b0_db    = (oal_int8)hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_RF_LINE_TX_GAIN_DB_5G);
@@ -3808,7 +3808,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_front_end(oal_uint8 *puc_param)
             pst_customize_rf->st_ext_rf.c_lna_gain_db < LNA_GAIN_DB_MIN ||
             pst_customize_rf->st_ext_rf.c_lna_gain_db > LNA_GAIN_DB_MAX)
         {
-            /* 值超出有效范围 */
+            /* ?????????????? */
             OAM_ERROR_LOG0(0, OAM_SF_CFG, "{hwifi_cfg_front_end::gain db rx or tx 5g lna gain db or out of range!}\r\n");
             return OAL_FAIL;
         }
@@ -3817,14 +3817,14 @@ OAL_STATIC oal_uint32 hwifi_cfg_front_end(oal_uint8 *puc_param)
     pst_customize_rf->uc_far_dist_pow_gain_switch = (oal_uint8)!!hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_FAR_DIST_POW_GAIN_SWITCH);
     pst_customize_rf->uc_far_dist_dsss_scale_promote_switch = (oal_uint8)!!hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_FAR_DIST_DSSS_SCALE_PROMOTE_SWITCH);
 
-    /* 配置: cca能量门限调整值 */
+    /* ????: cca?????????????? */
     {
         oal_int8 c_delta_cca_ed_high_20th_2g = (oal_int8)hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_DELTA_CCA_ED_HIGH_20TH_2G);
         oal_int8 c_delta_cca_ed_high_40th_2g = (oal_int8)hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_DELTA_CCA_ED_HIGH_40TH_2G);
         oal_int8 c_delta_cca_ed_high_20th_5g = (oal_int8)hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_DELTA_CCA_ED_HIGH_20TH_5G);
         oal_int8 c_delta_cca_ed_high_40th_5g = (oal_int8)hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_DELTA_CCA_ED_HIGH_40TH_5G);
 
-        /* 检查每一项的调整幅度是否超出最大限制 */
+        /* ???????????????????????????????????? */
         if (CUS_DELTA_CCA_ED_HIGH_TH_OUT_OF_RANGE(c_delta_cca_ed_high_20th_2g)
            || CUS_DELTA_CCA_ED_HIGH_TH_OUT_OF_RANGE(c_delta_cca_ed_high_40th_2g)
            || CUS_DELTA_CCA_ED_HIGH_TH_OUT_OF_RANGE(c_delta_cca_ed_high_20th_5g)
@@ -3859,46 +3859,46 @@ OAL_STATIC oal_uint32 hwifi_cfg_front_end(oal_uint8 *puc_param)
 
 OAL_STATIC oal_uint32 hwifi_cfg_init_tx_pwr_cmp(oal_uint8 *puc_param)
 {
-    oal_uint8                           uc_level;                                               /* 补偿功率的档位:0-2 */
-    oal_uint8                           uc_tx_pwr_comp_base = WLAN_CFG_INIT_TX_RATIO_LEVEL_0;   /* 功率补偿的起始ID值 */
+    oal_uint8                           uc_level;                                               /* ??????????????:0-2 */
+    oal_uint8                           uc_tx_pwr_comp_base = WLAN_CFG_INIT_TX_RATIO_LEVEL_0;   /* ??????????????ID?? */
     mac_cfg_customize_tx_pwr_comp_stru* pst_tx_pwr_comp;
 
-    /* 配置: 功率补偿 */
+    /* ????: ???????? */
     pst_tx_pwr_comp = (mac_cfg_customize_tx_pwr_comp_stru*)(puc_param);
 
     for (uc_level = 0; uc_level < 3; ++uc_level)
     {
         pst_tx_pwr_comp->ast_txratio2pwr[uc_level].us_tx_ratio = (oal_uint16)hwifi_get_init_value_etc(CUS_TAG_INI, uc_tx_pwr_comp_base + 2*uc_level);
 
-        /* 判断tx占空比是否有效 */
+        /* ????tx?????????????? */
         if (pst_tx_pwr_comp->ast_txratio2pwr[uc_level].us_tx_ratio > TX_RATIO_MAX)
         {
             OAM_ERROR_LOG2(0, OAM_SF_CFG, "{hwifi_cfg_init_tx_pwr_cmp::d[%d]:tx_ratio[%d] out of range, please check the value!}\r\n",
                                         uc_tx_pwr_comp_base + 2*uc_level, pst_tx_pwr_comp->ast_txratio2pwr[uc_level].us_tx_ratio);
-            /* 值超出有效范围 */
+            /* ?????????????? */
             return OAL_FAIL;
         }
 
         pst_tx_pwr_comp->ast_txratio2pwr[uc_level].us_tx_pwr_comp_val = (oal_uint16)hwifi_get_init_value_etc(CUS_TAG_INI, uc_tx_pwr_comp_base + 2*uc_level + 1);
 
-        /* 判断发射功率补偿值是否有效 */
+        /* ?????????????????????????? */
         if (pst_tx_pwr_comp->ast_txratio2pwr[uc_level].us_tx_pwr_comp_val > TX_PWR_COMP_VAL_MAX)
         {
             OAM_ERROR_LOG2(0, OAM_SF_CFG, "{hwifi_config_init_ini_rf::id[%d] tx_pwr_comp_val[%d] out of range!}\r\n",
                                             uc_tx_pwr_comp_base + 2*uc_level + 1, pst_tx_pwr_comp->ast_txratio2pwr[uc_level].us_tx_pwr_comp_val);
-            /* 值超出有效范围 */
+            /* ?????????????? */
             return OAL_FAIL;
         }
     }
 
     pst_tx_pwr_comp->ul_more_pwr = (oal_uint32)hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_MORE_PWR);
 
-    /* 判断根据温度额外补偿的发射功率值是否有效 */
+    /* ???????????????????????????????????????? */
     if (pst_tx_pwr_comp->ul_more_pwr > MORE_PWR_MAX)
     {
         OAM_ERROR_LOG2(0, OAM_SF_CFG, "{hwifi_config_init_ini_rf::cfg_id[%d]:more_pwr[%d] out of range!}\r\n",
                                             WLAN_CFG_INIT_MORE_PWR, pst_tx_pwr_comp->ul_more_pwr);
-        /* 值超出有效范围 */
+        /* ?????????????? */
         return OAL_FAIL;
     }
 
@@ -3911,7 +3911,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_init_dts_rf_reg(oal_uint16   *pus_rf_reg)
     oal_uint32                  ul_cfg_id;
     oal_uint16                  us_reg_val;
 
-    /* 配置RF寄存器 */
+    /* ????RF?????? */
     for(ul_cfg_id = WLAN_CFG_DTS_RF_FIRST; ul_cfg_id <= WLAN_CFG_DTS_RF_LAST; ul_cfg_id++)
     {
          us_reg_val = (oal_uint16)hwifi_get_init_value_etc(CUS_TAG_DTS, ul_cfg_id);
@@ -3925,16 +3925,16 @@ OAL_STATIC oal_uint32 hwifi_cfg_init_dts_rf_reg(oal_uint16   *pus_rf_reg)
 OAL_STATIC oal_uint32 hwifi_cfg_init_dts_cus_bt_cali(oal_uint8 *puc_param)
 {
     oal_uint32                  ul_cfg_id;
-    oal_int32                   l_cfg_value;            /* 临时变量保存从定制化get接口中获取的值 */
-    oal_int16                  *ps_tmp;                 /* 步进指针，用以遍历wifi bt校准值 */
+    oal_int32                   l_cfg_value;            /* ????????????????????get?????????????? */
+    oal_int16                  *ps_tmp;                 /* ??????????????????wifi bt?????? */
     mac_cus_bt_cali_stru       *pst_cali_bt;
 
     pst_cali_bt = (mac_cus_bt_cali_stru *)puc_param;
 
-    /* 配置: 单音幅度档位 */
+    /* ????: ???????????? */
     pst_cali_bt->uc_bt_tone_amp_grade = (oal_uint8)hwifi_get_init_value_etc(CUS_TAG_DTS, WLAN_CFG_DTS_BT_CALI_TONE_AMP_GRADE);
 
-    /* bt 校准值 */
+    /* bt ?????? */
     ps_tmp = &(pst_cali_bt->us_cali_bt_txpwr_pa_ref_band1);
     for(ul_cfg_id = WLAN_CFG_DTS_BT_CALI_TXPWR_PA_REF_BAND1; ul_cfg_id <= WLAN_CFG_DTS_BT_CALI_TXPWR_PA_REF_BAND8; ul_cfg_id++)
     {
@@ -3946,13 +3946,13 @@ OAL_STATIC oal_uint32 hwifi_cfg_init_dts_cus_bt_cali(oal_uint8 *puc_param)
         }
         else
         {
-            /* 值超出有效范围 */
+            /* ?????????????? */
             OAM_ERROR_LOG2(0, OAM_SF_ANY, "{hwifi_cfg_init_dts_cus_bt_cali::dts id[%d]value[%d]out of range!}\r\n", ul_cfg_id, l_cfg_value);
             return OAL_FAIL;
         }
     }
 
-    /* bt 频点值 */
+    /* bt ?????? */
     ps_tmp = &(pst_cali_bt->us_cali_bt_txpwr_numb);
     for(ul_cfg_id = WLAN_CFG_DTS_BT_CALI_TXPWR_PA_NUM; ul_cfg_id <= WLAN_CFG_DTS_BT_CALI_TXPWR_PA_FRE8; ul_cfg_id++)
     {
@@ -3964,7 +3964,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_init_dts_cus_bt_cali(oal_uint8 *puc_param)
         }
         else
         {
-            /* 值超出有效范围 */
+            /* ?????????????? */
             OAM_ERROR_LOG2(0, OAM_SF_ANY, "{hwifi_cfg_init_dts_cus_bt_cali::dts id[%d]value[%d]out of range!}\r\n", ul_cfg_id, l_cfg_value);
             return OAL_FAIL;
         }
@@ -3990,7 +3990,7 @@ OAL_STATIC oal_void hwifi_config_init_ini_rf(oal_net_device_stru *pst_cfg_net_de
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_CUS_RF, us_event_len);
 
     /*lint -e774*/
-    /* 定制化下发不能超过事件内存长 */
+    /* ???????????????????????????? */
     if (us_event_len > WAL_MSG_WRITE_MAX_LEN)
     {
         OAM_ERROR_LOG2(0, OAM_SF_ANY, "{hwifi_config_init_ini_rf::event size[%d] larger than msg size[%d]!}\r\n",
@@ -4010,7 +4010,7 @@ OAL_STATIC oal_void hwifi_config_init_ini_rf(oal_net_device_stru *pst_cfg_net_de
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1102_HOST)
     ul_offset += OAL_SIZEOF(mac_cfg_customize_rf);
 
-    /* 配置温度功率补偿 */
+    /* ???????????????? */
     ul_ret = hwifi_cfg_init_tx_pwr_cmp(st_write_msg.auc_value + ul_offset);
     if (OAL_SUCC != ul_ret)
     {
@@ -4019,7 +4019,7 @@ OAL_STATIC oal_void hwifi_config_init_ini_rf(oal_net_device_stru *pst_cfg_net_de
     }
 #endif //#if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1102_HOST)
 
-    /* 如果所有参数都在有效范围内，则下发配置值 */
+    /* ???????????????????????????????????????? */
     ul_ret = (oal_uint32)wal_send_cfg_event_etc(pst_cfg_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + us_event_len,
@@ -4041,40 +4041,40 @@ OAL_STATIC oal_uint32 hwifi_cfg_init_dts_cus_cali(oal_uint8 *puc_param, oal_uint
     oal_int32                    l_val;
     oal_int16                    s_ref_val_ch1;
     oal_int16                    s_ref_val_ch0;
-    oal_uint8                    uc_idx;             /* 结构体数组下标 */
+    oal_uint8                    uc_idx;             /* ?????????????? */
     mac_cus_dts_cali_stru       *pst_cus_cali;
     oal_uint8                    uc_gm_opt;
 
     pst_cus_cali = (mac_cus_dts_cali_stru *)puc_param;
-    /** 配置: TXPWR_PA_DC_REF **/
-    /*2G REF: 分13个信道*/
+    /** ????: TXPWR_PA_DC_REF **/
+    /*2G REF: ??13??????*/
     for (uc_idx = 0; uc_idx < 13; uc_idx++)
     {
         l_val = hwifi_get_init_value_etc(CUS_TAG_DTS, WLAN_CFG_DTS_CALI_TXPWR_PA_DC_REF_2G_START + uc_idx);
         s_ref_val_ch1 = (oal_int16)((l_val & 0xFFFF0000) >> 16);//lint !e737
         s_ref_val_ch0 = (oal_int16)(l_val & 0x0000FFFF);
 
-        /* 2G判断参考值先不判断<0, 待与RF同事确认, TBD */
+        /* 2G??????????????????<0, ????RF????????, TBD */
         if (s_ref_val_ch0 <= CALI_TXPWR_PA_DC_REF_MAX)
         {
             pst_cus_cali->ast_cali[0].aus_cali_txpwr_pa_dc_ref_2g_val_chan[uc_idx] = s_ref_val_ch0;
         }
         else
         {
-            /* 值超出有效范围 */
+            /* ?????????????? */
             OAM_ERROR_LOG2(0, OAM_SF_ANY, "{hwifi_cfg_init_dts_cus_cali::dts 2g ref id[%d]value[%d] out of range!}\r\n",
                             WLAN_CFG_DTS_CALI_TXPWR_PA_DC_REF_2G_START + uc_idx, s_ref_val_ch0);//lint !e571
             return OAL_FAIL;
         }
 #if (_PRE_PRODUCT_ID != _PRE_PRODUCT_ID_HI1102_HOST)
-        /* 02不需要适配双通道 */
+        /* 02???????????????? */
         if (s_ref_val_ch1 <= CALI_TXPWR_PA_DC_REF_MAX)
         {
                 pst_cus_cali->ast_cali[1].aus_cali_txpwr_pa_dc_ref_2g_val_chan[uc_idx] = s_ref_val_ch1;
         }
         else
         {
-            /* 值超出有效范围 */
+            /* ?????????????? */
             OAM_ERROR_LOG2(0, OAM_SF_ANY, "{hwifi_cfg_init_dts_cus_cali::dts ch1 2g ref id[%d]value[%d] out of range!}\r\n",
                              WLAN_CFG_DTS_CALI_TXPWR_PA_DC_REF_2G_START + uc_idx, s_ref_val_ch1);//lint !e571
             return OAL_FAIL;
@@ -4083,7 +4083,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_init_dts_cus_cali(oal_uint8 *puc_param, oal_uint
 #endif //#if (_PRE_PRODUCT_ID != _PRE_PRODUCT_ID_HI1102_HOST)
 
 #if (_PRE_TARGET_PRODUCT_TYPE_E5 == _PRE_CONFIG_TARGET_PRODUCT)
-        /* E5-5885 B40通路赋值 */
+        /* E5-5885 B40???????? */
         l_val = hwifi_get_init_value_etc(CUS_TAG_DTS, WLAN_CFG_DTS_CALI_TXPWR_PA_DC_REF_2G_B40_START+uc_idx);
         s_ref_val_ch1 = (l_val & 0xFFFF0000) >> 16;
         s_ref_val_ch0 = l_val & 0x0000FFFF;
@@ -4095,7 +4095,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_init_dts_cus_cali(oal_uint8 *puc_param, oal_uint
         }
         else
         {
-            /* 值超出有效范围 */
+            /* ?????????????? */
             OAM_ERROR_LOG3(0, OAM_SF_ANY, "{hwifi_cfg_init_dts_cus_cali::dts 2g ref id[%d]value ch0[%d]ch1[%d] out of range!}\r\n",
                              WLAN_CFG_DTS_CALI_TXPWR_PA_DC_REF_2G_B40_START + uc_idx, s_ref_val_ch0, s_ref_val_ch1);
             return OAL_FAIL;
@@ -4103,7 +4103,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_init_dts_cus_cali(oal_uint8 *puc_param, oal_uint
 #endif //#if (_PRE_TARGET_PRODUCT_TYPE_E5 == _PRE_CONFIG_TARGET_PRODUCT)
     }
 
-    /*5G REF: 分7个band*/
+    /*5G REF: ??7??band*/
     if (uc_5g_Band_enable)
     {
         for (uc_idx = 0; uc_idx < 7; ++uc_idx)
@@ -4118,7 +4118,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_init_dts_cus_cali(oal_uint8 *puc_param, oal_uint
             }
             else
             {
-                /* 值超出有效范围 */
+                /* ?????????????? */
                 OAM_ERROR_LOG2(0, OAM_SF_ANY, "{hwifi_cfg_init_dts_cus_cali::dts 5g ref id[%d]value[%d] out of range!}\r\n",
                                 WLAN_CFG_DTS_CALI_TXPWR_PA_DC_REF_5G_START + uc_idx, s_ref_val_ch0);//lint !e571
                 return OAL_FAIL;
@@ -4130,7 +4130,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_init_dts_cus_cali(oal_uint8 *puc_param, oal_uint
             }
             else
             {
-                /* 值超出有效范围 */
+                /* ?????????????? */
                 OAM_ERROR_LOG2(0, OAM_SF_ANY, "{hwifi_cfg_init_dts_cus_cali::dts ch1 5g ref id[%d]value[%d] out of range!}\r\n",
                                 WLAN_CFG_DTS_CALI_TXPWR_PA_DC_REF_5G_START + uc_idx, s_ref_val_ch1);//lint !e571
                 return OAL_FAIL;
@@ -4143,26 +4143,26 @@ OAL_STATIC oal_uint32 hwifi_cfg_init_dts_cus_cali(oal_uint8 *puc_param, oal_uint
     hwifi_cfg_init_dts_cus_bt_cali((oal_uint8 *)(&pst_cus_cali->st_cali_bt));
 #endif //#if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1102_HOST)
 
-    /* 配置BAND 5G ENABLE */
+    /* ????BAND 5G ENABLE */
     pst_cus_cali->uc_band_5g_enable = !!uc_5g_Band_enable;
 
-    /* 配置单音幅度档位 */
+    /* ???????????????? */
     pst_cus_cali->uc_tone_amp_grade = (oal_uint8)hwifi_get_init_value_etc(CUS_TAG_DTS, WLAN_CFG_DTS_CALI_TONE_AMP_GRADE);
 
-    /* 配置DPD校准参数 */
+    /* ????DPD???????? */
 #ifdef _PRE_WLAN_ONLINE_DPD
     for (uc_idx = 0; uc_idx < MAC_DPD_CALI_CUS_PARAMS_NUM; uc_idx++)
     {
-        /* 通道0 */
+        /* ????0 */
         l_val = hwifi_get_init_value_etc(CUS_TAG_DTS, WLAN_CFG_DTS_DPD_CALI_START + uc_idx);
         pst_cus_cali->ast_dpd_cali_para[0].aul_dpd_cali_cus_dts[uc_idx] = l_val;
-        /* 通道1 */
+        /* ????1 */
         l_val = hwifi_get_init_value_etc(CUS_TAG_DTS, WLAN_CFG_DTS_DPD_CALI_START + uc_idx + MAC_DPD_CALI_CUS_PARAMS_NUM);
         pst_cus_cali->ast_dpd_cali_para[1].aul_dpd_cali_cus_dts[uc_idx] = l_val;
     }
 #endif
 
-    /* 配置动态校准参数 */
+    /* ???????????????? */
 #ifdef _PRE_WLAN_FIT_BASED_REALTIME_CALI
     l_val = hwifi_get_init_value_etc(CUS_TAG_DTS, WLAN_CFG_DTS_DYN_CALI_DSCR_ITERVL);
     pst_cus_cali->aus_dyn_cali_dscr_interval[WLAN_BAND_2G] = (oal_uint16)(l_val & 0x0000FFFF);
@@ -4177,7 +4177,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_init_dts_cus_cali(oal_uint8 *puc_param, oal_uint
 
     if ((l_val & 0x3) >> 1)
     {
-        /* 自适应选择 */
+        /* ?????????? */
         l_val = !g_en_fact_cali_completed;
     }
     else
@@ -4202,13 +4202,13 @@ OAL_STATIC oal_uint32 hwifi_cfg_init_dts_fcc_band_edge_limit(oal_uint8 *puc_para
     mac_cus_band_edge_limit_stru   *pst_band_edge_limit;
     oal_uint8                       uc_max_txpwr;
     oal_uint16                      us_dbb_scale;
-    oal_uint8                       uc_idx;             /* 结构体数组下标 */
+    oal_uint8                       uc_idx;             /* ?????????????? */
 
     pst_band_edge_limit = (mac_cus_band_edge_limit_stru *)puc_param;
 
     for (uc_idx = 0; uc_idx < uc_fcc_auth_band_num; uc_idx++)
     {
-        /* 赋值idx、txpwr */
+        /* ????idx??txpwr */
         uc_max_txpwr = (oal_uint8)hwifi_get_init_value_etc(CUS_TAG_DTS, WLAN_CFG_DTS_BAND_EDGE_LIMIT_TXPWR_START + uc_idx);
         if (uc_max_txpwr >= MAX_TXPOWER_MIN && uc_max_txpwr <= MAX_TXPOWER_MAX)
         {
@@ -4217,13 +4217,13 @@ OAL_STATIC oal_uint32 hwifi_cfg_init_dts_fcc_band_edge_limit(oal_uint8 *puc_para
         }
         else
         {
-            /* 值超出有效范围 */
+            /* ?????????????? */
             OAM_ERROR_LOG2(0, OAM_SF_CFG, "{hwifi_cfg_init_dts_fcc_band_edge_limit::dts id[%d]value[%d]out of range!}\r\n",
                             WLAN_CFG_DTS_BAND_EDGE_LIMIT_TXPWR_START + uc_idx, uc_max_txpwr);
             return OAL_FAIL;
         }
 
-        /* 赋值scale */
+        /* ????scale */
         us_dbb_scale = (oal_uint16)hwifi_get_init_value_etc(CUS_TAG_DTS, WLAN_CFG_DTS_BAND_EDGE_LIMIT_SCALE_START + uc_idx);
         if (us_dbb_scale > 0 && us_dbb_scale <= MAX_DBB_SCALE)
         {
@@ -4231,7 +4231,7 @@ OAL_STATIC oal_uint32 hwifi_cfg_init_dts_fcc_band_edge_limit(oal_uint8 *puc_para
         }
         else
         {
-            /* 值超出有效范围 */
+            /* ?????????????? */
             OAM_ERROR_LOG2(0, OAM_SF_CFG, "{hwifi_cfg_init_dts_fcc_band_edge_limit::dts id[%d]value[%d]out of range!}\r\n",
                             WLAN_CFG_DTS_BAND_EDGE_LIMIT_TXPWR_START + uc_idx, us_dbb_scale);
             return OAL_FAIL;
@@ -4249,18 +4249,18 @@ OAL_STATIC oal_uint32 hwifi_config_init_dts_cali(oal_net_device_stru *pst_cfg_ne
     mac_cus_dts_cali_stru           st_cus_cali;
     mac_cus_band_edge_limit_stru   *pst_band_edge_limit;
     oal_uint16                      us_offset = 0;
-    oal_uint8                       uc_fcc_auth_band_num;   /* 实际需要进行配置的FCC认证band数，2g:3个,5g:3个 */
-    oal_bool_enum_uint8             en_5g_Band_enable;    /* mac device是否支持5g能力 */
+    oal_uint8                       uc_fcc_auth_band_num;   /* ??????????????????FCC????band????2g:3??,5g:3?? */
+    oal_bool_enum_uint8             en_5g_Band_enable;    /* mac device????????5g???? */
 
     if (OAL_WARN_ON(OAL_PTR_NULL == pst_cfg_net_dev))
     {
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 检查硬件是否需要使能5g */
+    /* ????????????????????5g */
     en_5g_Band_enable = mac_device_check_5g_enable_per_chip();
 
-    /* 配置校准参数TXPWR_PA_DC_REF */
+    /* ????????????TXPWR_PA_DC_REF */
     ul_ret = hwifi_cfg_init_dts_cus_cali((oal_uint8 *)&st_cus_cali, en_5g_Band_enable);
 
     if (OAL_UNLIKELY(OAL_SUCC != ul_ret))
@@ -4269,9 +4269,9 @@ OAL_STATIC oal_uint32 hwifi_config_init_dts_cali(oal_net_device_stru *pst_cfg_ne
         return ul_ret;
     }
 
-    /* 配置FCC认证 */
+    /* ????FCC???? */
     uc_fcc_auth_band_num = en_5g_Band_enable ? NUM_OF_BAND_EDGE_LIMIT : NUM_OF_BAND_EDGE_LIMIT >> 1;
-    /* 申请内存存放边带功率信息,本函数结束后释放,申请内存大小: 6*4 = 24字节 */
+    /* ????????????????????????,????????????????,????????????: 6*4 = 24???? */
     pst_band_edge_limit = OAL_MEM_ALLOC(OAL_MEM_POOL_ID_LOCAL, NUM_OF_BAND_EDGE_LIMIT * OAL_SIZEOF(mac_cus_band_edge_limit_stru), OAL_TRUE);
     if (OAL_PTR_NULL == pst_band_edge_limit)
     {
@@ -4288,7 +4288,7 @@ OAL_STATIC oal_uint32 hwifi_config_init_dts_cali(oal_net_device_stru *pst_cfg_ne
         return ul_ret;
     }
 
-    /* 如果所有参数都在有效范围内，则下发配置值 */
+    /* ???????????????????????????????????????? */
     oal_memcopy(st_write_msg.auc_value, (oal_int8*)&st_cus_cali, OAL_SIZEOF(mac_cus_dts_cali_stru));
     us_offset += OAL_SIZEOF(mac_cus_dts_cali_stru);
     oal_memcopy(st_write_msg.auc_value + us_offset, (oal_int8*)pst_band_edge_limit, NUM_OF_BAND_EDGE_LIMIT * OAL_SIZEOF(mac_cus_band_edge_limit_stru));
@@ -4309,7 +4309,7 @@ OAL_STATIC oal_uint32 hwifi_config_init_dts_cali(oal_net_device_stru *pst_cfg_ne
         return ul_ret;
     }
 
-    /* 释放pst_band_edge_limit内存 */
+    /* ????pst_band_edge_limit???? */
     OAL_MEM_FREE(pst_band_edge_limit, OAL_TRUE);
     return OAL_SUCC;
 }
@@ -4317,12 +4317,12 @@ OAL_STATIC oal_uint32 hwifi_config_init_dts_cali(oal_net_device_stru *pst_cfg_ne
 
 oal_uint32 hwifi_config_init_nvram_main_etc(oal_net_device_stru *pst_cfg_net_dev)
 {
-    /* nvram 参数结构体 */
+    /* nvram ?????????? */
     struct nvram_params_stru
     {
-        oal_uint8       uc_index;           /* 下标表示偏移 */
-        oal_uint8       uc_max_txpower;     /* 最大发送功率 */
-        oal_uint16      us_dbb_scale;       /* DBB幅值 */
+        oal_uint8       uc_index;           /* ???????????? */
+        oal_uint8       uc_max_txpower;     /* ???????????? */
+        oal_uint16      us_dbb_scale;       /* DBB???? */
     };
     struct nvram_params_stru* pst_nvram_params;
     oal_uint16          aus_nv_params[NUM_OF_NV_PARAMS];
@@ -4334,7 +4334,7 @@ oal_uint32 hwifi_config_init_nvram_main_etc(oal_net_device_stru *pst_cfg_net_dev
 
     oal_memcopy(aus_nv_params, hwifi_get_nvram_params_etc(), OAL_SIZEOF(aus_nv_params));
 
-    /* 申请内存存放NVRAM参数信息,本函数结束后释放,内存大小:46 * 4 = 164字节 */
+    /* ????????????NVRAM????????,????????????????,????????:46 * 4 = 164???? */
     pst_nvram_params = OAL_MEM_ALLOC(OAL_MEM_POOL_ID_LOCAL, us_offset, OAL_TRUE);
     if (OAL_PTR_NULL == pst_nvram_params)
     {
@@ -4342,7 +4342,7 @@ oal_uint32 hwifi_config_init_nvram_main_etc(oal_net_device_stru *pst_cfg_net_dev
         return OAL_ERR_CODE_ALLOC_MEM_FAIL;
     }
 
-    /* 结构体数组赋值 */
+    /* ?????????????? */
     for(uc_idx = 0; uc_idx < NUM_OF_NV_MAX_TXPOWER; uc_idx++)
     {
         pst_nvram_params[uc_idx].uc_index = uc_idx;
@@ -4357,7 +4357,7 @@ oal_uint32 hwifi_config_init_nvram_main_etc(oal_net_device_stru *pst_cfg_net_dev
             OAM_ERROR_LOG3(0, OAM_SF_CFG, "{hwifi_config_init_nvram_main_etc:: %dth pwr[0x%x] or scale[0x%x], check dts file or nvm!}\r\n",
                             uc_idx, aus_nv_params[2 * uc_idx], aus_nv_params[2 * uc_idx + 1]);
 
-            /* 超出有效值范围，使用默认值 */
+            /* ?????????????????????????? */
             pst_nvram_params[uc_idx].uc_max_txpower = MAX_TXPOWER_MAX;
             pst_nvram_params[uc_idx].us_dbb_scale   = MAX_DBB_SCALE;
         }
@@ -4384,12 +4384,12 @@ oal_uint32 hwifi_config_init_nvram_main_etc(oal_net_device_stru *pst_cfg_net_dev
     if (OAL_UNLIKELY(OAL_SUCC != l_ret))
     {
         OAM_ERROR_LOG1(0, OAM_SF_ANY, "{hwifi_config_init_nvram_main_etc::return err code [%d]!}\r\n", l_ret);
-        /* 释放pst_nvram_params内存 */
+        /* ????pst_nvram_params???? */
         OAL_MEM_FREE(pst_nvram_params, OAL_TRUE);
         return OAL_FAIL;
     }
 
-    /* 释放pst_nvram_params内存 */
+    /* ????pst_nvram_params???? */
     OAL_MEM_FREE(pst_nvram_params, OAL_TRUE);
 
     return OAL_SUCC;
@@ -4407,7 +4407,7 @@ OAL_STATIC oal_uint32 hwifi_config_init_dts_cali(oal_net_device_stru *pst_cfg_ne
 #endif
     mac_cus_dts_cali_stru           st_cus_cali;
     oal_uint32                      ul_offset = 0;
-    oal_bool_enum                   en_5g_Band_enable;    /* mac device是否支持5g能力 */
+    oal_bool_enum                   en_5g_Band_enable;    /* mac device????????5g???? */
 
     if (OAL_WARN_ON(OAL_PTR_NULL == pst_cfg_net_dev))
     {
@@ -4415,10 +4415,10 @@ OAL_STATIC oal_uint32 hwifi_config_init_dts_cali(oal_net_device_stru *pst_cfg_ne
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 检查硬件是否需要使能5g */
+    /* ????????????????????5g */
     en_5g_Band_enable = mac_device_check_5g_enable_per_chip();
 
-    /* 配置校准参数TXPWR_PA_DC_REF */
+    /* ????????????TXPWR_PA_DC_REF */
     ul_ret = hwifi_cfg_init_dts_cus_cali((oal_uint8 *)&st_cus_cali, en_5g_Band_enable);
 
     if (OAL_UNLIKELY(OAL_SUCC != ul_ret))
@@ -4428,11 +4428,11 @@ OAL_STATIC oal_uint32 hwifi_config_init_dts_cali(oal_net_device_stru *pst_cfg_ne
     }
 
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1102_HOST)
-    /* 配置RF寄存器 */
+    /* ????RF?????? */
     hwifi_cfg_init_dts_rf_reg((oal_uint16*)&st_rf_reg);
 #endif //#if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1102_HOST)
 
-    /* 如果所有参数都在有效范围内，则下发配置值 */
+    /* ???????????????????????????????????????? */
     oal_memcopy(st_write_msg.auc_value, (oal_int8*)&st_cus_cali, OAL_SIZEOF(mac_cus_dts_cali_stru));
     ul_offset += OAL_SIZEOF(mac_cus_dts_cali_stru);
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1102_HOST)
@@ -4477,7 +4477,7 @@ OAL_STATIC oal_uint32 hwifi_config_init_cus_dyn_cali(oal_net_device_stru *pst_cf
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 配置动态校准参数TXPWR_PA_DC_REF */
+    /* ????????????????TXPWR_PA_DC_REF */
     OAL_MEMZERO(st_dy_cus_cali, OAL_SIZEOF(mac_cus_dy_cali_param_stru)*WLAN_RF_CHANNEL_NUMS);
     ul_ret = hwifi_cfg_init_cus_dyn_cali(st_dy_cus_cali);
 
@@ -4492,7 +4492,7 @@ OAL_STATIC oal_uint32 hwifi_config_init_cus_dyn_cali(oal_net_device_stru *pst_cf
         pst_dy_cus_cali = &st_dy_cus_cali[uc_rf_id];
         pst_rsp_msg     = OAL_PTR_NULL;
 
-        /* 如果所有参数都在有效范围内，则下发配置值 */
+        /* ???????????????????????????????????????? */
         oal_memcopy(st_write_msg.auc_value, (oal_int8*)pst_dy_cus_cali, OAL_SIZEOF(mac_cus_dy_cali_param_stru));
         ul_offset = OAL_SIZEOF(mac_cus_dy_cali_param_stru);
         WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_CUS_DYN_CALI_PARAM, ul_offset);
@@ -4534,7 +4534,7 @@ oal_uint32 hwifi_config_init_nvram_main_etc(oal_net_device_stru *pst_cfg_net_dev
 {
     wal_msg_write_stru  st_write_msg;
     oal_int32           l_ret;
-    oal_uint16          us_offset = OAL_SIZEOF(wlan_cust_nvram_params); /* 包括4个基准功率 */
+    oal_uint16          us_offset = OAL_SIZEOF(wlan_cust_nvram_params); /* ????4?????????? */
 
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_CUS_NVRAM_PARAM, us_offset);
     oal_memcopy(st_write_msg.auc_value, hwifi_get_nvram_params_etc(), us_offset);
@@ -4560,14 +4560,14 @@ oal_uint32 hwifi_config_init_nvram_main_etc(oal_net_device_stru *pst_cfg_net_dev
 OAL_STATIC oal_void hwifi_config_init_ini_main(oal_net_device_stru *pst_cfg_net_dev)
 {
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
-    /* 国家码 */
+    /* ?????? */
     hwifi_config_init_ini_country(pst_cfg_net_dev);
 #endif
-    /* 低功耗 */
+    /* ?????? */
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC != _PRE_MULTI_CORE_MODE)
     hwifi_config_init_ini_pm(pst_cfg_net_dev);
 #endif //#if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC != _PRE_MULTI_CORE_MODE)
-    /* 可维可测 */
+    /* ???????? */
     hwifi_config_init_ini_log(pst_cfg_net_dev);
     /* RF */
     hwifi_config_init_ini_rf(pst_cfg_net_dev);
@@ -4583,17 +4583,17 @@ oal_uint32 hwifi_config_init_dts_main_etc(oal_net_device_stru *pst_cfg_net_dev)
 
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
 #ifdef _PRE_WLAN_FIT_BASED_REALTIME_CALI
-    /* 下发动态校准参数 */
+    /* ???????????????? */
     hwifi_config_init_cus_dyn_cali(pst_cfg_net_dev);
 #endif
 #endif
 
-    /* 校准 */
+    /* ???? */
     if (OAL_SUCC != hwifi_config_init_dts_cali(pst_cfg_net_dev))
     {
         return OAL_FAIL;
     }
-    /* 校准放到第一个进行 */
+    /* ?????????????????? */
     return ul_ret;
 }
 
@@ -4708,7 +4708,7 @@ oal_int32 hwifi_config_init_ini_etc(oal_net_device_stru *pst_net_dev)
 
 oal_void hwifi_config_init_force_etc(oal_void)
 {
-    /* 重新上电时置为FALSE */
+    /* ??????????????FALSE */
     g_uc_cfg_once_flag = OAL_FALSE;
 
     hwifi_config_host_global_ini_param();
@@ -4727,14 +4727,14 @@ OAL_STATIC oal_uint32  wal_hipriv_load_ini_power_gain(oal_net_device_stru *pst_n
 
     us_len = (oal_uint16)(OAL_STRLEN(pc_param) + 1);
 
-    /* 刷新txpwr和dbb scale */
+    /* ????txpwr??dbb scale */
     if (hwifi_force_refresh_rf_params(pst_net_dev) != OAL_SUCC)
     {
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_hipriv_refresh_ini_power_gain::refresh rf(max_txpwr & dbb scale) params failed!}");
         return OAL_FAIL;
     }
 
-    /* 刷新DTS参数 */
+    /* ????DTS???? */
     if (hwifi_config_init_etc(CUS_TAG_DTS))
     {
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_hipriv_refresh_ini_power_gain::refresh CUS_TAG_DTS params failed!}");
@@ -4743,7 +4743,7 @@ OAL_STATIC oal_uint32  wal_hipriv_load_ini_power_gain(oal_net_device_stru *pst_n
 
 
     /***************************************************************************
-                              抛事件到wal层处理
+                              ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_LOAD_INI_PWR_GAIN, us_len);
 
@@ -4823,7 +4823,7 @@ OAL_STATIC oal_int32 wal_netdev_spe_init(oal_net_device_stru *pst_net_dev)
 
     OAL_MEMZERO(&st_spe_port_attr, sizeof(struct spe_port_attr));
 
-    /* 设置SPE端口属性 */
+    /* ????SPE???????? */
     st_spe_port_attr.desc_ops.finish_rd =  wal_finish_spe_rd;
     st_spe_port_attr.desc_ops.finish_td =  wal_finish_spe_td;
     st_spe_port_attr.rd_depth = WAL_MAX_SPE_PKT_NUM;
@@ -4835,7 +4835,7 @@ OAL_STATIC oal_int32 wal_netdev_spe_init(oal_net_device_stru *pst_net_dev)
     st_spe_port_attr.enc_type = spe_enc_none;
     st_spe_port_attr.stick_mode = 0;
 
-    /* 申请SPE端口 */
+    /* ????SPE???? */
     l_port_num = wifi_spe_port_alloc(pst_net_dev, &st_spe_port_attr);
 
     if(0 > l_port_num)
@@ -4919,7 +4919,7 @@ OAL_STATIC oal_bool_enum_uint8 wal_dfr_recovery_check(oal_net_device_stru *pst_n
     if((OAL_TRUE == g_st_dfr_info_etc.bit_ready_to_recovery_flag)
        && (!pst_mac_device->uc_vap_num))
     {
-        /* DFR恢复,在创建业务VAP前下发校准等参数,只下发一次 */
+        /* DFR????,??????????VAP????????????????,?????????? */
         return OAL_TRUE;
     }
 
@@ -4972,11 +4972,11 @@ OAL_STATIC oal_int32  _wal_netdev_open(oal_net_device_stru *pst_net_dev,oal_uint
     else if(OAL_ERR_CODE_ALREADY_OPEN != l_ret)
     {
 #ifdef _PRE_PLAT_FEATURE_CUSTOMIZE
-        /* 重新上电时置为FALSE */
+        /* ??????????????FALSE */
         hwifi_config_init_force_etc();
 #endif
 
-        /* 上电host device_stru初始化*/
+        /* ????host device_stru??????*/
         l_ret = wal_host_dev_init_etc(pst_net_dev);
         if(OAL_SUCC != l_ret)
         {
@@ -4985,7 +4985,7 @@ OAL_STATIC oal_int32  _wal_netdev_open(oal_net_device_stru *pst_net_dev,oal_uint
         }
     }
 #ifdef _PRE_WLAN_FEATURE_DFR
-    /* dfr 暂未适配wlan1 */
+    /* dfr ????????wlan1 */
     else if (wal_dfr_recovery_check(pst_net_dev))
     {
 #ifdef _PRE_PLAT_FEATURE_CUSTOMIZE
@@ -4996,7 +4996,7 @@ OAL_STATIC oal_int32  _wal_netdev_open(oal_net_device_stru *pst_net_dev,oal_uint
     }
 #endif  /* #ifdef _PRE_WLAN_FEATURE_DFR */
 
-    // 配置vap的创建,函数内通过标志位判断是否需要下发device
+    // ????vap??????,????????????????????????????????device
     l_ret = wal_cfg_vap_h2d_event_etc(pst_net_dev);
     if(OAL_SUCC != l_ret)
     {
@@ -5011,13 +5011,13 @@ OAL_STATIC oal_int32  _wal_netdev_open(oal_net_device_stru *pst_net_dev,oal_uint
     {
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_netdev_open_etc::power state is on,in ap mode, start vap later.}\r\n");
 
-        /* 此变量临时用一次，防止 Android framework层在模式切换前下发网卡up动作 */
+        /* ?????????????????????? Android framework??????????????????????up???? */
         g_st_ap_config_info.l_ap_power_flag = OAL_FALSE;
-        oal_net_tx_wake_all_queues(pst_net_dev);/*启动发送队列 */
+        oal_net_tx_wake_all_queues(pst_net_dev);/*???????????? */
         return OAL_SUCC;
     }
 
-    if (((NL80211_IFTYPE_STATION == pst_net_dev->ieee80211_ptr->iftype) || (NL80211_IFTYPE_P2P_DEVICE == pst_net_dev->ieee80211_ptr->iftype)))/*信道跟随--取消name判断*/
+    if (((NL80211_IFTYPE_STATION == pst_net_dev->ieee80211_ptr->iftype) || (NL80211_IFTYPE_P2P_DEVICE == pst_net_dev->ieee80211_ptr->iftype)))/*????????--????name????*/
     {
         l_ret = wal_init_wlan_vap_etc(pst_net_dev);
         if(OAL_SUCC != l_ret)
@@ -5029,7 +5029,7 @@ OAL_STATIC oal_int32  _wal_netdev_open(oal_net_device_stru *pst_net_dev,oal_uint
     else if(NL80211_IFTYPE_AP == pst_net_dev->ieee80211_ptr->iftype)
     {
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_netdev_open_etc::ap mode,no need to start vap.!}\r\n");
-        oal_net_tx_wake_all_queues(pst_net_dev);/*启动发送队列 */
+        oal_net_tx_wake_all_queues(pst_net_dev);/*???????????? */
         return OAL_SUCC;
     }
 #else
@@ -5077,16 +5077,16 @@ OAL_STATIC oal_int32  _wal_netdev_open(oal_net_device_stru *pst_net_dev,oal_uint
     hwifi_config_init_ini_etc(pst_net_dev);
 #endif
 #if ((_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION) && (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE))
-    /* 低功耗定制化开关 */
+    /* ???????????????? */
     (OAL_TRUE == g_wlan_pm_switch_etc) ? wlan_pm_enable_etc() : wlan_pm_disable_etc();
 #endif // #if ((_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION) && (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE))
 
 #endif /* #ifdef _PRE_PLAT_FEATURE_CUSTOMIZE */
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
-    /* 填写消息 */
+    /* ???????? */
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_START_VAP, OAL_SIZEOF(mac_cfg_start_vap_param_stru));
     ((mac_cfg_start_vap_param_stru *)st_write_msg.auc_value)->pst_net_dev = pst_net_dev;
 #ifdef _PRE_WLAN_FEATURE_P2P
@@ -5104,7 +5104,7 @@ OAL_STATIC oal_int32  _wal_netdev_open(oal_net_device_stru *pst_net_dev,oal_uint
 
     ((mac_cfg_start_vap_param_stru *)st_write_msg.auc_value)->l_ifindex = pst_net_dev->ifindex;
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(mac_cfg_start_vap_param_stru),
@@ -5122,7 +5122,7 @@ OAL_STATIC oal_int32  _wal_netdev_open(oal_net_device_stru *pst_net_dev,oal_uint
         return l_ret;
     }
 
-    /* 处理返回消息 */
+    /* ???????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_err_code)
     {
@@ -5160,9 +5160,9 @@ OAL_STATIC oal_int32  _wal_netdev_open(oal_net_device_stru *pst_net_dev,oal_uint
     }
 
 
-    oal_net_tx_wake_all_queues(pst_net_dev);/*启动发送队列 */
+    oal_net_tx_wake_all_queues(pst_net_dev);/*???????????? */
 #if (defined(_PRE_PRODUCT_ID_HI110X_HOST)&&(_PRE_OS_VERSION_WIN32 != _PRE_OS_VERSION))
-    /*1102硬件fem、DEVICE唤醒HOST虚焊lna烧毁检测,只在wlan0时打印*/
+    /*1102????fem??DEVICE????HOST????lna????????,????wlan0??????*/
     if((NL80211_IFTYPE_STATION == pst_net_dev->ieee80211_ptr->iftype)
         && (0 == (oal_strcmp("wlan0", pst_net_dev->name))))
     {
@@ -5209,7 +5209,7 @@ oal_int32  wal_netdev_open_etc(oal_net_device_stru *pst_net_dev,oal_uint8 uc_ent
     wlan_set_driver_lock(true);
 #endif
 #if (defined(_PRE_PRODUCT_ID_HI110X_HOST) && (LINUX_VERSION_CODE >= KERNEL_VERSION(3,14,0))) && (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION)
-    /*记录wlan0 开的时间*/
+    /*????wlan0 ????????*/
     if (oal_strncmp("wlan0", pst_net_dev->name, OAL_STRLEN("wlan0")) == 0)
     {
         g_st_wifi_radio_stat_etc.ull_wifi_on_time_stamp = OAL_TIME_JIFFY;
@@ -5226,14 +5226,14 @@ oal_uint32 wal_custom_cali_etc(oal_void)
     oal_net_device_stru *pst_net_dev;
     oal_uint32           ul_ret = 0;
 
-    pst_net_dev = oal_dev_get_by_name("Hisilicon0");  //通过cfg vap0来下c0 c1校准
+    pst_net_dev = oal_dev_get_by_name("Hisilicon0");  //????cfg vap0????c0 c1????
     if (OAL_WARN_ON(OAL_PTR_NULL == pst_net_dev))
     {
         return OAL_ERR_CODE_PTR_NULL;
     }
     else
     {
-        /* 调用oal_dev_get_by_name后，必须调用oal_dev_put使net_dev的引用计数减一 */
+        /* ????oal_dev_get_by_name????????????oal_dev_put??net_dev?????????????? */
         oal_dev_put(pst_net_dev);
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_custom_cali_etc::the net_device is already exist!}\r\n");
     }
@@ -5244,7 +5244,7 @@ oal_uint32 wal_custom_cali_etc(oal_void)
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)&&(_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION)
     if (g_uc_custom_cali_done_etc == OAL_TRUE)
     {
-        /* 校准数据下发 */
+        /* ???????????? */
         wal_send_cali_data_etc(pst_net_dev);
     }
     else
@@ -5255,7 +5255,7 @@ oal_uint32 wal_custom_cali_etc(oal_void)
     wal_send_cali_matrix_data(pst_net_dev);
 #endif
 
-    /* 下发参数 */
+    /* ???????? */
     ul_ret = hwifi_config_init_dts_main_etc(pst_net_dev);
 
     return ul_ret;
@@ -5312,14 +5312,14 @@ OAL_STATIC oal_int32  _wal_netdev_stop(oal_net_device_stru *pst_net_dev)
     }
 
     /*stop the netdev's queues*/
-    oal_net_tx_stop_all_queues(pst_net_dev);/* 停止发送队列 */
+    oal_net_tx_stop_all_queues(pst_net_dev);/* ???????????? */
     wal_force_scan_complete_etc(pst_net_dev, OAL_TRUE);
 
 #if defined(_PRE_PRODUCT_ID_HI110X_HOST)
     OAL_IO_PRINT("wal_netdev_stop_etc,dev_name is:%s\n", pst_net_dev->name);
     OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_netdev_stop_etc::iftype:%d.!}", pst_net_dev->ieee80211_ptr->iftype);
 
-    /* AP模式下,在模式切换时down和删除 vap */
+    /* AP??????,????????????down?????? vap */
     if(NL80211_IFTYPE_AP == pst_net_dev->ieee80211_ptr->iftype)
     {
         l_ret = wal_netdev_stop_ap_etc(pst_net_dev);
@@ -5327,14 +5327,14 @@ OAL_STATIC oal_int32  _wal_netdev_stop(oal_net_device_stru *pst_net_dev)
     }
 #endif
 
-    /* 如果netdev不是running状态，则直接返回成功 */
+    /* ????netdev????running???????????????????? */
     if (0 == (OAL_NETDEVICE_FLAGS(pst_net_dev) & OAL_IFF_RUNNING))
     {
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{_wal_netdev_stop::vap is already down!}");
         return OAL_SUCC;
     }
 
-    /* 如果netdev下mac vap已经释放，则直接返回成功 */
+    /* ????netdev??mac vap???????????????????????? */
     pst_mac_vap = OAL_NET_DEV_PRIV(pst_net_dev);
     if(OAL_UNLIKELY(OAL_PTR_NULL == pst_mac_vap))
     {
@@ -5353,9 +5353,9 @@ OAL_STATIC oal_int32  _wal_netdev_stop(oal_net_device_stru *pst_net_dev)
     }
 
     /***************************************************************************
-                           抛事件到wal层处理
+                           ????????wal??????
     ***************************************************************************/
-    /* 填写WID消息 */
+    /* ????WID???? */
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_DOWN_VAP, OAL_SIZEOF(mac_cfg_down_vap_param_stru));
     ((mac_cfg_down_vap_param_stru *)st_write_msg.auc_value)->pst_net_dev = pst_net_dev;
 #ifdef _PRE_WLAN_FEATURE_P2P
@@ -5369,7 +5369,7 @@ OAL_STATIC oal_int32  _wal_netdev_stop(oal_net_device_stru *pst_net_dev)
     ((mac_cfg_start_vap_param_stru *)st_write_msg.auc_value)->en_p2p_mode = en_p2p_mode;
 #endif
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(mac_cfg_down_vap_param_stru),
@@ -5385,7 +5385,7 @@ OAL_STATIC oal_int32  _wal_netdev_stop(oal_net_device_stru *pst_net_dev)
     {
         if (OAL_PTR_NULL == OAL_NET_DEV_PRIV(pst_net_dev))
         {
-            /* 关闭net_device，发现其对应vap 是null，清除flags running标志 */
+            /* ????net_device????????????vap ??null??????flags running???? */
             OAL_NETDEVICE_FLAGS(pst_net_dev) &= (~OAL_IFF_RUNNING);
             OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_netdev_stop_etc::net_device's vap is null, set flag not running, if_idx:%d}", pst_net_dev->ifindex);
         }
@@ -5393,7 +5393,7 @@ OAL_STATIC oal_int32  _wal_netdev_stop(oal_net_device_stru *pst_net_dev)
         return l_ret;
     }
 
-    /* 处理返回消息 */
+    /* ???????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_err_code)
     {
@@ -5423,7 +5423,7 @@ OAL_STATIC oal_int32  _wal_netdev_stop(oal_net_device_stru *pst_net_dev)
         OAL_IO_PRINT("wal_deinit_wlan_vap_etc::wal_get_macdev_by_netdev FAIL\r\n");
         return -OAL_EFAIL;
     }
-        /* 通过device id获取netdev名字 */
+        /* ????device id????netdev???? */
     OAL_SPRINTF(ac_wlan_netdev_name, MAC_NET_DEVICE_NAME_LENGTH, "wlan%d", pst_mac_dev->uc_device_id);
     OAL_SPRINTF(ac_p2p_netdev_name, MAC_NET_DEVICE_NAME_LENGTH, "p2p%d",  pst_mac_dev->uc_device_id);
     OAL_SPRINTF(ac_hwlan_netdev_name, MAC_NET_DEVICE_NAME_LENGTH, "hwlan%d",  pst_mac_dev->uc_device_id);
@@ -5479,10 +5479,10 @@ OAL_STATIC oal_int32  wal_set_power_on(oal_net_device_stru *pst_net_dev, oal_int
 {
     oal_int32    l_ret = 0;
 
-    //ap上下电，配置VAP
-    if (0 == power_flag)//下电
+    //ap????????????VAP
+    if (0 == power_flag)//????
     {
-        /* 下电host device_stru去初始化*/
+        /* ????host device_stru????????*/
         wal_host_dev_exit(pst_net_dev);
 
         wal_wake_lock();
@@ -5491,7 +5491,7 @@ OAL_STATIC oal_int32  wal_set_power_on(oal_net_device_stru *pst_net_dev, oal_int
 
         g_st_ap_config_info.l_ap_power_flag = OAL_FALSE;
     }
-    else if (1 == power_flag) //上电
+    else if (1 == power_flag) //????
     {
         g_st_ap_config_info.l_ap_power_flag = OAL_TRUE;
 
@@ -5506,10 +5506,10 @@ OAL_STATIC oal_int32  wal_set_power_on(oal_net_device_stru *pst_net_dev, oal_int
         else if(OAL_ERR_CODE_ALREADY_OPEN != l_ret)
         {
 #ifdef _PRE_PLAT_FEATURE_CUSTOMIZE
-            /* 重新上电时置为FALSE */
+            /* ??????????????FALSE */
             hwifi_config_init_force_etc();
 #endif
-            // 重新上电场景，下发配置VAP
+            // ??????????????????????VAP
             l_ret = wal_cfg_vap_h2d_event_etc(pst_net_dev);
             if(OAL_SUCC!= l_ret)
             {
@@ -5517,7 +5517,7 @@ OAL_STATIC oal_int32  wal_set_power_on(oal_net_device_stru *pst_net_dev, oal_int
             }
         }
 
-        /* 上电host device_stru初始化*/
+        /* ????host device_stru??????*/
         l_ret = wal_host_dev_init_etc(pst_net_dev);
         if(OAL_SUCC != l_ret)
         {
@@ -5541,7 +5541,7 @@ OAL_STATIC oal_void wal_set_power_mgmt_on(oal_uint power_mgmt_flag)
     pst_wlan_pm = wlan_pm_get_drv_etc();
     if(NULL != pst_wlan_pm)
     {
-        /* ap模式下，是否允许下电操作,1:允许,0:不允许 */
+        /* ap????????????????????????,1:????,0:?????? */
         pst_wlan_pm->ul_apmode_allow_pm_flag = power_mgmt_flag;
     }
     else
@@ -5561,10 +5561,10 @@ oal_int32 wal_netdev_stop_ap_etc(oal_net_device_stru *pst_net_dev)
         return OAL_SUCC;
     }
 
-    /* 结束扫描,以防在20/40M扫描过程中关闭AP */
+    /* ????????,??????20/40M??????????????AP */
     wal_force_scan_complete_etc(pst_net_dev, OAL_TRUE);
 
-    /* AP关闭切换到STA模式,删除相关vap */
+    /* AP??????????STA????,????????vap */
     if(OAL_SUCC != wal_stop_vap_etc(pst_net_dev))
     {
         OAM_WARNING_LOG0(0, OAM_SF_CFG, "{wal_netdev_stop_ap_etc::wal_stop_vap_etc enter a error.}");
@@ -5576,11 +5576,11 @@ oal_int32 wal_netdev_stop_ap_etc(oal_net_device_stru *pst_net_dev)
         return l_ret;
     }
 
-    /* Del aput后需要切换netdev iftype状态到station */
+    /* Del aput??????????netdev iftype??????station */
     pst_net_dev->ieee80211_ptr->iftype = NL80211_IFTYPE_STATION;
 
 #if defined(_PRE_PRODUCT_ID_HI110X_HOST)
-    /* aput下电 */
+    /* aput???? */
     wal_set_power_mgmt_on(OAL_TRUE);
     l_ret = wal_set_power_on(pst_net_dev, OAL_FALSE);
     if (OAL_SUCC != l_ret)
@@ -5648,7 +5648,7 @@ OAL_STATIC oal_net_device_stats_stru*  wal_netdev_get_stats(oal_net_device_stru 
 
     pst_oam_vap_stat = &(pst_oam_stat->ast_vap_stat_info[pst_mac_vap->uc_vap_id]);
 
-    /* 更新统计信息到net_device */
+    /* ??????????????net_device */
     pst_stats->rx_packets   = pst_oam_vap_stat->ul_rx_pkt_to_lan;
     pst_stats->rx_bytes     = pst_oam_vap_stat->ul_rx_bytes_to_lan;
     pst_stats->rx_dropped   = pst_oam_vap_stat->ul_rx_ta_check_dropped +
@@ -5700,7 +5700,7 @@ OAL_STATIC oal_net_device_stats_stru*  wal_netdev_get_stats(oal_net_device_stru 
 
     pst_oam_vap_stat = &(pst_oam_stat->ast_vap_stat_info[pst_mac_vap->uc_vap_id]);
 
-    /* 更新统计信息到net_device */
+    /* ??????????????net_device */
     pst_stats->rx_packets   = pst_oam_vap_stat->ul_rx_pkt_to_lan;
     pst_stats->rx_bytes     = pst_oam_vap_stat->ul_rx_bytes_to_lan;
 
@@ -5730,7 +5730,7 @@ OAL_STATIC oal_int32  _wal_netdev_set_mac_addr(oal_net_device_stru *pst_net_dev,
     wal_msg_write_stru           *pst_write_msg = OAL_PTR_NULL;
     mac_cfg_staion_id_param_stru *pst_param = OAL_PTR_NULL;
 #ifdef _PRE_WLAN_FEATURE_P2P
-    oal_wireless_dev_stru        *pst_wdev = OAL_PTR_NULL; /* 对于P2P 场景，p2p0 和 p2p-p2p0 MAC 地址从wlan0 获取 */
+    oal_wireless_dev_stru        *pst_wdev = OAL_PTR_NULL; /* ????P2P ??????p2p0 ?? p2p-p2p0 MAC ??????wlan0 ???? */
 #endif
 #endif
 
@@ -5762,7 +5762,7 @@ OAL_STATIC oal_int32  _wal_netdev_set_mac_addr(oal_net_device_stru *pst_net_dev,
 
 
 #if (defined(CONFIG_BALONG_SPE) && defined(_PRE_WLAN_SPE_SUPPORT))
-    /* mac地址的修改要通知到spe对应的port， 这样spe才能做硬件加速 */
+    /* mac??????????????????spe??????port?? ????spe?????????????? */
     if(spe_hook.is_enable && spe_hook.is_enable() && (spe_mode_normal == spe_hook.mode()))
     {
         pst_mac_vap = (mac_vap_stru *)OAL_NET_DEV_PRIV(pst_net_dev);
@@ -5780,29 +5780,29 @@ OAL_STATIC oal_int32  _wal_netdev_set_mac_addr(oal_net_device_stru *pst_net_dev,
 #else
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
-    ul_ret = wal_alloc_cfg_event_etc(pst_net_dev, &pst_event_mem, NULL, &pst_cfg_msg, (WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(mac_cfg_staion_id_param_stru)));     /* 申请事件 */
+    ul_ret = wal_alloc_cfg_event_etc(pst_net_dev, &pst_event_mem, NULL, &pst_cfg_msg, (WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(mac_cfg_staion_id_param_stru)));     /* ???????? */
     if (OAL_UNLIKELY(OAL_SUCC != ul_ret))
     {
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_netdev_set_mac_addr::wal_alloc_cfg_event_etc fail!err code[%u]}\r\n",ul_ret);
         return -OAL_ENOMEM;
     }
 
-    /* 填写配置消息 */
+    /* ???????????? */
     WAL_CFG_MSG_HDR_INIT(&(pst_cfg_msg->st_msg_hdr),
                          WAL_MSG_TYPE_WRITE,
                          WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(mac_cfg_staion_id_param_stru),
                          WAL_GET_MSG_SN());
 
-    /* 填写WID消息 */
+    /* ????WID???? */
     pst_write_msg = (wal_msg_write_stru *)pst_cfg_msg->auc_msg_data;
     WAL_WRITE_MSG_HDR_INIT(pst_write_msg, WLAN_CFGID_STATION_ID, OAL_SIZEOF(mac_cfg_staion_id_param_stru));
 
-    pst_param = (mac_cfg_staion_id_param_stru *)pst_write_msg->auc_value;   /* 填写WID对应的参数 */
+    pst_param = (mac_cfg_staion_id_param_stru *)pst_write_msg->auc_value;   /* ????WID?????????? */
     oal_set_mac_addr(pst_param->auc_station_id, (oal_uint8 *)(pst_mac_addr->sa_data));
 #ifdef _PRE_WLAN_FEATURE_P2P
-    /* 填写下发net_device 对应p2p 模式 */
+    /* ????????net_device ????p2p ???? */
     pst_wdev = (oal_wireless_dev_stru *)pst_net_dev->ieee80211_ptr;
     pst_param->en_p2p_mode = wal_wireless_iftype_to_mac_p2p_mode_etc(pst_wdev->iftype);
     if (WLAN_P2P_BUTT == pst_param->en_p2p_mode)
@@ -5864,7 +5864,7 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
 #ifdef _PRE_WLAN_FEATURE_TAS_ANT_SWITCH
     oal_int32    l_param_1 = 0;
     oal_int32    l_param_2 = 0;
-    oal_int8     ac_name[WAL_HIPRIV_CMD_NAME_MAX_LEN] = {0};     /* 预留协议模式字符串空间 */
+    oal_int8     ac_name[WAL_HIPRIV_CMD_NAME_MAX_LEN] = {0};     /* ?????????????????????? */
     oal_uint32   ul_off_set;
     oal_int8    *pc_cmd_copy;
 #endif
@@ -5902,8 +5902,8 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
         return l_ret;
     }
 
-    /* 申请内存保存wpa_supplicant 下发的命令和数据 */
-    pc_command = oal_memalloc((oal_uint32)(st_priv_cmd.l_total_len + 5));/* total len 为priv cmd 后面buffer 长度 */
+    /* ????????????wpa_supplicant ???????????????? */
+    pc_command = oal_memalloc((oal_uint32)(st_priv_cmd.l_total_len + 5));/* total len ??priv cmd ????buffer ???? */
     if (OAL_PTR_NULL == pc_command)
     {
         OAM_ERROR_LOG0(0, OAM_SF_ANY, "{wal_android_priv_cmd_etc::mem alloc failed.}\r\n");
@@ -5912,7 +5912,7 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
         return l_ret;
     }
 
-    /* 拷贝wpa_supplicant 命令到内核态中 */
+    /* ????wpa_supplicant ?????????????? */
     oal_memset(pc_command, 0, (oal_uint32)(st_priv_cmd.l_total_len + 5));
 
     l_ret = (oal_int32)oal_copy_from_user(pc_command, pst_ifr->ifr_data + 8, (oal_uint32)(st_priv_cmd.l_total_len));
@@ -5930,7 +5930,7 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
     if (oal_strncasecmp(pc_command, CMD_SET_AP_WPS_P2P_IE, OAL_STRLEN(CMD_SET_AP_WPS_P2P_IE)) == 0)
     {
         oal_uint32 skip = OAL_STRLEN(CMD_SET_AP_WPS_P2P_IE) + 1;
-        /* 结构体类型 */
+        /* ?????????? */
         oal_app_ie_stru *pst_wps_p2p_ie;
         pst_wps_p2p_ie = (oal_app_ie_stru *)(pc_command + skip);
 
@@ -6008,7 +6008,7 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
     {
         oal_int32 power_flag = -1;
         oal_uint32 command_len = OAL_STRLEN(pc_command);
-        /* 格式:SET_POWER_ON 1 or SET_POWER_ON 0 */
+        /* ????:SET_POWER_ON 1 or SET_POWER_ON 0 */
         if(command_len < (OAL_STRLEN((oal_int8 *)CMD_SET_POWER_ON) + 2))
         {
             OAM_ERROR_LOG1(0, OAM_SF_ANY, "{wal_android_priv_cmd_etc::CMD_SET_POWER_ON cmd len must equal or larger than 18. Now the cmd len:%d.}\r\n", command_len);
@@ -6022,10 +6022,10 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_android_priv_cmd_etc::CMD_SET_POWER_ON command,power flag:%d}\r\n", power_flag);
 
 #if (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION)
-        //ap上下电，配置VAP
-        if (0 == power_flag)//下电
+        //ap????????????VAP
+        if (0 == power_flag)//????
         {
-            /* 下电host device_stru去初始化*/
+            /* ????host device_stru????????*/
             wal_host_dev_exit(pst_net_dev);
 
             wal_wake_lock();
@@ -6034,7 +6034,7 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
 
             g_st_ap_config_info.l_ap_power_flag = OAL_FALSE;
         }
-        else if (1 == power_flag) //上电
+        else if (1 == power_flag) //????
         {
             g_st_ap_config_info.l_ap_power_flag = OAL_TRUE;
 
@@ -6050,10 +6050,10 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
             else if(OAL_ERR_CODE_ALREADY_OPEN != l_ret)
             {
 #ifdef _PRE_PLAT_FEATURE_CUSTOMIZE
-                /* 重新上电时置为FALSE */
+                /* ??????????????FALSE */
                 hwifi_config_init_force_etc();
 #endif
-                // 重新上电场景，下发配置VAP
+                // ??????????????????????VAP
                 l_ret = wal_cfg_vap_h2d_event_etc(pst_net_dev);
                 if(OAL_SUCC!= l_ret)
                 {
@@ -6061,7 +6061,7 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
                     return -OAL_EFAIL;
                 }
 
-                /* 上电host device_stru初始化*/
+                /* ????host device_stru??????*/
                 l_ret = wal_host_dev_init_etc(pst_net_dev);
                 if(OAL_SUCC != l_ret)
                 {
@@ -6085,9 +6085,9 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
         struct wlan_pm_s  *pst_wlan_pm;
 #endif
 
-        oal_uint power_mgmt_flag = OAL_TRUE;  /* AP模式,默认电源管理是开启的 */
+        oal_uint power_mgmt_flag = OAL_TRUE;  /* AP????,???????????????????? */
         oal_uint32 command_len = OAL_STRLEN(pc_command);
-        /* 格式:CMD_SET_POWER_MGMT_ON 1 or CMD_SET_POWER_MGMT_ON 0 */
+        /* ????:CMD_SET_POWER_MGMT_ON 1 or CMD_SET_POWER_MGMT_ON 0 */
         if(command_len < (OAL_STRLEN((oal_int8 *)CMD_SET_POWER_MGMT_ON) + 2))
         {
             OAM_ERROR_LOG1(0, OAM_SF_ANY, "{wal_android_priv_cmd_etc::CMD_SET_POWER_MGMT_ON cmd len:%d is error.}\r\n", command_len);
@@ -6120,7 +6120,7 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
         oal_int8        auc_country_code[3] = {0};
         oal_int32       l_ret;
 
-        /* 格式:COUNTRY CN */
+        /* ????:COUNTRY CN */
         if(OAL_STRLEN(pc_command) < (OAL_STRLEN((oal_int8 *)CMD_COUNTRY) + 3))
         {
             OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_android_priv_cmd_etc::puc_command len error.}\r\n");
@@ -6179,7 +6179,7 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
             return -OAL_EFAIL;
         }
 
-        /* 将buf清零 */
+        /* ??buf???? */
         ret_len = OAL_MAX(st_priv_cmd.l_total_len, cmd_len);
         oal_memset(pc_command, 0, (oal_uint32)(ret_len + 1));
         pc_command[ret_len] = '\0';
@@ -6207,7 +6207,7 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
         oal_int32      l_ret;
         oal_int8       ltecoex_mode;
 
-        /* 格式:LTECOEX_MODE 1 or LTECOEX_MODE 0 */
+        /* ????:LTECOEX_MODE 1 or LTECOEX_MODE 0 */
         if(OAL_STRLEN(pc_command) < (OAL_STRLEN((oal_int8 *)CMD_LTECOEX_MODE) + 2))
         {
             OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_android_priv_cmd_etc::CMD_LTECOEX_MODE length is to short [%d].}\r\n", OAL_STRLEN(pc_command));
@@ -6238,7 +6238,7 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
         {
             OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_android_priv_cmd_etc::reduce sar return err code [%d]!}\r\n", l_ret);
             oal_free(pc_command);
-            /* 驱动打印错误码，返回成功，防止supplicant 累计4次 ioctl失败导致wifi异常重启 */
+            /* ??????????????????????????????supplicant ????4?? ioctl????????wifi???????? */
             return OAL_SUCC;
         }
     }
@@ -6247,7 +6247,7 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
     {
         if ((OAL_TRUE == g_aen_tas_switch_en[WLAN_RF_CHANNEL_ZERO]) || (OAL_TRUE == g_aen_tas_switch_en[WLAN_RF_CHANNEL_ONE]))
         {
-            /* 0:默认态 1:tas态 */
+            /* 0:?????? 1:tas?? */
             l_param_1 = oal_atoi(pc_command + OAL_STRLEN((oal_int8 *)CMD_SET_MEMO_CHANGE) + 1);
             OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_android_priv_cmd_etc::CMD_SET_MEMO_CHANGE antIndex[%d].}", l_param_1);
             l_ret = board_wifi_tas_set(l_param_1);
@@ -6262,12 +6262,12 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
     {
         l_param_1 = !!oal_atoi(pc_command + OAL_STRLEN((oal_int8 *)CMD_MEASURE_TAS_RSSI) + 1);
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_android_priv_cmd_etc::CMD_MEASURE_TAS_RSSI coreIndex[%d].}", l_param_1);
-        /* 测量天线 */
+        /* ???????? */
         l_ret = wal_ioctl_tas_rssi_access(pst_net_dev, l_param_1);
     }
     else if (oal_strncasecmp(pc_command, CMD_SET_TAS_TXPOWER, OAL_STRLEN(CMD_SET_TAS_TXPOWER)) == 0)
     {
-        /* tas抬功率 */
+        /* tas?????? */
         pc_cmd_copy = pc_command;
         pc_cmd_copy += OAL_STRLEN((oal_int8 *)CMD_SET_TAS_TXPOWER);
         l_value = wal_get_cmd_one_arg_etc(pc_cmd_copy, ac_name, &ul_off_set);
@@ -6278,7 +6278,7 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
              return OAL_SUCC;
         }
         l_param_1 = !!oal_atoi(ac_name);
-        /* 获取needImprove参数 */
+        /* ????needImprove???? */
         pc_cmd_copy += ul_off_set;
         l_ret = wal_get_cmd_one_arg_etc(pc_cmd_copy, ac_name, &ul_off_set);
         if (OAL_SUCC == l_ret)
@@ -6286,7 +6286,7 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
             l_param_2 = !!oal_atoi(ac_name);
             OAM_WARNING_LOG2(0, OAM_SF_TPC, "{wal_android_priv_cmd_etc::CMD_SET_TAS_TXPOWER coreIndex[%d] needImprove[%d].}",
                              l_param_1, l_param_2);
-            /* TAS控制抬功率 */
+            /* TAS?????????? */
             l_ret = wal_ioctl_tas_pow_ctrl(pst_net_dev, l_param_1, l_param_2);
         }
         else
@@ -6299,21 +6299,21 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
 #ifdef _PRE_PLAT_FEATURE_CUSTOMIZE
     else if (oal_strncasecmp(pc_command, CMD_WPAS_GET_CUST, OAL_STRLEN(CMD_WPAS_GET_CUST)) == 0)
     {
-        /* 将buf清零 */
+        /* ??buf???? */
         oal_memset(pc_command, 0, st_priv_cmd.l_total_len + 1);
         pc_command[st_priv_cmd.l_total_len] = '\0';
 
-        /* 读取全部定制化配置，不单独读取disable_capab_ht40 */
+        /* ??????????????????????????????disable_capab_ht40 */
         hwifi_config_host_global_ini_param();
 
-        /* 赋值ht40禁止位 */
+        /* ????ht40?????? */
         *pc_command = g_st_wlan_customize_etc.uc_disable_capab_2ght40;
 
         if(oal_copy_to_user(pst_ifr->ifr_data+8, pc_command, (oal_uint32)(st_priv_cmd.l_total_len)))
         {
             OAM_ERROR_LOG0(0, OAM_SF_ANY, "wal_android_priv_cmd_etc: Failed to copy ioctl_data to user !");
             oal_free(pc_command);
-            /* 返回错误，通知supplicant拷贝失败，supplicant侧做参数保护处理 */
+            /* ??????????????supplicant??????????supplicant???????????????? */
             return -OAL_EFAIL;
         }
     }
@@ -6342,7 +6342,7 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
             return -OAL_EFAIL;
         }
 
-        /* 将buf清零 */
+        /* ??buf???? */
         oal_memset(pc_command, 0, (oal_uint32)(st_priv_cmd.l_total_len + 1));
         pc_command[st_priv_cmd.l_total_len] = '\0';
         pl_value  = (oal_int32 *)pc_command;
@@ -6367,7 +6367,7 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
             return -OAL_EFAIL;
         }
 
-        /* 将buf清零 */
+        /* ??buf???? */
         oal_memset(pc_command, 0, (oal_uint32)(st_priv_cmd.l_total_len + 1));
         pc_command[st_priv_cmd.l_total_len] = '\0';
         pl_value  = (oal_int32 *)pc_command;
@@ -6394,7 +6394,7 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
             oal_free(pc_command);
             return -OAL_EFAIL;
         }
-        /* 将buf清零 */
+        /* ??buf???? */
         ret_len = OAL_MAX(st_priv_cmd.l_total_len, cmd_len);
         oal_memset(pc_command, 0, (oal_uint32)(ret_len + 1));
         pc_command[ret_len] = '\0';
@@ -6413,7 +6413,7 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
         oal_int32 l_on;
         oal_uint32 command_len = OAL_STRLEN(pc_command);
 
-        /* 格式:FILTER 1 or FILTER 0 */
+        /* ????:FILTER 1 or FILTER 0 */
         if(command_len < (OAL_STRLEN((oal_int8 *)CMD_FILTER_SWITCH) + 2))
         {
             OAM_ERROR_LOG1(0, OAM_SF_ANY, "{wal_android_priv_cmd_etc::CMD_FILTER_SWITCH cmd len must equal or larger than 8. Now the cmd len:%d.}\r\n", command_len);
@@ -6426,7 +6426,7 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
 
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_android_priv_cmd_etc::CMD_FILTER_SWITCH %d.}", l_on);
 
-        /* 调用内核接口调用 gWlanFilterOps.set_filter_enable */
+        /* ???????????????? gWlanFilterOps.set_filter_enable */
         l_ret = hw_set_net_filter_enable(l_on);
         if (OAL_UNLIKELY(OAL_SUCC != l_ret))
         {
@@ -6443,7 +6443,7 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
 #ifndef CONFIG_HAS_EARLYSUSPEND
     else if(0 == oal_strncasecmp(pc_command, CMD_SETSUSPENDOPT, OAL_STRLEN(CMD_SETSUSPENDOPT)))
     {
-        /* 目前还没有发现上层下发该命令,加维测出现后再分析 */
+        /* ????????????????????????????,?????????????????? */
         OAM_ERROR_LOG1(0,0,"wal_android_priv_cmd_etc:CMD_SETSUSPENDOPT param%d",*(pc_command + strlen(CMD_SETSUSPENDOPT) + 1) - '0');
         l_ret = OAL_SUCC;
     }
@@ -6469,7 +6469,7 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
 
         WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_STA_PM_ON, OAL_SIZEOF(mac_cfg_ps_open_stru));
 
-        /* 设置配置命令参数 */
+        /* ???????????????? */
         pst_sta_pm_open = (mac_cfg_ps_open_stru *)(st_write_msg.auc_value);
         /* MAC_STA_PM_SWITCH_ON / MAC_STA_PM_SWITCH_OFF */
         pst_sta_pm_open->uc_pm_enable      = *(pc_command + OAL_STRLEN((oal_int8 *)CMD_SET_STA_PM_ON) + 1) - '0';
@@ -6543,7 +6543,7 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
 #endif
     else
     {
-        /* 驱动对于不支持的命令，返回成功，否则上层wpa_supplicant认为ioctl失败，导致异常重启wifi */
+        /* ????????????????????????????????????????wpa_supplicant????ioctl??????????????????wifi */
         //OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_android_priv_cmd_etc::ignore unknow private command.}\r\n");
         l_ret = OAL_SUCC;
     }
@@ -6559,10 +6559,10 @@ oal_int32 wal_android_priv_cmd_etc(oal_net_device_stru *pst_net_dev, oal_ifreq_s
 #if ((!defined(_PRE_PRODUCT_ID_HI110X_DEV)) && (!defined(_PRE_PRODUCT_ID_HI110X_HOST)))
 oal_int32 wal_witp_wifi_priv_cmd(oal_net_device_stru *pst_net_dev, oal_ifreq_stru *pst_ifr)
 {
-    oal_net_dev_ioctl_data_stru     *pst_ioctl_data;  //用临时变量导致栈帧长度超过1024，有些平台编译不过，修改为动态申请
+    oal_net_dev_ioctl_data_stru     *pst_ioctl_data;  //??????????????????????????1024??????????????????????????????????
     oal_int32                       l_ret              = 0;
-    oal_bool_enum_uint8             en_get_flag        = OAL_FALSE;    //标记get接口
-    oal_uint32                      ul_get_data_size   = 0;    //get接口用户空间需要返回的数据size
+    oal_bool_enum_uint8             en_get_flag        = OAL_FALSE;    //????get????
+    oal_uint32                      ul_get_data_size   = 0;    //get??????????????????????????size
 
     if ((OAL_PTR_NULL == pst_ifr->ifr_data)||(OAL_PTR_NULL == pst_net_dev))
     {
@@ -6576,7 +6576,7 @@ oal_int32 wal_witp_wifi_priv_cmd(oal_net_device_stru *pst_net_dev, oal_ifreq_str
         return -OAL_EINVAL;
     }
 
-    /*将用户态数据拷贝到内核态*/
+    /*????????????????????????*/
     if (oal_copy_from_user(pst_ioctl_data, pst_ifr->ifr_data, sizeof(oal_net_dev_ioctl_data_stru)))
     {
         OAM_ERROR_LOG0(0, OAM_SF_ANY,"wal_witp_wifi_priv_cmd:Failed to copy ioctl_data from user !");
@@ -6869,7 +6869,7 @@ oal_int32 wal_net_device_ioctl(oal_net_device_stru *pst_net_dev, oal_ifreq_stru 
         return -OAL_EFAUL;
     }
 
-    /* 1102 wpa_supplicant 通过ioctl 下发命令 */
+    /* 1102 wpa_supplicant ????ioctl ???????? */
     if (WAL_SIOCDEVPRIVATE+1 == ul_cmd)
     {
         l_ret = wal_android_priv_cmd_etc(pst_net_dev, pst_ifr, ul_cmd);
@@ -6878,7 +6878,7 @@ oal_int32 wal_net_device_ioctl(oal_net_device_stru *pst_net_dev, oal_ifreq_stru 
 #if (_PRE_OS_VERSION_WIN32 != _PRE_OS_VERSION)
 
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
-    /*atcmdsrv 通过ioctl下发命令*/
+    /*atcmdsrv ????ioctl????????*/
     else if ( (WAL_SIOCDEVPRIVATE + 2) == ul_cmd )
     {
 #if (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION)
@@ -6899,8 +6899,8 @@ oal_int32 wal_net_device_ioctl(oal_net_device_stru *pst_net_dev, oal_ifreq_stru 
 #endif
 #endif
 #if ((!defined(_PRE_PRODUCT_ID_HI110X_DEV)) && (!defined(_PRE_PRODUCT_ID_HI110X_HOST)))
-    /* 51ioctl入口重构隔离 */
-    /*51 通过ioctl下发命令*/
+    /* 51ioctl???????????? */
+    /*51 ????ioctl????????*/
     else if(WAL_SIOCDEVPRIVATE == ul_cmd)
     {
 #if (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION)
@@ -6912,7 +6912,7 @@ oal_int32 wal_net_device_ioctl(oal_net_device_stru *pst_net_dev, oal_ifreq_stru 
         l_ret = wal_witp_wifi_priv_cmd(pst_net_dev, pst_ifr);
         return l_ret;
     }
-    /* 51ioctl入口重构隔离 */
+    /* 51ioctl???????????? */
 #endif
     else
     {
@@ -6925,7 +6925,7 @@ oal_int32 wal_net_device_ioctl(oal_net_device_stru *pst_net_dev, oal_ifreq_stru 
 
 OAL_STATIC oal_uint32  wal_hipriv_set_mode(oal_net_device_stru *pst_net_dev, oal_int8 *pc_param)
 {
-    oal_int8                    ac_mode_str[WAL_HIPRIV_CMD_NAME_MAX_LEN] = {0};     /* 预留协议模式字符串空间 */
+    oal_int8                    ac_mode_str[WAL_HIPRIV_CMD_NAME_MAX_LEN] = {0};     /* ?????????????????????? */
     oal_uint8                   uc_prot_idx;
     mac_cfg_mode_param_stru    *pst_mode_param;
     wal_msg_write_stru          st_write_msg;
@@ -6950,14 +6950,14 @@ OAL_STATIC oal_uint32  wal_hipriv_set_mode(oal_net_device_stru *pst_net_dev, oal
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 设备在up状态不允许配置，必须先down */
+    /* ??????up??????????????????????down */
     if (pst_mac_vap->en_vap_state != MAC_VAP_STATE_INIT)
     {
         OAM_ERROR_LOG1(0, OAM_SF_ANY, "{wal_ioctl_set_mode::device is busy, please down it first %d!}\r\n", pst_mac_vap->en_vap_state);
         return -OAL_EBUSY;
     }
 #endif
-    /* pc_param指向传入模式参数, 将其取出存放到ac_mode_str中 */
+    /* pc_param????????????????, ??????????????ac_mode_str?? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_mode_str, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -6965,7 +6965,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_mode(oal_net_device_stru *pst_net_dev, oal
         return ul_ret;
     }
 
-    ac_mode_str[OAL_SIZEOF(ac_mode_str) - 1] = '\0';    /* 确保以null结尾 */
+    ac_mode_str[OAL_SIZEOF(ac_mode_str) - 1] = '\0';    /* ??????null???? */
 
     for (uc_prot_idx = 0; OAL_PTR_NULL != g_ast_mode_map_etc[uc_prot_idx].pc_name; uc_prot_idx++)
     {
@@ -6985,7 +6985,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_mode(oal_net_device_stru *pst_net_dev, oal
 
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_MODE, OAL_SIZEOF(mac_cfg_mode_param_stru));
 
@@ -6997,7 +6997,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_mode(oal_net_device_stru *pst_net_dev, oal
     OAM_INFO_LOG3(0, OAM_SF_CFG, "{wal_hipriv_set_mode::protocol[%d],band[%d],bandwidth[%d]!}\r\n",
                             pst_mode_param->en_protocol, pst_mode_param->en_band, pst_mode_param->en_bandwidth);
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                 WAL_MSG_TYPE_WRITE,
                                 WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(mac_cfg_mode_param_stru),
@@ -7011,7 +7011,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_mode(oal_net_device_stru *pst_net_dev, oal
         return (oal_uint32)l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_ret = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_ret)
     {
@@ -7033,7 +7033,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_freq(oal_net_device_stru *pst_net_dev, oal
     oal_int32                   l_ret;
     wal_msg_stru                *pst_rsp_msg = OAL_PTR_NULL;
 
-    /*set freq命令会清空FIFO，软件长发起来后不能直接切信道，切信道后需要先关长发再开长发才会生效*/
+    /*set freq??????????FIFO????????????????????????????????????????????????????????????????????*/
 #if 0
     mac_vap_stru                *pst_mac_vap;
 
@@ -7044,14 +7044,14 @@ OAL_STATIC oal_uint32  wal_hipriv_set_freq(oal_net_device_stru *pst_net_dev, oal
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 设备在up状态不允许配置，必须先down */
+    /* ??????up??????????????????????down */
     if (pst_mac_vap->en_vap_state != MAC_VAP_STATE_INIT)
     {
         OAM_ERROR_LOG1(0, OAM_SF_ANY, "{wal_hipriv_set_freq::device is busy, please down it firs %d!}\r\n", pst_mac_vap->en_vap_state);
         return -OAL_EBUSY;
     }
 #endif
-    /* pc_param指向新创建的net_device的name, 将其取出存放到ac_name中 */
+    /* pc_param????????????net_device??name, ??????????????ac_name?? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_freq, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -7063,9 +7063,9 @@ OAL_STATIC oal_uint32  wal_hipriv_set_freq(oal_net_device_stru *pst_net_dev, oal
     OAM_INFO_LOG1(0, OAM_SF_ANY, "{wal_hipriv_set_freq::l_freq = %d!}\r\n", l_freq);
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
-    /* 填写消息 */
+    /* ???????? */
 #ifdef _PRE_WLAN_WEB_CMD_COMM
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_CHANNEL, OAL_SIZEOF(oal_int32));
 #else
@@ -7073,7 +7073,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_freq(oal_net_device_stru *pst_net_dev, oal
 #endif
     *((oal_int32 *)(st_write_msg.auc_value)) = l_freq;
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(oal_int32),
@@ -7087,7 +7087,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_freq(oal_net_device_stru *pst_net_dev, oal
         return (oal_uint32)l_ret;
     }
 
-        /* 读取返回的错误码 */
+        /* ???????????????? */
     ul_ret = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_ret)
     {
@@ -7249,7 +7249,7 @@ oal_uint32 wal_linux_update_wiphy_channel_list_num_etc(oal_net_device_stru *pst_
         return ul_ret;
     }
 
-    /* 只更新2G信道个数，5G信道由于存在DFS 区域，且带宽计算并无问题,不需要修改 */
+    /* ??????2G??????????5G????????????DFS ????????????????????????,?????????? */
     g_st_supported_band_2ghz_info.n_channels = st_channel_list.uc_channel_num_2g;
 
     OAM_WARNING_LOG2(0, OAM_SF_ANY, "{wal_linux_update_wiphy_channel_list_num_etc::2g_channel_num = %d, 5g_channel_num = %d}",
@@ -7289,34 +7289,34 @@ OAL_STATIC oal_void  wal_regdomain_fill_info(OAL_CONST oal_ieee80211_regdomain_s
     oal_uint8   uc_band;
     oal_uint8   uc_bw;
 
-    /* 复制国家字符串 */
+    /* ?????????????? */
     pst_mac_regdom->ac_country[0] = pst_regdom->alpha2[0];
     pst_mac_regdom->ac_country[1] = pst_regdom->alpha2[1];
     pst_mac_regdom->ac_country[2] = 0;
 
-    /* 获取DFS认证标准类型 */
+    /* ????DFS???????????? */
     wal_get_dfs_domain(pst_mac_regdom, pst_regdom->alpha2);
 
-    /* 填充管制类个数 */
+    /* ?????????????? */
     pst_mac_regdom->uc_regclass_num = (oal_uint8)pst_regdom->n_reg_rules;
 
-    /* 填充管制类信息 */
+    /* ?????????????? */
     for (ul_i = 0; ul_i < pst_regdom->n_reg_rules; ul_i++)
     {
-        /* 填写管制类的频段(2.4G或5G) */
+        /* ????????????????(2.4G??5G) */
         ul_start = pst_regdom->reg_rules[ul_i].freq_range.start_freq_khz / 1000;
         ul_end   = pst_regdom->reg_rules[ul_i].freq_range.end_freq_khz / 1000;
         uc_band  = wal_regdomain_get_band_etc(ul_start, ul_end);
         pst_mac_regdom->ast_regclass[ul_i].en_start_freq = uc_band;
 
-        /* 填写管制类允许的最大带宽 */
+        /* ???????????????????????? */
         uc_bw = (oal_uint8)(pst_regdom->reg_rules[ul_i].freq_range.max_bandwidth_khz / 1000);
         pst_mac_regdom->ast_regclass[ul_i].en_ch_spacing = wal_regdomain_get_bw_etc(uc_bw);
 
-        /* 填写管制类信道位图 */
+        /* ?????????????????? */
         pst_mac_regdom->ast_regclass[ul_i].ul_channel_bmap = wal_regdomain_get_channel_etc(uc_band, ul_start, ul_end);
 
-        /* 标记管制类行为 */
+        /* ?????????????? */
         pst_mac_regdom->ast_regclass[ul_i].uc_behaviour_bmap = 0;
 
         if (pst_regdom->reg_rules[ul_i].flags & NL80211_RRF_DFS)
@@ -7334,7 +7334,7 @@ OAL_STATIC oal_void  wal_regdomain_fill_info(OAL_CONST oal_ieee80211_regdomain_s
             pst_mac_regdom->ast_regclass[ul_i].uc_behaviour_bmap |= MAC_RC_NO_OUTDOOR;
         }
 
-        /* 填充覆盖类和最大发送功率 */
+        /* ???????????????????????? */
         pst_mac_regdom->ast_regclass[ul_i].uc_coverage_class = 0;
         pst_mac_regdom->ast_regclass[ul_i].uc_max_reg_tx_pwr = (oal_uint8)(pst_regdom->reg_rules[ul_i].power_rule.max_eirp / 100);
         pst_mac_regdom->ast_regclass[ul_i].us_max_tx_pwr     = (oal_uint16)(pst_regdom->reg_rules[ul_i].power_rule.max_eirp / 10);
@@ -7367,13 +7367,13 @@ oal_int32  wal_regdomain_update_etc(oal_net_device_stru *pst_net_dev, oal_int8 *
     oal_memcopy(old_pc_country, hwifi_get_country_code_etc(), COUNTRY_CODE_LEN);
     hwifi_set_country_code_etc(pc_country, COUNTRY_CODE_LEN);
 
-    /* 如果新的国家码和旧国家处于一个regdomain，不刷新RF参数，只更新国家码 */
+    /* ??????????????????????????????regdomain????????RF?????????????????? */
     if (OAL_TRUE == hwifi_is_regdomain_changed_etc((oal_uint8 *)old_pc_country, (oal_uint8 *)pc_country))
     {
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_regdomain_update_etc::regdomain changed, refresh rf params.!}\r\n");
 
-        /* 刷新参数失败，为了保证国家码和功率参数对应 */
-        /* 将国家码设回原来的国家码，本次更新失败 */
+        /* ?????????????????????????????????????????? */
+        /* ?????????????????????????????????????? */
         if (hwifi_force_refresh_rf_params(pst_net_dev) != OAL_SUCC)
         {
             OAM_WARNING_LOG0(0, OAM_SF_ANY,
@@ -7406,8 +7406,8 @@ oal_int32  wal_regdomain_update_etc(oal_net_device_stru *pst_net_dev, oal_int8 *
 
     us_size = (oal_uint16)(OAL_SIZEOF(mac_regclass_info_stru) * pst_regdom->n_reg_rules + MAC_RD_INFO_LEN);
 
-    /* 申请内存存放管制域信息，将内存指针作为事件payload抛下去 */
-    /* 此处申请的内存在事件处理函数释放(hmac_config_set_country_etc) */
+    /* ??????????????????????????????????????????payload?????? */
+    /* ????????????????????????????????(hmac_config_set_country_etc) */
     pst_mac_regdom = OAL_MEM_ALLOC(OAL_MEM_POOL_ID_LOCAL, us_size, OAL_TRUE);
     if (OAL_PTR_NULL == pst_mac_regdom)
     {
@@ -7418,18 +7418,18 @@ oal_int32  wal_regdomain_update_etc(oal_net_device_stru *pst_net_dev, oal_int8 *
     wal_regdomain_fill_info(pst_regdom, pst_mac_regdom);
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_COUNTRY, OAL_SIZEOF(mac_cfg_country_stru));
 
-    /* 填写WID对应的参数 */
+    /* ????WID?????????? */
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
     pst_mac_regdom->en_regdomain = hwifi_get_regdomain_from_country_code(pc_country);
 #endif
     pst_param = (mac_cfg_country_stru *)(st_write_msg.auc_value);
     pst_param->p_mac_regdom = pst_mac_regdom;
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(mac_cfg_country_stru),
@@ -7453,7 +7453,7 @@ oal_int32  wal_regdomain_update_etc(oal_net_device_stru *pst_net_dev, oal_int8 *
     }
     oal_free(pst_rsp_msg);
 
-    /* 驱动不支持ACS时，更新hostapd管制域信息; 如果驱动支持ACS，则不需要更新，否则hostapd无法配置DFS信道 */
+    /* ??????????ACS????????hostapd??????????; ????????????ACS????????????????????hostapd????????DFS???? */
 #ifndef _PRE_SUPPORT_ACS
     pst_mac_vap = (mac_vap_stru *)OAL_NET_DEV_PRIV(pst_net_dev);
     if (OAL_UNLIKELY(OAL_PTR_NULL == pst_mac_vap))
@@ -7514,7 +7514,7 @@ oal_int32  wal_regdomain_update_for_dfs_etc(oal_net_device_stru *pst_net_dev, oa
 
     us_size = (oal_uint16)(OAL_SIZEOF(mac_regclass_info_stru) * pst_regdom->n_reg_rules + MAC_RD_INFO_LEN);
 
-    /* 申请内存存放管制域信息,在本函数结束后释放 */
+    /* ??????????????????????,?????????????????? */
     pst_mac_regdom = OAL_MEM_ALLOC(OAL_MEM_POOL_ID_LOCAL, us_size, OAL_TRUE);
     if (OAL_PTR_NULL == pst_mac_regdom)
     {
@@ -7525,15 +7525,15 @@ oal_int32  wal_regdomain_update_for_dfs_etc(oal_net_device_stru *pst_net_dev, oa
     wal_regdomain_fill_info(pst_regdom, pst_mac_regdom);
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_COUNTRY_FOR_DFS, OAL_SIZEOF(mac_dfs_domain_enum_uint8));
 
-    /* 填写WID对应的参数 */
+    /* ????WID?????????? */
     pst_param = (mac_dfs_domain_enum_uint8 *)(st_write_msg.auc_value);
     *pst_param = pst_mac_regdom->en_dfs_domain;
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(mac_dfs_domain_enum_uint8),
@@ -7543,12 +7543,12 @@ oal_int32  wal_regdomain_update_for_dfs_etc(oal_net_device_stru *pst_net_dev, oa
 
     if (OAL_UNLIKELY(OAL_SUCC != l_ret))
     {
-        /*pst_mac_regdom内存，此处释放 */
+        /*pst_mac_regdom?????????????? */
         OAL_MEM_FREE(pst_mac_regdom, OAL_TRUE);
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_regdomain_update_for_dfs_etc::return err code %d!}\r\n", l_ret);
         return l_ret;
     }
-    /*pst_mac_regdom内存，此处释放 */
+    /*pst_mac_regdom?????????????? */
     OAL_MEM_FREE(pst_mac_regdom, OAL_TRUE);
 
     return OAL_SUCC;
@@ -7576,7 +7576,7 @@ oal_uint32  wal_regdomain_update_sta_etc(oal_uint8 uc_vap_id)
         }
 
 
-        /* 期望的国家码全为0，表示对端AP的国家码不存在，采用sta当前默认的国家码 */
+        /* ????????????????0??????????AP????????????????????sta???????????????? */
         if ((0 == pc_desired_country[0]) && (0 == pc_desired_country[1]))
         {
             OAM_INFO_LOG0(uc_vap_id, OAM_SF_ANY, "{wal_regdomain_update_sta_etc::ap does not have country ie, use default!}\r\n");
@@ -7627,7 +7627,7 @@ oal_int32 wal_regdomain_update_country_code_etc(oal_net_device_stru *pst_net_dev
         return -OAL_EFAIL;
     }
 
-    /* 设置国家码到wifi 驱动 */
+    /* ????????????wifi ???? */
     l_ret = wal_regdomain_update_for_dfs_etc(pst_net_dev, pc_country);
 
     if (OAL_UNLIKELY(OAL_SUCC != l_ret))
@@ -7661,11 +7661,11 @@ OAL_STATIC oal_int32  wal_ioctl_gettid(oal_net_device_stru *pst_net_dev, oal_iw_
     oal_iw_point_stru              *pst_w = (oal_iw_point_stru *)p_w;
 
     /***************************************************************************
-       抛事件到wal层处理
+       ????????wal??????
     ***************************************************************************/
     st_query_msg.en_wid = WLAN_CFGID_TID;
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                               WAL_MSG_TYPE_QUERY,
                               WAL_MSG_WID_LENGTH,
@@ -7678,10 +7678,10 @@ OAL_STATIC oal_int32  wal_ioctl_gettid(oal_net_device_stru *pst_net_dev, oal_iw_
        return l_ret;
     }
 
-    /* 处理返回消息 */
+    /* ???????????? */
     pst_query_rsp_msg = (wal_msg_rsp_stru *)(pst_rsp_msg->auc_msg_data);
 
-    /* 业务处理 */
+    /* ???????? */
     pst_get_tid = (mac_cfg_get_tid_stru*)(pst_query_rsp_msg->auc_value);
 
     oal_memcopy(pc_extra, &pst_get_tid->en_tid, OAL_SIZEOF(pst_get_tid->en_tid));
@@ -7708,10 +7708,10 @@ oal_int32  wal_set_random_mac_to_mib_etc(oal_net_device_stru *pst_net_dev)
     mac_vap_stru                 *pst_mac_vap;
     oal_uint8                    *puc_mac_addr;
 #ifdef _PRE_WLAN_FEATURE_P2P
-    oal_wireless_dev_stru        *pst_wdev; /* 对于P2P 场景，p2p0 和 p2p-p2p0 MAC 地址从wlan0 获取 */
+    oal_wireless_dev_stru        *pst_wdev; /* ????P2P ??????p2p0 ?? p2p-p2p0 MAC ??????wlan0 ???? */
     mac_device_stru              *pst_mac_device;
     wlan_p2p_mode_enum_uint8      en_p2p_mode = WLAN_LEGACY_VAP_MODE;
-    oal_uint8                     auc_primary_mac_addr[WLAN_MAC_ADDR_LEN] = {0};    /* MAC地址 */
+    oal_uint8                     auc_primary_mac_addr[WLAN_MAC_ADDR_LEN] = {0};    /* MAC???? */
 #endif
     oal_uint8                     *auc_wlan_addr;
 #ifdef _PRE_WLAN_FEATURE_P2P
@@ -7720,7 +7720,7 @@ oal_int32  wal_set_random_mac_to_mib_etc(oal_net_device_stru *pst_net_dev)
     pst_mac_vap = OAL_NET_DEV_PRIV(pst_net_dev);
     if(NULL == pst_mac_vap)
     {
-        /* 临时添加，以后删除，add:20151116，有效期1month */
+        /* ????????????????????add:20151116????????1month */
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_set_random_mac_to_mib_etc::pst_mac_vap NULL}");
         oal_msleep(500);
         pst_mac_vap = OAL_NET_DEV_PRIV(pst_net_dev);
@@ -7729,7 +7729,7 @@ oal_int32  wal_set_random_mac_to_mib_etc(oal_net_device_stru *pst_net_dev)
             OAM_ERROR_LOG0(0, OAM_SF_ANY, "{wal_set_random_mac_to_mib_etc::pst_mac_vap NULL}");
             return OAL_FAIL;
         }
-        /* 临时添加，以后删除 */
+        /* ?????????????????? */
     }
     if(OAL_PTR_NULL == pst_mac_vap->pst_mib_info)
     {
@@ -7742,7 +7742,7 @@ oal_int32  wal_set_random_mac_to_mib_etc(oal_net_device_stru *pst_net_dev)
     auc_p2p0_addr = mac_mib_get_p2p0_dot11StationID(pst_mac_vap);
 #endif
 #ifdef _PRE_WLAN_FEATURE_P2P
-    /* 获取wlan0 MAC 地址，生成p2p0/p2p-p2p0 MAC 地址 */
+    /* ????wlan0 MAC ??????????p2p0/p2p-p2p0 MAC ???? */
     pst_mac_device = (mac_device_stru *)mac_res_get_dev_etc(pst_mac_vap->uc_device_id);
     if (NULL == pst_mac_device)
     {
@@ -7778,13 +7778,13 @@ oal_int32  wal_set_random_mac_to_mib_etc(oal_net_device_stru *pst_net_dev)
         case NL80211_IFTYPE_P2P_DEVICE:
            en_p2p_mode = WLAN_P2P_DEV_MODE;
 #if defined(_PRE_PRODUCT_ID_HI110X_HOST)
-            /* 产生P2P device MAC 地址，将本地mac 地址bit 设置为1 */
+            /* ????P2P device MAC ????????????mac ????bit ??????1 */
             oal_memcopy(auc_p2p0_addr,
                         OAL_NETDEVICE_MAC_ADDR(pst_net_dev),
                         WLAN_MAC_ADDR_LEN);
 
 #else
-            /* 产生P2P device MAC 地址，将本地mac 地址bit 设置为1 */
+            /* ????P2P device MAC ????????????mac ????bit ??????1 */
             oal_memcopy(auc_p2p0_addr,
                         auc_primary_mac_addr,
                         WLAN_MAC_ADDR_LEN);
@@ -7794,7 +7794,7 @@ oal_int32  wal_set_random_mac_to_mib_etc(oal_net_device_stru *pst_net_dev)
         case NL80211_IFTYPE_P2P_CLIENT:
             en_p2p_mode = WLAN_P2P_CL_MODE;
 
-            /* 产生P2P interface MAC 地址 */
+            /* ????P2P interface MAC ???? */
             oal_memcopy(auc_wlan_addr,
                         auc_primary_mac_addr,
                         WLAN_MAC_ADDR_LEN);
@@ -7803,7 +7803,7 @@ oal_int32  wal_set_random_mac_to_mib_etc(oal_net_device_stru *pst_net_dev)
             break;
         case NL80211_IFTYPE_P2P_GO:
             en_p2p_mode = WLAN_P2P_GO_MODE;
-            /* 产生P2P interface MAC 地址 */
+            /* ????P2P interface MAC ???? */
             oal_memcopy(auc_wlan_addr,
                         auc_primary_mac_addr,
                         WLAN_MAC_ADDR_LEN);
@@ -7815,7 +7815,7 @@ oal_int32  wal_set_random_mac_to_mib_etc(oal_net_device_stru *pst_net_dev)
             if(0 == (oal_strcmp("p2p0", pst_net_dev->name)))
             {
                 en_p2p_mode = WLAN_P2P_DEV_MODE;
-                 /* 产生P2P device MAC 地址，将本地mac 地址bit 设置为1 */
+                 /* ????P2P device MAC ????????????mac ????bit ??????1 */
                 oal_memcopy(auc_p2p0_addr,
                             OAL_NETDEVICE_MAC_ADDR(pst_net_dev),
                             WLAN_MAC_ADDR_LEN);
@@ -7844,30 +7844,30 @@ oal_int32  wal_set_random_mac_to_mib_etc(oal_net_device_stru *pst_net_dev)
 
     /* send the random mac to dmac */
     /***************************************************************************
-        抛事件到wal层处理   copy from wal_netdev_set_mac_addr()
-        gong TBD : 改为调用通用的config接口
+        ????????wal??????   copy from wal_netdev_set_mac_addr()
+        gong TBD : ??????????????config????
     ***************************************************************************/
-    ul_ret = wal_alloc_cfg_event_etc(pst_net_dev, &pst_event_mem, NULL, &pst_cfg_msg, (WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(mac_cfg_staion_id_param_stru)));     /* 申请事件 */
+    ul_ret = wal_alloc_cfg_event_etc(pst_net_dev, &pst_event_mem, NULL, &pst_cfg_msg, (WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(mac_cfg_staion_id_param_stru)));     /* ???????? */
     if (OAL_UNLIKELY(OAL_SUCC != ul_ret))
     {
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_set_random_mac_to_mib_etc() fail; return %d!}\r\n", ul_ret);
         return -OAL_ENOMEM;
     }
 
-    /* 填写配置消息 */
+    /* ???????????? */
     WAL_CFG_MSG_HDR_INIT(&(pst_cfg_msg->st_msg_hdr),
                          WAL_MSG_TYPE_WRITE,
                          WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(mac_cfg_staion_id_param_stru),
                          WAL_GET_MSG_SN());
 
-    /* 填写WID消息 */
+    /* ????WID???? */
     pst_write_msg = (wal_msg_write_stru *)pst_cfg_msg->auc_msg_data;
     WAL_WRITE_MSG_HDR_INIT(pst_write_msg, WLAN_CFGID_STATION_ID, OAL_SIZEOF(mac_cfg_staion_id_param_stru));
 
-    pst_param = (mac_cfg_staion_id_param_stru *)pst_write_msg->auc_value;   /* 填写WID对应的参数 */
+    pst_param = (mac_cfg_staion_id_param_stru *)pst_write_msg->auc_value;   /* ????WID?????????? */
 #ifdef _PRE_WLAN_FEATURE_P2P
-    /* 如果使能P2P，需要将netdevice 对应的P2P 模式在配置参数中配置到hmac 和dmac */
-    /* 以便底层识别配到p2p0 或p2p-p2p0 cl */
+    /* ????????P2P????????netdevice ??????P2P ??????????????????????hmac ??dmac */
+    /* ????????????????p2p0 ??p2p-p2p0 cl */
     pst_param->en_p2p_mode = en_p2p_mode;
     if (en_p2p_mode == WLAN_P2P_DEV_MODE)
     {
@@ -7883,7 +7883,7 @@ oal_int32  wal_set_random_mac_to_mib_etc(oal_net_device_stru *pst_net_dev)
     OAL_IO_PRINT("wal_set_random_mac_to_mib_etc,mac is:%.2x:%.2x:%.2x\n",
                   puc_mac_addr[0], puc_mac_addr[1], puc_mac_addr[2]);
 
-    frw_event_dispatch_event_etc(pst_event_mem);    /* 分发事件 */
+    frw_event_dispatch_event_etc(pst_event_mem);    /* ???????? */
     FRW_EVENT_FREE(pst_event_mem);
 
     return OAL_SUCC;
@@ -7900,14 +7900,14 @@ OAL_STATIC oal_uint32  wal_hipriv_setcountry(oal_net_device_stru *pst_net_dev, o
     oal_int8                         ac_arg[WAL_HIPRIV_CMD_NAME_MAX_LEN];
     oal_int8                        *puc_para;
 
-    /* 设备在up状态不允许配置，必须先down */
+    /* ??????up??????????????????????down */
     if (0 != (OAL_IFF_RUNNING & OAL_NETDEVICE_FLAGS(pst_net_dev)))
     {
         OAM_INFO_LOG1(0, OAM_SF_ANY, "{wal_hipriv_setcountry::country is %d, %d!}\r\n", OAL_NETDEVICE_FLAGS(pst_net_dev));
         return OAL_EBUSY;
     }
 
-    /* 获取国家码字符串 */
+    /* ???????????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_arg, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -7947,7 +7947,7 @@ OAL_STATIC oal_uint32  wal_hipriv_getcountry(oal_net_device_stru *pst_net_dev,oa
     oal_int32                    l_ret;
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     st_query_msg.en_wid = WLAN_CFGID_COUNTRY;
 
@@ -8015,7 +8015,7 @@ OAL_STATIC oal_int32 wal_sta_info_seq_show(struct seq_file *f, void *v)
         return 0;
     }
 
-    /* step1. 同步要查询的dmac信息 */
+    /* step1. ????????????dmac???? */
     OAL_DLIST_SEARCH_FOR_EACH_SAFE(pst_entry, pst_dlist_tmp, &(pst_mac_vap->st_mac_user_list_head))
     {
         pst_user_tmp = OAL_DLIST_GET_ENTRY(pst_entry, mac_user_stru, st_user_dlist);
@@ -8032,18 +8032,18 @@ OAL_STATIC oal_int32 wal_sta_info_seq_show(struct seq_file *f, void *v)
 
         if (OAL_PTR_NULL == pst_dlist_tmp)
         {
-            /* 此for循环线程会暂停，期间会有删除用户事件，会出现pst_dlist_tmp为空。为空时直接跳过获取dmac信息 */
+            /* ??for????????????????????????????????????????????pst_dlist_tmp????????????????????????dmac???? */
             break;
         }
 
         /***********************************************************************/
-        /*                  获取dmac user的RSSI信息                            */
+        /*                  ????dmac user??RSSI????                            */
         /***********************************************************************/
         OAL_MEMZERO(&st_write_msg, OAL_SIZEOF(st_write_msg));
         WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_QUERY_RSSI, OAL_SIZEOF(mac_cfg_query_rssi_stru));
         pst_query_rssi_param = (mac_cfg_query_rssi_stru *)st_write_msg.auc_value;
 
-        pst_query_rssi_param->us_user_id = pst_user_tmp->us_assoc_id; /* 将用户的id传下去 */
+        pst_query_rssi_param->us_user_id = pst_user_tmp->us_assoc_id; /* ????????id?????? */
 
         l_ret = wal_send_cfg_event_etc(pst_hmac_vap->pst_net_device,
                                    WAL_MSG_TYPE_WRITE,
@@ -8060,19 +8060,19 @@ OAL_STATIC oal_int32 wal_sta_info_seq_show(struct seq_file *f, void *v)
         /*lint -e730*/
         l_ret = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT(pst_hmac_vap->query_wait_q,(OAL_TRUE == pst_hmac_vap->station_info_query_completed_flag), 5*OAL_TIME_HZ);
         /*lint +e730*/
-        if (l_ret <= 0) /* 等待超时或异常 */
+        if (l_ret <= 0) /* ?????????????? */
         {
             OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "wal_sta_info_seq_show: query rssi timeout. ret:%d", l_ret);
         }
 
         /***********************************************************************/
-        /*                  获取dmac user的速率信息                            */
+        /*                  ????dmac user??????????                            */
         /***********************************************************************/
         OAL_MEMZERO(&st_write_msg, OAL_SIZEOF(st_write_msg));
         WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_QUERY_RATE, OAL_SIZEOF(mac_cfg_query_rate_stru));
         pst_query_rate_param = (mac_cfg_query_rate_stru *)st_write_msg.auc_value;
 
-        pst_query_rate_param->us_user_id = pst_user_tmp->us_assoc_id; /* 将用户的id传下去 */
+        pst_query_rate_param->us_user_id = pst_user_tmp->us_assoc_id; /* ????????id?????? */
 
         l_ret = wal_send_cfg_event_etc(pst_hmac_vap->pst_net_device,
                                    WAL_MSG_TYPE_WRITE,
@@ -8089,14 +8089,14 @@ OAL_STATIC oal_int32 wal_sta_info_seq_show(struct seq_file *f, void *v)
         /*lint -e730*/
         l_ret = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT(pst_hmac_vap->query_wait_q, (OAL_TRUE == pst_hmac_vap->station_info_query_completed_flag), 5*OAL_TIME_HZ);
         /*lint +e730*/
-        if (l_ret <= 0) /* 等待超时或异常 */
+        if (l_ret <= 0) /* ?????????????? */
         {
             OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "wal_sta_info_seq_show: query rate timeout. ret:%d", l_ret);
         }
 
     }
 
-    /* step2. proc文件输出用户信息 */
+    /* step2. proc???????????????? */
     seq_printf(f, "Total user nums: %d\n", pst_mac_vap->us_user_nums);
     seq_printf(f, "-- STA info table --\n");
 
@@ -8143,14 +8143,14 @@ OAL_STATIC oal_int32 wal_sta_info_seq_show(struct seq_file *f, void *v)
 #ifdef _PRE_WLAN_DFT_STAT
                       "    Curr_rate PER: %u\n"
                       "    Best_rate PER: %u\n"
-                      "    Tx Throughput: %u\n" /*待补充*/
+                      "    Tx Throughput: %u\n" /*??????*/
 #endif
                       ,us_idx,
                       pst_user_tmp->us_assoc_id,
                       puc_addr[0],puc_addr[1],puc_addr[2],puc_addr[3],puc_addr[4],puc_addr[5],
                       pst_user_tmp->en_user_asoc_state,     /* status */
                       BW_ENUM_TO_NUMBER(pst_user_tmp->en_avail_bandwidth),
-                      (pst_user_tmp->en_avail_num_spatial_stream+1),   /* NSS,加1是为了方便用户查看，软件处理都是0表示单流 */
+                      (pst_user_tmp->en_avail_num_spatial_stream+1),   /* NSS,??1????????????????????????????????0???????? */
                       pst_hmac_user_tmp->c_rssi,
                       pac_protocol2string[pst_user_tmp->en_avail_protocol_mode],
                       pst_hmac_user_tmp->ul_tx_rate,
@@ -8162,7 +8162,7 @@ OAL_STATIC oal_int32 wal_sta_info_seq_show(struct seq_file *f, void *v)
                       TID_STAT_TO_USER(pst_oam_user_stat->aul_tx_mpdu_fail_num)+TID_STAT_TO_USER(pst_oam_user_stat->aul_tx_mpdu_fail_in_ampdu),
                       pst_oam_user_stat->ul_rx_mpdu_num,   /* RX packets succ */
                       0,
-                      20,                                  /* TX power, 暂不使用 后续调用tpc获取tx_power接口 */
+                      20,                                  /* TX power, ???????? ????????tpc????tx_power???? */
                       TID_STAT_TO_USER(pst_oam_user_stat->aul_tx_mpdu_bytes)+TID_STAT_TO_USER(pst_oam_user_stat->aul_tx_ampdu_bytes),
                       pst_oam_user_stat->ul_rx_mpdu_bytes, /* RX bytes */
                       pst_oam_user_stat->ul_tx_ppdu_retries/* TX retries */
@@ -8199,7 +8199,7 @@ OAL_STATIC oal_void wal_sta_info_seq_stop(struct seq_file *f, void *v)
 }
 
 /*****************************************************************************
-    dmac_sta_info_seq_ops: 定义seq_file ops
+    dmac_sta_info_seq_ops: ????seq_file ops
 *****************************************************************************/
 OAL_STATIC OAL_CONST struct seq_operations wal_sta_info_seq_ops = {
     .start = wal_sta_info_seq_start,
@@ -8227,7 +8227,7 @@ OAL_STATIC oal_int32 wal_sta_info_seq_open(struct inode *inode, struct file *fil
 }
 
 /*****************************************************************************
-    gst_sta_info_proc_fops: 定义sta info proc fops
+    gst_sta_info_proc_fops: ????sta info proc fops
 *****************************************************************************/
 OAL_STATIC OAL_CONST struct file_operations gst_sta_info_proc_fops = {
     .owner      = THIS_MODULE,
@@ -8259,7 +8259,7 @@ OAL_STATIC int  wal_read_vap_info_proc(char *page, char **start, off_t off,
         return 0;
     }
     /***********************************************************************/
-    /*                  获取dmac vap的ANI信息                            */
+    /*                  ????dmac vap??ANI????                            */
     /***********************************************************************/
     OAL_MEMZERO(&st_write_msg, OAL_SIZEOF(st_write_msg));
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_QUERY_RSSI, OAL_SIZEOF(mac_cfg_query_ani_stru));
@@ -8280,7 +8280,7 @@ OAL_STATIC int  wal_read_vap_info_proc(char *page, char **start, off_t off,
     /*lint -e730*/
     l_ret = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT(pst_hmac_vap->query_wait_q,(OAL_TRUE == pst_hmac_vap->station_info_query_completed_flag), 5*OAL_TIME_HZ);
     /*lint +e730*/
-    if (l_ret <= 0) /* 等待超时或异常 */
+    if (l_ret <= 0) /* ?????????????? */
     {
         OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "wal_read_vap_info_proc: query ani timeout. ret:%d", l_ret);
     }
@@ -8425,7 +8425,7 @@ OAL_STATIC oal_void wal_add_vap_proc_file(mac_vap_stru *pst_mac_vap, oal_int8 *p
     pst_proc_vapinfo->read_proc  = wal_read_vap_info_proc;
     pst_proc_vapinfo->data       = pst_mac_vap;
 
-    /* sta info，对于文件比较大的proc file，通过proc_fops的方式输出 */
+    /* sta info??????????????????proc file??????proc_fops?????????? */
     pst_proc_stainfo->data       = pst_mac_vap;
     pst_proc_stainfo->proc_fops  = &gst_sta_info_proc_fops;
 
@@ -8495,7 +8495,7 @@ OAL_STATIC oal_int32 wal_sta_info_seq_show_sec(struct seq_file *f, void *v)
         OAM_ERROR_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "wal_sta_info_seq_show: hmac vap is null. vap id:%d", pst_mac_vap->uc_vap_id);
         return 0;
     }
-    /* step1. 同步要查询的dmac信息 */
+    /* step1. ????????????dmac???? */
     OAL_DLIST_SEARCH_FOR_EACH_SAFE(pst_entry, pst_dlist_tmp, &(pst_mac_vap->st_mac_user_list_head))
     {
         pst_user_tmp = OAL_DLIST_GET_ENTRY(pst_entry, mac_user_stru, st_user_dlist);
@@ -8508,18 +8508,18 @@ OAL_STATIC oal_int32 wal_sta_info_seq_show_sec(struct seq_file *f, void *v)
 
         if (OAL_PTR_NULL == pst_dlist_tmp)
         {
-            /* 此for循环线程会暂停，期间会有删除用户事件，会出现pst_dlist_tmp为空。为空时直接跳过获取dmac信息 */
+            /* ??for????????????????????????????????????????????pst_dlist_tmp????????????????????????dmac???? */
             break;
         }
 
         /***********************************************************************/
-        /*                  获取dmac user的RSSI信息                            */
+        /*                  ????dmac user??RSSI????                            */
         /***********************************************************************/
         OAL_MEMZERO(&st_write_msg, OAL_SIZEOF(st_write_msg));
         WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_QUERY_RSSI, OAL_SIZEOF(mac_cfg_query_rssi_stru));
         pst_query_rssi_param = (mac_cfg_query_rssi_stru *)st_write_msg.auc_value;
 
-        pst_query_rssi_param->us_user_id = pst_user_tmp->us_assoc_id; /* 将用户的id传下去 */
+        pst_query_rssi_param->us_user_id = pst_user_tmp->us_assoc_id; /* ????????id?????? */
 
         l_ret = wal_send_cfg_event_etc(pst_hmac_vap->pst_net_device,
                                    WAL_MSG_TYPE_WRITE,
@@ -8538,19 +8538,19 @@ OAL_STATIC oal_int32 wal_sta_info_seq_show_sec(struct seq_file *f, void *v)
         l_ret = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT(pst_hmac_vap->query_wait_q,(OAL_TRUE == pst_hmac_vap->station_info_query_completed_flag), 5*OAL_TIME_HZ);
         /*lint +e730*/
         /*lint -restore */
-        if (l_ret <= 0) /* 等待超时或异常 */
+        if (l_ret <= 0) /* ?????????????? */
         {
             OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "wal_sta_info_seq_show: query rssi timeout. ret:%d", l_ret);
         }
 
         /***********************************************************************/
-        /*                  获取dmac user的速率信息                            */
+        /*                  ????dmac user??????????                            */
         /***********************************************************************/
         OAL_MEMZERO(&st_write_msg, OAL_SIZEOF(st_write_msg));
         WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_QUERY_RATE, OAL_SIZEOF(mac_cfg_query_rate_stru));
         pst_query_rate_param = (mac_cfg_query_rate_stru *)st_write_msg.auc_value;
 
-        pst_query_rate_param->us_user_id = pst_user_tmp->us_assoc_id; /* 将用户的id传下去 */
+        pst_query_rate_param->us_user_id = pst_user_tmp->us_assoc_id; /* ????????id?????? */
 
         l_ret = wal_send_cfg_event_etc(pst_hmac_vap->pst_net_device,
                                    WAL_MSG_TYPE_WRITE,
@@ -8569,14 +8569,14 @@ OAL_STATIC oal_int32 wal_sta_info_seq_show_sec(struct seq_file *f, void *v)
         l_ret = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT(pst_hmac_vap->query_wait_q, (OAL_TRUE == pst_hmac_vap->station_info_query_completed_flag), 5*OAL_TIME_HZ);
         /*lint +e730*/
         /*lint -restore */
-        if (l_ret <= 0) /* 等待超时或异常 */
+        if (l_ret <= 0) /* ?????????????? */
         {
             OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "wal_sta_info_seq_show: query rate timeout. ret:%d", l_ret);
         }
 
     }
 
-    /* step2. proc文件输出用户信息 */
+    /* step2. proc???????????????? */
     seq_printf(f, "Total user nums: %d\n", pst_mac_vap->us_user_nums);
     seq_printf(f, "-- STA info table --\n");
 
@@ -8619,7 +8619,7 @@ OAL_STATIC oal_int32 wal_sta_info_seq_show_sec(struct seq_file *f, void *v)
 #ifdef _PRE_WLAN_DFT_STAT
                       "    Curr_rate PER: %u\n"
                       "    Best_rate PER: %u\n"
-                      "    Tx Throughput: %u\n" /*待补充*/
+                      "    Tx Throughput: %u\n" /*??????*/
 #endif
                       ,us_idx,
                       pst_user_tmp->us_assoc_id,
@@ -8638,7 +8638,7 @@ OAL_STATIC oal_int32 wal_sta_info_seq_show_sec(struct seq_file *f, void *v)
                       TID_STAT_TO_USER(pst_oam_user_stat->aul_tx_mpdu_fail_num)+TID_STAT_TO_USER(pst_oam_user_stat->aul_tx_mpdu_fail_in_ampdu),
                       pst_oam_user_stat->ul_rx_mpdu_num,   /* RX packets succ */
                       0,
-                      20,                                  /* TX power, 暂不使用 后续调用tpc获取tx_power接口 */
+                      20,                                  /* TX power, ???????? ????????tpc????tx_power???? */
                       TID_STAT_TO_USER(pst_oam_user_stat->aul_tx_mpdu_bytes)+TID_STAT_TO_USER(pst_oam_user_stat->aul_tx_ampdu_bytes),
                       pst_oam_user_stat->ul_rx_mpdu_bytes, /* RX bytes */
                       pst_oam_user_stat->ul_tx_ppdu_retries/* TX retries */
@@ -8682,7 +8682,7 @@ OAL_STATIC oal_int32 wal_vap_info_seq_show_sec(struct seq_file *f, void *v)
         return 0;
     }
     /***********************************************************************/
-    /*                  获取dmac vap的ANI信息                            */
+    /*                  ????dmac vap??ANI????                            */
     /***********************************************************************/
     OAL_MEMZERO(&st_write_msg, OAL_SIZEOF(st_write_msg));
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_QUERY_RSSI, OAL_SIZEOF(mac_cfg_query_ani_stru));
@@ -8705,7 +8705,7 @@ OAL_STATIC oal_int32 wal_vap_info_seq_show_sec(struct seq_file *f, void *v)
     l_ret = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT(pst_hmac_vap->query_wait_q,(OAL_TRUE == pst_hmac_vap->station_info_query_completed_flag), 5*OAL_TIME_HZ);
     /*lint +e730*/
     /*lint -restore */
-    if (l_ret <= 0) /* 等待超时或异常 */
+    if (l_ret <= 0) /* ?????????????? */
     {
         OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "wal_read_vap_info_proc: query ani timeout. ret:%d", l_ret);
     }
@@ -8826,7 +8826,7 @@ static ssize_t wal_vap_info_proc_write(struct file* filp, const char __user* buf
 }
 
 /*****************************************************************************
-    gst_sta_info_proc_fops_sec: 定义sta info proc fops
+    gst_sta_info_proc_fops_sec: ????sta info proc fops
 *****************************************************************************/
 OAL_STATIC OAL_CONST struct file_operations gst_sta_info_proc_fops_sec = {
     .owner      = THIS_MODULE,
@@ -8838,7 +8838,7 @@ OAL_STATIC OAL_CONST struct file_operations gst_sta_info_proc_fops_sec = {
 };
 
 /*****************************************************************************
-    gst_vap_info_proc_fops_sec: 定义vap info proc fops
+    gst_vap_info_proc_fops_sec: ????vap info proc fops
 *****************************************************************************/
 OAL_STATIC OAL_CONST struct file_operations gst_vap_info_proc_fops_sec = {
     .owner      = THIS_MODULE,
@@ -8966,7 +8966,7 @@ OAL_STATIC oal_uint32  wal_hipriv_add_vap(oal_net_device_stru *pst_cfg_net_dev, 
 #endif  /* (defined(CONFIG_ATP_FASTIP) && defined(_PRE_WLAN_FASTIP_SUPPORT)) */
 
 
-    /* pc_param指向新创建的net_device的name, 将其取出存放到ac_name中 */
+    /* pc_param????????????net_device??name, ??????????????ac_name?? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -8974,18 +8974,18 @@ OAL_STATIC oal_uint32  wal_hipriv_add_vap(oal_net_device_stru *pst_cfg_net_dev, 
         return ul_ret;
     }
 
-    /* ac_name length不应超过OAL_IF_NAME_SIZE */
+    /* ac_name length????????OAL_IF_NAME_SIZE */
     if (OAL_IF_NAME_SIZE <=  OAL_STRLEN(ac_name))
     {
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_hipriv_add_vap:: vap name overlength is %d!}\r\n", OAL_STRLEN(ac_name));
-        /* 输出错误的vap name信息 */
+        /* ??????????vap name???? */
         oal_print_hex_dump((oal_uint8 *)ac_name, OAL_IF_NAME_SIZE, 32, "vap name lengh is overlong:");
         return OAL_FAIL;
     }
 
     pc_param += ul_off_set;
 
-    /* pc_param 指向'ap|sta', 将其取出放到ac_mode中 */
+    /* pc_param ????'ap|sta', ????????????ac_mode?? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_mode, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -8993,7 +8993,7 @@ OAL_STATIC oal_uint32  wal_hipriv_add_vap(oal_net_device_stru *pst_cfg_net_dev, 
         return (oal_uint32)ul_ret;
     }
 
-    /* 解析ac_mode字符串对应的模式 */
+    /* ????ac_mode???????????????? */
     if (0 == (oal_strcmp("ap", ac_mode)))
     {
         en_mode = WLAN_VAP_MODE_BSS_AP;
@@ -9044,7 +9044,7 @@ OAL_STATIC oal_uint32  wal_hipriv_add_vap(oal_net_device_stru *pst_cfg_net_dev, 
     }
 #endif
 #ifdef _PRE_WLAN_FEATURE_P2P
-    /* 创建P2P 相关VAP */
+    /* ????P2P ????VAP */
     else if (0 == (oal_strcmp("p2p_device", ac_mode)))
     {
         en_mode = WLAN_VAP_MODE_BSS_STA;
@@ -9067,19 +9067,19 @@ OAL_STATIC oal_uint32  wal_hipriv_add_vap(oal_net_device_stru *pst_cfg_net_dev, 
         return OAL_ERR_CODE_INVALID_CONFIG;
     }
 
-    /* 如果创建的net device已经存在，直接返回 */
-    /* 根据dev_name找到dev */
+    /* ??????????net device?????????????????? */
+    /* ????dev_name????dev */
     pst_net_dev = oal_dev_get_by_name(ac_name);
     if (OAL_PTR_NULL != pst_net_dev)
     {
-        /* 调用oal_dev_get_by_name后，必须调用oal_dev_put使net_dev的引用计数减一 */
+        /* ????oal_dev_get_by_name????????????oal_dev_put??net_dev?????????????? */
         oal_dev_put(pst_net_dev);
 
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_hipriv_add_vap::the net_device is already exist!}\r\n");
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 获取mac device */
+    /* ????mac device */
     pst_cfg_mac_vap = OAL_NET_DEV_PRIV(pst_cfg_net_dev);
     pst_mac_device  = mac_res_get_dev_etc(pst_cfg_mac_vap->uc_device_id);
     if (OAL_UNLIKELY(OAL_PTR_NULL == pst_mac_device))
@@ -9089,11 +9089,11 @@ OAL_STATIC oal_uint32  wal_hipriv_add_vap(oal_net_device_stru *pst_cfg_net_dev, 
     }
 
 #if defined(_PRE_WLAN_FEATURE_FLOWCTL)
-    pst_net_dev = oal_net_alloc_netdev_mqs(OAL_SIZEOF(oal_netdev_priv_stru), ac_name, oal_ether_setup, WAL_NETDEV_SUBQUEUE_MAX_NUM, 1);    /* 此函数第一个入参代表私有长度，此处不涉及为0 */
+    pst_net_dev = oal_net_alloc_netdev_mqs(OAL_SIZEOF(oal_netdev_priv_stru), ac_name, oal_ether_setup, WAL_NETDEV_SUBQUEUE_MAX_NUM, 1);    /* ??????????????????????????????????????????0 */
 #elif defined(_PRE_WLAN_FEATURE_OFFLOAD_FLOWCTL)
-    pst_net_dev = oal_net_alloc_netdev_mqs(OAL_SIZEOF(oal_netdev_priv_stru), ac_name, oal_ether_setup, WLAN_NET_QUEUE_BUTT, 1);    /* 此函数第一个入参代表私有长度，此处不涉及为0 */
+    pst_net_dev = oal_net_alloc_netdev_mqs(OAL_SIZEOF(oal_netdev_priv_stru), ac_name, oal_ether_setup, WLAN_NET_QUEUE_BUTT, 1);    /* ??????????????????????????????????????????0 */
 #else
-    pst_net_dev = oal_net_alloc_netdev(OAL_SIZEOF(oal_netdev_priv_stru), ac_name, oal_ether_setup);    /* 此函数第一个入参代表私有长度，此处不涉及为0 */
+    pst_net_dev = oal_net_alloc_netdev(OAL_SIZEOF(oal_netdev_priv_stru), ac_name, oal_ether_setup);    /* ??????????????????????????????????????????0 */
 #endif
 
     if (OAL_UNLIKELY(OAL_PTR_NULL == pst_net_dev))
@@ -9112,7 +9112,7 @@ OAL_STATIC oal_uint32  wal_hipriv_add_vap(oal_net_device_stru *pst_cfg_net_dev, 
 
     oal_memset(pst_wdev, 0, OAL_SIZEOF(oal_wireless_dev_stru));
 
-    /* 对netdevice进行赋值 */
+    /* ??netdevice???????? */
 #ifdef CONFIG_WIRELESS_EXT
     pst_net_dev->wireless_handlers             = &g_st_iw_handler_def_etc;
 #endif /* CONFIG_WIRELESS_EXT */
@@ -9160,15 +9160,15 @@ OAL_STATIC oal_uint32  wal_hipriv_add_vap(oal_net_device_stru *pst_cfg_net_dev, 
 
     pst_wdev->wiphy = pst_mac_device->pst_wiphy;
 
-    OAL_NETDEVICE_FLAGS(pst_net_dev) &= ~OAL_IFF_RUNNING;   /* 将net device的flag设为down */
+    OAL_NETDEVICE_FLAGS(pst_net_dev) &= ~OAL_IFF_RUNNING;   /* ??net device??flag????down */
 
-    /* st_write_msg作清零操作，防止部分成员因为相关宏没有开而没有赋值，出现非0的异常值，例如结构体中P2P mode没有用P2P宏包起来，这里又因为包起来没有正确赋值 */
+    /* st_write_msg??????????????????????????????????????????????????????????0??????????????????????P2P mode??????P2P?????????????????????????????????????? */
     oal_memset(&st_write_msg, 0, OAL_SIZEOF(wal_msg_write_stru));
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
-    /* 填写消息 */
+    /* ???????? */
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_ADD_VAP, OAL_SIZEOF(mac_cfg_add_vap_param_stru));
     ((mac_cfg_add_vap_param_stru *)st_write_msg.auc_value)->pst_net_dev = pst_net_dev;
     ((mac_cfg_add_vap_param_stru *)st_write_msg.auc_value)->en_vap_mode  = en_mode;
@@ -9187,7 +9187,7 @@ OAL_STATIC oal_uint32  wal_hipriv_add_vap(oal_net_device_stru *pst_cfg_net_dev, 
     ((mac_cfg_add_vap_param_stru *)st_write_msg.auc_value)->bit_11ac2g_enable = (oal_uint8)!!hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_11AC2G_ENABLE);
     ((mac_cfg_add_vap_param_stru *)st_write_msg.auc_value)->bit_disable_capab_2ght40 = g_st_wlan_customize_etc.uc_disable_capab_2ght40;
 #endif
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_cfg_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(mac_cfg_add_vap_param_stru),
@@ -9203,12 +9203,12 @@ OAL_STATIC oal_uint32  wal_hipriv_add_vap(oal_net_device_stru *pst_cfg_net_dev, 
         return (oal_uint32)l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_err_code)
     {
         OAM_WARNING_LOG1(pst_cfg_mac_vap->uc_vap_id, OAM_SF_ANY, "{wal_hipriv_add_vap::hmac add vap fail,err code[%u]!}\r\n", ul_err_code);
-        /* 异常处理，释放内存 */
+        /* ?????????????????? */
         OAL_MEM_FREE(pst_wdev, OAL_FALSE);
         oal_net_free_netdev(pst_net_dev);
         return ul_err_code;
@@ -9218,21 +9218,21 @@ OAL_STATIC oal_uint32  wal_hipriv_add_vap(oal_net_device_stru *pst_cfg_net_dev, 
 
     if ((WLAN_LEGACY_VAP_MODE == en_p2p_mode) && (OAL_PTR_NULL == pst_mac_device->st_p2p_info.pst_primary_net_device))
     {
-        /* 如果创建wlan0， 则保存wlan0 为主net_device,p2p0 和p2p-p2p0 MAC 地址从主netdevice 获取 */
+        /* ????????wlan0?? ??????wlan0 ????net_device,p2p0 ??p2p-p2p0 MAC ????????netdevice ???? */
         pst_mac_device->st_p2p_info.pst_primary_net_device = pst_net_dev;
     }
 
     if(OAL_SUCC != wal_set_random_mac_to_mib_etc(pst_net_dev))
     {
-        /* 异常处理，释放内存 */
-        /* 异常处理，释放内存 */
+        /* ?????????????????? */
+        /* ?????????????????? */
         OAL_MEM_FREE(pst_wdev, OAL_FALSE);
         oal_net_free_netdev(pst_net_dev);
         return OAL_ERR_CODE_PTR_NULL;
     } /* set random mac to mib ; for hi1102-cb */
 #endif
 
-    /* 设置netdevice的MAC地址，MAC地址在HMAC层被初始化到MIB中 */
+    /* ????netdevice??MAC??????MAC??????HMAC????????????MIB?? */
     pst_mac_vap = OAL_NET_DEV_PRIV(pst_net_dev);
 #ifdef _PRE_WLAN_FEATURE_P2P
     if (WLAN_P2P_CL_MODE != en_p2p_mode)
@@ -9257,14 +9257,14 @@ OAL_STATIC oal_uint32  wal_hipriv_add_vap(oal_net_device_stru *pst_cfg_net_dev, 
     }
 
 
-    /* 注册net_device */
+    /* ????net_device */
     ul_ret = (oal_uint32)oal_net_register_netdev(pst_net_dev);
     if (OAL_UNLIKELY(OAL_SUCC != ul_ret))
     {
         OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{wal_hipriv_add_vap::oal_net_register_netdev return error code %d!}\r\n", ul_ret);
 
-        /* 异常处理，释放内存 */
-        /* 抛删除vap事件释放刚申请的vap  */
+        /* ?????????????????? */
+        /* ??????vap????????????????vap  */
         WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_DEL_VAP, OAL_SIZEOF(mac_cfg_del_vap_param_stru));
 
         l_ret = wal_send_cfg_event_etc(pst_net_dev,
@@ -9309,7 +9309,7 @@ OAL_STATIC oal_uint32  wal_hipriv_add_vap(oal_net_device_stru *pst_cfg_net_dev, 
 #endif  /* (defined(CONFIG_ATP_FASTIP) && defined(_PRE_WLAN_FASTIP_SUPPORT)) */
 
 
-    /* 创建VAP对应的proc文件 */
+    /* ????VAP??????proc???? */
 #if (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION) && (LINUX_VERSION_CODE <= KERNEL_VERSION(2,6,34))
     wal_add_vap_proc_file(pst_mac_vap, ac_name);
 #elif (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION) && (LINUX_VERSION_CODE >= KERNEL_VERSION(3,10,59))
@@ -9333,13 +9333,13 @@ oal_uint32  wal_hipriv_del_vap_etc(oal_net_device_stru *pst_net_dev, oal_int8 *p
     mac_vap_stru                *pst_mac_vap;
     if (OAL_UNLIKELY((OAL_PTR_NULL == pst_net_dev) || (OAL_PTR_NULL == pc_param)))
     {
-        // 访问网络接口的模块可能不止一个,需要上层保证可靠删除
+        // ??????????????????????????????,????????????????????
         OAM_WARNING_LOG2(0, OAM_SF_ANY, "{wal_hipriv_del_vap_etc::pst_net_dev or pc_param null ptr error %d, %d!}\r\n",
                        pst_net_dev, pc_param);
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 设备在up状态不允许删除，必须先down */
+    /* ??????up??????????????????????down */
     if (OAL_UNLIKELY(0 != (OAL_IFF_RUNNING & OAL_NETDEVICE_FLAGS(pst_net_dev))))
     {
         OAM_ERROR_LOG1(0, OAM_SF_ANY, "{wal_hipriv_del_vap_etc::device is busy, please down it first %d!}\r\n", OAL_NETDEVICE_FLAGS(pst_net_dev));
@@ -9358,7 +9358,7 @@ oal_uint32  wal_hipriv_del_vap_etc(oal_net_device_stru *pst_net_dev, oal_int8 *p
         return OAL_ERR_CODE_INVALID_CONFIG;
     }
 
-    /* 设备在up状态不允许删除，必须先down */
+    /* ??????up??????????????????????down */
 #ifdef _PRE_WLAN_FEATURE_P2P
     if ((pst_mac_vap->en_vap_state != MAC_VAP_STATE_INIT)
          &&(pst_mac_vap->en_p2p_mode != WLAN_P2P_CL_MODE))
@@ -9382,7 +9382,7 @@ oal_uint32  wal_hipriv_del_vap_etc(oal_net_device_stru *pst_net_dev, oal_int8 *p
 #endif  /* (defined(CONFIG_ATP_FASTIP) && defined(_PRE_WLAN_FASTIP_SUPPORT)) */
 
 
-    /* 删除vap对应的proc文件 */
+    /* ????vap??????proc???? */
 #if (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION) && (LINUX_VERSION_CODE <= KERNEL_VERSION(2,6,34))
     wal_del_vap_proc_file(pst_net_dev);
 #elif (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION) && (LINUX_VERSION_CODE >= KERNEL_VERSION(3,10,59))
@@ -9390,10 +9390,10 @@ oal_uint32  wal_hipriv_del_vap_etc(oal_net_device_stru *pst_net_dev, oal_int8 *p
 #endif
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
-    //删除vap 时需要将参数赋值。
-    /* st_write_msg作清零操作，防止部分成员因为相关宏没有开而没有赋值，出现非0的异常值，例如结构体中P2P mode没有用P2P宏包起来，这里又因为包起来没有正确赋值 */
+    //????vap ??????????????????
+    /* st_write_msg??????????????????????????????????????????????????????????0??????????????????????P2P mode??????P2P?????????????????????????????????????? */
     oal_memset(&st_write_msg, 0, OAL_SIZEOF(wal_msg_write_stru));
 
     ((mac_cfg_del_vap_param_stru *)st_write_msg.auc_value)->pst_net_dev = pst_net_dev;
@@ -9427,13 +9427,13 @@ oal_uint32  wal_hipriv_del_vap_etc(oal_net_device_stru *pst_net_dev, oal_int8 *p
     if (OAL_UNLIKELY(OAL_SUCC != l_ret))
     {
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_hipriv_del_vap_etc::return err code %d}\r\n", l_ret);
-        /* 去注册 */
+        /* ?????? */
         oal_net_unregister_netdev(pst_net_dev);
         OAL_MEM_FREE(pst_wdev, OAL_TRUE);
         return (oal_uint32)l_ret;
     }
 
-    /* 去注册 */
+    /* ?????? */
     oal_net_unregister_netdev(pst_net_dev);
     OAL_MEM_FREE(pst_wdev, OAL_TRUE);
 
@@ -9447,7 +9447,7 @@ oal_uint32  wal_hipriv_vap_info_etc(oal_net_device_stru *pst_net_dev, oal_int8 *
     oal_int32                    l_ret;
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_VAP_INFO, OAL_SIZEOF(oal_int32));
 
@@ -9475,24 +9475,24 @@ oal_uint32  wal_hipriv_vap_info_etc(oal_net_device_stru *pst_net_dev, oal_int8 *
 
 oal_uint32  wal_hipriv_pk_mode_debug(oal_net_device_stru *pst_net_dev, oal_int8 *pc_param)
 {
-    /* pkmode功能的门限调整接口 hipriv "wlan0 pk_mode_debug 0/1(high/low) 0/1/2/3/4(BW) 0/1/2/3(protocol) 吞吐门限值"  */
+    /* pkmode?????????????????? hipriv "wlan0 pk_mode_debug 0/1(high/low) 0/1/2/3/4(BW) 0/1/2/3(protocol) ??????????"  */
     /*
         BW:20M     40M    80M   160M   80+80M
 
         protocol:lagency: HT: VHT: HE:
     */
     /*
-    PK模式门限基数:
-    {(单位Mbps)  20M     40M    80M   160M   80+80M
-    lagency:    {valid, valid, valid, valid, valid},   (基础协议模式没有pk mode )
+    PK????????????:
+    {(????Mbps)  20M     40M    80M   160M   80+80M
+    lagency:    {valid, valid, valid, valid, valid},   (????????????????pk mode )
     HT:         {72, 150, valid, valid, valid},
     VHT:        {86, 200, 433, 866, 866},
-    HE:         {valid, valid, valid, valid, valid},   (暂不支持11ax的pk mode)
+    HE:         {valid, valid, valid, valid, valid},   (????????11ax??pk mode)
     };
 
-    PK模式二级门限:
-    高档位门限: g_st_pk_mode_high_th_table = PK模式门限基数 * 70% *1024 *1024 /8  (单位字节)
-    低档位门限: g_st_pk_mode_low_th_table  = PK模式门限基数 * 20% *1024 *1024 /8  (单位字节)
+    PK????????????:
+    ??????????: g_st_pk_mode_high_th_table = PK???????????? * 70% *1024 *1024 /8  (????????)
+    ??????????: g_st_pk_mode_low_th_table  = PK???????????? * 20% *1024 *1024 /8  (????????)
 
     */
     wal_msg_write_stru              st_write_msg;
@@ -9510,10 +9510,10 @@ oal_uint32  wal_hipriv_pk_mode_debug(oal_net_device_stru *pst_net_dev, oal_int8 
     }
     #endif
 
-    /* st_write_msg作清零操作 */
+    /* st_write_msg?????????? */
     oal_memset(&st_write_msg, 0, OAL_SIZEOF(wal_msg_write_stru));
 
-   /* 0.获取第0个参数: 高门限/第门限 */
+   /* 0.??????0??????: ??????/?????? */
     ul_ret = wal_get_cmd_one_arg_etc((oal_int8*)pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -9531,7 +9531,7 @@ oal_uint32  wal_hipriv_pk_mode_debug(oal_net_device_stru *pst_net_dev, oal_int8 
 
     pc_param = pc_param + ul_off_set;
 
-    /* 1.获取第一个参数: BW */
+    /* 1.??????????????: BW */
     ul_ret = wal_get_cmd_one_arg_etc((oal_int8*)pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -9549,7 +9549,7 @@ oal_uint32  wal_hipriv_pk_mode_debug(oal_net_device_stru *pst_net_dev, oal_int8 
 
     pc_param = pc_param + ul_off_set;
 
-    /* 2.获取第二个参数: protocol */
+    /* 2.??????????????: protocol */
     ul_ret = wal_get_cmd_one_arg_etc((oal_int8*)pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -9567,7 +9567,7 @@ oal_uint32  wal_hipriv_pk_mode_debug(oal_net_device_stru *pst_net_dev, oal_int8 
     pc_param = pc_param + ul_off_set;
 
 
-    /* 3.获取第三个参数: 门限值 */
+    /* 3.??????????????: ?????? */
     ul_ret = wal_get_cmd_one_arg_etc((oal_int8*)pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -9579,14 +9579,14 @@ oal_uint32  wal_hipriv_pk_mode_debug(oal_net_device_stru *pst_net_dev, oal_int8 
 
     pc_param = pc_param + ul_off_set;
 
-    /*设置配置命令参数 */
+    /*???????????????? */
     st_write_msg.auc_value[0] = auc_pk_mode_param[0];
     st_write_msg.auc_value[1] = auc_pk_mode_param[1];
     st_write_msg.auc_value[2] = auc_pk_mode_param[2];
     st_write_msg.auc_value[3] = auc_pk_mode_param[3];
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SYNC_PK_MODE, OAL_SIZEOF(auc_pk_mode_param));
 
@@ -9627,7 +9627,7 @@ oal_uint32  wal_hipriv_set_ip_filter_etc(oal_net_device_stru *pst_net_dev, oal_i
     OAL_MEMZERO((oal_uint8 *)ast_items, OAL_SIZEOF(wal_hw_wifi_filter_item)*MAX_HIPRIV_IP_FILTER_BTABLE_SIZE);
 
 
-    /* 其取出子命令 */
+    /* ???????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_cmd, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -9637,7 +9637,7 @@ oal_uint32  wal_hipriv_set_ip_filter_etc(oal_net_device_stru *pst_net_dev, oal_i
 
     if(0 == oal_strncmp(ac_cmd, CMD_CLEAR_RX_FILTERS, OAL_STRLEN(CMD_CLEAR_RX_FILTERS)))
     {
-        /* 清理表单 */
+        /* ???????? */
         ul_ret = (oal_uint32)wal_clear_ip_filter_etc();
         return ul_ret;
     }
@@ -9652,7 +9652,7 @@ oal_uint32  wal_hipriv_set_ip_filter_etc(oal_net_device_stru *pst_net_dev, oal_i
 
     if(0 == oal_strncmp(ac_cmd, CMD_SET_RX_FILTER_ENABLE, OAL_STRLEN(CMD_SET_RX_FILTER_ENABLE)))
     {
-        /* 使能/关闭功能 */
+        /* ????/???????? */
         l_enable = oal_atoi(ac_cmd_param);
         ul_ret = (oal_uint32)wal_set_ip_filter_enable_etc(l_enable);
         return ul_ret;
@@ -9660,16 +9660,16 @@ oal_uint32  wal_hipriv_set_ip_filter_etc(oal_net_device_stru *pst_net_dev, oal_i
     }
     else if(0 == oal_strncmp(ac_cmd, CMD_ADD_RX_FILTER_ITEMS, OAL_STRLEN(CMD_ADD_RX_FILTER_ITEMS)))
     {
-        /* 更新黑名单 */
-        /* 获取名单条目数 */
+        /* ?????????? */
+        /* ?????????????? */
         l_items_cnt = oal_atoi(ac_cmd_param);
         l_items_cnt = OAL_MIN(MAX_HIPRIV_IP_FILTER_BTABLE_SIZE, l_items_cnt);
 
-        /* 获取名单条目 */
+        /* ???????????? */
         for (l_items_idx = 0; l_items_idx < l_items_cnt; l_items_idx++)
         {
 
-            /* 获取protocol X*/
+            /* ????protocol X*/
             pc_param += ul_off_set;
             ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_cmd_param, &ul_off_set);
             if (OAL_SUCC != ul_ret)
@@ -9680,7 +9680,7 @@ oal_uint32  wal_hipriv_set_ip_filter_etc(oal_net_device_stru *pst_net_dev, oal_i
             ast_items[l_items_idx].protocol = (oal_uint8)oal_atoi(ac_cmd_param);
 
 
-            /* 获取portX*/
+            /* ????portX*/
             pc_param += ul_off_set;
             ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_cmd_param, &ul_off_set);
             if (OAL_SUCC != ul_ret)
@@ -9721,8 +9721,8 @@ OAL_STATIC oal_uint32  wal_hipriv_tdls_prohibited(oal_net_device_stru *pst_net_d
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* TDLS禁用开关的命令: hipriv "vap0 tdls_prohi 0 | 1"
-        此处将解析出"1"或"0"存入ac_name
+    /* TDLS??????????????: hipriv "vap0 tdls_prohi 0 | 1"
+        ????????????"1"??"0"????ac_name
     */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
@@ -9731,7 +9731,7 @@ OAL_STATIC oal_uint32  wal_hipriv_tdls_prohibited(oal_net_device_stru *pst_net_d
         return ul_ret;
     }
 
-    /* 针对解析出的不同命令，设置TDLS禁用开关 */
+    /* ??????????????????????????TDLS???????? */
     if (0 == (oal_strcmp("0", ac_name)))
     {
         l_tmp = 0;
@@ -9747,10 +9747,10 @@ OAL_STATIC oal_uint32  wal_hipriv_tdls_prohibited(oal_net_device_stru *pst_net_d
     }
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_TDLS_PROHI, OAL_SIZEOF(oal_int32));
-    *((oal_int32 *)(st_write_msg.auc_value)) = l_tmp;  /* 设置配置命令参数 */
+    *((oal_int32 *)(st_write_msg.auc_value)) = l_tmp;  /* ???????????????? */
 
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
@@ -9784,8 +9784,8 @@ OAL_STATIC oal_uint32  wal_hipriv_tdls_channel_switch_prohibited(oal_net_device_
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* TDLS禁用开关的命令: hipriv "vap0 tdls_chaswi_prohi 0 | 1"
-        此处将解析出"1"或"0"存入ac_name
+    /* TDLS??????????????: hipriv "vap0 tdls_chaswi_prohi 0 | 1"
+        ????????????"1"??"0"????ac_name
     */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
@@ -9794,7 +9794,7 @@ OAL_STATIC oal_uint32  wal_hipriv_tdls_channel_switch_prohibited(oal_net_device_
         return ul_ret;
     }
 
-    /* 针对解析出的不同命令，设置TDLS信道切换禁用开关 */
+    /* ??????????????????????????TDLS???????????????? */
     if (0 == (oal_strcmp("0", ac_name)))
     {
         l_tmp = 0;
@@ -9810,10 +9810,10 @@ OAL_STATIC oal_uint32  wal_hipriv_tdls_channel_switch_prohibited(oal_net_device_
     }
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_TDLS_CHASWI_PROHI, OAL_SIZEOF(oal_int32));
-    *((oal_int32 *)(st_write_msg.auc_value)) = l_tmp;  /* 设置配置命令参数 */
+    *((oal_int32 *)(st_write_msg.auc_value)) = l_tmp;  /* ???????????????? */
 
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
@@ -9864,10 +9864,10 @@ OAL_STATIC oal_uint32  wal_hipriv_set_2040_coext_support(oal_net_device_stru *ps
     }
 
     /***************************************************************************
-                             抛事件到wal层处理
+                             ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_2040_COEXISTENCE, OAL_SIZEOF(oal_int32));
-    *((oal_int32 *)(st_write_msg.auc_value)) = uc_csp;  /* 设置配置命令参数 */
+    *((oal_int32 *)(st_write_msg.auc_value)) = uc_csp;  /* ???????????????? */
 
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
@@ -9895,9 +9895,9 @@ OAL_STATIC  oal_uint32  wal_hipriv_rx_fcs_info(oal_net_device_stru *pst_net_dev,
     oal_int32                   l_ret;
     oal_uint32                  ul_ret;
     mac_cfg_rx_fcs_info_stru   *pst_rx_fcs_info;
-    mac_cfg_rx_fcs_info_stru    st_rx_fcs_info;  /* 临时保存获取的use的信息 */
+    mac_cfg_rx_fcs_info_stru    st_rx_fcs_info;  /* ??????????????use?????? */
 
-    /* 打印接收帧的FCS正确与错误信息:sh hipriv.sh "vap0 rx_fcs_info 0/1 1-4" 0/1  0代表不清除，1代表清除 */
+    /* ????????????FCS??????????????:sh hipriv.sh "vap0 rx_fcs_info 0/1 1-4" 0/1  0????????????1???????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -9913,7 +9913,7 @@ OAL_STATIC  oal_uint32  wal_hipriv_rx_fcs_info(oal_net_device_stru *pst_net_dev,
         return OAL_ERR_CODE_INVALID_CONFIG;
     }
 
-    /* 偏移，取下一个参数 */
+    /* ?????????????????? */
     pc_param = pc_param + ul_off_set;
 
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
@@ -9932,11 +9932,11 @@ OAL_STATIC  oal_uint32  wal_hipriv_rx_fcs_info(oal_net_device_stru *pst_net_dev,
     }
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_RX_FCS_INFO, OAL_SIZEOF(mac_cfg_rx_fcs_info_stru));
 
-    /* 设置配置命令参数 */
+    /* ???????????????? */
     pst_rx_fcs_info = (mac_cfg_rx_fcs_info_stru *)(st_write_msg.auc_value);
     pst_rx_fcs_info->ul_data_op    = st_rx_fcs_info.ul_data_op;
     pst_rx_fcs_info->ul_print_info = st_rx_fcs_info.ul_print_info;
@@ -9970,8 +9970,8 @@ OAL_STATIC oal_uint32  wal_hipriv_vap_log_level(oal_net_device_stru *pst_net_dev
     wal_msg_write_stru          st_write_msg;
 #endif
 
-    /* OAM log模块的开关的命令: hipriv "Hisilicon0[vapx] log_level {1/2}"
-       1-2(error与warning)级别日志以vap级别为维度；
+    /* OAM log????????????????: hipriv "Hisilicon0[vapx] log_level {1/2}"
+       1-2(error??warning)??????????vap????????????
     */
 
     pst_mac_vap = OAL_NET_DEV_PRIV(pst_net_dev);
@@ -9981,7 +9981,7 @@ OAL_STATIC oal_uint32  wal_hipriv_vap_log_level(oal_net_device_stru *pst_net_dev
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 获取日志级别 */
+    /* ???????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_param, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -9995,7 +9995,7 @@ OAL_STATIC oal_uint32  wal_hipriv_vap_log_level(oal_net_device_stru *pst_net_dev
         return OAL_ERR_CODE_INVALID_CONFIG;
     }
 
-    /*hipriv "Hisilicon0 log_level 1|2|3" 设置所有vip id的log*/
+    /*hipriv "Hisilicon0 log_level 1|2|3" ????????vip id??log*/
 #ifdef _PRE_PLAT_FEATURE_CUSTOMIZE
     if(0 == oal_strcmp("Hisilicon0", pst_net_dev->name))
     {
@@ -10004,10 +10004,10 @@ OAL_STATIC oal_uint32  wal_hipriv_vap_log_level(oal_net_device_stru *pst_net_dev
     }
 #endif
 
-#if 0  /* 产品发布前支持info级别全局开 */
+#if 0  /* ??????????????info?????????? */
     if ((0 != oal_strcmp("1", ac_param)) && (0 != oal_strcmp("2", ac_param)))
     {
-        /* INFO级别 */
+        /* INFO???? */
         if (0 == oal_strcmp("3", ac_param))
         {
             OAM_ERROR_LOG0(0, OAM_SF_ANY, "{wal_hipriv_vap_log_level::not support info level config. use[feature_log_switch]command}\r\n");
@@ -10023,7 +10023,7 @@ OAL_STATIC oal_uint32  wal_hipriv_vap_log_level(oal_net_device_stru *pst_net_dev
     ul_ret = oam_log_set_vap_level_etc(pst_mac_vap->uc_vap_id, en_level_val);
 
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
-// 目前支持02 device 设置log 级别， 遗留后续的合并问题
+// ????????02 device ????log ?????? ??????????????????
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_LOG_LEVEL, OAL_SIZEOF(oal_int32));
     *((oal_int32 *)(st_write_msg.auc_value)) = en_level_val;
     ul_ret |= (oal_uint32)wal_send_cfg_event_etc(pst_net_dev,
@@ -10054,8 +10054,8 @@ OAL_STATIC oal_uint32  wal_hipriv_green_ap_en(oal_net_device_stru *pst_net_dev, 
     oal_int32                   l_ret;
     oal_uint32                  ul_ret;
 
-    /* OAM event模块的开关的命令: hipriv "wlan0 green_ap_en 0 | 1"
-        此处将解析出"1"或"0"存入ac_name
+    /* OAM event????????????????: hipriv "wlan0 green_ap_en 0 | 1"
+        ????????????"1"??"0"????ac_name
     */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
@@ -10064,15 +10064,15 @@ OAL_STATIC oal_uint32  wal_hipriv_green_ap_en(oal_net_device_stru *pst_net_dev, 
         return ul_ret;
     }
 
-    /* 针对解析出的不同命令，对event模块进行不同的设置 */
+    /* ????????????????????????event?????????????????? */
 
     l_tmp = (oal_uint8)oal_atoi(ac_name);
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_GREEN_AP_EN, OAL_SIZEOF(oal_int32));
-    *((oal_int32 *)(st_write_msg.auc_value)) = l_tmp;  /* 设置配置命令参数 */
+    *((oal_int32 *)(st_write_msg.auc_value)) = l_tmp;  /* ???????????????? */
 
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
@@ -10099,11 +10099,11 @@ OAL_STATIC oal_uint32 wal_ioctl_ltecoex_mode_set(oal_net_device_stru *pst_net_de
     oal_int32                       l_ret;
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_LTECOEX_MODE_SET, OAL_SIZEOF(oal_uint32));
 
-    /* 设置配置命令参数 */
+    /* ???????????????? */
     *((oal_uint8 *)(st_write_msg.auc_value)) = *pc_param;
 
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
@@ -10136,7 +10136,7 @@ OAL_STATIC oal_uint32  wal_hipriv_aifsn_cfg(oal_net_device_stru *pst_net_dev, oa
 
     OAL_MEMZERO(&st_edca_cfg, OAL_SIZEOF(st_edca_cfg));
 
-    /* 获取配置开关 */
+    /* ???????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -10146,7 +10146,7 @@ OAL_STATIC oal_uint32  wal_hipriv_aifsn_cfg(oal_net_device_stru *pst_net_dev, oa
     pc_param += ul_off_set;
     st_edca_cfg.en_switch = (oal_bool_enum_uint8)oal_atoi(ac_name);
 
-    /* 获取ac */
+    /* ????ac */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -10158,7 +10158,7 @@ OAL_STATIC oal_uint32  wal_hipriv_aifsn_cfg(oal_net_device_stru *pst_net_dev, oa
 
     if (OAL_TRUE == st_edca_cfg.en_switch)
     {
-        /* 获取配置值 */
+        /* ?????????? */
         ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
         if (OAL_SUCC != ul_ret)
         {
@@ -10169,11 +10169,11 @@ OAL_STATIC oal_uint32  wal_hipriv_aifsn_cfg(oal_net_device_stru *pst_net_dev, oa
         st_edca_cfg.us_val = (oal_uint16)oal_atoi(ac_name);
     }
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_WFA_CFG_AIFSN, OAL_SIZEOF(st_edca_cfg));
 
-    /* 设置配置命令参数 */
+    /* ???????????????? */
     oal_memcopy(st_write_msg.auc_value,
                 (const oal_void *)&st_edca_cfg,
                 OAL_SIZEOF(st_edca_cfg));
@@ -10206,7 +10206,7 @@ OAL_STATIC oal_uint32  wal_hipriv_cw_cfg(oal_net_device_stru *pst_net_dev, oal_i
 
     OAL_MEMZERO(&st_edca_cfg, OAL_SIZEOF(st_edca_cfg));
 
-    /* 获取配置开关 */
+    /* ???????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -10216,7 +10216,7 @@ OAL_STATIC oal_uint32  wal_hipriv_cw_cfg(oal_net_device_stru *pst_net_dev, oal_i
     pc_param += ul_off_set;
     st_edca_cfg.en_switch = (oal_bool_enum_uint8)oal_atoi(ac_name);
 
-    /* 获取ac */
+    /* ????ac */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -10228,7 +10228,7 @@ OAL_STATIC oal_uint32  wal_hipriv_cw_cfg(oal_net_device_stru *pst_net_dev, oal_i
 
     if (OAL_TRUE == st_edca_cfg.en_switch)
     {
-        /* 获取配置值 */
+        /* ?????????? */
         ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
         if (OAL_SUCC != ul_ret)
         {
@@ -10239,11 +10239,11 @@ OAL_STATIC oal_uint32  wal_hipriv_cw_cfg(oal_net_device_stru *pst_net_dev, oal_i
         st_edca_cfg.us_val = (oal_uint16)oal_strtol(ac_name, OAL_PTR_NULL, 0);
     }
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_WFA_CFG_CW, OAL_SIZEOF(st_edca_cfg));
 
-    /* 设置配置命令参数 */
+    /* ???????????????? */
     oal_memcopy(st_write_msg.auc_value,
                 (const oal_void *)&st_edca_cfg,
                 OAL_SIZEOF(st_edca_cfg));
@@ -10274,9 +10274,9 @@ OAL_STATIC oal_uint32  wal_hipriv_set_random_mac_addr_scan(oal_net_device_stru *
     oal_int32                       l_ret;
     oal_uint8                       uc_rand_mac_addr_scan_switch;
 
-    /* sh hipriv.sh "Hisilicon0 random_mac_addr_scan 0|1(开关)" */
+    /* sh hipriv.sh "Hisilicon0 random_mac_addr_scan 0|1(????)" */
 
-    /* 获取帧方向 */
+    /* ?????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -10286,7 +10286,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_random_mac_addr_scan(oal_net_device_stru *
     pc_param += ul_off_set;
     uc_rand_mac_addr_scan_switch = (oal_uint8)oal_atoi(ac_name);
 
-    /* 开关的取值范围为0|1,做参数合法性判断 */
+    /* ????????????????0|1,???????????????? */
     if (uc_rand_mac_addr_scan_switch > 1)
     {
         OAM_ERROR_LOG1(0, OAM_SF_ANY, "{wal_hipriv_set_random_mac_addr_scan::param is error, switch_value[%d]!}",
@@ -10295,7 +10295,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_random_mac_addr_scan(oal_net_device_stru *
     }
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_RANDOM_MAC_ADDR_SCAN, OAL_SIZEOF(oal_uint32));
     *((oal_int32 *)(st_write_msg.auc_value)) = (oal_uint32)uc_rand_mac_addr_scan_switch;
@@ -10328,8 +10328,8 @@ OAL_STATIC oal_uint32  wal_hipriv_ota_switch(oal_net_device_stru *pst_net_dev, o
     oal_uint32                          ul_ret;
     wal_specific_event_type_param_stru *pst_specific_event_param;
 
-    /* OAM ota模块的开关的命令: hipriv "Hisilicon0 ota_switch event_type 0 | 1",
-       此处将首先解析出ota类型(oam_ota_type_enum_uint8),然后解析开关参数"1"或"0"存入ac_name
+    /* OAM ota????????????????: hipriv "Hisilicon0 ota_switch event_type 0 | 1",
+       ????????????????ota????(oam_ota_type_enum_uint8),????????????????"1"??"0"????ac_name
     */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
@@ -10339,7 +10339,7 @@ OAL_STATIC oal_uint32  wal_hipriv_ota_switch(oal_net_device_stru *pst_net_dev, o
     }
     l_ota_type = oal_atoi((const oal_int8 *)ac_name);
 
-    /* 解析参数 */
+    /* ???????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param + ul_off_set, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -10351,7 +10351,7 @@ OAL_STATIC oal_uint32  wal_hipriv_ota_switch(oal_net_device_stru *pst_net_dev, o
 
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_OTA_SWITCH, OAL_SIZEOF(wal_specific_event_type_param_stru));
     pst_specific_event_param = (wal_specific_event_type_param_stru *)st_write_msg.auc_value;
@@ -10387,7 +10387,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_smps_vap_mode(oal_net_device_stru *pst_net
     oal_int32                   l_ret;
     oal_uint32                  ul_ret;
 
-    /* 此处将解析出"1"、"2"或"3"存入ac_name */
+    /* ????????????"1"??"2"??"3"????ac_name */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -10395,7 +10395,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_smps_vap_mode(oal_net_device_stru *pst_net
         return ul_ret;
     }
 
-    /* 针对解析出的不同命令，设置不同SMPS模式 */
+    /* ??????????????????????????????SMPS???? */
     if (0 == (oal_strcmp("1", ac_name)))
     {
         l_tmp = 1;
@@ -10415,10 +10415,10 @@ OAL_STATIC oal_uint32  wal_hipriv_set_smps_vap_mode(oal_net_device_stru *pst_net
     }
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SMPS_VAP_MODE, OAL_SIZEOF(oal_int32));
-    *((oal_int32 *)(st_write_msg.auc_value)) = l_tmp;  /* 设置配置命令参数 */
+    *((oal_int32 *)(st_write_msg.auc_value)) = l_tmp;  /* ???????????????? */
 
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
@@ -10449,7 +10449,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_smps_mode(oal_net_device_stru *pst_net_dev
     oal_int32                   l_ret;
     oal_uint32                  ul_ret;
 
-    /* 此处将解析出"1"、"2"或"3"存入ac_name */
+    /* ????????????"1"??"2"??"3"????ac_name */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -10457,7 +10457,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_smps_mode(oal_net_device_stru *pst_net_dev
         return ul_ret;
     }
 
-    /* 针对解析出的不同命令，设置不同SMPS模式 */
+    /* ??????????????????????????????SMPS???? */
     if (0 == (oal_strcmp("1", ac_name)))
     {
         l_tmp = 1;
@@ -10477,10 +10477,10 @@ OAL_STATIC oal_uint32  wal_hipriv_set_smps_mode(oal_net_device_stru *pst_net_dev
     }
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SMPS_MODE, OAL_SIZEOF(oal_int32));
-    *((oal_int32 *)(st_write_msg.auc_value)) = l_tmp;  /* 设置配置命令参数 */
+    *((oal_int32 *)(st_write_msg.auc_value)) = l_tmp;  /* ???????????????? */
 
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
@@ -10498,7 +10498,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_smps_mode(oal_net_device_stru *pst_net_dev
     return OAL_SUCC;
 }
 
-#if 0 // device smps能力不需要配置，m2s切换不需要，smps本身逻辑按照vap配置命令来，后续直接删除， 后续smps自身需要再放开
+#if 0 // device smps????????????????m2s????????????smps????????????vap?????????????????????????? ????smps??????????????
 
 OAL_STATIC oal_uint32  wal_hipriv_get_smps_mode_info(oal_net_device_stru *pst_net_dev, oal_int8 *pc_param)
 {
@@ -10506,7 +10506,7 @@ OAL_STATIC oal_uint32  wal_hipriv_get_smps_mode_info(oal_net_device_stru *pst_ne
     oal_int32                    l_ret;
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SMPS_EN, OAL_SIZEOF(oal_int32));
 
@@ -10540,7 +10540,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_uapsd_cap(oal_net_device_stru *pst_net_dev
     oal_int32                   l_ret;
     oal_uint32                  ul_ret;
 
-    /* 此处将解析出"1"或"0"存入ac_name */
+    /* ????????????"1"??"0"????ac_name */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -10548,7 +10548,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_uapsd_cap(oal_net_device_stru *pst_net_dev
         return ul_ret;
     }
 
-    /* 针对解析出的不同命令，对UAPSD开关进行不同的设置 */
+    /* ????????????????????????UAPSD?????????????????? */
     if (0 == (oal_strcmp("0", ac_name)))
     {
         l_tmp = 0;
@@ -10564,10 +10564,10 @@ OAL_STATIC oal_uint32  wal_hipriv_set_uapsd_cap(oal_net_device_stru *pst_net_dev
     }
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_UAPSD_EN, OAL_SIZEOF(oal_int32));
-    *((oal_int32 *)(st_write_msg.auc_value)) = l_tmp;  /* 设置配置命令参数 */
+    *((oal_int32 *)(st_write_msg.auc_value)) = l_tmp;  /* ???????????????? */
 
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
@@ -10595,15 +10595,15 @@ OAL_STATIC oal_uint32  wal_hipriv_add_user(oal_net_device_stru *pst_net_dev, oal
     oal_uint32                      ul_ret;
     oal_int32                       l_ret;
     mac_cfg_add_user_param_stru    *pst_add_user_param;
-    mac_cfg_add_user_param_stru     st_add_user_param;  /* 临时保存获取的use的信息 */
+    mac_cfg_add_user_param_stru     st_add_user_param;  /* ??????????????use?????? */
     oal_uint32                      ul_get_addr_idx;
 
     /*
-        设置添加用户的配置命令: hipriv "vap0 add_user xx xx xx xx xx xx(mac地址) 0 | 1(HT能力位) "
-        该命令针对某一个VAP
+        ??????????????????????: hipriv "vap0 add_user xx xx xx xx xx xx(mac????) 0 | 1(HT??????) "
+        ????????????????VAP
     */
 
-    /* 获取mac地址 */
+    /* ????mac???? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -10613,10 +10613,10 @@ OAL_STATIC oal_uint32  wal_hipriv_add_user(oal_net_device_stru *pst_net_dev, oal
 
     OAL_MEMZERO((oal_uint8*)&st_add_user_param, OAL_SIZEOF(st_add_user_param));
     oal_strtoaddr(ac_name, st_add_user_param.auc_mac_addr);
-    /* 偏移，取下一个参数 */
+    /* ?????????????????? */
     pc_param = pc_param + ul_off_set;
 
-    /* 获取用户的HT标识 */
+    /* ??????????HT???? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -10624,7 +10624,7 @@ OAL_STATIC oal_uint32  wal_hipriv_add_user(oal_net_device_stru *pst_net_dev, oal
         return ul_ret;
     }
 
-    /* 针对解析出的不同命令，对user的HT字段进行不同的设置 */
+    /* ????????????????????????user??HT?????????????????? */
     if (0 == (oal_strcmp("0", ac_name)))
     {
         st_add_user_param.en_ht_cap = 0;
@@ -10640,11 +10640,11 @@ OAL_STATIC oal_uint32  wal_hipriv_add_user(oal_net_device_stru *pst_net_dev, oal
     }
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_ADD_USER, OAL_SIZEOF(mac_cfg_add_user_param_stru));
 
-    /* 设置配置命令参数 */
+    /* ???????????????? */
     pst_add_user_param = (mac_cfg_add_user_param_stru *)(st_write_msg.auc_value);
     for (ul_get_addr_idx = 0; ul_get_addr_idx < WLAN_MAC_ADDR_LEN; ul_get_addr_idx++)
     {
@@ -10681,15 +10681,15 @@ OAL_STATIC oal_uint32  wal_hipriv_del_user(oal_net_device_stru *pst_net_dev, oal
     oal_uint32                      ul_ret;
     oal_int32                       l_ret;
     mac_cfg_del_user_param_stru    *pst_del_user_param;
-    mac_cfg_del_user_param_stru     st_del_user_param;  /* 临时保存获取的use的信息 */
+    mac_cfg_del_user_param_stru     st_del_user_param;  /* ??????????????use?????? */
     oal_uint32                      ul_get_addr_idx;
 
     /*
-        设置删除用户的配置命令: hipriv "vap0 del_user xx xx xx xx xx xx(mac地址)"
-        该命令针对某一个VAP
+        ??????????????????????: hipriv "vap0 del_user xx xx xx xx xx xx(mac????)"
+        ????????????????VAP
     */
 
-    /* 获取mac地址 */
+    /* ????mac???? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -10701,11 +10701,11 @@ OAL_STATIC oal_uint32  wal_hipriv_del_user(oal_net_device_stru *pst_net_dev, oal
     oal_strtoaddr(ac_name, st_del_user_param.auc_mac_addr);
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_DEL_USER, OAL_SIZEOF(mac_cfg_add_user_param_stru));
 
-    /* 设置配置命令参数 */
+    /* ???????????????? */
     pst_del_user_param = (mac_cfg_add_user_param_stru *)(st_write_msg.auc_value);
     for (ul_get_addr_idx = 0; ul_get_addr_idx < WLAN_MAC_ADDR_LEN; ul_get_addr_idx++)
     {
@@ -10735,14 +10735,14 @@ OAL_STATIC oal_uint32  wal_hipriv_user_info(oal_net_device_stru *pst_net_dev, oa
     wal_msg_write_stru              st_write_msg;
     oal_int32                      l_ret;
     mac_cfg_user_info_param_stru    *pst_user_info_param;
-    oal_uint8                       auc_mac_addr[6] = {0};    /* 临时保存获取的use的mac地址信息 */
+    oal_uint8                       auc_mac_addr[6] = {0};    /* ??????????????use??mac???????? */
     oal_uint8                       uc_char_index;
     oal_uint16                      us_user_idx;
 
-    /* 去除字符串的空格 */
+    /* ???????????????? */
     pc_param++;
 
-    /* 获取mac地址,16进制转换 */
+    /* ????mac????,16???????? */
     for (uc_char_index = 0; uc_char_index < 12; uc_char_index++)
     {
         if (':' == *pc_param)
@@ -10763,11 +10763,11 @@ OAL_STATIC oal_uint32  wal_hipriv_user_info(oal_net_device_stru *pst_net_dev, oa
     }
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_USER_INFO, OAL_SIZEOF(mac_cfg_user_info_param_stru));
 
-    /* 根据mac地址找用户 */
+    /* ????mac?????????? */
     pst_mac_vap = OAL_NET_DEV_PRIV(pst_net_dev);
 
     l_ret = (oal_int32)mac_vap_find_user_by_macaddr_etc(pst_mac_vap, auc_mac_addr, &us_user_idx);
@@ -10777,7 +10777,7 @@ OAL_STATIC oal_uint32  wal_hipriv_user_info(oal_net_device_stru *pst_net_dev, oa
         return OAL_FAIL;
     }
 
-    /* 设置配置命令参数 */
+    /* ???????????????? */
     pst_user_info_param              = (mac_cfg_user_info_param_stru *)(st_write_msg.auc_value);
     pst_user_info_param->us_user_idx = us_user_idx;
 
@@ -10809,14 +10809,14 @@ OAL_STATIC oal_uint32  wal_hipriv_set_mcast_data_dscr_param(oal_net_device_stru 
     oal_int8                         ac_arg[WAL_HIPRIV_CMD_NAME_MAX_LEN];
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_DSCR, OAL_SIZEOF(mac_cfg_set_dscr_param_stru));
 
-    /* 解析并设置配置命令参数 */
+    /* ?????????????????????? */
     pst_set_dscr_param = (mac_cfg_set_dscr_param_stru *)(st_write_msg.auc_value);
 
-    /* 获取描述符字段设置命令字符串 */
+    /* ???????????????????????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_arg, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -10825,7 +10825,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_mcast_data_dscr_param(oal_net_device_stru 
     }
     pc_param += ul_off_set;
 
-    /* 解析是设置哪一个字段 */
+    /* ???????????????????? */
     for (en_param_index = 0; en_param_index < WAL_DSCR_PARAM_BUTT; en_param_index++)
     {
         if(!oal_strcmp(pauc_tx_dscr_param_name_etc[en_param_index], ac_arg))
@@ -10834,7 +10834,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_mcast_data_dscr_param(oal_net_device_stru 
         }
     }
 
-    /* 检查命令是否打错 */
+    /* ???????????????? */
     if (WAL_DSCR_PARAM_BUTT == en_param_index)
     {
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_hipriv_set_mcast_data_dscr_param::no such param for tx dscr!}\r\n");
@@ -10843,7 +10843,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_mcast_data_dscr_param(oal_net_device_stru 
 
     pst_set_dscr_param->uc_function_index = en_param_index;
 
-    /*配置速率、空间流数、带宽*/
+    /*????????????????????????*/
     if(en_param_index >= WAL_DSCR_PARAM_RATE && en_param_index <= WAL_DSCR_PARAM_BW)
     {
         ul_ret = wal_hipriv_process_rate_params(pst_net_dev, pc_param, pst_set_dscr_param);
@@ -10855,7 +10855,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_mcast_data_dscr_param(oal_net_device_stru 
     }
     else
     {
-        /* 解析要设置为多大的值 */
+        /* ???????????????????? */
         ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_arg, &ul_off_set);
         if (OAL_SUCC != ul_ret)
         {
@@ -10866,7 +10866,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_mcast_data_dscr_param(oal_net_device_stru 
         pst_set_dscr_param->l_value = oal_strtol(ac_arg, OAL_PTR_NULL, 0);
     }
 
-    /* 组播数据帧描述符设置 tpye = MAC_VAP_CONFIG_MCAST_DATA */
+    /* ???????????????????? tpye = MAC_VAP_CONFIG_MCAST_DATA */
     pst_set_dscr_param->en_type = MAC_VAP_CONFIG_MCAST_DATA;
 
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
@@ -10901,14 +10901,14 @@ oal_uint32  wal_hipriv_set_rate_etc(oal_net_device_stru *pst_net_dev, oal_int8 *
     wal_msg_stru                *pst_rsp_msg = OAL_PTR_NULL;
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_RATE, OAL_SIZEOF(mac_cfg_non_ht_rate_stru));
 
-    /* 解析并设置配置命令参数 */
+    /* ?????????????????????? */
     pst_set_rate_param = (mac_cfg_non_ht_rate_stru *)(st_write_msg.auc_value);
 
-    /* 获取速率值字符串 */
+    /* ???????????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_arg, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -10916,7 +10916,7 @@ oal_uint32  wal_hipriv_set_rate_etc(oal_net_device_stru *pst_net_dev, oal_int8 *
         return ul_ret;
     }
 
-    /* 解析是设置为哪一级速率 */
+    /* ?????????????????????? */
     for (en_rate_index = 0; en_rate_index < WLAN_LEGACY_RATE_VALUE_BUTT; en_rate_index++)
     {
         if(!oal_strcmp(pauc_non_ht_rate_tbl[en_rate_index], ac_arg))
@@ -10925,7 +10925,7 @@ oal_uint32  wal_hipriv_set_rate_etc(oal_net_device_stru *pst_net_dev, oal_int8 *
         }
     }
 
-    /* 根据速率配置TX描述符中的协议模式 */
+    /* ????????????TX?????????????????? */
     if (en_rate_index <= WLAN_SHORT_11b_11_M_BPS)
     {
         pst_set_rate_param->en_protocol_mode = WLAN_11B_PHY_PROTOCOL_MODE;
@@ -10940,7 +10940,7 @@ oal_uint32  wal_hipriv_set_rate_etc(oal_net_device_stru *pst_net_dev, oal_int8 *
         return OAL_ERR_CODE_INVALID_CONFIG;
     }
 
-    /* 解析要设置为多大的值 */
+    /* ???????????????????? */
     pst_set_rate_param->en_rate = en_rate_index;
 
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
@@ -10955,7 +10955,7 @@ oal_uint32  wal_hipriv_set_rate_etc(oal_net_device_stru *pst_net_dev, oal_int8 *
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_hipriv_set_rate_etc::return err code [%d]!}\r\n", l_ret);
         return (oal_uint32)l_ret;
     }
-        /* 读取返回的错误码 */
+        /* ???????????????? */
     ul_ret = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_ret)
     {
@@ -10981,14 +10981,14 @@ oal_uint32  wal_hipriv_set_mcs_etc(oal_net_device_stru *pst_net_dev, oal_int8 *p
     wal_msg_stru                    *pst_rsp_msg = OAL_PTR_NULL;
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_MCS, OAL_SIZEOF(mac_cfg_tx_comp_stru));
 
-    /* 解析并设置配置命令参数 */
+    /* ?????????????????????? */
     pst_set_mcs_param = (mac_cfg_tx_comp_stru *)(st_write_msg.auc_value);
 
-    /* 获取速率值字符串 */
+    /* ???????????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_arg, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -10996,7 +10996,7 @@ oal_uint32  wal_hipriv_set_mcs_etc(oal_net_device_stru *pst_net_dev, oal_int8 *p
         return ul_ret;
     }
 
-    /* 输入命令合法性检测 */
+    /* ?????????????????? */
     while ('\0' != ac_arg[l_idx])
     {
         if (isdigit(ac_arg[l_idx]))
@@ -11012,7 +11012,7 @@ oal_uint32  wal_hipriv_set_mcs_etc(oal_net_device_stru *pst_net_dev, oal_int8 *p
         }
     }
 
-    /* 解析要设置为多大的值 */
+    /* ???????????????????? */
     l_mcs = oal_atoi(ac_arg);
 
     if (l_mcs < WAL_HIPRIV_HT_MCS_MIN || l_mcs > WAL_HIPRIV_HT_MCS_MAX)
@@ -11036,7 +11036,7 @@ oal_uint32  wal_hipriv_set_mcs_etc(oal_net_device_stru *pst_net_dev, oal_int8 *p
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_hipriv_set_mcs_etc::return err code [%d]!}\r\n", l_ret);
         return (oal_uint32)l_ret;
     }
-        /* 读取返回的错误码 */
+        /* ???????????????? */
     ul_ret = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_ret)
     {
@@ -11062,14 +11062,14 @@ oal_uint32  wal_hipriv_set_mcsac_etc(oal_net_device_stru *pst_net_dev, oal_int8 
     wal_msg_stru                    *pst_rsp_msg = OAL_PTR_NULL;
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_MCSAC, OAL_SIZEOF(mac_cfg_tx_comp_stru));
 
-    /* 解析并设置配置命令参数 */
+    /* ?????????????????????? */
     pst_set_mcs_param = (mac_cfg_tx_comp_stru *)(st_write_msg.auc_value);
 
-    /* 获取速率值字符串 */
+    /* ???????????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_arg, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -11077,7 +11077,7 @@ oal_uint32  wal_hipriv_set_mcsac_etc(oal_net_device_stru *pst_net_dev, oal_int8 
         return ul_ret;
     }
 
-    /* 输入命令合法性检测 */
+    /* ?????????????????? */
     while ('\0' != ac_arg[l_idx])
     {
         if (isdigit(ac_arg[l_idx]))
@@ -11093,7 +11093,7 @@ oal_uint32  wal_hipriv_set_mcsac_etc(oal_net_device_stru *pst_net_dev, oal_int8 
         }
     }
 
-    /* 解析要设置为多大的值 */
+    /* ???????????????????? */
     l_mcs = oal_atoi(ac_arg);
 
     if (l_mcs < WAL_HIPRIV_VHT_MCS_MIN || l_mcs > WAL_HIPRIV_VHT_MCS_MAX)
@@ -11117,7 +11117,7 @@ oal_uint32  wal_hipriv_set_mcsac_etc(oal_net_device_stru *pst_net_dev, oal_int8 
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_hipriv_set_mcsac_etc::return err code [%d]!}\r\n", l_ret);
         return (oal_uint32)l_ret;
     }
-        /* 读取返回的错误码 */
+        /* ???????????????? */
     ul_ret = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_ret)
     {
@@ -11144,14 +11144,14 @@ oal_uint32  wal_hipriv_set_mcsax(oal_net_device_stru *pst_net_dev, oal_int8 *pc_
     wal_msg_stru                    *pst_rsp_msg = OAL_PTR_NULL;
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_MCSAX, OAL_SIZEOF(mac_cfg_tx_comp_stru));
 
-    /* 解析并设置配置命令参数 */
+    /* ?????????????????????? */
     pst_set_mcs_param = (mac_cfg_tx_comp_stru *)(st_write_msg.auc_value);
 
-    /* 获取速率值字符串 */
+    /* ???????????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_arg, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -11159,7 +11159,7 @@ oal_uint32  wal_hipriv_set_mcsax(oal_net_device_stru *pst_net_dev, oal_int8 *pc_
         return ul_ret;
     }
 
-    /* 输入命令合法性检测 */
+    /* ?????????????????? */
     while ('\0' != ac_arg[l_idx])
     {
         if (isdigit(ac_arg[l_idx]))
@@ -11175,7 +11175,7 @@ oal_uint32  wal_hipriv_set_mcsax(oal_net_device_stru *pst_net_dev, oal_int8 *pc_
         }
     }
 
-    /* 解析要设置为多大的值 */
+    /* ???????????????????? */
     l_mcs = oal_atoi(ac_arg);
 
     if (l_mcs < WAL_HIPRIV_HE_MCS_MIN || l_mcs > WAL_HIPRIV_HE_MCS_MAX)
@@ -11185,7 +11185,7 @@ oal_uint32  wal_hipriv_set_mcsax(oal_net_device_stru *pst_net_dev, oal_int8 *pc_
     }
 
     pst_set_mcs_param->uc_param = (oal_uint8)l_mcs;
-    pst_set_mcs_param->en_protocol_mode = WLAN_HE_SU_FORMAT;/* TODO:默认先SU PPDU */
+    pst_set_mcs_param->en_protocol_mode = WLAN_HE_SU_FORMAT;/* TODO:??????SU PPDU */
 
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
@@ -11199,7 +11199,7 @@ oal_uint32  wal_hipriv_set_mcsax(oal_net_device_stru *pst_net_dev, oal_int8 *pc_
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_hipriv_set_mcsax::return err code [%d]!}\r\n", l_ret);
         return (oal_uint32)l_ret;
     }
-        /* 读取返回的错误码 */
+        /* ???????????????? */
     ul_ret = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_ret)
     {
@@ -11225,14 +11225,14 @@ OAL_STATIC oal_uint32  wal_hipriv_set_bw(oal_net_device_stru *pst_net_dev, oal_i
     wal_msg_stru                    *pst_rsp_msg = OAL_PTR_NULL;
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_BW, OAL_SIZEOF(mac_cfg_tx_comp_stru));
 
-    /* 解析并设置配置命令参数 */
+    /* ?????????????????????? */
     pst_set_bw_param = (mac_cfg_tx_comp_stru *)(st_write_msg.auc_value);
 
-    /* 获取带宽值字符串 */
+    /* ???????????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_arg, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -11240,7 +11240,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_bw(oal_net_device_stru *pst_net_dev, oal_i
         return ul_ret;
     }
 
-    /* 解析要设置为多大的值 */
+    /* ???????????????????? */
     for (en_bw_index = 0; en_bw_index < WLAN_BAND_ASSEMBLE_AUTO; en_bw_index++)
     {
         if(!oal_strcmp(pauc_bw_tbl[en_bw_index], ac_arg))
@@ -11249,7 +11249,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_bw(oal_net_device_stru *pst_net_dev, oal_i
         }
     }
 
-    /* 检查命令是否打错 */
+    /* ???????????????? */
     if (en_bw_index >= WLAN_BAND_ASSEMBLE_AUTO)
     {
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_hipriv_set_bw::not support this bandwidth!}\r\n");
@@ -11270,7 +11270,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_bw(oal_net_device_stru *pst_net_dev, oal_i
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_hipriv_set_bw::return err code [%d]!}\r\n", l_ret);
         return (oal_uint32)l_ret;
     }
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_ret = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_ret)
     {
@@ -11296,14 +11296,14 @@ OAL_STATIC oal_uint32  wal_hipriv_always_tx(oal_net_device_stru *pst_net_dev, oa
     oal_uint32                       ul_len = 2000;
     wal_msg_stru                *pst_rsp_msg = OAL_PTR_NULL;
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_ALWAYS_TX, OAL_SIZEOF(mac_cfg_tx_comp_stru));
 
-    /* 解析并设置配置命令参数 */
+    /* ?????????????????????? */
     pst_set_bcast_param = (mac_cfg_tx_comp_stru *)(st_write_msg.auc_value);
 
-    /* 获取常发模式开关标志 */
+    /* ???????????????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -11312,22 +11312,22 @@ OAL_STATIC oal_uint32  wal_hipriv_always_tx(oal_net_device_stru *pst_net_dev, oa
     }
     en_tx_flag = (oal_uint8)oal_atoi(ac_name);
 
-    /* 暂不支持聚合常发 */
+    /* ???????????????? */
     if (en_tx_flag >= HAL_ALWAYS_TX_AMPDU_ENABLE)
     {
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_hipriv_always_tx::input should be 0 or 1.}\r\n");
         return OAL_ERR_CODE_INVALID_CONFIG;
     }
 
-    /* 关闭的情况下不需要解析后面的参数 */
+    /* ???????????????????????????????? */
     if (HAL_ALWAYS_TX_DISABLE != en_tx_flag)
     {
-        /* ack_policy参数后续扩充 */
+        /* ack_policy???????????? */
 
-        /* 获取payload_flag参数 */
+        /* ????payload_flag???? */
         pc_param = pc_param + ul_off_set;
         ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
-        /* 若后面payload_flag和len参数没有设置，采用默认RF_PAYLOAD_RAND 2000 */
+        /* ??????payload_flag??len??????????????????????RF_PAYLOAD_RAND 2000 */
         if (OAL_SUCC == ul_ret)
         {
             en_payload_flag = (oal_uint8)oal_atoi(ac_name);
@@ -11337,7 +11337,7 @@ OAL_STATIC oal_uint32  wal_hipriv_always_tx(oal_net_device_stru *pst_net_dev, oa
                 return OAL_ERR_CODE_INVALID_CONFIG;
             }
 
-            /* 获取len参数 */
+            /* ????len???? */
             pc_param = pc_param + ul_off_set;
             ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
             if (OAL_SUCC != ul_ret)
@@ -11372,7 +11372,7 @@ OAL_STATIC oal_uint32  wal_hipriv_always_tx(oal_net_device_stru *pst_net_dev, oa
         return (oal_uint32)l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_ret = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_ret)
     {
@@ -11395,11 +11395,11 @@ OAL_STATIC oal_uint32  wal_hipriv_always_tx_num(oal_net_device_stru *pst_net_dev
     oal_int32                        l_ret;
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_ALWAYS_TX_NUM, OAL_SIZEOF(oal_uint32));
 
-    /* 获取参数配置 */
+    /* ???????????? */
     pul_num = (oal_uint32 *)(st_write_msg.auc_value);
 
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
@@ -11438,11 +11438,11 @@ OAL_STATIC oal_uint32  wal_hipriv_always_tx_hw_cfg(oal_net_device_stru *pst_net_
     oal_int8                         ac_name[WAL_HIPRIV_CMD_NAME_MAX_LEN];
     oal_int8                        *pc_end;
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_ALWAYS_TX_HW_CFG, OAL_SIZEOF(mac_cfg_al_tx_hw_cfg_stru));
 
-    /* 解析并设置配置命令参数 */
+    /* ?????????????????????? */
     pst_cfg = (mac_cfg_al_tx_hw_cfg_stru *)(st_write_msg.auc_value);
 
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
@@ -11502,11 +11502,11 @@ OAL_STATIC oal_uint32  wal_hipriv_always_tx_hw(oal_net_device_stru *pst_net_dev,
     oal_int8                         ac_name[WAL_HIPRIV_CMD_NAME_MAX_LEN];
     oal_uint8                        uc_value;
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_ALWAYS_TX_HW, OAL_SIZEOF(mac_cfg_al_tx_hw_stru));
 
-    /* 解析并设置配置命令参数 */
+    /* ?????????????????????? */
     pst_al_hw_tx = (mac_cfg_al_tx_hw_stru *)(st_write_msg.auc_value);
 
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
@@ -11558,7 +11558,7 @@ OAL_STATIC oal_uint32  wal_hipriv_always_tx_hw(oal_net_device_stru *pst_net_dev,
         pc_param += ul_off_set;
         pst_al_hw_tx->ul_times = (oal_uint32)oal_atoi(ac_name);
 
-        /* 获取帧间隔参数 */
+        /* ?????????????? */
         ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
         if (OAL_SUCC != ul_ret)
         {
@@ -11611,14 +11611,14 @@ OAL_STATIC oal_uint32  wal_hipriv_always_tx_51(oal_net_device_stru *pst_net_dev,
 
     //OAL_IO_PRINT("%s\n", __FUNCTION__);
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_ALWAYS_TX_51, OAL_SIZEOF(mac_cfg_tx_comp_stru));
 
-    /* 解析并设置配置命令参数 */
+    /* ?????????????????????? */
     pst_set_bcast_param = (mac_cfg_tx_comp_stru *)(st_write_msg.auc_value);
 
-    /* 获取常发模式开关标志 */
+    /* ???????????????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_arg, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -11636,7 +11636,7 @@ OAL_STATIC oal_uint32  wal_hipriv_always_tx_51(oal_net_device_stru *pst_net_dev,
 
     pst_set_bcast_param->uc_param = en_tx_flag;
 
-    /* 获取ack_policy参数 */
+    /* ????ack_policy???? */
     pc_param = pc_param + ul_off_set;
     ul_ret   = wal_get_cmd_one_arg_etc(pc_param, ac_arg, &ul_off_set);
 
@@ -11663,7 +11663,7 @@ OAL_STATIC oal_uint32  wal_hipriv_always_tx_51(oal_net_device_stru *pst_net_dev,
     }
     pst_set_bcast_param->en_ack_policy = en_ack_policy;
 
-    /* 获取payload_flag参数 */
+    /* ????payload_flag???? */
     pc_param = pc_param + ul_off_set;
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_arg, &ul_off_set);
     if (OAL_SUCC != ul_ret)
@@ -11679,7 +11679,7 @@ OAL_STATIC oal_uint32  wal_hipriv_always_tx_51(oal_net_device_stru *pst_net_dev,
     }
     pst_set_bcast_param->en_payload_flag = en_payload_flag;
 
-    /* 获取len参数 */
+    /* ????len???? */
     pc_param = pc_param + ul_off_set;
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_arg, &ul_off_set);
     if (OAL_SUCC != ul_ret)
@@ -11730,7 +11730,7 @@ OAL_STATIC oal_uint32  wal_hipriv_always_rx(oal_net_device_stru *pst_net_dev, oa
     oal_int32                        l_idx = 0;
     wal_msg_stru                    *pst_rsp_msg = OAL_PTR_NULL;
 
-    /* 获取常收模式开关标志 */
+    /* ???????????????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_arg, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -11738,7 +11738,7 @@ OAL_STATIC oal_uint32  wal_hipriv_always_rx(oal_net_device_stru *pst_net_dev, oa
         return ul_ret;
     }
 
-    /* 输入命令合法性检测 */
+    /* ?????????????????? */
     while ('\0' != ac_arg[l_idx])
     {
         if (isdigit(ac_arg[l_idx]))
@@ -11754,7 +11754,7 @@ OAL_STATIC oal_uint32  wal_hipriv_always_rx(oal_net_device_stru *pst_net_dev, oa
         }
     }
 
-    /* 将命令参数值字符串转化为整数 */
+    /* ???????????????????????????? */
     uc_rx_flag = (oal_uint8)oal_atoi(ac_arg);
 
     if ( uc_rx_flag > HAL_ALWAYS_RX_RESERVED)
@@ -11766,7 +11766,7 @@ OAL_STATIC oal_uint32  wal_hipriv_always_rx(oal_net_device_stru *pst_net_dev, oa
     *(oal_uint8 *)(st_write_msg.auc_value) = uc_rx_flag;
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_ALWAYS_RX, OAL_SIZEOF(oal_uint8));
 
@@ -11782,7 +11782,7 @@ OAL_STATIC oal_uint32  wal_hipriv_always_rx(oal_net_device_stru *pst_net_dev, oa
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_hipriv_always_rx::return err code [%d]!}\r\n", l_ret);
         return (oal_uint32)l_ret;
     }
-        /* 读取返回的错误码 */
+        /* ???????????????? */
     ul_ret = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_ret)
     {
@@ -11806,7 +11806,7 @@ OAL_STATIC oal_uint32  wal_hipriv_always_rx_51(oal_net_device_stru *pst_net_dev,
     oal_int32                        l_idx = 0;
 
     //OAL_IO_PRINT("%s\n", __FUNCTION__);
-    /* 获取常收模式开关标志 */
+    /* ???????????????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_arg, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -11814,7 +11814,7 @@ OAL_STATIC oal_uint32  wal_hipriv_always_rx_51(oal_net_device_stru *pst_net_dev,
         return ul_ret;
     }
 
-    /* 输入命令合法性检测 */
+    /* ?????????????????? */
     while ('\0' != ac_arg[l_idx])
     {
         if (isdigit(ac_arg[l_idx]))
@@ -11830,7 +11830,7 @@ OAL_STATIC oal_uint32  wal_hipriv_always_rx_51(oal_net_device_stru *pst_net_dev,
         }
     }
 
-    /* 将命令参数值字符串转化为整数 */
+    /* ???????????????????????????? */
     uc_rx_flag = (oal_uint8)oal_atoi(ac_arg);
 
     if ( uc_rx_flag > HAL_ALWAYS_RX_RESERVED)
@@ -11842,7 +11842,7 @@ OAL_STATIC oal_uint32  wal_hipriv_always_rx_51(oal_net_device_stru *pst_net_dev,
     *(oal_uint8 *)(st_write_msg.auc_value) = uc_rx_flag;
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_ALWAYS_RX_51, OAL_SIZEOF(oal_uint8));
 
@@ -11878,7 +11878,7 @@ OAL_STATIC oal_uint32  wal_hipriv_pcie_pm_level(oal_net_device_stru *pst_net_dev
     oal_uint32                  ul_off_set;
     mac_cfg_pcie_pm_level_stru     *pst_pcie_pm_level;
 
-    /* 命令格式: hipriv "Hisilicon0 pcie_pm_level level(0/1/2/3/4)" */
+    /* ????????: hipriv "Hisilicon0 pcie_pm_level level(0/1/2/3/4)" */
     pst_pcie_pm_level = (mac_cfg_pcie_pm_level_stru *)st_write_msg.auc_value;
 
     /* ppm */
@@ -11980,7 +11980,7 @@ OAL_STATIC oal_uint32  wal_hipriv_get_cmd_net_dev(oal_int8 *pc_cmd, oal_net_devi
         return ul_ret;
     }
 
-    /* 根据dev_name找到dev */
+    /* ????dev_name????dev */
     pst_net_dev = oal_dev_get_by_name(ac_dev_name);
     if (OAL_PTR_NULL == pst_net_dev)
     {
@@ -11988,7 +11988,7 @@ OAL_STATIC oal_uint32  wal_hipriv_get_cmd_net_dev(oal_int8 *pc_cmd, oal_net_devi
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 调用oal_dev_get_by_name后，必须调用oal_dev_put使net_dev的引用计数减一 */
+    /* ????oal_dev_get_by_name????????????oal_dev_put??net_dev?????????????? */
     oal_dev_put(pst_net_dev);
 
     *ppst_net_dev = pst_net_dev;
@@ -12015,7 +12015,7 @@ OAL_STATIC oal_uint32  wal_hipriv_get_cmd_id(oal_int8 *pc_cmd, wal_hipriv_cmd_en
         return ul_ret;
     }
 
-    /* 根据命令名找到命令枚举 */
+    /* ?????????????????????? */
     ul_ret = wal_hipriv_find_cmd(ac_cmd_name, pst_cmd_id);
     if (OAL_SUCC != ul_ret)
     {
@@ -12046,8 +12046,8 @@ oal_uint32  wal_hipriv_parse_cmd_etc(oal_int8 *pc_cmd)
     }
 
     /***************************************************************************
-        cmd格式约束
-        网络设备名 命令      参数   Hisilicon0 create vap0
+        cmd????????
+        ?????????? ????      ????   Hisilicon0 create vap0
         1~15Byte   1~15Byte
     **************************** ***********************************************/
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1151)
@@ -12068,7 +12068,7 @@ oal_uint32  wal_hipriv_parse_cmd_etc(oal_int8 *pc_cmd)
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_hipriv_get_cmd_id::wal_get_cmd_one_arg_etc return err_code [%d]!}\r\n", ul_ret);
         return ul_ret;
     }
-    /* 对配置vap,操作mib库的命令做非空检查 */
+    /* ??????vap,????mib?????????????????? */
     pst_mac_vap = OAL_NET_DEV_PRIV(pst_net_dev);
     if (OAL_UNLIKELY(OAL_PTR_NULL == pst_mac_vap))
     {
@@ -12111,7 +12111,7 @@ oal_uint32  wal_hipriv_parse_cmd_etc(oal_int8 *pc_cmd)
                 OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_hipriv_parse_cmd_etc::wal_hipriv_get_cmd_net_dev return error code [%d]!}\r\n", ul_ret);
                 return ul_ret;
             }
-                    /* 调用命令对应的函数 */
+                    /* ?????????????????? */
             ul_ret = pst_hipriv_cmd_entry->p_func(pst_net_dev, pc_cmd);
             if (OAL_SUCC != ul_ret)
             {
@@ -12131,7 +12131,7 @@ oal_uint32  wal_hipriv_parse_cmd_etc(oal_int8 *pc_cmd)
 
         pc_cmd += ul_off_set;
 
-        /* 调用命令对应的函数 */
+        /* ?????????????????? */
         ul_ret = pst_hipriv_cmd_entry->p_func(pst_net_dev, pc_cmd);
         if (OAL_SUCC != ul_ret)
         {
@@ -12157,7 +12157,7 @@ oal_uint32  wal_hipriv_parse_cmd_etc(oal_int8 *pc_cmd)
     }
 
     pc_cmd += ul_off_set;
-    /* 调用命令对应的函数 */
+    /* ?????????????????? */
     ul_ret = pst_hipriv_cmd_entry->p_func(pst_net_dev, pc_cmd);
     if (OAL_SUCC != ul_ret)
     {
@@ -12209,7 +12209,7 @@ OAL_STATIC oal_ssize_t  wal_hipriv_sys_write(oal_device_stru *dev, oal_device_at
 }
 
 
-#define SYS_READ_MAX_STRING_LEN (4096-40)   /* 当前命令字符长度20字节内，预留40保证不会超出 */
+#define SYS_READ_MAX_STRING_LEN (4096-40)   /* ????????????????20????????????40???????????? */
 OAL_STATIC oal_ssize_t  wal_hipriv_sys_read(oal_device_stru *dev, oal_device_attribute_stru *attr, char *pc_buffer)
 {
     oal_uint32              ul_cmd_idx;
@@ -12308,7 +12308,7 @@ OAL_STATIC oal_int32  wal_hipriv_proc_write(oal_file_stru *pst_file, const oal_i
 
     ul_ret = oal_copy_from_user((oal_void *)pc_cmd, pc_buffer, ul_len);
 
-    /* copy_from_user函数的目的是从用户空间拷贝数据到内核空间，失败返回没有被拷贝的字节数，成功返回0 */
+    /* copy_from_user??????????????????????????????????????????????????????????????????????????????0 */
     if (ul_ret > 0)
     {
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_hipriv_proc_write::oal_copy_from_user return ul_ret[%d]!}\r\n", ul_ret);
@@ -12320,7 +12320,7 @@ OAL_STATIC oal_int32  wal_hipriv_proc_write(oal_file_stru *pst_file, const oal_i
     pc_cmd[ul_len - 1] = '\0';
 
 #if defined(_PRE_WLAN_FEATURE_EQUIPMENT_TEST) && (_PRE_TEST_MODE_UT != _PRE_TEST_MODE)
-    /*装备测试的vap_info初始化*/
+    /*??????????vap_info??????*/
     ul_ret = wal_hipriv_get_cmd_net_dev(pc_cmd, &pst_net_dev, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -12373,8 +12373,8 @@ oal_uint32  wal_hipriv_create_proc_etc(oal_void *p_proc_arg)
         g_pst_proc_entry = OAL_PTR_NULL;
 #else
 
-    /* 420十进制对应八进制是0644 linux模式定义 S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH); */
-    /* S_IRUSR文件所有者具可读取权限, S_IWUSR文件所有者具可写入权限, S_IRGRP用户组具可读取权限, S_IROTH其他用户具可读取权限 */
+    /* 420??????????????????0644 linux???????? S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH); */
+    /* S_IRUSR??????????????????????, S_IWUSR??????????????????????, S_IRGRP??????????????????, S_IROTH???????????????????? */
     g_pst_proc_entry = oal_create_proc_entry(WAL_HIPRIV_PROC_ENTRY_NAME, 420, NULL);
     if (OAL_PTR_NULL == g_pst_proc_entry)
     {
@@ -12383,7 +12383,7 @@ oal_uint32  wal_hipriv_create_proc_etc(oal_void *p_proc_arg)
     }
 
     g_pst_proc_entry->data  = p_proc_arg;
-    g_pst_proc_entry->nlink = 1;        /* linux创建proc默认值 */
+    g_pst_proc_entry->nlink = 1;        /* linux????proc?????? */
     g_pst_proc_entry->read_proc  = OAL_PTR_NULL;
 
     g_pst_proc_entry->write_proc = (write_proc_t *)wal_hipriv_proc_write;
@@ -12413,7 +12413,7 @@ oal_uint32  wal_hipriv_create_proc_etc(oal_void *p_proc_arg)
 
 oal_uint32  wal_hipriv_remove_proc_etc(void)
 {
-/* 卸载时删除sysfs */
+/* ??????????sysfs */
 
 #ifdef _PRE_CONFIG_CONN_HISI_SYSFS_SUPPORT
     if(NULL != gp_sys_kobject_etc)
@@ -12443,7 +12443,7 @@ OAL_STATIC oal_uint32  wal_hipriv_reg_info(oal_net_device_stru *pst_net_dev, oal
     oal_uint16                      us_len;
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     oal_memcopy(st_write_msg.auc_value, pc_param, OAL_STRLEN(pc_param));
 
@@ -12484,7 +12484,7 @@ OAL_STATIC oal_uint32  wal_hipriv_sdio_flowctrl(oal_net_device_stru *pst_net_dev
     }
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     oal_memcopy(st_write_msg.auc_value, pc_param, OAL_STRLEN(pc_param));
 
@@ -12536,7 +12536,7 @@ OAL_STATIC oal_uint32 wal_hipriv_set_regdomain_pwr(oal_net_device_stru *pst_net_
     }
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_REGDOMAIN_PWR, OAL_SIZEOF(mac_cfg_regdomain_max_pwr_stru));
 
@@ -12564,7 +12564,7 @@ OAL_STATIC oal_uint32  wal_hipriv_dump_all_rx_dscr(oal_net_device_stru *pst_net_
     oal_int32                    l_ret;
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_DUMP_ALL_RX_DSCR, OAL_SIZEOF(oal_int32));
 
@@ -12594,7 +12594,7 @@ OAL_STATIC oal_uint32  wal_hipriv_reg_write(oal_net_device_stru *pst_net_dev, oa
     oal_uint16                      us_len;
 
     /***************************************************************************
-                              抛事件到wal层处理
+                              ????????wal??????
     ***************************************************************************/
     oal_memcopy(st_write_msg.auc_value, pc_param, OAL_STRLEN(pc_param));
 
@@ -12638,7 +12638,7 @@ OAL_STATIC oal_uint32  wal_hipriv_dfs_radartool(oal_net_device_stru *pst_net_dev
     }
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     oal_memcopy(st_write_msg.auc_value, pc_param, OAL_STRLEN(pc_param));
 
@@ -12681,7 +12681,7 @@ oal_uint32  wal_hipriv_alg_cfg_etc(oal_net_device_stru *pst_net_dev, oal_int8 *p
 
     pst_alg_param = (mac_ioctl_alg_param_stru *)(st_write_msg.auc_value);
 
-    /* 获取配置参数名称 */
+    /* ???????????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -12689,7 +12689,7 @@ oal_uint32  wal_hipriv_alg_cfg_etc(oal_net_device_stru *pst_net_dev, oal_int8 *p
          return ul_ret;
     }
 
-    /* 寻找匹配的命令 */
+    /* ?????????????? */
     st_alg_cfg = g_ast_alg_cfg_map_etc[0];
     while(OAL_PTR_NULL != st_alg_cfg.pc_name)
     {
@@ -12702,17 +12702,17 @@ oal_uint32  wal_hipriv_alg_cfg_etc(oal_net_device_stru *pst_net_dev, oal_int8 *p
 
     OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_hipriv_alg_cfg:: alg_cfg command[%d]!}\r\n", st_alg_cfg.en_alg_cfg);
 
-    /* 没有找到对应的命令，则报错 */
+    /* ?????????????????????????? */
     if( OAL_PTR_NULL == st_alg_cfg.pc_name)
     {
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_hipriv_alg_cfg_etc::invalid alg_cfg command!}\r\n");
         return OAL_FAIL;
     }
 
-    /* 记录命令对应的枚举值 */
+    /* ???????????????????? */
     pst_alg_param->en_alg_cfg = g_ast_alg_cfg_map_etc[uc_map_index].en_alg_cfg;
 
-    /* 获取参数配置值 */
+    /* ?????????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param + ul_off_set, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -12720,11 +12720,11 @@ oal_uint32  wal_hipriv_alg_cfg_etc(oal_net_device_stru *pst_net_dev, oal_int8 *p
          return ul_ret;
     }
 
-    /* 记录参数配置值 */
+    /* ?????????????? */
     pst_alg_param->ul_value = (oal_uint32)oal_atoi(ac_name);
 
     /***************************************************************************
-                             抛事件到wal层处理
+                             ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_ALG_PARAM, OAL_SIZEOF(mac_ioctl_alg_param_stru));
 
@@ -12739,7 +12739,7 @@ oal_uint32  wal_hipriv_alg_cfg_etc(oal_net_device_stru *pst_net_dev, oal_int8 *p
     {
         return (oal_uint32)l_ret;
     }
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_ret = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_ret)
     {
@@ -12767,7 +12767,7 @@ OAL_STATIC oal_uint32  wal_hipriv_tpc_log(oal_net_device_stru *pst_net_dev, oal_
 
     pst_alg_tpc_log_param = (mac_ioctl_alg_tpc_log_param_stru *)(st_write_msg.auc_value);
 
-    /* 获取配置参数名称 */
+    /* ???????????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -12776,7 +12776,7 @@ OAL_STATIC oal_uint32  wal_hipriv_tpc_log(oal_net_device_stru *pst_net_dev, oal_
     }
     pc_param = pc_param + ul_off_set;
 
-    /* 寻找匹配的命令 */
+    /* ?????????????? */
     st_alg_cfg = g_ast_alg_cfg_map_etc[0];
     while(OAL_PTR_NULL != st_alg_cfg.pc_name)
     {
@@ -12787,27 +12787,27 @@ OAL_STATIC oal_uint32  wal_hipriv_tpc_log(oal_net_device_stru *pst_net_dev, oal_
         st_alg_cfg = g_ast_alg_cfg_map_etc[++uc_map_index];
     }
 
-    /* 没有找到对应的命令，则报错 */
+    /* ?????????????????????????? */
     if( OAL_PTR_NULL == st_alg_cfg.pc_name)
     {
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_hipriv_tpc_log::invalid alg_cfg command!}\r\n");
         return OAL_FAIL;
     }
 
-    /* 记录命令对应的枚举值 */
+    /* ???????????????????? */
     pst_alg_tpc_log_param->en_alg_cfg = g_ast_alg_cfg_map_etc[uc_map_index].en_alg_cfg;
 
-    /* 区分获取特定帧功率和统计日志命令处理:获取功率只需获取帧名字 */
+    /* ????????????????????????????????????:?????????????????????? */
     if (MAC_ALG_CFG_TPC_GET_FRAME_POW == pst_alg_tpc_log_param->en_alg_cfg)
     {
-        /* 获取配置参数名称 */
+        /* ???????????????? */
         ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
         if (OAL_SUCC != ul_ret)
         {
             OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_hipriv_tpc_log::wal_get_cmd_one_arg_etc return err_code [%d]!}\r\n", ul_ret);
             return ul_ret;
         }
-        /* 记录命令对应的帧名字 */
+        /* ???????????????????? */
         pst_alg_tpc_log_param->pc_frame_name = ac_name;
     }
     else
@@ -12830,7 +12830,7 @@ OAL_STATIC oal_uint32  wal_hipriv_tpc_log(oal_net_device_stru *pst_net_dev, oal_
             ++ pc_param;
         }
 
-        /* 获取业务类型值 */
+        /* ?????????????? */
         if (OAL_TRUE != en_stop_flag)
         {
             ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
@@ -12856,7 +12856,7 @@ OAL_STATIC oal_uint32  wal_hipriv_tpc_log(oal_net_device_stru *pst_net_dev, oal_
 
             if (OAL_TRUE != en_stop_flag)
             {
-                /* 获取参数配置值 */
+                /* ?????????????? */
                 ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
                 if (OAL_SUCC != ul_ret)
                 {
@@ -12864,14 +12864,14 @@ OAL_STATIC oal_uint32  wal_hipriv_tpc_log(oal_net_device_stru *pst_net_dev, oal_
                     return ul_ret;
                 }
 
-                /* 记录参数配置值 */
+                /* ?????????????? */
                 pst_alg_tpc_log_param->us_value = (oal_uint16)oal_atoi(ac_name);
             }
         }
     }
 
     /***************************************************************************
-                             抛事件到wal层处理
+                             ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_ALG_PARAM, OAL_SIZEOF(mac_ioctl_alg_tpc_log_param_stru));
 
@@ -12933,9 +12933,9 @@ OAL_STATIC oal_int32 wal_ioctl_set_auth_mode(oal_net_device_stru *pst_net_dev, o
         return -OAL_EINVAL;
     }
 
-    /* hostapd.conf文件中直接配置为open = 1；shared =2；open and shred= 3
-     ioctl直接传下来，需要参照内核接续方式，解析成open = WLAN_WITP_AUTH_OPEN_SYSTEM
-     shared = WLAN_WITP_AUTH_SHARED_KEY， open and shred = WLAN_WITP_AUTH_AUTOMATIC */
+    /* hostapd.conf????????????????open = 1??shared =2??open and shred= 3
+     ioctl????????????????????????????????????????open = WLAN_WITP_AUTH_OPEN_SYSTEM
+     shared = WLAN_WITP_AUTH_SHARED_KEY?? open and shred = WLAN_WITP_AUTH_AUTOMATIC */
 
     switch(pst_ioctl_data->pri_data.auth_params.auth_alg)
     {
@@ -13002,7 +13002,7 @@ oal_int32 wal_ioctl_set_ssid(oal_net_device_stru *pst_net_dev, oal_net_dev_ioctl
         OAM_ERROR_LOG0(0, OAM_SF_ANY, "{wal_ioctl_set_ssid::OAL_NET_DEV_PRIV(pst_net_dev) is null ptr!}\r\n");
         return -OAL_EINVAL;
     }
-    /* 保证后面的strlen不会溢出 */
+    /* ??????????strlen???????? */
     pst_ioctl_data->pri_data.ssid[OAL_IEEE80211_MAX_SSID_LEN+3] = '\0';
     uc_ssid_temp = (oal_uint8)OAL_STRLEN((oal_int8 *)pst_ioctl_data->pri_data.ssid);
     us_len = OAL_MIN(uc_ssid_temp, OAL_IEEE80211_MAX_SSID_LEN);
@@ -13055,13 +13055,13 @@ oal_int32  wal_ioctl_nl80211_priv_connect(oal_net_device_stru *pst_net_dev, oal_
     mac_conn_param_stru                 st_mac_conn_param;
     oal_int32                           l_ret                   = OAL_SUCC;
 
-    /* 初始化驱动连接参数 */
+    /* ?????????????????? */
     OAL_MEMZERO(&st_mac_conn_param, OAL_SIZEOF(mac_conn_param_stru));
 
-    /* 解析内核下发的 freq to channel_number eg.1,2,36,40...  */
+    /* ?????????????? freq to channel_number eg.1,2,36,40...  */
     st_mac_conn_param.uc_channel    = (oal_uint8)oal_ieee80211_frequency_to_channel(pst_ioctl_data->pri_data.cfg80211_connect_params.l_freq);
 
-    /* 解析内核下发的 ssid */
+    /* ?????????????? ssid */
     st_mac_conn_param.uc_ssid_len   = (oal_uint8)pst_ioctl_data->pri_data.cfg80211_connect_params.ssid_len;
     if(st_mac_conn_param.uc_ssid_len)
     {
@@ -13095,14 +13095,14 @@ oal_int32  wal_ioctl_nl80211_priv_connect(oal_net_device_stru *pst_net_dev, oal_
     {
         OAL_MEMZERO(st_mac_conn_param.auc_bssid, OAL_MAC_ADDR_LEN);
     }
-    /* 解析内核下发的安全相关参数 */
-    /* 认证类型 */
+    /* ?????????????????????????? */
+    /* ???????? */
     st_mac_conn_param.en_auth_type  = pst_ioctl_data->pri_data.cfg80211_connect_params.en_auth_type;
 
-    /* 加密能力 */
+    /* ???????? */
     st_mac_conn_param.en_privacy    = pst_ioctl_data->pri_data.cfg80211_connect_params.en_privacy;
 
-    /* IE下发 */
+    /* IE???? */
     st_mac_conn_param.ul_ie_len     = (oal_uint32)pst_ioctl_data->pri_data.cfg80211_connect_params.ie_len;
     if(st_mac_conn_param.ul_ie_len)
     {
@@ -13124,12 +13124,12 @@ oal_int32  wal_ioctl_nl80211_priv_connect(oal_net_device_stru *pst_net_dev, oal_
         st_mac_conn_param.puc_ie = OAL_PTR_NULL;
     }
 
-    /* 设置加密参数 */
+    /* ???????????? */
     if (0 != pst_ioctl_data->pri_data.cfg80211_connect_params.en_privacy)
     {
         if (0 != pst_ioctl_data->pri_data.cfg80211_connect_params.uc_wep_key_len)
         {
-            /* 设置wep加密信息 */
+            /* ????wep???????? */
             st_mac_conn_param.uc_wep_key_len           = pst_ioctl_data->pri_data.cfg80211_connect_params.uc_wep_key_len;
             st_mac_conn_param.puc_wep_key = OAL_MEM_ALLOC(OAL_MEM_POOL_ID_LOCAL,st_mac_conn_param.uc_wep_key_len,OAL_TRUE);
             if(OAL_PTR_NULL == st_mac_conn_param.puc_wep_key)
@@ -13151,7 +13151,7 @@ oal_int32  wal_ioctl_nl80211_priv_connect(oal_net_device_stru *pst_net_dev, oal_
 
         if (0 != pst_ioctl_data->pri_data.cfg80211_connect_params.st_crypto.n_akm_suites)
         {
-            /* 设置WPA/WPA2 加密信息，关联请求中只发一个套件 */
+            /* ????WPA/WPA2 ???????????????????????????????? */
             st_mac_conn_param.st_crypto.ul_wpa_versions    = pst_ioctl_data->pri_data.cfg80211_connect_params.st_crypto.wpa_versions;
             st_mac_conn_param.st_crypto.ul_group_suite     = MAC_RSN_CHIPER_OUI((oal_uint8)pst_ioctl_data->pri_data.cfg80211_connect_params.st_crypto.cipher_group);
             st_mac_conn_param.st_crypto.aul_pair_suite[0]  = MAC_RSN_CHIPER_OUI((oal_uint8)pst_ioctl_data->pri_data.cfg80211_connect_params.st_crypto.ciphers_pairwise[0]);
@@ -13170,7 +13170,7 @@ oal_int32  wal_ioctl_nl80211_priv_connect(oal_net_device_stru *pst_net_dev, oal_
     }
 
 
-    /* 抛事件给驱动，启动关联 */
+    /* ?????????????????????? */
     l_ret = wal_cfg80211_start_connect_etc(pst_net_dev, &st_mac_conn_param);
     if( OAL_SUCC != l_ret)
     {
@@ -13197,13 +13197,13 @@ oal_int32  wal_ioctl_nl80211_priv_disconnect(oal_net_device_stru *pst_net_dev, o
     mac_vap_stru                    *pst_mac_vap;
 
 
-    /* 解析内核下发的connect参数 */
+    /* ??????????????connect???? */
     oal_memset(&st_mac_cfg_kick_user_param, 0, OAL_SIZEOF(mac_cfg_kick_user_param_stru));
 
-    /* 解析内核下发的去关联原因  */
+    /* ????????????????????????  */
     st_mac_cfg_kick_user_param.us_reason_code = pst_ioctl_data->pri_data.kick_user_params.us_reason_code;
 
-    /* 填写和sta关联的ap mac 地址*/
+    /* ??????sta??????ap mac ????*/
     pst_mac_vap = OAL_NET_DEV_PRIV(pst_net_dev);
     if (OAL_UNLIKELY(OAL_PTR_NULL == pst_mac_vap))
     {
@@ -13271,7 +13271,7 @@ oal_uint32 wal_get_sta_info(oal_net_sta_link_info_stru *pst_all_sta_link_info,oa
         }
     }
     pst_all_sta_link_info->rx_rssi        = (oal_uint8)c_rssi_temp;
-    pst_all_sta_link_info->tx_pwr         = 0;                                         /* 暂时不用实现 */
+    pst_all_sta_link_info->tx_pwr         = 0;                                         /* ???????????? */
     pst_all_sta_link_info->rx_rate        = pst_hmac_user_tmp->ul_rx_rate;
     pst_all_sta_link_info->tx_rate        = pst_hmac_user_tmp->ul_tx_rate;
     pst_all_sta_link_info->rx_minrate     = pst_hmac_user_tmp->ul_rx_rate_min;
@@ -13281,7 +13281,7 @@ oal_uint32 wal_get_sta_info(oal_net_sta_link_info_stru *pst_all_sta_link_info,oa
     pst_all_sta_link_info->tx_frames_rty  = pst_oam_user_stat->ul_tx_ppdu_retries;/* TX retries */
     pst_all_sta_link_info->tx_frames_all  = TID_STAT_TO_USER(pst_oam_user_stat->aul_tx_mpdu_succ_num)+TID_STAT_TO_USER(pst_oam_user_stat->aul_tx_mpdu_in_ampdu);
     pst_all_sta_link_info->tx_frames_fail = TID_STAT_TO_USER(pst_oam_user_stat->aul_tx_mpdu_fail_num)+TID_STAT_TO_USER(pst_oam_user_stat->aul_tx_mpdu_fail_in_ampdu);
-    pst_all_sta_link_info->SNR            = 0;                                             /* 暂时不用实现 */
+    pst_all_sta_link_info->SNR            = 0;                                             /* ???????????? */
     pst_all_sta_link_info->tx_minrate     = pst_hmac_user_tmp->ul_tx_rate_min;
     pst_all_sta_link_info->tx_maxrate     = pst_hmac_user_tmp->ul_tx_rate_max;
 
@@ -13367,7 +13367,7 @@ oal_int32 wal_ioctl_get_car_info(oal_net_device_stru *pst_net_dev, oal_net_dev_i
     oal_uint8                       uc_vap_num = 0;
     oal_uint16                      us_user_index = 0;  // 0-128
     oal_dlist_head_stru            *pst_list_pos;
-    oal_car_user_limit_stru        *pst_car_user_cfg_start; //内核态为用户信息申请的内存，在函数结尾需要copy to user用户态
+    oal_car_user_limit_stru        *pst_car_user_cfg_start; //??????????????????????????????????????????copy to user??????
     oal_car_user_limit_stru        *pst_car_user_cfg;
 
     pst_mac_vap = OAL_NET_DEV_PRIV(pst_net_dev);
@@ -13377,7 +13377,7 @@ oal_int32 wal_ioctl_get_car_info(oal_net_device_stru *pst_net_dev, oal_net_dev_i
         return OAL_EINVAL;
     }
 
-    /* 获取device结构体 */
+    /* ????device?????? */
     pst_mac_dev = mac_res_get_dev_etc(pst_mac_vap->uc_device_id);
     if (OAL_PTR_NULL == pst_mac_dev)
     {
@@ -13392,7 +13392,7 @@ oal_int32 wal_ioctl_get_car_info(oal_net_device_stru *pst_net_dev, oal_net_dev_i
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    //开始赋值
+    //????????
     pst_car_info = &(pst_ioctl_data->pri_data.st_car_info);
 
     OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_CAR, "{wal_ioctl_get_car_info::us_user_buf_max=%d.}", pst_car_info->us_user_buf_max);
@@ -13409,7 +13409,7 @@ oal_int32 wal_ioctl_get_car_info(oal_net_device_stru *pst_net_dev, oal_net_dev_i
         return -OAL_EINVAL;
     }
 
-    //保存原始的vapid
+    //??????????vapid
     pst_car_info->uc_ori_vap_id = pst_mac_vap->uc_vap_id;
 
     //device
@@ -13433,7 +13433,7 @@ oal_int32 wal_ioctl_get_car_info(oal_net_device_stru *pst_net_dev, oal_net_dev_i
     pst_car_info->st_car_device_cfg.ul_car_orgin_mcast_pps_num = pst_hmac_dev->st_car_device_multicast_cfg.ul_car_orgin_multicast_pps_num*1000/pst_hmac_dev->us_car_ctl_cycle_ms;
 
     //vap user
-    /* 遍历device下所有vap */
+    /* ????device??????vap */
     for (uc_vap_index = 0; uc_vap_index <pst_mac_dev->uc_vap_num; uc_vap_index++)
     {
         pst_mac_vap = (mac_vap_stru *)mac_res_get_mac_vap(pst_mac_dev->auc_vap_id[uc_vap_index]);
@@ -13443,7 +13443,7 @@ oal_int32 wal_ioctl_get_car_info(oal_net_device_stru *pst_net_dev, oal_net_dev_i
             continue;
         }
 
-        /* VAP模式判断, 只有ap模式下才有CAR, 其他模式下，不显示CAR信息 */
+        /* VAP????????, ????ap??????????CAR, ??????????????????CAR???? */
         if (WLAN_VAP_MODE_BSS_AP != pst_mac_vap->en_vap_mode)
         {
              OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_CAR, "{wal_ioctl_get_car_info:: CAR only used in AP mode; en_vap_mode=%d.}", pst_mac_vap->en_vap_mode);
@@ -13457,7 +13457,7 @@ oal_int32 wal_ioctl_get_car_info(oal_net_device_stru *pst_net_dev, oal_net_dev_i
             continue;
         }
 
-        //填写vap信息
+        //????vap????
         pst_car_info->ast_car_vap_cfg[uc_vap_num].uc_vap_id = pst_mac_vap->uc_vap_id;
         pst_car_info->ast_car_vap_cfg[uc_vap_num].ast_vap_car_cfg[OAL_CAR_UPLINK].en_car_limit_flag = pst_hmac_vap->st_car_vap_cfg[OAL_CAR_UPLINK].en_car_limit_flag;
         pst_car_info->ast_car_vap_cfg[uc_vap_num].ast_vap_car_cfg[OAL_CAR_UPLINK].ul_car_limit_kbps = pst_hmac_vap->st_car_vap_cfg[OAL_CAR_UPLINK].ul_car_limit_kbps;
@@ -13466,15 +13466,15 @@ oal_int32 wal_ioctl_get_car_info(oal_net_device_stru *pst_net_dev, oal_net_dev_i
 
         uc_vap_num++;
 
-        /* 遍历vap下所有user */
+        /* ????vap??????user */
         WAL_VAP_FOREACH_USER(pst_mac_user, &pst_hmac_vap->st_vap_base_info, pst_list_pos)
         {
-            /* 如果用户尚未关联成功，则不访问私有信息结构体 */
+            /* ???????????????????????????????????????????? */
             if (MAC_USER_STATE_ASSOC != pst_mac_user->en_user_asoc_state)
             {
                 continue;
             }
-            //获取hmac user
+            //????hmac user
             pst_hmac_user = mac_res_get_hmac_user_etc(pst_mac_user->us_assoc_id);
             if (OAL_PTR_NULL == pst_hmac_user)
             {
@@ -13482,16 +13482,16 @@ oal_int32 wal_ioctl_get_car_info(oal_net_device_stru *pst_net_dev, oal_net_dev_i
                 continue;
             }
 
-            //如果user个数超过了上层传下来的user个数，则return
+            //????user??????????????????????user????????return
             if (us_user_index >= pst_car_info->us_user_buf_max)
             {
                 break;
             }
 
-            //获取下一次user的内存
+            //??????????user??????
             pst_car_user_cfg = (oal_car_user_limit_stru *)(pst_car_user_cfg_start + us_user_index);
 
-            //填写user信息
+            //????user????
             pst_car_user_cfg->us_assoc_id = pst_mac_user->us_assoc_id;
             oal_memcopy(pst_car_user_cfg->auc_user_mac_addr, pst_mac_user->auc_user_mac_addr, OAL_MAC_ADDR_LEN);
             pst_car_user_cfg->ast_user_car_cfg[OAL_CAR_UPLINK].en_car_limit_flag = pst_hmac_user->st_car_user_cfg[OAL_CAR_UPLINK].en_car_limit_flag;
@@ -13508,7 +13508,7 @@ oal_int32 wal_ioctl_get_car_info(oal_net_device_stru *pst_net_dev, oal_net_dev_i
 
     pst_car_info->us_user_cnt = us_user_index;
 
-    //将用户信息从内核态拷贝到用户态
+    //??????????????????????????????
     if(OAL_PTR_NULL != pst_car_info->pst_car_user_cfg)
     {
         oal_copy_to_user(pst_car_info->pst_car_user_cfg, pst_car_user_cfg_start, ((oal_uint32)(pst_car_info->us_user_buf_max * OAL_SIZEOF(oal_car_user_limit_stru))));
@@ -13625,14 +13625,14 @@ oal_int32 wal_ioctl_get_all_sta_info(oal_net_device_stru *pst_net_dev, oal_net_d
         return OAL_SUCC;
     }
 
-    /* 获取该vap下的已关联sta数目，依次获取每个sta的统计信息，copy到临时缓冲区中 */
+    /* ??????vap??????????sta??????????????????sta????????????copy?????????????? */
     us_user_num = pst_mac_vap->us_user_nums;
     if (0 == us_user_num)
     {
         return OAL_SUCC;
     }
-    //进程上下文遍历vap的用户链表是不安全的，所以此时如果根据当前记录的用户数申请资源可能在随后的操作中溢出
-    //按照满规格或者上层传下来的参数申请内存资源
+    //??????????????vap????????????????????????????????????????????????????????????????????????????????????
+    //??????????????????????????????????????????
     ul_alloc_cnt = pst_all_sta_link_info_ext_data->buf_cnt;
     if(ul_alloc_cnt > mac_mib_get_MaxAssocUserNums(pst_mac_vap))
     {
@@ -13653,23 +13653,23 @@ oal_int32 wal_ioctl_get_all_sta_info(oal_net_device_stru *pst_net_dev, oal_net_d
         return OAL_FAIL;
     }
 
-    /* step1. 同步要查询的dmac信息 */
+    /* step1. ????????????dmac???? */
     OAL_DLIST_SEARCH_FOR_EACH_SAFE(pst_entry, pst_dlist_tmp, &(pst_mac_vap->st_mac_user_list_head))
     {
         pst_user_tmp = OAL_DLIST_GET_ENTRY(pst_entry, mac_user_stru, st_user_dlist);
         if (OAL_PTR_NULL == pst_dlist_tmp)
         {
-            /* 此for循环线程会暂停，期间会有删除用户事件，会出现pst_dlist_tmp为空。为空时直接跳过获取dmac信息 */
+            /* ??for????????????????????????????????????????????pst_dlist_tmp????????????????????????dmac???? */
             break;
         }
 
         /***********************************************************************/
-        /*                  获取dmac user的RSSI信息                            */
+        /*                  ????dmac user??RSSI????                            */
         /***********************************************************************/
         OAL_MEMZERO(&st_write_msg, OAL_SIZEOF(st_write_msg));
         WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_QUERY_RSSI, OAL_SIZEOF(mac_cfg_query_rssi_stru));
         pst_query_rssi_param = (mac_cfg_query_rssi_stru *)st_write_msg.auc_value;
-        pst_query_rssi_param->us_user_id = pst_user_tmp->us_assoc_id; /* 将用户的id传下去 */
+        pst_query_rssi_param->us_user_id = pst_user_tmp->us_assoc_id; /* ????????id?????? */
 
         pst_hmac_vap->station_info_query_completed_flag = OAL_FALSE;
         l_ret = wal_send_cfg_event_etc(pst_hmac_vap->pst_net_device,
@@ -13686,19 +13686,19 @@ oal_int32 wal_ioctl_get_all_sta_info(oal_net_device_stru *pst_net_dev, oal_net_d
         /*lint -e730*/
         l_ret = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT((pst_hmac_vap->query_wait_q), (OAL_TRUE == pst_hmac_vap->station_info_query_completed_flag), (5*OAL_TIME_HZ));
         /*lint +e730*/
-        if (l_ret <= 0) /* 等待超时或异常 */
+        if (l_ret <= 0) /* ?????????????? */
         {
             OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "wal_ioctl_get_all_sta_info: query rssi timeout. ret:%d", l_ret);
         }
 
         /***********************************************************************/
-        /*                  获取dmac user的速率信息                            */
+        /*                  ????dmac user??????????                            */
         /***********************************************************************/
         OAL_MEMZERO(&st_write_msg, OAL_SIZEOF(st_write_msg));
         WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_QUERY_RATE, OAL_SIZEOF(mac_cfg_query_rate_stru));
         pst_query_rate_param = (mac_cfg_query_rate_stru *)st_write_msg.auc_value;
 
-        pst_query_rate_param->us_user_id = pst_user_tmp->us_assoc_id; /* 将用户的id传下去 */
+        pst_query_rate_param->us_user_id = pst_user_tmp->us_assoc_id; /* ????????id?????? */
         pst_hmac_vap->station_info_query_completed_flag = OAL_FALSE;
         l_ret = wal_send_cfg_event_etc(pst_hmac_vap->pst_net_device,
                                    WAL_MSG_TYPE_WRITE,
@@ -13714,19 +13714,19 @@ oal_int32 wal_ioctl_get_all_sta_info(oal_net_device_stru *pst_net_dev, oal_net_d
         /*lint -e730*/
         l_ret = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT((pst_hmac_vap->query_wait_q), (OAL_TRUE == pst_hmac_vap->station_info_query_completed_flag), (5*OAL_TIME_HZ));
         /*lint +e730*/
-        if (l_ret <= 0) /* 等待超时或异常 */
+        if (l_ret <= 0) /* ?????????????? */
         {
             OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "wal_ioctl_get_all_sta_info: query rate timeout. ret:%d", l_ret);
         }
 
         /***********************************************************************/
-        /*                  获取dmac user的省功耗状态信息信息                            */
+        /*                  ????dmac user????????????????????                            */
         /***********************************************************************/
         OAL_MEMZERO(&st_write_msg, OAL_SIZEOF(st_write_msg));
         WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_QUERY_PSST, OAL_SIZEOF(mac_cfg_query_psst_stru));
         pst_query_psst_param = (mac_cfg_query_psst_stru *)st_write_msg.auc_value;
 
-        pst_query_psst_param->us_user_id = pst_user_tmp->us_assoc_id; /* 将用户的id传下去 */
+        pst_query_psst_param->us_user_id = pst_user_tmp->us_assoc_id; /* ????????id?????? */
 
         pst_hmac_vap->station_info_query_completed_flag = OAL_FALSE;
         l_ret = wal_send_cfg_event_etc(pst_hmac_vap->pst_net_device,
@@ -13743,14 +13743,14 @@ oal_int32 wal_ioctl_get_all_sta_info(oal_net_device_stru *pst_net_dev, oal_net_d
         /*lint -e730*/
         l_ret = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT((pst_hmac_vap->query_wait_q), (OAL_TRUE == pst_hmac_vap->station_info_query_completed_flag), (5*OAL_TIME_HZ));
         /*lint +e730*/
-        if (l_ret <= 0) /* 等待超时或异常 */
+        if (l_ret <= 0) /* ?????????????? */
         {
             OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "wal_ioctl_get_all_sta_info: query rate timeout. ret:%d", l_ret);
         }
 
     }
 
-    /* step2. 构造输出用户信息 */
+    /* step2. ???????????????? */
     pst_oam_stat = OAM_STAT_GET_STAT_ALL();
 
     OAL_DLIST_SEARCH_FOR_EACH_SAFE(pst_entry, pst_dlist_tmp, &(pst_mac_vap->st_mac_user_list_head))
@@ -13796,8 +13796,8 @@ oal_int32 wal_ioctl_get_all_sta_info(oal_net_device_stru *pst_net_dev, oal_net_d
         }
     }
 
-    /* 将获取统计信息填入到ioctl数据中，拷贝到用户空间，
-       将用户个数填入到pri_data.all_sta_link_info.sta_cnt中 */
+    /* ????????????????????ioctl????????????????????????
+       ????????????????pri_data.all_sta_link_info.sta_cnt?? */
     if(OAL_PTR_NULL != pst_all_sta_link_info_ext_data->sta_info)
     {
         oal_copy_to_user(pst_all_sta_link_info_ext_data->sta_info, pst_all_sta_link_info_start, (OAL_SIZEOF(oal_net_sta_link_info_stru)*us_sta_cnt));
@@ -13834,7 +13834,7 @@ oal_int32 wal_ioctl_start_fbt_scan(oal_net_device_stru *pst_net_dev, oal_net_dev
         return -OAL_EINVAL;
     }
 
-    /* 获取ioctl配置参数 */
+    /* ????ioctl???????? */
     us_len = OAL_SIZEOF(oal_hilink_scan_params);
     pst_mac_cfg_fbt_scan_params = (oal_hilink_scan_params *)(st_write_msg.auc_value);
     oal_memcopy(pst_mac_cfg_fbt_scan_params, &(pst_ioctl_data->pri_data.fbt_scan_params), us_len);
@@ -13845,7 +13845,7 @@ oal_int32 wal_ioctl_start_fbt_scan(oal_net_device_stru *pst_net_dev, oal_net_dev
                     pst_mac_cfg_fbt_scan_params->auc_mac[4],
                     pst_mac_cfg_fbt_scan_params->auc_mac[5]);
     /***************************************************************************
-                              抛事件到wal层处理
+                              ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_FBT_START_SCAN, us_len);
 
@@ -13877,11 +13877,11 @@ oal_int32 wal_ioctl_get_sta_11k_ability(oal_net_device_stru *pst_net_dev, oal_ne
     pst_get_sta_11k_ability = (oal_hilink_get_sta_11k_ability*)(st_write_msg.auc_value);
     oal_memcopy(pst_get_sta_11k_ability,&(pst_ioctl_data->pri_data.fbt_get_sta_11k_ability),OAL_SIZEOF(oal_hilink_get_sta_11k_ability));
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, (oal_uint16)WLAN_CFGID_FBT_GET_STA_11K_ABILITY, OAL_SIZEOF(oal_hilink_get_sta_11k_ability));
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                (oal_uint8)WAL_MSG_TYPE_WRITE,
                                (oal_uint16)(WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(oal_hilink_get_sta_11k_ability)),
@@ -13894,7 +13894,7 @@ oal_int32 wal_ioctl_get_sta_11k_ability(oal_net_device_stru *pst_net_dev, oal_ne
         return l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if (OAL_SUCC != ul_err_code)
     {
@@ -13918,11 +13918,11 @@ oal_int32 wal_ioctl_get_sta_11v_ability(oal_net_device_stru *pst_net_dev, oal_ne
     pst_get_sta_11v_ability = (oal_hilink_get_sta_11v_ability*)(st_write_msg.auc_value);
     oal_memcopy(pst_get_sta_11v_ability,&(pst_ioctl_data->pri_data.fbt_get_sta_11v_ability),OAL_SIZEOF(oal_hilink_get_sta_11v_ability));
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, (oal_uint16)WLAN_CFGID_FBT_GET_STA_11V_ABILITY, OAL_SIZEOF(oal_hilink_get_sta_11v_ability));
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                (oal_uint8)WAL_MSG_TYPE_WRITE,
                                (oal_uint16)(WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(oal_hilink_get_sta_11v_ability)),
@@ -13935,7 +13935,7 @@ oal_int32 wal_ioctl_get_sta_11v_ability(oal_net_device_stru *pst_net_dev, oal_ne
         return l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if (OAL_SUCC != ul_err_code)
     {
@@ -13960,11 +13960,11 @@ oal_int32 wal_ioctl_change_to_other_ap(oal_net_device_stru *pst_net_dev, oal_net
     pst_change_sta_to_target_ap = (oal_hilink_change_sta_to_target_ap*)(st_write_msg.auc_value);
     oal_memcopy(pst_change_sta_to_target_ap,&(pst_ioctl_data->pri_data.fbt_change_sta_to_target_ap),OAL_SIZEOF(oal_hilink_change_sta_to_target_ap));
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, (oal_uint16)WLAN_CFGID_FBT_CHANGE_STA_TO_TARGET_AP, OAL_SIZEOF(oal_hilink_change_sta_to_target_ap));
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                (oal_uint8)WAL_MSG_TYPE_WRITE,
                                (oal_uint16)(WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(oal_hilink_change_sta_to_target_ap)),
@@ -13977,7 +13977,7 @@ oal_int32 wal_ioctl_change_to_other_ap(oal_net_device_stru *pst_net_dev, oal_net
         return l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if (OAL_SUCC != ul_err_code)
     {
@@ -14001,11 +14001,11 @@ oal_int32 wal_ioctl_set_sta_bcn_request(oal_net_device_stru *pst_net_dev, oal_ne
     pst_neighbor_bcn_req = (oal_hilink_neighbor_bcn_req*)(st_write_msg.auc_value);
     oal_memcopy(pst_neighbor_bcn_req,&(pst_ioctl_data->pri_data.fbt_11k_sta_neighbor_bcn_req),OAL_SIZEOF(oal_hilink_neighbor_bcn_req));
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, (oal_uint16)WLAN_CFGID_FBT_NEIGHBOR_BCN_REQ, OAL_SIZEOF(oal_hilink_neighbor_bcn_req));
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                (oal_uint8)WAL_MSG_TYPE_WRITE,
                                (oal_uint16)(WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(oal_hilink_neighbor_bcn_req)),
@@ -14018,7 +14018,7 @@ oal_int32 wal_ioctl_set_sta_bcn_request(oal_net_device_stru *pst_net_dev, oal_ne
         return l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if (OAL_SUCC != ul_err_code)
     {
@@ -14043,11 +14043,11 @@ oal_int32 wal_ioctl_get_cur_channel(oal_net_device_stru *pst_net_dev, oal_net_de
     pst_current_channel = (oal_hilink_current_channel*)(st_write_msg.auc_value);
     oal_memcopy(pst_current_channel,&(pst_ioctl_data->pri_data.fbt_get_cur_channel),OAL_SIZEOF(oal_hilink_current_channel));
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, (oal_uint16)WLAN_CFGID_FBT_FET_CURRENT_CHANNEL, OAL_SIZEOF(oal_hilink_current_channel));
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                (oal_uint8)WAL_MSG_TYPE_WRITE,
                                (oal_uint16)(WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(oal_hilink_current_channel)),
@@ -14060,7 +14060,7 @@ oal_int32 wal_ioctl_get_cur_channel(oal_net_device_stru *pst_net_dev, oal_net_de
         return l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_err_code)
     {
@@ -14085,11 +14085,11 @@ oal_int32 wal_ioctl_set_stay_time(oal_net_device_stru *pst_net_dev, oal_net_dev_
     pst_set_scan_time_param = (oal_hilink_set_scan_time_param*)(st_write_msg.auc_value);
     oal_memcopy(pst_set_scan_time_param,&(pst_ioctl_data->pri_data.fbt_set_scan_stay_time),OAL_SIZEOF(oal_hilink_set_scan_time_param));
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, (oal_uint16)WLAN_CFGID_FBT_SET_SCAN_TIME_PARAM, OAL_SIZEOF(oal_hilink_set_scan_time_param));
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                (oal_uint8)WAL_MSG_TYPE_WRITE,
                                (oal_uint16)(WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(oal_hilink_set_scan_time_param)),
@@ -14102,7 +14102,7 @@ oal_int32 wal_ioctl_set_stay_time(oal_net_device_stru *pst_net_dev, oal_net_dev_
         return l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_err_code)
     {
@@ -14128,14 +14128,14 @@ oal_int32  wal_ioctl_nl80211_priv_fbt_kick_user(oal_net_device_stru *pst_net_dev
         return -OAL_EINVAL;
     }
 
-    /* 如果是广播地址,并且rej不为0，直接返回不做处理 */
+    /* ??????????????,????rej????0?????????????????? */
     if ((oal_is_broadcast_ether_addr(pst_ioctl_data->pri_data.fbt_kick_user_params.auc_mac))
     && (OAL_FALSE != pst_ioctl_data->pri_data.fbt_kick_user_params.uc_rej_user))
     {
         return OAL_SUCC;
     }
 
-    /* 解析内核下发的connect参数 */
+    /* ??????????????connect???? */
     oal_memset(&st_mac_cfg_kick_user_param, 0, OAL_SIZEOF(mac_cfg_kick_user_param_stru));
 
     st_mac_cfg_kick_user_param.us_reason_code = pst_ioctl_data->pri_data.fbt_kick_user_params.us_reason_code;
@@ -14178,11 +14178,11 @@ oal_int32 wal_ioctl_set_white_lst_ssidhiden(oal_net_device_stru *pst_net_dev, oa
     pst_white_lst->en_white_list_operate = pst_ioctl_data->pri_data.set_white_lst_ssidhiden_params.en_white_list_operate;
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, (oal_uint16)WLAN_CFGID_SET_WHITE_LIST_SSIDHIDEN, OAL_SIZEOF(oal_hilink_white_node_stru));
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                (oal_uint8)WAL_MSG_TYPE_WRITE,
                                (oal_uint16)(WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(oal_hilink_white_node_stru)),
@@ -14196,7 +14196,7 @@ oal_int32 wal_ioctl_set_white_lst_ssidhiden(oal_net_device_stru *pst_net_dev, oa
         return l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_err_code)
     {
@@ -14318,7 +14318,7 @@ oal_int32 wal_ioctl_set_hiden_blacklist(oal_net_device_stru *pst_net_dev, oal_ie
         return -OAL_EINVAL;
     }
 
-    /* 如果是广播地址,并且rej不为0，直接返回不做处理 */
+    /* ??????????????,????rej????0?????????????????? */
     if ((oal_is_broadcast_ether_addr(pst_action_sta->auc_mac_addr))
         && (IEEE80211_VENDOR_ADD_REJECT_STA == en_operate))
     {
@@ -14397,7 +14397,7 @@ oal_int32 wal_ioctl_get_vap_diag_info(oal_net_device_stru *pst_net_dev, oal_vap_
     }
 
     /***********************************************************************/
-    /*                  获取dmac vap的diag info信息                            */
+    /*                  ????dmac vap??diag info????                            */
     /***********************************************************************/
     OAL_MEMZERO(&st_write_msg, OAL_SIZEOF(st_write_msg));
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_GET_VAP_DIAG_INFO, OAL_SIZEOF(mac_vap_status_diag_info_stru));
@@ -14416,7 +14416,7 @@ oal_int32 wal_ioctl_get_vap_diag_info(oal_net_device_stru *pst_net_dev, oal_vap_
     /*lint -e730*/
     l_ret = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT(pst_hmac_vap->query_wait_q,(OAL_TRUE == pst_hmac_vap->auc_query_flag[QUERY_ID_VAP_DIAG_INFO]), 5*OAL_TIME_HZ);
     /*lint +e730*/
-    if (l_ret <= 0) /* 等待超时或异常 */
+    if (l_ret <= 0) /* ?????????????? */
     {
         OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_HILINK, "wal_ioctl_get_vap_diag_info: query vap diag info timeout. ret:%d", l_ret);
     }
@@ -14425,22 +14425,22 @@ oal_int32 wal_ioctl_get_vap_diag_info(oal_net_device_stru *pst_net_dev, oal_vap_
 
     /* baisc setting */
     oal_memcopy(pst_vap_diag_info->auc_bssid, pst_mac_vap->auc_bssid, WLAN_MAC_ADDR_LEN);  //BSSID
-    pst_vap_diag_info->uc_cur_channel = pst_mac_vap->st_channel.uc_chan_number;           //当前信道
-    pst_vap_diag_info->uc_offset_second_channel = pst_ret_vap_diag_info->uc_offset_second_channel; //备选信道  80M的时候从信道如何表示
-    pst_vap_diag_info->uc_bandwidth = pst_mac_vap->st_channel.en_bandwidth;               //20M:20、40M:40、20/40M:60, 最好使用标准（或者驱动）的约定
+    pst_vap_diag_info->uc_cur_channel = pst_mac_vap->st_channel.uc_chan_number;           //????????
+    pst_vap_diag_info->uc_offset_second_channel = pst_ret_vap_diag_info->uc_offset_second_channel; //????????  80M????????????????????
+    pst_vap_diag_info->uc_bandwidth = pst_mac_vap->st_channel.en_bandwidth;               //20M:20??40M:40??20/40M:60, ??????????????????????????????
     /* dynamic config parameters */
     pst_vap_diag_info->uc_dig = 0;
     pst_vap_diag_info->uc_cca_shreshold= 0;
-    pst_vap_diag_info->uc_channel_usage = pst_ret_vap_diag_info->uc_channel_usage;                                   //占空比：40%对应值40  zhoukedou band steering
-    pst_vap_diag_info->ul_hisi_dig = pst_ret_vap_diag_info->ul_hisi_dig;                                     //接收门限 跟mcs相关 3.11
-    pst_vap_diag_info->auc_hisi_cca_shreshold[0] = pst_ret_vap_diag_info->auc_hisi_cca_shreshold[0];                 //待确认含义   3.10.1
+    pst_vap_diag_info->uc_channel_usage = pst_ret_vap_diag_info->uc_channel_usage;                                   //????????40%??????40  zhoukedou band steering
+    pst_vap_diag_info->ul_hisi_dig = pst_ret_vap_diag_info->ul_hisi_dig;                                     //???????? ??mcs???? 3.11
+    pst_vap_diag_info->auc_hisi_cca_shreshold[0] = pst_ret_vap_diag_info->auc_hisi_cca_shreshold[0];                 //??????????   3.10.1
     pst_vap_diag_info->auc_hisi_cca_shreshold[1] = pst_ret_vap_diag_info->auc_hisi_cca_shreshold[1];
-    pst_vap_diag_info->uc_sta_cnt = (oal_uint8)pst_mac_vap->us_user_nums;                            //终端数量
+    pst_vap_diag_info->uc_sta_cnt = (oal_uint8)pst_mac_vap->us_user_nums;                            //????????
 
     pst_mac_dev = mac_res_get_dev_etc(pst_mac_vap->uc_device_id);
     if (pst_mac_dev != NULL)
     {
-        pst_vap_diag_info->uc_scan_mode = pst_mac_dev->en_curr_scan_state;                //在扫描：1，未扫描：0
+        pst_vap_diag_info->uc_scan_mode = pst_mac_dev->en_curr_scan_state;                //????????1??????????0
     }
     else
     {
@@ -14448,19 +14448,19 @@ oal_int32 wal_ioctl_get_vap_diag_info(oal_net_device_stru *pst_net_dev, oal_vap_
         pst_vap_diag_info->uc_scan_mode = 0;
     }
 
-    pst_vap_diag_info->us_fa = pst_ret_vap_diag_info->us_fa;                                        /* invalid frame - crc err .etc*///1秒内无效帧计数，需要驱动统计 hal_get_rx_err_count
-    pst_vap_diag_info->us_cca = pst_ret_vap_diag_info->us_cca;                                      /* valid frame, can be recongnized*///1秒内有效帧计数,需要驱动统计
+    pst_vap_diag_info->us_fa = pst_ret_vap_diag_info->us_fa;                                        /* invalid frame - crc err .etc*///1???????????????????????????? hal_get_rx_err_count
+    pst_vap_diag_info->us_cca = pst_ret_vap_diag_info->us_cca;                                      /* valid frame, can be recongnized*///1??????????????,????????????
     pst_vap_diag_info->ul_channel_busy = pst_ret_vap_diag_info->ul_channel_busy;
     /* agg setting */
-    pst_vap_diag_info->ul_wait_agg_time = pst_ret_vap_diag_info->ul_wait_agg_time;                  //聚合等待时间（ms)  //todo
+    pst_vap_diag_info->ul_wait_agg_time = pst_ret_vap_diag_info->ul_wait_agg_time;                  //??????????????ms)  //todo
     /* buffer use status */
-    pst_vap_diag_info->ul_skb_remain_buffer = pst_ret_vap_diag_info->ul_skb_remain_buffer;          //skb剩余buff
-    pst_vap_diag_info->ul_vo_remain_count = pst_ret_vap_diag_info->ul_vo_remain_count;              //vo队列剩余buff
-    pst_vap_diag_info->ul_vi_remain_count = pst_ret_vap_diag_info->ul_vi_remain_count;              //WLAN_TID_MPDU_NUM_LIMIT- mac_device_stru->us_total_mpdu_num;  //vi队列剩余buff
-    pst_vap_diag_info->ul_be_remain_count = pst_ret_vap_diag_info->ul_be_remain_count;              //WLAN_TID_MPDU_NUM_LIMIT- mac_device_stru->us_total_mpdu_num;  //be队列剩余buff
-    pst_vap_diag_info->ul_bk_remain_count = pst_ret_vap_diag_info->ul_bk_remain_count;              //WLAN_TID_MPDU_NUM_LIMIT- mac_device_stru->us_total_mpdu_num;   //bk队列剩余buff
+    pst_vap_diag_info->ul_skb_remain_buffer = pst_ret_vap_diag_info->ul_skb_remain_buffer;          //skb????buff
+    pst_vap_diag_info->ul_vo_remain_count = pst_ret_vap_diag_info->ul_vo_remain_count;              //vo????????buff
+    pst_vap_diag_info->ul_vi_remain_count = pst_ret_vap_diag_info->ul_vi_remain_count;              //WLAN_TID_MPDU_NUM_LIMIT- mac_device_stru->us_total_mpdu_num;  //vi????????buff
+    pst_vap_diag_info->ul_be_remain_count = pst_ret_vap_diag_info->ul_be_remain_count;              //WLAN_TID_MPDU_NUM_LIMIT- mac_device_stru->us_total_mpdu_num;  //be????????buff
+    pst_vap_diag_info->ul_bk_remain_count = pst_ret_vap_diag_info->ul_bk_remain_count;              //WLAN_TID_MPDU_NUM_LIMIT- mac_device_stru->us_total_mpdu_num;   //bk????????buff
     /* edca setting  */
-    pst_vap_diag_info->ul_vo_edca = pst_ret_vap_diag_info->ul_vo_edca;                              //1151的寄存器设置值
+    pst_vap_diag_info->ul_vo_edca = pst_ret_vap_diag_info->ul_vo_edca;                              //1151??????????????
     pst_vap_diag_info->ul_vi_edca = pst_ret_vap_diag_info->ul_vi_edca;
     pst_vap_diag_info->ul_be_edca = pst_ret_vap_diag_info->ul_be_edca;
     pst_vap_diag_info->ul_bk_edca = pst_ret_vap_diag_info->ul_bk_edca;                              //hi1151_vap_get_edca_machw_cw  3.9.1
@@ -14481,12 +14481,12 @@ oal_void wal_ioctl_get_user_diag_info(hmac_vap_stru *pst_hmac_vap, mac_user_stru
     mac_sta_status_diag_info_stru       *pst_dmac_sta_diag_info;
 
     /***********************************************************************/
-    /*                  获取dmac user的RSSI信息                            */
+    /*                  ????dmac user??RSSI????                            */
     /***********************************************************************/
     OAL_MEMZERO(&st_write_msg, OAL_SIZEOF(st_write_msg));
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_QUERY_RSSI, OAL_SIZEOF(mac_cfg_query_rssi_stru));
     pst_query_rssi_param = (mac_cfg_query_rssi_stru *)st_write_msg.auc_value;
-    pst_query_rssi_param->us_user_id = pst_user_tmp->us_assoc_id; /* 将用户的id传下去 */
+    pst_query_rssi_param->us_user_id = pst_user_tmp->us_assoc_id; /* ????????id?????? */
 
     pst_hmac_vap->station_info_query_completed_flag = OAL_FALSE;
     l_ret = wal_send_cfg_event_etc(pst_hmac_vap->pst_net_device,
@@ -14503,19 +14503,19 @@ oal_void wal_ioctl_get_user_diag_info(hmac_vap_stru *pst_hmac_vap, mac_user_stru
     /*lint -e730*/
     l_ret = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT(pst_hmac_vap->query_wait_q,(OAL_TRUE == pst_hmac_vap->station_info_query_completed_flag), 5*OAL_TIME_HZ);
     /*lint +e730*/
-    if (l_ret <= 0) /* 等待超时或异常 */
+    if (l_ret <= 0) /* ?????????????? */
     {
         OAM_WARNING_LOG1(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_ANY, "wal_ioctl_get_user_diag_info: query rssi timeout. ret:%d", l_ret);
     }
 
     /***********************************************************************/
-    /*                  获取dmac user的速率信息                            */
+    /*                  ????dmac user??????????                            */
     /***********************************************************************/
     OAL_MEMZERO(&st_write_msg, OAL_SIZEOF(st_write_msg));
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_QUERY_RATE, OAL_SIZEOF(mac_cfg_query_rate_stru));
     pst_query_rate_param = (mac_cfg_query_rate_stru *)st_write_msg.auc_value;
 
-    pst_query_rate_param->us_user_id = pst_user_tmp->us_assoc_id; /* 将用户的id传下去 */
+    pst_query_rate_param->us_user_id = pst_user_tmp->us_assoc_id; /* ????????id?????? */
     pst_hmac_vap->station_info_query_completed_flag = OAL_FALSE;
     l_ret = wal_send_cfg_event_etc(pst_hmac_vap->pst_net_device,
                                WAL_MSG_TYPE_WRITE,
@@ -14531,19 +14531,19 @@ oal_void wal_ioctl_get_user_diag_info(hmac_vap_stru *pst_hmac_vap, mac_user_stru
     /*lint -e730*/
     l_ret = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT(pst_hmac_vap->query_wait_q, (OAL_TRUE == pst_hmac_vap->station_info_query_completed_flag), 5*OAL_TIME_HZ);
     /*lint +e730*/
-    if (l_ret <= 0) /* 等待超时或异常 */
+    if (l_ret <= 0) /* ?????????????? */
     {
         OAM_WARNING_LOG1(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_ANY, "wal_ioctl_get_user_diag_info: query rate timeout. ret:%d", l_ret);
     }
 
     /***********************************************************************/
-    /*                  获取dmac user的省功耗状态信息信息                            */
+    /*                  ????dmac user????????????????????                            */
     /***********************************************************************/
     OAL_MEMZERO(&st_write_msg, OAL_SIZEOF(st_write_msg));
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_QUERY_PSST, OAL_SIZEOF(mac_cfg_query_psst_stru));
     pst_query_psst_param = (mac_cfg_query_psst_stru *)st_write_msg.auc_value;
 
-    pst_query_psst_param->us_user_id = pst_user_tmp->us_assoc_id; /* 将用户的id传下去 */
+    pst_query_psst_param->us_user_id = pst_user_tmp->us_assoc_id; /* ????????id?????? */
 
     pst_hmac_vap->station_info_query_completed_flag = OAL_FALSE;
     l_ret = wal_send_cfg_event_etc(pst_hmac_vap->pst_net_device,
@@ -14560,13 +14560,13 @@ oal_void wal_ioctl_get_user_diag_info(hmac_vap_stru *pst_hmac_vap, mac_user_stru
     /*lint -e730*/
     l_ret = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT(pst_hmac_vap->query_wait_q, (OAL_TRUE == pst_hmac_vap->station_info_query_completed_flag), 5*OAL_TIME_HZ);
     /*lint +e730*/
-    if (l_ret <= 0) /* 等待超时或异常 */
+    if (l_ret <= 0) /* ?????????????? */
     {
         OAM_WARNING_LOG1(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_ANY, "wal_ioctl_get_user_diag_info: query rate timeout. ret:%d", l_ret);
     }
 
     /***********************************************************************/
-    /*                  获取dmac user的diag info信息                            */
+    /*                  ????dmac user??diag info????                            */
     /***********************************************************************/
     OAL_MEMZERO(&st_write_msg, OAL_SIZEOF(st_write_msg));
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_GET_STA_DIAG_INFO, OAL_SIZEOF(mac_sta_status_diag_info_stru));
@@ -14588,7 +14588,7 @@ oal_void wal_ioctl_get_user_diag_info(hmac_vap_stru *pst_hmac_vap, mac_user_stru
     /*lint -e730*/
     l_ret = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT(pst_hmac_vap->query_wait_q,(OAL_TRUE == pst_hmac_vap->auc_query_flag[QUERY_ID_STA_DIAG_INFO]), 5*OAL_TIME_HZ);
     /*lint +e730*/
-    if (l_ret <= 0) /* 等待超时或异常 */
+    if (l_ret <= 0) /* ?????????????? */
     {
         OAM_WARNING_LOG1(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_HILINK, "wal_ioctl_get_all_sta_diag_info: query sta diag info timeout. ret:%d", l_ret);
     }
@@ -14651,8 +14651,8 @@ oal_int32 wal_get_sta_diag_info(mac_vap_stru *pst_mac_vap, oal_sta_status_diag_i
     if ((pst_sta_diag_info->ul_tx_fail < (pst_sta_diag_info->ul_tx_fail + pst_sta_diag_info->ul_tx_pkts)/200)
         || (pst_sta_diag_info->ul_tx_fail == 0))
 
-    {   //发送失败报文数小于发送总数0.5% or 发送失败数量为0
-        pst_sta_diag_info->uc_per = 0;  //误帧率：百分比值，40%为40  发送 报文级别和速率级别
+    {   //??????????????????????????0.5% or ??????????????0
+        pst_sta_diag_info->uc_per = 0;  //??????????????????40%??40  ???? ??????????????????
     }
     else if (pst_sta_diag_info->ul_tx_fail > pst_sta_diag_info->ul_tx_pkts)
     {
@@ -14721,7 +14721,7 @@ oal_int32 wal_ioctl_get_all_sta_diag_info(oal_net_device_stru *pst_net_dev,  oal
         return -OAL_EINVAL;
     }
 
-    /* 获取该vap下的已关联sta数目，依次获取每个sta的统计信息，copy到临时缓冲区中 */
+    /* ??????vap??????????sta??????????????????sta????????????copy?????????????? */
     if (0 == pst_mac_vap->us_user_nums)
     {
         pst_sta_diag_req->ul_sta_cnt = 0;
@@ -14729,17 +14729,17 @@ oal_int32 wal_ioctl_get_all_sta_diag_info(oal_net_device_stru *pst_net_dev,  oal
         return OAL_SUCC;
     }
 
-    /* step2. 构造输出用户信息 */
+    /* step2. ???????????????? */
     pst_oam_stat = OAM_STAT_GET_STAT_ALL();
 
     pst_curr_sta_diag_info = pst_all_sta_diag_info;
-    /* step1. 同步要查询的dmac信息 */
+    /* step1. ????????????dmac???? */
     OAL_DLIST_SEARCH_FOR_EACH_SAFE(pst_entry, pst_dlist_tmp, &(pst_mac_vap->st_mac_user_list_head))
     {
         pst_user_tmp = OAL_DLIST_GET_ENTRY(pst_entry, mac_user_stru, st_user_dlist);
         if (OAL_PTR_NULL == pst_dlist_tmp)
         {
-            /* 此for循环线程会暂停，期间会有删除用户事件，会出现pst_dlist_tmp为空。为空时直接跳过获取dmac信息 */
+            /* ??for????????????????????????????????????????????pst_dlist_tmp????????????????????????dmac???? */
             break;
         }
 
@@ -14766,8 +14766,8 @@ oal_int32 wal_ioctl_get_all_sta_diag_info(oal_net_device_stru *pst_net_dev,  oal
         us_sta_cnt++;
     }
 
-    /* 将获取统计信息填入到ioctl数据中，拷贝到用户空间，
-       将用户个数填入到pri_data.all_sta_link_info.sta_cnt中 */
+    /* ????????????????????ioctl????????????????????????
+       ????????????????pri_data.all_sta_link_info.sta_cnt?? */
     pst_sta_diag_req->ul_sta_cnt = us_sta_cnt;
     pst_sta_diag_req->ul_channel = pst_hmac_vap->st_vap_base_info.st_channel.uc_chan_idx;
     return OAL_SUCC;
@@ -14801,16 +14801,16 @@ oal_int32 wal_ioctl_get_one_sta_diag_info(oal_net_device_stru *pst_net_dev, oal_
         return -OAL_EINVAL;
     }
 
-    /* step2. 构造输出用户信息 */
+    /* step2. ???????????????? */
     pst_oam_stat = OAM_STAT_GET_STAT_ALL();
 
-    /* step1. 同步要查询的dmac信息 */
+    /* step1. ????????????dmac???? */
     OAL_DLIST_SEARCH_FOR_EACH_SAFE(pst_entry, pst_dlist_tmp, &(pst_mac_vap->st_mac_user_list_head))
     {
         pst_user_tmp = OAL_DLIST_GET_ENTRY(pst_entry, mac_user_stru, st_user_dlist);
         if (OAL_PTR_NULL == pst_dlist_tmp)
         {
-            /* 此for循环线程会暂停，期间会有删除用户事件，会出现pst_dlist_tmp为空。为空时直接跳过获取dmac信息 */
+            /* ??for????????????????????????????????????????????pst_dlist_tmp????????????????????????dmac???? */
             break;
         }
 
@@ -14865,7 +14865,7 @@ oal_void wal_ioctl_query_sensing_bssid_info(hmac_vap_stru *pst_hmac_vap)
     wal_msg_write_stru                   st_write_msg;
 
     /***********************************************************************/
-    /*                  获取dmac user的RSSI信息                            */
+    /*                  ????dmac user??RSSI????                            */
     /***********************************************************************/
     OAL_MEMZERO(&st_write_msg, OAL_SIZEOF(st_write_msg));
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_GET_SENSING_BSSID_INFO, OAL_SIZEOF(dmac_query_sensing_bssid_stru));
@@ -14885,7 +14885,7 @@ oal_void wal_ioctl_query_sensing_bssid_info(hmac_vap_stru *pst_hmac_vap)
     /*lint -e730*/
     l_ret = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT(pst_hmac_vap->query_wait_q,(OAL_TRUE == pst_hmac_vap->auc_query_flag[QUERY_ID_SENSING_BSSID_INFO]), 5*OAL_TIME_HZ);
     /*lint +e730*/
-    if (l_ret <= 0) /* 等待超时或异常 */
+    if (l_ret <= 0) /* ?????????????? */
     {
         OAM_WARNING_LOG1(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_ANY, "wal_ioctl_query_sensing_bssid_info: query sensing bssid timeout. ret:%d", l_ret);
     }
@@ -14960,7 +14960,7 @@ oal_int32 wal_ioctl_send_action_frame(oal_net_device_stru *pst_net_dev, oal_ieee
             pst_net_dev, pst_vendor_req);
         return -OAL_EINVAL;
     }
-    /* 获取待发送的帧信息 */
+    /* ?????????????????? */
     ul_ret = oal_copy_from_user(&st_send_frame_msg, pst_vendor_req->param.pst_raw_msg, OAL_SIZEOF(oal_ieee80211req_send_raw_stru));
     if (OAL_SUCC != ul_ret)
     {
@@ -14995,25 +14995,25 @@ oal_int32 wal_ioctl_send_action_frame(oal_net_device_stru *pst_net_dev, oal_ieee
         return -OAL_EINVAL;
     }
 
-    /* 上层传送下来的帧没有填充MAC 三地址，此处进行填充 */
-    /* DA is address of STA addr 由上层传递下来 */
+    /* ????????????????????????MAC ???????????????????? */
+    /* DA is address of STA addr ?????????????? */
     oal_set_mac_addr(puc_send_buff + WLAN_HDR_ADDR1_OFFSET, st_send_frame_msg.auc_mac_addr);
-    /* SA的值为本身的MAC地址 */
+    /* SA????????????MAC???? */
     oal_set_mac_addr(puc_send_buff + WLAN_HDR_ADDR2_OFFSET, mac_mib_get_StationID(pst_mac_vap));
-    /* TA的值为VAP的BSSID */
+    /* TA??????VAP??BSSID */
     oal_set_mac_addr(puc_send_buff + WLAN_HDR_ADDR3_OFFSET, pst_mac_vap->auc_bssid);
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
-    /* 3.1 填写 msg 消息头 */
+    /* 3.1 ???? msg ?????? */
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SEND_ACTION_FRAME, OAL_SIZEOF(oal_ieee80211req_send_raw_stru));
 
-    /* 3.2 填写 msg 消息体 将帧的buff指针替换成内核态指针 */
+    /* 3.2 ???? msg ?????? ??????buff???????????????????? */
     st_send_frame_msg.puc_msg = puc_send_buff;
     oal_memcopy(st_write_msg.auc_value, &st_send_frame_msg, OAL_SIZEOF(oal_ieee80211req_send_raw_stru));
 
-    /* 3.3 发送消息 */
+    /* 3.3 ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                 WAL_MSG_TYPE_WRITE,
                                 WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(oal_ieee80211req_send_raw_stru),
@@ -15033,24 +15033,24 @@ oal_int32 wal_ioctl_send_action_frame(oal_net_device_stru *pst_net_dev, oal_ieee
     /*lint -e730*/
     i_leftime = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT(pst_mgmt_tx->st_wait_queue, OAL_TRUE== pst_mgmt_tx->mgmt_tx_complete,  (oal_uint32)OAL_MSECS_TO_JIFFIES(WAL_MGMT_TX_TIMEOUT_MSEC));
 
-    // 发送完成后释放内存
+    // ??????????????????
     OAL_MEM_FREE(puc_send_buff, OAL_TRUE);
 
     if ( 0 == i_leftime)
     {
-        /* 定时器超时 */
+        /* ?????????? */
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_ioctl_send_action_frame::action tx timeout!}\r\n");
         return OAL_FAIL;
     }
     else if (i_leftime < 0)
     {
-        /* 定时器内部错误 */
+        /* ?????????????? */
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_ioctl_send_action_frame::action tx timer error!}\r\n");
         return OAL_FAIL;
     }
     else
     {
-        /* 正常结束  */
+        /* ????????  */
         OAM_INFO_LOG0(0, OAM_SF_ANY, "{wal_ioctl_send_action_frame::action tx commpleted!}\r\n");
         return (oal_int32)pst_mgmt_tx->mgmt_tx_status;
     }
@@ -15071,7 +15071,7 @@ oal_int32 wal_ioctl_disassoc_sta(oal_net_device_stru *pst_net_dev, oal_ieee80211
         return -OAL_EINVAL;
     }
 
-    /* 1. 获取待发送的帧信息 */
+    /* 1. ?????????????????? */
     pst_disassoc_sta_msg = &(pst_vendor_req->param.st_action_sta);
     if (OAL_PTR_NULL == pst_disassoc_sta_msg)
     {
@@ -15079,13 +15079,13 @@ oal_int32 wal_ioctl_disassoc_sta(oal_net_device_stru *pst_net_dev, oal_ieee80211
         return -OAL_EINVAL;
     }
 
-    /* 2. 解析命令获取MAC */
+    /* 2. ????????????MAC */
     oal_set_mac_addr(auc_mac_addr, pst_disassoc_sta_msg->auc_mac_addr);
 
-    /* 3. 解析去关联STA的reason code */
+    /* 3. ??????????STA??reason code */
     us_reason_code = pst_disassoc_sta_msg->param.us_reason_code;
 
-    /* 4.调用接口去关联STA */
+    /* 4.??????????????STA */
     l_ret = wal_kick_sta(pst_net_dev, auc_mac_addr, us_reason_code);
 
     return l_ret;
@@ -15110,10 +15110,10 @@ oal_int32 wal_ioctl_get_reg_domain(oal_net_device_stru *pst_net_dev, oal_ieee802
         return -OAL_EINVAL;
     }
     /***************************************************************************
-       抛事件到wal层处理  先获取驱动国家码
+       ????????wal??????  ????????????????
     ***************************************************************************/
     st_query_msg.en_wid = WLAN_CFGID_COUNTRY;
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                               WAL_MSG_TYPE_QUERY,
                               WAL_MSG_WID_LENGTH,
@@ -15126,13 +15126,13 @@ oal_int32 wal_ioctl_get_reg_domain(oal_net_device_stru *pst_net_dev, oal_ieee802
         return l_ret;
     }
 
-    /* 处理返回消息 提取国家码 */
+    /* ???????????? ?????????? */
     pst_query_rsp_msg = (wal_msg_rsp_stru *)(pst_rsp_msg->auc_msg_data);
     oal_memcopy(auc_country, pst_query_rsp_msg->auc_value, WLAN_COUNTRY_STR_LEN);
     oal_free(pst_rsp_msg);
 
 #ifdef _PRE_PLAT_FEATURE_CUSTOMIZE
-    /* 根据国家码提取区域码 并转化为hera产品定义的枚举 目前只区分四类区域码 */
+    /* ???????????????????? ????????hera?????????????? ???????????????????? */
     en_regdomain = hwifi_get_regdomain_from_country_code(auc_country, OAL_TRUE);
     switch(en_regdomain)
     {
@@ -15194,27 +15194,27 @@ oal_int32 wal_ioctl_set_mgmt_frame_ie(oal_net_device_stru *pst_net_dev, oal_ieee
     }
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
-    /* 3.1 填写 msg 消息头 */
+    /* 3.1 ???? msg ?????? */
     us_msg_len = OAL_SIZEOF(mac_vap_ie_set_stru) + (oal_uint16)st_set_ie_data.ul_len;
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_MGMT_FRAME_IE, us_msg_len);
 
-    /* 3.2 填写 msg 消息体 */
+    /* 3.2 ???? msg ?????? */
     pst_set_ie_msg = (mac_vap_ie_set_stru *)(st_write_msg.auc_value);
     pst_set_ie_msg->us_ie_content_len = (oal_uint16)st_set_ie_data.ul_len;
     pst_set_ie_msg->en_eid = (oal_uint8)st_set_ie_data.ul_elment_id;
     pst_set_ie_msg->en_set_type = (oal_uint8)st_set_ie_data.ul_type;
     oal_memcopy(pst_set_ie_msg->auc_ie_content, puc_ie_content, st_set_ie_data.ul_len);
 
-    /* 3.3 发送消息 */
+    /* 3.3 ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                 WAL_MSG_TYPE_WRITE,
                                 WAL_MSG_WRITE_MSG_HDR_LENGTH + us_msg_len,
                                 (oal_uint8 *)&st_write_msg,
                                 OAL_FALSE,
                                 OAL_PTR_NULL);
-    /* 释放申请内存 */
+    /* ???????????? */
     OAL_MEM_FREE(puc_ie_content, OAL_TRUE);
     if (OAL_UNLIKELY(OAL_SUCC != l_ret))
     {
@@ -15240,15 +15240,15 @@ oal_int32 wal_ioctl_set_mgmt_frame_cap_info(oal_net_device_stru *pst_net_dev, oa
     pst_set_cap_data = &pst_vendor_req->param.st_cap_info;
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
-    /* 3.1 填写 msg 消息头 */
+    /* 3.1 ???? msg ?????? */
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_MGMT_CAP_INFO, OAL_SIZEOF(oal_ieee80211req_set_cap_stru));
 
-    /* 3.2 填写 msg 消息体 */
+    /* 3.2 ???? msg ?????? */
     oal_memcopy(st_write_msg.auc_value, pst_set_cap_data, OAL_SIZEOF(oal_ieee80211req_set_cap_stru));
 
-    /* 3.3 发送消息 */
+    /* 3.3 ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                 WAL_MSG_TYPE_WRITE,
                                 WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(oal_ieee80211req_set_cap_stru),
@@ -15423,20 +15423,20 @@ oal_int32 wal_ioctl_set_mgmt_frame_ie_test(oal_net_device_stru *pst_net_dev, oal
     puc_ie_content = st_set_ie_data.puc_content;
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
-    /* 3.1 填写 msg 消息头 */
+    /* 3.1 ???? msg ?????? */
     us_msg_len = OAL_SIZEOF(mac_vap_ie_set_stru) + (oal_uint16)st_set_ie_data.ul_len;
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_MGMT_FRAME_IE, us_msg_len);
 
-    /* 3.2 填写 msg 消息体 */
+    /* 3.2 ???? msg ?????? */
     pst_set_ie_msg = (mac_vap_ie_set_stru *)(st_write_msg.auc_value);
     pst_set_ie_msg->us_ie_content_len = (oal_uint16)st_set_ie_data.ul_len;
     pst_set_ie_msg->en_eid = (oal_uint8)st_set_ie_data.ul_elment_id;
     pst_set_ie_msg->en_set_type = (oal_uint8)st_set_ie_data.ul_type;
     oal_memcopy(pst_set_ie_msg->auc_ie_content, puc_ie_content, st_set_ie_data.ul_len);
 
-    /* 3.3 发送消息 */
+    /* 3.3 ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                 WAL_MSG_TYPE_WRITE,
                                 WAL_MSG_WRITE_MSG_HDR_LENGTH + us_msg_len,
@@ -15461,16 +15461,16 @@ oal_int32 wal_ioctl_process_vendor_test_cmd(oal_net_device_stru *pst_net_dev, oa
     oal_uint32  ul_ret = 0;
     oal_uint32  ul_off_set = 0;
     oal_uint8   uc_para_index = 0;
-    oal_int8    *pc_cmd_str = pc_extra;     /* format: [cmd] [mac-addr] *//* 调试命令省略了length字段 */
+    oal_int8    *pc_cmd_str = pc_extra;     /* format: [cmd] [mac-addr] *//* ??????????????length???? */
     oal_int8    ac_name[WAL_HIPRIV_CMD_NAME_MAX_LEN];
     oal_uint8   auc_mac_addr[WLAN_MAC_ADDR_LEN];
     oal_ieee80211_vendor_req_stru   st_vendor_req;
     oal_ieee80211req_action_sta_stru *pst_action_sta = &st_vendor_req.param.st_action_sta;
-    oal_ieee80211req_send_raw_stru  *pst_raw_msg;                   /* 发送action帧 */
-    oal_ieee80211req_set_ie_stru    st_ie_set;                      /* 设置IE信息 format: 13 [eid] [type] [len] [content] */
-    oal_ieee80211req_set_cap_stru   st_cap_info;                    /* 设置capinfo */
+    oal_ieee80211req_send_raw_stru  *pst_raw_msg;                   /* ????action?? */
+    oal_ieee80211req_set_ie_stru    st_ie_set;                      /* ????IE???? format: 13 [eid] [type] [len] [content] */
+    oal_ieee80211req_set_cap_stru   st_cap_info;                    /* ????capinfo */
     oal_iw_point_stru               *pst_param = (oal_iw_point_stru *)p_param;
-    /* 11v bss transition request frame 不含邻居ap列表 */
+    /* 11v bss transition request frame ????????ap???? */
     oal_uint8   auc_action_buff[] = {0xd0,0,0,0,0,0x0,1,2,3,4,5,0x0,1,2,3,4,5,0x0,1,2,3,4,5,0x0,0x0,
                 0x0a,0x07,0x01,0x01,0xff,0xff,0x00};
 
@@ -15478,7 +15478,7 @@ oal_int32 wal_ioctl_process_vendor_test_cmd(oal_net_device_stru *pst_net_dev, oa
     OAL_MEMZERO(&st_vendor_req, sizeof(st_vendor_req));
     // str = '1 ff:ff:ff:ff:ff:ff xxxx"
 
-    /* 获取子命令字 */
+    /* ???????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_cmd_str, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -15617,7 +15617,7 @@ oal_int32 wal_ioctl_process_vendor_test_cmd(oal_net_device_stru *pst_net_dev, oa
             break;
         case IEEE80211_VENDOR_SEND_RAW:
             {
-                /* 获取MAC地址 */
+                /* ????MAC???? */
                 ul_ret = wal_get_cmd_one_arg_etc(pc_cmd_str, ac_name, &ul_off_set);
                 if (OAL_SUCC != ul_ret)
                 {
@@ -15647,7 +15647,7 @@ oal_int32 wal_ioctl_process_vendor_test_cmd(oal_net_device_stru *pst_net_dev, oa
             break;
         case IEEE80211_VENDOR_SET_IE:
             {
-                /* 获取需要设置的IE信息 */
+                /* ??????????????IE???? */
                 ul_ret = wal_get_cmd_one_arg_etc(pc_cmd_str, ac_name, &ul_off_set);
                 if (OAL_SUCC != ul_ret)
                 {
@@ -15672,11 +15672,11 @@ oal_int32 wal_ioctl_process_vendor_test_cmd(oal_net_device_stru *pst_net_dev, oa
                 }
                 st_ie_set.ul_len = oal_atoi(ac_name);         /* LEN */
                 pc_cmd_str += ul_off_set;
-                /* 申请指针 */
+                /* ???????? */
                 st_ie_set.puc_content = (oal_uint8 *)OAL_MEM_ALLOC(OAL_MEM_POOL_ID_LOCAL, st_ie_set.ul_len, OAL_TRUE);
                 if (OAL_PTR_NULL != st_ie_set.puc_content)
                 {
-                    /* 获取content内容 */
+                    /* ????content???? */
                     ul_ret = wal_get_cmd_one_arg_etc(pc_cmd_str, ac_name, &ul_off_set);
                     if (OAL_SUCC != ul_ret)
                     {
@@ -15701,7 +15701,7 @@ oal_int32 wal_ioctl_process_vendor_test_cmd(oal_net_device_stru *pst_net_dev, oa
             break;
         case IEEE80211_VENDOR_SET_CAP_INFO:
             {
-                 /* 获取需要设置的cap信息 */
+                 /* ??????????????cap???? */
                 ul_ret = wal_get_cmd_one_arg_etc(pc_cmd_str, ac_name, &ul_off_set);
                 if (OAL_SUCC != ul_ret)
                 {
@@ -15856,7 +15856,7 @@ oal_int32 wal_ioctl_process_vendor_req_cmd(oal_net_device_stru *pst_net_dev, oal
         return -OAL_ENOMEM;
     }
 
-    /*将用户态数据拷贝到内核态*/
+    /*????????????????????????*/
     ul_ret = oal_copy_from_user(pst_vendor_req, pst_param->pointer, pst_param->length);
     if (ul_ret > 0)
     {
@@ -15951,11 +15951,11 @@ oal_int32 wal_ioctl_get_sta_11h_ability(oal_net_device_stru *pst_net_dev, oal_ne
     *pul_temp = (oal_ulong)(st_write_msg.auc_value);
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, (oal_uint16)WLAN_CFGID_FBT_GET_STA_11H_ABILITY, OAL_SIZEOF(oal_hilink_get_sta_11h_ability) + OAL_SIZEOF(pul_temp));
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                (oal_uint8)WAL_MSG_TYPE_WRITE,
                                (oal_uint16)(WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(oal_hilink_get_sta_11h_ability) + OAL_SIZEOF(pul_temp)),
@@ -15968,7 +15968,7 @@ oal_int32 wal_ioctl_get_sta_11h_ability(oal_net_device_stru *pst_net_dev, oal_ne
         return l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if (OAL_SUCC != ul_err_code)
     {
@@ -15997,11 +15997,11 @@ oal_int32 wal_ioctl_get_sta_11r_ability(oal_net_device_stru *pst_net_dev, oal_ne
     pul_temp  = (oal_ulong*)(pst_get_sta_11r_ability + 1);
     *pul_temp = (oal_ulong)(st_write_msg.auc_value);
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, (oal_uint16)WLAN_CFGID_FBT_GET_STA_11R_ABILITY, OAL_SIZEOF(oal_hilink_get_sta_11r_ability) + OAL_SIZEOF(pul_temp));
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                (oal_uint8)WAL_MSG_TYPE_WRITE,
                                (oal_uint16)(WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(oal_hilink_get_sta_11r_ability) + OAL_SIZEOF(pul_temp)),
@@ -16014,7 +16014,7 @@ oal_int32 wal_ioctl_get_sta_11r_ability(oal_net_device_stru *pst_net_dev, oal_ne
         return l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if (OAL_SUCC != ul_err_code)
     {
@@ -16049,11 +16049,11 @@ oal_int32 wal_ioctl_set_mlme(oal_net_device_stru *pst_net_dev, oal_net_dev_ioctl
     oal_memcopy(pst_mlme_ie->auc_optie, pst_ioctl_data->pri_data.set_mlme.auc_optie, pst_mlme_ie->us_optie_len);
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_MLME, OAL_SIZEOF(oal_mlme_ie_stru));
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(oal_mlme_ie_stru),
@@ -16067,7 +16067,7 @@ oal_int32 wal_ioctl_set_mlme(oal_net_device_stru *pst_net_dev, oal_net_dev_ioctl
         return l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_err_code)
     {
@@ -16130,7 +16130,7 @@ oal_int32 wal_ioctl_set_channel(oal_net_device_stru *pst_net_dev, oal_net_dev_io
     l_channel   = pst_channel->hw_value;
     uc_vht_width = wal_cfg80211_convert_value_to_vht_width(l_bandwidth);
 
-    /* 判断信道在不在管制域内 */
+    /* ?????????????????????? */
     l_ret = (oal_int32)mac_is_channel_num_valid_etc((oal_uint8)pst_channel->band, (oal_uint8)l_channel);
     if (l_ret != OAL_SUCC)
     {
@@ -16138,7 +16138,7 @@ oal_int32 wal_ioctl_set_channel(oal_net_device_stru *pst_net_dev, oal_net_dev_io
         return -OAL_EINVAL;
     }
 
-    /* 进行内核带宽值和WITP 带宽值转换 */
+    /* ????????????????WITP ?????????? */
     if (80 == l_bandwidth || 160 == l_bandwidth)
     {
         en_bandwidth = mac_get_bandwith_from_center_freq_seg0_seg1(uc_vht_width, (oal_uint8)l_channel, (oal_uint8)l_center_freq1, (oal_uint8)l_center_freq2);
@@ -16163,17 +16163,17 @@ oal_int32 wal_ioctl_set_channel(oal_net_device_stru *pst_net_dev, oal_net_dev_io
     }
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
 
-    /* 填写消息 */
+    /* ???????? */
     pst_channel_param = (mac_cfg_channel_param_stru *)(st_write_msg.auc_value);
     pst_channel_param->uc_channel   = (oal_uint8)pst_channel->hw_value;
     pst_channel_param->en_band      = pst_channel->band;
     pst_channel_param->en_bandwidth = en_bandwidth;
 
 #ifdef _PRE_WLAN_FEATURE_DFS
-    /* 如果配置的信道被雷达占用，不可配置 */
+    /* ?????????????????????????????????? */
     ul_err_code = mac_get_channel_idx_from_num_etc(pst_channel_param->en_band, pst_channel_param->uc_channel, &uc_chan_idx);
     if (OAL_ERR_CODE_INVALID_CONFIG != ul_err_code && MAC_CHAN_BLOCK_DUE_TO_RADAR  == pst_device->st_ap_channel_list[uc_chan_idx].en_ch_status)
     {
@@ -16184,7 +16184,7 @@ oal_int32 wal_ioctl_set_channel(oal_net_device_stru *pst_net_dev, oal_net_dev_io
 
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_CFG80211_SET_CHANNEL, OAL_SIZEOF(mac_cfg_channel_param_stru));
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(mac_cfg_channel_param_stru),
@@ -16198,7 +16198,7 @@ oal_int32 wal_ioctl_set_channel(oal_net_device_stru *pst_net_dev, oal_net_dev_io
         return l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_err_code)
     {
@@ -16238,7 +16238,7 @@ static oal_uint32 wal_ioctl_parse_wps_p2p_ie(oal_app_ie_stru *pst_app_ie, oal_ui
 
     while(ul_len_remain > MAC_IE_HDR_LEN)
     {
-        /*MAC_EID_WPS,MAC_EID_P2P ID均为221 */
+        /*MAC_EID_WPS,MAC_EID_P2P ID????221 */
         puc_ie = mac_find_ie_etc(MAC_EID_P2P, puc_buf_remain, (oal_int32)ul_len_remain);
         if(OAL_PTR_NULL != puc_ie)
         {
@@ -16328,7 +16328,7 @@ oal_int32 wal_ioctl_set_wps_p2p_ie_etc(oal_net_device_stru  *pst_net_dev,
     en_type, ul_len, st_app_ie.ul_ie_len);
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     pst_w2h_wps_p2p_ie                 = (oal_w2h_app_ie_stru *)st_write_msg.auc_value;
     pst_w2h_wps_p2p_ie->en_app_ie_type = st_app_ie.en_app_ie_type;
@@ -16337,7 +16337,7 @@ oal_int32 wal_ioctl_set_wps_p2p_ie_etc(oal_net_device_stru  *pst_net_dev,
 
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_WPS_P2P_IE, OAL_SIZEOF(oal_w2h_app_ie_stru));
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(oal_w2h_app_ie_stru),
@@ -16351,7 +16351,7 @@ oal_int32 wal_ioctl_set_wps_p2p_ie_etc(oal_net_device_stru  *pst_net_dev,
         return l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_err_code)
     {
@@ -16371,13 +16371,13 @@ OAL_STATIC oal_int32  wal_ioctl_set_p2p_miracast_status(oal_net_device_stru *pst
     oal_int32                    l_ret;
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_P2P_MIRACAST_STATUS, OAL_SIZEOF(oal_uint8));
 
     st_write_msg.auc_value[0] = uc_param;
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(oal_uint8),
@@ -16405,11 +16405,11 @@ OAL_STATIC oal_int32  wal_ioctl_set_p2p_noa(oal_net_device_stru *pst_net_dev, ma
     oal_memcopy(st_write_msg.auc_value, pst_p2p_noa_param, OAL_SIZEOF(mac_cfg_p2p_noa_param_stru));
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_P2P_PS_NOA, OAL_SIZEOF(mac_cfg_p2p_noa_param_stru));
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(mac_cfg_p2p_noa_param_stru),
@@ -16423,7 +16423,7 @@ OAL_STATIC oal_int32  wal_ioctl_set_p2p_noa(oal_net_device_stru *pst_net_dev, ma
         return l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_err_code)
     {
@@ -16446,11 +16446,11 @@ OAL_STATIC oal_int32  wal_ioctl_set_p2p_ops(oal_net_device_stru *pst_net_dev, ma
     oal_memcopy(st_write_msg.auc_value, pst_p2p_ops_param, OAL_SIZEOF(mac_cfg_p2p_ops_param_stru));
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_P2P_PS_OPS, OAL_SIZEOF(mac_cfg_p2p_ops_param_stru));
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(mac_cfg_p2p_ops_param_stru),
@@ -16464,7 +16464,7 @@ OAL_STATIC oal_int32  wal_ioctl_set_p2p_ops(oal_net_device_stru *pst_net_dev, ma
         return l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_err_code)
     {
@@ -16489,11 +16489,11 @@ OAL_STATIC oal_int32 wal_ioctl_set_qos_map(oal_net_device_stru *pst_net_dev, hma
     oal_memcopy(st_write_msg.auc_value, pst_qos_map_param, OAL_SIZEOF(hmac_cfg_qos_map_param_stru));
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_QOS_MAP, OAL_SIZEOF(hmac_cfg_qos_map_param_stru));
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(hmac_cfg_qos_map_param_stru),
@@ -16506,7 +16506,7 @@ OAL_STATIC oal_int32 wal_ioctl_set_qos_map(oal_net_device_stru *pst_net_dev, hma
         return l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_err_code)
     {
@@ -16541,11 +16541,11 @@ oal_int32 wal_ioctl_set_wps_ie(oal_net_device_stru *pst_net_dev, oal_net_dev_ioc
     oal_memcopy(pst_wps_ie->auc_ie, pst_ioctl_data->pri_data.st_app_ie.auc_ie, pst_wps_ie->ul_ie_len);
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_WPS_IE, OAL_SIZEOF(oal_app_ie_stru));
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(oal_app_ie_stru),
@@ -16559,7 +16559,7 @@ oal_int32 wal_ioctl_set_wps_ie(oal_net_device_stru *pst_net_dev, oal_net_dev_ioc
         return l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_err_code)
     {
@@ -16580,14 +16580,14 @@ oal_int32 wal_ioctl_set_frag(oal_net_device_stru *pst_net_dev, oal_net_dev_ioctl
     oal_uint16                      us_len;
     oal_int32                       l_ret = 0;
 
-    /* 获取分片门限 */
+    /* ???????????? */
     ul_threshold = (oal_uint32)pst_ioctl_data->pri_data.l_frag;
 
     pst_threshold = (mac_cfg_frag_threshold_stru *)(st_write_msg.auc_value);
     pst_threshold->ul_frag_threshold = ul_threshold;
 
     /***************************************************************************
-                              抛事件到wal层处理
+                              ????????wal??????
     ***************************************************************************/
     us_len = OAL_SIZEOF(mac_cfg_frag_threshold_stru);
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_FRAG_THRESHOLD_REG, us_len);
@@ -16617,7 +16617,7 @@ oal_int32 wal_ioctl_set_rts(oal_net_device_stru *pst_net_dev, oal_net_dev_ioctl_
     oal_uint16                      us_len;
     oal_int32                       l_ret = 0;
 
-    /* 获取分片门限 */
+    /* ???????????? */
     ul_threshold = (oal_uint32)pst_ioctl_data->pri_data.l_rts;
 
     pst_threshold = (mac_cfg_rts_threshold_stru *)(st_write_msg.auc_value);
@@ -16625,7 +16625,7 @@ oal_int32 wal_ioctl_set_rts(oal_net_device_stru *pst_net_dev, oal_net_dev_ioctl_
 
     OAM_INFO_LOG1(0, OAM_SF_CFG, "{wal_ioctl_set_rts::rts [%d]!}\r\n", ul_threshold);
     /***************************************************************************
-                              抛事件到wal层处理
+                              ????????wal??????
     ***************************************************************************/
     us_len = OAL_SIZEOF(mac_cfg_rts_threshold_stru);
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_RTS_THRESHHOLD, us_len);
@@ -16662,33 +16662,33 @@ OAL_STATIC oal_int32 wal_ioctl_reduce_sar(oal_net_device_stru *pst_net_dev, oal_
     OAM_WARNING_LOG1(0, OAM_SF_TPC, "wal_ioctl_reduce_sar::supplicant set tx_power[%d] for reduce SAR purpose.\r\n", ul_tx_power);
 
     /***************************************************************************
-        参数10XX代表上层下发的降SAR档位，
-        当前档位需求按照"两个WiFi天线接SAR sensor，
-        并且区分单WiFi工作，WiFi和Modem一起工作"来预留，
-        共需要1001~1020档。
-        场景        档位          条件0        条件1    条件2（RPC）   条件3(Ant是否SAR sensor触发)
-                              是否和主频同传                           Ant1 Ant3
-        Head SAR    档位1001        N           CE卡    receiver on     NA  NA
-                    档位1002        Y           CE卡    receiver on     NA  NA
-                    档位1003        N           FCC卡   receiver on     NA  NA
-                    档位1004        Y           FCC卡   receiver on     NA  NA
+        ????10XX????????????????SAR??????
+        ????????????????"????WiFi??????SAR sensor??
+        ??????????WiFi??????WiFi??Modem????????"????????
+        ??????1001~1020????
+        ????        ????          ????0        ????1    ????2??RPC??   ????3(Ant????SAR sensor????)
+                              ??????????????                           Ant1 Ant3
+        Head SAR    ????1001        N           CE??    receiver on     NA  NA
+                    ????1002        Y           CE??    receiver on     NA  NA
+                    ????1003        N           FCC??   receiver on     NA  NA
+                    ????1004        Y           FCC??   receiver on     NA  NA
         -------------------------------------------------------------------------
-        Body SAR    档位1005        N           CE卡    receiver off    0   0
-                    档位1006        N           CE卡    receiver off    0   1
-                    档位1007        N           CE卡    receiver off    1   0
-                    档位1008        N           CE卡    receiver off    1   1
-                    档位1009        Y           CE卡    receiver off    0   0
-                    档位1010        Y           CE卡    receiver off    0   1
-                    档位1011        Y           CE卡    receiver off    1   0
-                    档位1012        Y           CE卡    receiver off    1   1
-                    档位1013        N           FCC卡   receiver off    0   0
-                    档位1014        N           FCC卡   receiver off    0   1
-                    档位1015        N           FCC卡   receiver off    1   0
-                    档位1016        N           FCC卡   receiver off    1   1
-                    档位1017        Y           FCC卡   receiver off    0   0
-                    档位1018        Y           FCC卡   receiver off    0   1
-                    档位1019        Y           FCC卡   receiver off    1   0
-                    档位1020        Y           FCC卡   receiver off    1   1
+        Body SAR    ????1005        N           CE??    receiver off    0   0
+                    ????1006        N           CE??    receiver off    0   1
+                    ????1007        N           CE??    receiver off    1   0
+                    ????1008        N           CE??    receiver off    1   1
+                    ????1009        Y           CE??    receiver off    0   0
+                    ????1010        Y           CE??    receiver off    0   1
+                    ????1011        Y           CE??    receiver off    1   0
+                    ????1012        Y           CE??    receiver off    1   1
+                    ????1013        N           FCC??   receiver off    0   0
+                    ????1014        N           FCC??   receiver off    0   1
+                    ????1015        N           FCC??   receiver off    1   0
+                    ????1016        N           FCC??   receiver off    1   1
+                    ????1017        Y           FCC??   receiver off    0   0
+                    ????1018        Y           FCC??   receiver off    0   1
+                    ????1019        Y           FCC??   receiver off    1   0
+                    ????1020        Y           FCC??   receiver off    1   1
     ***************************************************************************/
 
     if ((ul_tx_power >= 1001) && (ul_tx_power <= 1020))
@@ -16702,7 +16702,7 @@ OAL_STATIC oal_int32 wal_ioctl_reduce_sar(oal_net_device_stru *pst_net_dev, oal_
         puc_sar_ctrl_params = auc_sar_ctrl_params;
     }
 
-    /* vap未创建时，不处理supplicant命令 */
+    /* vap????????????????supplicant???? */
     if (OAL_PTR_NULL == OAL_NET_DEV_PRIV(pst_net_dev))
     {
         OAM_WARNING_LOG0(0, OAM_SF_CFG, "wal_ioctl_reduce_sar::vap not created yet, ignore the cmd!");
@@ -16710,7 +16710,7 @@ OAL_STATIC oal_int32 wal_ioctl_reduce_sar(oal_net_device_stru *pst_net_dev, oal_
     }
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_REDUCE_SAR, OAL_SIZEOF(oal_uint8)*CUS_NUM_OF_SAR_PARAMS);
     oal_memcopy(st_write_msg.auc_value, puc_sar_ctrl_params, OAL_SIZEOF(oal_uint8)*CUS_NUM_OF_SAR_PARAMS);
@@ -16742,7 +16742,7 @@ OAL_STATIC oal_int32 wal_ioctl_tas_pow_ctrl(oal_net_device_stru *pst_net_dev, oa
 
     if (OAL_FALSE == g_aen_tas_switch_en[uc_coreindex])
     {
-        /* 当前天线不支持TAS切换方案 */
+        /* ??????????????TAS???????? */
         OAM_ERROR_LOG1(0, OAM_SF_ANY, "wal_ioctl_tas_pow_ctrl::core[%d] is not supported!", uc_coreindex);
         return OAL_SUCC;
     }
@@ -16750,7 +16750,7 @@ OAL_STATIC oal_int32 wal_ioctl_tas_pow_ctrl(oal_net_device_stru *pst_net_dev, oa
     st_tas_pow_ctrl_params.en_need_improved = en_needImprove;
     st_tas_pow_ctrl_params.uc_core_idx      = uc_coreindex;
 
-    /* vap未创建时，不处理supplicant命令 */
+    /* vap????????????????supplicant???? */
     if (OAL_PTR_NULL == OAL_NET_DEV_PRIV(pst_net_dev))
     {
         OAM_WARNING_LOG0(0, OAM_SF_CFG, "wal_ioctl_tas_pow_ctrl::vap not created yet, ignore the cmd!");
@@ -16758,7 +16758,7 @@ OAL_STATIC oal_int32 wal_ioctl_tas_pow_ctrl(oal_net_device_stru *pst_net_dev, oa
     }
 
     pst_mac_device = mac_res_get_dev_etc(0);
-    /* 如果非单VAP,则不处理 */
+    /* ????????VAP,???????? */
     if (1 != mac_device_calc_up_vap_num_etc(pst_mac_device))
     {
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "wal_ioctl_tas_pow_ctrl::abort for more than 1 vap");
@@ -16766,7 +16766,7 @@ OAL_STATIC oal_int32 wal_ioctl_tas_pow_ctrl(oal_net_device_stru *pst_net_dev, oa
     }
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_TAS_PWR_CTRL, OAL_SIZEOF(mac_cfg_tas_pwr_ctrl_stru));
     oal_memcopy(st_write_msg.auc_value, &st_tas_pow_ctrl_params, OAL_SIZEOF(mac_cfg_tas_pwr_ctrl_stru));
@@ -16792,7 +16792,7 @@ OAL_STATIC oal_int32 wal_ioctl_tas_pow_ctrl(oal_net_device_stru *pst_net_dev, oa
      oal_int32                   l_ret;
      wal_msg_write_stru          st_write_msg;
 
-     /* vap未创建时，不处理supplicant命令 */
+     /* vap????????????????supplicant???? */
      if (OAL_PTR_NULL == OAL_NET_DEV_PRIV(pst_net_dev))
      {
          OAM_WARNING_LOG0(0, OAM_SF_CFG, "wal_ioctl_tas_rssi_access::vap not created yet, ignore the cmd!");
@@ -16801,13 +16801,13 @@ OAL_STATIC oal_int32 wal_ioctl_tas_pow_ctrl(oal_net_device_stru *pst_net_dev, oa
 
      if (OAL_FALSE == g_aen_tas_switch_en[uc_coreindex])
      {
-         /* 当前天线不支持TAS切换方案 */
+         /* ??????????????TAS???????? */
          OAM_ERROR_LOG1(0, OAM_SF_ANY, "wal_ioctl_tas_rssi_access::core[%d] is not supported!", uc_coreindex);
          return OAL_SUCC;
      }
 
      /***************************************************************************
-                                 抛事件到wal层处理
+                                 ????????wal??????
      ***************************************************************************/
      WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_TAS_RSSI_ACCESS, OAL_SIZEOF(oal_uint8));
      st_write_msg.auc_value[0] = uc_coreindex;
@@ -16845,12 +16845,12 @@ OAL_STATIC oal_uint32 wal_get_parameter_from_cmd(oal_int8 *pc_cmd, oal_int8 *pc_
 
     pc_cmd_copy = pc_cmd;
 
-    /* 去掉字符串开始的逗号 */
+    /* ???????????????????? */
     while (',' == *pc_cmd_copy)
     {
         ++pc_cmd_copy;
     }
-    /* 取得逗号前的字符串 */
+    /* ?????????????????? */
     while ((',' != *pc_cmd_copy) && ('\0' != *pc_cmd_copy))
     {
         ac_cmd_copy[ul_pos] = *pc_cmd_copy;
@@ -16864,7 +16864,7 @@ OAL_STATIC oal_uint32 wal_get_parameter_from_cmd(oal_int8 *pc_cmd, oal_int8 *pc_
         }
     }
     ac_cmd_copy[ul_pos]  = '\0';
-    /* 字符串到结尾，返回错误码 */
+    /* ???????????????????????? */
     if (0 == ul_pos)
     {
         OAM_INFO_LOG0(0, OAM_SF_ANY, "{wal_get_parameter_from_cmd::return param pc_arg is null!}\r\n");
@@ -16872,14 +16872,14 @@ OAL_STATIC oal_uint32 wal_get_parameter_from_cmd(oal_int8 *pc_cmd, oal_int8 *pc_
     }
     *pul_cmd_offset = (oal_uint32)(pc_cmd_copy - pc_cmd);
 
-    /* 检查字符串是否包含期望的前置命令字符*/
+    /* ????????????????????????????????????*/
     if (0 != oal_memcmp(ac_cmd_copy, puc_token, OAL_STRLEN(puc_token)))
     {
         return OAL_FAIL;
     }
     else
     {
-        /* 扣除前置命令字符，回传参数*/
+        /* ??????????????????????????*/
         ul_arg_len = OAL_STRLEN(ac_cmd_copy) - OAL_STRLEN(puc_token);
         oal_memcopy(pc_arg, ac_cmd_copy + OAL_STRLEN(puc_token), ul_arg_len);
         pc_arg[ul_arg_len]  = '\0';
@@ -16919,7 +16919,7 @@ OAL_STATIC oal_int32 wal_set_ap_max_user(oal_net_device_stru *pst_net_dev, oal_u
         return l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_err_code)
     {
@@ -16927,7 +16927,7 @@ OAL_STATIC oal_int32 wal_set_ap_max_user(oal_net_device_stru *pst_net_dev, oal_u
                            ul_err_code);
         return -OAL_EFAIL;
     }
-    /* 每次设置最大用户数完成后，都清空为非法值0 **/
+    /* ????????????????????????????????????????0 **/
     //g_st_ap_config_info.ul_ap_max_user = 0;
 
     return l_ret;
@@ -16959,14 +16959,14 @@ OAL_STATIC oal_int32 wal_config_mac_filter(oal_net_device_stru *pst_net_dev, oal
     }
     pc_parse_command = pc_command;
 
-    /* 解析MAC_MODE*/
+    /* ????MAC_MODE*/
     ul_ret = wal_get_parameter_from_cmd(pc_parse_command, ac_parsed_command, "MAC_MODE=", &ul_off_set, WAL_IOCTL_PRIV_SUBCMD_MAX_LEN);
     if(OAL_SUCC != ul_ret)
     {
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_config_mac_filter::wal_get_parameter_from_cmd return err_code %u.}\r\n", ul_ret);
         return -OAL_EINVAL;
     }
-    /* 检查参数是否合法 0,1,2*/
+    /* ???????????????? 0,1,2*/
     ul_mac_mode = (oal_uint32)oal_atoi(ac_parsed_command);
     if(ul_mac_mode > 2)
     {
@@ -16978,7 +16978,7 @@ OAL_STATIC oal_int32 wal_config_mac_filter(oal_net_device_stru *pst_net_dev, oal
         return -OAL_EINVAL;
     }
 
-    /* 设置过滤模式*/
+    /* ????????????*/
 #if (_PRE_WLAN_FEATURE_BLACKLIST_LEVEL != _PRE_WLAN_FEATURE_BLACKLIST_NONE)
     ul_ret = wal_hipriv_send_cfg_uint32_data_etc(pst_net_dev,ac_parsed_command, WLAN_CFGID_BLACKLIST_MODE);
     if(OAL_SUCC != ul_ret)
@@ -16986,7 +16986,7 @@ OAL_STATIC oal_int32 wal_config_mac_filter(oal_net_device_stru *pst_net_dev, oal
         return (oal_int32)ul_ret;
     }
 #endif
-    /* 解析MAC_CNT*/
+    /* ????MAC_CNT*/
     pc_parse_command += ul_off_set;
     ul_ret = wal_get_parameter_from_cmd(pc_parse_command, ac_parsed_command, "MAC_CNT=", &ul_off_set, WAL_IOCTL_PRIV_SUBCMD_MAX_LEN);
     if(OAL_SUCC != ul_ret)
@@ -17005,26 +17005,26 @@ OAL_STATIC oal_int32 wal_config_mac_filter(oal_net_device_stru *pst_net_dev, oal
             OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_config_mac_filter::wal_get_parameter_from_cmd return err_code [%u]!}\r\n", ul_ret);
             return -OAL_EINVAL;
         }
-        /* 5.1  检查参数是否符合MAC长度*/
+        /* 5.1  ????????????????MAC????*/
         if(WLAN_MAC_ADDR_LEN * 2 != OAL_STRLEN(ac_parsed_command))
         {
             OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_config_mac_filter::invalid MAC format}\r\n");
             return -OAL_EINVAL;
         }
-        /*6. 添加过滤设备*/
+        /*6. ????????????*/
 #if (_PRE_WLAN_FEATURE_BLACKLIST_LEVEL != _PRE_WLAN_FEATURE_BLACKLIST_NONE)
         /***************************************************************************
-                             抛事件到wal层处理
+                             ????????wal??????
         ***************************************************************************/
         OAL_MEMZERO((oal_uint8*)&st_write_msg, OAL_SIZEOF(st_write_msg));
         pst_blklst = (mac_blacklist_stru*)(st_write_msg.auc_value);
-        oal_strtoaddr(ac_parsed_command, pst_blklst->auc_mac_addr); /* 将字符 ac_name 转换成数组 mac_add[6] */
+        oal_strtoaddr(ac_parsed_command, pst_blklst->auc_mac_addr); /* ?????? ac_name ?????????? mac_add[6] */
 
         us_len = OAL_SIZEOF(mac_blacklist_stru);
 
         if(ul_i == (ul_mac_cnt - 1))
         {
-            /* 等所有的mac地址都添加完成后，才进行关联用户确认，是否需要删除 */
+            /* ????????mac?????????????????????????????????????????????????? */
             WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_ADD_BLACK_LIST, us_len);
         }
         else
@@ -17032,7 +17032,7 @@ OAL_STATIC oal_int32 wal_config_mac_filter(oal_net_device_stru *pst_net_dev, oal
             WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_ADD_BLACK_LIST_ONLY, us_len);
         }
 
-        /* 6.1  发送消息*/
+        /* 6.1  ????????*/
         l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                     WAL_MSG_TYPE_WRITE,
                                     WAL_MSG_WRITE_MSG_HDR_LENGTH + us_len,
@@ -17046,7 +17046,7 @@ OAL_STATIC oal_int32 wal_config_mac_filter(oal_net_device_stru *pst_net_dev, oal
             return l_ret;
         }
 
-        /* 6.2  读取返回的错误码 */
+        /* 6.2  ???????????????? */
         ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
         if(OAL_SUCC != ul_err_code)
         {
@@ -17057,7 +17057,7 @@ OAL_STATIC oal_int32 wal_config_mac_filter(oal_net_device_stru *pst_net_dev, oal
 #endif
     }
 
-    /* 每次设置完成mac地址过滤后，清空此中间变量 */
+    /* ????????????mac?????????????????????????? */
     //oal_memset(g_st_ap_config_info.ac_ap_mac_filter_mode, 0 ,OAL_SIZEOF(g_st_ap_config_info.ac_ap_mac_filter_mode));
 
     return OAL_SUCC;
@@ -17104,7 +17104,7 @@ OAL_STATIC oal_int32 wal_kick_sta(oal_net_device_stru *pst_net_dev, oal_uint8 *a
         return l_ret;
     }
 
-    /* 4.4  读取返回的错误码 */
+    /* 4.4  ???????????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_err_code)
     {
@@ -17133,13 +17133,13 @@ OAL_STATIC oal_int32 wal_ioctl_set_ap_config(oal_net_device_stru *pst_net_dev, o
         return -OAL_EFAIL;
     }
 
-    /* 1. 申请内存保存netd 下发的命令和数据 */
+    /* 1. ????????????netd ???????????????? */
     pc_command = oal_memalloc((oal_int32)(pst_wrqu->data.length + 1));
     if (OAL_PTR_NULL == pc_command)
     {
         return -OAL_ENOMEM;
     }
-    /* 2. 拷贝netd 命令到内核态中 */
+    /* 2. ????netd ?????????????? */
     oal_memset(pc_command, 0, (oal_uint32)(pst_wrqu->data.length + 1));
     ul_ret = oal_copy_from_user(pc_command, pst_wrqu->data.pointer , (oal_uint32)(pst_wrqu->data.length));
     if (OAL_SUCC != ul_ret)
@@ -17153,8 +17153,8 @@ OAL_STATIC oal_int32 wal_ioctl_set_ap_config(oal_net_device_stru *pst_net_dev, o
     OAL_IO_PRINT("wal_ioctl_set_ap_config,data len:%u,command is:%s\n", (oal_uint32)pst_wrqu->data.length, pc_command);
 
     pc_parse_command = pc_command;
-    /* 3.   解析参数 */
-    /* 3.1  解析ASCII_CMD*/
+    /* 3.   ???????? */
+    /* 3.1  ????ASCII_CMD*/
     ul_ret = wal_get_parameter_from_cmd(pc_parse_command, ac_parse_command, "ASCII_CMD=", &ul_off_set, WAL_IOCTL_PRIV_SUBCMD_MAX_LEN);
     if(OAL_SUCC != ul_ret)
     {
@@ -17171,7 +17171,7 @@ OAL_STATIC oal_int32 wal_ioctl_set_ap_config(oal_net_device_stru *pst_net_dev, o
         return -OAL_EINVAL;
     }
 
-    /* 3.2  解析CHANNEL，目前不处理netd下发的channel信息*/
+    /* 3.2  ????CHANNEL????????????netd??????channel????*/
     pc_parse_command += ul_off_set;
     ul_ret = wal_get_parameter_from_cmd(pc_parse_command, ac_parse_command, "CHANNEL=", &ul_off_set, WAL_IOCTL_PRIV_SUBCMD_MAX_LEN);
     if(OAL_SUCC != ul_ret)
@@ -17181,7 +17181,7 @@ OAL_STATIC oal_int32 wal_ioctl_set_ap_config(oal_net_device_stru *pst_net_dev, o
         return -OAL_EINVAL;
     }
 
-    /* 3.3  解析MAX_SCB*/
+    /* 3.3  ????MAX_SCB*/
     pc_parse_command += ul_off_set;
     ul_ret = wal_get_parameter_from_cmd(pc_parse_command, ac_parse_command, "MAX_SCB=", &ul_off_set, WAL_IOCTL_PRIV_SUBCMD_MAX_LEN);
     if(OAL_SUCC != ul_ret)
@@ -17198,7 +17198,7 @@ OAL_STATIC oal_int32 wal_ioctl_set_ap_config(oal_net_device_stru *pst_net_dev, o
         l_ret = wal_set_ap_max_user(pst_net_dev, (oal_uint32)oal_atoi(ac_parse_command));
     }
 
-    /* 5. 结束释放内存*/
+    /* 5. ????????????*/
     oal_free(pc_command);
     return l_ret;
 }
@@ -17220,18 +17220,18 @@ OAL_STATIC oal_int32  wal_ioctl_get_assoc_list(oal_net_device_stru *pst_net_dev,
         return -OAL_EFAIL;
     }
 
-    /* 上层在任何时候都可能下发此命令，需要先判断当前netdev的状态并及时返回 */
+    /* ??????????????????????????????????????????????netdev???????????????? */
     if (OAL_UNLIKELY(OAL_PTR_NULL == OAL_NET_DEV_PRIV(pst_net_dev)))
     {
         return -OAL_EFAIL;
     }
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     st_query_msg.en_wid = WLAN_CFGID_GET_STA_LIST;
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_QUERY,
                                WAL_MSG_WID_LENGTH,
@@ -17245,16 +17245,16 @@ OAL_STATIC oal_int32  wal_ioctl_get_assoc_list(oal_net_device_stru *pst_net_dev,
         return l_ret;
     }
 
-    /* 处理返回消息 */
+    /* ???????????? */
     pst_query_rsp_msg = (wal_msg_rsp_stru *)(pst_rsp_msg->auc_msg_data);
-    /* 业务处理 */
+    /* ???????? */
     if(pst_query_rsp_msg->us_len >= OAL_SIZEOF(pst_response_netbuf))
     {
-        /* 获取hmac保存的netbuf指针 */
+        /* ????hmac??????netbuf???? */
         oal_memcopy(&pst_response_netbuf,pst_query_rsp_msg->auc_value,OAL_SIZEOF(pst_response_netbuf));
         if(NULL != pst_response_netbuf)
         {
-            /* 保存ap保存的sta地址信息 */
+            /* ????ap??????sta???????? */
             pc_sta_list = (oal_int8*)OAL_NETBUF_DATA(pst_response_netbuf);
             pst_wrqu->data.length = (oal_uint16)(OAL_NETBUF_LEN(pst_response_netbuf) + 1);
             oal_memcopy(pc_extra, pc_sta_list, pst_wrqu->data.length);
@@ -17303,14 +17303,14 @@ OAL_STATIC oal_int32  wal_ioctl_set_mac_filters(oal_net_device_stru *pst_net_dev
         return -OAL_EFAIL;
     }
 
-    /* 1. 申请内存保存netd 下发的命令和数据 */
+    /* 1. ????????????netd ???????????????? */
     pc_command = oal_memalloc((oal_int32)(pst_wrqu->data.length + 1));
     if (OAL_PTR_NULL == pc_command)
     {
         return -OAL_ENOMEM;
     }
 
-    /* 2. 拷贝netd 命令到内核态中 */
+    /* 2. ????netd ?????????????? */
     oal_memset(pc_command, 0, (oal_uint32)(pst_wrqu->data.length + 1));
     ul_ret = oal_copy_from_user(pc_command, pst_wrqu->data.pointer , (oal_uint32)(pst_wrqu->data.length));
     if (OAL_SUCC != ul_ret)
@@ -17336,7 +17336,7 @@ OAL_STATIC oal_int32  wal_ioctl_set_mac_filters(oal_net_device_stru *pst_net_dev
         return OAL_SUCC;
     }
 
-    /* 3  解析MAC_MODE*/
+    /* 3  ????MAC_MODE*/
     ul_ret = wal_get_parameter_from_cmd(pc_parse_command, ac_parsed_command, "MAC_MODE=", &ul_off_set, WAL_IOCTL_PRIV_SUBCMD_MAX_LEN);
     if(OAL_SUCC != ul_ret)
     {
@@ -17344,7 +17344,7 @@ OAL_STATIC oal_int32  wal_ioctl_set_mac_filters(oal_net_device_stru *pst_net_dev
         oal_free(pc_command);
         return -OAL_EINVAL;
     }
-    /* 3.1 检查参数是否合法 0,1,2*/
+    /* 3.1 ???????????????? 0,1,2*/
     ul_mac_mode = (oal_uint32)oal_atoi(ac_parsed_command);
     if(ul_mac_mode > 2)
     {
@@ -17357,7 +17357,7 @@ OAL_STATIC oal_int32  wal_ioctl_set_mac_filters(oal_net_device_stru *pst_net_dev
         return -OAL_EINVAL;
     }
 
-    /* 5 解析MAC_CNT*/
+    /* 5 ????MAC_CNT*/
     pc_parse_command += ul_off_set;
     ul_ret = wal_get_parameter_from_cmd(pc_parse_command, ac_parsed_command, "MAC_CNT=", &ul_off_set, WAL_IOCTL_PRIV_SUBCMD_MAX_LEN);
     if(OAL_SUCC != ul_ret)
@@ -17370,7 +17370,7 @@ OAL_STATIC oal_int32  wal_ioctl_set_mac_filters(oal_net_device_stru *pst_net_dev
 
     wal_config_mac_filter(pst_net_dev, pc_command);
 
-    /* 如果是白名单模式，且下发允许MAC地址为空，即不允许任何设备关联，需要去关联所有已经关联的STA */
+    /* ????????????????????????????MAC????????????????????????????????????????????????????????STA */
     if((0 == ul_mac_cnt) && (2 == ul_mac_mode))
     {
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_ioctl_set_mac_filters::delete all user!}");
@@ -17400,14 +17400,14 @@ OAL_STATIC oal_int32  wal_ioctl_set_ap_sta_disassoc(oal_net_device_stru *pst_net
         return -OAL_EFAIL;
     }
 
-    /* 1. 申请内存保存netd 下发的命令和数据 */
+    /* 1. ????????????netd ???????????????? */
     pc_command = oal_memalloc((oal_int32)(pst_wrqu->data.length + 1));
     if (OAL_PTR_NULL == pc_command)
     {
         return -OAL_ENOMEM;
     }
 
-    /* 2. 拷贝netd 命令到内核态中 */
+    /* 2. ????netd ?????????????? */
     oal_memset(pc_command, 0, (oal_uint32)(pst_wrqu->data.length + 1));
     ul_ret = oal_copy_from_user(pc_command, pst_wrqu->data.pointer , (oal_uint32)(pst_wrqu->data.length));
     if (OAL_SUCC != ul_ret)
@@ -17420,7 +17420,7 @@ OAL_STATIC oal_int32  wal_ioctl_set_ap_sta_disassoc(oal_net_device_stru *pst_net
 
     OAL_IO_PRINT("wal_ioctl_set_ap_sta_disassoc,command is:%s\n", pc_command);
 
-    /* 3. 解析命令获取MAC */
+    /* 3. ????????????MAC */
     ul_ret = wal_get_parameter_from_cmd(pc_command, ac_parsed_command, "MAC=", &ul_off_set, WAL_IOCTL_PRIV_SUBCMD_MAX_LEN);
     if(OAL_SUCC != ul_ret)
     {
@@ -17428,19 +17428,19 @@ OAL_STATIC oal_int32  wal_ioctl_set_ap_sta_disassoc(oal_net_device_stru *pst_net
         oal_free(pc_command);
         return -OAL_EINVAL;
     }
-    /* 3.1  检查参数是否符合MAC长度*/
+    /* 3.1  ????????????????MAC????*/
     if(WLAN_MAC_ADDR_LEN * 2 != OAL_STRLEN(ac_parsed_command))
     {
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_ioctl_set_ap_sta_disassoc::invalid MAC format}\r\n");
         oal_free(pc_command);
         return -OAL_EINVAL;
     }
-    oal_strtoaddr(ac_parsed_command, auc_mac_addr); /* 将字符 ac_name 转换成数组 mac_add[6] */
+    oal_strtoaddr(ac_parsed_command, auc_mac_addr); /* ?????? ac_name ?????????? mac_add[6] */
 
     OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_ioctl_set_ap_sta_disassoc::Geting CMD from APP to DISASSOC!!}");
     l_ret = wal_kick_sta(pst_net_dev, auc_mac_addr, MAC_AUTH_NOT_VALID);
 
-    /* 5. 结束释放内存*/
+    /* 5. ????????????*/
     oal_free(pc_command);
     return l_ret;
 
@@ -17465,10 +17465,10 @@ OAL_STATIC oal_void  wal_event_report_to_sdt(wal_msg_type_enum_uint8   en_msg_ty
         en_event_type = OAM_EVENT_WID_WRITE;
     }
 
-    /* 复制WID,参数的前两个字节是WID */
+    /* ????WID,??????????????????WID */
     oal_memcopy((oal_void *)auc_event, (const oal_void *)puc_param, OAL_SIZEOF(oal_uint16));
 
-    /* 复制消息头 */
+    /* ?????????? */
     oal_memcopy((oal_void *)&auc_event[2], (const oal_void *)&(pst_cfg_msg->st_msg_hdr), OAL_SIZEOF(wal_msg_hdr_stru));
 
     WAL_EVENT_WID(BROADCAST_MACADDR, 0, en_event_type, auc_event);
@@ -17483,7 +17483,7 @@ oal_uint32  wal_hipriv_get_mac_addr_etc(oal_int8 *pc_param, oal_uint8 auc_mac_ad
     oal_uint32                      ul_ret          = OAL_SUCC;
     oal_int8                        ac_name[WAL_HIPRIV_CMD_NAME_MAX_LEN];
 
-    /* 获取mac地址 */
+    /* ????mac???? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -17512,7 +17512,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_edca_opt_switch_sta(oal_net_device_stru *p
 
     // sh hipriv.sh "vap0 set_edca_switch_sta 1/0"
 
-    /* 获取mac_vap */
+    /* ????mac_vap */
     pst_mac_vap = OAL_NET_DEV_PRIV(pst_net_dev);
     if (WLAN_VAP_MODE_BSS_STA != pst_mac_vap->en_vap_mode)
     {
@@ -17520,7 +17520,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_edca_opt_switch_sta(oal_net_device_stru *p
        return OAL_FAIL;
     }
 
-    /* 获取配置参数 */
+    /* ???????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -17530,20 +17530,20 @@ OAL_STATIC oal_uint32  wal_hipriv_set_edca_opt_switch_sta(oal_net_device_stru *p
 
     uc_flag = (oal_uint8)oal_atoi(ac_name);
 
-    /* 非法配置参数 */
+    /* ???????????? */
     if (uc_flag > 1)
     {
         OAM_WARNING_LOG0(0, OAM_SF_EDCA, "wal_hipriv_set_edca_opt_switch_sta, invalid config, should be 0 or 1");
         return OAL_SUCC;
     }
 
-    /* 申请事件内存 */
+    /* ???????????? */
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_EDCA_OPT_SWITCH_STA, OAL_SIZEOF(oal_uint8));
     puc_value = (oal_uint8 *)(st_write_msg.auc_value);
     *puc_value = uc_flag;
 
     /***************************************************************************
-                             抛事件到wal层处理
+                             ????????wal??????
     ***************************************************************************/
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
@@ -17575,7 +17575,7 @@ oal_uint32  wal_hipriv_send_cfg_uint32_data_etc(oal_net_device_stru *pst_net_dev
     oal_uint32                      set_value = 0;
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     OAL_MEMZERO(&st_write_msg,OAL_SIZEOF(wal_msg_write_stru));
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
@@ -17627,11 +17627,11 @@ OAL_STATIC oal_uint32  wal_hipriv_bgscan_enable(oal_net_device_stru *pst_net_dev
     }
 
     /***************************************************************************
-                            抛事件到wal层处理
+                            ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFIGD_BGSCAN_ENABLE, OAL_SIZEOF(oal_bool_enum_uint8));
 
-    /* 设置配置命令参数 */
+    /* ???????????????? */
     pen_bgscan_enable_flag = (oal_uint8 *)(st_write_msg.auc_value);
    *pen_bgscan_enable_flag = (oal_uint8)oal_atoi(ac_stop);
 
@@ -17671,11 +17671,11 @@ OAL_STATIC oal_uint32  wal_hipriv_dhcp_req_disable_switch(oal_net_device_stru *p
     }
 
     /***************************************************************************
-                            抛事件到wal层处理
+                            ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_DHCP_REQ_DISABLE_SWITCH, OAL_SIZEOF(oal_bool_enum_uint8));
 
-    /* 设置配置命令参数 */
+    /* ???????????????? */
     pen_dhcp_req_disable_flag = (oal_bool_enum_uint8 *)(st_write_msg.auc_value);
    *pen_dhcp_req_disable_flag = (oal_bool_enum_uint8)oal_atoi(ac_stop);
 
@@ -17719,11 +17719,11 @@ OAL_STATIC oal_uint32  wal_hipriv_sta_ps_mode(oal_net_device_stru *pst_cfg_net_d
     pc_param = pc_param + ul_off_set;
 
     /***************************************************************************
-                             抛事件到wal层处理
+                             ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_PS_MODE, OAL_SIZEOF(mac_cfg_ps_mode_param_stru));
 
-    /* 设置配置命令参数 */
+    /* ???????????????? */
     pst_ps_mode_param = (mac_cfg_ps_mode_param_stru *)(st_write_msg.auc_value);
     pst_ps_mode_param->uc_vap_ps_mode   = uc_vap_ps_mode;
 
@@ -17777,11 +17777,11 @@ OAL_STATIC oal_uint32  wal_hipriv_sta_ps_info(oal_net_device_stru *pst_cfg_net_d
     pc_param = pc_param + ul_off_set;
 
     /***************************************************************************
-                             抛事件到wal层处理
+                             ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SHOW_PS_INFO, OAL_SIZEOF(mac_cfg_ps_info_stru));
 
-    /* 设置配置命令参数 */
+    /* ???????????????? */
     pst_ps_info = (mac_cfg_ps_info_stru *)(st_write_msg.auc_value);
     pst_ps_info->uc_psm_info_enable   = uc_psm_info_enable;
     pst_ps_info->uc_psm_debug_mode    = uc_psm_debug_mode;
@@ -17839,18 +17839,18 @@ OAL_STATIC oal_uint32  wal_hipriv_set_uapsd_para(oal_net_device_stru *pst_cfg_ne
              return ul_ret;
         }
 
-        /* delivery_enabled的参数设置 */
+        /* delivery_enabled?????????? */
         uc_delivery_enabled[uc_ac] = (oal_uint8)oal_atoi(ac_name);
 
-        /* trigger_enabled 参数的设置 */
+        /* trigger_enabled ?????????? */
         uc_trigger_enabled[uc_ac] = (oal_uint8)oal_atoi(ac_name);
     }
     /***************************************************************************
-                             抛事件到wal层处理
+                             ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_UAPSD_PARA, OAL_SIZEOF(mac_cfg_uapsd_sta_stru));
 
-    /* 设置配置命令参数 */
+    /* ???????????????? */
     pst_uapsd_param = (mac_cfg_uapsd_sta_stru *)(st_write_msg.auc_value);
     pst_uapsd_param->uc_max_sp_len   = uc_max_sp_len;
     for (uc_ac = 0; uc_ac < WLAN_WME_AC_BUTT; uc_ac++)
@@ -17898,9 +17898,9 @@ oal_int32 wal_start_vap_etc(oal_net_device_stru *pst_net_dev)
     OAL_IO_PRINT("wal_start_vap_etc,dev_name is:%s\n", pst_net_dev->name);
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
-    /* 填写消息 */
+    /* ???????? */
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_START_VAP, OAL_SIZEOF(mac_cfg_start_vap_param_stru));
     ((mac_cfg_start_vap_param_stru *)st_write_msg.auc_value)->pst_net_dev = pst_net_dev;
 #ifdef _PRE_WLAN_FEATURE_P2P
@@ -17917,7 +17917,7 @@ oal_int32 wal_start_vap_etc(oal_net_device_stru *pst_net_dev)
 #endif
     ((mac_cfg_start_vap_param_stru *)st_write_msg.auc_value)->en_mgmt_rate_init_flag = OAL_TRUE;
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(mac_cfg_start_vap_param_stru),
@@ -17931,7 +17931,7 @@ oal_int32 wal_start_vap_etc(oal_net_device_stru *pst_net_dev)
         return l_ret;
     }
 
-    /* 处理返回消息 */
+    /* ???????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_err_code)
     {
@@ -17945,8 +17945,8 @@ oal_int32 wal_start_vap_etc(oal_net_device_stru *pst_net_dev)
         OAL_NETDEVICE_FLAGS(pst_net_dev) |= OAL_IFF_RUNNING;
     }
 
-    /* AP模式,启动VAP后,启动发送队列 */
-    oal_net_tx_wake_all_queues(pst_net_dev);/*启动发送队列 */
+    /* AP????,????VAP??,???????????? */
+    oal_net_tx_wake_all_queues(pst_net_dev);/*???????????? */
 
     return OAL_SUCC;
 }
@@ -17976,9 +17976,9 @@ oal_int32  wal_stop_vap_etc(oal_net_device_stru *pst_net_dev)
     OAL_IO_PRINT("wal_stop_vap_etc,dev_name is:%s\n", pst_net_dev->name);
 
     /***************************************************************************
-                           抛事件到wal层处理
+                           ????????wal??????
     ***************************************************************************/
-    /* 填写WID消息 */
+    /* ????WID???? */
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_DOWN_VAP, OAL_SIZEOF(mac_cfg_down_vap_param_stru));
     ((mac_cfg_down_vap_param_stru *)st_write_msg.auc_value)->pst_net_dev = pst_net_dev;
 #ifdef _PRE_WLAN_FEATURE_P2P
@@ -17994,7 +17994,7 @@ oal_int32  wal_stop_vap_etc(oal_net_device_stru *pst_net_dev)
     OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_stop_vap_etc::en_p2p_mode:%d}\r\n", en_p2p_mode);
 #endif
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(mac_cfg_down_vap_param_stru),
@@ -18052,7 +18052,7 @@ oal_int32 wal_init_wlan_vap_etc(oal_net_device_stru *pst_net_dev)
             OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_init_wlan_vap_etc::pst_mac_vap is already exist}\r\n");
             return OAL_SUCC;
         }
-        /* netdev下的vap已经被删除，需要重新创建和挂载 */
+        /* netdev????vap?????????????????????????????? */
         OAM_WARNING_LOG0(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{wal_init_wlan_vap_etc::pst_mac_vap is already free, need creat again!!}");
         OAL_NET_DEV_PRIV(pst_net_dev) = OAL_PTR_NULL;
     }
@@ -18072,7 +18072,7 @@ oal_int32 wal_init_wlan_vap_etc(oal_net_device_stru *pst_net_dev)
         return -OAL_EFAUL;
     }
 
-    /* 通过device id获取wlanX和 p2pX的netdev名 */
+    /* ????device id????wlanX?? p2pX??netdev?? */
     OAL_SPRINTF(ac_wlan_netdev_name, MAC_NET_DEVICE_NAME_LENGTH, "wlan%d", pst_mac_device->uc_device_id);
     OAL_SPRINTF(ac_p2p_netdev_name, MAC_NET_DEVICE_NAME_LENGTH, "p2p%d",  pst_mac_device->uc_device_id);
     OAL_SPRINTF(ac_hwlan_netdev_name, MAC_NET_DEVICE_NAME_LENGTH, "hwlan%d", pst_mac_device->uc_device_id);
@@ -18098,7 +18098,7 @@ oal_int32 wal_init_wlan_vap_etc(oal_net_device_stru *pst_net_dev)
         return -OAL_EFAUL;
     }
 
-    /* 仅用于WIFI和AP打开时创建VAP */
+    /* ??????WIFI??AP??????????VAP */
     if((NL80211_IFTYPE_STATION == pst_wdev->iftype) || (NL80211_IFTYPE_P2P_DEVICE == pst_wdev->iftype))
     {
         if(0 == (oal_strcmp(ac_wlan_netdev_name, pst_net_dev->name)) ||  0 == (oal_strcmp(ac_hwlan_netdev_name, pst_net_dev->name)))
@@ -18134,9 +18134,9 @@ oal_int32 wal_init_wlan_vap_etc(oal_net_device_stru *pst_net_dev)
 #endif
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
-    /* 填写消息 */
+    /* ???????? */
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_ADD_VAP, OAL_SIZEOF(mac_cfg_add_vap_param_stru));
     ((mac_cfg_add_vap_param_stru *)st_write_msg.auc_value)->pst_net_dev     = pst_net_dev;
     ((mac_cfg_add_vap_param_stru *)st_write_msg.auc_value)->en_vap_mode     = en_vap_mode;
@@ -18148,7 +18148,7 @@ oal_int32 wal_init_wlan_vap_etc(oal_net_device_stru *pst_net_dev)
     ((mac_cfg_add_vap_param_stru *)st_write_msg.auc_value)->bit_11ac2g_enable = (oal_uint8)!!hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_11AC2G_ENABLE);
     ((mac_cfg_add_vap_param_stru *)st_write_msg.auc_value)->bit_disable_capab_2ght40 = g_st_wlan_customize_etc.uc_disable_capab_2ght40;
 #endif
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_cfg_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(mac_cfg_add_vap_param_stru),
@@ -18162,7 +18162,7 @@ oal_int32 wal_init_wlan_vap_etc(oal_net_device_stru *pst_net_dev)
         return -OAL_EFAIL;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_err_code = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_err_code)
     {
@@ -18178,7 +18178,7 @@ oal_int32 wal_init_wlan_vap_etc(oal_net_device_stru *pst_net_dev)
     }
 #endif
 
-    /* 设置netdevice的MAC地址，MAC地址在HMAC层被初始化到MIB中 */
+    /* ????netdevice??MAC??????MAC??????HMAC????????????MIB?? */
     pst_mac_vap = OAL_NET_DEV_PRIV(pst_net_dev);
     if (OAL_PTR_NULL == pst_mac_vap)
     {
@@ -18195,7 +18195,7 @@ oal_int32 wal_init_wlan_vap_etc(oal_net_device_stru *pst_net_dev)
 
     if(NL80211_IFTYPE_AP == pst_wdev->iftype)
     {
-        /* AP模式初始化，初始化配置最大用户数和mac地址过滤模式 */
+        /* AP??????????????????????????????????mac???????????? */
         if(g_st_ap_config_info.ul_ap_max_user > 0)
         {
             wal_set_ap_max_user(pst_net_dev, g_st_ap_config_info.ul_ap_max_user);
@@ -18247,12 +18247,12 @@ oal_int32 wal_deinit_wlan_vap_etc(oal_net_device_stru *pst_net_dev)
         OAM_WARNING_LOG1(0, OAM_SF_ANY,"wal_deinit_wlan_vap_etc::mac_res_get_dev_etc id[%d] FAIL",pst_mac_vap->uc_device_id);
         return -OAL_EFAIL;
     }
-        /* 通过device id获取netdev名字 */
+        /* ????device id????netdev???? */
     OAL_SPRINTF(ac_wlan_netdev_name, MAC_NET_DEVICE_NAME_LENGTH, "wlan%d", pst_mac_dev->uc_device_id);
     OAL_SPRINTF(ac_p2p_netdev_name, MAC_NET_DEVICE_NAME_LENGTH, "p2p%d",  pst_mac_dev->uc_device_id);
     OAL_SPRINTF(ac_hwlan_netdev_name, MAC_NET_DEVICE_NAME_LENGTH, "hwlan%d",  pst_mac_dev->uc_device_id);
 
-    /* 仅用于WIFI和AP关闭时删除VAP */
+    /* ??????WIFI??AP??????????VAP */
     if ((0 != (oal_strcmp(ac_wlan_netdev_name, pst_net_dev->name)))
         && (0 != (oal_strcmp(ac_p2p_netdev_name, pst_net_dev->name)))
         && (0 != (oal_strcmp(ac_hwlan_netdev_name, pst_net_dev->name))))
@@ -18273,10 +18273,10 @@ oal_int32 wal_deinit_wlan_vap_etc(oal_net_device_stru *pst_net_dev)
 #endif
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
-    //删除vap 时需要将参数赋值。
-    /* st_write_msg作清零操作，防止部分成员因为相关宏没有开而没有赋值，出现非0的异常值，例如结构体中vap mode没有正确赋值 */
+    //????vap ??????????????????
+    /* st_write_msg??????????????????????????????????????????????????????????0??????????????????????vap mode???????????? */
     oal_memset(&st_write_msg, 0, OAL_SIZEOF(wal_msg_write_stru));
 
     ((mac_cfg_del_vap_param_stru *)st_write_msg.auc_value)->pst_net_dev = pst_net_dev;
@@ -18322,7 +18322,7 @@ oal_int32 wal_deinit_wlan_vap_etc(oal_net_device_stru *pst_net_dev)
 
 OAL_STATIC oal_int32 wal_set_mac_addr(oal_net_device_stru *pst_net_dev)
 {
-    oal_uint8                     auc_primary_mac_addr[WLAN_MAC_ADDR_LEN] = {0};    /* MAC地址 */
+    oal_uint8                     auc_primary_mac_addr[WLAN_MAC_ADDR_LEN] = {0};    /* MAC???? */
     oal_wireless_dev_stru        *pst_wdev;
     mac_wiphy_priv_stru          *pst_wiphy_priv;
     mac_device_stru              *pst_mac_device;
@@ -18360,14 +18360,14 @@ OAL_STATIC oal_int32 wal_set_mac_addr(oal_net_device_stru *pst_net_dev)
     {
         case NL80211_IFTYPE_P2P_DEVICE:
         {
-            /* 产生P2P device MAC 地址，将本地mac 地址bit 设置为1 */
+            /* ????P2P device MAC ????????????mac ????bit ??????1 */
             auc_primary_mac_addr[0] |= 0x02;
             oal_set_mac_addr((oal_uint8 *)OAL_NETDEVICE_MAC_ADDR(pst_net_dev), auc_primary_mac_addr);
             break;
         }
         default:
         {
-            /*信道跟随--add 增加hwlan name判断*/
+            /*????????--add ????hwlan name????*/
             OAL_SPRINTF(ac_hwlan_netdev_name, MAC_NET_DEVICE_NAME_LENGTH, "hwlan%d",  pst_mac_device->uc_device_id);
             if(0 == (oal_strcmp(ac_hwlan_netdev_name, pst_net_dev->name)))
             {
@@ -18392,7 +18392,7 @@ OAL_STATIC oal_int32 wal_set_mac_addr(oal_net_device_stru *pst_net_dev)
         }
     }
 #else
-            /*信道跟随--add 增加hwlan name判断*/
+            /*????????--add ????hwlan name????*/
             oal_random_ether_addr(auc_primary_mac_addr);
             OAL_SPRINTF(ac_hwlan_netdev_name, MAC_NET_DEVICE_NAME_LENGTH, "hwlan%d",  pst_mac_device->uc_device_id);
             if(0 == (oal_strcmp(ac_hwlan_netdev_name, pst_net_dev->name)))
@@ -18446,13 +18446,13 @@ oal_int32 wal_init_wlan_netdev_etc(oal_wiphy_stru *pst_wiphy, char *dev_name)
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 通过device id获取netdev名字 */
+    /* ????device id????netdev???? */
     OAL_SPRINTF(ac_wlan_netdev_name, MAC_NET_DEVICE_NAME_LENGTH, "wlan%d", pst_mac_device->uc_device_id);
     OAL_SPRINTF(ac_p2p_netdev_name, MAC_NET_DEVICE_NAME_LENGTH, "p2p%d",  pst_mac_device->uc_device_id);
-    /*信道跟随-add*/
+    /*????????-add*/
     OAL_SPRINTF(ac_hwlan_netdev_name, MAC_NET_DEVICE_NAME_LENGTH, "hwlan%d",  pst_mac_device->uc_device_id);
 
-    /*信道跟随--添加hwlan name判断*/
+    /*????????--????hwlan name????*/
     if (0 == (oal_strcmp(ac_wlan_netdev_name, dev_name)) ||0 == (oal_strcmp(ac_hwlan_netdev_name, dev_name)))
     {
         en_type = NL80211_IFTYPE_STATION;
@@ -18468,12 +18468,12 @@ oal_int32 wal_init_wlan_netdev_etc(oal_wiphy_stru *pst_wiphy, char *dev_name)
     }
     OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_init_wlan_netdev_etc::en_type is %d}\r\n", en_type);
 
-    /* 如果创建的net device已经存在，直接返回 */
-    /* 根据dev_name找到dev */
+    /* ??????????net device?????????????????? */
+    /* ????dev_name????dev */
     pst_net_dev = oal_dev_get_by_name(dev_name);
     if (OAL_PTR_NULL != pst_net_dev)
     {
-        /* 调用oal_dev_get_by_name后，必须调用oal_dev_put使net_dev的引用计数减一 */
+        /* ????oal_dev_get_by_name????????????oal_dev_put??net_dev?????????????? */
         oal_dev_put(pst_net_dev);
 
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_init_wlan_netdev_etc::the net_device is already exist!}\r\n");
@@ -18481,11 +18481,11 @@ oal_int32 wal_init_wlan_netdev_etc(oal_wiphy_stru *pst_wiphy, char *dev_name)
     }
 
 #if defined(_PRE_WLAN_FEATURE_FLOWCTL)
-    pst_net_dev = oal_net_alloc_netdev_mqs(OAL_SIZEOF(oal_netdev_priv_stru), dev_name, oal_ether_setup, WAL_NETDEV_SUBQUEUE_MAX_NUM, 1);    /* 此函数第一个入参代表私有长度，此处不涉及为0 */
+    pst_net_dev = oal_net_alloc_netdev_mqs(OAL_SIZEOF(oal_netdev_priv_stru), dev_name, oal_ether_setup, WAL_NETDEV_SUBQUEUE_MAX_NUM, 1);    /* ??????????????????????????????????????????0 */
 #elif defined(_PRE_WLAN_FEATURE_OFFLOAD_FLOWCTL)
-    pst_net_dev = oal_net_alloc_netdev_mqs(OAL_SIZEOF(oal_netdev_priv_stru), dev_name, oal_ether_setup, WLAN_NET_QUEUE_BUTT, 1);    /* 此函数第一个入参代表私有长度，此处不涉及为0 */
+    pst_net_dev = oal_net_alloc_netdev_mqs(OAL_SIZEOF(oal_netdev_priv_stru), dev_name, oal_ether_setup, WLAN_NET_QUEUE_BUTT, 1);    /* ??????????????????????????????????????????0 */
 #else
-    pst_net_dev = oal_net_alloc_netdev(OAL_SIZEOF(oal_netdev_priv_stru), dev_name, oal_ether_setup);    /* 此函数第一个入参代表私有长度，此处不涉及为0 */
+    pst_net_dev = oal_net_alloc_netdev(OAL_SIZEOF(oal_netdev_priv_stru), dev_name, oal_ether_setup);    /* ??????????????????????????????????????????0 */
 #endif
 
     if (OAL_UNLIKELY(OAL_PTR_NULL == pst_net_dev))
@@ -18510,7 +18510,7 @@ oal_int32 wal_init_wlan_netdev_etc(oal_wiphy_stru *pst_wiphy, char *dev_name)
     pst_net_dev->hw_features |= NETIF_F_SG;
 #endif
 
-    /* 对netdevice进行赋值 */
+    /* ??netdevice???????? */
 #ifdef CONFIG_WIRELESS_EXT
     pst_net_dev->wireless_handlers             = &g_st_iw_handler_def_etc;
 #endif
@@ -18535,16 +18535,16 @@ oal_int32 wal_init_wlan_netdev_etc(oal_wiphy_stru *pst_wiphy, char *dev_name)
     pst_wiphy_priv = (mac_wiphy_priv_stru *)(oal_wiphy_priv(pst_wiphy));
 
 #ifdef _PRE_WLAN_FEATURE_P2P
-    /*信道跟随--add wlan name 判断*/
+    /*????????--add wlan name ????*/
     if ((NL80211_IFTYPE_STATION == en_type) && (0 == (oal_strcmp(ac_wlan_netdev_name, dev_name))))
     {
-        /* 如果创建wlan0， 则保存wlan0 为主net_device,p2p0 和p2p-p2p0 MAC 地址从主netdevice 获取 */
+        /* ????????wlan0?? ??????wlan0 ????net_device,p2p0 ??p2p-p2p0 MAC ????????netdevice ???? */
         pst_wiphy_priv->pst_mac_device->st_p2p_info.pst_primary_net_device = pst_net_dev;
     }
-    /*信道跟随--add hwlan name 判断*/
+    /*????????--add hwlan name ????*/
     else if((NL80211_IFTYPE_STATION == en_type) && (0 == (oal_strcmp(ac_hwlan_netdev_name, dev_name))))
     {
-        /*netdevice 指针暂时挂载，未使用*/
+        /*netdevice ????????????????????*/
         pst_wiphy_priv->pst_mac_device->st_p2p_info.pst_second_net_device = pst_net_dev;
     }
     else if(NL80211_IFTYPE_P2P_DEVICE == en_type)
@@ -18552,7 +18552,7 @@ oal_int32 wal_init_wlan_netdev_etc(oal_wiphy_stru *pst_wiphy, char *dev_name)
         pst_wiphy_priv->pst_mac_device->st_p2p_info.pst_p2p_net_device = pst_net_dev;
     }
 #endif
-    OAL_NETDEVICE_FLAGS(pst_net_dev) &= ~OAL_IFF_RUNNING;   /* 将net device的flag设为down */
+    OAL_NETDEVICE_FLAGS(pst_net_dev) &= ~OAL_IFF_RUNNING;   /* ??net device??flag????down */
 
     wal_set_mac_addr(pst_net_dev);
 
@@ -18568,7 +18568,7 @@ oal_int32 wal_init_wlan_netdev_etc(oal_wiphy_stru *pst_wiphy, char *dev_name)
     oal_netbuf_list_head_init(&pst_netdev_priv->st_rx_netbuf_queue);
     oal_netif_napi_add(pst_net_dev, &pst_netdev_priv->st_napi, hmac_rxdata_polling, NAPI_POLL_WEIGHT_LEV1);
 
-    /* 注册net_device */
+    /* ????net_device */
     l_ret = oal_net_register_netdev(pst_net_dev);
     if (OAL_UNLIKELY(OAL_SUCC != l_ret))
     {
@@ -18601,7 +18601,7 @@ oal_int32  wal_setup_ap_etc(oal_net_device_stru *pst_net_dev)
 
     if (OAL_NETDEVICE_FLAGS(pst_net_dev) & OAL_IFF_RUNNING)
     {
-        /* 切换到AP前如果网络设备处于UP状态，需要先down wlan0网络设备 */
+        /* ??????AP??????????????????UP????????????down wlan0???????? */
         OAL_IO_PRINT("wal_setup_ap:stop netdevice:%.16s", pst_net_dev->name);
         OAM_WARNING_LOG0(0, OAM_SF_CFG, "{wal_setup_ap_etc:: oal_iff_running! now, stop netdevice}");
         wal_netdev_stop_etc(pst_net_dev);
@@ -18613,7 +18613,7 @@ oal_int32  wal_setup_ap_etc(oal_net_device_stru *pst_net_dev)
 
         if (pst_mac_vap->en_vap_state != MAC_VAP_STATE_INIT)
         {
-            /* 切换到AP前如果网络设备处于UP状态，需要先down wlan0网络设备 */
+            /* ??????AP??????????????????UP????????????down wlan0???????? */
             OAL_IO_PRINT("wal_setup_ap_etc:stop netdevice:%s", pst_net_dev->name);
             wal_netdev_stop_etc(pst_net_dev);
         }
@@ -18628,7 +18628,7 @@ oal_int32  wal_setup_ap_etc(oal_net_device_stru *pst_net_dev)
     {
         //hwifi_config_init_ini_etc(pst_net_dev);
 #if ((_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION) && (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE))
-        /* 低功耗定制化开关 */
+        /* ???????????????? */
         (OAL_TRUE == g_wlan_pm_switch_etc) ? wlan_pm_enable_etc() : wlan_pm_disable_etc();
 #endif // #if ((_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION) && (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE))
     }
@@ -18778,7 +18778,7 @@ oal_int32 wal_hipriv_inetaddr_notifier_call_etc(struct notifier_block *this, oal
 
                     return NOTIFY_DONE;
                 }
-                /* 获取到IP地址的时候开启低功耗 */
+                /* ??????IP???????????????????? */
             #if _PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE
                 if((MAX_FAST_PS==pst_hmac_vap->uc_ps_mode)||(AUTO_FAST_PS==pst_hmac_vap->uc_ps_mode))
                 {
@@ -18790,7 +18790,7 @@ oal_int32 wal_hipriv_inetaddr_notifier_call_etc(struct notifier_block *this, oal
                 }
             #endif
 
-                /* 获取到IP地址的时候通知漫游计时 */
+                /* ??????IP?????????????????????? */
             #ifdef _PRE_WLAN_FEATURE_ROAM
                 hmac_roam_wpas_connect_state_notify_etc(pst_hmac_vap, WPAS_CONNECT_STATE_IPADDR_OBTAINED);
             #endif
@@ -18813,7 +18813,7 @@ oal_int32 wal_hipriv_inetaddr_notifier_call_etc(struct notifier_block *this, oal
 
             if (WLAN_VAP_MODE_BSS_STA == pst_mac_vap->en_vap_mode)
             {
-                /* 获取到IP地址的时候通知漫游计时 */
+                /* ??????IP?????????????????????? */
             #ifdef _PRE_WLAN_FEATURE_ROAM
                 pst_hmac_vap = (hmac_vap_stru *)mac_res_get_hmac_vap(pst_mac_vap->uc_vap_id);
                 if (OAL_PTR_NULL == pst_hmac_vap)
@@ -18929,7 +18929,7 @@ OAL_STATIC oal_uint32  wal_hipriv_send_neighbor_req(oal_net_device_stru *pst_net
     uc_str_len = OS_STR_LEN(pc_param);
     uc_str_len = (uc_str_len > 1)?uc_str_len-1:uc_str_len;
 
-    /* 获取SSID字符串 */
+    /* ????SSID?????? */
     if (0 != uc_str_len)
     {
         ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_arg, &ul_offset);
@@ -18941,7 +18941,7 @@ OAL_STATIC oal_uint32  wal_hipriv_send_neighbor_req(oal_net_device_stru *pst_net
     }
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SEND_NEIGHBOR_REQ, OAL_SIZEOF(mac_cfg_ssid_param_stru));
     pst_ssid = (mac_cfg_ssid_param_stru *)st_write_msg.auc_value;
@@ -18982,7 +18982,7 @@ OAL_STATIC oal_uint32  wal_hipriv_beacon_req_table_switch(oal_net_device_stru *p
     uc_switch = (oal_uint8)oal_atoi(ac_arg);
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_BCN_TABLE_SWITCH, OAL_SIZEOF(oal_uint8));
     st_write_msg.auc_value[0] = uc_switch;
@@ -19024,7 +19024,7 @@ OAL_STATIC oal_uint32  wal_hipriv_voe_enable(oal_net_device_stru *pst_net_dev, o
     us_switch = us_switch & 0xFFFF;
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_VOE_ENABLE, OAL_SIZEOF(oal_uint16));
     ps_value = (oal_uint16 *)st_write_msg.auc_value;
@@ -19056,7 +19056,7 @@ OAL_STATIC oal_int32 wal_ioctl_set_vowifi_param(oal_net_device_stru *pst_net_dev
     mac_vowifi_cmd_enum_uint8   en_vowifi_cmd_id;
     oal_uint8                   uc_param;
 
-    /* vap未创建时，不处理supplicant命令 */
+    /* vap????????????????supplicant???? */
     if (OAL_PTR_NULL == OAL_NET_DEV_PRIV(pst_net_dev))
     {
         OAM_WARNING_LOG0(0, OAM_SF_CFG, "wal_ioctl_set_vowifi_param::vap not created yet, ignore the cmd!");
@@ -19098,7 +19098,7 @@ OAL_STATIC oal_int32 wal_ioctl_set_vowifi_param(oal_net_device_stru *pst_net_dev
     OAM_WARNING_LOG2(0, OAM_SF_ANY, "{wal_ioctl_set_vowifi_param::supplicant set VoWiFi_param cmd(%d), value[%d] }", en_vowifi_cmd_id, uc_param);
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     us_len         = OAL_SIZEOF(mac_cfg_vowifi_stru);
     pst_cfg_vowifi = (mac_cfg_vowifi_stru *)(st_write_msg.auc_value);
@@ -19124,14 +19124,14 @@ OAL_STATIC oal_int32 wal_ioctl_get_vowifi_param(oal_net_device_stru *pst_net_dev
 {
     mac_vap_stru *pst_mac_vap;
 
-    /* vap未创建时，不处理supplicant命令 */
+    /* vap????????????????supplicant???? */
     if (OAL_PTR_NULL == OAL_NET_DEV_PRIV(pst_net_dev))
     {
         OAM_WARNING_LOG0(0, OAM_SF_CFG, "wal_ioctl_get_vowifi_param::vap not created yet, ignore the cmd!");
         return -OAL_EINVAL;
     }
 
-    /* 获取mac_vap */
+    /* ????mac_vap */
     pst_mac_vap = OAL_NET_DEV_PRIV(pst_net_dev);
     if (OAL_PTR_NULL == pst_mac_vap->pst_vowifi_cfg_param)
     {
@@ -19181,14 +19181,14 @@ OAL_STATIC oal_int32 wal_ioctl_get_wifi_priv_feature_cap_param(oal_net_device_st
     hmac_vap_stru                   *pst_hmac_vap;
     oal_uint32                       ul_value = 0;
 
-    /* vap未创建时，不处理supplicant命令 */
+    /* vap????????????????supplicant???? */
     if (OAL_PTR_NULL == OAL_NET_DEV_PRIV(pst_net_dev))
     {
         OAM_WARNING_LOG0(0, OAM_SF_CFG, "wal_ioctl_get_wifi_priv_feature_cap_param::vap not created yet, ignore the cmd!");
         return -OAL_EINVAL;
     }
 
-    /* 获取mac_vap */
+    /* ????mac_vap */
     pst_mac_vap = OAL_NET_DEV_PRIV(pst_net_dev);
     if (OAL_PTR_NULL == pst_mac_vap)
     {
@@ -19205,13 +19205,13 @@ OAL_STATIC oal_int32 wal_ioctl_get_wifi_priv_feature_cap_param(oal_net_device_st
     }
 
 #if defined(_PRE_WLAN_FEATURE_11K) || defined(_PRE_WLAN_FEATURE_11R) || defined(_PRE_WLAN_FEATURE_11K_EXTERN)
-    /*11k能力*/
+    /*11k????*/
     if(OAL_TRUE == pst_hmac_vap->bit_11k_enable)
     {
         ul_value |=  BIT(WAL_WIFI_FEATURE_SUPPORT_11K);
     }
 
-    /*11v能力*/
+    /*11v????*/
     if(OAL_TRUE == pst_hmac_vap->bit_11v_enable)
     {
         ul_value |= BIT(WAL_WIFI_FEATURE_SUPPORT_11V);
@@ -19265,10 +19265,10 @@ oal_int32 wal_set_ip_filter_enable_etc(oal_int32 l_on)
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_set_ip_filter_enable_etc::wlan0 not exist!}");
         return -OAL_EINVAL;
     }
-    /* 调用oal_dev_get_by_name后，必须调用oal_dev_put使net_dev的引用计数减一 */
+    /* ????oal_dev_get_by_name????????????oal_dev_put??net_dev?????????????? */
     oal_dev_put(pst_net_dev);
 
-    /* vap未创建时，不处理下发的命令 */
+    /* vap?????????????????????????? */
     pst_mac_vap = OAL_NET_DEV_PRIV(pst_net_dev);
     if(OAL_PTR_NULL == pst_mac_vap)
     {
@@ -19282,7 +19282,7 @@ oal_int32 wal_set_ip_filter_enable_etc(oal_int32 l_on)
         return -OAL_EINVAL;
     }
 
-    /* 准备配置命令 */
+    /* ???????????? */
     ul_netbuf_len = OAL_SIZEOF(st_ip_filter_cmd);
     OAL_MEMZERO((oal_uint8 *)&st_ip_filter_cmd, ul_netbuf_len);
     st_ip_filter_cmd.en_cmd        = MAC_IP_FILTER_ENABLE;
@@ -19291,7 +19291,7 @@ oal_int32 wal_set_ip_filter_enable_etc(oal_int32 l_on)
     OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{wal_set_ip_filter_enable_etc::IP_filter on/off(%d).}",
                         st_ip_filter_cmd.en_enable);
 
-    /* 申请空间 缓存过滤规则 */
+    /* ???????? ???????????? */
     pst_netbuf = OAL_MEM_NETBUF_ALLOC(OAL_NORMAL_NETBUF,ul_netbuf_len, OAL_NETBUF_PRIORITY_MID);
     if (OAL_PTR_NULL == pst_netbuf)
     {
@@ -19301,22 +19301,22 @@ oal_int32 wal_set_ip_filter_enable_etc(oal_int32 l_on)
     OAL_MEMZERO(((oal_uint8 *)OAL_NETBUF_DATA(pst_netbuf)), ul_netbuf_len);
     pst_cmd_info = (mac_ip_filter_cmd_stru *)OAL_NETBUF_DATA(pst_netbuf);
 
-    /* 记录过滤规则 */
+    /* ???????????? */
     oal_memcopy((oal_uint8 *)pst_cmd_info, (oal_uint8 *)(&st_ip_filter_cmd), ul_netbuf_len);
     oal_netbuf_put(pst_netbuf, ul_netbuf_len);
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     us_len = OAL_SIZEOF(pst_netbuf);
 
-    /* 填写 msg 消息头*/
+    /* ???? msg ??????*/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_IP_FILTER, us_len);
 
-    /* 将申请的netbuf首地址填写到msg消息体内 */
+    /* ????????netbuf????????????msg???????? */
     oal_memcopy(st_write_msg.auc_value, (oal_uint8 *)&pst_netbuf, us_len);
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + us_len,
@@ -19367,10 +19367,10 @@ oal_int32 wal_add_ip_filter_items_etc(wal_hw_wifi_filter_item *pst_items, oal_in
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_add_ip_filter_items_etc::wlan0 not exist!}");
         return -OAL_EINVAL;
     }
-    /* 调用oal_dev_get_by_name后，必须调用oal_dev_put使net_dev的引用计数减一 */
+    /* ????oal_dev_get_by_name????????????oal_dev_put??net_dev?????????????? */
     oal_dev_put(pst_net_dev);
 
-    /* vap未创建时，不处理下发的命令 */
+    /* vap?????????????????????????? */
     pst_mac_vap = OAL_NET_DEV_PRIV(pst_net_dev);
     if(OAL_PTR_NULL == pst_mac_vap)
     {
@@ -19384,11 +19384,11 @@ oal_int32 wal_add_ip_filter_items_etc(wal_hw_wifi_filter_item *pst_items, oal_in
         return -OAL_EINVAL;
     }
 
-    /* 准备配置事件 */
+    /* ???????????? */
     OAL_MEMZERO((oal_uint8 *)&st_ip_filter_cmd, OAL_SIZEOF(st_ip_filter_cmd));
     st_ip_filter_cmd.en_cmd    = MAC_IP_FILTER_UPDATE_BTABLE;
 
-    /* 由于本地名单大小限制，取能收纳的规则条目数最小值 */
+    /* ???????????????????????????????????????????????? */
     st_ip_filter_cmd.uc_item_count = OAL_MIN((MAC_MAX_IP_FILTER_BTABLE_SIZE / OAL_SIZEOF(mac_ip_filter_item_stru)), l_count);
     if (st_ip_filter_cmd.uc_item_count < l_count)
     {
@@ -19400,11 +19400,11 @@ oal_int32 wal_add_ip_filter_items_etc(wal_hw_wifi_filter_item *pst_items, oal_in
     OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{wal_add_ip_filter_items_etc::Start updating btable, items_cnt(%d).}",
                         st_ip_filter_cmd.uc_item_count);
 
-    /* 选择申请事件空间的大小 */
+    /* ?????????????????????? */
     ul_netbuf_len = (st_ip_filter_cmd.uc_item_count * OAL_SIZEOF(mac_ip_filter_item_stru)) + OAL_SIZEOF(st_ip_filter_cmd);
 
 
-    /* 申请空间 缓存过滤规则 */
+    /* ???????? ???????????? */
     pst_netbuf = OAL_MEM_NETBUF_ALLOC(OAL_NORMAL_NETBUF,ul_netbuf_len, OAL_NETBUF_PRIORITY_MID);
     if (OAL_PTR_NULL == pst_netbuf)
     {
@@ -19414,7 +19414,7 @@ oal_int32 wal_add_ip_filter_items_etc(wal_hw_wifi_filter_item *pst_items, oal_in
     OAL_MEMZERO(((oal_uint8 *)OAL_NETBUF_DATA(pst_netbuf)), ul_netbuf_len);
     pst_cmd_info = (mac_ip_filter_cmd_stru *)OAL_NETBUF_DATA(pst_netbuf);
 
-    /* 记录过滤规则 */
+    /* ???????????? */
     oal_memcopy((oal_uint8 *)pst_cmd_info, (oal_uint8 *)(&st_ip_filter_cmd), OAL_SIZEOF(st_ip_filter_cmd));
     oal_netbuf_put(pst_netbuf, ul_netbuf_len);
 
@@ -19425,17 +19425,17 @@ oal_int32 wal_add_ip_filter_items_etc(wal_hw_wifi_filter_item *pst_items, oal_in
     }
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     us_len = OAL_SIZEOF(pst_netbuf);
 
-    /* 填写 msg 消息头*/
+    /* ???? msg ??????*/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_IP_FILTER, us_len);
 
-    /* 将申请的netbuf首地址填写到msg消息体内 */
+    /* ????????netbuf????????????msg???????? */
     oal_memcopy(st_write_msg.auc_value, (oal_uint8 *)&pst_netbuf, us_len);
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + us_len,
@@ -19482,10 +19482,10 @@ oal_int32 wal_clear_ip_filter_etc()
         return -OAL_EINVAL;
     }
 
-    /* 调用oal_dev_get_by_name后，必须调用oal_dev_put使net_dev的引用计数减一 */
+    /* ????oal_dev_get_by_name????????????oal_dev_put??net_dev?????????????? */
     oal_dev_put(pst_net_dev);
 
-    /* vap未创建时，不处理下发的命令 */
+    /* vap?????????????????????????? */
     pst_mac_vap = OAL_NET_DEV_PRIV(pst_net_dev);
     if(OAL_PTR_NULL == pst_mac_vap)
     {
@@ -19499,16 +19499,16 @@ oal_int32 wal_clear_ip_filter_etc()
         return -OAL_EINVAL;
     }
 
-    /* 清理黑名单 */
+    /* ?????????? */
     OAL_MEMZERO((oal_uint8 *)&st_ip_filter_cmd, OAL_SIZEOF(st_ip_filter_cmd));
     st_ip_filter_cmd.en_cmd        = MAC_IP_FILTER_CLEAR;
 
     OAM_WARNING_LOG0(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{wal_clear_ip_filter_etc::Now start clearing the list.}");
 
-    /* 选择申请事件空间的大小 */
+    /* ?????????????????????? */
     ul_netbuf_len = OAL_SIZEOF(st_ip_filter_cmd);
 
-    /* 申请空间 缓存过滤规则 */
+    /* ???????? ???????????? */
     pst_netbuf = OAL_MEM_NETBUF_ALLOC(OAL_NORMAL_NETBUF,ul_netbuf_len, OAL_NETBUF_PRIORITY_MID);
     if (OAL_PTR_NULL == pst_netbuf)
     {
@@ -19518,22 +19518,22 @@ oal_int32 wal_clear_ip_filter_etc()
     OAL_MEMZERO(((oal_uint8 *)OAL_NETBUF_DATA(pst_netbuf)), ul_netbuf_len);
     pst_cmd_info = (mac_ip_filter_cmd_stru *)OAL_NETBUF_DATA(pst_netbuf);
 
-    /* 记录过滤规则 */
+    /* ???????????? */
     oal_memcopy((oal_uint8 *)pst_cmd_info, (oal_uint8 *)(&st_ip_filter_cmd), ul_netbuf_len);
     oal_netbuf_put(pst_netbuf, ul_netbuf_len);
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     us_len = OAL_SIZEOF(pst_netbuf);
 
-    /* 填写 msg 消息头*/
+    /* ???? msg ??????*/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_IP_FILTER, us_len);
 
-    /* 将申请的netbuf首地址填写到msg消息体内 */
+    /* ????????netbuf????????????msg???????? */
     oal_memcopy(st_write_msg.auc_value, (oal_uint8 *)&pst_netbuf, us_len);
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + us_len,
@@ -19625,7 +19625,7 @@ OAL_STATIC oal_uint32  wal_hipriv_cali_power(oal_net_device_stru *pst_net_dev, o
     wal_msg_stru                *pst_rsp_msg = OAL_PTR_NULL;
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_CALI_POWER, OAL_SIZEOF(mac_cfg_cali_power_stru));
     pst_power_param = (mac_cfg_cali_power_stru *)(st_write_msg.auc_value);
@@ -19646,7 +19646,7 @@ OAL_STATIC oal_uint32  wal_hipriv_cali_power(oal_net_device_stru *pst_net_dev, o
     pst_power_param->uc_ch = (oal_uint8)l_ch;
     OAM_INFO_LOG1(0, OAM_SF_ANY, "{wal_hipriv_cali_power::l_ch = %d!}\r\n", l_ch);
 
-    /* l_ch为2时，是获取多项式值 */
+    /* l_ch??2?????????????????? */
     if(l_ch != 2)
     {
         pc_param = pc_param + ul_off_set;
@@ -19690,7 +19690,7 @@ OAL_STATIC oal_uint32  wal_hipriv_cali_power(oal_net_device_stru *pst_net_dev, o
         return (oal_uint32)l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_ret = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_ret)
     {
@@ -19721,7 +19721,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_polynomial_para(oal_net_device_stru *pst_n
     wal_msg_stru                    *pst_rsp_msg = OAL_PTR_NULL;
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_POLYNOMIAL_PARA, OAL_SIZEOF(mac_cfg_polynomial_para_stru));
     pst_polynomial_param = (mac_cfg_polynomial_para_stru *)(st_write_msg.auc_value);
@@ -19747,7 +19747,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_polynomial_para(oal_net_device_stru *pst_n
             return ul_ret;
         }
 
-        /*每个多项式值占用2个byte，有三个值，转换为十六进制字符串，长度为2*2*3=12 */
+        /*????????????????2??byte????????????????????????????????????????2*2*3=12 */
         if(OAL_STRLEN(ac_name) != 12)
         {
             OAM_WARNING_LOG0(0, OAM_SF_ANY, "{wal_hipriv_set_polynomial_para::polynomial_para value not right}\r\n");
@@ -19780,7 +19780,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_polynomial_para(oal_net_device_stru *pst_n
         return (oal_uint32)l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_ret = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_ret)
     {
@@ -19826,7 +19826,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_upc_params(oal_net_device_stru *pst_net_de
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 遍历device下所有vap */
+    /* ????device??????vap */
     for (uc_vap_idx = 0; uc_vap_idx < pst_mac_device->uc_vap_num; uc_vap_idx++)
     {
         pst_vap = (mac_vap_stru *)mac_res_get_mac_vap(pst_mac_device->auc_vap_id[uc_vap_idx]);
@@ -19836,7 +19836,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_upc_params(oal_net_device_stru *pst_net_de
                            pst_mac_device->auc_vap_id[uc_vap_idx]);
             continue;
         }
-        /* 设备在up状态不允许配置，必须先down */
+        /* ??????up??????????????????????down */
         if (pst_vap->en_vap_state != MAC_VAP_STATE_INIT)
         {
             OAM_ERROR_LOG2(pst_vap->uc_vap_id, OAM_SF_ANY, "{wal_hipriv_auto_cali::device is busy, please down it first, vap id: %d, state: %d!}\r\n",
@@ -19846,7 +19846,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_upc_params(oal_net_device_stru *pst_net_de
     }
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_UPC_PARA, OAL_SIZEOF(mac_cfg_show_upc_paras_stru));
     pst_upc_param = (mac_cfg_show_upc_paras_stru *)(st_write_msg.auc_value);
@@ -19860,7 +19860,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_upc_params(oal_net_device_stru *pst_net_de
 
     uc_param_len = OAL_STRLEN(ac_name);
 
-    /*每个参数值占用2个byte，5g 14个值，2g 6个值，转换为十六进制字符串，长度为4*14+13=69或者4*6+5=29 */
+    /*??????????????2??byte??5g 14??????2g 6??????????????????????????????????4*14+13=69????4*6+5=29 */
     /* iwpriv Hisilicon0 set_upc_param "0010_0020_0020_0010_0020_0020" */
     /* iwpriv Hisilicon1 set_upc_param "0010_0020_0020_0010_0020_0020_0020_0020_0010_0020_0020_0010_0020_0020" */
 
@@ -19907,7 +19907,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_upc_params(oal_net_device_stru *pst_net_de
         return (oal_uint32)l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_ret = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_ret)
     {
@@ -19929,7 +19929,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_load_mode(oal_net_device_stru *pst_net_dev
     oal_int32                       l_ret;
     wal_msg_stru                   *pst_rsp_msg = OAL_PTR_NULL;
 
-    /* 获取校准通道 */
+    /* ???????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_arg, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -19940,7 +19940,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_load_mode(oal_net_device_stru *pst_net_dev
     uc_load_mode = (oal_uint8)oal_atoi(ac_arg);
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_LOAD_MODE, OAL_SIZEOF(oal_uint8));
     *((oal_uint8 *)(st_write_msg.auc_value)) = uc_load_mode;
@@ -19958,7 +19958,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_load_mode(oal_net_device_stru *pst_net_dev
         return (oal_uint32)l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_ret = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_ret)
     {
@@ -20009,7 +20009,7 @@ OAL_STATIC oal_uint32  wal_hipriv_auto_cali(oal_net_device_stru *pst_net_dev, oa
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 遍历device下所有vap */
+    /* ????device??????vap */
     for (uc_vap_idx = 0; uc_vap_idx < pst_mac_device->uc_vap_num; uc_vap_idx++)
     {
         pst_vap = (mac_vap_stru *)mac_res_get_mac_vap(pst_mac_device->auc_vap_id[uc_vap_idx]);
@@ -20019,7 +20019,7 @@ OAL_STATIC oal_uint32  wal_hipriv_auto_cali(oal_net_device_stru *pst_net_dev, oa
                            pst_mac_device->auc_vap_id[uc_vap_idx]);
             continue;
         }
-        /* 设备在up状态不允许配置，必须先down */
+        /* ??????up??????????????????????down */
         if (pst_vap->en_vap_state != MAC_VAP_STATE_INIT)
         {
             OAM_ERROR_LOG2(pst_vap->uc_vap_id, OAM_SF_ANY, "{wal_hipriv_auto_cali::device is busy, please down it first, vap id: %d, state: %d!}\r\n",
@@ -20047,7 +20047,7 @@ OAL_STATIC oal_uint32  wal_hipriv_auto_cali(oal_net_device_stru *pst_net_dev, oa
 
 
     /***************************************************************************
-                              抛事件到wal层处理
+                              ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_AUTO_CALI, OAL_SIZEOF(uc_cali_type));
 
@@ -20064,7 +20064,7 @@ OAL_STATIC oal_uint32  wal_hipriv_auto_cali(oal_net_device_stru *pst_net_dev, oa
         return (oal_uint32)l_ret;
     }
 
-        /* 读取返回的错误码 */
+        /* ???????????????? */
     ul_ret = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_ret)
     {
@@ -20094,7 +20094,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_cali_vref(oal_net_device_stru *pst_net_dev
     oal_uint16                  us_vref_value;
     mac_cfg_set_cali_vref_stru *pst_cali_vref;
 
-    /* 获取校准通道 */
+    /* ???????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_arg, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -20103,7 +20103,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_cali_vref(oal_net_device_stru *pst_net_dev
     }
     uc_chain_idx = (oal_uint8)oal_atoi(ac_arg);
 
-    /* 获取校准vref idx */
+    /* ????????vref idx */
     pc_param = pc_param + ul_off_set;
     ul_ret   = wal_get_cmd_one_arg_etc(pc_param, ac_arg, &ul_off_set);
     if (OAL_SUCC != ul_ret)
@@ -20113,7 +20113,7 @@ OAL_STATIC oal_uint32  wal_hipriv_set_cali_vref(oal_net_device_stru *pst_net_dev
     }
     uc_band_idx = (oal_uint8)oal_atoi(ac_arg);
 
-    /* 获取校准vref值 */
+    /* ????????vref?? */
     pc_param = pc_param + ul_off_set;
     ul_ret   = wal_get_cmd_one_arg_etc(pc_param, ac_arg, &ul_off_set);
     if (OAL_SUCC != ul_ret)
@@ -20128,14 +20128,14 @@ OAL_STATIC oal_uint32  wal_hipriv_set_cali_vref(oal_net_device_stru *pst_net_dev
 
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_CALI_VREF, OAL_SIZEOF(mac_cfg_set_cali_vref_stru));
 
-    /* 设置配置命令参数 */
+    /* ???????????????? */
     pst_cali_vref = (mac_cfg_set_cali_vref_stru *)(st_write_msg.auc_value);
     pst_cali_vref->uc_chain_idx = uc_chain_idx;
     pst_cali_vref->uc_band_idx  = uc_band_idx;
     pst_cali_vref->us_vref_value = us_vref_value;
 
     /***************************************************************************
-                                    抛事件到wal层处理
+                                    ????????wal??????
     ***************************************************************************/
 
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
@@ -20274,10 +20274,10 @@ OAL_STATIC oal_uint32  wal_hipriv_wds_vap_mode(oal_net_device_stru *pst_net_dev,
     }
 
     /***************************************************************************
-                             抛事件到wal层处理
+                             ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_WDS_VAP_MODE, OAL_SIZEOF(oal_uint8));
-    *((oal_uint8 *)(st_write_msg.auc_value)) = uc_wds_vap_mode;  /* 获取WDS模式 */
+    *((oal_uint8 *)(st_write_msg.auc_value)) = uc_wds_vap_mode;  /* ????WDS???? */
 
     ul_ret = (oal_uint32)wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
@@ -20302,7 +20302,7 @@ OAL_STATIC oal_uint32  wal_hipriv_wds_vap_show(oal_net_device_stru *pst_net_dev,
 
 
     /***************************************************************************
-                             抛事件到wal层处理
+                             ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_WDS_VAP_SHOW, OAL_SIZEOF(oal_uint8));
 
@@ -20329,7 +20329,7 @@ OAL_STATIC oal_uint32  wal_hipriv_wds_sta_add(oal_net_device_stru *pst_net_dev, 
     oal_int8                        ac_name[WAL_HIPRIV_CMD_NAME_MAX_LEN];
     oal_uint32                      ul_ret = OAL_SUCC;
     mac_cfg_wds_sta_stru            *pst_wds_sta = OAL_PTR_NULL;
-    mac_cfg_wds_sta_stru            st_wds_sta;      /* 临时保存获取的use的信息 */
+    mac_cfg_wds_sta_stru            st_wds_sta;      /* ??????????????use?????? */
 
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
@@ -20339,7 +20339,7 @@ OAL_STATIC oal_uint32  wal_hipriv_wds_sta_add(oal_net_device_stru *pst_net_dev, 
     }
     oal_strtoaddr(ac_name, st_wds_sta.auc_sta_mac);
 
-    /* 偏移，取下一个参数 */
+    /* ?????????????????? */
     pc_param = pc_param + ul_off_set;
 
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
@@ -20352,11 +20352,11 @@ OAL_STATIC oal_uint32  wal_hipriv_wds_sta_add(oal_net_device_stru *pst_net_dev, 
     oal_strtoaddr(ac_name, st_wds_sta.auc_node_mac);
 
     /***************************************************************************
-                             抛事件到wal层处理
+                             ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_WDS_STA_ADD, OAL_SIZEOF(mac_cfg_wds_sta_stru));
 
-    /* 设置配置命令参数 */
+    /* ???????????????? */
     pst_wds_sta     = (mac_cfg_wds_sta_stru *)(st_write_msg.auc_value);
     oal_set_mac_addr(pst_wds_sta->auc_sta_mac, st_wds_sta.auc_sta_mac);
     oal_set_mac_addr(pst_wds_sta->auc_node_mac, st_wds_sta.auc_node_mac);
@@ -20393,11 +20393,11 @@ OAL_STATIC oal_uint32  wal_hipriv_wds_sta_del(oal_net_device_stru *pst_net_dev, 
     }
 
     /***************************************************************************
-                             抛事件到wal层处理
+                             ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_WDS_STA_DEL, OAL_SIZEOF(mac_cfg_wds_sta_stru));
 
-    /* 设置配置命令参数 */
+    /* ???????????????? */
     pst_wds_sta     = (mac_cfg_wds_sta_stru *)(st_write_msg.auc_value);
     oal_strtoaddr(ac_name, pst_wds_sta->auc_sta_mac);
     oal_set_mac_addr_zero(pst_wds_sta->auc_node_mac);
@@ -20436,10 +20436,10 @@ OAL_STATIC oal_uint32  wal_hipriv_wds_sta_age(oal_net_device_stru *pst_net_dev, 
     ul_sta_aging = (oal_uint32)oal_atoi(ac_name);
 
     /***************************************************************************
-                             抛事件到wal层处理
+                             ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_WDS_STA_AGE, OAL_SIZEOF(oal_uint8));
-    *((oal_uint32 *)(st_write_msg.auc_value)) = ul_sta_aging;  /* 获取WDS模式 */
+    *((oal_uint32 *)(st_write_msg.auc_value)) = ul_sta_aging;  /* ????WDS???? */
 
     ul_ret = (oal_uint32)wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
@@ -20469,11 +20469,11 @@ OAL_STATIC oal_uint32  wal_hipriv_rssi_limit(oal_net_device_stru *pst_net_dev, o
     mac_cfg_rssi_limit_stru        *pst_rssi_limit;
     oal_uint8                       uc_idx;
 
-    /* 设置配置命令参数,并初始化 */
+    /* ????????????????,???????? */
     pst_rssi_limit = (mac_cfg_rssi_limit_stru *)(st_write_msg.auc_value);
     oal_memset((oal_void *)pst_rssi_limit, 0, OAL_SIZEOF(mac_cfg_rssi_limit_stru));
 
-    //获取rssi_limit 参数
+    //????rssi_limit ????
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     pc_param = pc_param + ul_off_set;
     if (OAL_SUCC != ul_ret)
@@ -20482,7 +20482,7 @@ OAL_STATIC oal_uint32  wal_hipriv_rssi_limit(oal_net_device_stru *pst_net_dev, o
          return ul_ret;
     }
 
-    //根据输入的参数来获取对应的参数配置类型
+    //??????????????????????????????????????
     for (uc_idx = 0; uc_idx < MAC_RSSI_LIMIT_TYPE_BUTT; uc_idx++)
     {
         if(0 == oal_strcmp(ac_name, g_ast_mac_rssi_config_table[uc_idx].puc_car_name))
@@ -20497,7 +20497,7 @@ OAL_STATIC oal_uint32  wal_hipriv_rssi_limit(oal_net_device_stru *pst_net_dev, o
     }
     pst_rssi_limit->en_rssi_limit_type = g_ast_mac_rssi_config_table[uc_idx].en_rssi_cfg_id;
 
-    //获取参数的具体配置值
+    //????????????????????
     if (MAC_RSSI_LIMIT_SHOW_INFO != pst_rssi_limit->en_rssi_limit_type)
     {
         ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
@@ -20518,7 +20518,7 @@ OAL_STATIC oal_uint32  wal_hipriv_rssi_limit(oal_net_device_stru *pst_net_dev, o
             pst_rssi_limit->en_rssi_limit_enable_flag = (oal_bool_enum_uint8)oal_atoi(ac_name); break;
         case MAC_RSSI_LIMIT_THRESHOLD:
             pst_rssi_limit->c_rssi = (oal_int8)oal_atoi(ac_name);
-            /*若配置的rssi值超过了合法范围，函数直接返回*/
+            /*????????rssi??????????????????????????????*/
             if ((pst_rssi_limit->c_rssi < OAL_RSSI_SIGNAL_MIN) || (pst_rssi_limit->c_rssi > OAL_RSSI_SIGNAL_MAX))
             {
                 OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_hipriv_rssi_limit::rssi limit error data[%d]!}\r\n", (oal_int32)pst_rssi_limit->c_rssi);
@@ -20536,7 +20536,7 @@ OAL_STATIC oal_uint32  wal_hipriv_rssi_limit(oal_net_device_stru *pst_net_dev, o
     }
 
     /***************************************************************************
-                             抛事件到wal层处理
+                             ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_RSSI_LIMIT_CFG, OAL_SIZEOF(mac_cfg_rssi_limit_stru));
 
@@ -20569,7 +20569,7 @@ OAL_STATIC oal_uint32  wal_hipriv_report_product_log_cfg(oal_net_device_stru *ps
     oal_uint8                      *pst_product_log_param;
     oal_int32                       l_ret;
 
-    /* 设置配置命令参数 */
+    /* ???????????????? */
     pst_product_log_param = (oal_uint8 *)(st_write_msg.auc_value);
     oal_memset((oal_void *)pst_product_log_param, 0, OAL_SIZEOF(oal_uint8));
 
@@ -20583,7 +20583,7 @@ OAL_STATIC oal_uint32  wal_hipriv_report_product_log_cfg(oal_net_device_stru *ps
 
     uc_flag = (oal_uint8)oal_atoi(ac_name);
 
-    // 0 或1 控制开关; 2 读取参数值
+    // 0 ??1 ????????; 2 ??????????
     if ((0 != uc_flag ) && (1 != uc_flag ) && (2 != uc_flag ))
     {
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_hipriv_report_product_log_cfg:: input invalid[%d]}\r\n",uc_flag);
@@ -20595,7 +20595,7 @@ OAL_STATIC oal_uint32  wal_hipriv_report_product_log_cfg(oal_net_device_stru *ps
     OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_hipriv_report_product_log_cfg:: param=%d}\r\n", *pst_product_log_param);
 
     /***************************************************************************
-                             抛事件到wal层处理
+                             ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_PRODUCT_LOG, OAL_SIZEOF(oal_uint8));
 
@@ -20742,14 +20742,14 @@ OAL_STATIC oal_uint32  wal_hipriv_fast_aging_cfg(oal_net_device_stru *pst_net_de
     oal_uint8                       uc_idx;
     mac_cfg_fast_aging_stru        *pst_aging_cfg_param;
 
-    /* 设置配置命令参数 */
+    /* ???????????????? */
     pst_aging_cfg_param = (mac_cfg_fast_aging_stru *)(st_write_msg.auc_value);
     oal_memset((oal_void *)pst_aging_cfg_param, 0, OAL_SIZEOF(mac_cfg_fast_aging_stru));
 
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     pc_param = pc_param + ul_off_set;
 
-    //根据输入的参数来获取对应的参数类型
+    //??????????????????????????????????
     for (uc_idx = 0; uc_idx < MAC_FAST_AGING_TYPE_BUTT; uc_idx++)
     {
         if(0 == oal_strcmp(ac_name, g_ast_dmac_fast_aging_config_table[uc_idx].puc_string))
@@ -20765,7 +20765,7 @@ OAL_STATIC oal_uint32  wal_hipriv_fast_aging_cfg(oal_net_device_stru *pst_net_de
     pst_aging_cfg_param->en_cmd = g_ast_dmac_fast_aging_config_table[uc_idx].en_fast_aging_cfg_id;
 
 
-    //获取具体数值
+    //????????????
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     pc_param = pc_param + ul_off_set;
     if (OAL_SUCC != ul_ret)
@@ -20775,7 +20775,7 @@ OAL_STATIC oal_uint32  wal_hipriv_fast_aging_cfg(oal_net_device_stru *pst_net_de
     }
 
     l_tmp = (oal_int32)oal_atoi(ac_name);
-    //参数需要 >= 0 且< 10*1000
+    //???????? >= 0 ??< 10*1000
     if ((l_tmp < 0) || (l_tmp > 10*1000))
     {
         OAM_WARNING_LOG1(0, OAM_SF_CAR, "{wal_hipriv_fast_aging_cfg::  car param[%d] invalid! }\r\n", oal_atoi(ac_name));
@@ -20817,7 +20817,7 @@ OAL_STATIC oal_uint32  wal_hipriv_fast_aging_cfg(oal_net_device_stru *pst_net_de
     }
 
 /***************************************************************************
-                             抛事件到wal层处理
+                             ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_FAST_AGING, OAL_SIZEOF(mac_cfg_fast_aging_stru));
 
@@ -20861,11 +20861,11 @@ OAL_STATIC oal_uint32  wal_hipriv_car_cfg(oal_net_device_stru *pst_net_dev, oal_
     oal_uint8                       uc_idx;
     mac_cfg_car_stru               *pst_car_cfg_param;
 
-    /* 设置配置命令参数 */
+    /* ???????????????? */
     pst_car_cfg_param = (mac_cfg_car_stru *)(st_write_msg.auc_value);
     oal_memset((oal_void *)pst_car_cfg_param, 0, OAL_SIZEOF(mac_cfg_car_stru));
 
-    //获取device 或者 vap 或者 user 或者 timer 或者 enable
+    //????device ???? vap ???? user ???? timer ???? enable
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     pc_param = pc_param + ul_off_set;
     if (OAL_SUCC != ul_ret)
@@ -20874,7 +20874,7 @@ OAL_STATIC oal_uint32  wal_hipriv_car_cfg(oal_net_device_stru *pst_net_dev, oal_
          return ul_ret;
     }
 
-    //根据输入的参数来获取对应的参数类型
+    //??????????????????????????????????
     for (uc_idx = 0; uc_idx < MAC_CAR_TYPE_BUTT; uc_idx++)
     {
         if(0 == oal_strcmp(ac_name, g_ast_hmac_car_config_table[uc_idx].puc_car_name))
@@ -20889,7 +20889,7 @@ OAL_STATIC oal_uint32  wal_hipriv_car_cfg(oal_net_device_stru *pst_net_dev, oal_
     }
     pst_car_cfg_param->en_car_flag = g_ast_hmac_car_config_table[uc_idx].en_car_cfg_id;
 
-    //如果是device_bw、vap_bw、user_bw，需要获取on或者down
+    //??????device_bw??vap_bw??user_bw??????????on????down
     if ((MAC_CAR_DEVICE_LIMIT == pst_car_cfg_param->en_car_flag) || (MAC_CAR_VAP_LIMIT == pst_car_cfg_param->en_car_flag)|| (MAC_CAR_USER_LIMIT == pst_car_cfg_param->en_car_flag))
     {
         ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
@@ -20907,7 +20907,7 @@ OAL_STATIC oal_uint32  wal_hipriv_car_cfg(oal_net_device_stru *pst_net_dev, oal_
             return OAL_FAIL;
         }
     }
-    //如果是user的话，要获取mac地址
+    //??????user????????????mac????
     if (MAC_CAR_USER_LIMIT == pst_car_cfg_param->en_car_flag)
     {
         ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
@@ -20917,11 +20917,11 @@ OAL_STATIC oal_uint32  wal_hipriv_car_cfg(oal_net_device_stru *pst_net_dev, oal_
              OAM_WARNING_LOG1(0, OAM_SF_CAR, "{wal_hipriv_car_cfg::wal_get_cmd_one_arg_etc return err_code [%d]!}\r\n", ul_ret);
              return ul_ret;
         }
-        /* 获取mac地址 */
+        /* ????mac???? */
         oal_strtoaddr(ac_name, pst_car_cfg_param->auc_user_macaddr);
     }
 
-    //不是show_info时，获取limit_kbps 或者timer_cycle 或者car_enable
+    //????show_info????????limit_kbps ????timer_cycle ????car_enable
     if ((MAC_CAR_SHOW_INFO != pst_car_cfg_param->en_car_flag))
     {
         ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
@@ -20932,7 +20932,7 @@ OAL_STATIC oal_uint32  wal_hipriv_car_cfg(oal_net_device_stru *pst_net_dev, oal_
              return ul_ret;
         }
 
-        //参数需要 >= 0 且配置限速不能超过1000*1024kbps
+        //???????? >= 0 ??????????????????1000*1024kbps
         if ((0 > oal_atoi(ac_name)) || (1000*1024 < oal_atoi(ac_name)))
         {
             OAM_WARNING_LOG1(0, OAM_SF_CAR, "{wal_hipriv_car_cfg::  car param[%d] invalid! }\r\n", oal_atoi(ac_name));
@@ -20973,7 +20973,7 @@ OAL_STATIC oal_uint32  wal_hipriv_car_cfg(oal_net_device_stru *pst_net_dev, oal_
     }
 
     /***************************************************************************
-                             抛事件到wal层处理
+                             ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_CAR_CFG, OAL_SIZEOF(mac_cfg_car_stru));
 
@@ -21011,7 +21011,7 @@ OAL_STATIC oal_int32 wal_ioctl_set_hwaddr(oal_net_device_stru *pst_net_dev, oal_
     oal_int32                    l_ret;
     wal_msg_write_stru          st_write_msg;
     oal_sockaddr_stru           st_addr;
-    oal_int8                    cmd_str[20] = {0};     /* 预留字符串空间 */
+    oal_int8                    cmd_str[20] = {0};     /* ?????????????? */
     mac_cfg_staion_id_param_stru *pst_cfg = OAL_PTR_NULL;
     mac_vap_stru                 *pst_mac_vap;
 
@@ -21038,7 +21038,7 @@ OAL_STATIC oal_int32 wal_ioctl_set_hwaddr(oal_net_device_stru *pst_net_dev, oal_
 
     ul_ret = oal_copy_from_user(cmd_str, pst_param->pointer, pst_param->length);
 
-    /* copy_from_user函数的目的是从用户空间拷贝数据到内核空间，失败返回没有被拷贝的字节数，成功返回0 */
+    /* copy_from_user??????????????????????????????????????????????????????????????????????????????0 */
     if (ul_ret > 0)
     {
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_ioctl_set_hwaddr::oal_copy_from_user return error code %d!}\r\n", ul_ret);
@@ -21071,15 +21071,15 @@ OAL_STATIC oal_int32 wal_ioctl_set_hwaddr(oal_net_device_stru *pst_net_dev, oal_
 #endif
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
-    /* 填写消息 */
+    /* ???????? */
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_HWADDR, OAL_SIZEOF(mac_cfg_staion_id_param_stru));
 
-    pst_cfg = (mac_cfg_staion_id_param_stru *)st_write_msg.auc_value;   /* 填写WID对应的参数 */
+    pst_cfg = (mac_cfg_staion_id_param_stru *)st_write_msg.auc_value;   /* ????WID?????????? */
     oal_set_mac_addr(pst_cfg->auc_station_id, (oal_uint8 *)(st_addr.sa_data));
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(mac_cfg_staion_id_param_stru),
@@ -21101,7 +21101,7 @@ OAL_STATIC oal_int32 wal_ioctl_setmac(oal_net_device_stru *pst_net_dev, oal_iw_r
     oal_int8                                        *puc_str = 0;
     mac_cfg_kick_user_param_stru                    *pst_kick_user_param;
     oal_uint32                                      ul_ret;
-    oal_int8                                         uc_str[40] = {0};     /* 预留字符串空间 */
+    oal_int8                                         uc_str[40] = {0};     /* ?????????????? */
     oal_uint32                                      ul_off_set = 0;
 #if (_PRE_WLAN_FEATURE_BLACKLIST_LEVEL != _PRE_WLAN_FEATURE_BLACKLIST_NONE)
     mac_blacklist_stru                              *pst_blklst;
@@ -21121,7 +21121,7 @@ OAL_STATIC oal_int32 wal_ioctl_setmac(oal_net_device_stru *pst_net_dev, oal_iw_r
     puc_str  = (oal_int8 *)pst_param->pointer;
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
 
     switch (us_subid)
@@ -21151,7 +21151,7 @@ OAL_STATIC oal_int32 wal_ioctl_setmac(oal_net_device_stru *pst_net_dev, oal_iw_r
                 return OAL_FAIL;
             }
             oal_strtoaddr(uc_str, st_write_msg.auc_value);
-            /* 偏移，取下一个参数 */
+            /* ?????????????????? */
             puc_str = puc_str + ul_off_set;
             ul_ret = wal_get_cmd_one_arg_etc(puc_str, uc_str, &ul_off_set);
             if (OAL_SUCC != ul_ret)
@@ -21171,7 +21171,7 @@ OAL_STATIC oal_int32 wal_ioctl_setmac(oal_net_device_stru *pst_net_dev, oal_iw_r
             *((oal_int32 *)(st_write_msg.auc_value)) = 1;
             WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_BLACKLIST_MODE, OAL_SIZEOF(oal_int32));
 
-            /* 发送消息 */
+            /* ???????? */
             l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                        WAL_MSG_TYPE_WRITE,
                                        WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(oal_int32),
@@ -21194,7 +21194,7 @@ OAL_STATIC oal_int32 wal_ioctl_setmac(oal_net_device_stru *pst_net_dev, oal_iw_r
                 return OAL_FAIL;
             }
             oal_strtoaddr(uc_str, pst_blklst->auc_mac_addr);
-            /* 偏移，取下一个参数 */
+            /* ?????????????????? */
             puc_str = puc_str + ul_off_set;
             ul_ret = wal_get_cmd_one_arg_etc(puc_str, uc_str, &ul_off_set);
             if (OAL_SUCC != ul_ret)
@@ -21220,7 +21220,7 @@ OAL_STATIC oal_int32 wal_ioctl_setmac(oal_net_device_stru *pst_net_dev, oal_iw_r
 
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, us_subid, us_len);
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + us_len,
@@ -21280,7 +21280,7 @@ OAL_STATIC oal_int32  wal_ioctl_get_stru_param(oal_net_device_stru *pst_net_dev,
         /*lint -e730*/
         l_ret = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT((pst_hmac_vap->query_wait_q), (OAL_TRUE == pst_hmac_vap->auc_query_flag[QUERY_ID_PWR_REF]), (5*OAL_TIME_HZ));
         /*lint +e730*/
-        if (l_ret <= 0) /* 等待超时或异常 */
+        if (l_ret <= 0) /* ?????????????? */
         {
             OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "wal_ioctl_get_stru_param: query pwr ref timeout. ret:%d", l_ret);
         }
@@ -21290,7 +21290,7 @@ OAL_STATIC oal_int32  wal_ioctl_get_stru_param(oal_net_device_stru *pst_net_dev,
     else
     {
         /***************************************************************************
-            抛事件到wal层处理
+            ????????wal??????
         ***************************************************************************/
         l_ret = wal_send_cfg_event_etc(pst_net_dev,
                             WAL_MSG_TYPE_QUERY,
@@ -21305,7 +21305,7 @@ OAL_STATIC oal_int32  wal_ioctl_get_stru_param(oal_net_device_stru *pst_net_dev,
             return l_ret;
         }
 
-        /* 处理返回消息 */
+        /* ???????????? */
         pst_query_rsp_msg = (wal_msg_rsp_stru *)(pst_rsp_msg->auc_msg_data);
         if(!pst_query_rsp_msg->us_len)
         {
@@ -21315,7 +21315,7 @@ OAL_STATIC oal_int32  wal_ioctl_get_stru_param(oal_net_device_stru *pst_net_dev,
         }
         switch (ul_subioctl_id)
         {
-            /* 业务处理 */
+            /* ???????? */
             case WLAN_CFGID_GET_VAP_CAP:
             {
                 mac_vap_param_stru *pst_vap_param;
@@ -21366,12 +21366,12 @@ oal_int32  wal_io2cfg_get_chan_info(oal_net_device_stru *pst_net_dev, mac_cfg_ch
     mac_cfg_mode_param_stru        *pst_mode_param;
     mac_vap_stru                   *pst_mac_vap;
 
-    /* 获取vap id */
+    /* ????vap id */
     pst_mac_vap = OAL_NET_DEV_PRIV(pst_net_dev);
 
     st_query_msg.en_wid = WLAN_CFGID_MODE;
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_QUERY,
                                WAL_MSG_WID_LENGTH,
@@ -21385,7 +21385,7 @@ oal_int32  wal_io2cfg_get_chan_info(oal_net_device_stru *pst_net_dev, mac_cfg_ch
         return l_ret;
     }
 
-    /* 处理返回消息 */
+    /* ???????????? */
     pst_query_rsp_msg = (wal_msg_rsp_stru *)(pst_rsp_msg->auc_msg_data);
     pst_mode_param = (mac_cfg_mode_param_stru *)(pst_query_rsp_msg->auc_value);
 
@@ -21408,7 +21408,7 @@ oal_int32  wal_io2cfg_get_chan_info(oal_net_device_stru *pst_net_dev, mac_cfg_ch
             }
         }
     }
-    /* STA模式下频段和频段在和AP关联之后自适应，此处仅比较协议模式 */
+    /* STA????????????????????AP?????????????????????????????????? */
     else if (WLAN_VAP_MODE_BSS_STA == pst_mac_vap->en_vap_mode)
     {
         for (uc_prot_idx = 0; OAL_PTR_NULL != g_ast_mode_map_etc[uc_prot_idx].pc_name; uc_prot_idx++)
@@ -21441,11 +21441,11 @@ oal_int32  wal_io2cfg_get_chan_info(oal_net_device_stru *pst_net_dev, mac_cfg_ch
     oal_free(pst_rsp_msg);
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     st_query_msg.en_wid = WLAN_CFGID_CHANNEL;
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_QUERY,
                                WAL_MSG_WID_LENGTH,
@@ -21459,10 +21459,10 @@ oal_int32  wal_io2cfg_get_chan_info(oal_net_device_stru *pst_net_dev, mac_cfg_ch
         return l_ret;
     }
 
-    /* 处理返回消息 */
+    /* ???????????? */
     pst_query_rsp_msg = (wal_msg_rsp_stru *)(pst_rsp_msg->auc_msg_data);
 
-    /* 业务处理 */
+    /* ???????? */
     pst_channel_param->uc_channel = *((oal_uint8 *)(pst_query_rsp_msg->auc_value));
 
     oal_free(pst_rsp_msg);
@@ -21487,7 +21487,7 @@ OAL_STATIC oal_int32  wal_ioctl_priv_set_essid(oal_net_device_stru *pst_net_dev,
 
     if (WLAN_VAP_MODE_BSS_AP == pst_mac_vap->en_vap_mode)
     {
-        /* 设备在up状态且是AP时，不允许配置，必须先down */
+        /* ??????up????????AP??????????????????????down */
         if (0 != (OAL_IFF_RUNNING & OAL_NETDEVICE_FLAGS(pst_net_dev)))
         {
             OAM_ERROR_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{wal_ioctl_priv_set_essid::device is busy, please down it firste %d!}\r\n", OAL_NETDEVICE_FLAGS(pst_net_dev));
@@ -21495,30 +21495,30 @@ OAL_STATIC oal_int32  wal_ioctl_priv_set_essid(oal_net_device_stru *pst_net_dev,
         }
     }
 
-    pc_ssid = oal_strim(pc_ssid);                   /* 去掉字符串开始结尾的空格 */
+    pc_ssid = oal_strim(pc_ssid);                   /* ???????????????????????? */
 
     OAM_WARNING_LOG0(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{wal_ioctl_priv_set_essid:: pst_data->flags, pst_data->lengt !}\r\n");
 
-    //uc_ssid_len = (oal_uint8)pst_data->length;    /* 长度不包括 \0 */
+    //uc_ssid_len = (oal_uint8)pst_data->length;    /* ?????????? \0 */
     uc_ssid_len = (oal_uint8)OAL_STRLEN(pc_ssid);
 
-    if (uc_ssid_len > WLAN_SSID_MAX_LEN - 1)        /* -1为\0预留空间 */
+    if (uc_ssid_len > WLAN_SSID_MAX_LEN - 1)        /* -1??\0???????? */
     {
         uc_ssid_len = WLAN_SSID_MAX_LEN - 1;
     }
 
     OAM_INFO_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{wal_ioctl_priv_set_essid:: ssid length is %d!}\r\n", uc_ssid_len);
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SSID, OAL_SIZEOF(mac_cfg_ssid_param_stru));
 
-    /* 填写WID对应的参数 */
+    /* ????WID?????????? */
     pst_param = (mac_cfg_ssid_param_stru *)(st_write_msg.auc_value);
     pst_param->uc_ssid_len = uc_ssid_len;
     oal_memcopy(pst_param->ac_ssid, pc_ssid, uc_ssid_len);
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(mac_cfg_ssid_param_stru),
@@ -21549,12 +21549,12 @@ OAL_STATIC oal_int32  wal_ioctl_priv_get_mode(oal_net_device_stru *pst_net_dev, 
     mac_vap_stru                   *pst_mac_vap;
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
 
     st_query_msg.en_wid = WLAN_CFGID_MODE;
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_QUERY,
                                WAL_MSG_WID_LENGTH,
@@ -21568,10 +21568,10 @@ OAL_STATIC oal_int32  wal_ioctl_priv_get_mode(oal_net_device_stru *pst_net_dev, 
         return l_ret;
     }
 
-    /* 处理返回消息 */
+    /* ???????????? */
     pst_query_rsp_msg = (wal_msg_rsp_stru *)(pst_rsp_msg->auc_msg_data);
 
-    /* 业务处理 */
+    /* ???????? */
     pst_point = (oal_iw_point_stru *)p_param;
 
     pst_mode_param = (mac_cfg_mode_param_stru *)(pst_query_rsp_msg->auc_value);
@@ -21627,11 +21627,11 @@ OAL_STATIC oal_int32  wal_ioctl_priv_get_essid(oal_net_device_stru *pst_net_dev,
     wal_msg_rsp_stru               *pst_query_rsp_msg;
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     st_query_msg.en_wid = WLAN_CFGID_SSID;
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_QUERY,
                                WAL_MSG_WID_LENGTH,
@@ -21645,12 +21645,12 @@ OAL_STATIC oal_int32  wal_ioctl_priv_get_essid(oal_net_device_stru *pst_net_dev,
         return l_ret;
     }
 
-    /* 处理返回消息 */
+    /* ???????????? */
     pst_query_rsp_msg = (wal_msg_rsp_stru *)(pst_rsp_msg->auc_msg_data);
-    /* 业务处理 */
+    /* ???????? */
     pst_ssid = (mac_cfg_ssid_param_stru *)(pst_query_rsp_msg->auc_value);
 
-    pst_data->flags = 1;    /* 设置出参标志为有效 */
+    pst_data->flags = 1;    /* ?????????????????? */
     pst_data->length = pst_ssid->uc_ssid_len;
 
     oal_memcopy(pc_ssid, pst_ssid->ac_ssid, pst_ssid->uc_ssid_len);
@@ -21665,7 +21665,7 @@ OAL_STATIC oal_int32 wal_ioctl_priv_set_mode(oal_net_device_stru *pst_net_dev, o
     oal_iw_point_stru          *pst_param;
     oal_uint32                  ul_ret;
     oal_int32                   l_ret;
-    oal_int8                    ac_mode_str[24] = {0};     /* 预留协议模式字符串空间 */
+    oal_int8                    ac_mode_str[24] = {0};     /* ?????????????????????? */
     oal_int8                    ac_result[100] = {0};
     oal_uint8                   uc_prot_idx;
     mac_cfg_mode_param_stru    *pst_mode_param;
@@ -21697,7 +21697,7 @@ OAL_STATIC oal_int32 wal_ioctl_priv_set_mode(oal_net_device_stru *pst_net_dev, o
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 遍历device下所有vap */
+    /* ????device??????vap */
     for (uc_vap_idx = 0; uc_vap_idx < pst_mac_device->uc_vap_num; uc_vap_idx++)
     {
         pst_vap = (mac_vap_stru *)mac_res_get_mac_vap(pst_mac_device->auc_vap_id[uc_vap_idx]);
@@ -21708,7 +21708,7 @@ OAL_STATIC oal_int32 wal_ioctl_priv_set_mode(oal_net_device_stru *pst_net_dev, o
             continue;
         }
 #ifndef _PRE_WLAN_FEATURE_EQUIPMENT_TEST
-        /* 设备在up状态不允许配置，必须先down */
+        /* ??????up??????????????????????down */
         if (pst_vap->en_vap_state != MAC_VAP_STATE_INIT)
         {
             OAM_ERROR_LOG2(pst_vap->uc_vap_id, OAM_SF_ANY, "{wal_ioctl_priv_set_mode::device is busy, please down it first, vap id: %d, state: %d!}\r\n",
@@ -21721,21 +21721,21 @@ OAL_STATIC oal_int32 wal_ioctl_priv_set_mode(oal_net_device_stru *pst_net_dev, o
     pst_param = (oal_iw_point_stru *)p_param;
     OAM_INFO_LOG1(0, OAM_SF_ANY, "{wal_ioctl_priv_set_mode::input str length is %d!}\r\n", pst_param->length);
 
-    if (pst_param->length > OAL_SIZEOF(ac_mode_str))    /* 字符串切断, 长度包括\0 */
+    if (pst_param->length > OAL_SIZEOF(ac_mode_str))    /* ??????????, ????????\0 */
     {
         pst_param->length =  OAL_SIZEOF(ac_mode_str);
     }
 
     ul_ret = oal_copy_from_user(ac_mode_str, pst_param->pointer, pst_param->length);
 
-    /* copy_from_user函数的目的是从用户空间拷贝数据到内核空间，失败返回没有被拷贝的字节数，成功返回0 */
+    /* copy_from_user??????????????????????????????????????????????????????????????????????????????0 */
     if (ul_ret > 0)
     {
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_ioctl_priv_set_mode::oal_copy_from_user return error code %d!}\r\n", ul_ret);
         return -OAL_EFAUL;
     }
 
-    ac_mode_str[OAL_SIZEOF(ac_mode_str) - 1] = '\0';    /* 确保以null结尾 */
+    ac_mode_str[OAL_SIZEOF(ac_mode_str) - 1] = '\0';    /* ??????null???? */
 
     for (uc_prot_idx = 0; OAL_PTR_NULL != g_ast_mode_map_etc[uc_prot_idx].pc_name; uc_prot_idx++)
     {
@@ -21754,7 +21754,7 @@ OAL_STATIC oal_int32 wal_ioctl_priv_set_mode(oal_net_device_stru *pst_net_dev, o
     }
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_PRIV_MODE, OAL_SIZEOF(mac_cfg_mode_param_stru));
 
@@ -21763,11 +21763,11 @@ OAL_STATIC oal_int32 wal_ioctl_priv_set_mode(oal_net_device_stru *pst_net_dev, o
     pst_mode_param->en_band      = g_ast_mode_map_etc[uc_prot_idx].en_band;
     pst_mode_param->en_bandwidth = g_ast_mode_map_etc[uc_prot_idx].en_bandwidth;
 
-    //用户设置的模式字符串可能未携带带宽扩展信息或者携带的带宽扩展信息与当前信道不匹配
-    //驱动会根据当前信道自动匹配合适的带宽扩展方向
+    //????????????????????????????????????????????????????????????????????????????????
+    //????????????????????????????????????????????
     if(0 == pst_mac_vap->st_channel.uc_chan_number || (MAC_ACS_SW_INIT == mac_get_acs_switch(pst_mac_device)))
     {
-        //信道号还未设置且未设置带宽扩展方向时，驱动先设置一个默认的扩展方向
+        //??????????????????????????????????????????????????????????????????
         if(WLAN_BAND_WIDTH_40M == pst_mode_param->en_bandwidth)
         {
             pst_mode_param->en_bandwidth = WLAN_BAND_WIDTH_40PLUS;
@@ -21788,7 +21788,7 @@ OAL_STATIC oal_int32 wal_ioctl_priv_set_mode(oal_net_device_stru *pst_net_dev, o
                      pst_mode_param->en_bandwidth,
                      pst_mac_vap->st_channel.uc_chan_number);
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(mac_cfg_mode_param_stru),
@@ -21802,7 +21802,7 @@ OAL_STATIC oal_int32 wal_ioctl_priv_set_mode(oal_net_device_stru *pst_net_dev, o
         return l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_ret = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_ret)
     {
@@ -21821,7 +21821,7 @@ OAL_STATIC oal_int32  wal_ioctl_get_sta_stat_info(oal_net_device_stru *pst_net_d
 {
     oal_iw_point_stru           *pst_param;
     oal_uint32                  ul_ret;
-    oal_int8                    cmd_str[20] = {0};     /* 预留字符串空间 */
+    oal_int8                    cmd_str[20] = {0};     /* ?????????????? */
     oal_uint8                   auc_mac[WLAN_MAC_ADDR_LEN];
     oal_sockaddr_stru           st_addr;
     oal_int                     *param;
@@ -21844,7 +21844,7 @@ OAL_STATIC oal_int32  wal_ioctl_get_sta_stat_info(oal_net_device_stru *pst_net_d
 
     ul_ret = oal_copy_from_user(cmd_str, pst_param->pointer, pst_param->length);
 
-    /* copy_from_user函数的目的是从用户空间拷贝数据到内核空间，失败返回没有被拷贝的字节数，成功返回0 */
+    /* copy_from_user??????????????????????????????????????????????????????????????????????????????0 */
     if (ul_ret > 0)
     {
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_ioctl_get_sta_stat_info::oal_copy_from_user return error code %d!}\r\n", ul_ret);
@@ -21861,7 +21861,7 @@ OAL_STATIC oal_int32  wal_ioctl_get_sta_stat_info(oal_net_device_stru *pst_net_d
     if (WLAN_CFGID_QUERY_RSSI == ul_subioctl_id)
     {
         param = (oal_int *)pc_extra;
-        /* 回填rssi值 */
+        /* ????rssi?? */
         param[0] = wal_config_get_sta_rssi(pst_net_dev, auc_mac, (oal_uint8 *)pc_extra);
         pst_param->length = OAL_SIZEOF(oal_int);
 
@@ -21870,7 +21870,7 @@ OAL_STATIC oal_int32  wal_ioctl_get_sta_stat_info(oal_net_device_stru *pst_net_d
 #ifdef _PRE_WLAN_11K_STAT
     else if (WLAN_CFGID_QUERY_DROP_NUM == ul_subioctl_id)
     {
-        /* 回填队尾丢包数 */
+        /* ?????????????? */
         pst_ul_param = wal_config_get_sta_drop_num(pst_net_dev, auc_mac, (oal_uint8 *)pc_extra);
         if(OAL_PTR_NULL == pst_ul_param)
         {
@@ -21884,7 +21884,7 @@ OAL_STATIC oal_int32  wal_ioctl_get_sta_stat_info(oal_net_device_stru *pst_net_d
     }
     else if (WLAN_CFGID_QUERY_TX_DELAY == ul_subioctl_id)
     {
-        /* 回填报文延时值 */
+        /* ?????????????? */
         pst_ul_param = wal_config_get_sta_tx_delay(pst_net_dev, auc_mac, (oal_uint8 *)pc_extra);
         if(OAL_PTR_NULL == pst_ul_param)
         {
@@ -21933,7 +21933,7 @@ OAL_STATIC oal_uint32 wal_hipriv_80m_rts_debug(oal_net_device_stru *pst_net_dev,
     oal_uint8                      *pst_param;
     oal_int32                       l_ret;
 
-    /* 设置配置命令参数 */
+    /* ???????????????? */
     pst_param = (oal_uint8 *)(st_write_msg.auc_value);
     oal_memset((oal_void *)pst_param, 0, OAL_SIZEOF(oal_uint8));
 
@@ -21949,7 +21949,7 @@ OAL_STATIC oal_uint32 wal_hipriv_80m_rts_debug(oal_net_device_stru *pst_net_dev,
     *pst_param = uc_flag;
 
     /***************************************************************************
-                            抛事件到wal层处理
+                            ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_80M_RTS_DEBUG, OAL_SIZEOF(oal_uint8));
 
@@ -22004,7 +22004,7 @@ OAL_STATIC oal_int32  wal_ioctl_get_cali_power(oal_net_device_stru *pst_net_dev,
     }
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     pst_hmac_vap->station_info_query_completed_flag = OAL_FALSE;
 
@@ -22016,7 +22016,7 @@ OAL_STATIC oal_int32  wal_ioctl_get_cali_power(oal_net_device_stru *pst_net_dev,
     if (OAL_SUCC != ul_ret)
     {
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_ioctl_get_cali_power::wal_get_cmd_one_arg_etc ch return err_code %d!}\r\n", ul_ret);
-        /* 不跟参数，则获取所有cali power值 */
+        /* ????????????????????cali power?? */
         pst_power_param->uc_ch = 2;
     }
     else
@@ -22056,7 +22056,7 @@ OAL_STATIC oal_int32  wal_ioctl_get_cali_power(oal_net_device_stru *pst_net_dev,
         return l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_ret = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_ret)
     {
@@ -22064,19 +22064,19 @@ OAL_STATIC oal_int32  wal_ioctl_get_cali_power(oal_net_device_stru *pst_net_dev,
         return -((oal_int32)ul_ret);
     }
 
-        /*阻塞等待dmac上报*/
+        /*????????dmac????*/
     i_leftime = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT(pst_hmac_vap->query_wait_q,(oal_uint32)(OAL_TRUE == pst_hmac_vap->station_info_query_completed_flag),WAL_ATCMDSRB_GET_RX_PCKT);
 
     if ( 0 == i_leftime)
     {
-        /* 超时还没有上报扫描结束 */
+        /* ?????????????????????? */
         OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{wal_ioctl_get_cali_power wait for %ld ms timeout!}",
                          ((WAL_ATCMDSRB_DBB_NUM_TIME * 1000)/OAL_TIME_HZ));
         return -OAL_ETIMEDOUT;
     }
     else if (i_leftime < 0)
     {
-        /* 定时器内部错误 */
+        /* ?????????????? */
         OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{wal_ioctl_get_cali_power wait for %ld ms error!}",
                          ((WAL_ATCMDSRB_DBB_NUM_TIME * 1000)/OAL_TIME_HZ));
         return -OAL_ETIMEDOUT;
@@ -22128,7 +22128,7 @@ oal_int32  wal_ioctl_get_power_param(oal_net_device_stru *pst_net_dev, oal_iw_re
     }
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     pst_hmac_vap->station_info_query_completed_flag = OAL_FALSE;
 
@@ -22140,19 +22140,19 @@ oal_int32  wal_ioctl_get_power_param(oal_net_device_stru *pst_net_dev, oal_iw_re
          return -((oal_int32)ul_ret);
     }
 
-        /*阻塞等待dmac上报*/
+        /*????????dmac????*/
     i_leftime = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT(pst_hmac_vap->query_wait_q,(oal_uint32)(OAL_TRUE == pst_hmac_vap->station_info_query_completed_flag),WAL_ATCMDSRB_GET_RX_PCKT);
 
     if ( 0 == i_leftime)
     {
-        /* 超时还没有上报扫描结束 */
+        /* ?????????????????????? */
         OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{wal_ioctl_get_power_param wait for %ld ms timeout!}",
                          ((WAL_ATCMDSRB_DBB_NUM_TIME * 1000)/OAL_TIME_HZ));
         return -OAL_ETIMEDOUT;
     }
     else if (i_leftime < 0)
     {
-        /* 定时器内部错误 */
+        /* ?????????????? */
         OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{wal_ioctl_get_power_param ait for %ld ms error!}",
                          ((WAL_ATCMDSRB_DBB_NUM_TIME * 1000)/OAL_TIME_HZ));
         return -OAL_ETIMEDOUT;
@@ -22212,7 +22212,7 @@ OAL_STATIC oal_int32  wal_ioctl_get_upc_params(oal_net_device_stru *pst_net_dev,
     }
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     pst_hmac_vap->station_info_query_completed_flag = OAL_FALSE;
 
@@ -22231,7 +22231,7 @@ OAL_STATIC oal_int32  wal_ioctl_get_upc_params(oal_net_device_stru *pst_net_dev,
         return (oal_uint32)l_ret;
     }
 
-    /* 读取返回的错误码 */
+    /* ???????????????? */
     ul_ret = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
     if(OAL_SUCC != ul_ret)
     {
@@ -22239,19 +22239,19 @@ OAL_STATIC oal_int32  wal_ioctl_get_upc_params(oal_net_device_stru *pst_net_dev,
         return ul_ret;
     }
 
-    /*阻塞等待dmac上报*/
+    /*????????dmac????*/
     i_leftime = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT(pst_hmac_vap->query_wait_q,(oal_uint32)(OAL_TRUE == pst_hmac_vap->station_info_query_completed_flag),WAL_ATCMDSRB_GET_RX_PCKT);
 
     if ( 0 == i_leftime)
     {
-        /* 超时还没有上报扫描结束 */
+        /* ?????????????????????? */
         OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{wal_ioctl_get_upc_param wait for %ld ms timeout!}",
                          ((WAL_ATCMDSRB_DBB_NUM_TIME * 1000)/OAL_TIME_HZ));
         return -OAL_ETIMEDOUT;
     }
     else if (i_leftime < 0)
     {
-        /* 定时器内部错误 */
+        /* ?????????????? */
         OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{wal_ioctl_get_upc_param wait for %ld ms error!}",
                          ((WAL_ATCMDSRB_DBB_NUM_TIME * 1000)/OAL_TIME_HZ));
         return -OAL_ETIMEDOUT;
@@ -22297,7 +22297,7 @@ oal_int32  wal_ioctl_get_fast_aging(oal_net_device_stru *pst_net_dev, oal_iw_req
     hmac_vap_stru                  *pst_hmac_vap;
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
         ***************************************************************************/
     st_query_msg.en_wid = (oal_uint16)WLAN_CFGID_GET_FAST_AGING;
 
@@ -22331,7 +22331,7 @@ oal_int32  wal_ioctl_get_fast_aging(oal_net_device_stru *pst_net_dev, oal_iw_req
     /*lint -e730*/
     l_ret = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT((pst_hmac_vap->query_wait_q), (OAL_TRUE == pst_hmac_vap->auc_query_flag[QUERY_ID_FAST_AGING]), (5*OAL_TIME_HZ));
     /*lint +e730*/
-    if (l_ret <= 0) /* 等待超时或异常 */
+    if (l_ret <= 0) /* ?????????????? */
     {
         OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "wal_ioctl_get_param_char: query rssi timeout. ret:%d", l_ret);
     }
@@ -22366,7 +22366,7 @@ oal_int32  wal_ioctl_get_ppm(oal_net_device_stru *pst_net_dev, oal_iw_request_in
     oal_int8                        c_ppm;
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     st_query_msg.en_wid = WLAN_CFGID_ADJUST_PPM;
 
@@ -22383,7 +22383,7 @@ oal_int32  wal_ioctl_get_ppm(oal_net_device_stru *pst_net_dev, oal_iw_request_in
         return -l_ret;
     }
 
-    /* 处理返回消息 */
+    /* ???????????? */
     pst_query_rsp_msg = (wal_msg_rsp_stru *)(pst_rsp_msg->auc_msg_data);
     c_ppm = *((oal_int8 *)(pst_query_rsp_msg->auc_value));
 
@@ -22409,7 +22409,7 @@ oal_int32  wal_ioctl_get_cali_status(oal_net_device_stru *pst_net_dev, oal_iw_re
     oal_bool_enum_uint8             en_cali_rdy;
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     st_query_msg.en_wid = WLAN_CFGID_AUTO_CALI;
 
@@ -22426,7 +22426,7 @@ oal_int32  wal_ioctl_get_cali_status(oal_net_device_stru *pst_net_dev, oal_iw_re
         return -l_ret;
     }
 
-    /* 处理返回消息 */
+    /* ???????????? */
     pst_query_rsp_msg = (wal_msg_rsp_stru *)(pst_rsp_msg->auc_msg_data);
     en_cali_rdy = *((oal_int8 *)(pst_query_rsp_msg->auc_value));
 
@@ -22467,7 +22467,7 @@ OAL_STATIC oal_int32  wal_ioctl_get_rx_info(oal_net_device_stru *pst_net_dev, oa
     }
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     pst_hmac_vap->st_atcmdsrv_get_status.uc_get_rx_pkct_flag = OAL_FALSE;
 
@@ -22479,19 +22479,19 @@ OAL_STATIC oal_int32  wal_ioctl_get_rx_info(oal_net_device_stru *pst_net_dev, oa
          goto fail;
     }
 
-        /*阻塞等待dmac上报*/
+        /*????????dmac????*/
     i_leftime = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT(pst_hmac_vap->query_wait_q,(oal_uint32)(OAL_TRUE == pst_hmac_vap->st_atcmdsrv_get_status.uc_get_rx_pkct_flag),WAL_ATCMDSRB_GET_RX_PCKT);
 
     if ( 0 == i_leftime)
     {
-        /* 超时还没有上报扫描结束 */
+        /* ?????????????????????? */
         OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{wal_ioctl_get_rx_info wait for %ld ms timeout!}",
                          ((WAL_ATCMDSRB_DBB_NUM_TIME * 1000)/OAL_TIME_HZ));
         goto fail;
     }
     else if (i_leftime < 0)
     {
-        /* 定时器内部错误 */
+        /* ?????????????? */
         OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{wal_ioctl_get_rx_info ait for %ld ms error!}",
                          ((WAL_ATCMDSRB_DBB_NUM_TIME * 1000)/OAL_TIME_HZ));
         goto fail;
@@ -22499,7 +22499,7 @@ OAL_STATIC oal_int32  wal_ioctl_get_rx_info(oal_net_device_stru *pst_net_dev, oa
     else
     {
 #if defined( _PRE_WLAN_WEB_CMD_COMM) && defined(_PRE_WLAN_11K_STAT)
-        /* 正常结束  */
+        /* ????????  */
         l_ret_len = OAL_SPRINTF(ac_result, sizeof(ac_result),
             "\nRX OK:%d"
             "\nRX ERROR:%d"
@@ -22507,7 +22507,7 @@ OAL_STATIC oal_int32  wal_ioctl_get_rx_info(oal_net_device_stru *pst_net_dev, oa
             pst_hmac_vap->st_atcmdsrv_get_status.ul_rx_pkct_succ_num,
             pst_hmac_vap->st_wme_stat.ul_rx_fail_num[OAL_WME_AC_BE]);
 #else
-        /* 正常结束  */
+        /* ????????  */
         l_ret_len = OAL_SPRINTF(ac_result, sizeof(ac_result),
             "\nRX OK:%d"
             "\nsuccess\n",
@@ -22562,7 +22562,7 @@ oal_int32  wal_ioctl_get_fem_pa_status(oal_net_device_stru *pst_net_dev, oal_iw_
     pst_hmac_vap->st_atcmdsrv_get_status.uc_check_fem_pa_flag = OAL_FALSE;
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_CHECK_FEM_PA, 0);
 
@@ -22579,11 +22579,11 @@ oal_int32  wal_ioctl_get_fem_pa_status(oal_net_device_stru *pst_net_dev, oal_iw_
         return l_ret;
     }
 
-    /*阻塞等待dmac上报*/
+    /*????????dmac????*/
     i_leftime = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT(pst_hmac_vap->query_wait_q,(OAL_TRUE == pst_hmac_vap->st_atcmdsrv_get_status.uc_check_fem_pa_flag), WAL_ATCMDSRB_NORM_TIME);
     if ( 0 == i_leftime)
     {
-        /* 超时还没有上报扫描结束 */
+        /* ?????????????????????? */
         OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{wal_ioctl_get_fem_pa_status::reg wait for %ld ms timeout!}",
                          ((WAL_ATCMDSRB_NORM_TIME * 1000)/OAL_TIME_HZ));
         //OAL_IO_PRINT("%s timeout\n", __func__);
@@ -22591,7 +22591,7 @@ oal_int32  wal_ioctl_get_fem_pa_status(oal_net_device_stru *pst_net_dev, oal_iw_
     }
     else if (i_leftime < 0)
     {
-        /* 定时器内部错误 */
+        /* ?????????????? */
         OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{wal_ioctl_get_fem_pa_status::reg wait for %ld ms error!}",
                          ((WAL_ATCMDSRB_NORM_TIME * 1000)/OAL_TIME_HZ));
         //OAL_IO_PRINT("%s error\n", __func__);
@@ -22643,7 +22643,7 @@ OAL_STATIC oal_int32  wal_ioctl_pri_chip_check(oal_net_device_stru *pst_net_dev,
     }
 
     //OAL_IO_PRINT("%s call wal_hipriv_chip_check\n", __func__);
-    /* 芯片自检 */
+    /* ???????? */
     ul_ret = wal_hipriv_chip_check(pst_net_dev, "1");
     if(OAL_SUCC != ul_ret)
     {
@@ -22655,7 +22655,7 @@ OAL_STATIC oal_int32  wal_ioctl_pri_chip_check(oal_net_device_stru *pst_net_dev,
     }
 
     //OAL_IO_PRINT("%s call wal_ioctl_get_fem_pa_status\n", __func__);
-    /* 获取fem检测结果 */
+    /* ????fem???????? */
     l_ret = wal_ioctl_get_fem_pa_status(pst_net_dev, pst_info, p_param, pc_extra);
 
     if(OAL_SUCC == l_ret)
@@ -22724,18 +22724,18 @@ OAL_STATIC oal_int32  wal_ioctl_get_sta_info(oal_net_device_stru *pst_net_dev, o
 
         if (OAL_PTR_NULL == pst_dlist_tmp)
         {
-            /* 此for循环线程会暂停，期间会有删除用户事件，会出现pst_dlist_tmp为空。为空时直接跳过获取dmac信息 */
+            /* ??for????????????????????????????????????????????pst_dlist_tmp????????????????????????dmac???? */
             break;
         }
 #if 0
         /***********************************************************************/
-        /*                  获取dmac user的RSSI信息                            */
+        /*                  ????dmac user??RSSI????                            */
         /***********************************************************************/
         OAL_MEMZERO(&st_write_msg, OAL_SIZEOF(st_write_msg));
         WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_QUERY_RSSI, OAL_SIZEOF(mac_cfg_query_rssi_stru));
         pst_query_rssi_param = (mac_cfg_query_rssi_stru *)st_write_msg.auc_value;
 
-        pst_query_rssi_param->us_user_id = pst_user_tmp->us_assoc_id; /* 将用户的id传下去 */
+        pst_query_rssi_param->us_user_id = pst_user_tmp->us_assoc_id; /* ????????id?????? */
 
         l_ret = wal_send_cfg_event_etc(pst_hmac_vap->pst_net_device,
                                    WAL_MSG_TYPE_WRITE,
@@ -22752,19 +22752,19 @@ OAL_STATIC oal_int32  wal_ioctl_get_sta_info(oal_net_device_stru *pst_net_dev, o
         /*lint -e730*/
         l_ret = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT(pst_hmac_vap->query_wait_q,(OAL_TRUE == pst_hmac_vap->station_info_query_completed_flag), 5*OAL_TIME_HZ);
         /*lint +e730*/
-        if (l_ret <= 0) /* 等待超时或异常 */
+        if (l_ret <= 0) /* ?????????????? */
         {
             OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "wal_sta_info_seq_show: query rssi timeout. ret:%d", l_ret);
         }
 #endif
         /***********************************************************************/
-        /*                  获取dmac user的速率信息                            */
+        /*                  ????dmac user??????????                            */
         /***********************************************************************/
         OAL_MEMZERO(&st_write_msg, OAL_SIZEOF(st_write_msg));
         WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_QUERY_RATE, OAL_SIZEOF(mac_cfg_query_rate_stru));
         pst_query_rate_param = (mac_cfg_query_rate_stru *)st_write_msg.auc_value;
 
-        pst_query_rate_param->us_user_id = pst_user_tmp->us_assoc_id; /* 将用户的id传下去 */
+        pst_query_rate_param->us_user_id = pst_user_tmp->us_assoc_id; /* ????????id?????? */
 
         l_ret = wal_send_cfg_event_etc(pst_hmac_vap->pst_net_device,
                                    WAL_MSG_TYPE_WRITE,
@@ -22781,7 +22781,7 @@ OAL_STATIC oal_int32  wal_ioctl_get_sta_info(oal_net_device_stru *pst_net_dev, o
         /*lint -e730*/
         l_ret = OAL_WAIT_EVENT_INTERRUPTIBLE_TIMEOUT((pst_hmac_vap->query_wait_q), (OAL_TRUE == pst_hmac_vap->station_info_query_completed_flag), (5*OAL_TIME_HZ));
         /*lint +e730*/
-        if (l_ret <= 0) /* 等待超时或异常 */
+        if (l_ret <= 0) /* ?????????????? */
         {
             OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "wal_ioctl_get_sta_info: query rate timeout. ret:%d", l_ret);
         }
@@ -22826,7 +22826,7 @@ OAL_STATIC oal_int32  wal_ioctl_set_equipment_param(oal_net_device_stru *pst_net
     oal_uint32                      ul_ret;
     oal_int32                       l_ret;
     wal_msg_write_stru              st_write_msg;
-    oal_int8                        ac_cmd_str[70] = {0};     /* 预留字符串空间 */
+    oal_int8                        ac_cmd_str[70] = {0};     /* ?????????????? */
     //oal_int8                        ac_user_param[] = "07:06:05:04:03:02 1";
     mac_vap_stru                    *pst_mac_vap;
     hmac_vap_stru                   *pst_hmac_vap;
@@ -22857,7 +22857,7 @@ OAL_STATIC oal_int32  wal_ioctl_set_equipment_param(oal_net_device_stru *pst_net
         return -OAL_EFAUL;
     }
 
-    /* copy_from_user函数的目的是从用户空间拷贝数据到内核空间，失败返回没有被拷贝的字节数，成功返回0 */
+    /* copy_from_user??????????????????????????????????????????????????????????????????????????????0 */
     if (ul_ret > 0)
     {
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{wal_ioctl_set_equipment_param::oal_copy_from_user return error code %d!}\r\n", ul_ret);
@@ -22936,9 +22936,9 @@ OAL_STATIC oal_int32  wal_ioctl_set_equipment_param(oal_net_device_stru *pst_net
 #endif
         default:
             /***************************************************************************
-            抛事件到wal层处理
+            ????????wal??????
             ***************************************************************************/
-            /* 填写消息 */
+            /* ???????? */
             oal_memcopy((oal_uint8 *)st_write_msg.auc_value, (oal_uint8 *)ac_cmd_str, (oal_uint32)us_len);
             st_write_msg.auc_value[us_len] = '\0';
             us_len = (oal_uint16)(us_len + 1);
@@ -22946,7 +22946,7 @@ OAL_STATIC oal_int32  wal_ioctl_set_equipment_param(oal_net_device_stru *pst_net
 
 
 
-            /* 发送消息 */
+            /* ???????? */
             l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                        WAL_MSG_TYPE_WRITE,
                                        WAL_MSG_WRITE_MSG_HDR_LENGTH + us_len,
@@ -22960,7 +22960,7 @@ OAL_STATIC oal_int32  wal_ioctl_set_equipment_param(oal_net_device_stru *pst_net
                 return l_ret;
             }
 
-            /* 读取返回的错误码 */
+            /* ???????????????? */
             ul_ret = wal_check_and_release_msg_resp_etc(pst_rsp_msg);
             break;
     }
@@ -22991,7 +22991,7 @@ OAL_STATIC oal_uint32  wal_ioctl_set_m2s_blacklist(oal_net_device_stru *pst_net_
     oal_int32                       l_ret;
     mac_m2s_ie_stru                *pst_m2s_ie;
 
-    /* st_write_msg作清零操作 */
+    /* st_write_msg?????????? */
     OAL_MEMZERO(&st_write_msg, OAL_SIZEOF(wal_msg_write_stru));
 
     if (uc_m2s_blacklist_cnt > WLAN_M2S_BLACKLIST_MAX_NUM)
@@ -23001,7 +23001,7 @@ OAL_STATIC oal_uint32  wal_ioctl_set_m2s_blacklist(oal_net_device_stru *pst_net_
     }
 
     /***************************************************************************
-          抛事件到wal层处理
+          ????????wal??????
       ***************************************************************************/
     pst_m2s_ie = (mac_m2s_ie_stru *)st_write_msg.auc_value;
 
@@ -23032,7 +23032,7 @@ oal_uint32  wal_ioctl_set_m2s_mss(oal_net_device_stru *pst_net_dev, oal_uint8 uc
     wal_msg_write_stru              st_write_msg;
     oal_int32                       l_ret;
 
-    /* st_write_msg作清零操作 */
+    /* st_write_msg?????????? */
     OAL_MEMZERO(&st_write_msg, OAL_SIZEOF(wal_msg_write_stru));
 
     if (uc_m2s_mode > MAC_M2S_COMMAND_MODE_GET_STATE)
@@ -23042,10 +23042,10 @@ oal_uint32  wal_ioctl_set_m2s_mss(oal_net_device_stru *pst_net_dev, oal_uint8 uc
     }
 
     /***************************************************************************
-          抛事件到wal层处理
+          ????????wal??????
       ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_M2S_MSS, OAL_SIZEOF(oal_int32));
-    *((oal_int32 *)(st_write_msg.auc_value)) = uc_m2s_mode;  /* 设置配置命令参数 */
+    *((oal_int32 *)(st_write_msg.auc_value)) = uc_m2s_mode;  /* ???????????????? */
 
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                              WAL_MSG_TYPE_WRITE,
@@ -23081,11 +23081,11 @@ OAL_STATIC oal_int32  wal_ioctl_set_suspend_mode(oal_net_device_stru *pst_net_de
     st_write_msg.auc_value[0] = uc_suspend;
 
     /***************************************************************************
-        抛事件到wal层处理
+        ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_SUSPEND_MODE, OAL_SIZEOF(uc_suspend));
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(uc_suspend),
@@ -23107,12 +23107,12 @@ OAL_STATIC oal_uint32  wal_hipriv_apf_filter_list(oal_net_device_stru *pst_net_d
 
     st_apf_filter_cmd.en_cmd_type = APF_GET_FILTER_CMD;
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_SET_APF_FILTER, OAL_SIZEOF(st_apf_filter_cmd));
     oal_memcopy(st_write_msg.auc_value, &st_apf_filter_cmd, OAL_SIZEOF(st_apf_filter_cmd));
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(st_apf_filter_cmd),
@@ -23140,11 +23140,11 @@ OAL_STATIC oal_uint32  wal_hipriv_remove_app_ie(oal_net_device_stru *pst_net_dev
     const oal_uint8              uc_remove_ie_len = 2;  /* 0/1 eid*/
 
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_REMOVE_APP_IE, uc_remove_ie_len);
 
-    /* 获取移除的类型，类型暂只支持0/1 移除或者恢复 */
+    /* ????????????????????????????0/1 ???????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -23152,7 +23152,7 @@ OAL_STATIC oal_uint32  wal_hipriv_remove_app_ie(oal_net_device_stru *pst_net_dev
         return ul_ret;
     }
     st_write_msg.auc_value[0] = (oal_uint8)oal_atoi(ac_name);
-    /* 获取操作的EID */
+    /* ??????????EID */
     pc_param += ul_off_set;
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_name, &ul_off_set);
     if (OAL_SUCC != ul_ret)
@@ -23162,7 +23162,7 @@ OAL_STATIC oal_uint32  wal_hipriv_remove_app_ie(oal_net_device_stru *pst_net_dev
     }
     st_write_msg.auc_value[1] = (oal_uint8)oal_atoi(ac_name);
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + uc_remove_ie_len,
@@ -23188,7 +23188,7 @@ OAL_STATIC oal_uint32 wal_hipriv_pkt_time_switch(oal_net_device_stru *pst_net_de
     wal_msg_write_stru  st_write_msg;
     user_delay_switch_stru st_switch_cmd;
 
-    /* 获取命令字符串 */
+    /* ?????????????? */
     ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_arg, &ul_off_set);
     if (OAL_SUCC != ul_ret)
     {
@@ -23199,7 +23199,7 @@ OAL_STATIC oal_uint32 wal_hipriv_pkt_time_switch(oal_net_device_stru *pst_net_de
     {
         st_switch_cmd.dmac_stat_enable = 1;
 
-        /*第二个参数，统计数据帧的数量*/
+        /*????????????????????????????*/
         pc_param += ul_off_set;
         ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_arg, &ul_off_set);
         if (OAL_SUCC != ul_ret)
@@ -23209,7 +23209,7 @@ OAL_STATIC oal_uint32 wal_hipriv_pkt_time_switch(oal_net_device_stru *pst_net_de
         }
         st_switch_cmd.dmac_packet_count_num = (oal_uint32)oal_atoi(ac_arg);
 
-        /*第三个参数，上报间隔*/
+        /*????????????????????*/
         pc_param += ul_off_set;
         ul_ret = wal_get_cmd_one_arg_etc(pc_param, ac_arg, &ul_off_set);
         if (OAL_SUCC != ul_ret)
@@ -23233,7 +23233,7 @@ OAL_STATIC oal_uint32 wal_hipriv_pkt_time_switch(oal_net_device_stru *pst_net_de
     }
     oal_memcopy(st_write_msg.auc_value, &st_switch_cmd,  OAL_SIZEOF(st_switch_cmd));
     /***************************************************************************
-                             抛事件到wal层处理
+                             ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_PKT_TIME_SWITCH, OAL_SIZEOF(st_switch_cmd));
     ul_ret = (oal_uint32)wal_send_cfg_event_etc(pst_net_dev,
@@ -23258,13 +23258,13 @@ OAL_STATIC oal_uint32  wal_ioctl_force_stop_filter(oal_net_device_stru *pst_net_
     wal_msg_write_stru           st_write_msg;
     oal_int32                    l_ret;
     /***************************************************************************
-                                抛事件到wal层处理
+                                ????????wal??????
     ***************************************************************************/
     WAL_WRITE_MSG_HDR_INIT(&st_write_msg, WLAN_CFGID_FORCE_STOP_FILTER, OAL_SIZEOF(oal_uint8));
 
     st_write_msg.auc_value[0] = uc_param;
 
-    /* 发送消息 */
+    /* ???????? */
     l_ret = wal_send_cfg_event_etc(pst_net_dev,
                                WAL_MSG_TYPE_WRITE,
                                WAL_MSG_WRITE_MSG_HDR_LENGTH + OAL_SIZEOF(oal_uint8),

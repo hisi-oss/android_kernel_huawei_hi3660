@@ -50,7 +50,7 @@
 #define __MNMSGTS_H__
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "vos.h"
 #include "PsLogdef.h"
@@ -74,7 +74,7 @@ extern "C" {
 #pragma pack(4)
 
 /*****************************************************************************
-  2 常量定义
+  2 ????????
 *****************************************************************************/
 
 #define MN_MSG_DAYS_IN_A_YEAR                               365
@@ -140,7 +140,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  3 宏定义
+  3 ??????
 *****************************************************************************/
 /*23040 9.2.3.1 bits no 0 and 1 of the first octet of all PDUs*/
 #define MSG_GET_TP_MTI(ucMti, ucFo)                         ((ucMti) = ((ucFo) & MN_MSG_TP_MTI_MASK))
@@ -259,13 +259,13 @@ extern "C" {
 
 
 /*****************************************************************************
-  4 接口函数声明
+  4 ????????????
 *****************************************************************************/
 /* Added by f62575 for AT Project, 2011-10-24, begin */
 
-/* Deleted by f62575 for V9R1 STK升级, 2013-6-26, begin */
+/* Deleted by f62575 for V9R1 STK????, 2013-6-26, begin */
 /* Deleted MN_UnPack7Bit */
-/* Deleted by f62575 for V9R1 STK升级, 2013-6-26, end */
+/* Deleted by f62575 for V9R1 STK????, 2013-6-26, end */
 
 
 
@@ -307,9 +307,9 @@ VOS_VOID MN_MSG_EncodeTpRd(
     VOS_UINT8                          *pucTpFo
 );
 
-/* Deleted by f62575 for V9R1 STK升级, 2013-6-26, begin */
+/* Deleted by f62575 for V9R1 STK????, 2013-6-26, begin */
 /* Deleted MN_Pack7Bit */
-/* Deleted by f62575 for V9R1 STK升级, 2013-6-26, end */
+/* Deleted by f62575 for V9R1 STK????, 2013-6-26, end */
 
 #if ((VOS_OS_VER == VOS_WIN32) || (VOS_OS_VER == VOS_NUCLEUS))
 #pragma pack()

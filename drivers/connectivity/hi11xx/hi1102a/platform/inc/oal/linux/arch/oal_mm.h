@@ -11,7 +11,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 /*lint -e322*/
 #include <linux/slab.h>
@@ -25,13 +25,13 @@ extern "C" {
 /*lint +e322*/
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
 typedef dma_addr_t  oal_dma_addr;
 
 
 /*****************************************************************************
-  3 枚举定义
+  3 ????????
 *****************************************************************************/
 typedef enum
 {
@@ -44,37 +44,37 @@ typedef oal_uint8 oal_direction_uint8;
 
 
 /*****************************************************************************
-  4 全局变量声明
+  4 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  5 消息头定义
+  5 ??????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  6 消息定义
+  6 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  7 STRUCT定义
+  7 STRUCT????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  8 UNION定义
+  8 UNION????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  9 OTHERS定义
+  9 OTHERS????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  10 函数声明
+  10 ????????
 *****************************************************************************/
 
 OAL_STATIC OAL_INLINE oal_void* oal_memalloc(oal_uint32 ul_size)
@@ -82,7 +82,7 @@ OAL_STATIC OAL_INLINE oal_void* oal_memalloc(oal_uint32 ul_size)
     oal_int32   l_flags = GFP_KERNEL;
     oal_void   *puc_mem_space;
 
-    /* 不睡眠或在中断程序中标志置为GFP_ATOMIC */
+    /* ????????????????????????????GFP_ATOMIC */
     if (in_interrupt() || irqs_disabled())
     {
         l_flags = GFP_ATOMIC;
@@ -110,7 +110,7 @@ OAL_STATIC OAL_INLINE oal_void* oal_mem_dma_blockalloc(oal_uint32 size, oal_ulon
     oal_void   *puc_mem_space;
     unsigned long timeout2, timeout1;
 
-    /* 不睡眠或在中断程序中标志置为GFP_ATOMIC */
+    /* ????????????????????????????GFP_ATOMIC */
     if (in_interrupt() || irqs_disabled() || in_atomic())
     {
         l_flags |= GFP_ATOMIC;
@@ -139,25 +139,25 @@ OAL_STATIC OAL_INLINE oal_void* oal_mem_dma_blockalloc(oal_uint32 size, oal_ulon
         if(!time_after(jiffies, timeout1))
         {
             cpu_relax();
-            continue;/*未超时，继续*/
+            continue;/*????????????*/
         }
 
         if(!time_after(jiffies, timeout2))
         {
             msleep(1);
-            continue;/*长时间未申请到，开始让出调度*/
+            continue;/*????????????????????????????*/
         }
         else
         {
             if(l_flags & __GFP_NOWARN)
             {
-                /*超时，清掉报警屏蔽标记，尝试最后一次*/
+                /*????????????????????????????????????*/
                 l_flags &= ~__GFP_NOWARN;
                 continue;
             }
             else
             {
-                /*超时返回失败*/
+                /*????????????*/
                 break;
             }
         }
@@ -189,7 +189,7 @@ OAL_STATIC OAL_INLINE oal_void* oal_memtry_alloc(oal_uint32 request_maxsize, oal
 
     *actual_size = 0;
 
-    /* 不睡眠或在中断程序中标志置为GFP_ATOMIC */
+    /* ????????????????????????????GFP_ATOMIC */
     if (in_interrupt() || irqs_disabled())
     {
         l_flags |= GFP_ATOMIC;
@@ -218,11 +218,11 @@ OAL_STATIC OAL_INLINE oal_void* oal_memtry_alloc(oal_uint32 request_maxsize, oal
 
         if(request_size <= request_minsize)
         {
-            /*以最小SIZE申请依然失败返回NULL*/
+            /*??????SIZE????????????????NULL*/
             break;
         }
 
-        /*申请失败, 折半重新申请*/
+        /*????????, ????????????*/
         request_size = request_size >> 1;
         request_size = ((request_size >= request_minsize)? request_size : request_minsize);
     }while(1);
@@ -238,7 +238,7 @@ OAL_STATIC OAL_INLINE oal_void* oal_mem_uncache_alloc(oal_uint32 ul_size, oal_ui
     oal_void   *puc_mem_space;
     oal_uint32  ul_dma_real_addr;
 
-    /* 不睡眠或在中断程序中标志置为GFP_ATOMIC */
+    /* ????????????????????????????GFP_ATOMIC */
     if (in_interrupt() || irqs_disabled())
     {
         l_flags = GFP_ATOMIC;
@@ -246,7 +246,7 @@ OAL_STATIC OAL_INLINE oal_void* oal_mem_uncache_alloc(oal_uint32 ul_size, oal_ui
 
     puc_mem_space = dma_alloc_coherent(NULL, ul_size, &ul_dma_real_addr, l_flags);
 
-    /* 保存非cache内存的物理地址 */
+    /* ??????cache?????????????? */
     *pul_phy_addr = (oal_uint32)ul_dma_real_addr;
 
     if (OAL_PTR_NULL == puc_mem_space)

@@ -7,7 +7,7 @@ extern "C" {
 #endif
 
 /*****************************************************************************
-  1 Í·ÎÄ¼þ°üº¬
+  1 ??????????
 *****************************************************************************/
 #include "oal_ext_if.h"
 #include "oam_ext_if.h"
@@ -16,17 +16,17 @@ extern "C" {
 #define THIS_FILE_ID OAM_FILE_ID_OAL_FSM_C
 
 /*****************************************************************************
-  2 È«¾Ö±äÁ¿¶¨Òå
+  2 ????????????
 *****************************************************************************/
 
 
-oal_uint32  oal_fsm_create(oal_void                   *p_oshandle,         /*×´Ì¬»úownerµÄÖ¸Õë£¬¶ÔµÍ¹¦ºÄ×´Ì¬»ú£¬Ö¸ÏòVAP½á¹¹*/
-                                const oal_uint8          *p_name,             /*×´Ì¬»úµÄÃû×Ö*/
-                                oal_void                 *p_ctx,              /*×´Ì¬»úcontext*/
-                                oal_fsm_stru             *pst_oal_fsm,        /* oal×´Ì¬»úÄÚÈÝ */
-                                oal_uint8                 uc_init_state,      /*³õÊ¼×´Ì¬*/
-                                const oal_fsm_state_info *p_state_info,       /*×´Ì¬»úÊµÀýÖ¸Õë*/
-                                oal_uint8                 uc_num_states       /*±¾×´Ì¬»úµÄ×´Ì¬¸öÊý*/
+oal_uint32  oal_fsm_create(oal_void                   *p_oshandle,         /*??????owner????????????????????????????VAP????*/
+                                const oal_uint8          *p_name,             /*????????????*/
+                                oal_void                 *p_ctx,              /*??????context*/
+                                oal_fsm_stru             *pst_oal_fsm,        /* oal?????????? */
+                                oal_uint8                 uc_init_state,      /*????????*/
+                                const oal_fsm_state_info *p_state_info,       /*??????????????*/
+                                oal_uint8                 uc_num_states       /*??????????????????*/
 )
 {
     oal_uint32      ul_loop;
@@ -43,12 +43,12 @@ oal_uint32  oal_fsm_create(oal_void                   *p_oshandle,         /*×´Ì
        return OAL_FAIL;
     }
 
-    /*¼ì²é×´Ì¬ÐÅÏ¢Ë³ÐòÊÇ·ñºÍ×´Ì¬¶¨ÒåÆ¥Åä*/
+    /*??????????????????????????????????*/
     for (ul_loop = 0;ul_loop < uc_num_states;ul_loop++)
     {
         if ((p_state_info[ul_loop].state >= OAL_FSM_MAX_STATES) || (p_state_info[ul_loop].state!=ul_loop))
         {
-            /* OAMÈÕÖ¾ÖÐ²»ÄÜÊ¹ÓÃ%s*/
+            /* OAM??????????????%s*/
             OAL_IO_PRINT("oal_fsm_create::entry %d has invalid state %d }",ul_loop,p_state_info[ul_loop].state);
             return OAL_FAIL;
         }
@@ -73,7 +73,7 @@ oal_uint32  oal_fsm_create(oal_void                   *p_oshandle,         /*×´Ì
         pst_oal_fsm->uc_name[ul_loop] = '\0';
     }
 
-    /*Æô¶¯×´Ì¬»ú*/
+    /*??????????*/
    if(pst_oal_fsm->p_state_info[pst_oal_fsm->uc_cur_state].oal_fsm_entry)
    {
        pst_oal_fsm->p_state_info[pst_oal_fsm->uc_cur_state].oal_fsm_entry(pst_oal_fsm->p_ctx);
@@ -107,13 +107,13 @@ oal_uint32 oal_fsm_trans_to_state(oal_fsm_stru* p_fsm,oal_uint8 uc_state)
         return OAL_SUCC;
     }
 
-    /*µ÷ÓÃÇ°Ò»×´Ì¬µÄÍË³öº¯Êý*/
+    /*??????????????????????*/
     if (p_fsm->p_state_info[p_fsm->uc_cur_state].oal_fsm_exit)
     {
         p_fsm->p_state_info[p_fsm->uc_cur_state].oal_fsm_exit(p_fsm->p_ctx);
     }
 
-    /*µ÷ÓÃ±¾×´Ì¬µÄ½øÈëº¯Êý*/
+    /*????????????????????*/
     if (p_fsm->p_state_info[uc_state].oal_fsm_entry)
     {
        p_fsm->p_state_info[uc_state].oal_fsm_entry(p_fsm->p_ctx);

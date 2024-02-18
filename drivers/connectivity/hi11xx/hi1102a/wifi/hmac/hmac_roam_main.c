@@ -10,7 +10,7 @@ extern "C" {
 #ifdef _PRE_WLAN_FEATURE_ROAM
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "oam_ext_if.h"
 #include "mac_ie.h"
@@ -34,7 +34,7 @@ extern "C" {
 #define THIS_FILE_ID OAM_FILE_ID_HMAC_ROAM_MAIN_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 OAL_STATIC hmac_roam_fsm_func g_hmac_roam_main_fsm_func[ROAM_MAIN_STATE_BUTT][ROAM_MAIN_FSM_EVENT_TYPE_BUTT];
 OAL_STATIC oal_uint32  hmac_roam_main_null_fn(hmac_roam_info_stru *pst_roam_info, oal_void *p_param);
@@ -54,7 +54,7 @@ OAL_STATIC oal_uint32  hmac_roam_handle_fail_handshake_phase(hmac_roam_info_stru
 OAL_STATIC oal_uint32  hmac_roam_handle_scan_result(hmac_roam_info_stru *pst_roam_info, oal_void *p_param);
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 OAL_STATIC oal_void hmac_roam_fsm_init(oal_void)
@@ -165,22 +165,22 @@ OAL_STATIC oal_uint8 hmac_roam_get_curr_cipher(mac_bss_dscr_stru *pst_bss_dscr, 
 OAL_STATIC oal_uint8 hmac_roam_select_best_cipher(mac_bss_dscr_stru *pst_bss_dscr, witp_wpa_versions_enum en_wpa_type)
 {
     oal_uint8 uc_index;
-    oal_uint8 uc_best_cipher = WLAN_80211_CIPHER_SUITE_TKIP; /* 使用优先级最低的加密能力进行初始化 */
+    oal_uint8 uc_best_cipher = WLAN_80211_CIPHER_SUITE_TKIP; /* ?????????????????????????????????? */
     oal_uint8 uc_curr_cipher;
 
-    /* pst_bss_dscr非空已在外层函数做过检查 */
+    /* pst_bss_dscr???????????????????????? */
     for (uc_index = 0; uc_index < MAC_PAIRWISE_CIPHER_SUITES_NUM; uc_index++)
     {
         uc_curr_cipher = hmac_roam_get_curr_cipher(pst_bss_dscr, en_wpa_type, uc_index);
         if (hmac_roam_is_wpa_cipher(uc_curr_cipher) &&
             (uc_curr_cipher > uc_best_cipher))
         {
-            /* 数值越大加密能力越强, 若将来协议扩展后出现反例, 此处记得修改 */
+            /* ????????????????????, ????????????????????????, ???????????? */
             uc_best_cipher = uc_curr_cipher;
         }
     }
 
-    /* 增加兼容性: bss加密信息出错的情况下尝试以TKIP加密进行漫游重关联 */
+    /* ??????????: bss??????????????????????????TKIP?????????????????? */
     return uc_best_cipher;
 }
 
@@ -239,23 +239,23 @@ OAL_STATIC oal_uint32 hmac_roam_renew_privacy(hmac_vap_stru *pst_hmac_vap, mac_b
 
     en_pmf_cap = mac_mib_get_dot11RSNAMFPC(&pst_hmac_vap->st_vap_base_info);
     en_pmf_require = mac_mib_get_dot11RSNAMFPR(&pst_hmac_vap->st_vap_base_info);
-    if ((OAL_TRUE == en_pmf_require) && (!(pst_bss_dscr->st_bss_sec_info.auc_rsn_cap[0] & BIT7)))        /* 本地强制，对端没有MFP能力*/
+    if ((OAL_TRUE == en_pmf_require) && (!(pst_bss_dscr->st_bss_sec_info.auc_rsn_cap[0] & BIT7)))        /* ??????????????????MFP????*/
     {
         OAM_WARNING_LOG0(0, OAM_SF_CFG, "{hmac_roam_renew_privacy:: vap required pmf and ap don't have pmf cap!}\r\n");
         return OAL_FAIL;
     }
-    if ((OAL_FALSE == en_pmf_cap) && (pst_bss_dscr->st_bss_sec_info.auc_rsn_cap[0] & BIT6))      /* 对端强制，本地没有MFP能力*/
+    if ((OAL_FALSE == en_pmf_cap) && (pst_bss_dscr->st_bss_sec_info.auc_rsn_cap[0] & BIT6))      /* ??????????????????MFP????*/
     {
         OAM_WARNING_LOG0(0, OAM_SF_CFG, "{hmac_roam_renew_privacy:: vap no pmf cap and ap required!!}\r\n");
         return OAL_FAIL;
     }
-    /* 当前驱动的pmf能力由wpa控制, 故漫游时不支持pmf到非pmf ap的漫游 */
-    if (pst_hmac_vap->st_vap_base_info.en_user_pmf_cap && (!(pst_bss_dscr->st_bss_sec_info.auc_rsn_cap[0] & BIT7)))  /* 原ap开pmf 目的ap无pmf */
+    /* ??????????pmf??????wpa????, ??????????????pmf????pmf ap?????? */
+    if (pst_hmac_vap->st_vap_base_info.en_user_pmf_cap && (!(pst_bss_dscr->st_bss_sec_info.auc_rsn_cap[0] & BIT7)))  /* ??ap??pmf ????ap??pmf */
     {
         OAM_WARNING_LOG0(0, OAM_SF_CFG, "{hmac_roam_renew_privacy:: can't roam to no pmf ap!!}\r\n");
         return OAL_FAIL;
     }
-    /* 直接赋值上次一次的pmf能力位 不会出现r=1 c=0的异常，故不作判断 */
+    /* ??????????????????pmf?????? ????????r=1 c=0?????????????????? */
     st_conn_sec.en_mgmt_proteced = pst_hmac_vap->st_vap_base_info.en_user_pmf_cap;
     st_conn_sec.en_pmf_cap       = en_pmf_cap + en_pmf_require;
 
@@ -288,7 +288,7 @@ oal_uint32 hmac_roam_init(hmac_vap_stru *pst_hmac_vap)
 
     if (OAL_PTR_NULL == pst_hmac_vap->pul_roam_info)
     {
-        /* 漫游主结构体内存申请 */
+        /* ???????????????????? */
         pst_hmac_vap->pul_roam_info = (oal_uint32 *)OAL_MEM_ALLOC(OAL_MEM_POOL_ID_LOCAL, OAL_SIZEOF(hmac_roam_info_stru), OAL_TRUE);
         if (OAL_PTR_NULL == pst_hmac_vap->pul_roam_info)
         {
@@ -306,7 +306,7 @@ oal_uint32 hmac_roam_init(hmac_vap_stru *pst_hmac_vap)
     pst_roam_info = (hmac_roam_info_stru *)pst_hmac_vap->pul_roam_info;
 
 
-    /* TBD 参数初始化 */
+    /* TBD ?????????? */
     oal_memset(pst_hmac_vap->pul_roam_info, 0, OAL_SIZEOF(hmac_roam_info_stru));
 #ifdef _PRE_PLAT_FEATURE_CUSTOMIZE
     pst_roam_info->uc_enable             = g_st_wlan_customize.uc_roam_switch;
@@ -488,7 +488,7 @@ OAL_STATIC oal_void hmac_roam_main_start_timer(hmac_roam_info_stru *pst_roam_inf
 
     OAM_INFO_LOG1(0, OAM_SF_ROAM, "{hmac_roam_main_start_timer [%d].}", ul_timeout);
 
-    /* 启动认证超时定时器 */
+    /* ?????????????????? */
     FRW_TIMER_CREATE_TIMER(pst_timer,
                            hmac_roam_main_timeout,
                            ul_timeout,
@@ -530,7 +530,7 @@ oal_uint32 hmac_roam_enable(hmac_vap_stru *pst_hmac_vap, oal_uint8 uc_enable)
         return OAL_FAIL;
     }
 
-    /* 设置漫游开关 */
+    /* ???????????? */
     pst_roam_info->uc_enable             = uc_enable;
     pst_roam_info->en_main_state         = ROAM_MAIN_STATE_INIT;
     OAM_INFO_LOG1(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_ROAM, "{hmac_roam_enable::SET[%d] OK!}", uc_enable);
@@ -556,7 +556,7 @@ oal_uint32 hmac_roam_org(hmac_vap_stru *pst_hmac_vap, oal_uint8 uc_scan_orthogon
         return OAL_ERR_CODE_ROAM_DISABLED;
     }
 
-    /* 设置漫游正交 */
+    /* ???????????? */
     pst_roam_info->st_config.uc_scan_orthogonal = uc_scan_orthogonal;
     OAM_INFO_LOG1(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_ROAM, "{hmac_roam_org::SET[%d] OK!}", uc_scan_orthogonal);
 
@@ -581,7 +581,7 @@ oal_uint32 hmac_roam_band(hmac_vap_stru *pst_hmac_vap, oal_uint8 uc_scan_band)
         return OAL_ERR_CODE_ROAM_DISABLED;
     }
 
-    /* 设置漫游频段 */
+    /* ???????????? */
     pst_roam_info->st_config.uc_scan_band = uc_scan_band;
     OAM_INFO_LOG1(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_ROAM, "{hmac_roam_band::SET[%d] OK!}", uc_scan_band);
 
@@ -623,9 +623,9 @@ oal_uint32 hmac_roam_start(hmac_vap_stru *pst_hmac_vap, roam_channel_org_enum_ui
         return ul_ret;
     }
 
-    /* 每次漫游前，刷新是否支持漫游到自己的参数 */
+    /* ???????????????????????????????????????? */
     pst_roam_info->st_config.uc_scan_orthogonal = en_scan_type;
-    pst_roam_info->en_current_bss_ignore = en_current_bss_ignore; /* false表示漫游到自己 */
+    pst_roam_info->en_current_bss_ignore = en_current_bss_ignore; /* false?????????????? */
     pst_roam_info->en_roam_trigger = en_roam_trigger;
 
     OAM_WARNING_LOG3(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_ROAM,
@@ -642,7 +642,7 @@ oal_uint32 hmac_roam_start(hmac_vap_stru *pst_hmac_vap, roam_channel_org_enum_ui
     {
         hmac_roam_alg_init(pst_roam_info, ROAM_RSSI_CMD_TYPE);
     }
-    /* 触发漫游是否搭配扫描true表示不扫描 */
+    /* ????????????????????true?????????? */
     if (ROAM_SCAN_CHANNEL_ORG_0 == en_scan_type)
     {
         hmac_roam_main_change_state(pst_roam_info, ROAM_MAIN_STATE_SCANING);
@@ -726,7 +726,7 @@ OAL_STATIC oal_void  hmac_roam_scan_comp_cb(void  *p_scan_record)
     hmac_device_stru                *pst_hmac_device;
     hmac_bss_mgmt_stru              *pst_scan_bss_mgmt;
 
-    /* 获取hmac vap */
+    /* ????hmac vap */
     pst_hmac_vap = mac_res_get_hmac_vap(pst_scan_record->uc_vap_id);
     if (OAL_PTR_NULL == pst_hmac_vap)
     {
@@ -734,7 +734,7 @@ OAL_STATIC oal_void  hmac_roam_scan_comp_cb(void  *p_scan_record)
         return;
     }
 
-    /* 获取hmac device */
+    /* ????hmac device */
     pst_hmac_device = hmac_res_get_mac_dev(pst_hmac_vap->st_vap_base_info.uc_device_id);
     if (OAL_PTR_NULL == pst_hmac_device)
     {
@@ -750,7 +750,7 @@ OAL_STATIC oal_void  hmac_roam_scan_comp_cb(void  *p_scan_record)
         return;
     }
 
-    /* 漫游开关没有开时，不处理扫描结果 */
+    /* ???????????????????????????????? */
     if (pst_roam_info->uc_enable == 0)
     {
         return;
@@ -786,12 +786,12 @@ OAL_STATIC oal_uint32  hmac_roam_scan_init(hmac_roam_info_stru *pst_roam_info, o
     pst_scan_params = &pst_roam_info->st_scan_params;
     puc_cur_ssid = pst_roam_info->pst_hmac_vap->st_vap_base_info.pst_mib_info->st_wlan_mib_sta_config.auc_dot11DesiredSSID;
 
-    /* 扫描参数初始化 */
+    /* ?????????????? */
     pst_scan_params->en_bss_type         = WLAN_MIB_DESIRED_BSSTYPE_INFRA;
     pst_scan_params->en_scan_type        = WLAN_SCAN_TYPE_ACTIVE;
     pst_scan_params->us_scan_time        = WLAN_DEFAULT_ACTIVE_SCAN_TIME;
     pst_scan_params->uc_probe_delay      = 0;
-    pst_scan_params->uc_scan_func        = MAC_SCAN_FUNC_BSS;               /* 默认扫描bss */
+    pst_scan_params->uc_scan_func        = MAC_SCAN_FUNC_BSS;               /* ????????bss */
     pst_scan_params->p_fn_cb             = hmac_roam_scan_comp_cb;
     pst_scan_params->uc_max_send_probe_req_count_per_channel = 2;
     pst_scan_params->uc_max_scan_count_per_channel           = 2;
@@ -799,7 +799,7 @@ OAL_STATIC oal_uint32  hmac_roam_scan_init(hmac_roam_info_stru *pst_roam_info, o
     oal_memcopy(pst_scan_params->ast_mac_ssid_set[0].auc_ssid, puc_cur_ssid, WLAN_SSID_MAX_LEN);
     pst_scan_params->uc_ssid_num                             = 1;
 
-    /* 初始扫描请求只指定1个bssid，为广播地址 */
+    /* ??????????????????1??bssid???????????? */
     oal_memset(pst_scan_params->auc_bssid, 0xff, WLAN_MAC_ADDR_LEN);
     pst_scan_params->uc_bssid_num                            = 1;
 
@@ -835,14 +835,14 @@ OAL_STATIC oal_uint32  hmac_roam_scan_channel(hmac_roam_info_stru *pst_roam_info
 
     pst_roam_info->st_static.ul_scan_cnt++;
 
-    /* 发起背景扫描 */
+    /* ???????????? */
     ul_ret = hmac_fsm_call_func_sta(pst_roam_info->pst_hmac_vap, HMAC_FSM_INPUT_SCAN_REQ, (oal_void *)(&pst_roam_info->st_scan_params));
     if (OAL_SUCC != ul_ret)
     {
         OAM_WARNING_LOG0(0, OAM_SF_ROAM, "{hmac_roam_scan_channel::start scan failed!}");
     }
 
-    /* 启动扫描超时定时器 */
+    /* ?????????????????? */
     hmac_roam_main_start_timer(pst_roam_info, ROAM_SCAN_TIME_MAX);
 
     return OAL_SUCC;
@@ -887,7 +887,7 @@ oal_uint32  hmac_roam_check_bkscan_result(hmac_vap_stru *pst_hmac_vap, void *p_s
 
     oal_spin_lock(&(pst_scan_bss_mgmt->st_lock));
 
-    /* 遍历扫描到的bss信息，查找可以漫游的bss */
+    /* ????????????bss????????????????????bss */
     OAL_DLIST_SEARCH_FOR_EACH(pst_entry, &(pst_scan_bss_mgmt->st_bss_list_head))
     {
         pst_scanned_bss = OAL_DLIST_GET_ENTRY(pst_entry, hmac_scanned_bss_info, st_dlist_head);
@@ -918,7 +918,7 @@ OAL_STATIC oal_uint32 hmac_roam_check_11v_scan_result(hmac_roam_info_stru *pst_r
     hmac_device_stru          *pst_hmac_device;
 
     pst_hmac_vap    = pst_roam_info->pst_hmac_vap;
-    /* 获取发送端的用户指针 */
+    /* ???????????????????? */
     pst_hmac_user   = mac_res_get_hmac_user(pst_hmac_vap->st_vap_base_info.uc_assoc_vap_id);
     if (OAL_PTR_NULL == pst_hmac_user)
     {
@@ -939,7 +939,7 @@ OAL_STATIC oal_uint32 hmac_roam_check_11v_scan_result(hmac_roam_info_stru *pst_r
         pst_roam_info->st_bsst_rsp_info.uc_status_code = WNM_BSS_TM_ACCEPT;
         if(ROAM_SCAN_CHANNEL_ORG_1 == pst_roam_info->st_config.uc_scan_orthogonal)
         {
-            pst_11v_ctrl_info->uc_11v_roam_scan_times  = MAC_11V_ROAM_SCAN_FINISH;/*找到指定bss,本次11v漫游结束*/
+            pst_11v_ctrl_info->uc_11v_roam_scan_times  = MAC_11V_ROAM_SCAN_FINISH;/*????????bss,????11v????????*/
         }
     }
     else
@@ -949,7 +949,7 @@ OAL_STATIC oal_uint32 hmac_roam_check_11v_scan_result(hmac_roam_info_stru *pst_r
             if((OAL_FALSE == pst_11v_ctrl_info->en_only_scan_one_time) &&
                 (pst_11v_ctrl_info->uc_11v_roam_scan_times <= MAC_11V_ROAM_SCAN_ONE_CHANNEL_LIMIT))
             {
-                /*还需要再次触发漫游扫描*/
+                /*??????????????????????*/
                 pst_scan_mgmt->en_is_scanning = OAL_FALSE;
                 return OAL_ERR_CODE_ROAM_NO_VALID_BSS;
             }
@@ -1015,7 +1015,7 @@ OAL_STATIC oal_uint32  hmac_roam_check_scan_result(hmac_roam_info_stru *pst_roam
 
     pst_roam_info->st_static.ul_scan_result_cnt++;
 
-    /* 如果扫描到的bss个数为0，退出 */
+    /* ????????????bss??????0?????? */
     if (0 == pst_bss_mgmt->ul_bss_num)
     {
         OAM_WARNING_LOG0(0, OAM_SF_ROAM, "{hmac_roam_check_scan_result::no bss scanned}");
@@ -1028,10 +1028,10 @@ OAL_STATIC oal_uint32  hmac_roam_check_scan_result(hmac_roam_info_stru *pst_roam
         pst_roam_info->st_bsst_rsp_info.c_rssi = pst_roam_info->st_alg.c_current_rssi;
     }
 #endif
-    /* 获取锁 */
+    /* ?????? */
     oal_spin_lock(&(pst_bss_mgmt->st_lock));
 
-    /* 遍历扫描到的bss信息，查找可以漫游的bss */
+    /* ????????????bss????????????????????bss */
     OAL_DLIST_SEARCH_FOR_EACH(pst_entry, &(pst_bss_mgmt->st_bss_list_head))
     {
         pst_scanned_bss = OAL_DLIST_GET_ENTRY(pst_entry, hmac_scanned_bss_info, st_dlist_head);
@@ -1056,7 +1056,7 @@ OAL_STATIC oal_uint32  hmac_roam_check_scan_result(hmac_roam_info_stru *pst_roam
         pst_bss_dscr = OAL_PTR_NULL;
     }
 
-    /* 解除锁 */
+    /* ?????? */
     oal_spin_unlock(&(pst_bss_mgmt->st_lock));
 
 #ifdef _PRE_WLAN_FEATURE_11V_ENABLE
@@ -1072,7 +1072,7 @@ OAL_STATIC oal_uint32  hmac_roam_check_scan_result(hmac_roam_info_stru *pst_roam
     pst_bss_dscr = hmac_roam_alg_select_bss(pst_roam_info);
     if (OAL_PTR_NULL == pst_bss_dscr)
     {
-        /* 没有扫描到可用的bss，等待定时器超时即可 */
+        /* ????????????????bss???????????????????? */
         OAM_WARNING_LOG0(0, OAM_SF_ROAM, "{hmac_roam_check_scan_result::no bss valid}");
         return OAL_ERR_CODE_ROAM_NO_VALID_BSS;
     }
@@ -1122,18 +1122,18 @@ OAL_STATIC oal_uint32  hmac_roam_handle_scan_result(hmac_roam_info_stru *pst_roa
     if(OAL_SUCC == ul_ret)
     {
         pst_roam_info->uc_invalid_scan_cnt = 0;
-        /* 扫描结果发给sme */
+        /* ????????????sme */
         OAL_MEMZERO(&st_scan_rsp, OAL_SIZEOF(st_scan_rsp));
 
         st_scan_rsp.uc_result_code = MAC_SCAN_SUCCESS;
 
         hmac_send_rsp_to_sme_sta(pst_roam_info->pst_hmac_vap, HMAC_SME_SCAN_RSP, (oal_uint8 *)&st_scan_rsp);
 
-        /* 扫描到可用的bss，开始connect */
+        /* ????????????bss??????connect */
         return hmac_roam_main_fsm_action(pst_roam_info, ROAM_MAIN_FSM_EVENT_START_CONNECT, (oal_void *)pst_bss_dscr);
     }
 
-    /* 如果是亮屏的，不暂停漫游 */
+    /* ???????????????????????? */
     if (OAL_FALSE == pst_mac_device->uc_in_suspend)
     {
         pst_roam_info->uc_invalid_scan_cnt = 0;
@@ -1143,18 +1143,18 @@ OAL_STATIC oal_uint32  hmac_roam_handle_scan_result(hmac_roam_info_stru *pst_roa
         pst_roam_info->uc_invalid_scan_cnt++;
     }
 
-    /* 多次无效扫描暂停漫游，防止在某些场景下一直唤醒HOST */
+    /* ??????????????????????????????????????????????HOST */
     if (pst_roam_info->uc_invalid_scan_cnt >= ROAM_INVALID_SCAN_MAX)
     {
         OAM_WARNING_LOG1(0, OAM_SF_ROAM, "{hmac_roam_handle_scan_result::ignore_rssi_trigger after %d invalid_scan.}", pst_roam_info->uc_invalid_scan_cnt);
         pst_roam_info->uc_invalid_scan_cnt = 0;
         hmac_roam_ignore_rssi_trigger(pst_roam_info->pst_hmac_vap, OAL_TRUE);
     }
-    /* 删除定时器 */
+    /* ?????????? */
     hmac_roam_main_del_timer(pst_roam_info);
     hmac_roam_main_clear(pst_roam_info);
 #ifdef _PRE_WLAN_FEATURE_11V_ENABLE
-    /*重新触发漫游检查*/
+    /*????????????????*/
     if(OAL_TRUE == pst_roam_info->pst_hmac_vap->bit_11v_enable)
     {
         hmac_11v_roam_scan_check(pst_roam_info->pst_hmac_vap);
@@ -1204,7 +1204,7 @@ OAL_STATIC oal_uint32  hmac_roam_main_check_state(hmac_roam_info_stru *pst_roam_
 
 OAL_STATIC oal_void  hmac_roam_main_clear(hmac_roam_info_stru *pst_roam_info)
 {
-    /* 清理状态 */
+    /* ???????? */
     hmac_roam_main_change_state(pst_roam_info, ROAM_MAIN_STATE_INIT);
 
     hmac_roam_connect_stop(pst_roam_info->pst_hmac_vap);
@@ -1217,7 +1217,7 @@ OAL_STATIC oal_uint32  hmac_roam_resume_pm(hmac_roam_info_stru *pst_roam_info, o
     oal_uint32  ul_ret = OAL_SUCC;
 
 #ifdef _PRE_WLAN_FEATURE_STA_PM
-    /* 开低功耗前关闭低功耗超时定时器 */
+    /* ?????????????????????????????? */
     if (OAL_TRUE == pst_roam_info->pst_hmac_vap->st_ps_sw_timer.en_is_registerd)
     {
         FRW_TIMER_IMMEDIATE_DESTROY_TIMER(&pst_roam_info->pst_hmac_vap->st_ps_sw_timer);
@@ -1257,13 +1257,13 @@ OAL_STATIC oal_uint32  hmac_roam_resume_security_port(hmac_roam_info_stru *pst_r
         return OAL_ERR_CODE_ROAM_INVALID_USER;
     }
 
-    /* 设置用户8021x端口合法性的状态为合法 */
+    /* ????????8021x?????????????????????? */
     mac_user_set_port(&pst_roam_info->pst_hmac_user->st_user_base_info, OAL_TRUE);
 
-    //填充同步信息
+    //????????????
     st_h2d_sync.ul_back_to_old = OAL_FALSE;
 
-    //发送同步信息
+    //????????????
     ul_ret = hmac_config_send_event(&pst_roam_info->pst_hmac_vap->st_vap_base_info, WLAN_CFGID_ROAM_HMAC_SYNC_DMAC, OAL_SIZEOF(mac_h2d_roam_sync_stru), (oal_uint8 *)&st_h2d_sync);
     if (OAL_SUCC != ul_ret)
     {
@@ -1309,7 +1309,7 @@ OAL_STATIC oal_uint32  hmac_roam_connecting_timeout(hmac_roam_info_stru *pst_roa
                        "{hmac_roam_handle_fail_connect_phase:: hmac_roam_to_old_bss fail[%d]!}", ul_ret);
     }
 
-    /* 切换vap的状态为UP，恢复用户节能，恢复发送 */
+    /* ????vap????????UP???????????????????????? */
     ul_ret = hmac_fsm_call_func_sta(pst_roam_info->pst_hmac_vap, HMAC_FSM_INPUT_ROAMING_STOP, OAL_PTR_NULL);
 
     if (OAL_SUCC != ul_ret)
@@ -1344,26 +1344,26 @@ OAL_STATIC oal_uint32  hmac_roam_connecting_fail(hmac_roam_info_stru *pst_roam_i
         return ul_ret;
     }
 
-    /* 为了提高漫游成功的概率，在Auth/Reassoc No rsp时立即触发重新漫游 */
+    /* ??????????????????????????Auth/Reassoc No rsp?????????????????? */
     if (pst_roam_info->st_alg.c_current_rssi > ROAM_RSSI_MAX_TYPE)
     {
-        /* 如果是弱信号触发的漫游，先把rssi修改成ROAM_RSSI_LINKLOSS_TYPE来将弱信号跟LINKLOSS触发的重漫游归一 */
+        /* ????????????????????????????rssi??????ROAM_RSSI_LINKLOSS_TYPE????????????LINKLOSS???????????????? */
         if (pst_roam_info->st_alg.c_current_rssi > ROAM_RSSI_LINKLOSS_TYPE)
         {
             pst_roam_info->st_alg.c_current_rssi = ROAM_RSSI_LINKLOSS_TYPE;
         }
-        /* 漫游失败时，rssi 逐次减1dBm，一直到到ROAM_RSSI_MAX_TYPE。这样可以最多触发5次重漫游 */
+        /* ????????????rssi ??????1dBm??????????ROAM_RSSI_MAX_TYPE??????????????????5???????? */
         return hmac_roam_trigger_handle(pst_roam_info->pst_hmac_vap, pst_roam_info->st_alg.c_current_rssi - 1, OAL_TRUE);
     }
 
-    /* 管理帧加密是否开启*/
+    /* ??????????????????*/
     en_is_protected = pst_roam_info->pst_hmac_user->st_user_base_info.st_cap_info.bit_pmf_active;
 
-    /* 发去关联帧 */
+    /* ?????????? */
     hmac_mgmt_send_disassoc_frame(&(pst_roam_info->pst_hmac_vap->st_vap_base_info),
             pst_roam_info->pst_hmac_user->st_user_base_info.auc_user_mac_addr, MAC_DEAUTH_LV_SS, en_is_protected);
 
-    /* 删除对应用户 */
+    /* ???????????? */
     hmac_user_del(&(pst_roam_info->pst_hmac_vap->st_vap_base_info), pst_roam_info->pst_hmac_user);
 
     hmac_sta_handle_disassoc_rsp(pst_roam_info->pst_hmac_vap, MAC_NOT_ASSOCED);
@@ -1389,7 +1389,7 @@ OAL_STATIC oal_uint32  hmac_roam_handle_fail_handshake_phase(hmac_roam_info_stru
         return ul_ret;
     }
 
-    /* 切换vap的状态为UP，恢复用户节能，恢复发送 */
+    /* ????vap????????UP???????????????????????? */
     ul_ret = hmac_fsm_call_func_sta(pst_roam_info->pst_hmac_vap, HMAC_FSM_INPUT_ROAMING_STOP, OAL_PTR_NULL);
 
     if (OAL_SUCC != ul_ret)
@@ -1401,28 +1401,28 @@ OAL_STATIC oal_uint32  hmac_roam_handle_fail_handshake_phase(hmac_roam_info_stru
     hmac_roam_main_clear(pst_roam_info);
     hmac_roam_main_del_timer(pst_roam_info);
 
-    /* 为提高漫游成功的概率，在握手失败时触发立即重新漫游 */
+    /* ?????????????????????????????????????????????????? */
     if (pst_roam_info->st_alg.c_current_rssi > ROAM_RSSI_MAX_TYPE)
     {
-        /* 如果是弱信号触发的漫游，先把rssi修改成ROAM_RSSI_LINKLOSS_TYPE来将弱信号跟LINKLOSS触发的重漫游归一 */
+        /* ????????????????????????????rssi??????ROAM_RSSI_LINKLOSS_TYPE????????????LINKLOSS???????????????? */
         if (pst_roam_info->st_alg.c_current_rssi > ROAM_RSSI_LINKLOSS_TYPE)
         {
             pst_roam_info->st_alg.c_current_rssi = ROAM_RSSI_LINKLOSS_TYPE;
         }
-        /* 漫游握手失败时，rssi 逐次减1dBm，一直到到ROAM_RSSI_MAX_TYPE。这样可以最多触发5次重漫游 */
+        /* ????????????????rssi ??????1dBm??????????ROAM_RSSI_MAX_TYPE??????????????????5???????? */
         return hmac_roam_trigger_handle(pst_roam_info->pst_hmac_vap, pst_roam_info->st_alg.c_current_rssi - 1, OAL_TRUE);
     }
 
     OAM_WARNING_LOG1(0, OAM_SF_ROAM, "{hmac_roam_handle_fail_handshake_phase:: report deauth to wpas! c_current_rssi=%d}", pst_roam_info->st_alg.c_current_rssi);
 
-    /* 管理帧加密是否开启*/
+    /* ??????????????????*/
     en_is_protected = pst_roam_info->pst_hmac_user->st_user_base_info.st_cap_info.bit_pmf_active;
 
-    /* 发去关联帧 */
+    /* ?????????? */
     hmac_mgmt_send_disassoc_frame(&(pst_roam_info->pst_hmac_vap->st_vap_base_info),
             pst_roam_info->pst_hmac_user->st_user_base_info.auc_user_mac_addr, MAC_DEAUTH_LV_SS, en_is_protected);
 
-    /* 删除对应用户 */
+    /* ???????????? */
     hmac_user_del(&(pst_roam_info->pst_hmac_vap->st_vap_base_info), pst_roam_info->pst_hmac_user);
 
     hmac_sta_handle_disassoc_rsp(pst_roam_info->pst_hmac_vap, MAC_4WAY_HANDSHAKE_TIMEOUT);
@@ -1499,7 +1499,7 @@ OAL_STATIC oal_uint32  hmac_roam_connect_to_bss(hmac_roam_info_stru *pst_roam_in
 
     if (0 != ul_need_to_stop_user)
     {
-        /* 切换vap的状态为ROAMING，将用户节能，暂停发送 */
+        /* ????vap????????ROAMING?????????????????????? */
         ul_ret = hmac_fsm_call_func_sta(pst_hmac_vap, HMAC_FSM_INPUT_ROAMING_START, (oal_void *)pst_bss_dscr);
         if (OAL_SUCC != ul_ret)
         {
@@ -1508,7 +1508,7 @@ OAL_STATIC oal_uint32  hmac_roam_connect_to_bss(hmac_roam_info_stru *pst_roam_in
         }
     }
 
-    /* 原bss信息保存，以便回退 */
+    /* ??bss?????????????????? */
     pst_old_bss = &pst_roam_info->st_old_bss;
     pst_old_bss->us_sta_aid = pst_hmac_vap->st_vap_base_info.us_sta_aid;
     pst_old_bss->en_protocol_mode = pst_hmac_vap->st_vap_base_info.en_protocol;
@@ -1525,17 +1525,17 @@ OAL_STATIC oal_uint32  hmac_roam_connect_to_bss(hmac_roam_info_stru *pst_roam_in
     oal_memcopy(&pst_old_bss->auc_bssid, &(pst_hmac_vap->st_vap_base_info.auc_bssid), WLAN_MAC_ADDR_LEN);
     pst_old_bss->us_cap_info = pst_hmac_vap->st_vap_base_info.us_assoc_user_cap_info;
 
-    /* 切换状态至connecting */
+    /* ??????????connecting */
     hmac_roam_main_change_state(pst_roam_info, ROAM_MAIN_STATE_CONNECTING);
 
     pst_roam_info->st_static.ul_connect_cnt++;
 
-    /* 设置漫游到的bss能力位，重关联请求使用 */
+    /* ????????????bss?????????????????????? */
     pst_hmac_vap->st_vap_base_info.us_assoc_user_cap_info = pst_bss_dscr->us_cap_info;
 
     hmac_config_set_mgmt_log(&pst_hmac_vap->st_vap_base_info, &pst_hmac_user->st_user_base_info, OAL_TRUE);
 
-    /* 启动connect状态机 */
+    /* ????connect?????? */
     ul_ret = hmac_roam_connect_start(pst_hmac_vap, pst_bss_dscr);
     if (OAL_SUCC != ul_ret)
     {
@@ -1544,7 +1544,7 @@ OAL_STATIC oal_uint32  hmac_roam_connect_to_bss(hmac_roam_info_stru *pst_roam_in
         return ul_ret;
     }
 
-    /* 启动connect超时定时器 */
+    /* ????connect?????????? */
     hmac_roam_main_start_timer(pst_roam_info, ROAM_CONNECT_TIME_MAX);
 
     OAM_INFO_LOG4(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_ROAM,
@@ -1573,7 +1573,7 @@ OAL_STATIC oal_uint32  hmac_roam_to_old_bss(hmac_roam_info_stru *pst_roam_info, 
     pst_roam_info->st_static.ul_roam_old_cnt++;
     pst_roam_info->st_static.ul_roam_eap_fail++;
 
-    /* 恢复原来bss相关信息 */
+    /* ????????bss???????? */
     pst_hmac_vap->st_vap_base_info.us_sta_aid  = pst_old_bss->us_sta_aid;
     pst_hmac_vap->st_vap_base_info.en_protocol = pst_old_bss->en_protocol_mode;
     oal_memcopy(&(pst_hmac_user->st_user_base_info.st_cap_info), &pst_old_bss->st_cap_info, OAL_SIZEOF(mac_user_cap_info_stru));
@@ -1589,7 +1589,7 @@ OAL_STATIC oal_uint32  hmac_roam_to_old_bss(hmac_roam_info_stru *pst_roam_info, 
     oal_memcopy(pst_hmac_vap->st_vap_base_info.auc_bssid, pst_old_bss->auc_bssid, WLAN_MAC_ADDR_LEN);
     pst_hmac_vap->st_vap_base_info.us_assoc_user_cap_info = pst_old_bss->us_cap_info;
 
-    /* 设置用户8021x端口合法性的状态为合法 */
+    /* ????????8021x?????????????????????? */
     mac_user_set_port(&pst_hmac_user->st_user_base_info, OAL_TRUE);
 
     if (pst_old_bss->en_protocol_mode >= WLAN_HT_MODE)
@@ -1611,10 +1611,10 @@ OAL_STATIC oal_uint32  hmac_roam_to_old_bss(hmac_roam_info_stru *pst_roam_info, 
         return ul_ret;
     }
 
-    /* 相关参数需要配置到dmac */
+    /* ??????????????????dmac */
     hmac_roam_connect_set_join_reg(&pst_hmac_vap->st_vap_base_info);
 
-    /* 更新用户的mac地址，漫游时mac会更新 */
+    /* ??????????mac????????????mac?????? */
     oal_set_mac_addr(pst_hmac_user->st_user_base_info.auc_user_mac_addr, pst_hmac_vap->st_vap_base_info.auc_bssid);
 
     ul_ret = hmac_config_user_info_syn(&(pst_hmac_vap->st_vap_base_info), &(pst_hmac_user->st_user_base_info));
@@ -1624,7 +1624,7 @@ OAL_STATIC oal_uint32  hmac_roam_to_old_bss(hmac_roam_info_stru *pst_roam_info, 
                        "{hmac_roam_to_old_bss::hmac_syn_vap_state failed[%d].}", ul_ret);
     }
 
-    /* 回退 bss 时，hmac 2 dmac 同步的相关信息，以便失败的时候回退 */
+    /* ???? bss ????hmac 2 dmac ?????????????????????????????????? */
     pst_h2d_sync = OAL_MEM_ALLOC(OAL_MEM_POOL_ID_LOCAL, OAL_SIZEOF(mac_h2d_roam_sync_stru), OAL_TRUE);
     if (OAL_PTR_NULL == pst_h2d_sync)
     {
@@ -1632,7 +1632,7 @@ OAL_STATIC oal_uint32  hmac_roam_to_old_bss(hmac_roam_info_stru *pst_roam_info, 
         return OAL_ERR_CODE_ALLOC_MEM_FAIL;
     }
 
-    //填充同步信息
+    //????????????
     pst_h2d_sync->ul_back_to_old = OAL_TRUE;
     pst_h2d_sync->us_sta_aid = pst_old_bss->us_sta_aid;
     oal_memcopy(&(pst_h2d_sync->st_channel), &pst_old_bss->st_channel, OAL_SIZEOF(mac_channel_stru));
@@ -1640,24 +1640,24 @@ OAL_STATIC oal_uint32  hmac_roam_to_old_bss(hmac_roam_info_stru *pst_roam_info, 
     oal_memcopy(&(pst_h2d_sync->st_key_info), &pst_old_bss->st_key_info, OAL_SIZEOF(mac_key_mgmt_stru));
     oal_memcopy(&(pst_h2d_sync->st_user_tx_info),&pst_old_bss->st_user_tx_info, OAL_SIZEOF(mac_user_tx_param_stru));
 
-    /* 在漫游过程中可能又建立了聚合，因此回退时需要删除掉 */
+    /* ?????????????????????????????????????????????????? */
     hmac_tid_clear(&pst_hmac_vap->st_vap_base_info, pst_hmac_user);
 
-    //发送同步信息
+    //????????????
     ul_ret = hmac_config_send_event(&pst_hmac_vap->st_vap_base_info, WLAN_CFGID_ROAM_HMAC_SYNC_DMAC, OAL_SIZEOF(mac_h2d_roam_sync_stru), (oal_uint8 *)pst_h2d_sync);
     if (OAL_SUCC != ul_ret)
     {
         OAM_ERROR_LOG1(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_ROAM, "{hmac_roam_to_old_bss::send event[WLAN_CFGID_ROAM_HMAC_SYNC_DMAC] failed[%d].}", ul_ret);
     }
 
-    /* 释放同步数据 */
+    /* ???????????? */
     if(OAL_PTR_NULL != pst_h2d_sync)
     {
         OAL_MEM_FREE(pst_h2d_sync, OAL_TRUE);
         pst_h2d_sync = OAL_PTR_NULL;
     }
 
-    /* user已经关联上，抛事件给DMAC，在DMAC层挂用户算法钩子 */
+    /* user????????????????????DMAC????DMAC???????????????? */
     hmac_user_add_notify_alg(&pst_hmac_vap->st_vap_base_info, pst_hmac_user->st_user_base_info.us_assoc_id);
     hmac_config_set_mgmt_log(&pst_hmac_vap->st_vap_base_info, &pst_hmac_user->st_user_base_info, OAL_FALSE);
 
@@ -1689,7 +1689,7 @@ OAL_STATIC oal_uint32  hmac_roam_to_new_bss(hmac_roam_info_stru *pst_roam_info, 
 
     hmac_roam_main_del_timer(pst_roam_info);
 
-    /* 切换vap的状态为UP，恢复用户节能，恢复发送 */
+    /* ????vap????????UP???????????????????????? */
     ul_ret = hmac_fsm_call_func_sta(pst_hmac_vap, HMAC_FSM_INPUT_ROAMING_STOP, OAL_PTR_NULL);
     if (OAL_SUCC != ul_ret)
     {
@@ -1711,7 +1711,7 @@ OAL_STATIC oal_uint32  hmac_roam_to_new_bss(hmac_roam_info_stru *pst_roam_info, 
 
 OAL_STATIC oal_uint32  hmac_roam_to_new_bss_fail(hmac_roam_info_stru *pst_roam_info, oal_void *p_param)
 {
-    /* 漫游失败先关闭漫游主定时器 */
+    /* ?????????????????????????? */
     hmac_roam_main_del_timer(pst_roam_info);
 
     return hmac_roam_to_old_bss(pst_roam_info, p_param);
@@ -1739,7 +1739,7 @@ OAL_STATIC oal_uint32  hmac_roam_stop(hmac_roam_info_stru *pst_roam_info, oal_vo
 
     hmac_roam_main_change_state(pst_roam_info, ROAM_MAIN_STATE_FAIL);
 
-    /* 切换vap的状态为UP，恢复用户节能，恢复发送 */
+    /* ????vap????????UP???????????????????????? */
     ul_ret = hmac_fsm_call_func_sta(pst_hmac_vap, HMAC_FSM_INPUT_ROAMING_STOP, OAL_PTR_NULL);
     if (OAL_SUCC != ul_ret)
     {
@@ -1817,7 +1817,7 @@ oal_uint32  hmac_roam_pause_user(hmac_vap_stru *pst_hmac_vap, oal_void *p_param)
         return OAL_ERR_CODE_ROAM_INVALID_VAP;
     }
 
-    /* 漫游开关没有开时，不暂停用户 */
+    /* ???????????????????????????? */
     if (0 == pst_roam_info->uc_enable)
     {
         OAM_ERROR_LOG0(uc_vap_id, OAM_SF_ROAM, "{hmac_roam_pause_user::roam disabled!}");
@@ -1830,7 +1830,7 @@ oal_uint32  hmac_roam_pause_user(hmac_vap_stru *pst_hmac_vap, oal_void *p_param)
         return OAL_ERR_CODE_ROAM_DISABLED;
     }
 
-    /* 初始化缓存队列 */
+    /* ?????????????? */
     skb_queue_head_init(&(pst_roam_info->st_buf.st_data_queue));
     INIT_WORK(&(pst_roam_info->st_buf.st_work), hmac_roam_flush_buf);
     pst_roam_info->st_buf.pst_wq = create_singlethread_workqueue("hi110x_roam");
@@ -1864,7 +1864,7 @@ oal_uint32  hmac_roam_resume_user(hmac_vap_stru *pst_hmac_vap, oal_void *p_param
         return OAL_ERR_CODE_ROAM_DISABLED;
     }
 
-    /* 清空缓存队列 */
+    /* ???????????? */
     skb_queue_purge(&(pst_roam_info->st_buf.st_data_queue));
     destroy_workqueue(pst_roam_info->st_buf.pst_wq);
     pst_roam_info->st_buf.pst_wq = OAL_PTR_NULL;
@@ -1949,7 +1949,7 @@ oal_uint32  hmac_roam_pause_user(hmac_vap_stru *pst_hmac_vap, oal_void *p_param)
         return OAL_ERR_CODE_ROAM_INVALID_VAP;
     }
 
-    /* 漫游开关没有开时，不暂停用户 */
+    /* ???????????????????????????? */
     if (0 == pst_roam_info->uc_enable)
     {
         OAM_ERROR_LOG0(uc_vap_id, OAM_SF_ROAM, "{hmac_roam_pause_user::roam disabled!}");
@@ -1963,7 +1963,7 @@ oal_uint32  hmac_roam_pause_user(hmac_vap_stru *pst_hmac_vap, oal_void *p_param)
         return OAL_ERR_CODE_ROAM_INVALID_VAP;
     }
 
-    /* 必须保证vap的状态是UP */
+    /* ????????vap????????UP */
     if (MAC_VAP_STATE_UP != pst_hmac_vap->st_vap_base_info.en_vap_state)
     {
         OAM_WARNING_LOG1(uc_vap_id, OAM_SF_ROAM,
@@ -1972,12 +1972,12 @@ oal_uint32  hmac_roam_pause_user(hmac_vap_stru *pst_hmac_vap, oal_void *p_param)
         return OAL_ERR_CODE_ROAM_STATE_UNEXPECT;
     }
 
-    /* 暂停所有协议层数据，这样就不需要再hmac搞一个缓存队列了 */
+    /* ??????????????????????????????????hmac???????????????? */
     //oal_net_stop_subqueue(pst_net_device, 0);
     oal_net_tx_stop_all_queues(pst_net_device);
     oal_net_wake_subqueue(pst_net_device, WLAN_HI_QUEUE);
 
-    /* 清空 HMAC层TID信息 */
+    /* ???? HMAC??TID???? */
     hmac_tid_clear(&pst_hmac_vap->st_vap_base_info, pst_roam_info->pst_hmac_user);
 
 #ifdef _PRE_WLAN_FEATURE_STA_PM
@@ -2004,7 +2004,7 @@ oal_uint32  hmac_roam_pause_user(hmac_vap_stru *pst_hmac_vap, oal_void *p_param)
     {
         if (VOWIFI_LOW_THRES_REPORT == pst_hmac_vap->st_vap_base_info.pst_vowifi_cfg_param->en_vowifi_mode)
         {
-            /* 针对漫游和去关联场景,切换vowifi语音状态 */
+            /* ????????????????????,????vowifi???????? */
             hmac_config_vowifi_report((&pst_hmac_vap->st_vap_base_info), 0, OAL_PTR_NULL);
         }
     }
@@ -2046,7 +2046,7 @@ oal_uint32  hmac_roam_resume_user(hmac_vap_stru *pst_hmac_vap, oal_void *p_param
         return OAL_ERR_CODE_ROAM_INVALID_VAP;
     }
 
-    /* 必须保证vap的状态是roaming */
+    /* ????????vap????????roaming */
     if (MAC_VAP_STATE_ROAMING != pst_hmac_vap->st_vap_base_info.en_vap_state)
     {
         hmac_roam_resume_pm(pst_roam_info, OAL_PTR_NULL);
@@ -2099,13 +2099,13 @@ oal_uint32 hmac_roam_scan_complete(hmac_vap_stru *pst_hmac_vap)
         return OAL_ERR_CODE_ROAM_INVALID_VAP;
     }
 
-    /* 漫游开关没有开时，不处理扫描结果 */
+    /* ???????????????????????????????? */
     if (0 == pst_roam_info->uc_enable)
     {
         return OAL_ERR_CODE_ROAM_DISABLED;
     }
 
-    /* 获取hmac device */
+    /* ????hmac device */
     pst_hmac_device = hmac_res_get_mac_dev(pst_hmac_vap->st_vap_base_info.uc_device_id);
     if (OAL_PTR_NULL == pst_hmac_device)
     {
@@ -2137,7 +2137,7 @@ oal_uint32 hmac_roam_trigger_handle(hmac_vap_stru *pst_hmac_vap, oal_int8 c_rssi
         return OAL_ERR_CODE_ROAM_INVALID_VAP;
     }
 
-    /* 信号桥时不触发漫游 */
+    /* ?????????????????? */
     ul_ret = hmac_vap_check_signal_bridge(&pst_hmac_vap->st_vap_base_info);
     if (OAL_SUCC != ul_ret)
     {
@@ -2151,7 +2151,7 @@ oal_uint32 hmac_roam_trigger_handle(hmac_vap_stru *pst_hmac_vap, oal_int8 c_rssi
         return OAL_ERR_CODE_ROAM_EVENT_UXEXPECT;
     }
 
-    /* 每次漫游前，刷新是否支持漫游到自己的参数 */
+    /* ???????????????????????????????????????? */
     pst_roam_info->en_current_bss_ignore = en_current_bss_ignore;
 
     ul_ret = hmac_roam_main_check_state(pst_roam_info, MAC_VAP_STATE_UP, ROAM_MAIN_STATE_INIT);
@@ -2276,14 +2276,14 @@ oal_uint32 hmac_roam_reassoc(hmac_vap_stru *pst_hmac_vap)
         return OAL_ERR_CODE_ROAM_INVALID_VAP;
     }
 
-    /* 漫游开关没有开时，不处理 */
+    /* ???????????????????????? */
     if (0 == pst_roam_info->uc_enable)
     {
         OAM_WARNING_LOG0(uc_vap_id, OAM_SF_ROAM, "{hmac_roam_reassoc::roam disabled.}");
         return OAL_ERR_CODE_ROAM_DISABLED;
     }
 
-    /* 主状态机为非CONNECTING状态，失败 */
+    /* ????????????CONNECTING?????????? */
     if (pst_roam_info->en_main_state != ROAM_MAIN_STATE_CONNECTING)
     {
         OAM_WARNING_LOG1(uc_vap_id, OAM_SF_ROAM,
@@ -2292,7 +2292,7 @@ oal_uint32 hmac_roam_reassoc(hmac_vap_stru *pst_hmac_vap)
         return OAL_ERR_CODE_ROAM_STATE_UNEXPECT;
     }
 
-    /* CONNECT状态机为非WAIT_JOIN状态，失败 */
+    /* CONNECT??????????WAIT_JOIN?????????? */
     if (pst_roam_info->st_connect.en_state != ROAM_CONNECT_STATE_WAIT_ASSOC_COMP)
     {
         OAM_WARNING_LOG1(uc_vap_id, OAM_SF_ROAM,
@@ -2365,7 +2365,7 @@ oal_void hmac_roam_connect_complete(hmac_vap_stru *pst_hmac_vap, oal_uint32 ul_r
         return;
     }
 
-    /* 漫游开关没有开时，不处理扫描结果 */
+    /* ???????????????????????????????? */
     if (0 == pst_roam_info->uc_enable)
     {
         OAM_ERROR_LOG0(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_ROAM, "{hmac_roam_connect_complete::roam disabled!}");
@@ -2421,7 +2421,7 @@ oal_void hmac_roam_rx_complete(hmac_vap_stru *pst_hmac_vap, oal_uint32 ul_reslut
         return;
     }
 
-    /* 漫游开关没有开时，不处理扫描结果 */
+    /* ???????????????????????????????? */
     if (0 == pst_roam_info->uc_enable)
     {
         OAM_ERROR_LOG0(0, OAM_SF_ROAM, "{hmac_roam_connect_complete::roam disabled!}");

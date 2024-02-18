@@ -149,7 +149,7 @@ oal_void oal_pcie_common_clk_set(oal_pci_dev_stru *pst_dev, oal_uint32 nfts)
     }
     oal_pci_write_config_word(pst_dev, pos + PCI_EXP_LNKCTL, reg16);
     oal_pcie_print_bits(&reg16, 2);
-    /*N-FTS个数配置*/
+    /*N-FTS????????*/
     oal_pci_read_config_dword(pst_dev, PCIE_PL_ASPM_CTRL_OFFSET, &reg32);
     OAL_IO_PRINT("0x70c:old ");
     oal_pcie_print_bits(&reg32, 4);
@@ -225,7 +225,7 @@ oal_uint32 oal_pcie_l12_set(oal_pci_dev_stru *pst_dev,oal_uint32 enable)
             return OAL_FAIL;
         }
 
-        /*PCI_EXP_DEVCTL2_LTR_EN 必须要在PCI_L1SS_L12_PCIPM_EN/PCI_L1SS_L12_ASPM_EN 使能后配置，否者不生效!!*/
+        /*PCI_EXP_DEVCTL2_LTR_EN ????????PCI_L1SS_L12_PCIPM_EN/PCI_L1SS_L12_ASPM_EN ??????????????????????!!*/
         oal_pci_read_config_dword(pst_dev, pos + PCI_EXP_DEVCTL2, &reg32);
         reg32 |= PCI_EXP_DEVCTL2_LTR_EN;
         oal_pci_write_config_dword(pst_dev, pos + PCI_EXP_DEVCTL2, reg32);
@@ -404,7 +404,7 @@ oal_void oal_pcie_rc_dbi_enable(oal_uint32 id)
 oal_void oal_pcie_rc_dbi_disable(oal_uint32 id)
 {
 #if (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION)
-    /* 配置工作模式，恢复读写wifi侧 */
+    /* ??????????????????????wifi?? */
      oal_uint32 ul_val;
 
      if (0 == id)
@@ -555,7 +555,7 @@ oal_void oal_pcie_rc_common_clk_set(oal_uint32 nfts)
     oal_writel(reg32,g_pst_pci_dbi_0 + OAL_PCIE_CAP_POS + PCI_EXP_LNKCTL);
     oal_pcie_print_bits(&reg32, 4);
 
-    /*N-FTS个数配置*/
+    /*N-FTS????????*/
     reg32 = oal_readl(g_pst_pci_dbi_0+PCIE_PL_ASPM_CTRL_OFFSET);
     OAL_IO_PRINT("rc 0x70c: old");
     oal_pcie_print_bits(&reg32, 4);

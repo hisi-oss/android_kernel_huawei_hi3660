@@ -47,7 +47,7 @@
 */
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "RnicSndMsg.h"
 #include "RnicLog.h"
@@ -60,12 +60,12 @@
 #define    THIS_FILE_ID        PS_FILE_ID_RNIC_SND_MSG_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 VOS_UINT32 RNIC_SendDialInfoMsg(
@@ -76,7 +76,7 @@ VOS_UINT32 RNIC_SendDialInfoMsg(
     RNIC_DIAL_MODE_STRU                *pstDialMode;
 
 
-    /* 内存分配 */
+    /* ???????? */
     pstDialInfo = (RNIC_NOTIFY_MSG_STRU *)PS_ALLOC_MSG(ACPU_PID_RNIC,
                                                       sizeof(RNIC_NOTIFY_MSG_STRU) - VOS_MSG_HEAD_LENGTH);
     if (VOS_NULL_PTR == pstDialInfo)
@@ -87,7 +87,7 @@ VOS_UINT32 RNIC_SendDialInfoMsg(
 
     pstDialMode                         = RNIC_GetDialModeAddr();
 
-    /* 填充消息 */
+    /* ???????? */
     pstDialInfo->ulSenderCpuId          = VOS_LOCAL_CPUID;
     pstDialInfo->ulSenderPid            = ACPU_PID_RNIC;
     pstDialInfo->ulReceiverCpuId        = VOS_LOCAL_CPUID;
@@ -114,7 +114,7 @@ VOS_UINT32 RNIC_SendCdsImsDataReq(
 {
     RNIC_CDS_IMS_DATA_REQ_STRU         *pstSndMsg = VOS_NULL_PTR;
 
-    /* 内存分配 */
+    /* ???????? */
     pstSndMsg = (RNIC_CDS_IMS_DATA_REQ_STRU *)PS_ALLOC_MSG_WITH_HEADER_LEN(ACPU_PID_RNIC,
                                     sizeof(RNIC_CDS_IMS_DATA_REQ_STRU) - 4 + pstSkb->len);
 
@@ -125,20 +125,20 @@ VOS_UINT32 RNIC_SendCdsImsDataReq(
         return VOS_ERR;
     }
 
-    /* 填充消息头 */
+    /* ?????????? */
     pstSndMsg->ulSenderCpuId            = VOS_LOCAL_CPUID;
     pstSndMsg->ulSenderPid              = ACPU_PID_RNIC;
     pstSndMsg->ulReceiverCpuId          = VOS_LOCAL_CPUID;
     pstSndMsg->ulReceiverPid            = UEPS_PID_CDS;
     pstSndMsg->ulMsgId                  = ID_RNIC_CDS_IMS_DATA_REQ;
 
-    /* 填充消息 */
+    /* ???????? */
     pstSndMsg->usModemId                = pstNetCntxt->enModemId;
     pstSndMsg->usDataLen                = (VOS_UINT16)pstSkb->len;
 
     TAF_MEM_CPY_S(pstSndMsg->aucData, pstSkb->len, pstSkb->data, pstSkb->len);
 
-    /* 发送消息 */
+    /* ???????? */
     if (VOS_OK != PS_SEND_MSG(ACPU_PID_RNIC, pstSndMsg))
     {
         RNIC_ERROR_LOG(ACPU_PID_RNIC, "RNIC_SendCdsImsDataReq: Send msg failed!");
@@ -154,7 +154,7 @@ VOS_VOID RNIC_TrigImsDataProcEvent(RNIC_RMNET_ID_ENUM_UINT8 enRmNetId)
 {
     RNIC_IMS_DATA_PROC_IND_STRU         *pstSndMsg = VOS_NULL_PTR;
 
-    /* 内存分配 */
+    /* ???????? */
     pstSndMsg = (RNIC_IMS_DATA_PROC_IND_STRU *)PS_ALLOC_MSG_WITH_HEADER_LEN(ACPU_PID_RNIC,
                                     sizeof(RNIC_IMS_DATA_PROC_IND_STRU));
 
@@ -164,7 +164,7 @@ VOS_VOID RNIC_TrigImsDataProcEvent(RNIC_RMNET_ID_ENUM_UINT8 enRmNetId)
         return;
     }
 
-    /* 填充消息头 */
+    /* ?????????? */
     pstSndMsg->ulSenderCpuId            = VOS_LOCAL_CPUID;
     pstSndMsg->ulSenderPid              = ACPU_PID_RNIC;
     pstSndMsg->ulReceiverCpuId          = VOS_LOCAL_CPUID;
@@ -172,7 +172,7 @@ VOS_VOID RNIC_TrigImsDataProcEvent(RNIC_RMNET_ID_ENUM_UINT8 enRmNetId)
     pstSndMsg->enMsgId                  = ID_RNIC_IMS_DATA_PROC_IND;
     pstSndMsg->enRmNetId                = enRmNetId;
 
-    /* 发送消息 */
+    /* ???????? */
     if (VOS_OK != PS_SEND_MSG(ACPU_PID_RNIC, pstSndMsg))
     {
         RNIC_DEV_ERR_PRINTK("RNIC_TrigImsDataProcEvent: Send msg failed!");
@@ -188,7 +188,7 @@ VOS_UINT32 RNIC_SndRnicRmnetConfigReq(
 {
     RNIC_RMNET_CONFIG_REQ_STRU         *pstSndMsg = VOS_NULL_PTR;
 
-    /* 内存分配 */
+    /* ???????? */
     pstSndMsg = (RNIC_RMNET_CONFIG_REQ_STRU *)PS_ALLOC_MSG(ACPU_PID_RNIC,
                         sizeof(RNIC_RMNET_CONFIG_REQ_STRU) - VOS_MSG_HEAD_LENGTH);
 
@@ -198,14 +198,14 @@ VOS_UINT32 RNIC_SndRnicRmnetConfigReq(
         return VOS_ERR;
     }
 
-    /* 填充消息头 */
+    /* ?????????? */
     pstSndMsg->ulSenderCpuId            = VOS_LOCAL_CPUID;
     pstSndMsg->ulSenderPid              = ACPU_PID_RNIC;
     pstSndMsg->ulReceiverCpuId          = VOS_LOCAL_CPUID;
     pstSndMsg->ulReceiverPid            = ACPU_PID_RNIC;
     pstSndMsg->enMsgId                  = ID_RNIC_RMNET_CONFIG_REQ;
 
-    /* 填充消息 */
+    /* ???????? */
     pstSndMsg->enModemType              = pstConfigInfo->enModemType;
     pstSndMsg->enRmnetStatus            = pstConfigInfo->enRmnetStatus;
     pstSndMsg->enIpType                 = pstConfigInfo->enIpType;
@@ -214,7 +214,7 @@ VOS_UINT32 RNIC_SndRnicRmnetConfigReq(
     pstSndMsg->ucRmNetId                = pstConfigInfo->ucRmNetId;
     pstSndMsg->usModemId                = pstConfigInfo->usModemId;
 
-    /* 发送消息 */
+    /* ???????? */
     if (VOS_OK != PS_SEND_MSG(ACPU_PID_RNIC, pstSndMsg))
     {
         RNIC_ERROR_LOG(ACPU_PID_RNIC, "RNIC_SndRnicRmnetConfigMsg: Send msg failed!");
@@ -231,7 +231,7 @@ VOS_VOID RNIC_MNTN_SndRmnetConfigInfoMsg(
 {
     RNIC_RMNET_CONFIG_REQ_STRU          *pstSndMsg = VOS_NULL_PTR;
 
-    /* 内存分配 */
+    /* ???????? */
     pstSndMsg = (RNIC_RMNET_CONFIG_REQ_STRU *)PS_ALLOC_MSG(ACPU_PID_RNIC,
                         sizeof(RNIC_RMNET_CONFIG_REQ_STRU) - VOS_MSG_HEAD_LENGTH);
 
@@ -241,7 +241,7 @@ VOS_VOID RNIC_MNTN_SndRmnetConfigInfoMsg(
         return;
     }
 
-    /* 填充消息 */
+    /* ???????? */
     pstSndMsg->enModemType              = pstConfigInfo->enModemType;
     pstSndMsg->enRmnetStatus            = pstConfigInfo->enRmnetStatus;
     pstSndMsg->enIpType                 = pstConfigInfo->enIpType;
@@ -256,7 +256,7 @@ VOS_VOID RNIC_MNTN_SndRmnetConfigInfoMsg(
     pstSndMsg->ulReceiverPid            = ACPU_PID_RNIC;
     pstSndMsg->enMsgId                  = ID_RNIC_MNTN_RMNET_CONFIG_INFO;
 
-    /* 发送消息 */
+    /* ???????? */
     if (VOS_OK != PS_SEND_MSG(ACPU_PID_RNIC, pstSndMsg))
     {
         RNIC_ERROR_LOG(ACPU_PID_RNIC, "RNIC_SndRnicRmnetConfigMsg: Send msg failed!");
@@ -273,7 +273,7 @@ VOS_VOID RNIC_FillNetManagerMsgPdnCfgInfo(
     IMSA_RNIC_PDN_INFO_CONFIG_STRU     *pSrcPdnInfo
 )
 {
-    /* 对stRnicNmMsg中参数进行赋值 */
+    /* ??stRnicNmMsg?????????????? */
     pDestPdnInfo->bitOpIpv4PdnInfo     = pSrcPdnInfo->bitOpIpv4PdnInfo;
     pDestPdnInfo->bitOpIpv6PdnInfo     = pSrcPdnInfo->bitOpIpv6PdnInfo;
     pDestPdnInfo->bitOpSockPortInfo    = pSrcPdnInfo->bitOpSockPortInfo;
@@ -281,7 +281,7 @@ VOS_VOID RNIC_FillNetManagerMsgPdnCfgInfo(
     pDestPdnInfo->enModemId    = pSrcPdnInfo->enModemId;
     pDestPdnInfo->enRatType    = pSrcPdnInfo->enRatType;
 
-    /* 对ipv4的pdn进行赋值 */
+    /* ??ipv4??pdn???????? */
     TAF_MEM_CPY_S(&(pDestPdnInfo->stIpv4PdnInfo),
                   sizeof(NM_IPV4_PDN_INFO_STRU),
                   &(pSrcPdnInfo->stIpv4PdnInfo),
@@ -316,7 +316,7 @@ VOS_VOID RNIC_SndNetManagerPdpActInd(
 
     RNIC_FillNetManagerMsgPdnCfgInfo(&(stRnicNmMsg.unMsgInfo.stPdnCfgInfo), &(pstRcvInd->stPdnInfo));
 
-    /* 调用虚拟设备提供的发送接口发送消息 */
+    /* ?????????????????????????????????? */
     NM_CTRL_SendMsg(&stRnicNmMsg, sizeof(NM_MSG_STRU));
 
     return;
@@ -336,11 +336,11 @@ VOS_VOID RNIC_SndNetManagerPdpDeactInd(
     stRnicNmMsg.enMsgId     = ID_NM_PDN_DEACT_IND;
     stRnicNmMsg.ulMsgLen    = sizeof(NM_PDN_DEACT_IND_STRU);
 
-    /* 对stRnicNmMsg中参数进行赋值 */
+    /* ??stRnicNmMsg?????????????? */
     stRnicNmMsg.unMsgInfo.stPdnDeactInd.enModemId   = pstRcvInd->enModemId;
     stRnicNmMsg.unMsgInfo.stPdnDeactInd.enRatType   = pstRcvInd->enRatType;
 
-    /* 调用虚拟设备提供的发送接口发送消息 */
+    /* ?????????????????????????????????? */
     NM_CTRL_SendMsg(&stRnicNmMsg, sizeof(NM_MSG_STRU));
 
     return;
@@ -362,7 +362,7 @@ VOS_VOID RNIC_SndNetManagerPdpModifyInd(
 
     RNIC_FillNetManagerMsgPdnCfgInfo(&(stRnicNmMsg.unMsgInfo.stPdnCfgInfo), &(pstRcvInd->stPdnInfo));
 
-    /* 调用虚拟设备提供的发送接口发送消息 */
+    /* ?????????????????????????????????? */
     NM_CTRL_SendMsg(&stRnicNmMsg, sizeof(NM_MSG_STRU));
 
     return;
@@ -378,7 +378,7 @@ VOS_VOID RNIC_SndNetManagerModemResetInd(VOS_VOID)
     stRnicNmMsg.enMsgId     = ID_NM_MODEM_RESET_IND;
     stRnicNmMsg.ulMsgLen    = 0;
 
-    /* 调用虚拟设备提供的发送接口发送消息 */
+    /* ?????????????????????????????????? */
     NM_CTRL_SendMsg(&stRnicNmMsg, sizeof(NM_MSG_STRU));
 
     return;

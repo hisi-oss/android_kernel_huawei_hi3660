@@ -47,7 +47,7 @@
  */
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 #include "v_typdef.h"
 #include "IpsMntn.h"
@@ -60,48 +60,48 @@
 #include "TTFUtil.h"
 
 /*****************************************************************************
-    协议栈打印打点方式下的.C文件宏定义
+    ??????????????????????.C??????????
 *****************************************************************************/
 /*lint -e767 */
 #define    THIS_FILE_ID        PS_FILE_ID_ACPU_IPS_MNTN_C
 /*lint -e767 */
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
 
 /*******************************************************************************
-  3 枚举定义
+  3 ????????
 *******************************************************************************/
 
 /*****************************************************************************
-  2 结构定义
+  2 ????????
 *****************************************************************************/
 
 /*****************************************************************************
-  3 全局变量声明
+  3 ????????????
 *****************************************************************************/
-IPS_MNTN_TRACE_CONFIG_REQ_STRU          g_stIpsTraceMsgCfg;     /*TCP/IP协议栈可维可测配置信息*/
+IPS_MNTN_TRACE_CONFIG_REQ_STRU          g_stIpsTraceMsgCfg;     /*TCP/IP??????????????????????*/
 
 /*****************************************************************************
-  4 消息头定义
-*****************************************************************************/
-
-/*****************************************************************************
-  5 消息定义
-*****************************************************************************/
-
-
-/*****************************************************************************
-  6 UNION定义
+  4 ??????????
 *****************************************************************************/
 
 /*****************************************************************************
-  7 OTHERS定义
+  5 ????????
+*****************************************************************************/
+
+
+/*****************************************************************************
+  6 UNION????
 *****************************************************************************/
 
 /*****************************************************************************
-  8 函数声明
+  7 OTHERS????
+*****************************************************************************/
+
+/*****************************************************************************
+  8 ????????
 *****************************************************************************/
 
 
@@ -114,7 +114,7 @@ VOS_VOID IPS_MNTN_SndCfgCnf2Om
 {
     MsgBlock                *pSendMsg;
 
-    /*分配并填写消息*/
+    /*??????????????*/
     pSendMsg = VOS_AllocMsg(ACPU_PID_NFEXT, ulTransMsgContentLen - VOS_MSG_HEAD_LENGTH);
     if (VOS_NULL_PTR == pSendMsg)
     {
@@ -147,7 +147,7 @@ VOS_UINT32 IPS_MNTN_GetPktLenByTraceCfg
 
     *pulDataLen    =   0;
 
-    /*判断定时器是否启动*/
+    /*??????????????????*/
     switch ( pstTraceCfg->ulChoice )
     {
         case IPS_MNTN_TRACE_NULL_CHOSEN:
@@ -203,13 +203,13 @@ VOS_VOID IPS_MNTN_PktInfoCB
         return;
     }
 
-    /* HIDS未连接 */
+    /* HIDS?????? */
     if (VOS_NO == DIAG_GetConnState())
     {
         return;
     }
 
-    /*根据消息类型选择对应配置信息*/
+    /*????????????????????????????*/
     if(ID_IPS_TRACE_INPUT_DATA_INFO == enType)
     {
         pstTraceCfg = &(g_stIpsTraceMsgCfg.stPreRoutingTraceCfg);
@@ -224,17 +224,17 @@ VOS_VOID IPS_MNTN_PktInfoCB
     }
     else
     {
-        /*打印警告信息,消息类型不匹配*/
+        /*????????????,??????????????*/
         TTF_LOG( ACPU_PID_NFEXT, DIAG_MODE_COMM, PS_PRINT_ERROR,
                 "IPS, IPS_MNTN_PktInfoCB : ERROR : usType is not Expectes!" );
         return;
     }
 
-    /*根据消息配置信息，获取输出报文长度*/
+    /*??????????????????????????????????*/
     ulRst = IPS_MNTN_GetPktLenByTraceCfg(pstTraceCfg, pucPktData, usPktLen, &ulDataLen);
     if(PS_FALSE == ulRst)
     {
-        /*不捕获该报文*/
+        /*????????????*/
         return;
     }
 
@@ -243,7 +243,7 @@ VOS_VOID IPS_MNTN_PktInfoCB
     ulTransDataLen      += ulDataLen;
     ulNeedMemLen = ulTransDataLen + sizeof(DIAG_TRANS_IND_STRU);
 
-    /* 从Linux内核申请内存 */
+    /* ??Linux???????????? */
     pucTraceData = NF_EXT_MEM_ALLOC(ACPU_PID_NFEXT, ulNeedMemLen);
     if (VOS_NULL_PTR == pucTraceData)
     {
@@ -252,13 +252,13 @@ VOS_VOID IPS_MNTN_PktInfoCB
         return;
     }
 
-    /*构建透明消息*/
+    /*????????????*/
     pstTraceMsg             = (IPS_MNTN_PKT_INFO_STRU *)(pucTraceData + sizeof(DIAG_TRANS_IND_STRU));
     pstTraceMsg->usLen      = usPktLen;
     pstTraceMsg->usPrimId   = enType;
     mdrv_memcpy(pstTraceMsg->aucNetIfName, pucNetIfName, (VOS_ULONG)IPS_IFNAMSIZ);
 
-    /* 在某些情况下(如配置 pstTraceCfg->ulTraceDataLen 为0)，ulDataLen为0的情况，存在异常，这里进行判断，保护这种情况。*/
+    /* ????????????(?????? pstTraceCfg->ulTraceDataLen ??0)??ulDataLen??0??????????????????????????????????????????????*/
     if ( 0 != ulDataLen )
     {
         /*lint -e669 */
@@ -307,30 +307,30 @@ VOS_VOID IPS_MNTN_BridgePktInfoCB
         return;
     }
 
-    /* HIDS未连接 */
+    /* HIDS?????? */
     if (VOS_NO == DIAG_GetConnState())
     {
         return;
     }
 
-    /*根据消息类型选择对应配置信息*/
+    /*????????????????????????????*/
     if((enType >= ID_IPS_TRACE_BRIDGE_DATA_INFO) && (enType <= ID_IPS_TRACE_BR_FORWARD_FLOW_CTRL_STOP))
     {
         pstTraceCfg = &(g_stIpsTraceMsgCfg.stBridgeArpTraceCfg);
     }
     else
     {
-        /*打印警告信息,消息类型不匹配*/
+        /*????????????,??????????????*/
         TTF_LOG( ACPU_PID_NFEXT, DIAG_MODE_COMM, PS_PRINT_ERROR,
                 "IPS, IPS_MNTN_BridgePktInfoCB : ERROR : usType is not Expectes!" );
         return;
     }
 
-    /*根据消息配置信息，获取输出报文长度*/
+    /*??????????????????????????????????*/
     ulRst = IPS_MNTN_GetPktLenByTraceCfg(pstTraceCfg, pucPktData, usPktLen, &ulDataLen);
     if(PS_FALSE == ulRst)
     {
-        /*不捕获该报文*/
+        /*????????????*/
         return;
     }
 
@@ -339,7 +339,7 @@ VOS_VOID IPS_MNTN_BridgePktInfoCB
     ulTransDataLen      += ulDataLen;
     ulNeedMemLen = ulTransDataLen + sizeof(DIAG_TRANS_IND_STRU);
 
-    /* 从Linux内核申请内存 */
+    /* ??Linux???????????? */
     pucTraceData = NF_EXT_MEM_ALLOC(ACPU_PID_NFEXT, ulNeedMemLen);
 
     if (VOS_NULL_PTR == pucTraceData)
@@ -349,7 +349,7 @@ VOS_VOID IPS_MNTN_BridgePktInfoCB
         return;
     }
 
-    /*构建透明消息*/
+    /*????????????*/
     pstTraceMsg             = (IPS_MNTN_BRIDGE_PKT_INFO_STRU *)(pucTraceData + sizeof(DIAG_TRANS_IND_STRU));
     pstTraceMsg->usLen      = usPktLen;
     pstTraceMsg->usPrimId   = enType;
@@ -401,7 +401,7 @@ VOS_VOID IPS_MNTN_CtrlPktInfoCB
         return;
     }
 
-    /* HIDS未连接 */
+    /* HIDS?????? */
     if (VOS_NO == DIAG_GetConnState())
     {
         return;
@@ -417,7 +417,7 @@ VOS_VOID IPS_MNTN_CtrlPktInfoCB
     ulTransDataLen      += ulDataLen;
     ulNeedMemLen = ulTransDataLen + sizeof(DIAG_TRANS_IND_STRU);
 
-    /* 从Linux内核申请内存 */
+    /* ??Linux???????????? */
     pucTraceData = NF_EXT_MEM_ALLOC(ACPU_PID_NFEXT, ulNeedMemLen);
 
     if (VOS_NULL_PTR == pucTraceData)
@@ -427,7 +427,7 @@ VOS_VOID IPS_MNTN_CtrlPktInfoCB
         return;
     }
 
-    /*构建透明消息*/
+    /*????????????*/
     pstTraceMsg             = (IPS_MNTN_PKT_INFO_STRU *)(pucTraceData + sizeof(DIAG_TRANS_IND_STRU));
     pstTraceMsg->usLen      = usPktLen;
     pstTraceMsg->usPrimId   = enType;
@@ -454,7 +454,7 @@ VOS_VOID IPS_MNTN_FlowCtrl(VOS_UINT32 ulFcType, TTF_MNTN_MSG_TYPE_ENUM_UINT16  e
 
     PSACORE_MEM_SET(&stFlowCtrlMsg, sizeof(IPS_MNTN_FLOW_CTRL_STRU), 0x0, sizeof(IPS_MNTN_FLOW_CTRL_STRU));
 
-    /* 填充信息 */
+    /* ???????? */
     stTransData.ulPid       = ACPU_PID_NFEXT;
     stTransData.ulMsgId     = enType;
     stTransData.ulModule    = DIAG_GEN_MODULE(MODEM_ID_0, DIAG_MODE_COMM);
@@ -485,17 +485,17 @@ VOS_UINT32 IPS_MNTN_TransMsg
     NF_EXT_DATA_RING_BUF_STRU               stBufData;
     DIAG_TRANS_IND_STRU                     *pstDiagTransData;
 
-    /*申请消息*/
+    /*????????*/
     pstDiagTransData            = (DIAG_TRANS_IND_STRU *)pucTransMsg;
 
-    /* 填充信息 */
+    /* ???????? */
     pstDiagTransData->ulPid     = ACPU_PID_NFEXT;
     pstDiagTransData->ulMsgId   = enMsgName;
     pstDiagTransData->ulModule  = DIAG_GEN_MODULE(MODEM_ID_0, DIAG_MODE_COMM);
     pstDiagTransData->ulLength  = ulTransMsgContentLen;
     pstDiagTransData->pData     = pucTransMsg + sizeof(DIAG_TRANS_IND_STRU);
 
-    /* 中断上下文在自处理任务中勾包, 非中断上下文直接勾包 */
+    /* ????????????????????????????, ???????????????????? */
     if (VOS_FALSE != VOS_CheckInterrupt())
     {
         stBufData.pData         = (VOS_UINT8 *)pucTransMsg;
@@ -569,13 +569,13 @@ PS_BOOL_ENUM_UINT8  IPS_MNTN_TraceCfgChkParam(IPS_MNTN_TRACE_CONFIG_REQ_STRU *pR
 
 PS_BOOL_ENUM_UINT8  IPS_MNTN_TraceAdvancedCfgChkParam(IPS_MNTN_TRACE_CONFIG_REQ_STRU *pRcvMsg)
 {
-    /*TCP/IP协议栈报文钩包配置参数检查*/
+    /*TCP/IP??????????????????????????*/
     if (PS_FALSE == IPS_MNTN_TraceCfgChkParam(pRcvMsg))
     {
         return PS_FALSE;
     }
 
-    /*网桥中转报文钩包配置参数检查*/
+    /*????????????????????????????*/
     if (PS_FALSE == IPS_MNTN_BridgeTraceCfgChkParam(pRcvMsg))
     {
         return  PS_FALSE;
@@ -599,19 +599,19 @@ VOS_VOID IPS_MNTN_TraceAdvancedCfgReq(VOS_VOID *pMsg)
 
     pRcvMsg = (OM_IPS_ADVANCED_TRACE_CONFIG_REQ_STRU *)pMsg;
 
-    /*检测配置参数是否合法*/
+    /*????????????????????*/
     enResult = IPS_MNTN_TraceAdvancedCfgChkParam(&(pRcvMsg->stIpsAdvanceCfgReq));
 
     /* Fill DIAG trans msg header */
     stIpsTraceCfgCnf.stDiagHdr.ulSenderCpuId        = VOS_LOCAL_CPUID;
     stIpsTraceCfgCnf.stDiagHdr.ulSenderPid          = ACPU_PID_NFEXT;
     stIpsTraceCfgCnf.stDiagHdr.ulReceiverCpuId      = VOS_LOCAL_CPUID;
-    stIpsTraceCfgCnf.stDiagHdr.ulReceiverPid        = MSP_PID_DIAG_APP_AGENT;   /* 把应答消息发送给DIAG，由DIAG把透传命令的处理结果发送给HIDS工具*/
+    stIpsTraceCfgCnf.stDiagHdr.ulReceiverPid        = MSP_PID_DIAG_APP_AGENT;   /* ????????????????DIAG????DIAG??????????????????????????HIDS????*/
     stIpsTraceCfgCnf.stDiagHdr.ulLength             = sizeof(IPS_OM_ADVANCED_TRACE_CONFIG_CNF_STRU) - VOS_MSG_HEAD_LENGTH;
 
     stIpsTraceCfgCnf.stDiagHdr.ulMsgId              = ID_IPS_OM_ADVANCED_TRACE_CONFIG_CNF;
 
-    /* DIAG透传命令中的特定信息*/
+    /* DIAG????????????????????*/
     stIpsTraceCfgCnf.stDiagHdr.usOriginalId         = pRcvMsg->stDiagHdr.usOriginalId;
     stIpsTraceCfgCnf.stDiagHdr.usTerminalId         = pRcvMsg->stDiagHdr.usTerminalId;
     stIpsTraceCfgCnf.stDiagHdr.ulTimeStamp          = pRcvMsg->stDiagHdr.ulTimeStamp;
@@ -619,7 +619,7 @@ VOS_VOID IPS_MNTN_TraceAdvancedCfgReq(VOS_VOID *pMsg)
 
     if ( PS_FALSE == enResult )
     {
-        /*如果参数检测不合法，向OM回复配置失败*/
+        /*??????????????????????OM????????????*/
         stIpsTraceCfgCnf.stIpsAdvanceCfgCnf.enRslt  =   PS_FAIL;
 
         IPS_MNTN_SndCfgCnf2Om(ID_IPS_OM_ADVANCED_TRACE_CONFIG_CNF,
@@ -634,7 +634,7 @@ VOS_VOID IPS_MNTN_TraceAdvancedCfgReq(VOS_VOID *pMsg)
     enResult = NFExt_ConfigEffective(&(pRcvMsg->stIpsAdvanceCfgReq));
     if( PS_FALSE == enResult )
     {
-        /*如果注册钩子函数失败，向OM回复配置失败*/
+        /*????????????????????????OM????????????*/
         stIpsTraceCfgCnf.stIpsAdvanceCfgCnf.enRslt =   PS_FAIL;
 
         IPS_MNTN_SndCfgCnf2Om(ID_IPS_OM_ADVANCED_TRACE_CONFIG_CNF,
@@ -646,10 +646,10 @@ VOS_VOID IPS_MNTN_TraceAdvancedCfgReq(VOS_VOID *pMsg)
         return;
     }
 
-    /*保存配置参数*/
+    /*????????????*/
     PSACORE_MEM_CPY(&g_stIpsTraceMsgCfg, sizeof(IPS_MNTN_TRACE_CONFIG_REQ_STRU), &(pRcvMsg->stIpsAdvanceCfgReq), sizeof(IPS_MNTN_TRACE_CONFIG_REQ_STRU));
 
-    /*向OM回复配置成功*/
+    /*??OM????????????*/
     stIpsTraceCfgCnf.stIpsAdvanceCfgCnf.enRslt = PS_SUCC;
 
     IPS_MNTN_SndCfgCnf2Om(ID_IPS_OM_ADVANCED_TRACE_CONFIG_CNF,
@@ -756,7 +756,7 @@ VOS_VOID IPS_MNTN_TraceIpInfo(
     IPS_MNTN_IP_INFO_STRU          *pstIpInfo;
     VOS_UINT8                      *pucTraceData;
 
-    /* HIDS未连接 */
+    /* HIDS?????? */
     if (VOS_NO == DIAG_GetConnState())
     {
         return;
@@ -765,7 +765,7 @@ VOS_VOID IPS_MNTN_TraceIpInfo(
     ulRst = IPS_MNTN_GetIPInfoCfg(enType);
     if(PS_FALSE == ulRst)
     {
-        /*不捕获该报文*/
+        /*????????????*/
         return;
     }
 
@@ -776,7 +776,7 @@ VOS_VOID IPS_MNTN_TraceIpInfo(
         return;
     }
 
-    /* USB抓取的skb data可能是IP数据包或者是带MAC头的IP数据包*/
+    /* USB??????skb data??????IP??????????????MAC????IP??????*/
     pIpData         = skb->data;
 
     if (IP_IPV4_VER_AND_HEAD == *pIpData)
@@ -797,7 +797,7 @@ VOS_VOID IPS_MNTN_TraceIpInfo(
         pIpData     += MAC_HEAD_LEN;
     }
 
-    /* 从Linux内核申请内存 */
+    /* ??Linux???????????? */
     pucTraceData = NF_EXT_MEM_ALLOC(ACPU_PID_NFEXT, MNTN_IP_INFO_LEN + sizeof(DIAG_TRANS_IND_STRU));
     if (VOS_NULL_PTR == pucTraceData)
     {
@@ -815,7 +815,7 @@ VOS_VOID IPS_MNTN_TraceIpInfo(
     pstIpInfo->ulParam3     = ulParam3;
     pstIpInfo->ulParam4     = ulParam4;
 
-    /* IP报文解析TCP,UDP,ICMP，不解析IP的扩展头*/
+    /* IP????????TCP,UDP,ICMP????????IP????????*/
     if (IP_IPV4_PROTO_VERSION == pstIpInfo->ucIpVer)
     {
         pstIpInfo->usDataLen  = IP_GET_VAL_NTOH_U16(pIpData, IP_IPV4_DATA_LEN_POS);

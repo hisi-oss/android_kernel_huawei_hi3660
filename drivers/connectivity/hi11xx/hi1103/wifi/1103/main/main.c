@@ -7,7 +7,7 @@ extern "C" {
 #endif
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #define HISI_LOG_TAG    "[WIFI_MAIN]"
 #include "main.h"
@@ -28,7 +28,7 @@ extern "C" {
 #endif /* #ifdef _PRE_PLAT_FEATURE_CUSTOMIZE */
 
 #elif (defined(_PRE_PRODUCT_ID_HI110X_DEV))
-/*TBD 以上头文件待回收*/
+/*TBD ????????????????*/
 #include "oam_log.h"
 #include "oal_sdio.h"
 #include "oal_main.h"
@@ -61,7 +61,7 @@ extern oal_int32 hcc_is_pcie(oal_void);
 #endif
 
 #if defined(_PRE_PRODUCT_ID_HI110X_DEV)
-/* g_puc_matrix_data在函数hi110x_device_main_init中申请，在hi1103_initialize_rf_sys函数中释放 */
+/* g_puc_matrix_data??????hi110x_device_main_init??????????hi1103_initialize_rf_sys?????????? */
 oal_uint8 *g_puc_matrix_data = OAL_PTR_NULL;
 oal_int32 g_device_main_return = OAL_SUCC;
 oal_int32 g_device_main_err_line = 0;
@@ -90,14 +90,14 @@ extern oal_int32 dmac_rx_custom_post_data_function(oal_uint8 stype,
 #undef  THIS_FILE_ID
 #define THIS_FILE_ID OAM_FILE_ID_MAIN_C
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 #if ((!defined(_PRE_PRODUCT_ID_HI110X_DEV)) || (_PRE_OS_VERSION_WIN32_RAW == _PRE_OS_VERSION))
 oal_void platform_module_exit(oal_uint16 us_bitmap);
 OAL_STATIC oal_void builder_module_exit(oal_uint16 us_bitmap);
 #endif
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 
@@ -147,12 +147,12 @@ OAL_STATIC oal_uint32 host_test_get_chip_msg(oal_void)
     oal_uint32             ul_return;
     mac_chip_stru         *pst_chip;
     frw_event_mem_stru    *pst_event_mem;
-    frw_event_stru        *pst_event;             /* 事件结构体 */
+    frw_event_stru        *pst_event;             /* ?????????? */
     oal_uint32             ul_dev_id;
 	oal_netbuf_stru       *pst_netbuf;
     dmac_tx_event_stru    *pst_ctx_event;
     oal_uint8             *pst_mac_rates_11g;
-    /** 待补充 ***/
+    /** ?????? ***/
 
 
     pst_event_mem = FRW_EVENT_ALLOC(OAL_SIZEOF(dmac_tx_event_stru));
@@ -162,7 +162,7 @@ OAL_STATIC oal_uint32 host_test_get_chip_msg(oal_void)
         return OAL_FAIL;
     }
 
-    /* 申请netbuf内存 */
+    /* ????netbuf???? */
     pst_netbuf = OAL_MEM_NETBUF_ALLOC(OAL_NORMAL_NETBUF, WLAN_MEM_NETBUF_SIZE2, OAL_NETBUF_PRIORITY_MID);
     if (OAL_UNLIKELY(OAL_PTR_NULL == pst_netbuf))
     {
@@ -177,7 +177,7 @@ OAL_STATIC oal_uint32 host_test_get_chip_msg(oal_void)
     pst_chip = (mac_chip_stru *)(pst_mac_rates_11g + sizeof(mac_data_rate_stru) * MAC_DATARATES_PHY_80211G_NUM);
 
     ul_dev_id = (oal_uint32) oal_queue_dequeue(&(g_pst_mac_res->st_dev_res.st_queue));
-    /* 0为无效值 */
+    /* 0???????? */
     if (0 == ul_dev_id)
     {
         OAL_IO_PRINT("host_test_get_chip_msg:oal_queue_dequeue return 0!");
@@ -186,12 +186,12 @@ OAL_STATIC oal_uint32 host_test_get_chip_msg(oal_void)
     }
     pst_chip->auc_device_id[0] = (oal_uint8)(ul_dev_id - 1);
 
-    /* 根据ul_chip_ver，通过hal_chip_init_by_version函数获得 */
+    /* ????ul_chip_ver??????hal_chip_init_by_version???????? */
     pst_chip->uc_device_nums = 1;
     pst_chip->uc_chip_id = 0;
     pst_chip->en_chip_state = OAL_TRUE;
 
-    /* 由hal_chip_get_version函数得到,1102 02需要SOC提供寄存器后实现 */
+    /* ??hal_chip_get_version????????,1102 02????SOC???????????????? */
     pst_chip->ul_chip_ver = WLAN_CHIP_VERSION_HI1151V100H;
 
     pst_chip->pst_hal_chip = OAL_PTR_NULL;
@@ -262,7 +262,7 @@ oal_void platform_module_exit(oal_uint16 us_bitmap)
 
 #if (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION)
     #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1151)
-        /* 02目前不需要SDT初始化 TBD */
+        /* 02??????????SDT?????? TBD */
         if (BIT2 & us_bitmap)
         {
             sdt_drv_main_exit_etc();
@@ -311,7 +311,7 @@ oal_int32 platform_module_init(oal_void)
 
 #if (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION)
     #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1151)
-    /* 02目前不需要SDT初始化 TBD */
+    /* 02??????????SDT?????? TBD */
         l_return = sdt_drv_main_init_etc();
         if (OAL_SUCC != l_return)
         {
@@ -339,7 +339,7 @@ oal_int32 platform_module_init(oal_void)
         return l_return;
     }
 
-    /*启动完成后，输出打印*/
+    /*????????????????????*/
     OAL_IO_PRINT("platform_module_init:: platform_main_init finish!\r\n");
 
     return OAL_SUCC;
@@ -390,7 +390,7 @@ OAL_STATIC oal_int32  device_module_init(oal_void)
 
 #if 0
 #if (((_PRE_OS_VERSION_WIN32_RAW == _PRE_OS_VERSION)&&(defined(_PRE_PRODUCT_ID_HI110X_DEV))) || (defined(HI1102_EDA)))
-    /* ut工程打桩用:从host下发创建cfg_vap命令 */
+    /* ut??????????:??host????????cfg_vap???? */
     l_return = (oal_int32) device_test_create_cfg_vap();
     if (OAL_SUCC != l_return)
     {
@@ -399,7 +399,7 @@ OAL_STATIC oal_int32  device_module_init(oal_void)
 #endif
 #endif
     //WLAN_EDA_TRACE_TAG(0x4240UL);
-    /*启动完成后，输出打印*/
+    /*????????????????????*/
     OAL_IO_PRINT("device_module_init finish!\r\n");
 
     return OAL_SUCC;
@@ -434,8 +434,8 @@ oal_uint32 hwifi_cfg_host_global_init_param(oal_void)
     oal_int32      l_priv_value = 0;
     oal_int32      l_ret        = OAL_FAIL;
 
-    /*************************** 低功耗定制化 *****************************/
-    /*由于device 低功耗开关不是true false,而host是,先取定制化的值赋给device开关,再根据此值给host低功耗开关赋值 */
+    /*************************** ???????????? *****************************/
+    /*????device ??????????????true false,??host??,??????????????????device????,????????????host?????????????? */
     g_wlan_device_pm_switch = hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_POWERMGMT_SWITCH);
     g_wlan_ps_mode          = hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_PS_MODE);
     if(MAX_FAST_PS==g_wlan_ps_mode)
@@ -453,21 +453,21 @@ oal_uint32 hwifi_cfg_host_global_init_param(oal_void)
     g_wlan_pm_switch_etc = (g_wlan_device_pm_switch == 1 || g_wlan_device_pm_switch == 4)  ?  OAL_TRUE : OAL_FALSE;
 
 
-    /*************************** 私有定制化 *******************************/
+    /*************************** ?????????? *******************************/
     uc_cmd_idx = WLAN_CFG_PRIV_DBDC_RADIO_0;
     for (uc_device_idx = 0; uc_device_idx < WLAN_SERVICE_DEVICE_MAX_NUM_PER_CHIP; uc_device_idx++)
     {
         l_ret = hwifi_get_init_priv_value(uc_cmd_idx, &l_priv_value);
         if (OAL_SUCC == l_ret)
         {
-            /* 定制化 RADIO_0高4bit 给dbdc软件开关用 */
+            /* ?????? RADIO_0??4bit ??dbdc?????????? */
             l_priv_value &= 0x0F;
             g_auc_wlan_service_device_per_chip[uc_device_idx] = (oal_uint8)(oal_uint32)l_priv_value;
         }
 
         uc_cmd_idx++;
     }
-    /* 同步host侧业务device */
+    /* ????host??????device */
     oal_memcopy(g_auc_mac_device_radio_cap, g_auc_wlan_service_device_per_chip, OAL_SIZEOF(g_auc_wlan_service_device_per_chip));
 #ifdef _PRE_WLAN_RF_AUTOCALI
     l_ret = hwifi_get_init_priv_value(WLAN_CFG_PRIV_CALI_AUTOCALI_MASK, &l_priv_value);
@@ -562,9 +562,9 @@ oal_int32  host_module_init_etc(oal_void)
      oal_int32            l_priv_value          = 0;
      oal_bool_enum_uint8  en_cali_first_power_on = OAL_TRUE;
 
-    /* 读定制化配置文件&NVRAM */
+    /* ????????????????&NVRAM */
     hwifi_custom_host_read_cfg_init();
-    /* 配置host全局变量值 */
+    /* ????host?????????? */
     hwifi_cfg_host_global_init_param();
 #endif // #ifdef _PRE_PLAT_FEATURE_CUSTOMIZE
 #endif /* if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE */
@@ -577,7 +577,7 @@ oal_int32  host_module_init_etc(oal_void)
     }
 #if 0
 #if ((_PRE_OS_VERSION_WIN32 == _PRE_OS_VERSION)&&(defined(_PRE_PRODUCT_ID_HI110X_HOST)))
-    /* ut工程打桩用:从device获取板级信息 */
+    /* ut??????????:??device???????????? */
     l_return = (oal_int32) host_test_get_chip_msg();
     if (OAL_SUCC != l_return)
     {
@@ -610,7 +610,7 @@ oal_int32  host_module_init_etc(oal_void)
     }
     #endif
 
-    /* 开机校准和定制化参数下发 */
+    /* ???????????????????????? */
     if (OAL_TRUE == en_cali_first_power_on)
     {
         wlan_pm_open_etc();
@@ -619,7 +619,7 @@ oal_int32  host_module_init_etc(oal_void)
     //mdelay(7);
     //wlan_pm_close_etc();
 
-    /*启动完成后，输出打印*/
+    /*????????????????????*/
     OAL_IO_PRINT("host_module_init_etc:: host_main_init finish!\r\n");
 
     return OAL_SUCC;
@@ -646,7 +646,7 @@ oal_int32 hi110x_device_module_init(oal_void)
         return l_return;
     }
 
-    /*启动完成后，输出打印*/
+    /*????????????????????*/
     OAL_IO_PRINT("hi110x_device_module_init:: device_module_init finish!\r\n");
     OAM_WARNING_LOG0(0, OAM_SF_ANY, "hi110x_device_module_init finish!!!");
 
@@ -668,7 +668,7 @@ oal_int32  hi110x_device_main_init(oal_void)
     }
 
 #ifndef HI110x_EDA
-    /* 申请3个64K的pktram，用来存放校准数据(IQ的H矩阵，DPD corram数据，pktmem发送单音的数据) */
+    /* ????3??64K??pktram??????????????????(IQ??H??????DPD corram??????pktmem??????????????) */
     g_puc_matrix_data = (oal_uint8 *)OAL_MEM_SAMPLE_NETBUF_ALLOC(3);
     if (OAL_PTR_NULL == g_puc_matrix_data)
     {
@@ -701,7 +701,7 @@ oal_int32  hi110x_device_main_init(oal_void)
     }
 
 #if (!defined(HI1102_EDA)&&!defined(HI110x_EDA))
-    /*device_ready:调用HCC接口通知Hmac,Dmac已经完成初始化 TBD*/
+    /*device_ready:????HCC????????Hmac,Dmac?????????????? TBD*/
     //hcc_send_msg2host(D2H_MSG_WLAN_READY);
     l_return = hcc_bus_send_message2host(D2H_MSG_WLAN_READY);
     if(OAL_SUCC != l_return)
@@ -712,7 +712,7 @@ oal_int32  hi110x_device_main_init(oal_void)
 #endif
     return l_return;
 #if 0
-	/* 1102 需要在device初始化成功后同步速率级 */
+	/* 1102 ??????device?????????????????????? */
 	pst_event_mem = FRW_EVENT_ALLOC(0);
 	if (OAL_UNLIKELY(OAL_PTR_NULL == pst_event_mem))
 	{
@@ -744,7 +744,7 @@ oal_void device_main_init(oal_void)
     if (OAL_SUCC != l_return)
     {
         OAL_IO_PRINT("device_main_init: hi110x_device_main_init return error code: %d\r\n", l_return);
-        /* 初始化失败不退出主程序，等待重启 */
+        /* ???????????????????????????????? */
         for (;;)
             ;
     }
@@ -841,7 +841,7 @@ oal_int32  hi110x_host_main_init(oal_void)
     wal_hipriv_register_inet6addr_notifier_etc();
 #endif
 
-    /*启动完成后，输出打印*/
+    /*????????????????????*/
     OAL_IO_PRINT("hi110x_host_main_init:: hi110x_host_main_init finish!\n");
 
     return OAL_SUCC;
@@ -894,7 +894,7 @@ oal_int32 hi1151_main_init(oal_void)
         builder_module_exit(us_bitmap);
         return l_return;
     }
-    /*启动完成后，输出打印*/
+    /*????????????????????*/
     OAL_IO_PRINT("Hi1151_main_init:: Hi1151_main_init finish!/r/n");
 
     return OAL_SUCC;

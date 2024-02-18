@@ -9,7 +9,7 @@ extern "C" {
 #endif
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "hmac_main.h"
 #include "hmac_blacklist.h"
@@ -23,14 +23,14 @@ extern "C" {
 #define THIS_FILE_ID OAM_FILE_ID_HMAC_BLACKLIST_C
 
 /*****************************************************************************
-  2 STRUCT定义
+  2 STRUCT????
 *****************************************************************************/
 
 /*****************************************************************************
-  3 全局变量定义
+  3 ????????????
 *****************************************************************************/
 /*****************************************************************************
-  4 函数实现
+  4 ????????
 *****************************************************************************/
 
 
@@ -84,7 +84,7 @@ OAL_STATIC oal_void hmac_blacklist_init(mac_vap_stru *pst_mac_vap, cs_blacklist_
         return;
     }
     ul_size = sizeof(mac_blacklist_info_stru);
-    /* Max=32 => 新增加mac_vap结构大小= 0x494 = 1172 ; Max=8 => size = 308 */
+    /* Max=32 => ??????mac_vap????????= 0x494 = 1172 ; Max=8 => size = 308 */
     if (en_flush)
     {
         OAL_MEMZERO(pst_blacklist_info->ast_black_list, sizeof(mac_blacklist_stru) * WLAN_BLACKLIST_MAX);
@@ -106,19 +106,19 @@ OAL_STATIC oal_bool_enum_uint8 hmac_blacklist_is_aged(mac_vap_stru *pst_mac_vap,
     oal_uint8                    *puc_mac_addr;
     hmac_vap_stru                *pst_hmac_vap;
 
-    /* 1.1 全零地址，属于非法地址 */
+    /* 1.1 ?????????????????????? */
     if (hmac_blacklist_mac_is_zero(pst_blacklist->auc_mac_addr))
     {
         return OAL_FALSE;
     }
 
-    /* 2.1 老化时间为0表示不需要老化 */
+    /* 2.1 ??????????0?????????????? */
     if (0 == pst_blacklist->ul_aging_time)
     {
         return OAL_FALSE;
     }
 
-    /* 2.2 没有超过老化时间 */
+    /* 2.2 ???????????????? */
     oal_time_get_stamp_us(&st_cur_time);
     if (st_cur_time.i_sec < (oal_int)(pst_blacklist->ul_cfg_time + pst_blacklist->ul_aging_time))
     {
@@ -137,7 +137,7 @@ OAL_STATIC oal_bool_enum_uint8 hmac_blacklist_is_aged(mac_vap_stru *pst_mac_vap,
             "{aging time reach delete MAC:=%02X:XX:XX:%02X:%02X:%02X}",
             puc_mac_addr[0],puc_mac_addr[3],puc_mac_addr[4],puc_mac_addr[5]);
 
-    /* 3.1 直接从黑名单中删除 */
+    /* 3.1 ?????????????????? */
     pst_blacklist_info = pst_hmac_vap->pst_blacklist_info;
     if (OAL_PTR_NULL == pst_blacklist_info)
     {
@@ -155,7 +155,7 @@ OAL_STATIC oal_bool_enum_uint8 hmac_blacklist_is_aged(mac_vap_stru *pst_mac_vap,
         return OAL_TRUE;
     }
 
-    /* 4.1 直接从白名单中恢复 */
+    /* 4.1 ?????????????????? */
     if (CS_BLACKLIST_MODE_WHITE == pst_blacklist_info->uc_mode)
     {
         pst_blacklist->ul_aging_time = 0;
@@ -173,13 +173,13 @@ OAL_STATIC oal_uint32 hmac_blacklist_get(mac_vap_stru *pst_mac_vap, oal_uint8 *p
     mac_blacklist_info_stru      *pst_blacklist_info = OAL_PTR_NULL;
     hmac_vap_stru                *pst_hmac_vap;
 
-    /* 1.1 广播地址，属于非法地址 */
+    /* 1.1 ?????????????????????? */
     if (hmac_blacklist_mac_is_bcast(puc_mac_addr))
     {
         return OAL_ERR_CODE_SECURITY_MAC_INVALID;
     }
 
-    /* 1.2 全零地址，属于非法地址 */
+    /* 1.2 ?????????????????????? */
     if (hmac_blacklist_mac_is_zero(puc_mac_addr))
     {
         return OAL_ERR_CODE_SECURITY_MAC_INVALID;
@@ -199,7 +199,7 @@ OAL_STATIC oal_uint32 hmac_blacklist_get(mac_vap_stru *pst_mac_vap, oal_uint8 *p
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 2.1 找到表单 */
+    /* 2.1 ???????? */
     for (ul_blacklist_index = 0; ul_blacklist_index < WLAN_BLACKLIST_MAX; ul_blacklist_index++)
     {
         *ppst_blacklist = &pst_blacklist_info->ast_black_list[ul_blacklist_index];
@@ -218,7 +218,7 @@ oal_uint32 hmac_backlist_get_drop_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc_
 {
     mac_blacklist_stru *pst_blacklist = OAL_PTR_NULL;	/* 2014.9.2 Add UT and found no init value set to it ! add initial value null */
 
-    /* 1.1 入参检查 */
+    /* 1.1 ???????? */
     if (OAL_PTR_NULL == pst_mac_vap)
     {
         OAM_ERROR_LOG0(0, OAM_SF_ANY, "{hmac_backlist_get_drop_etc::null mac_vap}");
@@ -256,7 +256,7 @@ oal_uint8 hmac_backlist_get_list_num_etc(mac_vap_stru *pst_mac_vap)
     mac_blacklist_info_stru      *pst_blacklist_info;
     hmac_vap_stru                *pst_hmac_vap;
 
-    /* 1.1 入参检查 */
+    /* 1.1 ???????? */
     if (OAL_PTR_NULL == pst_mac_vap)
     {
         OAM_ERROR_LOG0(0, OAM_SF_ANY, "{hmac_backlist_get_list_num_etc::null mac_vap}");
@@ -292,13 +292,13 @@ OAL_STATIC oal_uint32 hmac_autoblacklist_get(mac_vap_stru *pst_mac_vap, oal_uint
     hmac_vap_stru                    *pst_hmac_vap;
 
 
-    /* 1.1 广播地址，属于非法地址 */
+    /* 1.1 ?????????????????????? */
     if (hmac_blacklist_mac_is_bcast(puc_mac_addr))
     {
         return OAL_ERR_CODE_SECURITY_MAC_INVALID;
     }
 
-    /* 1.2 全零地址，属于非法地址 */
+    /* 1.2 ?????????????????????? */
     if (hmac_blacklist_mac_is_zero(puc_mac_addr))
     {
         return OAL_ERR_CODE_SECURITY_MAC_INVALID;
@@ -321,18 +321,18 @@ OAL_STATIC oal_uint32 hmac_autoblacklist_get(mac_vap_stru *pst_mac_vap, oal_uint
 
     *ppst_autoblacklist = OAL_PTR_NULL;
 
-    /* 2.1 找到历史表单 */
+    /* 2.1 ???????????? */
     for (ul_blacklist_index = 0; ul_blacklist_index < WLAN_BLACKLIST_MAX; ul_blacklist_index++)
     {
         /**ppst_autoblacklist = &pst_autoblacklist_info->ast_autoblack_list[ul_blacklist_index];*/
         pst_autoblacklist = &pst_autoblacklist_info->ast_autoblack_list[ul_blacklist_index];
-        /* 2.2 无效表单*/
+        /* 2.2 ????????*/
         if (pst_autoblacklist->ul_cfg_time == 0)
         {
             continue;
         }
 
-        /* 2.2 过期表单直接清0*/
+        /* 2.2 ??????????????0*/
         if (st_cur_time.i_sec > (oal_int)(pst_autoblacklist->ul_cfg_time + pst_autoblacklist_info->ul_reset_time))
         {
             if(pst_autoblacklist_info->list_num > 0)
@@ -341,7 +341,7 @@ OAL_STATIC oal_uint32 hmac_autoblacklist_get(mac_vap_stru *pst_mac_vap, oal_uint
             continue;
         }
 
-        /* 2.3 有效表单，mac地址比对*/
+        /* 2.3 ??????????mac????????*/
         if (!oal_memcmp(pst_autoblacklist->auc_mac_addr, puc_mac_addr, OAL_MAC_ADDR_LEN))
         {
             *ppst_autoblacklist = pst_autoblacklist;
@@ -354,17 +354,17 @@ OAL_STATIC oal_uint32 hmac_autoblacklist_get(mac_vap_stru *pst_mac_vap, oal_uint
     {
         OAM_INFO_LOG3(pst_mac_vap->uc_vap_id, OAM_SF_ANY,
             "{Get a history item from auto_blacklist.index=%d.MAC=x.x.x.x.%02x.%02x.}",
-            ul_blacklist_index,puc_mac_addr[4],puc_mac_addr[5]);/* [false alarm]:pst_autoblacklist不可能为空，如果为空那说明ppst_autoblacklist也为空，那这个分支不可能进入*/
+            ul_blacklist_index,puc_mac_addr[4],puc_mac_addr[5]);/* [false alarm]:pst_autoblacklist??????????????????????????ppst_autoblacklist????????????????????????????*/
         return OAL_SUCC;
     }
 
-    /* 3.1 找到新表单 */
+    /* 3.1 ?????????? */
     ul_cfg_time_old        = (st_cur_time.i_sec > 0) ? (oal_uint32)(st_cur_time.i_sec) : 0;
     ul_blacklist_index_old = 0;
     for (ul_blacklist_index = 0; ul_blacklist_index < WLAN_BLACKLIST_MAX; ul_blacklist_index++)
     {
         pst_autoblacklist = &pst_autoblacklist_info->ast_autoblack_list[ul_blacklist_index];
-        /* 2.2 找到空闲表单 */
+        /* 2.2 ???????????? */
         if (pst_autoblacklist->ul_cfg_time == 0)
         {
             pst_autoblacklist_info->list_num++;
@@ -372,7 +372,7 @@ OAL_STATIC oal_uint32 hmac_autoblacklist_get(mac_vap_stru *pst_mac_vap, oal_uint
             break;
         }
 
-        /* 2.3 记录最老配置的表单 */
+        /* 2.3 ?????????????????? */
         if (pst_autoblacklist->ul_cfg_time < ul_cfg_time_old)
         {
             ul_cfg_time_old         = pst_autoblacklist->ul_cfg_time;
@@ -382,7 +382,7 @@ OAL_STATIC oal_uint32 hmac_autoblacklist_get(mac_vap_stru *pst_mac_vap, oal_uint
         /*pst_autoblacklist = OAL_PTR_NULL;*/
     }
 
-    /* 4.1 如果没有空闲的表单，就使用最老的表单 */
+    /* 4.1 ???????????????????????????????????? */
     /*if (OAL_PTR_NULL == pst_autoblacklist)*/
     if (OAL_PTR_NULL == *ppst_autoblacklist)
     {
@@ -390,7 +390,7 @@ OAL_STATIC oal_uint32 hmac_autoblacklist_get(mac_vap_stru *pst_mac_vap, oal_uint
         *ppst_autoblacklist = pst_autoblacklist;
     }
 
-    /* 5.1 更新表单 */
+    /* 5.1 ???????? */
     OAM_INFO_LOG4(pst_mac_vap->uc_vap_id, OAM_SF_ANY,
             "{add to auto_blacklist MAC:=%02X:XX:XX:%02X:%02X:%02X. assoc_count=1.}",
             puc_mac_addr[0],puc_mac_addr[3],puc_mac_addr[4],puc_mac_addr[5]);
@@ -420,7 +420,7 @@ OAL_STATIC oal_uint32  hmac_blacklist_update_delete_user(hmac_vap_stru *pst_hmac
 
     hmac_mgmt_send_disassoc_frame_etc(pst_mac_vap, pst_mac_user->auc_user_mac_addr, MAC_DISAS_LV_SS, OAL_FALSE);
 
-    /* 删除黑名单内用户，需要上报内核 */
+    /* ?????????????????????????????? */
     hmac_handle_disconnect_rsp_etc(pst_hmac_vap, pst_hmac_user, MAC_DISAS_LV_SS);
 
     hmac_user_del_etc(pst_mac_vap, pst_hmac_user);
@@ -445,7 +445,7 @@ OAL_STATIC oal_uint32 hmac_whitelist_check_user(mac_vap_stru *pst_mac_vap)
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 遍历VAP下所有用户，不在白名单里的删除 */
+    /* ????VAP?????????????????????????????? */
     OAL_DLIST_SEARCH_FOR_EACH_SAFE(pst_entry, pst_dlist_tmp, &(pst_mac_vap->st_mac_user_list_head))
     {
         pst_user_tmp = OAL_DLIST_GET_ENTRY(pst_entry, mac_user_stru, st_user_dlist);
@@ -465,7 +465,7 @@ OAL_STATIC oal_uint32 hmac_whitelist_check_user(mac_vap_stru *pst_mac_vap)
         {
             continue;
         }
-        /* 2014.6.30 chenchongbao 在如上的hmac_blacklist_filter()中会 ul_drop_counter++ 它不是实际的过滤数，所以--恢复 */
+        /* 2014.6.30 chenchongbao ????????hmac_blacklist_filter()???? ul_drop_counter++ ????????????????????????--???? */
         hmac_backlist_sub_drop(pst_mac_vap, pst_user_tmp->auc_user_mac_addr);
 
         hmac_blacklist_update_delete_user(pst_hmac_vap, pst_hmac_user_tmp);
@@ -492,14 +492,14 @@ OAL_STATIC oal_uint32 hmac_blacklist_vap_check_user_by_macaddr(mac_vap_stru *pst
     ul_ret = mac_vap_find_user_by_macaddr_etc(pst_mac_vap, puc_mac_addr, &us_idx);
     if(OAL_SUCC != ul_ret)
     {
-        /* 该mac地址在此vap下不存在用户，不需要删除，直接返回成功 */
+        /* ??mac????????vap?????????????????????????????????????? */
         return OAL_SUCC;
     }
 
     pst_mac_user = (mac_user_stru *)mac_res_get_mac_user_etc(us_idx);
     if (OAL_PTR_NULL == pst_mac_user)
     {
-        return OAL_FAIL;/* 异常返回 */
+        return OAL_FAIL;/* ???????? */
     }
 
     bool_ret = hmac_blacklist_filter_etc(pst_mac_vap, pst_mac_user->auc_user_mac_addr);
@@ -508,7 +508,7 @@ OAL_STATIC oal_uint32 hmac_blacklist_vap_check_user_by_macaddr(mac_vap_stru *pst
         OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{hmac_blacklist_vap_check_user_by_macaddr::hmac_blacklist_filter_etc bool_ret=%d}", bool_ret);
         return OAL_FAIL;
     }
-    /* 2014.6.30 chenchongbao 在如上的hmac_blacklist_filter()中会 ul_drop_counter++ 它不是实际的过滤数，所以--恢复 */
+    /* 2014.6.30 chenchongbao ????????hmac_blacklist_filter()???? ul_drop_counter++ ????????????????????????--???? */
     hmac_backlist_sub_drop(pst_mac_vap,pst_mac_user->auc_user_mac_addr);
 
     pst_hmac_user = mac_res_get_hmac_user_etc(us_idx);
@@ -607,7 +607,7 @@ oal_uint32 hmac_blacklist_add_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc_mac_
     hmac_vap_stru                *pst_hmac_vap;
 
 
-    /* 1.1 入参检查 */
+    /* 1.1 ???????? */
     if (OAL_PTR_NULL == pst_mac_vap)
     {
         OAM_ERROR_LOG0(0, OAM_SF_ANY, "{hmac_blacklist_add_etc::null mac_vap}");
@@ -633,7 +633,7 @@ oal_uint32 hmac_blacklist_add_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc_mac_
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 3.1 找到表单 */
+    /* 3.1 ???????? */
     for (ul_blacklist_index = 0; ul_blacklist_index < WLAN_BLACKLIST_MAX; ul_blacklist_index++)
     {
         pst_blacklist = &pst_blacklist_info->ast_black_list[ul_blacklist_index];
@@ -644,7 +644,7 @@ oal_uint32 hmac_blacklist_add_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc_mac_
         pst_blacklist = OAL_PTR_NULL;
     }
 
-    /* 4.1 表单已经存在，只更新老化时间 */
+    /* 4.1 ???????????????????????????? */
     if (OAL_PTR_NULL != pst_blacklist)
     {
         OAM_INFO_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{blacklist_add allready exist. update aging = %d}",ul_aging_time);
@@ -652,7 +652,7 @@ oal_uint32 hmac_blacklist_add_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc_mac_
         return OAL_SUCC;
     }
 
-    /* 5.1 找一个地址为空的表单 */
+    /* 5.1 ???????????????????? */
     for (ul_blacklist_index = 0; ul_blacklist_index < WLAN_BLACKLIST_MAX; ul_blacklist_index++)
     {
         pst_blacklist = &pst_blacklist_info->ast_black_list[ul_blacklist_index];
@@ -663,7 +663,7 @@ oal_uint32 hmac_blacklist_add_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc_mac_
         pst_blacklist = OAL_PTR_NULL;
     }
 
-    /* 6.1 无可用表单 */
+    /* 6.1 ?????????? */
     if (OAL_PTR_NULL == pst_blacklist)
     {
         OAM_WARNING_LOG4(pst_mac_vap->uc_vap_id, OAM_SF_ANY,
@@ -672,7 +672,7 @@ oal_uint32 hmac_blacklist_add_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc_mac_
         return OAL_ERR_CODE_SECURITY_LIST_FULL;
     }
 
-    /* 7.1 更新表单 */
+    /* 7.1 ???????? */
     oal_time_get_stamp_us(&st_cur_time);
     oal_memcopy(pst_blacklist->auc_mac_addr, puc_mac_addr, OAL_MAC_ADDR_LEN);
     pst_blacklist->ul_cfg_time     = (oal_uint32)st_cur_time.i_sec;
@@ -685,7 +685,7 @@ oal_uint32 hmac_blacklist_add_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc_mac_
             puc_mac_addr[4],puc_mac_addr[5],pst_blacklist_info->uc_list_num,pst_blacklist->ul_cfg_time);
 
 
-    /* 黑白名单添加成功后刷新一把用户 */
+    /* ?????????????????????????????? */
     if (CS_BLACKLIST_MODE_BLACK == pst_blacklist_info->uc_mode)
     {
         hmac_blacklist_vap_check_user_by_macaddr(pst_mac_vap, puc_mac_addr);
@@ -724,7 +724,7 @@ oal_bool_enum_uint8 hmac_blacklist_get_vap_in_device(mac_device_stru *pst_device
         {
             break;
         }
-        /* 遍历vap下所有用户，若能找到当前user，则返回该vap */
+        /* ????vap????????????????????????user??????????vap */
         OAL_DLIST_SEARCH_FOR_EACH(pst_entry, &(pst_mac_vap->st_mac_user_list_head))
         {
             pst_mac_user = OAL_DLIST_GET_ENTRY(pst_entry, mac_user_stru, st_user_dlist);
@@ -798,7 +798,7 @@ oal_bool_enum_uint8 hmac_blacklist_get_assoc_ap(mac_vap_stru *pst_cur_vap, oal_u
     }
 
 #elif (_PRE_WLAN_FEATURE_BLACKLIST_LEVEL == _PRE_WLAN_FEATURE_BLACKLIST_DEVICE)
-    /* 获取device结构体 */
+    /* ????device?????? */
     pst_device = mac_res_get_dev_etc(pst_cur_vap->uc_device_id);
     if (OAL_PTR_NULL == pst_device)
     {
@@ -823,7 +823,7 @@ oal_uint32 hmac_blacklist_add_only_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc
     hmac_vap_stru                *pst_hmac_vap;
 
 
-    /* 1.1 入参检查 */
+    /* 1.1 ???????? */
     if (OAL_PTR_NULL == pst_mac_vap)
     {
         OAM_ERROR_LOG0(0, OAM_SF_ANY, "{hmac_blacklist_add_only_etc::null mac_vap}");
@@ -849,7 +849,7 @@ oal_uint32 hmac_blacklist_add_only_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 3.1 找到表单 */
+    /* 3.1 ???????? */
     for (ul_blacklist_index = 0; ul_blacklist_index < WLAN_BLACKLIST_MAX; ul_blacklist_index++)
     {
         pst_blacklist = &pst_blacklist_info->ast_black_list[ul_blacklist_index];
@@ -860,7 +860,7 @@ oal_uint32 hmac_blacklist_add_only_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc
         pst_blacklist = OAL_PTR_NULL;
     }
 
-    /* 4.1 表单已经存在，只更新老化时间 */
+    /* 4.1 ???????????????????????????? */
     if (OAL_PTR_NULL != pst_blacklist)
     {
         OAM_INFO_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{blacklist_add allready exist. update aging = %d}",ul_aging_time);
@@ -868,7 +868,7 @@ oal_uint32 hmac_blacklist_add_only_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc
         return OAL_SUCC;
     }
 
-    /* 5.1 找一个地址为空的表单 */
+    /* 5.1 ???????????????????? */
     for (ul_blacklist_index = 0; ul_blacklist_index < WLAN_BLACKLIST_MAX; ul_blacklist_index++)
     {
         pst_blacklist = &pst_blacklist_info->ast_black_list[ul_blacklist_index];
@@ -879,7 +879,7 @@ oal_uint32 hmac_blacklist_add_only_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc
         pst_blacklist = OAL_PTR_NULL;
     }
 
-    /* 6.1 无可用表单 */
+    /* 6.1 ?????????? */
     if (OAL_PTR_NULL == pst_blacklist)
     {
         OAM_INFO_LOG4(pst_mac_vap->uc_vap_id, OAM_SF_ANY,
@@ -888,7 +888,7 @@ oal_uint32 hmac_blacklist_add_only_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc
         return OAL_ERR_CODE_SECURITY_LIST_FULL;
     }
 
-    /* 7.1 更新表单 */
+    /* 7.1 ???????? */
     oal_time_get_stamp_us(&st_cur_time);
     oal_memcopy(pst_blacklist->auc_mac_addr, puc_mac_addr, OAL_MAC_ADDR_LEN);
     pst_blacklist->ul_cfg_time     = (oal_uint32)st_cur_time.i_sec;
@@ -914,7 +914,7 @@ oal_uint32 hmac_blacklist_del_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc_mac_
     oal_uint16                    us_user_idx   = 0xffff;
     hmac_user_stru               *pst_hmac_user_tmp = OAL_PTR_NULL;
 
-    /* 1.1 入参检查 */
+    /* 1.1 ???????? */
     if (OAL_PTR_NULL == pst_mac_vap)
     {
         OAM_ERROR_LOG0(0, OAM_SF_ANY, "{hmac_blacklist_del_etc::null mac_vap}");
@@ -935,7 +935,7 @@ oal_uint32 hmac_blacklist_del_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc_mac_
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 2.1 如果模式不一致，不需要删除，返回失败即可 */
+    /* 2.1 ???????????????????????????????????????? */
     /*if (pst_blacklist_info->uc_mode == CS_BLACKLIST_MODE_NONE)
     {
         return OAL_ERR_CODE_HMAC_SECURITY_MODE_INVALID;
@@ -947,7 +947,7 @@ oal_uint32 hmac_blacklist_del_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc_mac_
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 3.1 广播地址，需要删除所有表单 */
+    /* 3.1 ?????????????????????????? */
     if (hmac_blacklist_mac_is_bcast(puc_mac_addr))
     {
         OAM_WARNING_LOG0(pst_mac_vap->uc_vap_id, OAM_SF_ANY,
@@ -958,7 +958,7 @@ oal_uint32 hmac_blacklist_del_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc_mac_
         return OAL_SUCC;
     }
 
-    /* 4.1 找到表单 */
+    /* 4.1 ???????? */
     for (ul_blacklist_index = 0; ul_blacklist_index < WLAN_BLACKLIST_MAX; ul_blacklist_index++)
     {
         pst_blacklist = &pst_blacklist_info->ast_black_list[ul_blacklist_index];
@@ -969,7 +969,7 @@ oal_uint32 hmac_blacklist_del_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc_mac_
         pst_blacklist = OAL_PTR_NULL;
     }
 
-    /* 5.1 如果找到表单，删除 */
+    /* 5.1 ?????????????????? */
     if (OAL_PTR_NULL != pst_blacklist)
     {
         oal_memset(pst_blacklist, 0, sizeof(mac_blacklist_stru));
@@ -980,7 +980,7 @@ oal_uint32 hmac_blacklist_del_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc_mac_
 
         if (CS_BLACKLIST_MODE_WHITE == pst_blacklist_info->uc_mode)
         {
-            /*根据mac addr找到sta索引*/
+            /*????mac addr????sta????*/
             ul_ret = mac_vap_find_user_by_macaddr_etc(pst_mac_vap, puc_mac_addr, &us_user_idx);
             if(OAL_SUCC != ul_ret)
             {
@@ -1011,7 +1011,7 @@ oal_uint32 hmac_blacklist_set_mode_etc(mac_vap_stru *pst_mac_vap, oal_uint8 uc_m
 {
     /*oal_uint32        ul_ret; */
 
-    /* 1.1 入参检查 */
+    /* 1.1 ???????? */
     if (OAL_PTR_NULL == pst_mac_vap)
     {
         OAM_ERROR_LOG0(0, OAM_SF_ANY, "{hmac_blacklist_set_mode_etc::null mac_vap}");
@@ -1024,7 +1024,7 @@ oal_uint32 hmac_blacklist_set_mode_etc(mac_vap_stru *pst_mac_vap, oal_uint8 uc_m
     }
 
     OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{hmac_blacklist_set_mode_etc::mode = %d}",uc_mode);
-    /* 2.1 根据不同模式增加表单 */
+    /* 2.1 ???????????????????? */
     switch (uc_mode)
     {
         case CS_BLACKLIST_MODE_NONE:
@@ -1048,7 +1048,7 @@ oal_uint32 hmac_blacklist_get_mode(mac_vap_stru *pst_mac_vap, oal_uint8 *uc_mode
 {
     hmac_vap_stru                *pst_hmac_vap;
 
-    /*  入参检查 */
+    /*  ???????? */
     if (OAL_PTR_NULL == pst_mac_vap)
     {
         OAM_ERROR_LOG0(0, OAM_SF_ANY, "{hmac_blacklist_get_mode::null mac_vap}");
@@ -1087,7 +1087,7 @@ OAL_STATIC oal_void hmac_show_autoblacklist_info(mac_autoblacklist_info_stru *ps
     }
     OAL_MEMZERO(pc_print_buff, OAM_REPORT_MAX_STRING_LEN);
 
-    /* 2.1 黑名单配置信息 */
+    /* 2.1 ?????????????? */
 
     OAM_INFO_LOG4(0, OAM_SF_ANY, "{hmac_show_autoblacklist_info::AUTOBLACKLIST[%d] info: THRESHOLD: %u. RESET_TIME: %u sec. AGING_TIME: %u sec}",
         pst_autoblacklist_info->uc_enabled,pst_autoblacklist_info->ul_threshold,
@@ -1101,7 +1101,7 @@ OAL_STATIC oal_void hmac_show_autoblacklist_info(mac_autoblacklist_info_stru *ps
             pst_autoblacklist_info->uc_enabled,pst_autoblacklist_info->ul_threshold,
             pst_autoblacklist_info->ul_reset_time,pst_autoblacklist_info->ul_aging_time);
 
-    /* 4.1 打印黑名单表单 */
+    /* 4.1 ?????????????? */
     for (ul_blacklist_index = 0; ul_blacklist_index < WLAN_BLACKLIST_MAX; ul_blacklist_index++)
     {
         pst_autoblacklist = &pst_autoblacklist_info->ast_autoblack_list[ul_blacklist_index];
@@ -1142,7 +1142,7 @@ oal_void hmac_show_blacklist_info_etc(mac_vap_stru *pst_mac_vap)
     oal_int8                     *pc_print_buff;
     hmac_vap_stru                *pst_hmac_vap;
 
-    /* 1.1 入参检查 */
+    /* 1.1 ???????? */
     if (OAL_PTR_NULL == pst_mac_vap)
     {
         OAM_ERROR_LOG0(0, OAM_SF_ANY, "{hmac_show_blacklist_info_etc::null mac_vap}");
@@ -1178,7 +1178,7 @@ oal_void hmac_show_blacklist_info_etc(mac_vap_stru *pst_mac_vap)
         return;
     }
 
-    /* 3.1 黑名单模式信息 */
+    /* 3.1 ?????????????? */
     if (CS_BLACKLIST_MODE_BLACK == pst_blacklist_info->uc_mode)
     {
         OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{BLACKLIST[BLACK] num=%d info:}",pst_blacklist_info->uc_list_num);
@@ -1195,7 +1195,7 @@ oal_void hmac_show_blacklist_info_etc(mac_vap_stru *pst_mac_vap)
         buff_index = (oal_uint8)OAL_SPRINTF(pc_print_buff,OAM_REPORT_MAX_STRING_LEN,"BLACKLIST not enable! num=%d info:\n",pst_blacklist_info->uc_list_num);
     }
 
-    /* 5.1 打印黑名单表单 */
+    /* 5.1 ?????????????? */
     for (ul_blacklist_index = 0; ul_blacklist_index < WLAN_BLACKLIST_MAX; ul_blacklist_index++)
     {
         pst_blacklist = &pst_blacklist_info->ast_black_list[ul_blacklist_index];
@@ -1222,10 +1222,10 @@ oal_void hmac_show_blacklist_info_etc(mac_vap_stru *pst_mac_vap)
     oam_print_etc(pc_print_buff);
     OAL_MEM_FREE(pc_print_buff, OAL_TRUE);
 
-    /* 4.1 自动黑名单信息 */
+    /* 4.1 ?????????????? */
     hmac_show_autoblacklist_info(&pst_blacklist_info->st_autoblacklist_info);
 
-    /* 加入当前时间 */
+    /* ???????????? */
     oal_time_get_stamp_us(&st_cur_time);
     OAM_INFO_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY,"{ CURR_TIME: %d}",(oal_uint32)st_cur_time.i_sec);
 
@@ -1237,7 +1237,7 @@ oal_uint32 hmac_autoblacklist_enable_etc(mac_vap_stru *pst_mac_vap, oal_uint8 uc
     mac_autoblacklist_info_stru   *pst_autoblacklist_info;
     hmac_vap_stru                 *pst_hmac_vap;
 
-    /* 1.1 入参检查 */
+    /* 1.1 ???????? */
     if (OAL_PTR_NULL == pst_mac_vap)
     {
         OAM_ERROR_LOG0(0, OAM_SF_ANY, "{hmac_autoblacklist_enable_etc::null mac_vap}");
@@ -1249,7 +1249,7 @@ oal_uint32 hmac_autoblacklist_enable_etc(mac_vap_stru *pst_mac_vap, oal_uint8 uc
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 2.1 获取参数 */
+    /* 2.1 ???????? */
     pst_hmac_vap = (hmac_vap_stru *)mac_res_get_hmac_vap(pst_mac_vap->uc_vap_id);
     if (OAL_PTR_NULL == pst_hmac_vap)
     {
@@ -1263,7 +1263,7 @@ oal_uint32 hmac_autoblacklist_enable_etc(mac_vap_stru *pst_mac_vap, oal_uint8 uc
     }
     pst_autoblacklist_info = &(pst_hmac_vap->pst_blacklist_info->st_autoblacklist_info);
 
-    /* 参数跟原有一样 */
+    /* ?????????????? */
     if (uc_enabled == pst_autoblacklist_info->uc_enabled)
     {
         OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY,
@@ -1272,7 +1272,7 @@ oal_uint32 hmac_autoblacklist_enable_etc(mac_vap_stru *pst_mac_vap, oal_uint8 uc
         return OAL_SUCC;
     }
 
-    /* 重新初始化 */
+    /* ?????????? */
     if (uc_enabled == 1)
     {
         hmac_blacklist_init(pst_mac_vap, CS_BLACKLIST_MODE_BLACK, OAL_TRUE);
@@ -1281,7 +1281,7 @@ oal_uint32 hmac_autoblacklist_enable_etc(mac_vap_stru *pst_mac_vap, oal_uint8 uc
         pst_autoblacklist_info->ul_reset_time = CS_DEFAULT_RESET_TIME;
         pst_autoblacklist_info->ul_threshold  = CS_DEFAULT_THRESHOLD;
     }
-    else    /* 关闭自动黑名单，清零相关数据 */
+    else    /* ???????????????????????????? */
     {
         hmac_blacklist_init(pst_mac_vap, CS_BLACKLIST_MODE_NONE, OAL_TRUE);   /* 2013.7.23 add clean */
     }
@@ -1298,14 +1298,14 @@ oal_uint32 hmac_autoblacklist_set_aging_etc(mac_vap_stru *pst_mac_vap, oal_uint3
     mac_autoblacklist_info_stru   *pst_autoblacklist_info;
     hmac_vap_stru                 *pst_hmac_vap;
 
-    /* 1.1 入参检查 */
+    /* 1.1 ???????? */
     if (OAL_PTR_NULL == pst_mac_vap)
     {
         OAM_ERROR_LOG0(0, OAM_SF_ANY, "{hmac_autoblacklist_set_aging_etc::null mac_vap}");
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 2.1 获取参数 */
+    /* 2.1 ???????? */
     if (ul_aging_time == 0)
     {
         OAM_ERROR_LOG0(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{ul_aging_time should not be 0}");
@@ -1325,13 +1325,13 @@ oal_uint32 hmac_autoblacklist_set_aging_etc(mac_vap_stru *pst_mac_vap, oal_uint3
     }
     pst_autoblacklist_info = &(pst_hmac_vap->pst_blacklist_info->st_autoblacklist_info);
 
-    /* 3.1 自动黑名单没有使能 */
+    /* 3.1 ?????????????????? */
     if (0 == pst_autoblacklist_info->uc_enabled)
     {
         hmac_autoblacklist_enable_etc(pst_mac_vap, 1);
     }
 
-    /* 4.1 更新老化时间 */
+    /* 4.1 ???????????? */
     pst_autoblacklist_info->ul_aging_time = ul_aging_time;
 
     OAM_INFO_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{blacklist set auto aging = %d}",ul_aging_time);
@@ -1344,14 +1344,14 @@ oal_uint32 hmac_autoblacklist_set_threshold_etc(mac_vap_stru *pst_mac_vap, oal_u
     mac_autoblacklist_info_stru   *pst_autoblacklist_info;
     hmac_vap_stru                 *pst_hmac_vap;
 
-    /* 1.1 入参检查 */
+    /* 1.1 ???????? */
     if (OAL_PTR_NULL == pst_mac_vap)
     {
         OAM_ERROR_LOG0(0, OAM_SF_ANY, "{hmac_autoblacklist_set_threshold_etc::null mac_vap}");
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 2.1 获取参数 */
+    /* 2.1 ???????? */
     if (ul_threshold == 0)
     {
         OAM_ERROR_LOG0(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{ul_threshold should not be 0}");
@@ -1371,13 +1371,13 @@ oal_uint32 hmac_autoblacklist_set_threshold_etc(mac_vap_stru *pst_mac_vap, oal_u
     }
     pst_autoblacklist_info = &(pst_hmac_vap->pst_blacklist_info->st_autoblacklist_info);
 
-    /* 3.1 自动黑名单没有使能 */
+    /* 3.1 ?????????????????? */
     if (0 == pst_autoblacklist_info->uc_enabled)
     {
         hmac_autoblacklist_enable_etc(pst_mac_vap, 1);
     }
 
-    /* 4.1 更新门限 */
+    /* 4.1 ???????? */
     pst_autoblacklist_info->ul_threshold = ul_threshold;
 
     OAM_INFO_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{blacklist set auto threshold = %d}",ul_threshold);
@@ -1390,14 +1390,14 @@ oal_uint32 hmac_autoblacklist_set_reset_time_etc(mac_vap_stru *pst_mac_vap, oal_
     mac_autoblacklist_info_stru   *pst_autoblacklist_info;
     hmac_vap_stru                  *pst_hmac_vap;
 
-    /* 1.1 入参检查 */
+    /* 1.1 ???????? */
     if (OAL_PTR_NULL == pst_mac_vap)
     {
         OAM_ERROR_LOG0(0, OAM_SF_ANY, "{hmac_autoblacklist_set_reset_time_etc::null mac_vap}");
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 2.1 获取参数 */
+    /* 2.1 ???????? */
     if (ul_reset_time == 0)
     {
         OAM_ERROR_LOG0(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{ul_aging_time should not be 0}");
@@ -1417,13 +1417,13 @@ oal_uint32 hmac_autoblacklist_set_reset_time_etc(mac_vap_stru *pst_mac_vap, oal_
     }
     pst_autoblacklist_info = &(pst_hmac_vap->pst_blacklist_info->st_autoblacklist_info);
 
-    /* 3.1 自动黑名单没有使能 */
+    /* 3.1 ?????????????????? */
     if (0 == pst_autoblacklist_info->uc_enabled)
     {
         hmac_autoblacklist_enable_etc(pst_mac_vap, 1);
     }
 
-    /* 4.1 更新重置时间 */
+    /* 4.1 ???????????? */
     pst_autoblacklist_info->ul_reset_time = ul_reset_time;
 
     OAM_INFO_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{blacklist set auto reset_time = %d}", ul_reset_time);
@@ -1439,7 +1439,7 @@ oal_bool_enum_uint8 hmac_blacklist_filter_etc(mac_vap_stru *pst_mac_vap, oal_uin
     oal_uint32                    ul_ret;
     oal_bool_enum_uint8           b_ret;
 
-    /* 1.1 入参检查 */
+    /* 1.1 ???????? */
     if ((OAL_PTR_NULL == pst_mac_vap) || (OAL_PTR_NULL == puc_mac_addr))
     {
         OAM_ERROR_LOG0(0, OAM_SF_ANY, "{hmac_blacklist_filter_etc::null mac_vap or null mac addr}");
@@ -1460,36 +1460,36 @@ oal_bool_enum_uint8 hmac_blacklist_filter_etc(mac_vap_stru *pst_mac_vap, oal_uin
     }
     pst_blacklist_info = pst_hmac_vap->pst_blacklist_info;
 
-    /* 1.1 功能没有开启，不需要过滤 */
+    /* 1.1 ???????????????????????? */
     if (CS_BLACKLIST_MODE_NONE == pst_blacklist_info->uc_mode)
     {
         return OAL_FALSE;
     }
 
-    /* 2.1 黑名单模式下 */
+    /* 2.1 ???????????? */
     if (CS_BLACKLIST_MODE_BLACK == pst_blacklist_info->uc_mode)
     {
         ul_ret = hmac_blacklist_get(pst_mac_vap, puc_mac_addr, &pst_blacklist);
-        /* 表示puc_mac_addr地址为广播地址或者全零地址, 不过滤 */
+        /* ????puc_mac_addr??????????????????????????, ?????? */
         if (OAL_SUCC != ul_ret)
         {
             OAM_WARNING_LOG3(pst_mac_vap->uc_vap_id, OAM_SF_ANY,
                 "{hmac_blacklist_filter_etc::there is no MAC=x.x.x.%02x.%02x.%02x in blacklist}", puc_mac_addr[3], puc_mac_addr[4], puc_mac_addr[5]);
             return OAL_FALSE;
         }
-        /* 2.2 如果找不到表单，不需要过滤 */
+        /* 2.2 ?????????????????????????? */
         if (OAL_PTR_NULL == pst_blacklist)
         {
             return OAL_FALSE;
         }
 
-        /* 2.3 老化时间到了，不需要过滤 */
+        /* 2.3 ???????????????????????? */
         b_ret = hmac_blacklist_is_aged(pst_mac_vap, pst_blacklist);
         if (OAL_TRUE == b_ret)
         {
             return OAL_FALSE;
         }
-        /* 2.4 其他情况下都需要过滤 */
+        /* 2.4 ???????????????????? */
         pst_blacklist->ul_drop_counter++;
         OAM_INFO_LOG4(pst_mac_vap->uc_vap_id, OAM_SF_ANY,
             "{hmac_blacklist_filter_etc::blacklist_filter drop_counter = %d MAC:=x.x.x.%02x.%02x.%02x}",
@@ -1498,16 +1498,16 @@ oal_bool_enum_uint8 hmac_blacklist_filter_etc(mac_vap_stru *pst_mac_vap, oal_uin
         return OAL_TRUE;
     }
 
-    /* 3.1 白名单模式下 */
+    /* 3.1 ???????????? */
     if (CS_BLACKLIST_MODE_WHITE == pst_blacklist_info->uc_mode)
     {
         ul_ret = hmac_blacklist_get(pst_mac_vap, puc_mac_addr, &pst_blacklist);
-        /* 表示puc_mac_addr地址为广播地址或者全零地址, 不过滤 */
+        /* ????puc_mac_addr??????????????????????????, ?????? */
         if (OAL_SUCC != ul_ret)
         {
             return OAL_FALSE;
         }
-        /* 3.2 如果找不到表单，需要过滤 */
+        /* 3.2 ???????????????????????? */
         if (OAL_PTR_NULL == pst_blacklist)
         {
             OAM_WARNING_LOG4(pst_mac_vap->uc_vap_id, OAM_SF_ANY,
@@ -1516,7 +1516,7 @@ oal_bool_enum_uint8 hmac_blacklist_filter_etc(mac_vap_stru *pst_mac_vap, oal_uin
             return OAL_TRUE;
         }
 
-        /* 3.3 老化时间到了，不需要过滤 */
+        /* 3.3 ???????????????????????? */
         b_ret = hmac_blacklist_is_aged(pst_mac_vap, pst_blacklist);
         if (OAL_TRUE == b_ret)
         {
@@ -1526,7 +1526,7 @@ oal_bool_enum_uint8 hmac_blacklist_filter_etc(mac_vap_stru *pst_mac_vap, oal_uin
             return OAL_FALSE;
         }
 
-        /* 3.4 老化时间没有到，需要过滤 */
+        /* 3.4 ???????????????????????? */
         if (0 != pst_blacklist->ul_aging_time)
         {
             OAM_INFO_LOG4(pst_mac_vap->uc_vap_id, OAM_SF_ANY,
@@ -1537,20 +1537,20 @@ oal_bool_enum_uint8 hmac_blacklist_filter_etc(mac_vap_stru *pst_mac_vap, oal_uin
         }
     }
 
-    /* 不满足黑白名单过滤条件的，均不需要过滤 */
+    /* ?????????????????????????????????????? */
     return OAL_FALSE;
 }
 
 
 oal_void hmac_autoblacklist_filter_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc_mac_addr)
 {
-    mac_autoblacklist_stru           *pst_autoblacklist = OAL_PTR_NULL;	/* 添加初始化值，便于做UT打桩后此值是null */
+    mac_autoblacklist_stru           *pst_autoblacklist = OAL_PTR_NULL;	/* ????????????????????UT????????????null */
     mac_autoblacklist_info_stru      *pst_autoblacklist_info;
     oal_uint32                        ul_ret;
     hmac_vap_stru                    *pst_hmac_vap;
     mac_blacklist_stru               *pst_blacklist = OAL_PTR_NULL;
 
-    /* 1.1 入参检查 */
+    /* 1.1 ???????? */
     if ((OAL_PTR_NULL == pst_mac_vap) || (OAL_PTR_NULL == puc_mac_addr))
     {
         OAM_ERROR_LOG0(0, OAM_SF_ANY, "{hmac_autoblacklist_filter_etc::null mac_vap or null mac addr}");
@@ -1575,13 +1575,13 @@ oal_void hmac_autoblacklist_filter_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc
     }
     pst_autoblacklist_info = &(pst_hmac_vap->pst_blacklist_info->st_autoblacklist_info);
 
-    /* 1.1 功能没有开启 */
+    /* 1.1 ???????????? */
     if (0 == pst_autoblacklist_info->uc_enabled)
     {
         return;
     }
 
-    /* 1.2 检查是否已经在黑名单中, 若在黑名单中，直接返回 */
+    /* 1.2 ??????????????????????, ?????????????????????? */
     hmac_blacklist_get(pst_mac_vap, puc_mac_addr, &pst_blacklist);
     if (OAL_PTR_NULL != pst_blacklist)
     {
@@ -1592,21 +1592,21 @@ oal_void hmac_autoblacklist_filter_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc
             "{hmac_autoblacklist_filter_etc:: MAC:=%02X:XX:XX:%02X:%02X:%02X}",
             puc_mac_addr[0],puc_mac_addr[3],puc_mac_addr[4],puc_mac_addr[5]);
 
-    /* 2.1 找到关联请求统计表单  */
+    /* 2.1 ????????????????????  */
     ul_ret = hmac_autoblacklist_get(pst_mac_vap, puc_mac_addr, &pst_autoblacklist);
     if (OAL_SUCC != ul_ret)
     {
         OAM_ERROR_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{hmac_autoblacklist_get failed %d}", ul_ret);
         return;
     }
-    /* 2.2 如果找不到表单，不处理 */
+    /* 2.2 ?????????????????????? */
     if (OAL_PTR_NULL == pst_autoblacklist)
     {
         OAM_ERROR_LOG0(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{Can't find item to add}");
         return;
     }
 
-    /* 3.1 关联计数器判断 */
+    /* 3.1 ?????????????? */
     if (++pst_autoblacklist->ul_asso_counter > pst_autoblacklist_info->ul_threshold)
     {
         OAM_INFO_LOG2(pst_mac_vap->uc_vap_id, OAM_SF_ANY,
@@ -1618,7 +1618,7 @@ oal_void hmac_autoblacklist_filter_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc
             OAM_ERROR_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{hmac_blacklist_add_etc failed %d}", ul_ret);
             return;
         }
-        /* 3.2 删除统计表单*/
+        /* 3.2 ????????????*/
         oal_memset(pst_autoblacklist, 0, OAL_SIZEOF(mac_autoblacklist_stru));
         if(pst_autoblacklist_info->list_num > 0)
         {
@@ -1672,7 +1672,7 @@ oal_void hmac_config_get_blacklist(mac_vap_stru *pst_mac_vap,oal_uint8 *pst_info
     str_len_left -= strlen;
     if(str_len_left <= 0) return;
 
-    /*  黑名单表单 */
+    /*  ?????????? */
     for (ul_blacklist_index = 0; ul_blacklist_index < WLAN_BLACKLIST_MAX; ul_blacklist_index++)
     {
             pst_blacklist = &pst_blacklist_info->ast_black_list[ul_blacklist_index];
@@ -1705,7 +1705,7 @@ oal_void hmac_config_get_blacklist(mac_vap_stru *pst_mac_vap,oal_uint8 *pst_info
 
     }
 
-    /*  自动黑名单信息 */
+    /*  ?????????????? */
     strlen = OAL_SPRINTF(pst_info_str + str_idex,str_len_left,"\nAUTOBLACKLIST INFO : enable=%d. list_num=%d. left=%d\n",
         pst_autoblacklist_info->uc_enabled,pst_autoblacklist_info->list_num,str_len_left);
     str_idex += strlen;
@@ -1732,7 +1732,7 @@ oal_void hmac_config_get_blacklist(mac_vap_stru *pst_mac_vap,oal_uint8 *pst_info
     str_len_left -= strlen;
     if(str_len_left <= 0) return;
 
-    /*  自动黑名单表单 */
+    /*  ?????????????? */
     for (ul_blacklist_index = 0; ul_blacklist_index < WLAN_ASSOC_USER_MAX_NUM; ul_blacklist_index++)
     {
             pst_autoblacklist_item = &pst_blacklist_info->st_autoblacklist_info.ast_autoblack_list[ul_blacklist_index];

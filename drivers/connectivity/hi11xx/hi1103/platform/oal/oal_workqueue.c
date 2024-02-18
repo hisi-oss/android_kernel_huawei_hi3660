@@ -9,7 +9,7 @@ extern "C" {
 
 //#if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1151)
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "oal_main.h"
 #include "oal_workqueue.h"
@@ -20,10 +20,10 @@ extern "C" {
 #define THIS_FILE_ID OAM_FILE_ID_OAL_WORKQUEUE_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 #if (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION)
-oal_workqueue_stru  *g_oal_workqueue;           /* oal工作队列全局变量 */
+oal_workqueue_stru  *g_oal_workqueue;           /* oal???????????????? */
 
 
 oal_int32 oal_workqueue_schedule(oal_work_stru *pst_work)
@@ -63,7 +63,7 @@ oal_uint32  oal_workqueue_init(oal_void)
 
 oal_uint32  oal_workqueue_exit(oal_void)
 {
-    /* 删除工作队列 */
+    /* ???????????? */
     oal_destroy_workqueue(g_oal_workqueue);
 
     return OAL_SUCC;

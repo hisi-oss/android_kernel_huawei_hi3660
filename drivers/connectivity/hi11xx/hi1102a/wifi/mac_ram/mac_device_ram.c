@@ -7,7 +7,7 @@
 #endif
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "mac_device.h"
 
@@ -19,12 +19,12 @@
 #define THIS_FILE_ID OAM_FILE_ID_MAC_DEVICE_RAM_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 mac_phy_debug_switch_stru  g_st_mac_phy_debug_switch = {0};
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 
@@ -43,7 +43,7 @@ oal_rom_cb_result_enum_uint8 mac_device_init_cb(mac_device_stru *pst_mac_device,
 
 wlan_bw_cap_enum_uint8 mac_device_max_band_cb(oal_void)
 {
-    /* Host侧只能使用函数判断FPGA/ASIC, Device侧用patch判断 */
+    /* Host??????????????????FPGA/ASIC, Device????patch???? */
     if (VERSION_ASIC == isAsic())
     {
         return WLAN_BW_CAP_80M;
@@ -61,7 +61,7 @@ wlan_bw_cap_enum_uint8 mac_device_max_band_cb(oal_void)
 
 wlan_bw_cap_enum_uint8 mac_device_max_band_cb(oal_void)
 {
-    /* Device侧可使用ASIC宏判断 */
+    /* Device????????ASIC?????? */
 #if (_PRE_WLAN_CHIP_ASIC != _PRE_WLAN_CHIP_VERSION)
     return WLAN_BW_CAP_40M;
 #else

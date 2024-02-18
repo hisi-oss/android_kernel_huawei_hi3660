@@ -751,7 +751,7 @@ int32 get_download_channel_etc(void)
     ret = find_download_channel_etc(wlan_mode, INI_WLAN_DOWNLOAD_CHANNEL);
     if (BOARD_SUCC != ret)
     {
-        /*兼容1102,1102无此配置项*/
+        /*????1102,1102??????????*/
         g_board_info_etc.wlan_download_channel = MODE_SDIO;
         PS_PRINT_WARNING("can not find wlan_download_channel ,choose default:%s\n", device_download_mode_list_etc[0].name);
         hcc_bus_cap_init(HCC_CHIP_110X_DEV, NULL);
@@ -771,7 +771,7 @@ int32 get_download_channel_etc(void)
     ret = find_download_channel_etc(bfgn_mode, INI_BFGX_DOWNLOAD_CHANNEL);
     if (BOARD_SUCC != ret)
     {
-        /*如果不存在该项，则默认保持和wlan一致*/
+        /*????????????????????????????wlan????*/
         g_board_info_etc.bfgn_download_channel = g_board_info_etc.wlan_download_channel;
         PS_PRINT_WARNING("can not find bfgn_download_channel ,choose default:%s\n", device_download_mode_list_etc[0].name);
         return BOARD_SUCC;
@@ -795,7 +795,7 @@ int32 get_ssi_dump_cfg(void)
     int32               l_cfg_value = 0;
     int32               l_ret = INI_FAILED;
 
-    /* 获取ini的配置值 */
+    /* ????ini???????? */
     l_ret = get_cust_conf_int32_etc(INI_MODU_PLAT, INI_SSI_DUMP_EN, &l_cfg_value);
 
     if (INI_FAILED == l_ret)
@@ -993,7 +993,7 @@ int32 hi110x_board_resume_etc(struct platform_device *pdev)
 
 
 /*********************************************************************/
-/********************   SSI调试代码start   ***************************/
+/********************   SSI????????start   ***************************/
 /*********************************************************************/
 #ifdef _PRE_CONFIG_GPIO_TO_SSI_DEBUG
 #define HI110X_SSI_CLK_GPIO_NAME  ("hi110x ssi clk")
@@ -1029,7 +1029,7 @@ char* g_ssi_hi1103_pilot_cpu_st_str[] =
     "PROTECTING"/*0x7*/
 };
 
-static uint32 g_halt_det_cnt = 0;/*检测soc异常次数*/
+static uint32 g_halt_det_cnt = 0;/*????soc????????*/
 typedef struct _ssi_cpu_info_
 {
     uint32 cpu_state;
@@ -1050,15 +1050,15 @@ static ssi_cpu_infos g_st_ssi_cpu_infos;
 #define SSI_WRITE_DATA 0x5a5a
 ssi_trans_test_st ssi_test_st = {0};
 
-uint32 g_ssi_clk_etc  = 0;              /*模拟ssi时钟的GPIO管脚号*/
-uint32 g_ssi_data_etc = 0;              /*模拟ssi数据线的GPIO管脚号*/
-uint16 g_ssi_base_etc = 0x8000;         /*ssi基址*/
-uint32 g_interval_etc = INTERVAL_TIME;  /*GPIO拉出来的波形保持时间，单位us*/
+uint32 g_ssi_clk_etc  = 0;              /*????ssi??????GPIO??????*/
+uint32 g_ssi_data_etc = 0;              /*????ssi????????GPIO??????*/
+uint16 g_ssi_base_etc = 0x8000;         /*ssi????*/
+uint32 g_interval_etc = INTERVAL_TIME;  /*GPIO??????????????????????????us*/
 uint32 g_delay_etc    = 5;
 
-/*ssi 工作时必须切换ssi clock,
-  此时aon会受到影响，
-  BCPU/WCPU 有可能异常，慎用!*/
+/*ssi ??????????????ssi clock,
+  ????aon????????????
+  BCPU/WCPU ????????????????!*/
 int32 ssi_try_lock(void)
 {
     oal_ulong flags;
@@ -1092,7 +1092,7 @@ int32 wait_for_ssi_idle_timeout(int32 mstimeout)
     else {
         can_sleep = 1;
     }
-    /*考虑效率，这里需要判断是否可以睡眠*/
+    /*??????????????????????????????????*/
     while(ssi_try_lock()){
         if (can_sleep) {
             msleep(1);
@@ -1229,17 +1229,17 @@ int32 ssi_write_data_etc(uint16 addr, uint16 value)
         ssi_data_output_etc(0);
     }
 
-    /*发送SYNC位*/
+    /*????SYNC??*/
     PS_PRINT_DBG("tx sync bit\n");
     ssi_clk_output_etc();
     ssi_data_output_etc(1);
 
-    /*指示本次操作为写，高读低写*/
+    /*??????????????????????????*/
     PS_PRINT_DBG("tx r/w->w\n");
     ssi_clk_output_etc();
     ssi_data_output_etc(0);
 
-    /*发送地址*/
+    /*????????*/
     PS_PRINT_DBG("write addr:0x%x\n", addr);
     for (i = 0; i < SSI_DATA_LEN; i++)
     {
@@ -1249,7 +1249,7 @@ int32 ssi_write_data_etc(uint16 addr, uint16 value)
         ssi_data_output_etc(tx);
     }
 
-    /*发送数据*/
+    /*????????*/
     PS_PRINT_DBG("write value:0x%x\n", value);
     for (i = 0; i < SSI_DATA_LEN; i++)
     {
@@ -1259,7 +1259,7 @@ int32 ssi_write_data_etc(uint16 addr, uint16 value)
         ssi_data_output_etc(tx);
     }
 
-    /*数据发送完成以后，保持delay个周期的0*/
+    /*??????????????????????delay????????0*/
     PS_PRINT_DBG("ssi write:finish, delay %d cycle\n", g_delay_etc);
     for (i = 0; i < g_delay_etc; i++)
     {
@@ -1285,17 +1285,17 @@ uint16 ssi_read_data_etc(uint16 addr)
         ssi_data_output_etc(0);
     }
 
-    /*发送SYNC位*/
+    /*????SYNC??*/
     PS_PRINT_DBG("tx sync bit\n");
     ssi_clk_output_etc();
     ssi_data_output_etc(1);
 
-    /*指示本次操作为读，高读低写*/
+    /*??????????????????????????*/
     PS_PRINT_DBG("tx r/w->r\n");
     ssi_clk_output_etc();
     ssi_data_output_etc(1);
 
-    /*发送地址*/
+    /*????????*/
     PS_PRINT_DBG("read addr:0x%x\n", addr);
     for (i = 0; i < SSI_DATA_LEN; i++)
     {
@@ -1305,15 +1305,15 @@ uint16 ssi_read_data_etc(uint16 addr)
         ssi_data_output_etc(tx);
     }
 
-    /*延迟一个clk，否则上一个数据只保持了半个时钟周期*/
+    /*????????clk????????????????????????????????????*/
     ssi_clk_output_etc();
 
-    /*设置data线GPIO为输入，准备读取数据*/
+    /*????data??GPIO????????????????????*/
     gpio_direction_input(g_ssi_data_etc);
 
     PS_PRINT_DBG("data in mod, current gpio level is %d\n", gpio_get_value(g_ssi_data_etc));
 
-    /*读取SYNC同步位*/
+    /*????SYNC??????*/
     do
     {
         ssi_clk_output_etc();
@@ -1342,7 +1342,7 @@ uint16 ssi_read_data_etc(uint16 addr)
         data = data | (rx << (SSI_DATA_LEN - i - 1));
     }
 
-    /*恢复data线GPIO为输出，并输出0*/
+    /*????data??GPIO??????????????0*/
     ssi_data_output_etc(0);
 
     return data;
@@ -1390,14 +1390,14 @@ int32 ssi_write32_etc(uint32 addr, uint16 value)
     addr_half_word_high = (addr >> 16) & 0xffff;
     addr_half_word_low  = (addr & 0xffff) >> 1;
 
-    /*往基地址写地址的高16位*/
+    /*??????????????????16??*/
     if (ssi_write16_etc(g_ssi_base_etc, addr_half_word_high) < 0)
     {
         PS_PRINT_ERR("ssi write: 0x%x=0x%x fail\n", addr, value);
         return BOARD_FAIL;
     }
 
-    /*低地址写实际要写入的value*/
+    /*????????????????????value*/
     if (ssi_write16_etc(addr_half_word_low, value) < 0)
     {
         PS_PRINT_ERR("ssi write: 0x%x=0x%x fail\n", addr, value);
@@ -1446,17 +1446,17 @@ int32 ssi_read_data16(uint16 addr, uint16 *value)
         ssi_data_output_etc(0);
     }
 
-    /*发送SYNC位*/
+    /*????SYNC??*/
     PS_PRINT_DBG("tx sync bit\n");
     ssi_clk_output_etc();
     ssi_data_output_etc(1);
 
-    /*指示本次操作为读，高读低写*/
+    /*??????????????????????????*/
     PS_PRINT_DBG("tx r/w->r\n");
     ssi_clk_output_etc();
     ssi_data_output_etc(1);
 
-    /*发送地址*/
+    /*????????*/
     PS_PRINT_DBG("read addr:0x%x\n", addr);
     for (i = 0; i < SSI_DATA_LEN; i++)
     {
@@ -1466,15 +1466,15 @@ int32 ssi_read_data16(uint16 addr, uint16 *value)
         ssi_data_output_etc(tx);
     }
 
-    /*延迟一个clk，否则上一个数据只保持了半个时钟周期*/
+    /*????????clk????????????????????????????????????*/
     ssi_clk_output_etc();
 
-    /*设置data线GPIO为输入，准备读取数据*/
+    /*????data??GPIO????????????????????*/
     gpio_direction_input(g_ssi_data_etc);
 
     PS_PRINT_DBG("data in mod, current gpio level is %d\n", gpio_get_value(g_ssi_data_etc));
 
-    /*读取SYNC同步位*/
+    /*????SYNC??????*/
     do
     {
         ssi_clk_output_etc();
@@ -1503,7 +1503,7 @@ int32 ssi_read_data16(uint16 addr, uint16 *value)
         data = data | (rx << (SSI_DATA_LEN - i - 1));
     }
 
-    /*恢复data线GPIO为输出，并输出0*/
+    /*????data??GPIO??????????????0*/
     ssi_data_output_etc(0);
 
     *value = data;
@@ -1540,11 +1540,11 @@ int32 ssi_read_value16(uint32 addr, uint16* value, int16 last_high_addr)
 
 /*32bits address,
   32bits value
-  gpio模拟SSI 读32BIT value
-  1.配置SSI 为32BIT模式
-  2.第一次读16BIT操作，SOC发起32BIT操作，返回低16BIT给HOST
-  3.第二次读同一地址16BIT操作，SOC不发起总线操作，返回高16BIT给HOST
-  4.如果跳过步骤3 读其他地址，SOC侧高16BIT 会被丢弃*/
+  gpio????SSI ??32BIT value
+  1.????SSI ??32BIT????
+  2.????????16BIT??????SOC????32BIT????????????16BIT??HOST
+  3.????????????????16BIT??????SOC??????????????????????16BIT??HOST
+  4.????????????3 ????????????SOC????16BIT ????????*/
 int32 ssi_read_value32(uint32 addr, uint32* value, int16 last_high_addr)
 {
     int32 ret;
@@ -1597,14 +1597,14 @@ int32 ssi_write_value32(uint32 addr, uint32 value)
     addr_half_word_low  = (addr & 0xffff) >> 1;
     addr_half_word_low_incr  = ((addr + 2) & 0xffff) >> 1;
 
-    /*往基地址写地址的高16位*/
+    /*??????????????????16??*/
     if (ssi_write_data_etc(g_ssi_base_etc, addr_half_word_high) < 0)
     {
         PS_PRINT_ERR("ssi write high addr: 0x%x=0x%x fail\n", addr, value);
         return BOARD_FAIL;
     }
 
-    /*低地址写实际要写入的value*/
+    /*????????????????????value*/
     if (ssi_write_data_etc(addr_half_word_low, value & 0xffff) < 0)
     {
         PS_PRINT_ERR("ssi write low value: 0x%x=0x%x fail\n", addr, value);
@@ -1862,7 +1862,7 @@ int32 ssi_file_test(ssi_trans_test_st* pst_ssi_test)
     /*reset wcpu */
     if (BOARD_SUCC != ssi_write32_etc(0x40000030, 0xfe5e))
     {
-         //脉冲复位
+         //????????
          //PS_PRINT_ERR("reset wcpu fail\n");
          //return BOARD_FAIL;
     }
@@ -1936,7 +1936,7 @@ int32 do_ssi_mem_test(ssi_trans_test_st* pst_ssi_test)
 
     for (i = 0; i < pst_ssi_test->trans_len; i++ )
     {
-        ul_addr = ul_write_base + 2*i;  //按2字节读写
+        ul_addr = ul_write_base + 2*i;  //??2????????
         l_ret = ssi_write32_etc(ul_addr, SSI_WRITE_DATA);
         if (BOARD_SUCC != l_ret)
         {
@@ -2012,7 +2012,7 @@ ssi_reg_info hi1103_w_ctrl_full =    {0x40000000, 0x408, SSI_RW_WORD_MOD};
 ssi_reg_info hi1103_w_key_mem  =    {0x2001e620, 0x80, SSI_RW_DWORD_MOD};
 ssi_reg_info hi1103_b_ctrl_full =    {0x48000000, 0x40c, SSI_RW_WORD_MOD};
 ssi_reg_info hi1103_pcie_ctrl_full = {0x40007000, 0x4c8, SSI_RW_DWORD_MOD};
-ssi_reg_info hi1103_pcie_dbi_full = {0x40102000, 0x900, SSI_RW_DWORD_MOD};/*没建链之前不能读*/
+ssi_reg_info hi1103_pcie_dbi_full = {0x40102000, 0x900, SSI_RW_DWORD_MOD};/*????????????????*/
 ssi_reg_info hi1103_pcie_pilot_iatu_full = {0x40104000, 0x2000, SSI_RW_DWORD_MOD};/*8KB*/
 ssi_reg_info hi1103_pcie_pilot_dma_full = {0x40106000, 0x1000, SSI_RW_DWORD_MOD};/*4KB*/
 ssi_reg_info hi1103_pcie_dma_ctrl_full = {0x40008000, 0x34, SSI_RW_DWORD_MOD};
@@ -2422,9 +2422,9 @@ int ssi_check_bcpu_is_working(void)
 #define TCXO_LIMIT_THRESHOLD (5)
 int ssi_detect_tcxo_is_normal(void)
 {
-    /*tcxo detect 依赖tcxo时钟，
-       如果在启动后tcxo 异常那么tcxo_32k_det_result 为旧值
-       如果在启动后32k异常 那么sytem_tick为旧值*/
+    /*tcxo detect ????tcxo??????
+       ????????????tcxo ????????tcxo_32k_det_result ??????
+       ????????????32k???? ????sytem_tick??????*/
     int ret  = 0;
     char* tcxo_str = "";
     int tcxo_is_abnormal = 0;
@@ -2471,7 +2471,7 @@ int ssi_detect_tcxo_is_normal(void)
     tcxo_det_value_target = TCXO_32K_DET_VALUE;
     if(tcxo_det_value_src == tcxo_det_value_target)
     {
-        /*刚做过detect,改变det_value，观测值是否改变*/
+        /*??????detect,????det_value????????????????*/
         tcxo_det_value_target = TCXO_32K_DET_VALUE + 2;
     }
 
@@ -2482,7 +2482,7 @@ int ssi_detect_tcxo_is_normal(void)
     sys_tick_old = (uint32)ssi_read32_etc(0x500000d0);
     tcxo_det_res_old = (uint32)ssi_read32_etc(0x50000708);
 
-    ssi_write32_etc(0x500000c0, 0x2);/*清零w systick*/
+    ssi_write32_etc(0x500000c0, 0x2);/*????w systick*/
     oal_get_time_cost_start(cost);
 
     if(tcxo_enable)
@@ -2535,7 +2535,7 @@ int ssi_detect_tcxo_is_normal(void)
     {
         oal_uint64  us_to_s;
         us_to_s = time_cost_var_sub(cost);
-        us_to_s += 1446;/*经验值,误差1446us*/
+        us_to_s += 1446;/*??????,????1446us*/
         clock_32k = (sys_tick_new*1000)/(oal_uint32)us_to_s;
         PS_PRINT_ERR("32k runtime:%llu us , sys_tick:%u\n", us_to_s, sys_tick_new);
         PS_PRINT_ERR("32k realclock real= %u Khz[base=32768]\n", clock_32k);
@@ -2547,7 +2547,7 @@ int ssi_detect_tcxo_is_normal(void)
     {
         if(tcxo_det_res_new == tcxo_det_res_old)
         {
-            /*tcxo 软件配置为打开此时应该有时钟*/
+            /*tcxo ????????????????????????????*/
             PS_PRINT_ERR("tcxo don't change after detect, tcxo or 32k maybe abnormal, tcxo=0x%x\n", tcxo_det_res_new);
             if(0 == tcxo_det_res_new)
             {
@@ -2556,8 +2556,8 @@ int ssi_detect_tcxo_is_normal(void)
             }
             else
             {
-                /*这里可能是无效的探测，
-                   要结合详细日志分析，此处DSM忽略改分支，不上报*/
+                /*??????????????????????
+                   ????????????????????????DSM??????????????????*/
                 tcxo_is_abnormal = 0;
                 tcxo_str = "tcxo-detect-invalid";
             }
@@ -2570,7 +2570,7 @@ int ssi_detect_tcxo_is_normal(void)
             div_clock = div_u64(div_clock, 1000000);
             if((clock_tcxo < tcxo_limit_low) || (clock_tcxo > tcxo_limit_high))
             {
-                /*时钟误差超过阈值*/
+                /*????????????????*/
                 tcxo_is_abnormal = 2;
                 tcxo_str = "tcxo clock-abnormal";
             }
@@ -3075,14 +3075,14 @@ void dsm_cpu_info_dump(void)
     int32 ret = 0;
     int32 count = 0;
     char buf[DSM_CPU_INFO_SIZE];
-    /*dsm cpu信息上报*/
+    /*dsm cpu????????*/
     if(g_halt_det_cnt || (hi11xx_kernel_crash))
     {
         PS_PRINT_INFO("g_halt_det_cnt=%u hi11xx_kernel_crash=%d dsm_cpu_info_dump return\n", g_halt_det_cnt, hi11xx_kernel_crash);
         return;
     }
 
-    /*没有检测到异常，上报记录的CPU信息*/
+    /*??????????????????????????CPU????*/
     oal_memset((void*)buf, 0, sizeof(buf));
     ret = snprintf(buf + count, DSM_CPU_INFO_SIZE - count, "wcpu_state=0x%x %s, bcpu_state=0x%x %s ",
        g_st_ssi_cpu_infos.wcpu_info.cpu_state, ssi_is_pilot ? (g_ssi_hi1103_pilot_cpu_st_str[g_st_ssi_cpu_infos.wcpu_info.cpu_state & 0x7]):(g_ssi_hi1103_mpw2_cpu_st_str[g_st_ssi_cpu_infos.wcpu_info.cpu_state & 0x3]),
@@ -3156,7 +3156,7 @@ int ssi_dump_device_regs(unsigned long long module_set)
     int ret;
     struct st_exception_info *pst_exception_data = NULL;
 
-    /*系统crash后强行dump,系统正常时user版本受控*/
+    /*????crash??????dump,??????????user????????*/
     if((HI1XX_ANDROID_BUILD_VARIANT_USER == hi11xx_get_android_build_variant()) && (0 == hi11xx_kernel_crash))
     {
         /*user build, limit the ssi dump*/
@@ -3436,7 +3436,7 @@ ssi_fail:
 #endif
 
 /*********************************************************************/
-/********************   SSI调试代码end    ****************************/
+/********************   SSI????????end    ****************************/
 /*********************************************************************/
 
 #ifdef _PRE_CONFIG_USE_DTS

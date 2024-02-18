@@ -156,7 +156,7 @@ static __inline__ unsigned readb(const void* addr)
 #ifdef __OS_VXWORKS__
 #ifndef __ASSEMBLY__
 
-/* device: strongly-ordered 寄存器都要使用该接口 */
+/* device: strongly-ordered ???????????????????? */
 static __inline__ void *ioremap(unsigned phy_addr, unsigned int len)
 {
     return (void *)0;
@@ -278,7 +278,7 @@ void *ioremap_wcx(MMU_VA_T phy_addr, unsigned int len);
 
 #endif
 #if defined(__OS_RTOSCK_SMP__) ||defined(__OS_RTOSCK__)
-/* device: strongly-ordered 寄存器都要使用该接口 */
+/* device: strongly-ordered ???????????????????? */
 void *ioremap(MMU_PA_T phy_addr, unsigned int len);
 
 /* device: non-cacheable normal */

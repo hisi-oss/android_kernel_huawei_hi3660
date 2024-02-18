@@ -9,7 +9,7 @@ extern "C" {
 
 #ifdef _PRE_WLAN_FEATURE_ROAM
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "oam_ext_if.h"
 #include "oal_schedule.h"
@@ -31,7 +31,7 @@ extern "C" {
 #define THIS_FILE_ID OAM_FILE_ID_HMAC_ROAM_ALG_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 hmac_roam_rssi_capacity_stru   gst_rssi_table_11a_ofdm[ROAM_RSSI_LEVEL] = {
     {-75,               29300},
@@ -66,7 +66,7 @@ hmac_roam_rssi_capacity_stru   gst_rssi_table_vht80_ofdm[ROAM_RSSI_LEVEL] = {
 };
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 oal_void hmac_roam_alg_init(hmac_roam_info_stru *pst_roam_info, oal_int8 c_current_rssi)
@@ -97,7 +97,7 @@ oal_void hmac_roam_alg_init(hmac_roam_info_stru *pst_roam_info, oal_int8 c_curre
     pst_roam_alg->c_current_rssi        = c_current_rssi;
     pst_roam_alg->c_max_rssi            = 0;
     pst_roam_alg->uc_another_bss_scaned = 0;
-    /* 首次关联时初始化 pst_roam_alg->uc_invalid_scan_cnt   = 0x0; */
+    /* ???????????????? pst_roam_alg->uc_invalid_scan_cnt   = 0x0; */
     pst_roam_alg->pst_max_rssi_bss      = OAL_PTR_NULL;
 
     return;
@@ -179,7 +179,7 @@ OAL_STATIC oal_int8 hmac_roam_alg_compare_rssi_increase(hmac_roam_info_stru *pst
 
     if (uc_delta_rssi >= ROAM_RSSI_DIFF_4_DB + 2)
     {
-        /* 步进2DB至4DB*/
+        /* ????2DB??4DB*/
         uc_delta_rssi -= 2;
     }
 
@@ -190,7 +190,7 @@ OAL_STATIC oal_int8 hmac_roam_alg_compare_rssi_increase(hmac_roam_info_stru *pst
 
     if (uc_delta_rssi >= ROAM_RSSI_DIFF_4_DB + 2)
     {
-        /* 步进2DB至4DB*/
+        /* ????2DB??4DB*/
         uc_delta_rssi -= 2;
     }
 
@@ -223,7 +223,7 @@ OAL_STATIC oal_uint32 hmac_roam_alg_add_bsslist(hmac_roam_bss_list_stru *pst_roa
         ul_timeout = (oal_uint32)pst_cur_bss->ul_timeout;
         if (0 == oal_compare_mac_addr(pst_cur_bss->auc_bssid, puc_bssid))
         {
-            /* 优先查找已存在的记录，如果名单超时更新时间戳，否则更新count */
+            /* ??????????????????????????????????????????????????????count */
 
             if (OAL_TIME_GET_RUNTIME(pst_cur_bss->ul_time_stamp, ul_now) > ul_timeout)
             {
@@ -241,7 +241,7 @@ OAL_STATIC oal_uint32 hmac_roam_alg_add_bsslist(hmac_roam_bss_list_stru *pst_roa
             return OAL_SUCC;
         }
 
-        /* 记录第一个空记录 */
+        /* ???????????????? */
         if (OAL_PTR_NULL != pst_zero_bss)
         {
             continue;
@@ -253,7 +253,7 @@ OAL_STATIC oal_uint32 hmac_roam_alg_add_bsslist(hmac_roam_bss_list_stru *pst_roa
             continue;
         }
 
-        /* 记录一个非空最老记录 */
+        /* ???????????????????? */
         if (OAL_PTR_NULL == pst_oldest_bss)
         {
             pst_oldest_bss = pst_cur_bss;
@@ -303,7 +303,7 @@ OAL_STATIC oal_bool_enum_uint8 hmac_roam_alg_find_in_bsslist(hmac_roam_bss_list_
 
         if (0 == oal_compare_mac_addr(pst_cur_bss->auc_bssid, puc_bssid))
         {
-            /* 如果在超时时间内出现count_limit次以上记录 */
+            /* ????????????????????count_limit?????????? */
             ul_delta_time = OAL_TIME_GET_RUNTIME(pst_cur_bss->ul_time_stamp, ul_now);
             if ((ul_delta_time <= ul_timeout) &&
                 (pst_cur_bss->us_count >= us_count_limit))
@@ -415,14 +415,14 @@ oal_uint32 hmac_roam_alg_scan_channel_init(hmac_roam_info_stru *pst_roam_info, m
             pst_scan_params->ast_channel_list[0].uc_idx         = pst_channel->uc_idx;
          }
 #ifdef _PRE_WLAN_FEATURE_11V_ENABLE
-        /* 支持11v协议时，在备选列表所在信道扫描 */
+        /* ????11v?????????????????????????????? */
         else
         {
             pst_scan_params->ast_channel_list[0].uc_chan_number = pst_roam_info->st_bsst_rsp_info.uc_chl_num;
             pst_scan_params->ast_channel_list[0].en_band = mac_get_band_by_channel_num(pst_roam_info->st_bsst_rsp_info.uc_chl_num);
             ul_ret = mac_get_channel_idx_from_num(pst_scan_params->ast_channel_list[0].en_band, pst_scan_params->ast_channel_list[0].uc_chan_number,
                                          &(pst_scan_params->ast_channel_list[0].uc_idx));
-            /* 维测 */
+            /* ???? */
             if (OAL_SUCC != ul_ret)
             {
                 OAM_WARNING_LOG1(0, OAM_SF_SCAN, "hmac_roam_alg_scan_channel_init::mac_get_channel_idx_from_num_etc fail=%d", ul_ret);
@@ -603,7 +603,7 @@ OAL_STATIC oal_uint32 hmac_roam_alg_calc_avail_channel_capacity(mac_bss_dscr_str
     uc_ie_offset = MAC_80211_FRAME_LEN + MAC_TIME_STAMP_LEN + MAC_BEACON_INTERVAL_LEN + MAC_CAP_INFO_LEN;
     puc_obss_ie = mac_find_ie(MAC_EID_QBSS_LOAD, (oal_uint8 *)(pst_bss_dscr->auc_mgmt_buff + uc_ie_offset), (oal_int32)(pst_bss_dscr->ul_mgmt_len - uc_ie_offset));
     /*lint +e416*/
-    /* 长度要到达ChannelUtilization这个域，至少为3 */
+    /* ??????????ChannelUtilization??????????????3 */
     if (puc_obss_ie && (puc_obss_ie[1] >= 3))
     {
         uc_channel_utilization = *(puc_obss_ie + 4);
@@ -646,7 +646,7 @@ oal_uint32 hmac_roam_alg_bss_in_ess(hmac_roam_info_stru *pst_roam_info, mac_bss_
     }
     pst_roam_alg = &(pst_roam_info->st_alg);
 
-    /* 是否扫描到了当前关联的 bss, 仅置位，不过滤 */
+    /* ?????????????????????? bss, ?????????????? */
     if (0 != oal_compare_mac_addr(pst_mac_vap->auc_bssid, pst_bss_dscr->auc_bssid))
     {
         pst_roam_alg->uc_another_bss_scaned = 1;
@@ -693,7 +693,7 @@ oal_uint32 hmac_roam_alg_bss_check(hmac_roam_info_stru *pst_roam_info, mac_bss_d
     }
     pst_roam_alg = &(pst_roam_info->st_alg);
 
-    /* 检查漫游到自己:未扫描到自己，返回失败 */
+    /* ??????????????:?????????????????????? */
     if ((OAL_FALSE == pst_roam_info->en_current_bss_ignore)
         && oal_memcmp(pst_mac_vap->auc_bssid, pst_bss_dscr->auc_bssid, OAL_MAC_ADDR_LEN))
     {
@@ -702,8 +702,8 @@ oal_uint32 hmac_roam_alg_bss_check(hmac_roam_info_stru *pst_roam_info, mac_bss_d
 
     if(OAL_TRUE== pst_roam_info->en_current_bss_ignore)
     {
-    /* 非voe认证挑选HMAC_SCAN_MAX_VALID_SCANNED_BSS_EXPIRE时间以内的有效bss */
-    /* 11R时，漫游命令不扫描时，bss上报到wpas和漫游bss选择都会只选择当前时间之前最近5s内的，该逻辑会导致漫游时找不到可用的bss，最终漫游失败*/
+    /* ??voe????????HMAC_SCAN_MAX_VALID_SCANNED_BSS_EXPIRE??????????????bss */
+    /* 11R??????????????????????bss??????wpas??????bss??????????????????????????????5s????????????????????????????????????bss??????????????*/
 #if defined(_PRE_WLAN_FEATURE_11K)|| defined(_PRE_WLAN_FEATURE_11R)
         if( 0 == pst_hmac_vap->bit_voe_11r_auth)
 #endif
@@ -716,7 +716,7 @@ oal_uint32 hmac_roam_alg_bss_check(hmac_roam_info_stru *pst_roam_info, mac_bss_d
             }
         }
     }
-    /* 检查黑名单 */
+    /* ?????????? */
     ul_ret = hmac_roam_alg_find_in_blacklist(pst_roam_info, pst_bss_dscr->auc_bssid);
     if (OAL_TRUE == ul_ret)
     {
@@ -725,16 +725,16 @@ oal_uint32 hmac_roam_alg_bss_check(hmac_roam_info_stru *pst_roam_info, mac_bss_d
         return OAL_ERR_CODE_ROAM_NO_VALID_BSS;
     }
 
-    /* 检查漫游到其它BSSID */
+    /* ??????????????BSSID */
     if(OAL_TRUE == pst_roam_info->en_current_bss_ignore)
     {
-        /* 排除当前bss的rssi值计算，本地已经保存了dmac上报的rssi */
+        /* ????????bss??rssi??????????????????????dmac??????rssi */
         if (0 == oal_compare_mac_addr(pst_mac_vap->auc_bssid, pst_bss_dscr->auc_bssid))
         {
             return OAL_ERR_CODE_ROAM_NO_VALID_BSS;
         }
     }
-    /*  wep的bss直接过滤掉 */
+    /*  wep??bss?????????? */
     pst_cap_info = (mac_cap_info_stru *)&pst_bss_dscr->us_cap_info;
     if ((0 == pst_bss_dscr->st_bss_sec_info.uc_bss_80211i_mode) &&
         (0 != pst_cap_info->bit_privacy))
@@ -742,7 +742,7 @@ oal_uint32 hmac_roam_alg_bss_check(hmac_roam_info_stru *pst_roam_info, mac_bss_d
         return OAL_ERR_CODE_ROAM_NO_VALID_BSS;
     }
 
-    /*  open加密方式到wpa/wpa2直接过滤掉 */
+    /*  open??????????wpa/wpa2?????????? */
     /*lint -e731*/
     if ((0 == pst_cap_info->bit_privacy) != (OAL_TRUE != mac_mib_get_privacyinvoked(&pst_hmac_vap->st_vap_base_info)))
     {
@@ -752,8 +752,8 @@ oal_uint32 hmac_roam_alg_bss_check(hmac_roam_info_stru *pst_roam_info, mac_bss_d
 
     c_tmp_rssi = pst_bss_dscr->c_rssi;
 
-    /* 终端评审:AP信号很弱时，忽略漫游。避免漫游时间太长 */
-    /* 2.4G候选AP小于-80db不再漫游，5G候选AP小于-78dB不再漫游 */
+    /* ????????:AP?????????????????????????????????????? */
+    /* 2.4G????AP????-80db??????????5G????AP????-78dB???????? */
     if (((c_tmp_rssi < ROAM_RSSI_NE80_DB) && (WLAN_BAND_2G == pst_bss_dscr->st_channel.en_band))
         ||((c_tmp_rssi < ROAM_RSSI_NE78_DB) && (WLAN_BAND_5G == pst_bss_dscr->st_channel.en_band)))
     {
@@ -770,7 +770,7 @@ oal_uint32 hmac_roam_alg_bss_check(hmac_roam_info_stru *pst_roam_info, mac_bss_d
         c_tmp_rssi = hmac_roam_alg_adjust_5G_rssi_weight(c_tmp_rssi);
     }
 
-    /* c_current_rssi为0时，表示linkloss上报的触发，不需要考虑rssi增益 */
+    /* c_current_rssi??0????????linkloss??????????????????????rssi???? */
     c_delta_rssi = hmac_roam_alg_compare_rssi_increase(pst_roam_info, pst_bss_dscr, c_tmp_rssi);
     if (c_delta_rssi <= 0)
     {
@@ -786,12 +786,12 @@ oal_uint32 hmac_roam_alg_bss_check(hmac_roam_info_stru *pst_roam_info, mac_bss_d
         ((OAL_PTR_NULL == pst_roam_alg->pst_max_capacity_bss) ||
         (ul_avail_channel_capacity > pst_roam_alg->ul_max_capacity)))
     {
-	    //暂时不考虑容量
+	    //??????????????
         //pst_roam_alg->ul_max_capacity      = ul_avail_channel_capacity;
         //pst_roam_alg->pst_max_capacity_bss = pst_bss_dscr;
     }
 
-    /* 对于已存在pmk缓存的bss进行加分处理 */
+    /* ??????????pmk??????bss???????????? */
     puc_pmkid = hmac_vap_get_pmksa(pst_hmac_vap, pst_bss_dscr->auc_bssid);
     if (OAL_PTR_NULL != puc_pmkid)
     {
@@ -805,7 +805,7 @@ oal_uint32 hmac_roam_alg_bss_check(hmac_roam_info_stru *pst_roam_info, mac_bss_d
         pst_roam_alg->pst_max_rssi_bss  = pst_bss_dscr;
     }
 
-    /* 当2G AP RSSI和5G AP加权RSSI相等时，优选5G低band AP */
+    /* ??2G AP RSSI??5G AP????RSSI????????????5G??band AP */
     if ((c_tmp_rssi == pst_roam_alg->c_max_rssi)
         && (WLAN_BAND_2G == pst_roam_alg->pst_max_rssi_bss->st_channel.en_band) && (WLAN_BAND_5G == pst_bss_dscr->st_channel.en_band))
     {
@@ -880,12 +880,12 @@ mac_bss_dscr_stru *hmac_roam_alg_select_bss(hmac_roam_info_stru *pst_roam_info)
 
     pst_roam_alg = &(pst_roam_info->st_alg);
 
-    /* 取得最大 rssi 的 bss */
+    /* ???????? rssi ?? bss */
     pst_bss_dscr = pst_roam_alg->pst_max_rssi_bss;
 
     if ((OAL_PTR_NULL != pst_roam_alg->pst_max_capacity_bss) && (pst_roam_alg->ul_max_capacity >= ROAM_THROUGHPUT_THRESHOLD))
     {
-        /* 取得最大 capacity 的 bss*/
+        /* ???????? capacity ?? bss*/
         pst_bss_dscr = pst_roam_alg->pst_max_capacity_bss;
     }
 
@@ -895,7 +895,7 @@ mac_bss_dscr_stru *hmac_roam_alg_select_bss(hmac_roam_info_stru *pst_roam_info)
         return OAL_PTR_NULL;
     }
 
-    /* rssi增益处理 */
+    /* rssi???????? */
     c_delta_rssi = hmac_roam_alg_compare_rssi_increase(pst_roam_info, pst_bss_dscr, pst_roam_alg->c_max_rssi);
     if (c_delta_rssi <= 0)
     {

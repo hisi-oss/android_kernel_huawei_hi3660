@@ -10,7 +10,7 @@ extern "C" {
 #ifdef _PRE_WLAN_FEATURE_11R_AP
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "oal_cfg80211.h"
 #include "oam_ext_if.h"
@@ -34,11 +34,11 @@ extern "C" {
 #define THIS_FILE_ID OAM_FILE_ID_HMAC_11R_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 oal_void  hmac_ft_ap_up_rx_auth_req(hmac_vap_stru *pst_hmac_vap, oal_netbuf_stru *pst_auth_req)
 {
@@ -50,7 +50,7 @@ oal_void  hmac_ft_ap_up_rx_auth_req(hmac_vap_stru *pst_hmac_vap, oal_netbuf_stru
     oal_uint32        ul_ret;
 
     hmac_rx_mgmt_send_to_host_etc(pst_hmac_vap, pst_auth_req);
-    /* 获取STA的地址 */
+    /* ????STA?????? */
     mac_get_address2(oal_netbuf_header(pst_auth_req), auc_addr2);
     if(mac_addr_is_zero_etc(auc_addr2))
     {
@@ -59,14 +59,14 @@ oal_void  hmac_ft_ap_up_rx_auth_req(hmac_vap_stru *pst_hmac_vap, oal_netbuf_stru
         return;
     }
 
-    /* 解析auth transaction number */
+    /* ????auth transaction number */
     us_auth_seq  = mac_get_auth_seq_num(oal_netbuf_header(pst_auth_req));
     if (us_auth_seq > HMAC_AP_AUTH_SEQ3_WEP_COMPLETE)
     {
         OAM_WARNING_LOG1(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_AUTH,"{hmac_ap_rx_auth_req::auth recieve invalid seq, auth seq [%d]}", us_auth_seq);
         return;
     }
-    /* 获取用户idx */
+    /* ????????idx */
     uc_is_seq1 = (WLAN_AUTH_TRASACTION_NUM_ONE == us_auth_seq);
     ul_ret = hmac_encap_auth_rsp_get_user_idx_etc(&(pst_hmac_vap->st_vap_base_info),
                                         auc_addr2,
@@ -97,14 +97,14 @@ oal_uint32  hmac_ft_ap_up_rx_assoc_req(
 {
     oal_uint32 ul_ret;
 
-    /* AP 保存STA 的关联请求帧信息，以备上报内核 */
+    /* AP ????STA ?????????????????????????????? */
     ul_ret = hmac_ap_save_user_assoc_req(pst_hmac_user, puc_payload, ul_payload_len, uc_mgmt_frm_type);
     if (OAL_SUCC != ul_ret)
     {
         OAM_ERROR_LOG1(0, OAM_SF_ASSOC, "{hmac_ft_ap_up_rx_assoc_req :: hmac_ap_save_user_assoc_req fail[%d].}", ul_ret);
         return ul_ret;
     }
-    /* 上报WAL层(WAL上报内核) AP关联上了一个新的STA */
+    /* ????WAL??(WAL????????) AP????????????????STA */
     hmac_handle_connect_rsp_ap(pst_hmac_vap, pst_hmac_user);
     OAM_WARNING_LOG0(pst_hmac_user->st_user_base_info.uc_vap_id, OAM_SF_ASSOC, "{hmac_ft_ap_up_rx_assoc_req::new station to hostapd.}");
 
@@ -145,7 +145,7 @@ oal_uint32 hmac_ft_assoc(mac_vap_stru *pst_mac_vap, oal_mlme_ie_stru *pst_mlme_i
         OAM_ERROR_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ASSOC,
                        "{hmac_ap_up_rx_asoc_req::pst_hmac_user[%d] null.}", us_user_idx);
 
-        /* 没有查到对应的USER,发送去认证消息 */
+        /* ??????????????USER,?????????????? */
         hmac_mgmt_send_deauth_frame_etc(pst_mac_vap, pst_mlme_ie->auc_macaddr, MAC_ASOC_NOT_AUTH, OAL_FALSE);
 
         return OAL_ERR_CODE_PTR_NULL;
@@ -157,7 +157,7 @@ oal_uint32 hmac_ft_assoc(mac_vap_stru *pst_mac_vap, oal_mlme_ie_stru *pst_mlme_i
     if (OAL_PTR_NULL == pst_asoc_rsp)
     {
         OAM_ERROR_LOG0(pst_mac_vap->uc_vap_id, OAM_SF_ASSOC, "{hmac_ft_assoc::pst_asoc_rsp null.}");
-        /*异常返回之前删除user*/
+        /*????????????????user*/
         hmac_user_del_etc(pst_mac_vap, pst_hmac_user);
 
         return OAL_ERR_CODE_ALLOC_MEM_FAIL;
@@ -167,7 +167,7 @@ oal_uint32 hmac_ft_assoc(mac_vap_stru *pst_mac_vap, oal_mlme_ie_stru *pst_mlme_i
 
     OAL_MEM_NETBUF_TRACE(pst_asoc_rsp, OAL_TRUE);
 
-    /* 获取hmac vap指针 */
+    /* ????hmac vap???? */
     pst_hmac_vap = (hmac_vap_stru *)mac_res_get_hmac_vap(pst_mac_vap->uc_vap_id);
     if (OAL_PTR_NULL == pst_hmac_vap)
     {
@@ -204,7 +204,7 @@ oal_uint32 hmac_ft_assoc(mac_vap_stru *pst_mac_vap, oal_mlme_ie_stru *pst_mlme_i
                          "{hmac_ft_assoc::hmac_mgmt_encap_asoc_rsp_ap_etc encap msg fail.}");
         oal_netbuf_free(pst_asoc_rsp);
 
-        /*异常返回之前删除user*/
+        /*????????????????user*/
         hmac_user_del_etc(pst_mac_vap, pst_hmac_user);
 
         return OAL_FAIL;
@@ -215,7 +215,7 @@ oal_uint32 hmac_ft_assoc(mac_vap_stru *pst_mac_vap, oal_mlme_ie_stru *pst_mlme_i
     MAC_GET_CB_TX_USER_IDX(pst_tx_ctl) = pst_hmac_user->st_user_base_info.us_assoc_id;
     MAC_GET_CB_MPDU_LEN(pst_tx_ctl)    = (oal_uint16)ul_asoc_rsp_len;
 
-    /* 发送关联响应帧之前，将用户的节能状态复位 */
+    /* ???????????????????????????????????????? */
     hmac_mgmt_reset_psm_etc(pst_mac_vap, MAC_GET_CB_TX_USER_IDX(pst_tx_ctl));
 
     if (MAC_SUCCESSFUL_STATUSCODE == en_status_code)
@@ -231,7 +231,7 @@ oal_uint32 hmac_ft_assoc(mac_vap_stru *pst_mac_vap, oal_mlme_ie_stru *pst_mlme_i
                          "{hmac_ft_assoc::hmac_tx_mgmt_send_event_etc failed[%d].}", ul_rslt);
         oal_netbuf_free(pst_asoc_rsp);
 
-        /*异常返回之前删除user*/
+        /*????????????????user*/
         hmac_user_del_etc(pst_mac_vap, pst_hmac_user);
 
         return ul_rslt;
@@ -239,7 +239,7 @@ oal_uint32 hmac_ft_assoc(mac_vap_stru *pst_mac_vap, oal_mlme_ie_stru *pst_mlme_i
 
     if (MAC_SUCCESSFUL_STATUSCODE == en_status_code)
     {
-        /* AP检测STA成功，允许其关联成功*/
+        /* AP????STA????????????????????*/
 #ifdef _PRE_DEBUG_MODE_USER_TRACK
         mac_user_change_info_event(pst_hmac_user->st_user_base_info.auc_user_mac_addr,
                                        pst_mac_vap->uc_vap_id,
@@ -247,7 +247,7 @@ oal_uint32 hmac_ft_assoc(mac_vap_stru *pst_mac_vap, oal_mlme_ie_stru *pst_mlme_i
                                        MAC_USER_STATE_ASSOC, OAM_MODULE_ID_HMAC,
                                        OAM_USER_INFO_CHANGE_TYPE_ASSOC_STATE);
 #endif
-        /* 打开80211单播管理帧开关，观察关联过程，关联成功了就关闭 */
+        /* ????80211?????????????????????????????????????????????? */
         st_80211_ucast_switch.en_frame_direction = OAM_OTA_FRAME_DIRECTION_TYPE_TX;
         st_80211_ucast_switch.en_frame_type = OAM_USER_TRACK_FRAME_TYPE_MGMT;
         st_80211_ucast_switch.en_frame_switch = OAL_SWITCH_OFF;
@@ -272,20 +272,20 @@ oal_uint32 hmac_ft_assoc(mac_vap_stru *pst_mac_vap, oal_mlme_ie_stru *pst_mlme_i
                            "{hmac_ft_assoc::hmac_config_user_rate_info_syn_etc failed[%d].}", ul_rslt);
         }
 
-        /*  user已经关联上，抛事件给DMAC，在DMAC层挂用户算法钩子 */
+        /*  user????????????????????DMAC????DMAC???????????????? */
         hmac_user_add_notify_alg_etc(pst_mac_vap, us_user_idx);
         for (uc_chip_id = 0; uc_chip_id < WLAN_CHIP_MAX_NUM_PER_BOARD; uc_chip_id++)
         {
             if (uc_chip_id != pst_mac_vap->uc_chip_id)
             {
-                /* 若在同一板子下的其他VAP下找到给用户，删除之。否则sta有可能仍然在另一个AP发包 */
+                /* ????????????????????VAP??????????????????????????sta??????????????????AP???? */
                 if (OAL_SUCC == mac_chip_find_user_by_macaddr(uc_chip_id, pst_mlme_ie->auc_macaddr, &us_other_user_idx))
                 {
                     pst_hmac_other_user = mac_res_get_hmac_user_etc(us_other_user_idx);
                     if (OAL_PTR_NULL != pst_hmac_other_user)
                     {
                         pst_hmac_other_vap  = mac_res_get_hmac_vap(pst_hmac_other_user->st_user_base_info.uc_vap_id);
-                        /* 抛事件上报内核，已经删除某个STA */
+                        /* ????????????????????????????STA */
                         hmac_mgmt_send_disassoc_frame_etc(&(pst_hmac_other_vap->st_vap_base_info), pst_mlme_ie->auc_macaddr, MAC_DISAS_LV_SS, OAL_FALSE);
                         hmac_handle_disconnect_rsp_ap_etc(pst_hmac_other_vap, pst_hmac_other_user);
                         hmac_user_del_etc(&(pst_hmac_other_vap->st_vap_base_info), pst_hmac_other_user);
@@ -298,14 +298,14 @@ oal_uint32 hmac_ft_assoc(mac_vap_stru *pst_mac_vap, oal_mlme_ie_stru *pst_mlme_i
     }
     else
     {
-        /* AP检测STA失败，将其删除 */
+        /* AP????STA?????????????? */
         if (MAC_REJECT_TEMP != en_status_code)
         {
             hmac_user_del_etc(pst_mac_vap, pst_hmac_user);
         }
     }
 
-    /*  STA 入网后，上报VAP 信息和用户信息 */
+    /*  STA ????????????VAP ?????????????? */
     st_hmac_user_info_event.us_user_idx = us_user_idx;
 
     hmac_config_vap_info_etc(pst_mac_vap, OAL_SIZEOF(oal_uint32), (oal_uint8 *)&ul_rslt);
@@ -348,13 +348,13 @@ oal_uint16  hmac_ft_encap_auth_rsp(mac_vap_stru *pst_mac_vap, oal_netbuf_stru *p
     /*                Set the fields in the frame header                     */
     /*************************************************************************/
 
-    /* 设置函数头的frame control字段 */
+    /* ????????????frame control???? */
     mac_hdr_set_frame_control(puc_data, WLAN_FC0_SUBTYPE_AUTH);
 
-    /* 将DA设置为STA的地址 */
+    /* ??DA??????STA?????? */
     oal_set_mac_addr(((mac_ieee80211_frame_stru *)puc_data)->auc_address1, pst_mlme->auc_macaddr);
 
-    /* 将SA设置为dot11MacAddress */
+    /* ??SA??????dot11MacAddress */
     oal_set_mac_addr(((mac_ieee80211_frame_stru *)puc_data)->auc_address2, mac_mib_get_StationID(pst_mac_vap));
     oal_set_mac_addr(((mac_ieee80211_frame_stru *)puc_data)->auc_address3, pst_mac_vap->auc_bssid);
 
@@ -375,23 +375,23 @@ oal_uint16  hmac_ft_encap_auth_rsp(mac_vap_stru *pst_mac_vap, oal_netbuf_stru *p
     us_index = MAC_80211_FRAME_LEN;
     puc_frame = (oal_uint8 *)(puc_data + us_index);
 
-    /* 计算认证相应帧的长度 */
+    /* ???????????????????? */
     us_auth_rsp_len = MAC_80211_FRAME_LEN + MAC_AUTH_ALG_LEN + MAC_AUTH_TRANS_SEQ_NUM_LEN +
                       MAC_STATUS_CODE_LEN;
 
-    /* 解析认证类型 */
+    /* ???????????? */
     us_auth_type = WLAN_WITP_AUTH_FT;
 
 
-    /* 设置认证类型IE */
+    /* ????????????IE */
     puc_frame[0] = (us_auth_type & 0x00FF);
     puc_frame[1] = (us_auth_type & 0xFF00) >> 8;
 
-    /* 根据下发内容填写认证响应帧的transaction number */
+    /* ????????????????????????????transaction number */
     puc_frame[2] = ((pst_mlme->uc_seq) & 0x00FF);
     puc_frame[3] = 0;
 
-    /* 认证状态 */
+    /* ???????? */
     puc_frame[4] = (pst_mlme->us_reason & 0x00FF);
     puc_frame[5] = (pst_mlme->us_reason & 0xFF00) >> 8;
     puc_frame = (oal_uint8 *)(puc_data + us_auth_rsp_len);
@@ -413,7 +413,7 @@ oal_uint16  hmac_ft_encap_auth_rsp(mac_vap_stru *pst_mac_vap, oal_netbuf_stru *p
         return us_auth_rsp_len;
     }
 
-    /* 获取hmac user指针 */
+    /* ????hmac user???? */
     ul_ret = mac_vap_find_user_by_macaddr_etc(pst_mac_vap, pst_mlme->auc_macaddr, &us_user_index);
     if (OAL_SUCC != ul_ret)
     {
@@ -442,7 +442,7 @@ oal_uint32 hmac_ft_auth(mac_vap_stru *pst_mac_vap, oal_mlme_ie_stru *pst_mlme_ie
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* AP接收到STA发来的认证请求帧组相应的认证响应帧 */
+    /* AP??????STA?????????????????????????????????? */
     pst_auth_rsp = (oal_netbuf_stru *)OAL_MEM_NETBUF_ALLOC(OAL_NORMAL_NETBUF, WLAN_MEM_NETBUF_SIZE2, OAL_NETBUF_PRIORITY_MID);
     if(OAL_PTR_NULL == pst_auth_rsp)
     {
@@ -466,7 +466,7 @@ oal_uint32 hmac_ft_auth(mac_vap_stru *pst_mac_vap, oal_mlme_ie_stru *pst_mlme_ie
 
     oal_netbuf_put(pst_auth_rsp, us_auth_rsp_len);
 
-    /* 获取hmac vap指针 */
+    /* ????hmac vap???? */
     pst_hmac_vap = (hmac_vap_stru *)mac_res_get_hmac_vap(pst_mac_vap->uc_vap_id);
     if (OAL_PTR_NULL == pst_hmac_vap)
     {
@@ -479,14 +479,14 @@ oal_uint32 hmac_ft_auth(mac_vap_stru *pst_mac_vap, oal_mlme_ie_stru *pst_mlme_ie
 
     hmac_mgmt_update_auth_mib(pst_hmac_vap, pst_auth_rsp);
 
-    /* 发送认证响应帧之前，将用户的节能状态复位 */
+    /* ???????????????????????????????????????? */
     pst_tx_ctl = (mac_tx_ctl_stru *)oal_netbuf_cb(pst_auth_rsp);
     if (OAL_PTR_NULL != mac_res_get_hmac_user_etc(MAC_GET_CB_TX_USER_IDX(pst_tx_ctl)))
     {
         hmac_mgmt_reset_psm_etc(pst_mac_vap, MAC_GET_CB_TX_USER_IDX(pst_tx_ctl));
     }
 
-    /* 抛事件给dmac发送认证帧 */
+    /* ????????dmac?????????? */
     ul_ret = hmac_tx_mgmt_send_event_etc(pst_mac_vap, pst_auth_rsp, us_auth_rsp_len);
     if (OAL_SUCC != ul_ret)
     {

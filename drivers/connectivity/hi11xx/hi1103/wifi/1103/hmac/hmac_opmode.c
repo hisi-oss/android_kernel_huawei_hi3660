@@ -9,7 +9,7 @@ extern "C" {
 
 #ifdef _PRE_WLAN_FEATURE_OPMODE_NOTIFY
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "hmac_opmode.h"
 
@@ -17,12 +17,12 @@ extern "C" {
 #define THIS_FILE_ID OAM_FILE_ID_HMAC_OPMODE_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 
@@ -40,7 +40,7 @@ oal_uint32 hmac_check_opmode_notify_etc(
 //    oal_uint8               uc_mgmt_frm_type;
     oal_uint32              ul_relt;
 
-    /* 入参指针已经在调用函数保证非空，这里直接使用即可 */
+    /* ???????????????????????????????????????????????? */
     pst_mac_vap   = &(pst_hmac_vap->st_vap_base_info);
     pst_mac_user  = &(pst_hmac_user->st_user_base_info);
 
@@ -53,12 +53,12 @@ oal_uint32 hmac_check_opmode_notify_etc(
     //puc_opmode_notify_ie = mac_get_opmode_notify_ie(puc_payload, (oal_uint16)ul_msg_len, us_info_elem_offset);
     puc_opmode_notify_ie = mac_find_ie_etc(MAC_EID_OPMODE_NOTIFY, puc_payload_offset, (oal_int32)ul_msg_len);
 
-    /* STA关联在vht下,且vap在双空间流的情况下才解析此ie */
+    /* STA??????vht??,??vap??????????????????????????ie */
     if ((OAL_PTR_NULL != puc_opmode_notify_ie) && (puc_opmode_notify_ie[1] == MAC_OPMODE_NOTIFY_LEN))
     {
         pst_opmode_notify = (mac_opmode_notify_stru *)(puc_opmode_notify_ie + MAC_IE_HDR_LEN);
 
-        /* SMPS已经解析并更新空间流，因此若空间流不等则SMPS和OPMODE的空间流信息不同 */
+        /* SMPS????????????????????????????????????????SMPS??OPMODE???????????????? */
         if(pst_mac_user->en_avail_num_spatial_stream > pst_opmode_notify->bit_rx_nss ||
             (WLAN_SINGLE_NSS == pst_mac_user->en_avail_num_spatial_stream && WLAN_SINGLE_NSS != pst_opmode_notify->bit_rx_nss))
         {
@@ -113,7 +113,7 @@ oal_uint32  hmac_mgmt_rx_opmode_notify_frame_etc(hmac_vap_stru *pst_hmac_vap, hm
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 获取帧体指针 */
+    /* ???????????? */
     puc_data = (oal_uint8 *)MAC_GET_RX_CB_MAC_HEADER_ADDR(pst_rx_ctrl);
 
     /****************************************************/
@@ -126,7 +126,7 @@ oal_uint32  hmac_mgmt_rx_opmode_notify_frame_etc(hmac_vap_stru *pst_hmac_vap, hm
     /*                                                  */
     /****************************************************/
 
-    /* 获取payload的指针 */
+    /* ????payload?????? */
     puc_frame_payload = (oal_uint8 *)puc_data + MAC_80211_FRAME_LEN;
     pst_opmode_notify = (mac_opmode_notify_stru *)(puc_frame_payload + MAC_ACTION_OFFSET_ACTION + 1);
 

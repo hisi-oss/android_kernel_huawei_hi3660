@@ -9,22 +9,22 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 //#include "wal_regdb.h"
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 #if (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION)
 /*
-    以下管制域数据库由工具生成:
-    Step 1: 从http://wireless.kernel.org/download/wireless-regdb/regulatory.bins/
-            下载最新的管制域二进制文件regulatory.bin
+    ??????????????????????????:
+    Step 1: ??http://wireless.kernel.org/download/wireless-regdb/regulatory.bins/
+            ??????????????????????????regulatory.bin
     Step 2: regdbdump regulatory.bin >> db.txt
     Step 3: kernel/net/wireless/genregdb.awk db.txt >> wal_regdb.c
  */
-/* 根据WIFI-2.4G-5G-国家码信道对应表更新管制域信息*/
+/* ????WIFI-2.4G-5G-??????????????????????????????*/
 #ifdef _PRE_WLAN_FEATURE_11D
 static const struct ieee80211_regdomain regdom_AE = {
     .alpha2 = "AE",
@@ -2286,7 +2286,7 @@ static const struct ieee80211_regdomain regdom_ZW = {
     },
     .n_reg_rules = 4
 };
-/* 参考broadcom国家码信道规格表，新增的 */
+/* ????broadcom???????????????????????? */
 static const struct ieee80211_regdomain regdom_AD = {
     .alpha2 = "AD",
     .reg_rules = {
@@ -3691,7 +3691,7 @@ const struct ieee80211_regdomain *reg_regdb_etc[] = {
     &regdom_ZA,
     &regdom_ZM,
     &regdom_ZW,
-/* 参考broadcom国家码信道规格表，新增的 */    
+/* ????broadcom???????????????????????? */    
     &regdom_AD,
     &regdom_BJ,
     &regdom_BT,

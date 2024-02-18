@@ -264,7 +264,7 @@ VOS_UINT32 LUP_EnQuetoHead(LUP_QUEUE_STRU *pstQue, VOS_VOID *pNode, VOS_VOID** p
     }
     if (PS_TRUE == LUP_IsQueFull(pstQue))
     {
-        /*ÒÆ³ýÎ²½Úµã*/
+        /*??????????*/
         *ppTailNode = pstQue->pBuff[pstQue->ulTail];
         pstQue->ulTail = TTF_MOD_SUB(pstQue->ulTail, 1, pstQue->ulMaxNum);
     }

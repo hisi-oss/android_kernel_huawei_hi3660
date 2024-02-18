@@ -9,7 +9,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "oal_main.h"
 #include "oal_workqueue.h"
@@ -40,21 +40,21 @@ typedef struct
 }oal_stacktrace_stru;
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 #if (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION)
 void __iomem *g_l2cache_base;
 #endif
 
-/* 动态/静态DBDC，其中一个默认使能 */
+/* ????/????DBDC?????????????????? */
 oal_uint8  g_auc_wlan_service_device_per_chip[WLAN_SERVICE_DEVICE_MAX_NUM_PER_CHIP] = {WLAN_INIT_DEVICE_RADIO_CAP};
 
-oal_uint8  g_uc_hitalk_status = 0;      /* 记录当前固件类型 */
+oal_uint8  g_uc_hitalk_status = 0;      /* ???????????????? */
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
-/* 有些内核版本可能没开启CONFIG_STACKTRACE, 增加CONFIG_STACKTRACE的宏 */
+/* ??????????????????????CONFIG_STACKTRACE, ????CONFIG_STACKTRACE???? */
 
 #define oal_dump_stack_str_init()
 oal_int32 oal_dump_stack_str(oal_uint8 *puc_str, oal_uint32 ul_max_size)
@@ -96,12 +96,12 @@ oal_int32  ATTR_OAL_NO_FUNC_TRACE oal_main_init(oal_void)
     }
 #endif
 
-    /* 为了解各模块的启动时间，增加时间戳打印 */
+    /* ?????????????????????????????????????? */
 
 #if defined(_PRE_PRODUCT_ID_HI110X_HOST) && !defined(CONFIG_HI110X_KERNEL_MODULES_BUILD_SUPPORT) && defined(_PRE_CONFIG_CONN_HISI_SYSFS_SUPPORT)
-    /*110X 驱动build in，内存池初始化上移到内核完成，保证大片内存申请成功*/
+    /*110X ????build in??????????????????????????????????????????????????*/
 #else
-    /* 内存池初始化 */
+    /* ???????????? */
     ul_rslt = oal_mem_init_pool();
     if (ul_rslt != OAL_SUCC)
     {
@@ -111,9 +111,9 @@ oal_int32  ATTR_OAL_NO_FUNC_TRACE oal_main_init(oal_void)
 #endif
 
 #if ((defined(_PRE_PRODUCT_ID_HI110X_HOST))||(defined(_PRE_PRODUCT_ID_HI110X_DEV)))
-    /* Hi1102 SDIO总线初始化接口 TBD */
+    /* Hi1102 SDIO?????????????? TBD */
 
-    /* 初始化: 总线上的chip数量增加1 */
+    /* ??????: ????????chip????????1 */
     oal_bus_init_chip_num();
     ul_rslt = oal_bus_inc_chip_num();
     if(OAL_SUCC != ul_rslt)
@@ -123,14 +123,14 @@ oal_int32  ATTR_OAL_NO_FUNC_TRACE oal_main_init(oal_void)
     }
 #endif
 
-    /* 启动成功 */
+    /* ???????? */
 #if (_PRE_OS_VERSION_WIN32 == _PRE_OS_VERSION)
     OAL_MEMZERO(g_past_net_device, WLAN_VAP_SUPPORT_MAX_NUM_LIMIT * OAL_SIZEOF(oal_net_device_stru *));
 #endif
 
 #ifndef BFGX_UART_DOWNLOAD_SUPPORT
 #if defined(_PRE_PRODUCT_ID_HI110X_HOST)
-    /* HCC初始化 */
+    /* HCC?????? */
     if (OAL_UNLIKELY(OAL_SUCC !=hcc_dev_init()))
     {
         OAL_IO_PRINT("[ERROR]hcc_module_init return err null\n");
@@ -183,16 +183,16 @@ oal_void  ATTR_OAL_NO_FUNC_TRACE oal_main_exit(oal_void)
 #endif
 
 #if ((defined(_PRE_PRODUCT_ID_HI110X_HOST))||(defined(_PRE_PRODUCT_ID_HI110X_DEV)))
-    /* Hi1102 SDIO总线exit接口(不下电) TBD */
+    /* Hi1102 SDIO????exit????(??????) TBD */
 
-    /* chip num初始化:0 */
+    /* chip num??????:0 */
     oal_bus_init_chip_num();
 #endif
 
 #if defined(_PRE_PRODUCT_ID_HI110X_HOST) && !defined(CONFIG_HI110X_KERNEL_MODULES_BUILD_SUPPORT) && defined(_PRE_CONFIG_CONN_HISI_SYSFS_SUPPORT)
-    /*110X 驱动build in，内存池初始化上移到内核完成，保证大片内存申请成功*/
+    /*110X ????build in??????????????????????????????????????????????????*/
 #else
-    /* 内存池卸载 */
+    /* ?????????? */
     oal_mem_exit();
 #endif
 
@@ -257,7 +257,7 @@ oal_uint8 oal_board_get_service_vap_start_id(oal_void)
 {
     oal_uint8   uc_device_num_per_chip = oal_device_check_enable_num();
 
-    /* 配置vap个数 = mac device个数,vap idx分配先配置vap,后业务vap */
+    /* ????vap???? = mac device????,vap idx??????????vap,??????vap */
     return (oal_uint8)(WLAN_CHIP_MAX_NUM_PER_BOARD * uc_device_num_per_chip);
 }
 
@@ -273,7 +273,7 @@ oal_void hi_wlan_power_off(void)
 
 oal_void save_nfc_lowpower_log(oal_void)
 {
-    /*读取nfc低电log数据,然后下电*/
+    /*????nfc????log????,????????*/
     save_nfc_lowpower_log_2_sdt();
     hi_wlan_power_off();
 }

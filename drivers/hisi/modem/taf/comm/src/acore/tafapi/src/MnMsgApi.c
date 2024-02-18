@@ -47,7 +47,7 @@
 */
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include  "product_config.h"
 #include  "vos.h"
@@ -58,14 +58,14 @@
 
 
 /*****************************************************************************
-  2 常量定义
+  2 ????????
 *****************************************************************************/
 #define THIS_FILE_ID                PS_FILE_ID_MNMSG_API_C
 
 /*****************************************************************************
-  3 类型定义
+  3 ????????
 *****************************************************************************/
-/*API发送的消息类型和长度用一个二维数组对应起来*/
+/*API??????????????????????????????????????????*/
 typedef struct
 {
     MN_MSG_MSGTYPE_ENUM_U16             enMsgType;
@@ -73,7 +73,7 @@ typedef struct
 }MSG_MSGTYPE_LEN_STRU;
 
 /*****************************************************************************
-  4 变量定义
+  4 ????????
 *****************************************************************************/
 LOCAL MSG_MSGTYPE_LEN_STRU             f_astMsgTypeLen[] = {
     {MN_MSG_MSGTYPE_SEND_RPDATA_DIRECT ,sizeof(MN_MSG_SEND_PARM_STRU)},
@@ -108,7 +108,7 @@ LOCAL MSG_MSGTYPE_LEN_STRU             f_astMsgTypeLen[] = {
 LOCAL MN_MSG_TS_DATA_INFO_STRU         f_stMsgDataInfo;
 
 /*****************************************************************************
-  5 函数实现
+  5 ????????
 *****************************************************************************/
 
 VOS_UINT32 MSG_SendAppReq(
@@ -125,7 +125,7 @@ VOS_UINT32 MSG_SendAppReq(
     VOS_UINT32                          ulLoop;
     VOS_UINT32                          ulMaxLoop;
 
-    /* 消息类型有效性判断 */
+    /* ?????????????????? */
     if ((enMsgType >= MN_MSG_MSGTYPE_MAX)
      || (enMsgType <= MN_APP_MSG_CLASS_MSG))
     {
@@ -133,7 +133,7 @@ VOS_UINT32 MSG_SendAppReq(
         return MN_ERR_INVALIDPARM;
     }
 
-    /* 获取消息信息字段长度 */
+    /* ???????????????????? */
     ulMaxLoop    = sizeof(f_astMsgTypeLen)/sizeof(MSG_MSGTYPE_LEN_STRU);
     for (ulLoop = 0; ulLoop < ulMaxLoop; ulLoop++)
     {
@@ -152,7 +152,7 @@ VOS_UINT32 MSG_SendAppReq(
 
     ulSendLen = (ulLen + sizeof(MN_APP_REQ_MSG_STRU)) - (sizeof(VOS_UINT8)*4);
 
-    /* 填写并发送消息 */
+    /* ?????????????? */
     pstAppReq = (MN_APP_REQ_MSG_STRU*)PS_ALLOC_MSG_WITH_HEADER_LEN(WUEPS_PID_AT,ulSendLen);
 
     if (VOS_NULL_PTR == pstAppReq)
@@ -188,7 +188,7 @@ VOS_UINT32 MSG_SendAppReq(
     return MN_ERR_NO_ERROR;
 }
 
-/* Added by f62575 for AT Project，2011-10-03,  Begin*/
+/* Added by f62575 for AT Project??2011-10-03,  Begin*/
 
 VOS_UINT32 MN_MSG_ReqStub(
     MN_CLIENT_ID_T                      clientId,
@@ -198,7 +198,7 @@ VOS_UINT32 MN_MSG_ReqStub(
 {
     VOS_UINT32                          ulRet;
 
-    /*判断输入参数的合法性*/
+    /*????????????????????*/
     if (VOS_NULL_PTR == pstStubParam)
     {
         AT_WARN_LOG("MN_MSG_ReqStub: pstSetParam is Null ");
@@ -212,7 +212,7 @@ VOS_UINT32 MN_MSG_ReqStub(
 
     return ulRet;
 }
-/* Added by f62575 for AT Project，2011-10-03,  End*/
+/* Added by f62575 for AT Project??2011-10-03,  End*/
 
 
 VOS_UINT32   MN_MSG_SetLinkCtrl(
@@ -223,7 +223,7 @@ VOS_UINT32   MN_MSG_SetLinkCtrl(
 {
     VOS_UINT32                          ulRet;
 
-    /*判断输入参数的合法性*/
+    /*????????????????????*/
     if (VOS_NULL_PTR == pstSetParam)
     {
         AT_WARN_LOG("MN_MSG_SetLinkCtrl:pstSetParam is Null ");
@@ -270,7 +270,7 @@ VOS_UINT32   MN_MSG_Send(
 {
     VOS_UINT32                          ulRet;
 
-    /*判断输入参数的合法性*/
+    /*????????????????????*/
     if (VOS_NULL_PTR == pstSendParm)
     {
         AT_WARN_LOG("MN_MSG_Send:pstSendDirectParm is Null ");
@@ -289,7 +289,7 @@ VOS_UINT32   MN_MSG_Send(
         return MN_ERR_INVALIDPARM;
     }
 
-    /*如果带有SCADDR,24011协议规定,BCD编码最少长度是2,最大长度是11*/
+    /*????????SCADDR,24011????????,BCD??????????????2,??????????11*/
     if (pstSendParm->stMsgInfo.stScAddr.ucBcdLen > 0)
     {
         if ((pstSendParm->stMsgInfo.stScAddr.ucBcdLen < MN_MSG_MIN_BCD_NUM_LEN)
@@ -300,7 +300,7 @@ VOS_UINT32   MN_MSG_Send(
         }
     }
 
-    /*判断输入TPDU格式的合法性,即解码是否成功*/
+    /*????????TPDU????????????,??????????????*/
     if ((MN_MSG_TPDU_COMMAND != pstSendParm->stMsgInfo.stTsRawData.enTpduType)
      && (MN_MSG_TPDU_SUBMIT != pstSendParm->stMsgInfo.stTsRawData.enTpduType))
     {
@@ -356,7 +356,7 @@ VOS_UINT32   MN_MSG_SendFromMem(
 {
     VOS_UINT32                          ulRet;
 
-    /*判断输入参数的合法性*/
+    /*????????????????????*/
     if (VOS_NULL_PTR == pstSendFromMemParm)
     {
         AT_WARN_LOG("MN_MSG_SendFromMem:pstSendFromMemParm is Null");
@@ -401,20 +401,20 @@ VOS_UINT32   MN_MSG_SendAck(
 {
     VOS_UINT32                          ulRet;
 
-    /*判断输入参数的合法性*/
+    /*????????????????????*/
     if (VOS_NULL_PTR == pstAckParm)
     {
         AT_WARN_LOG("MN_MSG_SendAck:pstAckParm is Null");
         return MN_ERR_NULLPTR;
     }
-    /*必须是Deliver Ack 或Deliver Err*/
+    /*??????Deliver Ack ??Deliver Err*/
     if ((MN_MSG_TPDU_DELIVER_RPT_ACK != pstAckParm->stTsRawData.enTpduType)
      && (MN_MSG_TPDU_DELIVER_RPT_ERR != pstAckParm->stTsRawData.enTpduType))
     {
         AT_WARN_LOG("MN_MSG_SendAck:Invalid Tpdu Type");
         return MN_ERR_CLASS_SMS_INVALID_TPDUTYPE;
     }
-    /*判断输入TPDU格式的合法性,即解码是否成功*/
+    /*????????TPDU????????????,??????????????*/
     TAF_MEM_SET_S(&f_stMsgDataInfo, sizeof(f_stMsgDataInfo), 0x00, sizeof(f_stMsgDataInfo));
     ulRet = MN_MSG_Decode(&pstAckParm->stTsRawData,&f_stMsgDataInfo);
     if (MN_ERR_NO_ERROR != ulRet)
@@ -440,7 +440,7 @@ VOS_UINT32   MN_MSG_Write(
 {
     VOS_UINT32                          ulRet;
 
-    /*判断输入参数的合法性*/
+    /*????????????????????*/
     if (VOS_NULL_PTR == pstWriteParm)
     {
         AT_WARN_LOG("MN_MSG_Write:pstWriteParm is Null");
@@ -467,7 +467,7 @@ VOS_UINT32   MN_MSG_Write(
         return MN_ERR_INVALIDPARM;
     }
 
-    /*如果有SC ADDR,判断SC ADDR是否合理*/
+    /*??????SC ADDR,????SC ADDR????????*/
     if (pstWriteParm->stMsgInfo.stScAddr.ucBcdLen > 0)
     {
         if ((pstWriteParm->stMsgInfo.stScAddr.ucBcdLen < MN_MSG_MIN_BCD_NUM_LEN)
@@ -478,7 +478,7 @@ VOS_UINT32   MN_MSG_Write(
         }
     }
 
-    /*判断输入TPDU格式的合法性,即解码是否成功*/
+    /*????????TPDU????????????,??????????????*/
     TAF_MEM_SET_S(&f_stMsgDataInfo, sizeof(f_stMsgDataInfo), 0x00, sizeof(f_stMsgDataInfo));
     ulRet = MN_MSG_Decode(&pstWriteParm->stMsgInfo.stTsRawData,&f_stMsgDataInfo);
     if (MN_ERR_NO_ERROR != ulRet)
@@ -643,7 +643,7 @@ VOS_UINT32   MN_MSG_ReadStaRpt(
         return MN_ERR_NULLPTR;
     }
 
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, begin */
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, begin */
     if ((MN_MSG_MEM_STORE_SIM != pstReadParam->enMemStore)
      && (MN_MSG_MEM_STORE_NV != pstReadParam->enMemStore))
     {
@@ -656,7 +656,7 @@ VOS_UINT32   MN_MSG_ReadStaRpt(
         AT_WARN_LOG("MN_MSG_ReadStaRpt:Invalid enMemStore2");
         return MN_ERR_INVALIDPARM;
     }
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, end */
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, end */
 
     ulRet = MSG_SendAppReq(MN_MSG_MSGTYPE_READ_STARPT,
                            clientId,
@@ -681,7 +681,7 @@ VOS_UINT32   MN_MSG_DeleteStaRpt(
         return MN_ERR_NULLPTR;
     }
 
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, begin */
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, begin */
     if ((MN_MSG_MEM_STORE_SIM != pstDeleteParam->enMemStore)
      && (MN_MSG_MEM_STORE_NV != pstDeleteParam->enMemStore))
     {
@@ -694,7 +694,7 @@ VOS_UINT32   MN_MSG_DeleteStaRpt(
         AT_WARN_LOG("MN_MSG_DeleteStaRpt:Invalid enMemStore");
         return MN_ERR_INVALIDPARM;
     }
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, end */
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, end */
 
     if ((MN_MSG_DELETE_SINGLE != pstDeleteParam->enDeleteType)
      && (MN_MSG_DELETE_ALL != pstDeleteParam->enDeleteType))
@@ -748,14 +748,14 @@ VOS_UINT32   MN_MSG_WriteSrvParam(
         return MN_ERR_INVALIDPARM;
     }
 
-    /*如果设置的值没有一个有效,则返回*/
+    /*????????????????????????,??????*/
     if (MN_MSG_SRV_PARM_TOTALABSENT == (pstSrvParam->stSrvParm.ucParmInd & MN_MSG_SRV_PARM_TOTALABSENT))
     {
         AT_WARN_LOG("MN_MSG_WriteSrvParam:Invalid Parm,No Valid Data");
         return MN_ERR_INVALIDPARM;
     }
 
-    /*判断SC Addr和Dest Addr的有效性*/
+    /*????SC Addr??Dest Addr????????*/
     if (MN_MSG_SRV_PARM_PRESENT ==
         ((pstSrvParam->stSrvParm.ucParmInd & MN_MSG_SRV_PARM_MASK_SC_ADDR) >> 1))
     {
@@ -1070,7 +1070,7 @@ VOS_UINT32   MN_MSG_GetMoMsgIndex(
         return MN_ERR_NULLPTR;
     }
 
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, begin */
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, begin */
     if ((MN_MSG_MEM_STORE_SIM != pstStaRptParm->enMemStore)
      && (MN_MSG_MEM_STORE_NV != pstStaRptParm->enMemStore))
     {
@@ -1083,7 +1083,7 @@ VOS_UINT32   MN_MSG_GetMoMsgIndex(
         AT_WARN_LOG("MN_MSG_GetMoMsgFromStaRpt:Invalid enMemStore2");
         return MN_ERR_INVALIDPARM;
     }
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, end */
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, end */
 
     ulRet = MSG_SendAppReq(MN_MSG_MSGTYPE_GET_MOMSG_FROMSTARPT,
                            clientId,

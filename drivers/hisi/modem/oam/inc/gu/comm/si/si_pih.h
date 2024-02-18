@@ -57,7 +57,7 @@ extern "C" {
 #endif
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 #include "product_config.h"
 #include "vos.h"
@@ -75,7 +75,7 @@ extern "C" {
 #pragma pack(4)
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
 
 #define SI_PIH_PIN_CODE_LEN             (8)
@@ -141,21 +141,21 @@ extern "C" {
 
 #define PIH_BIT_N(num)                  (0x01 << (num))
 
-#define SI_PIH_MNC_TWO_BYTES_LEN        (2)             /* MNC长度为2 */
-#define SI_PIH_MNC_THREE_BYTES_LEN      (3)             /* MNC长度为3 */
-#define SI_PIH_AD_MNC_LEN_POS           (3)             /* AD文件中MNC长度字段所在位置 */
+#define SI_PIH_MNC_TWO_BYTES_LEN        (2)             /* MNC??????2 */
+#define SI_PIH_MNC_THREE_BYTES_LEN      (3)             /* MNC??????3 */
+#define SI_PIH_AD_MNC_LEN_POS           (3)             /* AD??????MNC???????????????? */
 
-#define SI_PIH_IMSI_MAX_LEN             (8)             /* IMSI中指示长度的最大值 */
+#define SI_PIH_IMSI_MAX_LEN             (8)             /* IMSI?????????????????? */
 
 #define PIH_SET_BIT(Data,BitNo)         (Data |= (VOS_UINT8)(0x1<<BitNo))
 
-#define BIT_ACTIVECARD                  (3)             /*当前是否激活卡操作*/
-#define BIT_HANDLEVSIM                  (2)             /*当前是否处理VSIM卡*/
-#define BIT_VSIMSTATE                   (1)             /*当前VSIM卡是否激活*/
-#define BIT_CURCARDOK                   (0)             /*当前卡是否在位 */
+#define BIT_ACTIVECARD                  (3)             /*??????????????????*/
+#define BIT_HANDLEVSIM                  (2)             /*????????????VSIM??*/
+#define BIT_VSIMSTATE                   (1)             /*????VSIM??????????*/
+#define BIT_CURCARDOK                   (0)             /*?????????????? */
 
-#define SI_PIH_DH_PARAP_MAX             (128)           /*DH 参数 P的最大长度*/
-#define SI_PIH_DH_PARAG_MAX             (1)             /*DH 参数 G的最大长度*/
+#define SI_PIH_DH_PARAP_MAX             (128)           /*DH ???? P??????????*/
+#define SI_PIH_DH_PARAG_MAX             (1)             /*DH ???? G??????????*/
 
 #define SI_PIH_SMEM_ENDFLAG             (0x5A5A5A5A)
 
@@ -163,13 +163,13 @@ extern "C" {
 #define SI_PIH_HUK_BITS                 (128)
 
 #define SI_PIH_APNSET_SMEM_ADDR         (g_ulTEEShareAddr)
-#define SI_PIH_APNSET_SMEM_LEN          (0x400)         /*预留1K*/
+#define SI_PIH_APNSET_SMEM_LEN          (0x400)         /*????1K*/
 
 #define SI_PIH_DHPARASET_SMEM_ADDR      (SI_PIH_APNSET_SMEM_ADDR+SI_PIH_APNSET_SMEM_LEN)
-#define SI_PIH_DHPARASET_SMEM_LEN       (0x400)         /*预留1K*/
+#define SI_PIH_DHPARASET_SMEM_LEN       (0x400)         /*????1K*/
 
 #define SI_PIH_VSIM_SMEM_ADDR           (SI_PIH_DHPARASET_SMEM_ADDR+SI_PIH_DHPARASET_SMEM_LEN)
-#define SI_PIH_VSIM_SMEM_LEN            (0x1000)        /*预留4K*/
+#define SI_PIH_VSIM_SMEM_LEN            (0x1000)        /*????4K*/
 
 
 #define SI_PIH_GETCARDSTATUS_MAX        (200)
@@ -183,19 +183,19 @@ extern "C" {
 #define SI_PIH_TASKDELAY_SEM_LEN        (1000)
 
 #if (FEATURE_ON == FEATURE_VCOM_EXT)
-#define SI_PIH_CTRL_INFO_SIZE           (5)             /* AT最大通道个数（4个）+1 */
+#define SI_PIH_CTRL_INFO_SIZE           (5)             /* AT??????????????4????+1 */
 #else
 #define SI_PIH_CTRL_INFO_SIZE           (2)
 #endif  /*(FEATURE_ON == FEATURE_VCOM_EXT)*/
 
-/* 根据随机数和通道号获得SessionID, 0x1f值根据USIMM_CHANNEL_NUMBER_MAX来设定 */
+/* ??????????????????????SessionID, 0x1f??????USIMM_CHANNEL_NUMBER_MAX?????? */
 #define SI_PIH_MAKESESSION_ID(RandNum, ChannelID) \
         ((RandNum & (~0x1f)) | ChannelID)
 
-#define SI_PIH_SCI_ERR_COUNT_MAX_SLICE  (30 * 60 * 32768)   /* Err Log统计上报间隔时长 */
+#define SI_PIH_SCI_ERR_COUNT_MAX_SLICE  (30 * 60 * 32768)   /* Err Log???????????????? */
 
 /*******************************************************************************
-  3 枚举定义
+  3 ????????
 *******************************************************************************/
 enum SI_PIH_REQ_ENUM
 {
@@ -305,22 +305,22 @@ typedef VOS_UINT8       SI_PIH_PCSC_SIM_STATUS;
 
 enum SI_PIH_HVSST_HANDLE_STATE_ENUM
 {                                               /*OP_ActiveCard OP_HandleVsim   OP_VsimState    OP_CurCardOK*/
-    SI_PIH_HVSST_DEACTIVE_RSIM_AGAIN    = 0x00, /*0             0               0               0*/ /*无需操作*/
-    SI_PIH_HVSST_DEACTIVE_RSIM          = 0x01, /*0             0               0               1*/ /*需要操作*/
-    SI_PIH_HVSST_STATE_ERROR2           = 0x02, /*0             0               1               0*/ /*VSIM激活，卡不在位，去激活硬卡*/
-    SI_PIH_HVSST_STATE_ERROR3           = 0x03, /*0             0               1               1*/ /*VSIM激活时候去激活硬卡*/
-    SI_PIH_HVSST_STATE_ERROR4           = 0x04, /*0             1               0               0*/ /*硬卡不在，VSIM未打开，去激活VSIM*/
-    SI_PIH_HVSST_STATE_ERROR5           = 0x05, /*0             1               0               1*/ /*硬卡在，VSIM未打开，去激活VSIM*/
-    SI_PIH_HVSST_DEACTIVE_VSIM_AGAIN    = 0x06, /*0             1               1               0*/ /*无需操作*/
-    SI_PIH_HVSST_DEACTIVE_VSIM          = 0x07, /*0             1               1               1*/ /*需要操作*/
-    SI_PIH_HVSST_ACTIVE_RSIM            = 0x08, /*1             0               0               0*/ /*需要操作*/
-    SI_PIH_HVSST_ACTIVE_RSIM_AGAIN      = 0x09, /*1             0               0               1*/ /*重复激活硬卡*/
-    SI_PIH_HVSST_ACTIVE_RSIM_AGAIN2     = 0x0A, /*1             0               1               0*/ /*VSIM激活失败,激活硬卡*/
-    SI_PIH_HVSST_STATE_ERROR11          = 0x0B, /*1             0               1               1*/ /*VSIM激活时候,激活硬卡*/
-    SI_PIH_HVSST_ACTIVE_VSIM            = 0x0C, /*1             1               0               0*/ /*需要操作*/
-    SI_PIH_HVSST_ACTIVE_ERROR13         = 0x0D, /*1             1               0               1*/ /*硬卡在位时候激活VSIM*/
-    SI_PIH_HVSST_ACTIVE_VSIM_AGAIN      = 0x0E, /*1             1               1               0*/ /*VSIM激活时候,使能VSIM*/
-    SI_PIH_HVSST_ACTIVE_VSIM_AGAIN2     = 0x0F, /*1             1               1               1*/ /*无需操作*/
+    SI_PIH_HVSST_DEACTIVE_RSIM_AGAIN    = 0x00, /*0             0               0               0*/ /*????????*/
+    SI_PIH_HVSST_DEACTIVE_RSIM          = 0x01, /*0             0               0               1*/ /*????????*/
+    SI_PIH_HVSST_STATE_ERROR2           = 0x02, /*0             0               1               0*/ /*VSIM??????????????????????????*/
+    SI_PIH_HVSST_STATE_ERROR3           = 0x03, /*0             0               1               1*/ /*VSIM??????????????????*/
+    SI_PIH_HVSST_STATE_ERROR4           = 0x04, /*0             1               0               0*/ /*??????????VSIM??????????????VSIM*/
+    SI_PIH_HVSST_STATE_ERROR5           = 0x05, /*0             1               0               1*/ /*????????VSIM??????????????VSIM*/
+    SI_PIH_HVSST_DEACTIVE_VSIM_AGAIN    = 0x06, /*0             1               1               0*/ /*????????*/
+    SI_PIH_HVSST_DEACTIVE_VSIM          = 0x07, /*0             1               1               1*/ /*????????*/
+    SI_PIH_HVSST_ACTIVE_RSIM            = 0x08, /*1             0               0               0*/ /*????????*/
+    SI_PIH_HVSST_ACTIVE_RSIM_AGAIN      = 0x09, /*1             0               0               1*/ /*????????????*/
+    SI_PIH_HVSST_ACTIVE_RSIM_AGAIN2     = 0x0A, /*1             0               1               0*/ /*VSIM????????,????????*/
+    SI_PIH_HVSST_STATE_ERROR11          = 0x0B, /*1             0               1               1*/ /*VSIM????????,????????*/
+    SI_PIH_HVSST_ACTIVE_VSIM            = 0x0C, /*1             1               0               0*/ /*????????*/
+    SI_PIH_HVSST_ACTIVE_ERROR13         = 0x0D, /*1             1               0               1*/ /*????????????????VSIM*/
+    SI_PIH_HVSST_ACTIVE_VSIM_AGAIN      = 0x0E, /*1             1               1               0*/ /*VSIM????????,????VSIM*/
+    SI_PIH_HVSST_ACTIVE_VSIM_AGAIN2     = 0x0F, /*1             1               1               1*/ /*????????*/
     SI_PIH_HVSST_HANDLE_STATE_BUTT
 };
 typedef VOS_UINT8      SI_PIH_HVSST_HANDLE_STATE_ENUM_UINT8;
@@ -355,16 +355,16 @@ typedef VOS_UINT8  SI_PIH_INFO_LIST_ENUM_UINT8;
 
 enum SI_PIH_ERR_LOG_ALM_ID_ENUM
 {
-    SI_PIH_ERR_LOG_ALM_REQ_RPT_FAIL          = 0x01,             /* 卡Errlog查询上报(已经使用) */
-    SI_PIH_ERR_LOG_ALM_ACTIVE_INIT_ERR_RPT   = 0x02,             /* 初始化失败主动上报 */
-    SI_PIH_ERR_LOG_ALM_ACTIVE_COUNT_ERR_RPT  = 0x03,             /* 统计阈值达到规定时间点主动上报 */
+    SI_PIH_ERR_LOG_ALM_REQ_RPT_FAIL          = 0x01,             /* ??Errlog????????(????????) */
+    SI_PIH_ERR_LOG_ALM_ACTIVE_INIT_ERR_RPT   = 0x02,             /* ?????????????????? */
+    SI_PIH_ERR_LOG_ALM_ACTIVE_COUNT_ERR_RPT  = 0x03,             /* ?????????????????????????????? */
 
     SI_PIH_ERR_LOG_ALM_ID_BUTT
 };
 typedef VOS_UINT16 SI_PIH_ERR_LOG_ALM_ID_ENUM_UINT16;
 
 /*****************************************************************************
-  4 STRUCT定义
+  4 STRUCT????
 *****************************************************************************/
 
 
@@ -392,8 +392,8 @@ typedef struct
 typedef struct
 {
     VOS_MSG_HEADER
-    VOS_UINT32                          ulMsgName;       /* 消息名 */
-    VOS_UINT16                          usClient;        /* 客户端ID */
+    VOS_UINT32                          ulMsgName;       /* ?????? */
+    VOS_UINT16                          usClient;        /* ??????ID */
     VOS_UINT8                           ucOpID;
     VOS_UINT8                           ucRsv;
     SI_PIH_EVENT                        ulEventType;
@@ -402,13 +402,13 @@ typedef struct
 typedef struct
 {
     SI_PIH_MSG_HEADER_STRU              stMsgHeader;
-    VOS_UINT8                           aucPIN2[SI_PIH_PIN_CODE_LEN];      /* PIN2码，如上层调用未带入PIN2码则为全0 */
+    VOS_UINT8                           aucPIN2[SI_PIH_PIN_CODE_LEN];      /* PIN2????????????????????PIN2????????0 */
 } SI_PIH_FDN_ENABLE_REQ_STRU;
 
 typedef struct
 {
     SI_PIH_MSG_HEADER_STRU              stMsgHeader;
-    VOS_UINT8                           aucPIN2[SI_PIH_PIN_CODE_LEN];      /* PIN2码，如上层调用未带入PIN2码则为全0 */
+    VOS_UINT8                           aucPIN2[SI_PIH_PIN_CODE_LEN];      /* PIN2????????????????????PIN2????????0 */
 } SI_PIH_FDN_DISABLE_REQ_STRU;
 
 typedef struct
@@ -421,9 +421,9 @@ typedef struct
 
 typedef struct
 {
-    SI_PIH_MSG_HEADER_STRU              stMsgHeader;        /* PIH消息头    */
-    VOS_UINT32                          ulDataLen;          /* PIH消息长度  */
-    VOS_UINT8                           aucData[8];         /* PIH消息内容  */
+    SI_PIH_MSG_HEADER_STRU              stMsgHeader;        /* PIH??????    */
+    VOS_UINT32                          ulDataLen;          /* PIH????????  */
+    VOS_UINT8                           aucData[8];         /* PIH????????  */
 }SI_PIH_ISDB_ACCESS_REQ_STRU;
 
 typedef struct
@@ -439,13 +439,13 @@ typedef VOS_VOID (*PUSIMPCSCPROC)(SI_PIH_PCSC_REQ_STRU *pstMsg);
 
 typedef struct
 {
-    SI_PIH_MSG_HEADER_STRU              stMsgHeader;        /* PIH消息头 */
+    SI_PIH_MSG_HEADER_STRU              stMsgHeader;        /* PIH?????? */
     SI_PIH_HVSST_SET_STRU               stHvSSTData;
 } SI_PIH_HVSST_REQ_STRU;
 
 typedef struct
 {
-    SI_PIH_MSG_HEADER_STRU              stMsgHeader;        /* PIH消息头 */
+    SI_PIH_MSG_HEADER_STRU              stMsgHeader;        /* PIH?????? */
     VOS_UINT8                           ucFileNameLen;
     VOS_UINT8                           aucFileName[SI_PIH_ATFILE_NAME_MAX];
     VOS_UINT8                           ucRef;
@@ -513,52 +513,52 @@ typedef struct
 typedef struct
 {
     VOS_MSG_HEADER
-    VOS_UINT32                      ulMsgName;          /* 消息类型 */
-    VOS_UINT32                      ulResult;           /* PC/SC命令执行结果 */
-    VOS_UINT32                      ulCmdType;          /* 命令类型 */
-    VOS_UINT32                      ulRspLen;           /* 命令执行得到的数据长度 */
-    VOS_UINT8                       aucContent[4];      /* 数据内容 */
+    VOS_UINT32                      ulMsgName;          /* ???????? */
+    VOS_UINT32                      ulResult;           /* PC/SC???????????? */
+    VOS_UINT32                      ulCmdType;          /* ???????? */
+    VOS_UINT32                      ulRspLen;           /* ?????????????????????? */
+    VOS_UINT8                       aucContent[4];      /* ???????? */
 }SI_PIH_PCSC_CNF_STRU;
 
 typedef struct
 {
     VOS_MSG_HEADER
-    VOS_UINT32                      ulMsgName;          /* 消息类型 */
-    VOS_UINT8                       aucContent[4];      /* 数据内容 */
+    VOS_UINT32                      ulMsgName;          /* ???????? */
+    VOS_UINT8                       aucContent[4];      /* ???????? */
 }SI_PIH_HOOK_MSG_STRU;
 
 
 typedef struct
 {
-    SI_PIH_MSG_HEADER_STRU              stMsgHeader;                            /* PIH消息头 */
-    VOS_UINT32                          ulAIDLen;                               /* AID的长度 */
-    VOS_UINT8                           aucADFName[2*USIMM_AID_LEN_MAX];        /* 考虑到中移动不对AID长度检测的需求将长度增大1倍 */
+    SI_PIH_MSG_HEADER_STRU              stMsgHeader;                            /* PIH?????? */
+    VOS_UINT32                          ulAIDLen;                               /* AID?????? */
+    VOS_UINT8                           aucADFName[2*USIMM_AID_LEN_MAX];        /* ????????????????AID????????????????????????1?? */
 }SI_PIH_CCHO_SET_REQ_STRU;
 
 
 typedef struct
 {
-    SI_PIH_MSG_HEADER_STRU              stMsgHeader;                            /* PIH消息头 */
-    VOS_UINT32                          ulAIDLen;                               /* AID的长度 */
-    VOS_UINT8                           aucADFName[2*USIMM_AID_LEN_MAX];        /* 考虑到中移动不对AID长度检测的需求将长度增大1倍 */
-    VOS_UINT8                           ucAPDUP2;                               /* APDU命令的P2参数 */
+    SI_PIH_MSG_HEADER_STRU              stMsgHeader;                            /* PIH?????? */
+    VOS_UINT32                          ulAIDLen;                               /* AID?????? */
+    VOS_UINT8                           aucADFName[2*USIMM_AID_LEN_MAX];        /* ????????????????AID????????????????????????1?? */
+    VOS_UINT8                           ucAPDUP2;                               /* APDU??????P2???? */
     VOS_UINT8                           ucRsv[3];
 }SI_PIH_CCHP_SET_REQ_STRU;
 
 
 typedef struct
 {
-    SI_PIH_MSG_HEADER_STRU              stMsgHeader;                            /* PIH消息头 */
-    VOS_UINT32                          ulSessionID;                            /* 逻辑通道号 */
+    SI_PIH_MSG_HEADER_STRU              stMsgHeader;                            /* PIH?????? */
+    VOS_UINT32                          ulSessionID;                            /* ?????????? */
 }SI_PIH_CCHC_SET_REQ_STRU;
 
 
 typedef struct
 {
-    SI_PIH_MSG_HEADER_STRU              stMsgHeader;                            /* PIH消息头    */
-    VOS_UINT32                          ulSessionID;                            /* 逻辑通道号 */
-    VOS_UINT32                          ulDataLen;                              /* 命令长度  */
-    VOS_UINT8                           aucData[SI_APDU_MAX_LEN + 1];           /* 命令内容 ,带LE字段多一个字节 */
+    SI_PIH_MSG_HEADER_STRU              stMsgHeader;                            /* PIH??????    */
+    VOS_UINT32                          ulSessionID;                            /* ?????????? */
+    VOS_UINT32                          ulDataLen;                              /* ????????  */
+    VOS_UINT8                           aucData[SI_APDU_MAX_LEN + 1];           /* ???????? ,??LE?????????????? */
     VOS_UINT8                           aucRsv[3];
 }SI_PIH_CGLA_REQ_STRU;
 
@@ -576,19 +576,19 @@ typedef struct
 
 typedef struct
 {
-    SI_PIH_MSG_HEADER_STRU              stMsgHeader;        /* PIH消息头 */
+    SI_PIH_MSG_HEADER_STRU              stMsgHeader;        /* PIH?????? */
     SI_PIH_UICCAUTH_STRU                stAuthData;
 } SI_PIH_UICCAUTH_REQ_STRU;
 
 typedef struct
 {
-    SI_PIH_MSG_HEADER_STRU              stMsgHeader;        /* PIH消息头 */
+    SI_PIH_MSG_HEADER_STRU              stMsgHeader;        /* PIH?????? */
     SI_PIH_ACCESSFILE_STRU              stCmdData;
 } SI_PIH_ACCESSFILE_REQ_STRU;
 
 typedef struct
 {
-    SI_PIH_MSG_HEADER_STRU              stMsgHeader;        /* PIH消息头 */
+    SI_PIH_MSG_HEADER_STRU              stMsgHeader;        /* PIH?????? */
     SI_PIH_CARD_SLOT_ENUM_UINT32        enCard0Slot;
     SI_PIH_CARD_SLOT_ENUM_UINT32        enCard1Slot;
     SI_PIH_CARD_SLOT_ENUM_UINT32        enCard2Slot;
@@ -596,7 +596,7 @@ typedef struct
 
 typedef struct
 {
-    SI_PIH_MSG_HEADER_STRU              stMsgHeader;        /* PIH消息头 */
+    SI_PIH_MSG_HEADER_STRU              stMsgHeader;        /* PIH?????? */
     SI_PIH_HVTEE_SET_STRU               stHvtee;
 } SI_PIH_HVTEE_SET_REQ_STRU;
 
@@ -629,32 +629,32 @@ typedef struct
 typedef struct
 {
     USIMM_CARDAPP_ENUM_UINT32           enAppType;
-    VOS_UINT16                          usEfId;         /* 文件ID */
-    VOS_UINT8                           ucRecordNum;    /* 文件记录号，二进制文件填0 */
-    VOS_UINT8                           ucRsv;          /* 保留 */
+    VOS_UINT16                          usEfId;         /* ????ID */
+    VOS_UINT8                           ucRecordNum;    /* ????????????????????????0 */
+    VOS_UINT8                           ucRsv;          /* ???? */
 }SI_PIH_GETFILE_INFO_STRU;
 
 typedef struct
 {
     USIMM_CARDAPP_ENUM_UINT32           enAppType;
-    VOS_UINT16                          usEfId;         /* 文件ID */
-    VOS_UINT8                           ucRecordNum;    /* 文件记录号，二进制文件填0 */
-    VOS_UINT8                           ucRsv;          /* 保留 */
-    VOS_UINT32                          ulEfLen ;       /* 更新数据长度 */
-    VOS_UINT8                           *pucEfContent;  /* 更新数据内容 */
+    VOS_UINT16                          usEfId;         /* ????ID */
+    VOS_UINT8                           ucRecordNum;    /* ????????????????????????0 */
+    VOS_UINT8                           ucRsv;          /* ???? */
+    VOS_UINT32                          ulEfLen ;       /* ???????????? */
+    VOS_UINT8                           *pucEfContent;  /* ???????????? */
 }SI_PIH_SETFILE_INFO_STRU;
 
 
 typedef struct
 {
-    SI_PIH_MSG_HEADER_STRU              stMsgHeader;                            /* PIH消息头 */
+    SI_PIH_MSG_HEADER_STRU              stMsgHeader;                            /* PIH?????? */
     SI_PIH_CRSM_STRU                    stMsgContent;
 }SI_PIH_CRSM_SET_REQ_STRU;
 
 
 typedef struct
 {
-    SI_PIH_MSG_HEADER_STRU              stMsgHeader;                            /* PIH消息头 */
+    SI_PIH_MSG_HEADER_STRU              stMsgHeader;                            /* PIH?????? */
     SI_PIH_CRLA_STRU                    stMsgContent;
 }SI_PIH_CRLA_SET_REQ_STRU;
 
@@ -679,32 +679,32 @@ typedef struct
 typedef struct
 {
     SI_PIH_FILE_INFO_STRU               stFileInfo;
-    VOS_BOOL                            bIsNeedCheck;        /* 是否还需再周期性读取 */
+    VOS_BOOL                            bIsNeedCheck;        /* ???????????????????? */
 }SI_PIH_NEED_CHECK_FILE_STRU;
 
 
 typedef struct
 {
     SI_PIH_NEED_CHECK_FILE_STRU         stNeedCheckList[SI_PIH_KEYFILE_MAX_NUM];
-    VOS_UINT32                          ulReceiverPid;       /* 关键文件检测到之后接受消息PID */
-    USIMM_CHECK_KEY_FILE_NV_STRU        stNVCheckFileCfg;    /* NV项检测时长配置 */
-    VOS_UINT8                           ucNeedCheckFileNum;  /* 还需要读取文件数量(每次检测到关键文件后数量减一) */
-    VOS_UINT8                           ucCheckFileNum;      /* NAS需要检测文件数量 */
-    VOS_UINT8                           ucTimerCount;        /* 定时器起的次数 */
+    VOS_UINT32                          ulReceiverPid;       /* ??????????????????????????PID */
+    USIMM_CHECK_KEY_FILE_NV_STRU        stNVCheckFileCfg;    /* NV?????????????? */
+    VOS_UINT8                           ucNeedCheckFileNum;  /* ??????????????????(????????????????????????????) */
+    VOS_UINT8                           ucCheckFileNum;      /* NAS???????????????? */
+    VOS_UINT8                           ucTimerCount;        /* ?????????????? */
     VOS_UINT8                           ucRsv;
 }SI_PIH_KEY_FILE_LIST_STRU;
 
 
 typedef struct
 {
-    USIMM_PHYCARD_TYPE_ENUM_UINT32      enPhyCardType;      /*物理卡状态*/
+    USIMM_PHYCARD_TYPE_ENUM_UINT32      enPhyCardType;      /*??????????*/
     USIMM_CARDAPP_SERVIC_ENUM_UINT32    enGUTLSvcStatus;
     USIMM_CARD_TYPE_ENUM_UINT32         enGUTLCardType;     /*USIM/SIM*/
     USIMM_CARDAPP_SERVIC_ENUM_UINT32    enCDMASvcStatus;
     USIMM_CARD_TYPE_ENUM_UINT32         enCDMACardType;     /*CSIM/UIM*/
     USIMM_CARDAPP_SERVIC_ENUM_UINT32    enISIMSvcStatus;
     USIMM_CARD_TYPE_ENUM_UINT32         enISIMCardType;     /*ISIM*/
-    USIMM_CARDSTATUS_ADDINFO_STRU       stAddInfo;          /*卡状态有效时候才能使用里面的信息*/
+    USIMM_CARDSTATUS_ADDINFO_STRU       stAddInfo;          /*????????????????????????????????*/
 }SI_PIH_CARD_STATUS_STRU;
 
 #if ((FEATURE_VSIM == FEATURE_ON) && (FEATURE_ON == FEATURE_VSIM_ICC_SEC_CHANNEL))
@@ -712,8 +712,8 @@ typedef struct
 
 enum SI_TEE_REQ_MSG_TYPE_ENUM
 {
-    SI_TEE_MSG_TYPE_APNSET_REQ               = 0xA5A50001UL,    /*APN设置数据消息*/
-    SI_TEE_MSG_TYPE_VSIMDATA_REQ             = 0xA5A50002UL,     /*VSIM数据消息*/
+    SI_TEE_MSG_TYPE_APNSET_REQ               = 0xA5A50001UL,    /*APN????????????*/
+    SI_TEE_MSG_TYPE_VSIMDATA_REQ             = 0xA5A50002UL,     /*VSIM????????*/
     SI_TEE_MSG_TYPE_REQ_BUTT
 };
 typedef  VOS_UINT32  SI_TEE_REQ_ENUM_UINT32;
@@ -721,8 +721,8 @@ typedef  VOS_UINT32  SI_TEE_REQ_ENUM_UINT32;
 
 enum SI_TEE_CNF_MSG_TYPE_ENUM
 {
-    SI_TEE_MSG_TYPE_APNSET_CNF               = 0x5A5A0001,    /*APN设置数据*/
-    SI_TEE_MSG_TYPE_VSIMDATA_CNF             = 0x5A5A0002,    /*VSIM数据*/
+    SI_TEE_MSG_TYPE_APNSET_CNF               = 0x5A5A0001,    /*APN????????*/
+    SI_TEE_MSG_TYPE_VSIMDATA_CNF             = 0x5A5A0002,    /*VSIM????*/
     SI_TEE_MSG_TYPE_CNF_BUTT
 };
 typedef  VOS_UINT32  SI_TEE_CNF_ENUM_UINT32;
@@ -730,7 +730,7 @@ typedef  VOS_UINT32  SI_TEE_CNF_ENUM_UINT32;
 
 enum SI_TEE_IND_MSG_TYPE_ENUM
 {
-    SI_TEE_MSG_TYPE_AUTH_RESULT_IND          = 0xAAAA0001,    /*APN设置数据*/
+    SI_TEE_MSG_TYPE_AUTH_RESULT_IND          = 0xAAAA0001,    /*APN????????*/
     SI_TEE_MSG_TYPE_IND_BUTT
 };
 typedef  VOS_UINT32  SI_TEE_MSG_IND_ENUM_UINT32;
@@ -757,53 +757,53 @@ typedef  VOS_UINT8  SI_TEE_VSIM_AUTH_TYPE_ENUM_UINT8;
 typedef struct
 {
     VOS_MSG_HEADER
-    SI_PIH_EVENT                                            enMsgType;          /*消息ID*/
-    VOS_INT32                                               lDataLen;           /*数据长度*/
+    SI_PIH_EVENT                                            enMsgType;          /*????ID*/
+    VOS_INT32                                               lDataLen;           /*????????*/
     VOS_UINT32                                              ulChannelId;        /* CHANNEL ID */
 } SI_PIH_ICC_SEC_CH_CALL_BACK_STRU;
 
 
 typedef struct
 {
-    SI_TEE_REQ_ENUM_UINT32              enReqMsgId;         /*消息ID*/
+    SI_TEE_REQ_ENUM_UINT32              enReqMsgId;         /*????ID*/
     VOS_UINT32                          ulModemId;
-    VOS_UINT32                          ulDataLen;          /*数据长度*/
-    VOS_UINT8                           aucReqData[4];      /*数据内容，根据实际长度增加*/
+    VOS_UINT32                          ulDataLen;          /*????????*/
+    VOS_UINT8                           aucReqData[4];      /*??????????????????????????*/
 } SI_TEE_REQDATA_STRU;
 
 
 typedef struct
 {
-    SI_TEE_CNF_ENUM_UINT32              enCnfMsgId;     /*消息ID*/
+    SI_TEE_CNF_ENUM_UINT32              enCnfMsgId;     /*????ID*/
     VOS_UINT32                          ulModemId;
-    VOS_UINT32                          ulCnfResult;    /*消息处理结果*/
-    VOS_UINT32                          ulDataLen;      /*数据长度*/
-    VOS_UINT8                           aucCnfData[4];  /*数据内容，根据实际长度增加*/
+    VOS_UINT32                          ulCnfResult;    /*????????????*/
+    VOS_UINT32                          ulDataLen;      /*????????*/
+    VOS_UINT8                           aucCnfData[4];  /*??????????????????????????*/
 } SI_TEE_CNFDATA_STRU;
 
 
 typedef struct
 {
-    SI_TEE_CNF_ENUM_UINT32              enCnfMsgId;     /*消息ID*/
+    SI_TEE_CNF_ENUM_UINT32              enCnfMsgId;     /*????ID*/
     VOS_UINT32                          ulModemId;
-    VOS_UINT32                          ulDataLen;      /*数据长度*/
-    VOS_UINT8                           aucCnfData[4];  /*数据内容，根据实际长度增加*/
+    VOS_UINT32                          ulDataLen;      /*????????*/
+    VOS_UINT8                           aucCnfData[4];  /*??????????????????????????*/
 } SI_TEE_MSGDATA_IND_STRU;
 
 
 typedef struct
 {
-    VOS_UINT8                           aucAESKey[SI_PIH_VSIM_AES_KEY_LEN];      /* AES密钥 */
+    VOS_UINT8                           aucAESKey[SI_PIH_VSIM_AES_KEY_LEN];      /* AES???? */
     SI_TEE_VSIM_CARD_TYPE_ENUM_UINT8    enCardType;
     SI_TEE_VSIM_AUTH_TYPE_ENUM_UINT8    enAuthType;
-    VOS_UINT32                          ulFileNum;          /*文件个数*/
-    VOS_UINT8                           aucFileData[4];     /*文件数据，根据实际下发文件个数而增加*/
+    VOS_UINT32                          ulFileNum;          /*????????*/
+    VOS_UINT8                           aucFileData[4];     /*????????????????????????????????????*/
 }SI_VSIM_FILELIST_STRU;
 
 #endif
 
 /*****************************************************************************
-  5 全局变量声明
+  5 ????????????
 *****************************************************************************/
 extern SI_PIH_POLL_TIME_STRU        g_stPIHPollTime[SI_PIH_TIMER_NAME_BUTT];
 
@@ -816,7 +816,7 @@ extern VOS_UINT32                   g_aulPIHRefreshBCPid[SI_PIH_BCPID_REG_MAX];
 extern SI_PIH_CSIM_CTRL_STRU        g_stPIHCSIMCtrlInfo;
 
 /*****************************************************************************
-  6 函数声明
+  6 ????????
 *****************************************************************************/
 #if (OSA_CPU_CCPU == VOS_OSA_CPU)
 extern VOS_VOID SI_PIH_InitTEEShareAddr(VOS_VOID);

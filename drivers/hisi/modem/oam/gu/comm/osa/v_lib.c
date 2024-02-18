@@ -81,7 +81,7 @@
 #include "v_timer.h"
 
 /*****************************************************************************
-    协议栈打印打点方式下的.C文件宏定义
+    ??????????????????????.C??????????
 *****************************************************************************/
 #define    THIS_FILE_ID        PS_FILE_ID_V_LIB_C
 
@@ -165,7 +165,7 @@ typedef enum _bit64CompareResult
 /* the seed of radom */
 static VOS_UINT32 g_ulVosRadomSeed = 0;
 
-VOS_UINT32        g_ulErrorNo = 0;                  /* 存放错误码 */
+VOS_UINT32        g_ulErrorNo = 0;                  /* ?????????? */
 
 
 int errnoSet(int errorValue)
@@ -863,7 +863,7 @@ VOS_VOID * V_MemMove( VOS_VOID * Dest, const VOS_VOID * Src, VOS_SIZE_T Count,
         return VOS_NULL_PTR;
     }
 
-    /* 如果目的为空，直接返回NULL */
+    /* ??????????????????????NULL */
     if (VOS_NULL_PTR == Src)
     {
         return VOS_NULL_PTR;
@@ -890,7 +890,7 @@ VOS_VOID * V_MemMove( VOS_VOID * Dest, const VOS_VOID * Src, VOS_SIZE_T Count,
         return(VOS_NULL_PTR);
     }
 
-    return memmove (Dest,Src,Count);/* [false alarm]:前边已有严谨的判断  */
+    return memmove (Dest,Src,Count);/* [false alarm]:??????????????????  */
 }
 
 /*****************************************************************************
@@ -1289,7 +1289,7 @@ VOS_UINT32 VOS_Rand( VOS_UINT32 ulRange )
     register VOS_UINT32 ulGenTempHigh, ulRangeHigh, ulRangeLow;
     register VOS_UINT32 ulRandomNumber;
 
-    /* 设置了种子用设置的种子，否则用系统时间做种子 */
+    /* ???????????????????????????????????????????? */
     if (0 == g_ulVosRadomSeed )
     {
         ulGenTemp = VOS_GetSlice();
@@ -1299,12 +1299,12 @@ VOS_UINT32 VOS_Rand( VOS_UINT32 ulRange )
         ulGenTemp = g_ulVosRadomSeed;
     }
 
-    /* 网络搜索算法生成伪随机数 */
+    /* ???????????????????????? */
     ulGenTemp = (ulGenTemp * 1664525L + 1013904223L) ;
 
     g_ulVosRadomSeed = ulGenTemp;
 
-    /* 将伪随机匹配到范围内 */
+    /* ???????????????????? */
     ulGenTempHigh = ulGenTemp >> 16;
     ulGenTemp &= 0xffff;
 

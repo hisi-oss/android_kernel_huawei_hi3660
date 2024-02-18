@@ -9,7 +9,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "oam_main.h"
 #include "oam_statistics.h"
@@ -20,14 +20,14 @@ extern "C" {
 #define THIS_FILE_ID OAM_FILE_ID_OAM_STATISTICS_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 #ifdef _PRE_PRODUCT_ID_HI110X_HOST
-/* 统计信息全局变量 */
+/* ???????????????? */
 oam_stat_info_stru g_st_stat_info;
 #endif
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 
@@ -36,7 +36,7 @@ oal_void  oam_stats_report_irq_info_to_sdt(
                                     oal_uint16  us_irq_info_len)
 {
     oal_uint32           ul_tick;
-    oal_uint16           us_skb_len;        /* skb总长度 */
+    oal_uint16           us_skb_len;        /* skb?????? */
     oal_netbuf_stru     *pst_netbuf;
     oam_ota_stru        *pst_ota_data;
 
@@ -52,7 +52,7 @@ oal_void  oam_stats_report_irq_info_to_sdt(
         return;
     }
 
-    /* 为上报描述符申请空间,头部预留8字节，尾部预留1字节，给sdt_drv用 */
+    /* ????????????????????,????????8??????????????1????????sdt_drv?? */
     us_skb_len = us_irq_info_len + OAL_SIZEOF(oam_ota_hdr_stru);
     if (us_skb_len > WLAN_SDT_NETBUF_MAX_PAYLOAD)
     {
@@ -68,10 +68,10 @@ oal_void  oam_stats_report_irq_info_to_sdt(
 
     pst_ota_data = (oam_ota_stru *)oal_netbuf_data(pst_netbuf);
 
-    /* 获取系统TICK值 */
+    /* ????????TICK?? */
     ul_tick = (oal_uint32)OAL_TIME_GET_STAMP_MS();
 
-    /* 填写ota消息头结构体 */
+    /* ????ota???????????? */
     pst_ota_data->st_ota_hdr.ul_tick     = ul_tick;
     pst_ota_data->st_ota_hdr.en_ota_type = OAM_OTA_TYPE_IRQ;
     pst_ota_data->st_ota_hdr.uc_frame_hdr_len = 0;
@@ -86,12 +86,12 @@ oal_void  oam_stats_report_irq_info_to_sdt(
     pst_ota_data->st_ota_hdr.auc_resv[0]    = OAM_OTA_TYPE_1151_HOST;
 #endif
 
-    /* 复制数据,填写ota数据 */
+    /* ????????,????ota???? */
     oal_memcopy((oal_void *)pst_ota_data->auc_ota_data,
                 (const oal_void *)puc_irq_info_addr,
                 (oal_uint32)us_irq_info_len);
 
-    /* 下发至sdt接收队列，若队列满则串口输出 */
+    /* ??????sdt???????????????????????????? */
     oam_report_data2sdt(pst_netbuf, OAM_DATA_TYPE_OTA, OAM_PRIMID_TYPE_OUTPUT_CONTENT);
 }
 
@@ -117,7 +117,7 @@ oal_uint32  oam_stats_report_timer_info_to_sdt(
 
 #if 0
     oal_uint32           ul_tick;
-    oal_uint16           us_skb_len;        /* skb总长度 */
+    oal_uint16           us_skb_len;        /* skb?????? */
     oal_netbuf_stru     *pst_netbuf;
     oam_ota_stru        *pst_ota_data;
     oal_uint32           ul_ret         = OAL_SUCC;
@@ -140,7 +140,7 @@ oal_uint32  oam_stats_report_timer_info_to_sdt(
         return OAL_FAIL;
     }
 
-    /* 为上报描述符申请空间,头部预留8字节，尾部预留1字节，给sdt_drv用 */
+    /* ????????????????????,????????8??????????????1????????sdt_drv?? */
     us_skb_len = uc_timer_len + OAL_SIZEOF(oam_ota_hdr_stru);
 
     pst_netbuf = oam_alloc_data2sdt(us_skb_len);
@@ -151,21 +151,21 @@ oal_uint32  oam_stats_report_timer_info_to_sdt(
 
     pst_ota_data = (oam_ota_stru *)oal_netbuf_data(pst_netbuf);
 
-    /* 获取系统TICK值 */
+    /* ????????TICK?? */
     ul_tick = (oal_uint32)OAL_TIME_GET_STAMP_MS();
 
-    /* 填写ota消息头结构体 */
+    /* ????ota???????????? */
     pst_ota_data->st_ota_hdr.ul_tick     = ul_tick;
     pst_ota_data->st_ota_hdr.en_ota_type = OAM_OTA_TYPE_TIMER;
     pst_ota_data->st_ota_hdr.uc_frame_hdr_len = 0;
     pst_ota_data->st_ota_hdr.us_ota_data_len = uc_timer_len;
 
-    /* 复制数据,填写ota数据 */
+    /* ????????,????ota???? */
     oal_memcopy((oal_void *)pst_ota_data->auc_ota_data,
                 (const oal_void *)puc_timer_addr,
                 (oal_uint32)uc_timer_len);
 
-    /* 下发至sdt接收队列，若队列满则串口输出 */
+    /* ??????sdt???????????????????????????? */
     ul_ret = oam_report_data2sdt(pst_netbuf, OAM_DATA_TYPE_OTA, OAM_PRIMID_TYPE_OUTPUT_CONTENT);
 
     return ul_ret;
@@ -184,7 +184,7 @@ oal_uint32 oam_stats_report_mempool_info_to_sdt(
     oam_stats_mempool_stru        st_device_mempool_info;
     oal_netbuf_stru              *pst_netbuf;
     oam_ota_stru                 *pst_ota_data;
-    oal_uint16                    us_skb_len;        /* skb总长度 */
+    oal_uint16                    us_skb_len;        /* skb?????? */
     oal_uint32                    ul_tick;
     oal_uint32                    ul_ret    = OAL_SUCC;
     oal_uint16                    us_stru_len;
@@ -194,7 +194,7 @@ oal_uint32 oam_stats_report_mempool_info_to_sdt(
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 填写要上报给sdt的内存池信息结构体 */
+    /* ????????????sdt?????????????????? */
     st_device_mempool_info.uc_mem_pool_id          = uc_pool_id;
     st_device_mempool_info.uc_subpool_id           = uc_subpool_id;
     st_device_mempool_info.us_mem_pool_total_cnt   = us_pool_total_cnt;
@@ -203,7 +203,7 @@ oal_uint32 oam_stats_report_mempool_info_to_sdt(
     st_device_mempool_info.us_subpool_free_cnt     = us_subpool_free_cnt;
 
     us_stru_len = OAL_SIZEOF(oam_stats_mempool_stru);
-    /* 为ota消息上报SDT申请空间,头部预留8字节，尾部预留1字节，给sdt_drv用 */
+    /* ??ota????????SDT????????,????????8??????????????1????????sdt_drv?? */
     us_skb_len = us_stru_len + OAL_SIZEOF(oam_ota_hdr_stru);
     if (us_skb_len > WLAN_SDT_NETBUF_MAX_PAYLOAD)
     {
@@ -219,21 +219,21 @@ oal_uint32 oam_stats_report_mempool_info_to_sdt(
 
     pst_ota_data = (oam_ota_stru *)oal_netbuf_data(pst_netbuf);
 
-    /* 获取系统TICK值 */
+    /* ????????TICK?? */
     ul_tick = (oal_uint32)OAL_TIME_GET_STAMP_MS();
 
-    /* 填写ota消息结构体 */
+    /* ????ota?????????? */
     pst_ota_data->st_ota_hdr.ul_tick = ul_tick;
     pst_ota_data->st_ota_hdr.en_ota_type = OAM_OTA_TYPE_MEMPOOL;
     pst_ota_data->st_ota_hdr.uc_frame_hdr_len = 0;
     pst_ota_data->st_ota_hdr.us_ota_data_len = us_stru_len;
 
-    /* 复制数据,填写ota数据 */
+    /* ????????,????ota???? */
     oal_memcopy((oal_void *)pst_ota_data->auc_ota_data,
                 (const oal_void *)&st_device_mempool_info,
                 (oal_uint32)us_stru_len);
 
-    /* 下发至sdt接收队列，若队列满则串口输出 */
+    /* ??????sdt???????????????????????????? */
     ul_ret = oam_report_data2sdt(pst_netbuf, OAM_DATA_TYPE_OTA, OAM_PRIMID_TYPE_OUTPUT_CONTENT);
 
     return ul_ret;
@@ -253,7 +253,7 @@ oal_uint32  oam_stats_report_memblock_info_to_sdt(
     oal_uint16                    us_memblock_info_len;
     oal_netbuf_stru              *pst_netbuf;
     oam_ota_stru                 *pst_ota_data;
-    oal_uint16                    us_skb_len;        /* skb总长度 */
+    oal_uint16                    us_skb_len;        /* skb?????? */
     oal_uint32                    ul_tick;
     oal_uint32                    ul_ret    = OAL_SUCC;
 
@@ -270,14 +270,14 @@ oal_uint32  oam_stats_report_memblock_info_to_sdt(
 
     us_memblock_info_len = OAL_SIZEOF(oam_memblock_info_stru);
 
-    /* 填写要上报给sdt的内存块信息结构体 */
+    /* ????????????sdt?????????????????? */
     st_memblock_info.uc_pool_id         = uc_pool_id;
     st_memblock_info.uc_subpool_id      = uc_subpool_id;
     st_memblock_info.uc_user_cnt        = uc_user_cnt;
     st_memblock_info.ul_alloc_line_num  = ul_alloc_line_num;
     st_memblock_info.ul_file_id         = ul_file_id;
 
-    /* 为ota消息上报SDT申请空间,头部预留8字节，尾部预留1字节，给sdt_drv用 */
+    /* ??ota????????SDT????????,????????8??????????????1????????sdt_drv?? */
     us_skb_len = us_memblock_info_len + us_len + OAL_SIZEOF(oam_ota_hdr_stru);
     if (us_skb_len > WLAN_SDT_NETBUF_MAX_PAYLOAD)
     {
@@ -301,27 +301,27 @@ oal_uint32  oam_stats_report_memblock_info_to_sdt(
 
     pst_ota_data = (oam_ota_stru *)oal_netbuf_data(pst_netbuf);
 
-    /* 获取系统TICK值 */
+    /* ????????TICK?? */
     ul_tick = (oal_uint32)OAL_TIME_GET_STAMP_MS();
 
-    /* 填写ota消息结构体 */
+    /* ????ota?????????? */
     pst_ota_data->st_ota_hdr.ul_tick          = ul_tick;
     pst_ota_data->st_ota_hdr.en_ota_type      = OAM_OTA_TYPE_MEMBLOCK;
     pst_ota_data->st_ota_hdr.uc_frame_hdr_len = (oal_uint8)us_memblock_info_len;
     pst_ota_data->st_ota_hdr.us_ota_data_len  = us_memblock_info_len + us_len;
 
-    /* 填写ota数据部分,首先复制内存块的信息结构体 */
+    /* ????ota????????,?????????????????????????? */
     oal_memcopy((oal_void *)pst_ota_data->auc_ota_data,
                 (const oal_void *)&st_memblock_info,
                 (oal_uint32)us_memblock_info_len);
 
-    /* 复制内存块的具体内容 *//*lint -e416*/
+    /* ???????????????????? *//*lint -e416*/
     oal_memcopy((oal_void *)(pst_ota_data->auc_ota_data + us_memblock_info_len),
                 (const oal_void *)puc_origin_data,
                 (oal_uint32)us_len);
 
     /*lint +e416*/
-    /* 下发至sdt接收队列，若队列满则串口输出 */
+    /* ??????sdt???????????????????????????? */
     ul_ret = oam_report_data2sdt(pst_netbuf, OAM_DATA_TYPE_OTA, OAM_PRIMID_TYPE_OUTPUT_CONTENT);
 
     return ul_ret;
@@ -334,7 +334,7 @@ oal_uint32  oam_stats_report_event_queue_info_to_sdt(
                                     oal_uint16    us_event_queue_info_len)
 {
     oal_uint32           ul_tick;
-    oal_uint16           us_skb_len;        /* skb总长度 */
+    oal_uint16           us_skb_len;        /* skb?????? */
     oal_netbuf_stru     *pst_netbuf;
     oam_ota_stru        *pst_ota_data;
     oal_uint32           ul_ret         = OAL_SUCC;
@@ -350,7 +350,7 @@ oal_uint32  oam_stats_report_event_queue_info_to_sdt(
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 为上报描述符申请空间,头部预留8字节，尾部预留1字节，给sdt_drv用 */
+    /* ????????????????????,????????8??????????????1????????sdt_drv?? */
     us_skb_len = us_event_queue_info_len + OAL_SIZEOF(oam_ota_hdr_stru);
     if (us_skb_len > WLAN_SDT_NETBUF_MAX_PAYLOAD)
     {
@@ -366,21 +366,21 @@ oal_uint32  oam_stats_report_event_queue_info_to_sdt(
 
     pst_ota_data = (oam_ota_stru *)oal_netbuf_data(pst_netbuf);
 
-    /* 获取系统TICK值 */
+    /* ????????TICK?? */
     ul_tick = (oal_uint32)OAL_TIME_GET_STAMP_MS();
 
-    /* 填写ota消息头结构体 */
+    /* ????ota???????????? */
     pst_ota_data->st_ota_hdr.ul_tick     = ul_tick;
     pst_ota_data->st_ota_hdr.en_ota_type = OAM_OTA_TYPE_EVENT_QUEUE;
     pst_ota_data->st_ota_hdr.uc_frame_hdr_len = 0;
     pst_ota_data->st_ota_hdr.us_ota_data_len = us_event_queue_info_len;
 
-    /* 复制数据,填写ota数据 */
+    /* ????????,????ota???? */
     oal_memcopy((oal_void *)pst_ota_data->auc_ota_data,
                 (const oal_void *)puc_event_queue_addr,
                 (oal_uint32)us_event_queue_info_len);
 
-    /* 下发至sdt接收队列，若队列满则串口输出 */
+    /* ??????sdt???????????????????????????? */
     ul_ret = oam_report_data2sdt(pst_netbuf, OAM_DATA_TYPE_OTA, OAM_PRIMID_TYPE_OUTPUT_CONTENT);
 
     return ul_ret;
@@ -390,7 +390,7 @@ oal_uint32  oam_stats_report_event_queue_info_to_sdt(
 oal_uint32  oam_report_vap_pkt_stat_to_sdt(oal_uint8 uc_vap_id)
 {
     oal_uint32           ul_tick;
-    oal_uint16           us_skb_len;        /* skb总长度 */
+    oal_uint16           us_skb_len;        /* skb?????? */
     oal_netbuf_stru     *pst_netbuf;
     oam_ota_stru        *pst_ota_data;
     oal_uint32           ul_ret         = OAL_SUCC;
@@ -403,7 +403,7 @@ oal_uint32  oam_report_vap_pkt_stat_to_sdt(oal_uint8 uc_vap_id)
 
     us_stat_info_len = OAL_SIZEOF(oam_vap_stat_info_stru);
 
-    /* 为上报统计信息申请空间,头部预留8字节，尾部预留1字节，给sdt_drv用 */
+    /* ??????????????????????,????????8??????????????1????????sdt_drv?? */
     us_skb_len = us_stat_info_len + OAL_SIZEOF(oam_ota_hdr_stru);
 
     pst_netbuf = oam_alloc_data2sdt(us_skb_len);
@@ -414,22 +414,22 @@ oal_uint32  oam_report_vap_pkt_stat_to_sdt(oal_uint8 uc_vap_id)
 
     pst_ota_data = (oam_ota_stru *)oal_netbuf_data(pst_netbuf);
 
-    /* 获取系统TICK值 */
+    /* ????????TICK?? */
     ul_tick = (oal_uint32)OAL_TIME_GET_STAMP_MS();
 
-    /* 填写ota消息头结构体 */
+    /* ????ota???????????? */
     pst_ota_data->st_ota_hdr.ul_tick     = ul_tick;
     pst_ota_data->st_ota_hdr.en_ota_type = OAM_OTA_TYPE_VAP_STAT_INFO;
     pst_ota_data->st_ota_hdr.us_ota_data_len = us_stat_info_len;
     pst_ota_data->st_ota_hdr.uc_frame_hdr_len = 0;
     oal_set_mac_addr(pst_ota_data->st_ota_hdr.auc_user_macaddr, BROADCAST_MACADDR);
 
-    /* 复制数据,填写ota数据 */
+    /* ????????,????ota???? */
     oal_memcopy((oal_void *)pst_ota_data->auc_ota_data,
                         (const oal_void *)&g_st_stat_info.ast_vap_stat_info[uc_vap_id],
                         us_stat_info_len);
 
-    /* 下发至sdt接收队列，若队列满则串口输出 */
+    /* ??????sdt???????????????????????????? */
     ul_ret = oam_report_data2sdt(pst_netbuf, OAM_DATA_TYPE_OTA, OAM_PRIMID_TYPE_OUTPUT_CONTENT);
 
     return ul_ret;
@@ -440,7 +440,7 @@ oal_uint32  oam_report_vap_pkt_stat_to_sdt(oal_uint8 uc_vap_id)
 oal_uint32  oam_stats_report_info_to_sdt(oam_ota_type_enum_uint8 en_ota_type)
 {
     oal_uint32           ul_tick;
-    oal_uint16           us_skb_len;        /* skb总长度 */
+    oal_uint16           us_skb_len;        /* skb?????? */
     oal_netbuf_stru     *pst_netbuf;
     oam_ota_stru        *pst_ota_data;
     oal_uint32           ul_ret         = OAL_SUCC;
@@ -475,7 +475,7 @@ oal_uint32  oam_stats_report_info_to_sdt(oam_ota_type_enum_uint8 en_ota_type)
         return OAL_ERR_CODE_INVALID_CONFIG;
     }
 
-    /* 为上报统计信息申请空间,头部预留8字节，尾部预留1字节，给sdt_drv用 */
+    /* ??????????????????????,????????8??????????????1????????sdt_drv?? */
     us_skb_len = us_stat_info_len + OAL_SIZEOF(oam_ota_hdr_stru);
     if (us_skb_len > WLAN_SDT_NETBUF_MAX_PAYLOAD)
     {
@@ -491,16 +491,16 @@ oal_uint32  oam_stats_report_info_to_sdt(oam_ota_type_enum_uint8 en_ota_type)
 
     pst_ota_data = (oam_ota_stru *)oal_netbuf_data(pst_netbuf);
 
-    /* 获取系统TICK值 */
+    /* ????????TICK?? */
     ul_tick = (oal_uint32)OAL_TIME_GET_STAMP_MS();
 
-    /* 填写ota消息头结构体 */
+    /* ????ota???????????? */
     pst_ota_data->st_ota_hdr.ul_tick     = ul_tick;
     pst_ota_data->st_ota_hdr.en_ota_type = en_ota_type;
     pst_ota_data->st_ota_hdr.uc_frame_hdr_len = 0;
     pst_ota_data->st_ota_hdr.us_ota_data_len = us_stat_info_len;
 
-    /* 复制数据,填写ota数据 */
+    /* ????????,????ota???? */
     if (OAM_OTA_TYPE_DEV_STAT_INFO == en_ota_type)
     {
             oal_memcopy((oal_void *)pst_ota_data->auc_ota_data,
@@ -517,7 +517,7 @@ oal_uint32  oam_stats_report_info_to_sdt(oam_ota_type_enum_uint8 en_ota_type)
 
     }
 
-    /* 下发至sdt接收队列，若队列满则串口输出 */
+    /* ??????sdt???????????????????????????? */
     ul_ret = oam_report_data2sdt(pst_netbuf, OAM_DATA_TYPE_OTA, OAM_PRIMID_TYPE_OUTPUT_CONTENT);
 
     return ul_ret;
@@ -527,7 +527,7 @@ oal_uint32  oam_stats_report_info_to_sdt(oam_ota_type_enum_uint8 en_ota_type)
 oal_uint32  oam_stats_report_usr_info(oal_uint16  us_usr_id)
 {
     oal_uint32           ul_tick;
-    oal_uint16           us_skb_len;        /* skb总长度 */
+    oal_uint16           us_skb_len;        /* skb?????? */
     oal_netbuf_stru     *pst_netbuf;
     oam_ota_stru        *pst_ota_data;
     oal_uint32           ul_ret         = OAL_SUCC;
@@ -545,7 +545,7 @@ oal_uint32  oam_stats_report_usr_info(oal_uint16  us_usr_id)
 
     us_stat_info_len = OAL_SIZEOF(oam_device_stat_info_stru);
 
-    /* 为上报统计信息申请空间,头部预留8字节，尾部预留1字节，给sdt_drv用 */
+    /* ??????????????????????,????????8??????????????1????????sdt_drv?? */
     us_skb_len = us_stat_info_len + OAL_SIZEOF(oam_ota_hdr_stru);
     if (us_skb_len > WLAN_SDT_NETBUF_MAX_PAYLOAD)
     {
@@ -561,10 +561,10 @@ oal_uint32  oam_stats_report_usr_info(oal_uint16  us_usr_id)
 
     pst_ota_data = (oam_ota_stru *)oal_netbuf_data(pst_netbuf);
 
-    /* 获取系统TICK值 */
+    /* ????????TICK?? */
     ul_tick = (oal_uint32)OAL_TIME_GET_STAMP_MS();
 
-    /* 填写ota消息头结构体 */
+    /* ????ota???????????? */
     pst_ota_data->st_ota_hdr.ul_tick     = ul_tick;
     pst_ota_data->st_ota_hdr.en_ota_type = OAM_OTA_TYPE_USER_STAT_INFO;
     pst_ota_data->st_ota_hdr.uc_frame_hdr_len = 0;
@@ -574,7 +574,7 @@ oal_uint32  oam_stats_report_usr_info(oal_uint16  us_usr_id)
                 (const oal_void *)&g_st_stat_info.ast_user_stat_info[us_usr_id],
                 us_stat_info_len);
 
-    /* 下发至sdt接收队列，若队列满则串口输出 */
+    /* ??????sdt???????????????????????????? */
     ul_ret = oam_report_data2sdt(pst_netbuf, OAM_DATA_TYPE_OTA, OAM_PRIMID_TYPE_OUTPUT_CONTENT);
 
     return ul_ret;

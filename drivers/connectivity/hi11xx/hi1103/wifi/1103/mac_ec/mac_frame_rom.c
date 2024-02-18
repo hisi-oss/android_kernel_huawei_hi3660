@@ -9,7 +9,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "oam_ext_if.h"
 #include "frw_ext_if.h"
@@ -34,7 +34,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  2 函数原型声明
+  2 ????????????
 *****************************************************************************/
 #if (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION)
 mac_frame_cb g_st_mac_frame_rom_cb = {
@@ -65,31 +65,31 @@ mac_frame_cb g_st_mac_frame_rom_cb = {
 
 
 /*****************************************************************************
-  3 全局变量定义
+  3 ????????????
 *****************************************************************************/
-/* WMM OUI定义 */
+/* WMM OUI???? */
 OAL_CONST oal_uint8    g_auc_wmm_oui_etc[MAC_OUI_LEN] = {0x00, 0x50, 0xF2};
 
-/* WPA OUI 定义 */
+/* WPA OUI ???? */
 OAL_CONST oal_uint8    g_auc_wpa_oui_etc[MAC_OUI_LEN] = {0x00, 0x50, 0xF2};
 
-/* WFA TPC RPT OUI 定义 */
+/* WFA TPC RPT OUI ???? */
 OAL_CONST oal_uint8    g_auc_wfa_oui_etc[MAC_OUI_LEN] = {0x00, 0x50, 0xF2};
 
-/* P2P OUI 定义 */
+/* P2P OUI ???? */
 OAL_CONST oal_uint8    g_auc_p2p_oui_etc[MAC_OUI_LEN] = {0x50, 0x6F, 0x9A};
 
-/* RSNA OUI 定义 */
+/* RSNA OUI ???? */
 OAL_CONST oal_uint8    g_auc_rsn_oui_etc[MAC_OUI_LEN] = {0x00, 0x0F, 0xAC};
 
-/* WPS OUI 定义 */
+/* WPS OUI ???? */
 OAL_CONST oal_uint8    g_auc_wps_oui_etc[MAC_OUI_LEN] = {0x00, 0x50, 0xF2};
 
-/* 窄带 OUI 定义 */
+/* ???? OUI ???? */
 OAL_CONST oal_uint8    g_auc_huawei_oui[MAC_OUI_LEN] = {0xac, 0x85, 0x3d};
 
 /*****************************************************************************
-  4 函数实现
+  4 ????????
 *****************************************************************************/
 
 
@@ -152,7 +152,7 @@ oal_uint32  mac_report_80211_get_switch(
         uc_frame_type = OAM_USER_TRACK_FRAME_TYPE_DATA;
     }
 
-    /* probe request 和 probe response太多，单独过滤一次 */
+    /* probe request ?? probe response?????????????????? */
     if (WLAN_MANAGEMENT == pst_frame_hdr->st_frame_control.bit_type)
     {
         if (WLAN_PROBE_REQ == pst_frame_hdr->st_frame_control.bit_sub_type
@@ -295,7 +295,7 @@ oal_uint32  mac_report_80211_frame(oal_uint8      *puc_mac_vap,
     oal_uint8                      *puc_mac_payload_addr = OAL_PTR_NULL;
 #endif
 
-    /* 获取打印开关 */
+    /* ???????????? */
     ul_ret = mac_report_80211_get_switch(pst_mac_vap,
                                          pst_rx_cb,
                                          &en_frame_switch,
@@ -313,7 +313,7 @@ oal_uint32  mac_report_80211_frame(oal_uint8      *puc_mac_vap,
         return ul_ret;
     }
 
-    /* 获取发送端用户地址，用户SDT过滤,如果是组播\广播帧，则地址填为全F */
+    /* ????????????????????????SDT????,??????????\????????????????????F */
     ul_ret = mac_report_80211_get_user_macaddr(pst_rx_cb, auc_user_macaddr);
     if (OAL_SUCC != ul_ret)
     {
@@ -324,7 +324,7 @@ oal_uint32  mac_report_80211_frame(oal_uint8      *puc_mac_vap,
 
     if ((OAM_OTA_TYPE_RX_DSCR == en_ota_type)||(OAM_OTA_TYPE_RX_DSCR_PILOT== en_ota_type))
     {
-         /* 上报接收帧的接收描述符*/
+         /* ??????????????????????*/
         if (OAL_SWITCH_ON == en_dscr_switch)
         {
             ul_ret = oam_report_dscr_etc(auc_user_macaddr, puc_des_addr,(oal_uint16)WLAN_RX_DSCR_SIZE, en_ota_type);
@@ -336,7 +336,7 @@ oal_uint32  mac_report_80211_frame(oal_uint8      *puc_mac_vap,
     }
     else
     {
-        /* 上报接收到的帧 */
+        /* ?????????????? */
         if (OAL_SWITCH_ON == en_frame_switch)
         {
 #if defined(_PRE_PRODUCT_ID_HI110X_DEV)
@@ -362,7 +362,7 @@ oal_uint32  mac_report_80211_frame(oal_uint8      *puc_mac_vap,
             }
         }
 
-        /* 上报接收帧的CB字段 */
+        /* ????????????CB???? */
         if (OAL_SWITCH_ON == en_cb_switch)
         {
             ul_ret = oam_report_netbuf_cb_etc(auc_user_macaddr, (oal_uint8 *)pst_rx_cb, en_ota_type);
@@ -420,7 +420,7 @@ oal_uint8 *mac_find_p2p_attribute_etc(oal_uint8 uc_eid, oal_uint8 *puc_ies, oal_
         return OAL_PTR_NULL;
     }
 
-    /* 查找P2P IE，如果不是直接找下一个 */
+    /* ????P2P IE?????????????????????? */
     while (l_len > MAC_P2P_ATTRIBUTE_HDR_LEN && puc_ies[0] != uc_eid)
     {
         l_ie_len = (oal_int32)((puc_ies[2] << 8) + puc_ies[1]);
@@ -428,7 +428,7 @@ oal_uint8 *mac_find_p2p_attribute_etc(oal_uint8 uc_eid, oal_uint8 *puc_ies, oal_
         puc_ies += l_ie_len + MAC_P2P_ATTRIBUTE_HDR_LEN;
     }
 
-    /* 查找到P2P IE，剩余长度不匹配直接返回空指针 */
+    /* ??????P2P IE?????????????????????????????? */
     l_ie_len = (oal_int32)((puc_ies[2] << 8) + puc_ies[1]);
     if ((l_len < MAC_P2P_ATTRIBUTE_HDR_LEN) || (l_len < (MAC_P2P_ATTRIBUTE_HDR_LEN + l_ie_len)))
     {
@@ -446,7 +446,7 @@ oal_uint8 *mac_find_ie_etc(oal_uint8 uc_eid, oal_uint8 *puc_ies, oal_int32 l_len
         return OAL_PTR_NULL;
     }
 
-    /* buffer长度超过1500字节认为入参异常，不做查找操作 */
+    /* buffer????????1500?????????????????????????????? */
     if (l_len > 1500)
     {
         return OAL_PTR_NULL;
@@ -542,7 +542,7 @@ oal_void  mac_set_cap_info_ap_etc(oal_void *pst_vap, oal_uint8 *puc_cap_info)
          |QoS|ShortSlot|APSD|RM      |DSSS-OFDM|Delayed BA |Immediate BA   |
          -------------------------------------------------------------------
     ***************************************************************************/
-    /* 初始清零 */
+    /* ???????? */
     puc_cap_info[0] = 0;
     puc_cap_info[1] = 0;
 
@@ -589,7 +589,7 @@ oal_void  mac_set_cap_info_ap_etc(oal_void *pst_vap, oal_uint8 *puc_cap_info)
     /* Delayed BA */
     pst_cap_info->bit_delayed_block_ack = mac_mib_get_dot11DelayedBlockAckOptionImplemented(pst_mac_vap);
 
-    /* Immediate Block Ack 参考STA及AP标杆，此能力一直为0,实际通过addba协商。此处修改为标杆一致。mib值不修改 */
+    /* Immediate Block Ack ????STA??AP??????????????????0,????????addba??????????????????????????mib???????? */
     /*pst_cap_info->bit_immediate_block_ack = pst_mib->st_wlan_mib_sta_config.en_dot11ImmediateBlockAckOptionImplemented;*/
     pst_cap_info->bit_immediate_block_ack = 0;
 
@@ -612,10 +612,10 @@ oal_void  mac_set_cap_info_sta_etc(oal_void *pst_vap, oal_uint8 *puc_cap_info)
          |QoS|ShortSlot|APSD|RM      |DSSS-OFDM|Delayed BA |Immediate BA   |
          -------------------------------------------------------------------
     ***************************************************************************/
-    /* 学习对端的能力信息 */
+    /* ?????????????????? */
     oal_memcopy(puc_cap_info, (oal_uint8 *)(&pst_mac_vap->us_assoc_user_cap_info), OAL_SIZEOF(mac_cap_info_stru));
 
-    /* 以下能力位不学习，保持默认值 */
+    /* ???????????????????????????? */
     pst_cap_info->bit_ibss              = 0;
     pst_cap_info->bit_cf_pollable       = 0;
     pst_cap_info->bit_cf_poll_request   = 0;
@@ -642,7 +642,7 @@ oal_void  mac_set_ssid_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffer, oal_uint
       A SSID  field  of length 0 is  used  within Probe
       Request management frames to indicate the wildcard SSID.
     ***************************************************************************/
-    /* 只有beacon会隐藏ssid */
+    /* ????beacon??????ssid */
     if((pst_mac_vap->st_cap_flag.bit_hide_ssid) && (WLAN_FC0_SUBTYPE_BEACON == us_frm_type))
     {
         /* ssid ie */
@@ -657,7 +657,7 @@ oal_void  mac_set_ssid_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffer, oal_uint
 
     puc_ssid = mac_mib_get_DesiredSSID(pst_mac_vap);
 
-    uc_ssid_len = (oal_uint8)OAL_STRLEN((oal_int8 *)puc_ssid);   /* 不包含'\0'*/
+    uc_ssid_len = (oal_uint8)OAL_STRLEN((oal_int8 *)puc_ssid);   /* ??????'\0'*/
 
     *(puc_buffer + 1) = uc_ssid_len;
 
@@ -682,10 +682,10 @@ oal_void  mac_set_nb_ie( oal_uint8 *puc_buffer, oal_uint8 *puc_ie_len)
     /* 1   |   1    |  3  | 1       |3           |                       */
     /* ----------------------------------------------------------------- */
 
-    /* 填写EID, 长度最后填 */
+    /* ????EID, ?????????? */
     puc_buffer[0] = MAC_EID_VENDOR;
 
-    /* 初始化填写buffer的位置 */
+    /* ??????????buffer?????? */
     uc_index = MAC_IE_HDR_LEN;
 
     oal_memcopy(puc_buffer + uc_index, g_auc_huawei_oui, MAC_OUI_LEN);
@@ -697,7 +697,7 @@ oal_void  mac_set_nb_ie( oal_uint8 *puc_buffer, oal_uint8 *puc_ie_len)
     puc_buffer[uc_index++] = NARROW_BW_5M;
     puc_buffer[uc_index++] = NARROW_BW_10M;
 
-    /* 设置信息元素长度 */
+    /* ???????????????? */
     puc_buffer[1] = uc_index - MAC_IE_HDR_LEN;
     *puc_ie_len = uc_index;
 
@@ -718,7 +718,7 @@ oal_void  mac_set_supported_rates_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffe
 
     pst_rates_set = &(pst_mac_vap->st_curr_sup_rates.st_rate);
 
-    /* STA全信道扫描时根据频段设置supported rates */
+    /* STA????????????????????????supported rates */
     if (WLAN_VAP_MODE_BSS_STA == pst_mac_vap->en_vap_mode &&
 #ifdef _PRE_WLAN_FEATURE_11AX
        (WLAN_VHT_MODE == pst_mac_vap->en_protocol || WLAN_HE_MODE == pst_mac_vap->en_protocol))
@@ -777,7 +777,7 @@ oal_void mac_set_dsss_params_etc(oal_void *pst_vap, oal_uint8 *puc_buffer, oal_u
 #if 0
     if (WLAN_BAND_2G != pst_mac_vap->st_channel.en_band)
     {
-        /* 如果不是2.4GHz频段，则没有dsss参数 */
+        /* ????????2.4GHz????????????dsss???? */
         *puc_ie_len = 0;
 
         return;
@@ -817,7 +817,7 @@ oal_void mac_set_country_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffer, oal_ui
         && OAL_TRUE != mac_mib_get_dot11SpectrumManagementRequired(pst_mac_vap)
         && OAL_TRUE != mac_mib_get_dot11RadioMeasurementActivated(pst_mac_vap))
     {
-        /* 没有使能管制域ie */
+        /* ??????????????ie */
         *puc_ie_len = 0;
 
         return;
@@ -835,22 +835,22 @@ oal_void mac_set_country_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffer, oal_ui
     |1   |1    |3              |1              |1         |1          |0 or 1     |
     -------------------------------------------------------------------------------
     ***************************************************************************/
-    /* 读取管制域信息 */
+    /* ?????????????? */
     mac_get_regdomain_info_etc(&pst_rd_info);
 
-    /* 获取当前工作频段 */
+    /* ???????????????? */
     uc_band = pst_mac_vap->st_channel.en_band;
 
-    /* 填写EID, 长度最后填 */
+    /* ????EID, ?????????? */
     puc_buffer[0] = MAC_EID_COUNTRY;
 
-    /* 初始化填写buffer的位置 */
+    /* ??????????buffer?????? */
     uc_index = MAC_IE_HDR_LEN;
 
-    /* 国家码 */
+    /* ?????? */
     puc_buffer[uc_index++] = (oal_uint8)(pst_rd_info->ac_country[0]);
     puc_buffer[uc_index++] = (oal_uint8)(pst_rd_info->ac_country[1]);
-    puc_buffer[uc_index++] = ' ';     /* 0表示室内室外规定相同 */
+    puc_buffer[uc_index++] = ' ';     /* 0???????????????????? */
 
     if (WLAN_BAND_2G == uc_band)
     {
@@ -873,7 +873,7 @@ oal_void mac_set_country_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffer, oal_ui
 
     if (0 == uc_len)
     {
-        /* 无管制域内容 */
+        /* ???????????? */
         *puc_ie_len = 0;
 
         return;
@@ -881,14 +881,14 @@ oal_void mac_set_country_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffer, oal_ui
 
     uc_index += uc_len;
 
-    /* 如果总长度为奇数，则补1字节pad */
+    /* ??????????????????????1????pad */
     if (1 == (uc_index & BIT0))
     {
         puc_buffer[uc_index] = 0;
         uc_index += 1;
     }
 
-    /* 设置信息元素长度 */
+    /* ???????????????? */
     puc_buffer[1] = uc_index - MAC_IE_HDR_LEN;
     *puc_ie_len = uc_index;
 }
@@ -907,7 +907,7 @@ oal_void mac_set_11ntxbf_vendor_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffer,
     pst_vendor_ie = (mac_11ntxbf_vendor_ie_stru *)puc_buffer;
     pst_vendor_ie->uc_id = MAC_EID_VENDOR;
     pst_vendor_ie->uc_len = sizeof(mac_11ntxbf_vendor_ie_stru) - MAC_IE_HDR_LEN;
-    /* 此值为CCB决策 */
+    /* ??????CCB???? */
     pst_vendor_ie->uc_ouitype = MAC_EID_11NTXBF;
 
     /*lint -e572*/ /*lint -e778*/
@@ -934,8 +934,8 @@ oal_void mac_set_pwrconstraint_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffer, 
        Octets:     |1         | 1      | 1                   |
                    -------------------------------------------
 
-    向工作站描述其所允许的最大传输功率，此信息元素记录规定最大值
-    减去实际使用时的最大值
+    ????????????????????????????????????????????????????????????
+    ??????????????????????
     ***************************************************************************/
     if (OAL_FALSE == mac_mib_get_dot11SpectrumManagementRequired(pst_mac_vap))
     {
@@ -962,7 +962,7 @@ oal_void mac_set_quiet_ie_etc(
                 oal_uint8  uc_qperiod, oal_uint16 us_qduration,    oal_uint16 us_qoffset,
                 oal_uint8 *puc_ie_len)
 {
-    /* 管制域相关 tbd, 需要11h特性进一步分析此ie的设置 */
+    /* ?????????? tbd, ????11h????????????????ie?????? */
 
     mac_quiet_ie_stru *pst_quiet;
     mac_vap_stru      *pst_mac_vap = (mac_vap_stru *)pst_vap;
@@ -1015,7 +1015,7 @@ oal_void mac_set_tpc_report_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffer, oal
        Octets:  |1          |1       |1              |1         |
                 -------------------------------------------------
 
-    TransimitPower, 此帧的传送功率，以dBm为单位
+    TransimitPower, ??????????????????dBm??????
     ***************************************************************************/
     if (OAL_FALSE == mac_mib_get_dot11SpectrumManagementRequired(pst_mac_vap)
         && OAL_FALSE == mac_mib_get_dot11RadioMeasurementActivated(pst_mac_vap))
@@ -1028,7 +1028,7 @@ oal_void mac_set_tpc_report_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffer, oal
     *puc_buffer       = MAC_EID_TPCREP;
     *(puc_buffer + 1) = MAC_TPCREP_IE_LEN;
     *(puc_buffer + 2) = pst_mac_vap->uc_tx_power;
-    *(puc_buffer + 3) = 0;                          /* 此字段管理帧中不用 */
+    *(puc_buffer + 3) = 0;                          /* ?????????????????? */
 
     *puc_ie_len = MAC_IE_HDR_LEN + MAC_TPCREP_IE_LEN;
 }
@@ -1050,16 +1050,16 @@ oal_void mac_set_erp_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffer, oal_uint8 
     {
         *puc_ie_len = 0;
 
-        return;     /* 5G频段和11b协议模式 没有erp信息 */
+        return;     /* 5G??????11b???????? ????erp???? */
     }
 
     *puc_buffer       = MAC_EID_ERP;
     *(puc_buffer + 1) = MAC_ERP_IE_LEN;
-    *(puc_buffer + 2) = 0;  /* 初始清0 */
+    *(puc_buffer + 2) = 0;  /* ??????0 */
 
     pst_erp_params = (mac_erp_params_stru *)(puc_buffer + MAC_IE_HDR_LEN);
 
-    /*如果存在non erp站点与ap关联， 或者obss中存在non erp站点*/
+    /*????????non erp??????ap?????? ????obss??????non erp????*/
     if ((0 != pst_mac_vap->st_protection.uc_sta_non_erp_num) || ( OAL_TRUE == pst_mac_vap->st_protection.bit_obss_non_erp_present))
     {
         pst_erp_params->bit_non_erp = 1;
@@ -1069,7 +1069,7 @@ oal_void mac_set_erp_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffer, oal_uint8 
         pst_erp_params->bit_non_erp = 0;
     }
 
-    /*如果ap已经启用erp保护*/
+    /*????ap????????erp????*/
     if (WLAN_PROT_ERP == pst_mac_vap->st_protection.en_protection_mode)
     {
         pst_erp_params->bit_use_protection = 1;
@@ -1079,7 +1079,7 @@ oal_void mac_set_erp_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffer, oal_uint8 
         pst_erp_params->bit_use_protection = 0;
     }
 
-    /*如果存在不支持short preamble的站点与ap关联， 或者ap自身不支持short preamble*/
+    /*??????????????short preamble????????ap?????? ????ap??????????short preamble*/
     if ((0 != pst_mac_vap->st_protection.uc_sta_no_short_preamble_num)
         || (OAL_FALSE == mac_mib_get_ShortPreambleOptionImplemented(pst_mac_vap)))
     {
@@ -1142,17 +1142,17 @@ oal_void mac_set_rsn_ie_etc(oal_void *pst_vap, oal_uint8 *puc_pmkid, oal_uint8 *
     /*************************************************************************/
     uc_index = MAC_IE_HDR_LEN;
 
-    /* 设置RSN ie的EID */
+    /* ????RSN ie??EID */
     puc_buffer[0] = MAC_EID_RSN;
 
-    /* 设置version字段 */
+    /* ????version???? */
     puc_buffer[uc_index++] = MAC_RSN_IE_VERSION;
     puc_buffer[uc_index++] = 0;
 
     oal_memcopy(&puc_buffer[uc_index], (oal_uint8 *)(&ul_group_suit), 4);
     uc_index += 4;
 
-    /* 设置成对加密套件 */
+    /* ???????????????? */
     puc_buffer[uc_index++] = uc_pair_suites_num;
     puc_buffer[uc_index++] = 0;
 
@@ -1162,18 +1162,18 @@ oal_void mac_set_rsn_ie_etc(oal_void *pst_vap, oal_uint8 *puc_pmkid, oal_uint8 *
         uc_index += 4;
     }
 
-    /* 设置认证套件数 */
+    /* ?????????????? */
     puc_buffer[uc_index++] = uc_akm_suites_num;
     puc_buffer[uc_index++] = 0;
 
-    /* 根据MIB 值，设置认证套件内容 */
+    /* ????MIB ???????????????????? */
     for (uc_loop = 0; uc_loop < uc_akm_suites_num; uc_loop++)
     {
         oal_memcopy(&puc_buffer[uc_index], (oal_uint8 *)(&aul_akm[uc_loop]), 4);
         uc_index += 4;
     }
 
-    /* 设置 RSN Capabilities字段 */
+    /* ???? RSN Capabilities???? */
     /*************************************************************************/
     /* --------------------------------------------------------------------- */
     /* | B15 - B6  |  B5 - B4      | B3 - B2     |       B1    |     B0    | */
@@ -1184,9 +1184,9 @@ oal_void mac_set_rsn_ie_etc(oal_void *pst_vap, oal_uint8 *puc_pmkid, oal_uint8 *
     /*                                                                       */
     /*************************************************************************/
 
-    /* 设置RSN Capabilities 值，包括Pre_Auth, no_pairwise,  */
+    /* ????RSN Capabilities ????????Pre_Auth, no_pairwise,  */
     /* Replay counters (PTKSA and GTKSA)                    */
-    /* WPA 不需要填写RSN Capabilities 字段                  */
+    /* WPA ??????????RSN Capabilities ????                  */
     pst_rsn_cap = (mac_rsn_cap_stru *)(puc_buffer + uc_index);
     OAL_MEMZERO(pst_rsn_cap, OAL_SIZEOF(mac_rsn_cap_stru));
     uc_index += MAC_RSN_CAP_LEN;
@@ -1198,7 +1198,7 @@ oal_void mac_set_rsn_ie_etc(oal_void *pst_vap, oal_uint8 *puc_pmkid, oal_uint8 *
     pst_rsn_cap->bit_ptska_relay_counter = mac_mib_get_rsnacfg_ptksareplaycounters(pst_mac_vap);
     pst_rsn_cap->bit_gtska_relay_counter = mac_mib_get_rsnacfg_gtksareplaycounters(pst_mac_vap);
 
-    /* 设置 PMKID 信息 */
+    /* ???? PMKID ???? */
     if (puc_pmkid)
     {
         puc_buffer[uc_index++] = 0x01;
@@ -1209,7 +1209,7 @@ oal_void mac_set_rsn_ie_etc(oal_void *pst_vap, oal_uint8 *puc_pmkid, oal_uint8 *
 
     if ((OAL_TRUE == mac_mib_get_dot11RSNAMFPC((mac_vap_stru *)pst_mac_vap) && ul_group_mgmt_suit))
     {
-        /* 如果已经填过pmkid信息，不需要再填，否则需要填写一个空的PMKID */
+        /* ????????????pmkid??????????????????????????????????????PMKID */
         if (OAL_PTR_NULL == puc_pmkid)
         {
             puc_buffer[uc_index++] = 0x00;
@@ -1220,7 +1220,7 @@ oal_void mac_set_rsn_ie_etc(oal_void *pst_vap, oal_uint8 *puc_pmkid, oal_uint8 *
 
     }
 
-    /* 设置RSN element的长度 */
+    /* ????RSN element?????? */
     puc_buffer[1] = uc_index - MAC_IE_HDR_LEN;
 
     *puc_ie_len = uc_index;
@@ -1281,21 +1281,21 @@ oal_void mac_set_wpa_ie_etc(oal_void  *pst_vap, oal_uint8 *puc_buffer, oal_uint8
     /*************************************************************************/
     uc_index = MAC_IE_HDR_LEN;
 
-    /* 设置RSN ie的EID */
+    /* ????RSN ie??EID */
     puc_buffer[0] = MAC_EID_WPA;
 
     oal_memcopy(puc_buffer + uc_index, g_auc_wpa_oui_etc, MAC_OUI_LEN);
 
     uc_index += MAC_OUI_LEN;
 
-    puc_buffer[uc_index++] = MAC_OUITYPE_WPA;/* 填充WPA 的OUI 类型 */
+    puc_buffer[uc_index++] = MAC_OUITYPE_WPA;/* ????WPA ??OUI ???? */
 
 
-    /* 设置version字段 */
+    /* ????version???? */
     puc_buffer[uc_index++] = MAC_RSN_IE_VERSION;
     puc_buffer[uc_index++] = 0;
 
-    /* 设置Group Cipher Suite */
+    /* ????Group Cipher Suite */
     /*************************************************************************/
     /*                  Group Cipher Suite                                   */
     /* --------------------------------------------------------------------- */
@@ -1307,7 +1307,7 @@ oal_void mac_set_wpa_ie_etc(oal_void  *pst_vap, oal_uint8 *puc_buffer, oal_uint8
     oal_memcopy(&puc_buffer[uc_index], (oal_uint8 *)(&ul_group_suit), 4);
     uc_index += 4;
 
-    /* 设置成对加密套件 */
+    /* ???????????????? */
     puc_buffer[uc_index++] = uc_pair_suites_num;
     puc_buffer[uc_index++] = 0;
 
@@ -1317,7 +1317,7 @@ oal_void mac_set_wpa_ie_etc(oal_void  *pst_vap, oal_uint8 *puc_buffer, oal_uint8
         uc_index += 4;
     }
 
-    /* 设置认证套件数 */
+    /* ?????????????? */
     puc_buffer[uc_index++] = uc_akm_suites_num;
     puc_buffer[uc_index++] = 0;
 
@@ -1327,7 +1327,7 @@ oal_void mac_set_wpa_ie_etc(oal_void  *pst_vap, oal_uint8 *puc_buffer, oal_uint8
         uc_index += 4;
     }
 
-    /* 设置wpa element的长度 */
+    /* ????wpa element?????? */
     puc_buffer[1] = uc_index - MAC_IE_HDR_LEN;
 
     *puc_ie_len = uc_index;
@@ -1558,7 +1558,7 @@ oal_void mac_set_exsup_rates_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffer, oa
 
     pst_rates_set = &(pst_mac_vap->st_curr_sup_rates.st_rate);
 
-    /* STA全信道扫描时根据频段设置supported rates */
+    /* STA????????????????????????supported rates */
     if (WLAN_VAP_MODE_BSS_STA == pst_mac_vap->en_vap_mode &&
 #ifdef _PRE_WLAN_FEATURE_11AX
        (WLAN_VHT_MODE == pst_mac_vap->en_protocol || WLAN_HE_MODE == pst_mac_vap->en_protocol))
@@ -1615,7 +1615,7 @@ oal_void mac_set_bssload_ie(oal_void *pst_vap, oal_uint8 *puc_buffer, oal_uint8 
     }
 
 #ifdef _PRE_WLAN_FEATURE_11K_EXTERN
-    /*获取mac_device_stru*/
+    /*????mac_device_stru*/
     pst_mac_device = mac_res_get_dev_etc(pst_mac_vap->uc_device_id);
     if ( OAL_PTR_NULL == pst_mac_device)
     {
@@ -1683,7 +1683,7 @@ oal_void mac_set_bssload_ie(oal_void *pst_vap, oal_uint8 *puc_buffer, oal_uint8 
     }
 
 #ifdef _PRE_WLAN_FEATURE_11K_EXTERN
-    /*获取mac_device_stru*/
+    /*????mac_device_stru*/
     pst_mac_device = mac_res_get_dev_etc(pst_mac_vap->uc_device_id);
     if ( OAL_PTR_NULL == pst_mac_device)
     {
@@ -1775,13 +1775,13 @@ oal_void mac_set_ht_capinfo_field(oal_void *pst_vap, oal_uint8 *puc_buffer)
      |    B10    |   B11  |   B12   |   B13    |    B14     |    B15     |
      |-------------------------------------------------------------------|
     ***************************************************************************/
-    /* 初始清0 */
+    /* ??????0 */
     puc_buffer[0] = 0;
     puc_buffer[1] = 0;
 
     pst_ht_capinfo->bit_ldpc_coding_cap = mac_mib_get_LDPCCodingOptionImplemented(pst_mac_vap);
 
-    /* 设置所支持的信道宽度集"，0:仅20MHz运行; 1:20MHz与40MHz运行 */
+    /* ??????????????????????"??0:??20MHz????; 1:20MHz??40MHz???? */
     pst_ht_capinfo->bit_supported_channel_width = (MAC_VAP_GET_CAP_BW(pst_mac_vap) > WLAN_BAND_WIDTH_20M) ? OAL_TRUE : OAL_FALSE;
 
 #ifdef _PRE_WLAN_FEATURE_SMPS
@@ -1802,7 +1802,7 @@ oal_void mac_set_ht_capinfo_field(oal_void *pst_vap, oal_uint8 *puc_buffer)
 
     pst_ht_capinfo->bit_max_amsdu_length = mac_mib_get_max_amsdu_length(pst_mac_vap);
 
-    /* 是否在具有40MHz能力，而运行于20/40MHz模式的BSS上使用DSSS/CCK */
+    /* ??????????40MHz??????????????20/40MHz??????BSS??????DSSS/CCK */
     if (WLAN_BAND_2G == pst_mac_vap->st_channel.en_band)
     {
         if ((WLAN_LEGACY_11B_MODE    == pst_mac_vap->en_protocol) ||
@@ -1822,14 +1822,14 @@ oal_void mac_set_ht_capinfo_field(oal_void *pst_vap, oal_uint8 *puc_buffer)
         pst_ht_capinfo->bit_dsss_cck_mode_40mhz = 0;
     }
 
-    /* 设置"40MHz不容许"，只在2.4GHz下有效 */
+    /* ????"40MHz??????"??????2.4GHz?????? */
     if (WLAN_BAND_2G == pst_mac_vap->st_channel.en_band)
     {
         pst_ht_capinfo->bit_forty_mhz_intolerant = mac_mib_get_FortyMHzIntolerant(pst_mac_vap);
     }
     else
     {
-        /*5G 40MHz不容忍设置为0*/
+        /*5G 40MHz????????????0*/
         pst_ht_capinfo->bit_forty_mhz_intolerant = OAL_FALSE;
     }
 
@@ -1849,7 +1849,7 @@ oal_void mac_set_ampdu_params_field(oal_void * pst_vap, oal_uint8 *puc_buffer)
       | B0                         B1 | B2                      B4 | B5     B7|
       |-----------------------------------------------------------------------|
      **************************************************************************/
-    /* 初始清0 */
+    /* ??????0 */
     puc_buffer[0] = 0;
 
     pst_ampdu_params->bit_max_ampdu_len_exponent = mac_mib_get_max_ampdu_len_exponent(pst_mac_vap);
@@ -1876,7 +1876,7 @@ oal_void mac_set_sup_mcs_set_field(oal_void * pst_vap, oal_uint8 *puc_buffer)
     |-------------------------------------------------------------------|
     *************************************************************************/
 
-    /* 初始清零 */
+    /* ???????? */
     OAL_MEMZERO(puc_buffer, OAL_SIZEOF(mac_sup_mcs_set_stru));
 
     oal_memcopy(pst_sup_mcs_set->auc_rx_mcs, mac_mib_get_SupportedMCSRx(pst_mac_vap), WLAN_HT_MCS_BITMASK_LEN);
@@ -1900,7 +1900,7 @@ oal_void mac_set_sup_mcs_set_field(oal_void * pst_vap, oal_uint8 *puc_buffer)
         }
     }
 
-    /* reserve位清0 */
+    /* reserve????0 */
     pst_sup_mcs_set->bit_resv1 = 0;
     pst_sup_mcs_set->bit_resv2 = 0;
 
@@ -1919,7 +1919,7 @@ oal_void mac_set_ht_extcap_field(oal_void * pst_vap, oal_uint8 *puc_buffer)
       | B0  | B1     B2 | B3    B7 | B8 B9|   B10   |  B11   | B12  B15 |
       |-----------------------------------------------------------------|
     ***********************************************************************/
-    /* 初始清0 */
+    /* ??????0 */
     puc_buffer[0] = 0;
     puc_buffer[1] = 0;
 
@@ -1968,16 +1968,16 @@ oal_void mac_set_txbf_cap_field(oal_void * pst_vap, oal_uint8 *puc_buffer)
      | B23           B24 | B25            B26 | B27       B28 | B29  B31       |
      |-------------------------------------------------------------------------|
     ***************************************************************************/
-    /* 初始清零 */
+    /* ???????? */
     puc_buffer[0] = 0;
     puc_buffer[1] = 0;
     puc_buffer[2] = 0;
     puc_buffer[3] = 0;
 
-    /* 指示STA是否可以接收staggered sounding帧 */
+    /* ????STA????????????staggered sounding?? */
     pst_txbf_cap->bit_rx_stagg_sounding = mac_mib_get_ReceiveStaggerSoundingOptionImplemented(pst_mac_vap);
 
-    /* 指示STA是否可以发送staggered sounding帧.*/
+    /* ????STA????????????staggered sounding??.*/
     pst_txbf_cap->bit_tx_stagg_sounding = mac_mib_get_TransmitStaggerSoundingOptionImplemented(pst_mac_vap);
 
     pst_txbf_cap->bit_rx_ndp = mac_mib_get_ReceiveNDPOptionImplemented(pst_mac_vap);
@@ -2081,19 +2081,19 @@ oal_void mac_set_asel_cap_field(oal_void * pst_vap, oal_uint8 *puc_buffer)
      |    B5    |     B6       |    B7    |
      |------------------------------------|
     ***************************************************************************/
-    /* 初始清0 */
+    /* ??????0 */
     puc_buffer[0] = 0;
 
-    /* 指示STA是否支持天线选择 */
+    /* ????STA???????????????? */
     pst_asel_cap->bit_asel = mac_mib_get_AntennaSelectionOptionImplemented(pst_mac_vap);
 
-    /* 指示STA是否具有基于显示CSI(信道状态信息)反馈的发射天线选择能力 */
+    /* ????STA????????????????CSI(????????????)?????????????????????? */
     pst_asel_cap->bit_explicit_sci_fdbk_tx_asel = mac_mib_get_TransmitExplicitCSIFeedbackASOptionImplemented(pst_mac_vap);
 
-    /* 指示STA是否具有基于天线指数反馈的发射天线选择能力 */
+    /* ????STA?????????????????????????????????????????? */
     pst_asel_cap->bit_antenna_indices_fdbk_tx_asel = mac_mib_get_TransmitIndicesFeedbackASOptionImplemented(pst_mac_vap);
 
-    /* 指示STA在天线选择的支持下是否能够计算CSI(信道状态信息)并提供CSI反馈 */
+    /* ????STA??????????????????????????????CSI(????????????)??????CSI???? */
     pst_asel_cap->bit_explicit_csi_fdbk = mac_mib_get_ExplicitCSIFeedbackASOptionImplemented(pst_mac_vap);
 
     /* Indicates whether or not this STA can conduct antenna indices */
@@ -2101,10 +2101,10 @@ oal_void mac_set_asel_cap_field(oal_void * pst_vap, oal_uint8 *puc_buffer)
     /* Antenna Selection.*/
     pst_asel_cap->bit_antenna_indices_fdbk = mac_mib_get_TransmitExplicitCSIFeedbackASOptionImplemented(pst_mac_vap);
 
-    /* 指示STA是否具有接收天线选择能力 */
+    /* ????STA???????????????????????? */
     pst_asel_cap->bit_rx_asel = mac_mib_get_ReceiveAntennaSelectionOptionImplemented(pst_mac_vap);
 
-    /* 指示STA是否能够在每一次请求中都可以为天线选择序列发送探测PPDU */
+    /* ????STA??????????????????????????????????????????????????PPDU */
     pst_asel_cap->bit_trans_sounding_ppdu = mac_mib_get_TransmitSoundingPPDUOptionImplemented(pst_mac_vap);
 }
 
@@ -2121,7 +2121,7 @@ oal_void mac_set_timeout_interval_ie_etc(oal_void *pst_vap,
     en_tie_type = (mac_Timeout_Interval_type_enum)ul_type;
     *puc_ie_len = 0;
 
-    /* 判断是否需要设置timeout_interval IE */
+    /* ????????????????timeout_interval IE */
     if (MAC_TIE_BUTT <= en_tie_type)
     {
         return;
@@ -2139,7 +2139,7 @@ oal_void mac_set_timeout_interval_ie_etc(oal_void *pst_vap,
     puc_buffer[1] = MAC_TIMEOUT_INTERVAL_INFO_LEN;
     puc_buffer[2] = en_tie_type;
 
-    /* 设置Timeout Interval Value */
+    /* ????Timeout Interval Value */
     puc_buffer[3] = ul_timeout & 0x000000FF;
     puc_buffer[4] = (ul_timeout & 0x0000FF00)>>8;
     puc_buffer[5] = (ul_timeout & 0x00FF0000)>>16;
@@ -2182,27 +2182,27 @@ oal_void mac_set_timeout_interval_ie_etc(oal_void *pst_vap,
 
     puc_buffer += MAC_IE_HDR_LEN;
 
-    /* 填充ht capabilities information域信息 */
+    /* ????ht capabilities information?????? */
     mac_set_ht_capinfo_field(pst_vap, puc_buffer);
     puc_buffer += MAC_HT_CAPINFO_LEN;
 
-    /* 填充A-MPDU parameters域信息 */
+    /* ????A-MPDU parameters?????? */
     mac_set_ampdu_params_field(pst_vap, puc_buffer);
     puc_buffer += MAC_HT_AMPDU_PARAMS_LEN;
 
-    /* 填充supported MCS set域信息 */
+    /* ????supported MCS set?????? */
     mac_set_sup_mcs_set_field(pst_vap, puc_buffer);
     puc_buffer += MAC_HT_SUP_MCS_SET_LEN;
 
-    /* 填充ht extended capabilities域信息 */
+    /* ????ht extended capabilities?????? */
     mac_set_ht_extcap_field(pst_vap, puc_buffer);
     puc_buffer += MAC_HT_EXT_CAP_LEN;
 
-    /* 填充 transmit beamforming capabilities域信息 */
+    /* ???? transmit beamforming capabilities?????? */
     mac_set_txbf_cap_field(pst_vap, puc_buffer);
     puc_buffer += MAC_HT_TXBF_CAP_LEN;
 
-    /* 填充asel(antenna selection) capabilities域信息*/
+    /* ????asel(antenna selection) capabilities??????*/
     mac_set_asel_cap_field(pst_vap, puc_buffer);
 
     *puc_ie_len = MAC_IE_HDR_LEN + MAC_HT_CAP_LEN;
@@ -2271,10 +2271,10 @@ oal_void mac_set_ht_opern_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffer, oal_u
     *(puc_buffer + 1) = MAC_HT_OPERN_LEN;
     pst_ht_opern = (mac_ht_opern_stru *)(puc_buffer + MAC_IE_HDR_LEN);
 
-    /* 主信道编号 */
+    /* ?????????? */
     pst_ht_opern->uc_primary_channel = pst_mac_vap->st_channel.uc_chan_number;
 
-    /* 设置"次信道偏移量" */
+    /* ????"????????????" */
     switch (pst_mac_vap->st_channel.en_bandwidth)
     {
         case WLAN_BAND_WIDTH_40PLUS:
@@ -2310,16 +2310,16 @@ oal_void mac_set_ht_opern_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffer, oal_u
             break;
     }
 
-    /* 设置"STA信道宽度"，当BSS运行信道宽度 >= 40MHz时，需要将此field设置为1 */
+    /* ????"STA????????"????BSS???????????? >= 40MHz????????????field??????1 */
     pst_ht_opern->bit_sta_chan_width = (pst_mac_vap->st_channel.en_bandwidth > WLAN_BAND_WIDTH_20M) ? 1 : 0;
 
-    /* 指示基本服务集里是否允许使用减小的帧间距 */
+    /* ???????????????????????????????????????? */
     pst_ht_opern->bit_rifs_mode = mac_mib_get_RifsMode(pst_mac_vap);
 
-    /* B4-B7保留 */
+    /* B4-B7???? */
     pst_ht_opern->bit_resv1 = 0;
 
-    /* 指示ht传输的保护要求 */
+    /* ????ht?????????????? */
     pst_ht_opern->bit_HT_protection = mac_mib_get_HtProtection(pst_mac_vap);
 
     /* Non-GF STAs */
@@ -2336,11 +2336,11 @@ oal_void mac_set_ht_opern_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffer, oal_u
     }
     pst_ht_opern->bit_obss_nonht_sta_present = uc_obss_non_ht;
 
-    /* B5-B15 保留 */
+    /* B5-B15 ???? */
     pst_ht_opern->bit_resv3 = 0;
     pst_ht_opern->bit_resv4 = 0;
 
-    /* B0-B5 保留 */
+    /* B0-B5 ???? */
     pst_ht_opern->bit_resv5 = 0;
 
     /* B6  dual_beacon */
@@ -2361,7 +2361,7 @@ oal_void mac_set_ht_opern_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffer, oal_u
     /* PCO phase */
     pst_ht_opern->bit_pco_phase = 0;
 
-    /* B12-B15  保留 */
+    /* B12-B15  ???? */
     pst_ht_opern->bit_resv6 = 0;
 
     /* Basic MCS Set: set all bit zero,Indicates the MCS values that are supported by all HT STAs in the BSS. */
@@ -2454,7 +2454,7 @@ oal_void mac_set_ext_capabilities_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffe
          (OAL_TRUE == mac_is_tkip_only(pst_mac_vap))) && ( WLAN_VAP_MODE_BSS_AP == pst_mac_vap->en_vap_mode)))
     {
         *puc_ie_len = 0;
-        /* 驱动如果不带有ext cap ie 则使用hera产品接口传下来的信息增加该IE */
+        /* ??????????????ext cap ie ??????hera??????????????????????????IE */
 #ifdef _PRE_WLAN_FEATURE_11KV_INTERFACE
         mac_set_ie_field((oal_void *)(pst_mac_vap->pst_excap_ie_info), puc_buffer, &uc_ie_set_len);
         *puc_ie_len += uc_ie_set_len;
@@ -2479,12 +2479,12 @@ oal_void mac_set_ext_capabilities_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffe
     puc_buffer[0] = MAC_EID_EXT_CAPS;
     puc_buffer[1] = MAC_XCAPS_EX_LEN;
 
-    /* 初始清零 */
+    /* ???????? */
     OAL_MEMZERO(puc_buffer + MAC_IE_HDR_LEN, OAL_SIZEOF(mac_ext_cap_ie_stru));
 
     pst_ext_cap = (mac_ext_cap_ie_stru *)(puc_buffer + MAC_IE_HDR_LEN);
 
-    /* 设置20/40 BSS Coexistence Management Support fieid */
+    /* ????20/40 BSS Coexistence Management Support fieid */
     if ((OAL_TRUE == mac_mib_get_2040BSSCoexistenceManagementSupport(pst_mac_vap)) &&
         (WLAN_BAND_2G == pst_mac_vap->st_channel.en_band) &&
         (OAL_TRUE == mac_mib_get_FortyMHzOperationImplemented(pst_mac_vap)))
@@ -2492,14 +2492,14 @@ oal_void mac_set_ext_capabilities_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffe
         pst_ext_cap->bit_2040_coexistence_mgmt = 1;
     }
 
-    /* 设置TDLS prohibited */
+    /* ????TDLS prohibited */
     pst_ext_cap->bit_tdls_prhibited =  pst_mac_vap->st_cap_flag.bit_tdls_prohibited;
 
-    /* 设置TDLS channel switch prohibited */
+    /* ????TDLS channel switch prohibited */
     pst_ext_cap->bit_tdls_channel_switch_prhibited = pst_mac_vap->st_cap_flag.bit_tdls_channel_switch_prohibited;
 
 #ifdef _PRE_WLAN_FEATURE_OPMODE_NOTIFY
-    /* 如果是11ac 站点 设置OPMODE NOTIFY标志 */
+    /* ??????11ac ???? ????OPMODE NOTIFY???? */
     if ((OAL_TRUE == mac_mib_get_VHTOptionImplemented(pst_mac_vap))&&
         (((OAL_FALSE == mac_is_wep_enabled(pst_mac_vap))&&
         (OAL_FALSE == mac_is_tkip_only(pst_mac_vap))) || ( WLAN_VAP_MODE_BSS_AP != pst_mac_vap->en_vap_mode)))
@@ -2521,16 +2521,16 @@ oal_void mac_set_ext_capabilities_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffe
     }
 #endif
 #ifdef _PRE_WLAN_FEATURE_HS20
-    /*  如果支持Hotspot2.0的Interwoking标志  */
+    /*  ????????Hotspot2.0??Interwoking????  */
     pst_ext_cap->bit_interworking = 1;
 #else
     pst_ext_cap->bit_interworking = 0;
 #endif
 
     *puc_ie_len = MAC_IE_HDR_LEN + MAC_XCAPS_EX_LEN;
-    /* 驱动如果带有ext cap ie 则使用hera产品接口传下来的信息修改该IE */
+    /* ????????????ext cap ie ??????hera??????????????????????????IE */
 #ifdef _PRE_WLAN_FEATURE_11KV_INTERFACE
-    uc_ie_set_len = *puc_ie_len;    /* IE已经存在 uc_ie_set_len在函数内部会置0 */
+    uc_ie_set_len = *puc_ie_len;    /* IE???????? uc_ie_set_len??????????????0 */
     mac_set_ie_field((oal_void *)(pst_mac_vap->pst_excap_ie_info), puc_buffer, &uc_ie_set_len);
 #endif
 
@@ -2549,7 +2549,7 @@ oal_void  mac_set_vht_capinfo_field_etc(oal_void *pst_vap, oal_uint8 *puc_buffer
     mac_user_stru          *pst_mac_user;
 #endif
 
-    /*********************** VHT 能力信息域 ************************************
+    /*********************** VHT ?????????? ************************************
     ----------------------------------------------------------------------------
      |-----------------------------------------------------------------------|
      | Max    | Supp    | RX   | Short GI| Short  | Tx   |  Rx  |  SU        |
@@ -2575,7 +2575,7 @@ oal_void  mac_set_vht_capinfo_field_etc(oal_void *pst_vap, oal_uint8 *puc_buffer
     ***************************************************************************/
     pst_vht_capinfo->bit_max_mpdu_length         = mac_mib_get_maxmpdu_length(pst_mac_vap);
 
-    /* 设置"所支持的信道宽度集"，0:neither 160 nor 80+80:; 1:160MHz; 2:160/80+80MHz */
+    /* ????"??????????????????"??0:neither 160 nor 80+80:; 1:160MHz; 2:160/80+80MHz */
     pst_vht_capinfo->bit_supported_channel_width = mac_mib_get_VHTChannelWidthOptionImplemented(pst_mac_vap);
 
     pst_vht_capinfo->bit_rx_ldpc                 = mac_mib_get_VHTLDPCCodingOptionImplemented(pst_mac_vap);
@@ -2588,7 +2588,7 @@ oal_void  mac_set_vht_capinfo_field_etc(oal_void *pst_vap, oal_uint8 *puc_buffer
     pst_vht_capinfo->bit_num_bf_ant_supported    = mac_mib_get_VHTBeamformeeNTxSupport(pst_mac_vap) - 1;
 
 #ifdef _PRE_WLAN_FEATURE_M2S
-    /* 参考标杆,该字段根据对端num of sounding和自己的能力取交集*/
+    /* ????????,??????????????num of sounding??????????????????*/
     pst_mac_user = mac_res_get_mac_user_etc(pst_mac_vap->us_assoc_vap_id);
     if(WLAN_VAP_MODE_BSS_STA == pst_mac_vap->en_vap_mode && OAL_PTR_NULL != pst_mac_user)
     {
@@ -2597,7 +2597,7 @@ oal_void  mac_set_vht_capinfo_field_etc(oal_void *pst_vap, oal_uint8 *puc_buffer
     }
 #endif
 
-    /* sounding dim是bfer的能力 */
+    /* sounding dim??bfer?????? */
 #if (WLAN_MAX_NSS_NUM >= WLAN_DOUBLE_NSS)
     pst_vht_capinfo->bit_num_sounding_dim        = mac_mib_get_VHTNumberSoundingDimensions(pst_mac_vap);
 #else
@@ -2612,10 +2612,10 @@ oal_void  mac_set_vht_capinfo_field_etc(oal_void *pst_vap, oal_uint8 *puc_buffer
 
 
      pst_vht_capinfo->bit_vht_link_adaptation    = 0;
-     pst_vht_capinfo->bit_rx_ant_pattern         = 0;   /* 在该关联中不改变天线模式，设为1,；改变则设为0 */
-     pst_vht_capinfo->bit_tx_ant_pattern         = 0;   /* 在该关联中不改变天线模式，设为1,；改变则设为0 */
+     pst_vht_capinfo->bit_rx_ant_pattern         = 0;   /* ??????????????????????????????1,????????????0 */
+     pst_vht_capinfo->bit_tx_ant_pattern         = 0;   /* ??????????????????????????????1,????????????0 */
 
-    /* resv位清0 */
+    /* resv????0 */
     pst_vht_capinfo->bit_resv = 0;
 
     if (OAL_PTR_NULL != g_st_mac_frame_rom_cb.set_vht_capinfo_field_cb)
@@ -2631,7 +2631,7 @@ oal_void  mac_set_vht_supported_mcsset_field_etc(oal_void *pst_vap, oal_uint8 *p
     mac_vap_stru              *pst_mac_vap    = (mac_vap_stru *)pst_vap;
     mac_vht_sup_mcs_set_stru  *pst_vht_mcsset = (mac_vht_sup_mcs_set_stru *)puc_buffer;
 
-    /*********************** VHT 支持的MCS集 ************************************
+    /*********************** VHT ??????MCS?? ************************************
     ----------------------------------------------------------------------------
      |-----------------------------------------------------------------------|
      | Rx MCS Map | Rx Highest Supported | Resv    | Tx MCS Map  |
@@ -2651,7 +2651,7 @@ oal_void  mac_set_vht_supported_mcsset_field_etc(oal_void *pst_vap, oal_uint8 *p
     pst_vht_mcsset->bit_tx_mcs_map      = mac_mib_get_vht_tx_mcs_map(pst_mac_vap);
     pst_vht_mcsset->bit_tx_highest_rate = mac_mib_get_us_tx_highest_rate(pst_mac_vap);
 
-    /* resv清0 */
+    /* resv??0 */
     pst_vht_mcsset->bit_resv  = 0;
     pst_vht_mcsset->bit_resv2 = 0;
 
@@ -2741,7 +2741,7 @@ oal_void  mac_set_vht_opern_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffer, oal
     pst_vht_opern = (mac_vht_opern_stru *)puc_buffer;
 
     /*
-        uc_channel_width的取值，0 -- 20/40M, 1 -- 80M, 2 -- 160M, 3 -- 80+80M
+        uc_channel_width????????0 -- 20/40M, 1 -- 80M, 2 -- 160M, 3 -- 80+80M
     */
     if ((pst_mac_vap->st_channel.en_bandwidth >= WLAN_BAND_WIDTH_80PLUSPLUS) && (pst_mac_vap->st_channel.en_bandwidth <= WLAN_BAND_WIDTH_80MINUSMINUS))
     {
@@ -2762,49 +2762,49 @@ oal_void  mac_set_vht_opern_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffer, oal
     {
 
 #ifdef _PRE_WLAN_FEATURE_160M
-        /* 从20信道+1, 从40信道+1, 从80信道+1 */
+        /* ??20????+1, ??40????+1, ??80????+1 */
         case WLAN_BAND_WIDTH_160PLUSPLUSPLUS:
             pst_vht_opern->uc_channel_center_freq_seg0 = pst_mac_vap->st_channel.uc_chan_number + 6;
             pst_vht_opern->uc_channel_center_freq_seg1 = pst_mac_vap->st_channel.uc_chan_number + 14;
         break;
 
-        /* 从20信道+1, 从40信道+1, 从80信道-1 */
+        /* ??20????+1, ??40????+1, ??80????-1 */
         case WLAN_BAND_WIDTH_160PLUSPLUSMINUS:
             pst_vht_opern->uc_channel_center_freq_seg0 = pst_mac_vap->st_channel.uc_chan_number + 6;
             pst_vht_opern->uc_channel_center_freq_seg1 = pst_mac_vap->st_channel.uc_chan_number - 2;
         break;
 
-        /* 从20信道+1, 从40信道-1, 从80信道+1 */
+        /* ??20????+1, ??40????-1, ??80????+1 */
         case WLAN_BAND_WIDTH_160PLUSMINUSPLUS:
             pst_vht_opern->uc_channel_center_freq_seg0 = pst_mac_vap->st_channel.uc_chan_number - 2;
             pst_vht_opern->uc_channel_center_freq_seg1 = pst_mac_vap->st_channel.uc_chan_number + 6;
         break;
 
-        /* 从20信道+1, 从40信道-1, 从80信道-1 */
+        /* ??20????+1, ??40????-1, ??80????-1 */
         case WLAN_BAND_WIDTH_160PLUSMINUSMINUS:
             pst_vht_opern->uc_channel_center_freq_seg0 = pst_mac_vap->st_channel.uc_chan_number - 2;
             pst_vht_opern->uc_channel_center_freq_seg1 = pst_mac_vap->st_channel.uc_chan_number - 10;
         break;
 
-        /* 从20信道-1, 从40信道+1, 从80信道+1 */
+        /* ??20????-1, ??40????+1, ??80????+1 */
         case WLAN_BAND_WIDTH_160MINUSPLUSPLUS:
             pst_vht_opern->uc_channel_center_freq_seg0 = pst_mac_vap->st_channel.uc_chan_number + 2;
             pst_vht_opern->uc_channel_center_freq_seg1 = pst_mac_vap->st_channel.uc_chan_number + 10;
         break;
 
-        /* 从20信道-1, 从40信道+1, 从80信道-1 */
+        /* ??20????-1, ??40????+1, ??80????-1 */
         case WLAN_BAND_WIDTH_160MINUSPLUSMINUS:
             pst_vht_opern->uc_channel_center_freq_seg0 = pst_mac_vap->st_channel.uc_chan_number + 2;
             pst_vht_opern->uc_channel_center_freq_seg1 = pst_mac_vap->st_channel.uc_chan_number - 6;
         break;
 
-        /* 从20信道-1, 从40信道-1, 从80信道+1 */
+        /* ??20????-1, ??40????-1, ??80????+1 */
         case WLAN_BAND_WIDTH_160MINUSMINUSPLUS:
             pst_vht_opern->uc_channel_center_freq_seg0 = pst_mac_vap->st_channel.uc_chan_number - 6;
             pst_vht_opern->uc_channel_center_freq_seg1 = pst_mac_vap->st_channel.uc_chan_number + 2;
         break;
 
-        /* 从20信道-1, 从40信道-1, 从80信道-1 */
+        /* ??20????-1, ??40????-1, ??80????-1 */
         case WLAN_BAND_WIDTH_160MINUSMINUSMINUS:
             pst_vht_opern->uc_channel_center_freq_seg0 = pst_mac_vap->st_channel.uc_chan_number - 6;
             pst_vht_opern->uc_channel_center_freq_seg1 = pst_mac_vap->st_channel.uc_chan_number - 14;
@@ -2812,60 +2812,60 @@ oal_void  mac_set_vht_opern_ie_etc(oal_void *pst_vap, oal_uint8 *puc_buffer, oal
 #endif
         case WLAN_BAND_WIDTH_80PLUSPLUS:
             /***********************************************************************
-            | 主20 | 从20 | 从40       |
+            | ??20 | ??20 | ??40       |
                           |
-                          |中心频率相对于主20偏6个信道
+                          |????????????????20??6??????
             ************************************************************************/
             pst_vht_opern->uc_channel_center_freq_seg0 = pst_mac_vap->st_channel.uc_chan_number + 6;
             break;
 
         case WLAN_BAND_WIDTH_80PLUSMINUS:
             /***********************************************************************
-            | 从40        | 主20 | 从20 |
+            | ??40        | ??20 | ??20 |
                           |
-                          |中心频率相对于主20偏-2个信道
+                          |????????????????20??-2??????
             ************************************************************************/
             pst_vht_opern->uc_channel_center_freq_seg0 = pst_mac_vap->st_channel.uc_chan_number - 2;
             break;
 
         case WLAN_BAND_WIDTH_80MINUSPLUS:
             /***********************************************************************
-            | 从20 | 主20 | 从40       |
+            | ??20 | ??20 | ??40       |
                           |
-                          |中心频率相对于主20偏2个信道
+                          |????????????????20??2??????
             ************************************************************************/
             pst_vht_opern->uc_channel_center_freq_seg0 = pst_mac_vap->st_channel.uc_chan_number + 2;
             break;
 
         case WLAN_BAND_WIDTH_80MINUSMINUS:
             /***********************************************************************
-            | 从40        | 从20 | 主20 |
+            | ??40        | ??20 | ??20 |
                           |
-                          |中心频率相对于主20偏-6个信道
+                          |????????????????20??-6??????
             ************************************************************************/
             pst_vht_opern->uc_channel_center_freq_seg0 = pst_mac_vap->st_channel.uc_chan_number - 6;
             break;
 
         case WLAN_BAND_WIDTH_40MINUS:
             /***********************************************************************
-            | 从20 | 主20 |
+            | ??20 | ??20 |
             |
-            | 中心频率相对于主20偏-2个信道
+            | ????????????????20??-2??????
             ************************************************************************/
             pst_vht_opern->uc_channel_center_freq_seg0 = pst_mac_vap->st_channel.uc_chan_number - 2;
             break;
 
         case WLAN_BAND_WIDTH_40PLUS:
             /***********************************************************************
-            | 主20 | 从20 |
+            | ??20 | ??20 |
             |
-            | 中心频率相对于主20偏+2个信道
+            | ????????????????20??+2??????
             ************************************************************************/
             pst_vht_opern->uc_channel_center_freq_seg0 = pst_mac_vap->st_channel.uc_chan_number + 2;
             break;
 
         case WLAN_BAND_WIDTH_20M:
-            /* 中心频率就是主信道频率   */
+            /* ??????????????????????   */
             pst_vht_opern->uc_channel_center_freq_seg0 = pst_mac_vap->st_channel.uc_chan_number;
             break;
 
@@ -2904,7 +2904,7 @@ oal_uint32  mac_set_csa_ie_etc(oal_uint8 uc_mode,oal_uint8 uc_channel, oal_uint8
     /* | 1          | 1      | 1                | 1        | 1             | */
     /* --------------------------------------------------------------------- */
 
-   /* 设置Channel Switch Announcement Element */
+   /* ????Channel Switch Announcement Element */
     puc_buffer[0] = MAC_EID_CHANSWITCHANN;
     puc_buffer[1] = MAC_CHANSWITCHANN_LEN;
     puc_buffer[2] = uc_mode;                       /* ask all associated STAs to stop transmission */
@@ -2932,7 +2932,7 @@ oal_uint32  mac_set_csa_bw_ie(oal_void *pst_vap, oal_uint8 *puc_buffer, oal_uint
     en_bw       = pst_mac_vap->st_ch_switch_info.en_announced_bandwidth;
     uc_channel  = pst_mac_vap->st_ch_switch_info.uc_announced_channel;
     uc_len      = 0;
-    /* 封装Second channel offset IE */
+    /* ????Second channel offset IE */
     if (OAL_SUCC != mac_set_second_channel_offset_ie_etc(en_bw, puc_buffer, &uc_len))
     {
         OAM_ERROR_LOG0(pst_mac_vap->uc_vap_id, OAM_SF_CSA, "{mac_set_csa_bw_ie::mac_set_second_channel_offset_ie_etc failed}");
@@ -2980,21 +2980,21 @@ oal_uint8*  mac_get_ssid_etc(oal_uint8 *puc_beacon_body, oal_int32 l_frame_body_
            Octets:  |1          | 1      | 0~32|
                     ----------------------------
     ***************************************************************************/
-    /* ssid的长度初始赋值为0 */
+    /* ssid????????????????0 */
     *puc_ssid_len = 0;
 
-    /* 检测beacon帧或者probe rsp帧的长度的合法性 */
+    /* ????beacon??????probe rsp???????????????? */
     if (l_frame_body_len <= us_offset)
     {
         OAM_WARNING_LOG0(0, OAM_SF_ANY, "{mac_get_ssid_etc:: the length of beacon/probe rsp frame body is invalid.}");
         return OAL_PTR_NULL;
     }
 
-    /* 查找ssid的ie */
+    /* ????ssid??ie */
     puc_ssid_ie = mac_find_ie_etc(MAC_EID_SSID, (puc_beacon_body + us_offset), (oal_int32)(l_frame_body_len - us_offset));
     if ((OAL_PTR_NULL != puc_ssid_ie) && (puc_ssid_ie[1] < WLAN_SSID_MAX_LEN))
     {
-        /* 获取ssid ie的长度 */
+        /* ????ssid ie?????? */
         *puc_ssid_len = puc_ssid_ie[1];
 
         return (oal_uint8 *)(puc_ssid_ie + MAC_IE_HDR_LEN);
@@ -3139,7 +3139,7 @@ oal_uint16 mac_get_rsn_capability_etc(const oal_uint8 *puc_rsn_ie)
     }
 
     us_index          = 8;
-    /*获取Pairwise Suite Count*/
+    /*????Pairwise Suite Count*/
     us_pairwise_count = OAL_MAKE_WORD16(puc_rsn_ie[us_index] ,puc_rsn_ie[us_index + 1]);
     if (us_pairwise_count > MAC_PAIRWISE_CIPHER_SUITES_NUM)
     {
@@ -3181,7 +3181,7 @@ oal_uint16 mac_get_rsn_capability_etc(const oal_uint8 *puc_rsn_ie)
         us_index += 4;
     }
 
-    /* 越过RSN Capabilities */
+    /* ????RSN Capabilities */
     if(OAL_FALSE == MAC_IE_REAMIN_LEN_IS_ENOUGH(&puc_rsn_ie[2], &puc_rsn_ie[us_index], uc_ie_len, 2))
     {
         return 0;
@@ -3219,7 +3219,7 @@ oal_void mac_set_power_cap_ie_etc(oal_uint8 *pst_vap, oal_uint8 *puc_buffer, oal
     *puc_buffer       = MAC_EID_PWRCAP;
     *(puc_buffer + 1) = MAC_PWR_CAP_LEN;
 
-    /* 成功获取管制域信息则根据国家码和TPC设置最大和最小发射功率，否则默认为0 */
+    /* ????????????????????????????????TPC??????????????????????????????????0 */
     pst_regclass_info = mac_get_channel_num_rc_info_etc(pst_mac_vap->st_channel.en_band, pst_mac_vap->st_channel.uc_chan_number);
 
     if (OAL_PTR_NULL != pst_regclass_info)
@@ -3253,7 +3253,7 @@ oal_void mac_set_supported_channel_ie_etc(oal_uint8 *pst_vap, oal_uint8 *puc_buf
     }
 
     /********************************************************************************************
-            长度不定，信道号与信道数成对出现
+            ????????????????????????????????
             ------------------------------------------------------------------------------------
             |ElementID | Length | Fisrt Channel Number| Number of Channels|
             ------------------------------------------------------------------------------------
@@ -3261,7 +3261,7 @@ oal_void mac_set_supported_channel_ie_etc(oal_uint8 *pst_vap, oal_uint8 *puc_buf
             -------------------------------------------------------------------------------------
 
     *********************************************************************************************/
-    /* 根据支持的频段获取最大信道个数 */
+    /* ?????????????????????????????? */
     if (WLAN_BAND_2G == pst_mac_vap->st_channel.en_band)
     {
         uc_channel_max_num = (oal_uint8)MAC_CHANNEL_FREQ_2_BUTT;
@@ -3280,14 +3280,14 @@ oal_void mac_set_supported_channel_ie_etc(oal_uint8 *pst_vap, oal_uint8 *puc_buf
      puc_buffer++;
      puc_ie_len_buffer = puc_buffer;
 
-    /* 填写信道信息 */
+    /* ???????????? */
     for (uc_channel_idx = 0; uc_channel_idx < uc_channel_max_num; uc_channel_idx++)
     {
-        /* 修改管制域结构体后，需要增加该是否支持信号的判断 */
+        /* ???????????????????????????????????????????????? */
         if (OAL_SUCC == mac_is_channel_idx_valid_etc(pst_mac_vap->st_channel.en_band, uc_channel_idx))
         {
             uc_channel_idx_cnt++;
-            /*uc_channel_idx_cnt为1的时候表示是第一个可用信道，需要写到Fisrt Channel Number*/
+            /*uc_channel_idx_cnt??1????????????????????????????????????Fisrt Channel Number*/
             if(1 == uc_channel_idx_cnt)
             {
                 puc_buffer++;
@@ -3297,7 +3297,7 @@ oal_void mac_set_supported_channel_ie_etc(oal_uint8 *pst_vap, oal_uint8 *puc_buf
             }
             else if((uc_channel_max_num - 1) == uc_channel_idx)
             {
-                /*将Number of Channels写入帧体中*/
+                /*??Number of Channels??????????*/
                 puc_buffer++;
                *puc_buffer = uc_channel_idx_cnt;
 
@@ -3306,16 +3306,16 @@ oal_void mac_set_supported_channel_ie_etc(oal_uint8 *pst_vap, oal_uint8 *puc_buf
         }
         else
         {
-            /*uc_channel_idx_cnt不为0的时候表示之前有可用信道，需要将可用信道的长度写到帧体中*/
+            /*uc_channel_idx_cnt????0????????????????????????????????????????????????????????*/
             if(0 != uc_channel_idx_cnt)
             {
-                /*将Number of Channels写入帧体中*/
+                /*??Number of Channels??????????*/
                 puc_buffer++;
                *puc_buffer = uc_channel_idx_cnt;
 
                 us_channel_ie_len += 2;
             }
-            /*将Number of Channels统计清零*/
+            /*??Number of Channels????????*/
             uc_channel_idx_cnt = 0;
         }
     }
@@ -3338,7 +3338,7 @@ oal_void mac_set_wmm_ie_sta_etc(oal_uint8 *pst_vap, oal_uint8 *puc_buffer, oal_u
     /* | OUI   | OUI Type | OUI Subtype | Version field | QoS Info | */
     /* ------------------------------------------------------------- */
 
-    /* 判断STA是否支持WMM */
+    /* ????STA????????WMM */
     if (OAL_TRUE != mac_mib_get_dot11QosOptionImplemented(pst_mac_vap))
     {
         *puc_ie_len = 0;
@@ -3380,7 +3380,7 @@ oal_void mac_set_tspec_info_field(oal_uint8 *pst_vap, mac_wmm_tspec_stru *pst_ad
     mac_wmm_tspec_stru    *pst_tspec_info;
     /**************************************************************************************************/
 
-    /* TSPEC字段:
+    /* TSPEC????:
               ----------------------------------------------------------------------------------------
               |TS Info|Nominal MSDU Size|Max MSDU Size|Min Serv Itvl|Max Serv Itvl|
               ----------------------------------------------------------------------------------------
@@ -3395,7 +3395,7 @@ oal_void mac_set_tspec_info_field(oal_uint8 *pst_vap, mac_wmm_tspec_stru *pst_ad
      Octets:  |4             |4         | 4         | 4          |  2                   |2          |
               ----------------------------------------------------------------------------------------
 
-     TS info字段:
+     TS info????:
               ----------------------------------------------------------------------------------------
               |Reserved |TSID |Direction |1 |0 |Reserved |PSB |UP |Reserved |Reserved |Reserved |
               ----------------------------------------------------------------------------------------
@@ -3403,7 +3403,7 @@ oal_void mac_set_tspec_info_field(oal_uint8 *pst_vap, mac_wmm_tspec_stru *pst_ad
               ----------------------------------------------------------------------------------------
    ***************************************************************************************************/
 
-    /* 初始化TSPEC结构内存信息 */
+    /* ??????TSPEC???????????? */
     OAL_MEMZERO(puc_buffer, MAC_WMMAC_TSPEC_LEN);
 
     pst_tspec_info = (mac_wmm_tspec_stru *)(puc_buffer); //TSPEC Body
@@ -3429,7 +3429,7 @@ oal_uint16 mac_set_wmmac_ie_sta_etc(oal_uint8 *pst_vap, oal_uint8 *puc_buffer, m
     oal_uint8            uc_index;
 
     /************************************************************************************/
-    /*                                Set WMM TSPEC 信息:                               */
+    /*                                Set WMM TSPEC ????:                               */
     /*       ---------------------------------------------------------------------------
              |ID | Length| OUI |OUI Type| OUI subtype| Version| TSPEC body|
              ---------------------------------------------------------------------------
@@ -3520,13 +3520,13 @@ oal_uint32  mac_check_mac_privacy_etc(oal_uint16 us_cap_info,oal_uint8 *pst_vap)
 
     if (OAL_TRUE == mac_mib_get_privacyinvoked(pst_mac_vap))
     {
-        /* 该VAP有Privacy invoked但其他VAP没有 */
+        /* ??VAP??Privacy invoked??????VAP???? */
         if (pst_cap_info->bit_privacy == 0)
         {
             return (oal_uint32)OAL_FALSE;
         }
     }
-    /* 考虑兼容性，当vap不支持加密时，不检查用户的能力*/
+    /* ??????????????vap??????????????????????????????*/
 
     return (oal_uint32)OAL_TRUE;
 
@@ -3589,7 +3589,7 @@ oal_void mac_add_wps_ie_etc(oal_void *pst_vap,
         return;
     }
 
-    /* 将WPS ie 信息拷贝到buffer 中 */
+    /* ??WPS ie ??????????buffer ?? */
     oal_memcopy(puc_buffer, puc_wps_ie, puc_wps_ie[1] + MAC_IE_HDR_LEN);
     *pus_ie_len = puc_wps_ie[1] + MAC_IE_HDR_LEN;
 
@@ -3611,14 +3611,14 @@ oal_void mac_set_opmode_field_etc(oal_uint8 *pst_vap, oal_uint8 *puc_buffer, wla
     /*|Channel Width |Dynamic Extended NSS BW |Rx Nss  |Rx Nss Type|*/
     /*--------------------------------------------------------------*/
     /****************************************************************/
-    /* bit_rx_nss_type目前写定0即可，后续出现三流以上，但是txbf流小于三流时，才需要发送1类型 再扩展TBD */
+    /* bit_rx_nss_type????????0????????????????????????????txbf????????????????????????1???? ??????TBD */
     OAL_MEMZERO(pst_opmode_notify, OAL_SIZEOF(mac_opmode_notify_stru));
 
     mac_vap_get_bandwidth_cap_etc(pst_mac_vap, &en_cp_bw);
 
     pst_opmode_notify->bit_channel_width = en_cp_bw;
 
-    /* 要切换到的流，采用vap下的nss能力的话，需要提前置vap的nss能力，接口不灵活，增加入参，提高场景可扩展性 */
+    /* ??????????????????vap????nss????????????????????vap??nss???????????????????????????????????????????? */
     pst_opmode_notify->bit_rx_nss        = en_nss;
     pst_opmode_notify->bit_rx_nss_type   = 0;
 }
@@ -3666,7 +3666,7 @@ wlan_pmf_cap_status_uint8 mac_get_pmf_cap_etc(oal_uint8 *puc_ie, oal_uint32 ul_i
         return MAC_PMF_DISABLED;
     }
 
-    /* 查找RSN信息元素,如果没有RSN信息元素,则按照不支持处理*/
+    /* ????RSN????????,????????RSN????????,????????????????*/
     //puc_rsn_ie = mac_get_rsn_ie(puc_ie, ul_ie_len, 0);
     puc_rsn_ie = mac_find_ie_etc(MAC_EID_RSN, puc_ie, (oal_int32)(ul_ie_len));
     if (OAL_PTR_NULL == puc_rsn_ie)
@@ -3674,7 +3674,7 @@ wlan_pmf_cap_status_uint8 mac_get_pmf_cap_etc(oal_uint8 *puc_ie, oal_uint32 ul_i
         return MAC_PMF_DISABLED;
     }
 
-    /* 根据RSN信息元素, 判断RSN能力是否匹配*/
+    /* ????RSN????????, ????RSN????????????*/
     us_rsn_cap = mac_get_rsn_capability_etc(puc_rsn_ie);
     if ((us_rsn_cap & BIT6) && (us_rsn_cap & BIT7))
     {
@@ -3769,7 +3769,7 @@ oal_void mac_set_rde_ie_etc(oal_void *pst_mac_vap, oal_uint8 *puc_buffer, oal_ui
     *puc_buffer       = MAC_EID_RDE;
     *(puc_buffer + 1) = 4;
     *(puc_buffer + 2) = 0;
-    /*TBD:count对应RDE后跟随的RIC descriptor IE个数*/
+    /*TBD:count????RDE????????RIC descriptor IE????*/
     *(puc_buffer + 3) = 0;
     *(puc_buffer + 4) = 0;
     *(puc_buffer + 5) = 0;
@@ -3841,7 +3841,7 @@ oal_void mac_set_rrm_enabled_cap_field_etc(oal_void *pst_vap, oal_uint8 *puc_buf
     if(OAL_FALSE == mac_mib_get_dot11RadioMeasurementActivated(pst_mac_vap))
     {
         *puc_ie_len = 0;
-        /* 驱动如果不带有rrm enabled ie 则使用hera产品接口传下来的信息增加该IE */
+        /* ??????????????rrm enabled ie ??????hera??????????????????????????IE */
 #ifdef _PRE_WLAN_FEATURE_11KV_INTERFACE
         mac_set_ie_field((oal_void *)(pst_mac_vap->pst_rrm_ie_info), puc_buffer, &uc_ie_set_len);
         *puc_ie_len += uc_ie_set_len;
@@ -3858,7 +3858,7 @@ oal_void mac_set_rrm_enabled_cap_field_etc(oal_void *pst_vap, oal_uint8 *puc_buf
     OAL_MEMZERO(pst_rrm_enabled_cap_ie, OAL_SIZEOF(oal_rrm_enabled_cap_ie_stru));
 
 #if defined(_PRE_WLAN_FEATURE_11K) || defined(_PRE_WLAN_FEATURE_11K_EXTERN)
-    /* 只有bit0 4 5 6位置1 */
+    /* ????bit0 4 5 6????1 */
     pst_rrm_enabled_cap_ie->bit_link_cap        = mac_mib_get_dot11RMLinkMeasurementActivated(pst_mac_vap);
     pst_rrm_enabled_cap_ie->bit_bcn_passive_cap = mac_mib_get_dot11RMBeaconPassiveMeasurementActivated(pst_vap);
     pst_rrm_enabled_cap_ie->bit_bcn_active_cap  = mac_mib_get_dot11RMBeaconActiveMeasurementActivated(pst_vap);
@@ -3870,8 +3870,8 @@ oal_void mac_set_rrm_enabled_cap_field_etc(oal_void *pst_vap, oal_uint8 *puc_buf
     pst_rrm_enabled_cap_ie->bit_neighbor_rpt_cap= mac_mib_get_dot11RMNeighborReportActivated(pst_vap);
 #endif
 #if (defined(_PRE_WLAN_FEATURE_11K) && (defined(_PRE_PRODUCT_ID_HI110X_HOST) || defined(_PRE_PRODUCT_ID_HI110X_DEV)))
-    /*st_wlan_mib_sta_config.en_dot11RMNeighborReportActivated ROM化,对于03,
-      如果11k打开,直接设置为 1  */
+    /*st_wlan_mib_sta_config.en_dot11RMNeighborReportActivated ROM??,????03,
+      ????11k????,?????????? 1  */
     if(IS_LEGACY_STA(pst_mac_vap))
     {
         pst_rrm_enabled_cap_ie->bit_neighbor_rpt_cap = 1;
@@ -3883,9 +3883,9 @@ oal_void mac_set_rrm_enabled_cap_field_etc(oal_void *pst_vap, oal_uint8 *puc_buf
 #endif
 
     *puc_ie_len = MAC_IE_HDR_LEN + MAC_RRM_ENABLE_CAP_IE_LEN;
-    /* 驱动如果带有rrm enabled ie 则使用hera产品接口传下来的信息修改该IE */
+    /* ????????????rrm enabled ie ??????hera??????????????????????????IE */
 #ifdef _PRE_WLAN_FEATURE_11KV_INTERFACE
-    uc_ie_set_len = *puc_ie_len;    /* IE已经存在 uc_ie_set_len在函数内部会置0 */
+    uc_ie_set_len = *puc_ie_len;    /* IE???????? uc_ie_set_len??????????????0 */
     mac_set_ie_field((oal_void *)(pst_mac_vap->pst_rrm_ie_info), puc_buffer, &uc_ie_set_len);
 #endif
 }
@@ -3966,19 +3966,19 @@ oal_uint16  mac_encap_2040_coext_mgmt_etc(oal_void *pst_vap, oal_netbuf_stru *ps
     /*                                                                       */
     /*************************************************************************/
 
-    /* 设置 Frame Control field */
+    /* ???? Frame Control field */
     mac_hdr_set_frame_control(puc_mac_header, WLAN_PROTOCOL_VERSION| WLAN_FC0_TYPE_MGT | WLAN_FC0_SUBTYPE_ACTION);
 
-    /* 设置分片序号为0 */
+    /* ??????????????0 */
     mac_hdr_set_fragment_number(puc_mac_header, 0);
 
-    /* 设置 address1(接收端): AP MAC地址 (BSSID)*/
+    /* ???? address1(??????): AP MAC???? (BSSID)*/
     oal_set_mac_addr(puc_mac_header + WLAN_HDR_ADDR1_OFFSET, pst_mac_vap->auc_bssid);
 
-    /* 设置 address2(发送端): dot11StationID */
+    /* ???? address2(??????): dot11StationID */
     oal_set_mac_addr(puc_mac_header + WLAN_HDR_ADDR2_OFFSET, mac_mib_get_StationID(pst_mac_vap));
 
-    /* 设置 address3: AP MAC地址 (BSSID) */
+    /* ???? address3: AP MAC???? (BSSID) */
     oal_set_mac_addr(puc_mac_header + WLAN_HDR_ADDR3_OFFSET, pst_mac_vap->auc_bssid);
 
     /*************************************************************************************/
@@ -3994,13 +3994,13 @@ oal_uint16  mac_encap_2040_coext_mgmt_etc(oal_void *pst_vap, oal_netbuf_stru *ps
     puc_payload_addr[us_index++] = MAC_ACTION_CATEGORY_PUBLIC;           /* Category */
     puc_payload_addr[us_index++] = MAC_PUB_COEXT_MGMT;                   /* Public Action */
 
-    /* 封装20/40 BSS Coexistence element */
+    /* ????20/40 BSS Coexistence element */
     puc_payload_addr[us_index++] = MAC_EID_2040_COEXT;                   /* Element ID */
     puc_payload_addr[us_index++] = MAC_2040_COEX_LEN;                    /* Length */
     puc_payload_addr[us_index++] = uc_coext_info;                        /* 20/40 BSS Coexistence Information field */
 
-    /* 封装20/40 BSS Intolerant Channel Report element */
-    /* 只有当STA检测到Trigger Event A时，才包含Operating Class，参见802.11n 10.15.12 */
+    /* ????20/40 BSS Intolerant Channel Report element */
+    /* ??????STA??????Trigger Event A??????????Operating Class??????802.11n 10.15.12 */
     puc_payload_addr[us_index++] = MAC_EID_2040_INTOLCHREPORT;       /* Element ID */
     us_ie_len_idx          = us_index;
     puc_payload_addr[us_index++] = MAC_2040_INTOLCHREPORT_LEN_MIN;   /* Length */
@@ -4021,7 +4021,7 @@ oal_uint16  mac_encap_2040_coext_mgmt_etc(oal_void *pst_vap, oal_netbuf_stru *ps
         }
     }
 
-    return (oal_uint16)(us_index + MAC_80211_FRAME_LEN);      /* [false alarm]:fortify误报,返回是无符号数  */
+    return (oal_uint16)(us_index + MAC_80211_FRAME_LEN);      /* [false alarm]:fortify????,??????????????  */
 }
 
 oal_bool_enum_uint8 mac_frame_is_null_data(oal_netbuf_stru *pst_net_buf)
