@@ -348,7 +348,7 @@ static void act_cdev_setup( struct act_cdev *dev,  int index)
 
     if (NULL == dev)
     {
-        return -EINVAL;
+        return;
     }
 
     printk(KERN_INFO "Enter act_cdev_setup.");
