@@ -54,11 +54,10 @@ extern "C"
 #endif
 
 #include "mdrv_icc.h"
+#include "drv_comm.h"
 #include "mdrv_udi_common.h"
 
 #define UDI_BUILD_DEV_ID(dev, type) ((dev << 8) | (type & 0x00ff))
-
-typedef int UDI_HANDLE;
 
 typedef enum tagUDI_DEVICE_MAIN_ID_E
 {

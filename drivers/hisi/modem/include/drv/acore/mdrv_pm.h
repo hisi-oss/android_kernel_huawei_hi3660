@@ -54,6 +54,7 @@ extern "C"
 #endif
 
 #include "mdrv_public.h"
+#include "drv_comm.h"
 #include <mdrv_pm_common.h>
 
 typedef enum tagPWC_COMM_CHANNEL_E
@@ -234,7 +235,6 @@ int mdrv_pm_disable_pllclk (PWC_COMM_MODE_E enCommMode, PWC_COMM_MODULE_E enComm
 *****************************************************************************/
 int mdrv_pm_get_pllclk_status (PWC_COMM_MODE_E enCommMode, PWC_COMM_MODULE_E enCommModule, PWC_COMM_MODEM_E enCommModem,PWC_COMM_CHANNEL_E enChannel);
 
-typedef unsigned int (*PWRCTRLFUNCPTR)(unsigned int arg);
 /*****************************************************************************
 * ?? ?? ??  : mdrv_pm_register_ccpuload_cb
 *
