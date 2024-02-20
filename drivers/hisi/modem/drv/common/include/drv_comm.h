@@ -71,7 +71,7 @@ typedef unsigned long long  BSP_U64;
 #else
 typedef double              BSP_U64;
 #endif
-typedef unsigned int        BSP_U32;
+#include "osl_types.h"
 typedef unsigned short      BSP_U16;
 typedef unsigned char       BSP_U8;
 
