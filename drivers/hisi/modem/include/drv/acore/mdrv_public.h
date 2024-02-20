@@ -57,9 +57,9 @@ extern "C"
 #define MDRV_OK                  (0)
 #define MDRV_ERROR               (-1)
 
+#include "drv_comm.h"
+
 typedef int (*FUNCPTR_1)(int);
-typedef int  (*pFUNCPTR)(void);
-typedef void (*VOIDFUNCPTR)(unsigned int );
 
 #ifdef __cplusplus
 }
