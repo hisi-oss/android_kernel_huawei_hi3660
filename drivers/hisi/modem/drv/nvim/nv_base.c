@@ -700,9 +700,6 @@ void bsp_nvm_icc_task(void* parm)
     nv_cmd_req *msg;
     nv_item_info_t *nv_info;
 	
-    /* coverity[self_assign] */
-    parm = parm;
-
     /* coverity[no_escape] */
     for(;;)
     {
@@ -1131,9 +1128,6 @@ out:
 static void bsp_nvm_exit(void)
 {
     nv_global_info_s* ddr_info = (nv_global_info_s*)NV_GLOBAL_INFO_ADDR;
-
-    /* coverity[self_assign] */
-    ddr_info = ddr_info;
 
     /*??????????*/
     (void)bsp_nvm_flush();
