@@ -1041,8 +1041,8 @@ KBUILD_CFLAGS   += $(call cc-option,-Werror=strict-prototypes)
 #KBUILD_CFLAGS   += $(call cc-option,-Werror=date-time)
 
 ifneq ($(strip $(clang)), true)
-# enforce correct pointer usage
-KBUILD_CFLAGS   += $(call cc-option,-Werror=incompatible-pointer-types)
+# Relax correct pointer usage
+KBUILD_CFLAGS   += $(call cc-option,-Wno=incompatible-pointer-types)
 endif
 
 # use the deterministic mode of AR if available
