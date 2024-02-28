@@ -1477,50 +1477,9 @@ free_mem:
 	g_session_root_key = NULL;
 	return ret;
 }
-extern char __cfc_rules_start[];
-extern char __cfc_rules_stop[];
-extern char __cfc_area_start[];
-extern char __cfc_area_stop[];
-unsigned int *cfc_seqlock;
 
-static void smc_set_cfc_info(void)
-{
-	struct cfc_rules_pos {
-		u64 magic;
-		u64 address;
-		u64 size;
-		u64 cfc_area_start;
-		u64 cfc_area_stop;
-	} __attribute__((packed)) *buffer = (void *)(cmd_data->out);
-
-	buffer->magic = 0xCFC00CFC00CFCCFC;
-	buffer->address = virt_to_phys(__cfc_rules_start);
-	buffer->size = (void *)__cfc_rules_stop - (void *)__cfc_rules_start;
-	buffer->cfc_area_start = virt_to_phys(__cfc_area_start);
-	buffer->cfc_area_stop = virt_to_phys(__cfc_area_stop);
-	cfc_seqlock = (u32 *)__cfc_rules_start;
-	__dma_map_area((void *)__cfc_area_start,
-			       (__cfc_area_stop - __cfc_area_start),
-			       DMA_TO_DEVICE);
-}
-
-/* Sync with trustedcore_src TEE/cfc.h */
-enum cfc_info_to_linux {
-       CFC_TO_LINUX_IS_ENABLED = 0xCFC0CFC1,
-       CFC_TO_LINUX_IS_DISABLED = 0xCFC0CFC2,
-};
-
-/* default is false */
-bool cfc_is_enabled;
-
-static void smc_get_cfc_info(void)
-{
-	uint32_t cfc_flag = ((uint32_t *)(cmd_data->out))[0];
-
-	if (cfc_flag == (uint32_t) CFC_TO_LINUX_IS_ENABLED)
-		cfc_is_enabled = true;
-}
-
+static inline void smc_set_cfc_info(void) {}
+static inline void smc_get_cfc_info(void) {}
 
 #define compile_time_assert(cond, msg) \
     typedef char ASSERT_##msg[(cond) ? 1 : -1]

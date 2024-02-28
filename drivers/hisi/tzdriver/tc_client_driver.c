@@ -91,7 +91,6 @@
 
 #include <linux/namei.h>
 
-#include <linux/random.h>
 #include <linux/crc32.h>
 #include "security_auth_enhance.h"
 
@@ -618,27 +617,10 @@ static int tee_init_crypto(char *hash_type)
 	return 0;
 }
 
-static int
+static inline int
 tee_cfc_rehash(struct shash_desc *shash, unsigned char *digest)
 {
-	int rc;
-	unsigned int rand_val;
-
-	rc = crypto_shash_init(shash);
-	if (rc)
-		return rc;
-	rc = crypto_shash_update(shash, digest, MAX_SHA_256_SZ);
-	if (rc)
-		return rc;
-
-	get_random_bytes((void *)&rand_val, sizeof(unsigned int));
-	rc = crypto_shash_update(shash, (void *)&rand_val, sizeof(unsigned int));
-	CFC_SEND_DATA(tee_calc_task_hash_rand_val, rand_val);
-	rand_val = 0;
-	if (rc)
-		return rc;
-
-	return crypto_shash_final(shash, digest);
+	return 0;
 }
 
 /* Calculate the SHA256 file digest */
