@@ -1,7 +1,7 @@
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include <linux/delay.h>
 #include <linux/rtc.h>
@@ -25,7 +25,7 @@
 #include "oam_rdr.h"
 
 /*****************************************************************************
-  3 全局变量定义
+  3 ????????????
 *****************************************************************************/
 struct st_exception_info *g_pst_exception_info = NULL;
 struct sdio_dump_bcpu_buff st_bcpu_dump_buff = {NULL, 0, 0};
@@ -229,7 +229,7 @@ exception_bcpu_dump_msg g_sdio_read_bcpu_mem_info[BFGX_SHARE_RAM_NUM] =
 };
 exception_bcpu_dump_msg g_sdio_read_bcpu_priv_reg_info[BFGX_PRIV_REG_NUM] =
 {
-	/*私有寄存器只能拷贝2个*/
+	/*??????????????????2??*/
     //{GNSS_SUB_FILE_NAME,             BFGX_GNSS_SUB_ADDR,             ALIGN_2_BYTE, BFGX_GNSS_SUB_LEN},
     {B_CTL_WDT_TIMER_UART_FILE_NAME, BFGX_B_CTL_WDT_TIMER_UART_ADDR, ALIGN_2_BYTE, BFGX_B_CTL_WDT_TIMER_UART_LEN},
     {IR_SUB_FILE_NAME,               BFGX_IR_SUB_ADDR,               ALIGN_2_BYTE, BFGX_IR_SUB_LEN},
@@ -265,7 +265,7 @@ memdump_info_t bcpu_memdump_cfg;
 memdump_info_t wcpu_memdump_cfg;
 #endif
 /*****************************************************************************
-  2 函数实现
+  2 ????????
 *****************************************************************************/
 void  bfgx_beat_timer_expire(uint64 data);
 int32 get_exception_info_reference(struct st_exception_info **exception_data);
@@ -382,7 +382,7 @@ void bfgx_beat_timer_expire(uint64 data)
 
     ps_core_d = pst_exception_data->ps_plat_d->core_data;
 
-    /*bfgx睡眠时，没有心跳消息上报*/
+    /*bfgx????????????????????????*/
     if (BFGX_SLEEP == ps_core_d->ps_pm->bfgx_dev_state_get())
     {
         PS_PRINT_INFO("bfgx has sleep!\n");
@@ -701,7 +701,7 @@ int32 plat_power_fail_exception_info_set(uint32 subsys_type, uint32 thread_type,
         pst_exception_data->thread_type   = thread_type;
         pst_exception_data->excetion_type = exception_type;
 
-        /*当前异常没有处理完成之前，不允许处理新的异常*/
+        /*????????????????????????????????????????????*/
         atomic_set(&pst_exception_data->is_reseting_device, PLAT_EXCEPTION_RESET_BUSY);
     }
     else
@@ -712,7 +712,7 @@ int32 plat_power_fail_exception_info_set(uint32 subsys_type, uint32 thread_type,
         return -EXCEPTION_FAIL;
     }
 
-    /*增加统计信息*/
+    /*????????????*/
     pst_exception_data->etype_info[exception_type].excp_cnt += 1;
 
     spin_unlock_irqrestore(&pst_exception_data->exception_spin_lock, flag);
@@ -787,7 +787,7 @@ int32 plat_exception_handler(uint32 subsys_type, uint32 thread_type, uint32 exce
         return EXCEPTION_SUCCESS;
     }
 
-    /*这里只能用spin lock，因为该函数会被心跳超时函数调用，心跳超时函数属于软中断，不允许睡眠*/
+    /*??????????spin lock????????????????????????????????????????????????????????????????????*/
     spin_lock_irqsave(&pst_exception_data->exception_spin_lock, flag);
     if (PLAT_EXCEPTION_RESET_IDLE == atomic_read(&pst_exception_data->is_reseting_device))
     {
@@ -795,7 +795,7 @@ int32 plat_exception_handler(uint32 subsys_type, uint32 thread_type, uint32 exce
         pst_exception_data->thread_type   = thread_type;
         pst_exception_data->excetion_type = exception_type;
 
-        /*当前异常没有处理完成之前，不允许处理新的异常*/
+        /*????????????????????????????????????????????*/
         atomic_set(&pst_exception_data->is_reseting_device, PLAT_EXCEPTION_RESET_BUSY);
     }
     else
@@ -808,7 +808,7 @@ int32 plat_exception_handler(uint32 subsys_type, uint32 thread_type, uint32 exce
     spin_unlock_irqrestore(&pst_exception_data->exception_spin_lock, flag);
 
 #ifdef _PRE_CONFIG_GPIO_TO_SSI_DEBUG
-    /*等待SSI操作完成，防止NOC*/
+    /*????SSI??????????????NOC*/
     timeout = wait_for_ssi_idle_timeout(HI110X_DFR_WAIT_SSI_IDLE_MS);
     if(timeout <= 0) {
         PS_PRINT_ERR("[HI110X_DFR]wait for ssi idle failed\n");
@@ -824,7 +824,7 @@ int32 plat_exception_handler(uint32 subsys_type, uint32 thread_type, uint32 exce
          pm_data->bfg_timer_mod_cnt = 0;
          pm_data->bfg_timer_mod_cnt_pre = 0;
 
-        /*timer time out 中断调用时，不能再这里删除，死锁*/
+        /*timer time out ????????????????????????????????*/
         if (exception_type != BFGX_BEATHEART_TIMEOUT)
         {
                 pm_data->ps_pm_interface->operate_beat_timer(BEAT_TIMER_DELETE);
@@ -836,8 +836,8 @@ int32 plat_exception_handler(uint32 subsys_type, uint32 thread_type, uint32 exce
                                pst_exception_data->subsys_type, pst_exception_data->excetion_type);
     plat_bbox_msg_hander(subsys_type, exception_type);
 
-    oal_wake_lock_timeout(&pst_exception_data->plat_exception_rst_wlock, 10*1000);/*处理异常，持锁10秒*/
-    /*触发异常处理worker*/
+    oal_wake_lock_timeout(&pst_exception_data->plat_exception_rst_wlock, 10*1000);/*??????????????10??*/
+    /*????????????worker*/
     queue_work(pst_exception_data->plat_exception_rst_workqueue, &pst_exception_data->plat_exception_rst_work);
 
     return EXCEPTION_SUCCESS;
@@ -910,7 +910,7 @@ void plat_exception_reset_work(struct work_struct *work)
 #endif
         PS_PRINT_WARNING("[HI110X_DFR]plat execption recovery success, current time [%llu]ms, max time [%llu]ms\n",total_time, pst_exception_data->etype_info[pst_exception_data->excetion_type].maxtime );
     }
-    /*每次dfr完成，显示历史dfr处理结果*/
+    /*????dfr??????????????dfr????????*/
     plat_print_dfr_info();
 
 exit_exception:
@@ -950,7 +950,7 @@ int32 wifi_exception_handler(void)
 
     exception_type = pst_exception_data->excetion_type;
 
-    /*如果bfgx已经打开，执行wifi子系统复位流程，否则执行wifi全系统复位流程*/
+    /*????bfgx??????????????wifi????????????????????????wifi??????????????*/
     if (!bfgx_is_shutdown())
     {
         PS_PRINT_INFO("bfgx is opened, start wifi subsystem reset!\n");
@@ -1058,7 +1058,7 @@ int32 wifi_subsystem_reset(void)
     }
 
 #ifdef _PRE_PLAT_FEATURE_CUSTOMIZE
-        //下发定制化参数到device去
+        //????????????????device??
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_HOST)
         hwifi_hcc_customize_h2d_data_cfg();
 #endif
@@ -1092,7 +1092,7 @@ int32 wifi_system_reset(void)
         return -EXCEPTION_FAIL;
     }
 
-    /*重新上电，firmware重新加载*/
+    /*??????????firmware????????*/
     hcc_bus_power_action(hcc_get_current_110x_bus(), HCC_BUS_POWER_PATCH_LOAD_PREPARE);
 
     if (!bfgx_is_shutdown())
@@ -1133,7 +1133,7 @@ int32 wifi_system_reset(void)
     }
 
 #ifdef _PRE_PLAT_FEATURE_CUSTOMIZE
-        //下发定制化参数到device去
+        //????????????????device??
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_HOST)
     hwifi_hcc_customize_h2d_data_cfg();
 #endif
@@ -1176,7 +1176,7 @@ int32 wifi_system_reset(void)
 
         bfgx_pm_feature_set();
 
-        /*恢复bfgx业务状态*/
+        /*????bfgx????????*/
         if (EXCEPTION_SUCCESS != bfgx_status_recovery())
         {
             PS_PRINT_ERR("bfgx status revocery failed!\n");
@@ -1317,7 +1317,7 @@ int32 wifi_device_reset(void)
         PS_PRINT_ERR("ps_core_d is NULL\n");
         return -EXCEPTION_FAIL;
     }
-    /*1102通过BCPU复位WCPU*/
+    /*1102????BCPU????WCPU*/
     if (BOARD_VERSION_HI1102 == l_subchip_type)
     {
         PS_PRINT_INFO("reset wifi device by BCPU\n");
@@ -1355,7 +1355,7 @@ int32 wifi_device_reset(void)
             return -EXCEPTION_FAIL;
         }
     }
-    else if (BOARD_VERSION_HI1103 == l_subchip_type)/*1103 通过w_en复位*/
+    else if (BOARD_VERSION_HI1103 == l_subchip_type)/*1103 ????w_en????*/
     {
         PS_PRINT_INFO("reset wifi device by w_en gpio\n");
         hi1103_wifi_disable();
@@ -1366,7 +1366,7 @@ int32 wifi_device_reset(void)
         }
         return EXCEPTION_SUCCESS;
     }
-    else if (BOARD_VERSION_HI1102A == l_subchip_type)/*1102a 通过w_en复位*/
+    else if (BOARD_VERSION_HI1102A == l_subchip_type)/*1102a ????w_en????*/
     {
         PS_PRINT_INFO("reset wifi device by w_en gpio\n");
         hi1102a_wifi_disable();
@@ -1606,20 +1606,20 @@ int32 bfgx_exception_handler(void)
 
     if (pst_exception_data->excetion_type == BFGX_BEATHEART_TIMEOUT)
     {
-        /*bfgx异常，先删除bfg timer和心跳timer，防止重复触发bfgx异常*/
+        /*bfgx????????????bfg timer??????timer??????????????bfgx????*/
         pm_data->ps_pm_interface->operate_beat_timer(BEAT_TIMER_DELETE);
     }
 
     exception_type = pst_exception_data->excetion_type;
 
-    /*ioctl下来的异常执行线程复位流程,当前执行系统全复位*/
+    /*ioctl??????????????????????????,??????????????????*/
     if (exception_type == BFGX_TIMER_TIMEOUT || exception_type == BFGX_ARP_TIMEOUT)
     {
         ret = bfgx_subthread_reset();
     }
     else
     {
-        /*异常恢复之前，尝试用平台命令读栈，不能保证一定成功，因为此时uart可能不通*/
+        /*????????????????????????????????????????????????????????????uart????????*/
         bfgx_dump_stack();
 
         ret = bfgx_subsystem_reset();
@@ -1642,7 +1642,7 @@ int32 bfgx_exception_handler(void)
 
 int32 bfgx_subthread_reset(void)
 {
-    /*这里执行芯片全系统复位，保证芯片下电*/
+    /*????????????????????????????????????*/
     return bfgx_system_reset();
 }
 
@@ -1908,7 +1908,7 @@ int32 bfgx_system_reset(void)
         }
     }
 
-    /*重新上电，firmware重新加载*/
+    /*??????????firmware????????*/
     if (EXCEPTION_SUCCESS != bfgx_power_reset())
     {
         PS_PRINT_ERR("bfgx power reset failed!\n");
@@ -2010,7 +2010,7 @@ int32 bfgx_store_stack_mem_to_file(void)
         }
         OS_MEM_SET(filename, 0, sizeof(filename));
         snprintf(filename, sizeof(filename),BFGX_DUMP_PATH"/%s_%s.bin", UART_STORE_BFGX_STACK, pst_mem_info->file_name);
-        /*打开文件，准备保存接收到的内存*/
+        /*??????????????????????????????*/
         fp = filp_open(filename, O_RDWR | O_CREAT, 0664);
         if (OAL_IS_ERR_OR_NULL(fp))
         {
@@ -2018,7 +2018,7 @@ int32 bfgx_store_stack_mem_to_file(void)
             continue;
         }
 
-        /*将接收到的内存写入到文件中*/
+        /*??????????????????????????*/
         fs = get_fs();
         set_fs(KERNEL_DS);
         //l_ret = vfs_llseek(fp, 0, SEEK_END);
@@ -2068,7 +2068,7 @@ void bfgx_dump_stack(void)
 
     INIT_COMPLETION(pst_exception_data->wait_read_bfgx_stack);
 
-    /*等待读栈操作完成*/
+    /*????????????????*/
     timeleft = wait_for_completion_timeout(&pst_exception_data->wait_read_bfgx_stack, msecs_to_jiffies(WAIT_BFGX_READ_STACK_TIME));
     if (!timeleft)
     {
@@ -2238,7 +2238,7 @@ int32 __store_wifi_mem_to_file(void)
         block_size      = g_uart_read_wifi_mem_info[index].block_info[i].size;
         block_file_name = g_uart_read_wifi_mem_info[index].block_info[i].file_name;
         snprintf(filename, sizeof(filename),BFGX_DUMP_PATH"/%s_%s.bin", UART_STORE_WIFI_MEM, block_file_name);
-        /*打开文件，准备保存接收到的内存*/
+        /*??????????????????????????????*/
         fp = filp_open(filename, O_RDWR | O_CREAT, 0664);
         if (OAL_IS_ERR_OR_NULL(fp))
         {
@@ -2246,7 +2246,7 @@ int32 __store_wifi_mem_to_file(void)
             return -EXCEPTION_FAIL;
         }
 
-        /*将接收到的内存写入到文件中*/
+        /*??????????????????????????*/
         fs = get_fs();
         set_fs(KERNEL_DS);
         //l_ret = vfs_llseek(fp, 0, SEEK_END);
@@ -2432,7 +2432,7 @@ int32 sdio_halt_bcpu(void)
     ret = hcc_bus_send_message(pst_wlan_pm->pst_bus, H2D_MSG_HALT_BCPU);
     if(0 == ret)
     {
-        /*等待device执行命令*/
+        /*????device????????*/
         timeleft = wait_for_completion_timeout(&pst_wlan_pm->st_halt_bcpu_done,msecs_to_jiffies(WLAN_HALT_BCPU_TIMEOUT));
         if(0 == timeleft)
         {
@@ -2449,7 +2449,7 @@ int32 sdio_halt_bcpu(void)
 
 int32 allocate_data_save_buffer(uint32 len)
 {
-    //临时buff配置,用于传送数据
+    //????buff????,????????????
     st_bcpu_dump_buff.mem_addr = OS_VMALLOC_GFP(len);
     if (NULL == st_bcpu_dump_buff.mem_addr)
     {
@@ -2477,7 +2477,7 @@ int32 allocate_send_netbuf(uint32 len)
 
 int32 dump_header_init(exception_bcpu_dump_header* header, uint32 align_type, uint32 addr, uint32 send_len)
 {
-    /*cmd 初始化*/
+    /*cmd ??????*/
     header->align_type = align_type;
     header->start_addr = addr;
     header->men_len    = send_len;
@@ -2490,7 +2490,7 @@ int32 init_hcc_head_and_send(struct hcc_transfer_param st_hcc_transfer_param,
 {
     uint64 timeleft;
     int32 l_ret;
-    //发送
+    //????
     INIT_COMPLETION(pst_exception_data->wait_sdio_d2h_dump_ack);
     l_ret = hcc_tx(hcc_get_110x_handler(), st_bcpu_dump_netbuf, &st_hcc_transfer_param);
     if (OAL_SUCC != l_ret)
@@ -2500,7 +2500,7 @@ int32 init_hcc_head_and_send(struct hcc_transfer_param st_hcc_transfer_param,
         st_bcpu_dump_netbuf = NULL;
         return -EXCEPTION_FAIL;
     }
-    /*等待SDIO读数据完成*/
+    /*????SDIO??????????*/
     timeleft = wait_for_completion_timeout(&pst_exception_data->wait_sdio_d2h_dump_ack, msecs_to_jiffies(wait_time));
     if (!timeleft)
     {
@@ -2554,7 +2554,7 @@ int32 sdio_get_and_save_data(exception_bcpu_dump_msg* sdio_read_info, uint32 cou
     {
         index = 0;
         snprintf(filename, sizeof(filename),BFGX_DUMP_PATH"/%s_%s.bin", SDIO_STORE_BFGX_REGMEM, sdio_read_info[i].file_name);
-        /*准备文件空间*/
+        /*????????????*/
         fp = filp_open(filename, O_RDWR | O_CREAT, 0664);
         if (OAL_IS_ERR_OR_NULL(fp))
         {
@@ -2623,7 +2623,7 @@ int32 sdio_get_and_save_data(exception_bcpu_dump_msg* sdio_read_info, uint32 cou
 
             oal_memcopy(oal_netbuf_put(st_bcpu_dump_netbuf, netbuf_len), &dump_header, sizeof(exception_bcpu_dump_header));
 
-            //发送
+            //????
             if (EXCEPTION_SUCCESS != init_hcc_head_and_send(st_hcc_transfer_param, pst_exception_data, WIFI_DUMP_BCPU_TIMEOUT))
             {
                 error = -EXCEPTION_FAIL;
@@ -2698,7 +2698,7 @@ int32 debug_sdio_read_bfgx_reg_and_mem(uint32 which_mem)
         PS_PRINT_INFO("wifi is open!\n");
     }
 
-    //去能exception设置,halt bcpu不引发DFR
+    //????exception????,halt bcpu??????DFR
     pst_exception_data->exception_reset_enable = PLAT_EXCEPTION_DISABLE;
 
     //plat_wait_last_rotate_finish();
@@ -2729,7 +2729,7 @@ int32 debug_sdio_read_bfgx_reg_and_mem(uint32 which_mem)
 
     PS_PRINT_INFO("dump complete, recovery begin\n");
 
-    //使能DFR, recovery
+    //????DFR, recovery
     pst_exception_data->exception_reset_enable = PLAT_EXCEPTION_ENABLE;
     plat_exception_handler(SUBSYS_BFGX, BFGX_THREAD_BOTTOM, SDIO_DUMPBCPU_FAIL);
 
@@ -2962,7 +2962,7 @@ int32 bfgx_status_recovery(void)
 
     post_to_visit_node(ps_core_d);
 
-    /*仅调试使用*/
+    /*??????????*/
     PS_PRINT_INFO("exception: set debug beat flag to 1\n");
     pst_exception_data->debug_beat_flag = 1;
 
@@ -3041,7 +3041,7 @@ int32 plat_wifi_exception_rst_register(void *data)
         return -EXCEPTION_FAIL;
     }
 
-    /*wifi异常回调函数注册*/
+    /*wifi????????????????*/
     pst_wifi_callback = (struct st_wifi_dfr_callback *)data;
     pst_exception_data->wifi_callback = pst_wifi_callback;
 
@@ -3076,27 +3076,27 @@ int32 plat_exception_reset_init(void)
     atomic_set(&p_exception_data->bfgx_beat_flag, BFGX_NOT_RECV_BEAT_INFO);
     atomic_set(&p_exception_data->is_reseting_device, PLAT_EXCEPTION_RESET_IDLE);
 
-    /*初始化异常处理workqueue和work*/
+    /*??????????????workqueue??work*/
     p_exception_data->plat_exception_rst_workqueue = create_singlethread_workqueue("plat_exception_reset_queue");
     INIT_WORK(&p_exception_data->plat_exception_rst_work, plat_exception_reset_work);
     oal_wake_lock_init(&p_exception_data->plat_exception_rst_wlock, "hi11xx_excep_rst_wlock");
     INIT_WORK(&p_exception_data->uart_store_wifi_mem_to_file_work, store_wifi_mem_to_file_work);
 
-    /*初始化心跳timer*/
+    /*??????????timer*/
     init_timer(&p_exception_data->bfgx_beat_timer);
     p_exception_data->bfgx_beat_timer.function = bfgx_beat_timer_expire;
     p_exception_data->bfgx_beat_timer.expires  = jiffies + BFGX_BEAT_TIME*HZ;
     p_exception_data->bfgx_beat_timer.data     = 0;
 
-    /*初始化异常处理自旋锁*/
+    /*????????????????????*/
     spin_lock_init(&p_exception_data->exception_spin_lock);
 
-    /*初始化bfgx读栈完成量*/
+    /*??????bfgx??????????*/
     init_completion(&p_exception_data->wait_read_bfgx_stack);
-    /*初始化sdio读取bcpu完成量*/
+    /*??????sdio????bcpu??????*/
     init_completion(&p_exception_data->wait_sdio_d2h_dump_ack);
 
-    /*调试使用的变量初始化*/
+    /*????????????????????*/
     p_exception_data->debug_beat_flag          = 1;
     atomic_set(&p_exception_data->is_memdump_runing, 0);
     p_exception_data->wifi_open_bcpu_enable    = false;
@@ -3106,7 +3106,7 @@ int32 plat_exception_reset_init(void)
 
     g_pst_exception_info = p_exception_data;
 
-    /*初始化dump文件轮替模块*/
+    /*??????dump????????????*/
     plat_exception_dump_file_rotate_init();
 
     hisi_conn_rdr_init();

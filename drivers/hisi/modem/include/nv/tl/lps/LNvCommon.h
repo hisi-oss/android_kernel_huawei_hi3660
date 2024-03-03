@@ -73,19 +73,19 @@ extern "C" {
 
 /*****************************************************************************
   4 Enum
-    PS NV值使用范围：0xD200 ~ 0xD38F
+    PS NV????????????0xD200 ~ 0xD38F
 *****************************************************************************/
 enum NV_ITEM_ID_ENUM
 {
     EN_NV_ID_BEGIN                                  = 0,
     /*mod for LNAS NV migrate because of conflict with MBB product,begin 2017-02-23*/
-    /*LNAS NV迁移背景:Boston NV归一化项目中给IMSA分配的区间[50501,53000]中的[50501,52000]这块区间和MBB产品线
-      冲突，经过海思讨论将冲突区间让给MBB产品线，并给LNAS重新划分一块区间[31000,32500],所以这里将冲突区间的nvid
-      减去4C2C调整到新区间中*/
+    /*LNAS NV????????:Boston NV??????????????IMSA??????????[50501,53000]????[50501,52000]??????????MBB??????
+      ????????????????????????????????MBB????????????LNAS????????????????[31000,32500],????????????????????nvid
+      ????4C2C??????????????*/
     EN_NV_ID_LNAS_NEW_NV_INTERVAL_BEGIN             = 0x7918,/* LNAS NEW ALLOCATE NV INTERVAL BEGIN*/
     EN_NV_ID_IMS_BEGIN                              = 0x7919,/* IMS BEGIN */
-    EN_NV_ID_IMS_CONTROL                            = 0x791A,/* IMS总开关 NV, for IMS support flag, 2016-10-11*/
-    EN_NV_ID_IMS_SIP_TIMER                          = 0x791B,/* SIP定制器, Added by   for KT, 2016-12-05 */
+    EN_NV_ID_IMS_CONTROL                            = 0x791A,/* IMS?????? NV, for IMS support flag, 2016-10-11*/
+    EN_NV_ID_IMS_SIP_TIMER                          = 0x791B,/* SIP??????, Added by   for KT, 2016-12-05 */
     /* Added 2017-3-9 for emc category urn begin*/
     EN_NV_ID_IMS_EMC_CAT_URN_CONFIG                 = 0x791C,
     /* Added 2017-3-9 for emc category urn end*/
@@ -110,10 +110,10 @@ enum NV_ITEM_ID_ENUM
     EN_NV_ID_LNAS_LOAD_BALANCE_TAU_CONTROL_CONFIG   = 0x7984,
     /* Added for load balance TAU 2016-12-20 end*/
     /* Added for MO_DETACH_REL,2017-01-05,Begin */
-    EN_NV_ID_NAS_DETACH_ATTEMPT_CNT_CTRL_CONFIG     = 0x7985,/* detach过程中收到mmc释放后最大尝试次数*/
+    EN_NV_ID_NAS_DETACH_ATTEMPT_CNT_CTRL_CONFIG     = 0x7985,/* detach??????????mmc??????????????????*/
     /* Added for MO_DETACH_REL,2017-01-05,End */
     /* Added for MODETACH_ATTACH_COLLISION,2017-01-05,Begin */
-    EN_NV_ID_NAS_STORE_MMC_DETACH_CTRL_CONFIG       = 0x7986,/* ATTACH过程中收到MMC DETACH是否缓存控制 */
+    EN_NV_ID_NAS_STORE_MMC_DETACH_CTRL_CONFIG       = 0x7986,/* ATTACH??????????MMC DETACH???????????? */
     /* Added for MODETACH_ATTACH_COLLISION,2017-01-05,End */
     /* Added for BOSTON_R13_CR_PHASEIII 2017-01-16 begin */
     EN_NV_ID_NAS_ACDC_CTRL_CONFIG                   = 0x7987,
@@ -122,15 +122,15 @@ enum NV_ITEM_ID_ENUM
     EN_NV_ID_NAS_BACKOFF_CTRL_CONFIG                = 0x7988,
     /* Added for Boston_R13_CR_PHASEIII, 2017-01-16, End */
     /* add for separate special part from original NV , 2017-03-07, begin */
-    /* 解耦拆分新增的NV只在BOSTON版本上生效 */
-    EN_NV_ID_LNAS_DSDS_OPTIMIZE_FLAG_CONFIG         = 0x7989,/* DSDS2.0优化控制开关 */
-    EN_NV_ID_LNAS_SRLTE_FLAG_CONFIG                 = 0x798A,/* SRLTE控制开关 */
-    EN_NV_ID_LNAS_TMO_IMSI_HPLMN_LIST_CONFIG        = 0x798B,/* TMO定制需求生效的IMSI HPLMN列表 */
+    /* ??????????????NV????BOSTON?????????? */
+    EN_NV_ID_LNAS_DSDS_OPTIMIZE_FLAG_CONFIG         = 0x7989,/* DSDS2.0???????????? */
+    EN_NV_ID_LNAS_SRLTE_FLAG_CONFIG                 = 0x798A,/* SRLTE???????? */
+    EN_NV_ID_LNAS_TMO_IMSI_HPLMN_LIST_CONFIG        = 0x798B,/* TMO??????????????IMSI HPLMN???? */
     /* add for separate special part from original NV , 2017-03-07, end */
 
     EN_NV_ID_LNAS_MT_DETACH_WITH_OPTIMZIE_CONFIG    = 0x798f,
     /* Added for network not include eps_network_feature_support IE ,2017-08-25,begin */
-    EN_NV_ID_NETWORK_FEATURE_VOPS_OPTIMIZE_CTRL     = 0x7999, /* 此NV用于解决沙特运营商ZAIN网络未携带eps network feature support信元时,非VOLTE用户无法进行IMS注册的问题 */
+    EN_NV_ID_NETWORK_FEATURE_VOPS_OPTIMIZE_CTRL     = 0x7999, /* ??NV??????????????????ZAIN??????????eps network feature support??????,??VOLTE????????????IMS?????????? */
     /* Added for network not include eps_network_feature_support IE ,2017-08-25,end */
     EN_NV_ID_COMPATIBLE_OPTIMIZE_FOR_PROTCL_AND_NET  = 0x79AA,
     EN_NV_ID_LNAS_EMM_END                           = 0x7BD4,/* EMM END */
@@ -140,7 +140,7 @@ enum NV_ITEM_ID_ENUM
     EN_NV_ID_SBM_FEATURE_CONFIG                     = 0x7BD7,
     /* Added 2016-09-26 for sbm,end */
     /* begin for emc pdn rej retry 2016-11-16 */
-    EN_NV_ID_EMC_PDN_REJ_CONFIG                     = 0x7BD8,/* 紧急PDN建立被拒重试NV */
+    EN_NV_ID_EMC_PDN_REJ_CONFIG                     = 0x7BD8,/* ????PDN????????????NV */
     /* end for emc pdn rej retry 2016-11-16 */
     EN_NV_ID_IMSA_REREG_CTRL                        = 0x7BD9,/* Added by   for Rogers_volte_II, 2016-11-19 */
     /* added for VISP Wakeup Compens Timer Issue, begin in 2016-12-20 */
@@ -149,28 +149,28 @@ enum NV_ITEM_ID_ENUM
     /* Added 2016-12-12 for KDDI,begin */
     EN_NV_ID_JAPAN_FEATURE_CONFIG                   = 0x7BDB,
     /* Added 2016-12-12 for KDDI,end */
-    EN_NV_ID_REG_STRATEGY_CONFIG                    = 0x7BDC,/* 注册重试策略配置, Added by   for ChinaTelecom_Volte, 2017-01-20 */
-    EN_NV_ID_CTCC_CUSTOM_CONFIG                     = 0x7BDD,/* 电信定制需求配置, Added by   for ChinaTelecom_Volte, 2017-01-20 */
-    EN_NV_ID_NORMAL_PDN_REJ_CONFIG                  = 0x7BDE,/* PDN被拒立即重新发起激活的ESM原因值列表, Added by   for ChinaTelecom_Volte, 2017-01-20 */
+    EN_NV_ID_REG_STRATEGY_CONFIG                    = 0x7BDC,/* ????????????????, Added by   for ChinaTelecom_Volte, 2017-01-20 */
+    EN_NV_ID_CTCC_CUSTOM_CONFIG                     = 0x7BDD,/* ????????????????, Added by   for ChinaTelecom_Volte, 2017-01-20 */
+    EN_NV_ID_NORMAL_PDN_REJ_CONFIG                  = 0x7BDE,/* PDN??????????????????????ESM??????????, Added by   for ChinaTelecom_Volte, 2017-01-20 */
     /* BOSTON VoWiFI Phase I Project,begin 2016-02-14 */
     EN_NV_ID_LTE_PDN_PERM_FORB_RETRY_CONFIG         = 0x7BDF,
     EN_NV_ID_VOWIFI_REMAIN_ACTIVE_CTRL_CONFIG       = 0x7BE0,
     /* BOSTON VoWiFI Phase I Project,end 2016-02-14 */
     /* add for separate special part from original NV , 2017-03-07, begin */
-    /* 解耦拆分新增的NV只在BOSTON版本上生效 */
+    /* ??????????????NV????BOSTON?????????? */
     EN_NV_ID_HIFI_CONTROL_CONFIG                    = 0x7BE1,
     EN_NV_ID_NO_CARD_EMC_CALL_SUPPORT_FLAG_CONFIG   = 0x7BE2,
     /* add for separate special part from original NV , 2017-03-07, end */
-    EN_NV_ID_REG_FAIL_PDN_RETRY_CONFIG              = 0x7BE3,/* 注册失败后断开与重建PDN的控制NV */
-    EN_NV_ID_EMC_TCALL_CTRL                         = 0x7BE5,/* 紧急TCALL定时器时长定制NV */
+    EN_NV_ID_REG_FAIL_PDN_RETRY_CONFIG              = 0x7BE3,/* ????????????????????PDN??????NV */
+    EN_NV_ID_EMC_TCALL_CTRL                         = 0x7BE5,/* ????TCALL??????????????NV */
     /*  check PingPong Exist or not in L2W handover, begin in 2017-03-30 */
-    EN_NV_ID_IMSA_PINGPONG_CONFIG                   = 0x7BE6, /* LTE/WiFi乒乓切换控制结构NV */
+    EN_NV_ID_IMSA_PINGPONG_CONFIG                   = 0x7BE6, /* LTE/WiFi????????????????NV */
     /*  check PingPong Exist or not in L2W handover, end in 2017-03-30 */
     /* for Boston VoWIFI Phase II,begin 2017-04-08*/
-    EN_NV_ID_IMSA_VOWIFI_MODEM_VERSION_CONFIG       = 0x7BEA,/* VoWIFI MODEM侧版本号配置 */
+    EN_NV_ID_IMSA_VOWIFI_MODEM_VERSION_CONFIG       = 0x7BEA,/* VoWIFI MODEM???????????? */
     /* for Boston VoWIFI Phase II,end 2017-04-08*/
     /* begin for EMC reg no respond 2017-06-23 */
-    EN_NV_ID_EMC_REG_NO_RSP_TO_ANONYMOUS_CTRL       = 0x7BED,/* 紧急注册保护功能定制NV */
+    EN_NV_ID_EMC_REG_NO_RSP_TO_ANONYMOUS_CTRL       = 0x7BED,/* ????????????????????NV */
     /* end for EMC reg no respond 2017-06-23 */
     /* KDDI VOWIFI REQ#3 WIFI prefer 150s tried, begin in 2018-05-14 */
     EN_NV_ID_KDDI_WIFI_PDN_TRY_CONFIG               = 0x7BFE,
@@ -181,19 +181,19 @@ enum NV_ITEM_ID_ENUM
     EN_NV_ID_LNAS_NEW_NV_INTERVAL_END               = 0x7EF4,/* LNAS NEW ALLOCATE NV INTERVAL END*/
     /*mod for LNAS NV migrate because of conflict with MBB product,end 2017-02-23*/
     /*mod for LNAS NV migrate because of conflict with MBB product,begin 2017-02-23*/
-    /***************************从0xCB27到0xCF08为LNAS的NV区间*********************************************/
+    /***************************??0xCB27??0xCF08??LNAS??NV????*********************************************/
     EN_NV_ID_LNAS_CSS_BEGIN                         = 0xCB27,/* CSS BEGIN */
     EN_NV_ID_CSS_CONFIG_CONTROL_PARA                = 0xCB34,
     EN_NV_ID_LNAS_CSS_END                           = 0xCBE8,/* CSS END */
     EN_NV_ID_LNAS_ERABM_ESM_BEGIN                   = 0xCBE9,/* ERABM ESM BEGIN */
     /* Added for IMS_PDN_STORE,2016-09-29,Begin */
-    EN_NV_ID_LNAS_ESM_NDIS_CONN_DELAY_CTRL_CONFIG   = 0XCBEA,/* ndis conn delay定时器 单位ms */
+    EN_NV_ID_LNAS_ESM_NDIS_CONN_DELAY_CTRL_CONFIG   = 0XCBEA,/* ndis conn delay?????? ????ms */
     /* Added for IMS_PDN_STORE,2016-09-29,End */
     /* Added for MTU_REQUIRE,2016-11-12,Begin */
-    EN_NV_ID_LNAS_ESM_IPV4_MTU_CTRL_CONFIG          = 0XCBEB,/*请求IPV4 MTU配置nv */
+    EN_NV_ID_LNAS_ESM_IPV4_MTU_CTRL_CONFIG          = 0XCBEB,/*????IPV4 MTU????nv */
     /* Added for MTU_REQUIRE,2016-11-12,End */
     /* Added 2016-12-14 for KDDI,begin */
-    EN_NV_ID_LNAS_ESM_CHANGE_TO_IMSAPN_CONFIG       = 0xCBEC, /* ATTACH时承载被拒后，是否要替换为IMS的APN */
+    EN_NV_ID_LNAS_ESM_CHANGE_TO_IMSAPN_CONFIG       = 0xCBEC, /* ATTACH??????????????????????????IMS??APN */
     /* Added 2016-12-14 for KDDI,end */
     EN_NV_ID_LNAS_ESM_PROTOCOL_CONFIG                = 0xCBF1,
     EN_NV_ID_LNAS_COMPATIBILITY_CONFIG              = 0xCBF2,
@@ -201,7 +201,7 @@ enum NV_ITEM_ID_ENUM
     EN_NV_ID_LNAS_RSV_BEGIN                         = 0xCCB1,/* RSV BEGIN */
     EN_NV_ID_LNAS_RSV_END                           = 0xCF08,/* RSV END */
     /*mod for LNAS NV migrate because of conflict with MBB product,end 2017-02-23*/
-    /***************************从0xCB27到0xCF08为LNAS的NV区间*********************************************/
+    /***************************??0xCB27??0xCF08??LNAS??NV????*********************************************/
     /* add for plmn search opt 6.0, 2016-08-04, End */
     EN_NV_ID_PS_BEGIN                               = 0xD200,/*Modem begin D000*/
     EN_NV_ID_LTEAPT_TOTAL_FLG                       = 0xD201,
@@ -237,10 +237,10 @@ enum NV_ITEM_ID_ENUM
     EN_NV_ID_LCS_COMMON_CONFIG                      = 0xD21f,/* modified 2015-10-13 fo lcs*/
     EN_NV_ID_CELL_MEAS_THREDHOLD                    = 0xD220, /*add */
     EN_NV_ID_GET_SIB_THRESHOLD                      = 0xD221,
-    EN_NV_ID_UE_CAP_V9a0                            = 0xD222,/* R10 NV修改 begin */
+    EN_NV_ID_UE_CAP_V9a0                            = 0xD222,/* R10 NV???? begin */
     EN_NV_ID_UE_CAP_V1020                           = 0xD223,
     EN_NV_ID_UE_CAP_V1060                           = 0xD224,
-    EN_NV_ID_UE_CAP_RF_PARA_V1060                   = 0xD225,/* R10 NV修改 end */
+    EN_NV_ID_UE_CAP_RF_PARA_V1060                   = 0xD225,/* R10 NV???? end */
     EN_NV_ID_IRAT_REDIR_SWITCH                      = 0xD226,
     EN_NV_ID_LTE_SPAC_BAND_INFO                     = 0xD227,/* MTC add begin */
     EN_NV_ID_LTE_ABANDON_BAND_INFO                  = 0xD228,/* MTC add end */
@@ -257,8 +257,8 @@ enum NV_ITEM_ID_ENUM
     EN_NV_ID_RRC_RESELECT_3DB_SWITCH                = 0xD233,
     EN_NV_ID_UE_RFRD_TYPE                           = 0xD234,
     EN_NV_ID_LTE_IRAT_TDS_CAPABILITY_INFO           = 0xD235,/* Irat TDS UE capability modify begin */
-    EN_NV_ID_UE_EXTBAND_INFO                        = 0xD236,/*BEGIN  modify for B28全频段特性*/
-    EN_NV_ID_EXTBAND_INFO_WITH_BANDWIDTH            = 0xD237,/*END  modify for B28全频段特性*/
+    EN_NV_ID_UE_EXTBAND_INFO                        = 0xD236,/*BEGIN  modify for B28??????????*/
+    EN_NV_ID_EXTBAND_INFO_WITH_BANDWIDTH            = 0xD237,/*END  modify for B28??????????*/
     EN_NV_ID_DSDS_CFG_INFO                          = 0xD238,
     EN_NV_ID_FIX_MUTI_PLMNS_CAND_INFO               = 0xD239,
     EN_NV_ID_DYN_MUTI_PLMNS_CAND_INFO               = 0xD23A,
@@ -333,7 +333,7 @@ enum NV_ITEM_ID_ENUM
     EN_NV_ID_UE_CAP_MEAS_PARA_BAND40                = 0xD287,
     EN_NV_ID_UE_CAP_MEAS_PARA_BAND41                = 0xD288,
     EN_NV_ID_RA_FAIL_REPORT_INFO                    = 0xD290,
-    EN_NV_ID_TEST_PLMN_SET                          = 0xD291,/* 仪器测试时，搜网搜到非仪器的PLMN不上报，begin */
+    EN_NV_ID_TEST_PLMN_SET                          = 0xD291,/* ????????????????????????????PLMN????????begin */
     EN_NV_ID_BAND1_CAND_INFO                        = 0xD2a0,/* mul Band */
     EN_NV_ID_BAND2_CAND_INFO                        = 0xD2a1,
     /*EN_NV_ID_BAND3_CAND_INFO                      = 0xD2a2,*/
@@ -388,7 +388,7 @@ enum NV_ITEM_ID_ENUM
     EN_NV_ID_BAND64_CAND_INFO                       = 0xD2d8,
     EN_NV_ID_FLOWCTRL_CONFIG                        = 0xD2d9,
     EN_NV_ID_BANDXX_CAND_INFO                       = 0xD2da,/*  -nv-bands-cfg-begin */
-    EN_NV_ID_BANDNon2_CAND_INFO                     = 0xD2DB,/* 非标频段的候补信息begin */
+    EN_NV_ID_BANDNon2_CAND_INFO                     = 0xD2DB,/* ??????????????????begin */
     EN_NV_ID_BANDNon3_CAND_INFO                     = 0xD2DC,
     EN_NV_ID_BANDNon4_CAND_INFO                     = 0xD2DD,
     EN_NV_ID_BANDNon5_CAND_INFO                     = 0xD2DE,
@@ -403,8 +403,8 @@ enum NV_ITEM_ID_ENUM
     EN_NV_ID_BANDNon14_CAND_INFO                    = 0xD2E7,
     EN_NV_ID_BANDNon15_CAND_INFO                    = 0xD2E8,
     EN_NV_ID_BANDNon16_CAND_INFO                    = 0xD2E9,
-    EN_NV_ID_BANDNon1_CAND_INFO                     = 0xD2EA,/* 非标频段的候补信息end */
-    EN_NV_ID_BANDNon1_BAND_INFO                     = 0xD2ED,/* 非标频段的频段信息begin */
+    EN_NV_ID_BANDNon1_CAND_INFO                     = 0xD2EA,/* ??????????????????end */
+    EN_NV_ID_BANDNon1_BAND_INFO                     = 0xD2ED,/* ??????????????????begin */
     EN_NV_ID_BANDNon2_BAND_INFO                     = 0xD2EE,
     EN_NV_ID_BANDNon3_BAND_INFO                     = 0xD2EF,
     EN_NV_ID_BANDNon4_BAND_INFO                     = 0xD2F0,
@@ -419,7 +419,7 @@ enum NV_ITEM_ID_ENUM
     EN_NV_ID_BANDNon13_BAND_INFO                    = 0xD2F9,
     EN_NV_ID_BANDNon14_BAND_INFO                    = 0xD2FA,
     EN_NV_ID_BANDNon15_BAND_INFO                    = 0xD2FB,
-    EN_NV_ID_BANDNon16_BAND_INFO                    = 0xD2FC,/* 非标频段的频段信息end */
+    EN_NV_ID_BANDNon16_BAND_INFO                    = 0xD2FC,/* ??????????????????end */
     EN_NV_ID_FLOWCTRL_LIMIT_CONFIG                  = 0xD2FD,
     EN_NV_ID_TDS_FREQ_CELL_LOCK_SWITCH              = 0xD2FE,/*  freq/cell lock begin*/
     EN_NV_ID_PS_END                                 = 0xD2ff,
@@ -481,14 +481,14 @@ enum NV_ITEM_ID_ENUM
     EN_NV_ID_CELL_SEARCH_TIME                       = 0xD338,/*begin:add for tds cell search optimize  */
     EN_NV_ID_CHR_ERROR_LOG_INFO                     = 0xD339,/*add by   for not to LTE begin*/
     EN_NV_ID_L2_CHR_CTRL_CONFIG                     = 0xD33a,/*Added by   for L2 CHR Ctrl Config*/
-    EN_NV_ID_POWER_ON_LOG_SWITCH                    = 0xD33b,/* Added by   for 开机log功能 */
+    EN_NV_ID_POWER_ON_LOG_SWITCH                    = 0xD33b,/* Added by   for ????log???? */
 
     /* begin:add for Boston Phase3  UE CAP  */
     EN_NV_ID_UL_CA_IDC_PARA                         = 0xD33c,
     EN_NV_ID_UE_CAP_V1180_EXT                       = 0xD33d,
     /* end:add for Boston Phase3  UE CAP  */
 
-    EN_NV_ID_UE_CAP_V1090                           = 0xD340,/* R11 NV修改 begin */
+    EN_NV_ID_UE_CAP_V1090                           = 0xD340,/* R11 NV???? begin */
     EN_NV_ID_UE_CAP_V1130                           = 0xD341,
     EN_NV_ID_UE_CAP_V1170                           = 0xD342,
     EN_NV_ID_UE_CAP_V9c0                            = 0xD343,
@@ -499,7 +499,7 @@ enum NV_ITEM_ID_ENUM
     EN_NV_ID_UE_CAP_V1180                           = 0xD348,
     EN_NV_ID_UE_CAP_V11A0                           = 0xD349,
     EN_NV_ID_UE_CAP_V1250                           = 0xD34a,
-    EN_NV_ID_UE_CAP_V10f0                           = 0xD34b,/* R11 NV修改 end */
+    EN_NV_ID_UE_CAP_V10f0                           = 0xD34b,/* R11 NV???? end */
     /* Begin: 2016/1/4 cr develop */
     EN_NV_ID_UE_CAP_V10i0                           = 0xD34c,
     EN_NV_ID_UE_CAP_V11d0                           = 0xD34D,
@@ -615,7 +615,7 @@ enum NV_ITEM_ID_ENUM
     EN_NV_ID_UE_CAP_V1020_RF_MEAS_PARA_BAND126      = 0xD3bd,
     EN_NV_ID_UE_CAP_V1020_RF_MEAS_PARA_BAND127      = 0xD3be,
     EN_NV_ID_UE_CAP_V1020_RF_MEAS_PARA_BAND128      = 0xD3bf,/* CA NV end,d310~d32f,d350~d37f,d390~d3bf */
-    EN_NV_ID_UE_CAP_V1180_BAND_COMB_PARAM1          = 0xD5a0,/* 以下是DSP的NV范围，PSNV不够用，暂时借用之 */
+    EN_NV_ID_UE_CAP_V1180_BAND_COMB_PARAM1          = 0xD5a0,/* ??????DSP??NV??????PSNV?????????????????? */
     EN_NV_ID_UE_CAP_V1180_BAND_COMB_PARAM2          = 0xD5a1,
     EN_NV_ID_UE_CAP_V1180_BAND_COMB_PARAM3          = 0xD5a2,
     EN_NV_ID_UE_CAP_V1180_BAND_COMB_PARAM4          = 0xD5a3,
@@ -1348,8 +1348,8 @@ enum NV_ITEM_ID_ENUM
 typedef unsigned long NV_ITEM_ID_ENUM_UINT32;
 
 /*****************************************************************************
-    PS NV值使用范围：0xD200 ~ 0xD38F
-    0xD390 ~ 0xD3bf已用作CA
+    PS NV????????????0xD200 ~ 0xD38F
+    0xD390 ~ 0xD3bf??????CA
 *****************************************************************************/
 
 

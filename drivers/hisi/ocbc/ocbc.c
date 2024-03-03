@@ -90,9 +90,9 @@ int ocbc_mmbuf_request(void)
 	 *    bit0 - mmbuf
 	 *
 	 * [23:16]: Attribute (oneshot)
-	 *    Bit16：req
-	 *    Bit17：release
-	 *    Bit23：Deinit
+	 *    Bit16???req
+	 *    Bit17???release
+	 *    Bit23???Deinit
 	 *
 	 * [27:24]: CMD
 	 *    0x00: Binding request mode (default)
@@ -182,9 +182,9 @@ int ocbc_mmbuf_release(void)
 	 *    bit0 - mmbuf
 	 *
 	 * [23:16]: Attribute (oneshot)
-	 *    Bit16：req
-	 *    Bit17：release
-	 *    Bit23：Deinit
+	 *    Bit16???req
+	 *    Bit17???release
+	 *    Bit23???Deinit
 	 *
 	 * [27:24]: CMD
 	 *    0x00: Binding request mode (default)

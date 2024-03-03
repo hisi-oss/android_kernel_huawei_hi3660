@@ -47,7 +47,7 @@
 */
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "RnicCtx.h"
 #include "RnicEntity.h"
@@ -63,16 +63,16 @@
 
 
 /*****************************************************************************
-    协议栈打印打点方式下的.C文件宏定义
+    ??????????????????????.C??????????
 *****************************************************************************/
 #define    THIS_FILE_ID        PS_FILE_ID_RNIC_CTX_C
 
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 
-/* RNIC CTX,用于保存RNIC的全局变量 */
+/* RNIC CTX,????????RNIC?????????? */
 RNIC_CTX_STRU                           g_stRnicCtx;
 
 extern RNIC_STATS_INFO_STRU                    g_astRnicStats[RNIC_NET_ID_MAX_NUM];
@@ -92,22 +92,22 @@ VOS_VOID RNIC_InitCtx(
 
     for (ucIndex = 0 ; ucIndex < RNIC_NET_ID_MAX_NUM ; ucIndex++)
     {
-        /* 初始化RNIC流量统计 */
+        /* ??????RNIC???????? */
         RNIC_ClearNetDsFlowStats(ucIndex);
 
-        /* 初始化RNIC PDP上下文 */
+        /* ??????RNIC PDP?????? */
         RNIC_InitPdpCtx(&(pstRnicCtx->astSpecCtx[ucIndex].stPdpCtx), ucIndex);
 
-        /* 初始化流控状态 */
+        /* ?????????????? */
         pstRnicCtx->astSpecCtx[ucIndex].enFlowCtrlStatus = RNIC_FLOW_CTRL_STATUS_STOP;
 
-        /* 初始化模块ID */
-        /* 初始化的时候就已经确定了哪张网卡对应哪个MODEM */
+        /* ??????????ID */
+        /* ????????????????????????????????????????MODEM */
         pstRnicCtx->astSpecCtx[ucIndex].enModemId        = RNIC_GET_MODEM_ID_BY_NET_ID(ucIndex);
 
-        /* Modified by l60609 for L-C互操作项目, 2014-1-14, begin */
+        /* Modified by l60609 for L-C??????????, 2014-1-14, begin */
         pstRnicCtx->astSpecCtx[ucIndex].enModemType      = RNIC_MODEM_TYPE_INSIDE;
-        /* Modified by l60609 for L-C互操作项目, 2014-1-14, end */
+        /* Modified by l60609 for L-C??????????, 2014-1-14, end */
 
         pstRnicCtx->astSpecCtx[ucIndex].enRmNetId        = ucIndex;
         pstRnicCtx->astSpecCtx[ucIndex].lSpePort         = RNIC_INVALID_SPE_PORT;
@@ -117,30 +117,30 @@ VOS_VOID RNIC_InitCtx(
 
     }
 
-    /* 初始化RABID信息 */
+    /* ??????RABID???? */
     for (ucIndex = 0 ; ucIndex < RNIC_MODEM_ID_MAX_NUM ; ucIndex++)
     {
         RNIC_InitRabidInfo(&pstRnicCtx->astRabIdInfo[ucIndex]);
     }
 
-    /* 初始化PDNID信息 */
+    /* ??????PDNID???? */
     RNIC_InitPdnIdInfo(&pstRnicCtx->stPdnIdInfo);
 
-    /* 初始化RNIC定时器上下文 */
+    /* ??????RNIC???????????? */
     RNIC_InitAllTimers(pstRnicCtx->astTimerCtx);
 
-    /* 初始化拨号模式信息 */
+    /* ?????????????????? */
     RNIC_InitDialMode(&(pstRnicCtx->stDialMode));
 
-    /* 初始化拨号断开定时器超时次数参数统计 */
+    /* ???????????????????????????????????? */
     RNIC_ClearTiDialDownExpCount();
 
     RNIC_SetTimer4WakeFlg(VOS_FALSE);
 
-    /* 初始化复位信号量 */
+    /* ???????????????? */
     RNIC_InitResetSem();
 
-    /* 初始化IPF模式信息 */
+    /* ??????IPF???????? */
     RNIC_InitIpfMode(pstRnicCtx);
 
     return;
@@ -229,10 +229,10 @@ VOS_VOID RNIC_InitIpv4PdpCtx(
 )
 {
     pstIpv4PdpCtx->enRegStatus = RNIC_PDP_REG_STATUS_DEACTIVE;
-    /* Modified by l60609 for L-C互操作项目, 2014-1-14, begin */
+    /* Modified by l60609 for L-C??????????, 2014-1-14, begin */
     pstIpv4PdpCtx->ucRabId     = RNIC_RAB_ID_INVALID;
     pstIpv4PdpCtx->ucPdnId     = RNIC_PDN_ID_INVALID;
-    /* Modified by l60609 for L-C互操作项目, 2014-1-14, end */
+    /* Modified by l60609 for L-C??????????, 2014-1-14, end */
     pstIpv4PdpCtx->ulIpv4Addr  = 0;
 
 
@@ -245,10 +245,10 @@ VOS_VOID RNIC_InitIpv6PdpCtx(
 )
 {
     pstIpv6PdpCtx->enRegStatus = RNIC_PDP_REG_STATUS_DEACTIVE;
-    /* Modified by l60609 for L-C互操作项目, 2014-1-14, begin */
+    /* Modified by l60609 for L-C??????????, 2014-1-14, begin */
     pstIpv6PdpCtx->ucRabId     = RNIC_RAB_ID_INVALID;
     pstIpv6PdpCtx->ucPdnId     = RNIC_PDN_ID_INVALID;
-    /* Modified by l60609 for L-C互操作项目, 2014-1-14, end */
+    /* Modified by l60609 for L-C??????????, 2014-1-14, end */
 
     TAF_MEM_SET_S(pstIpv6PdpCtx->aucIpv6Addr,
                sizeof(pstIpv6PdpCtx->aucIpv6Addr),
@@ -267,14 +267,14 @@ VOS_VOID RNIC_InitIpv4v6PdpCtx(
 {
     RNIC_PDP_CTX_STRU                  *pstPdpAddr;
 
-    /* 获取PDP上下文地址 */
+    /* ????PDP?????????? */
     pstPdpAddr                              = RNIC_GetPdpCtxAddr(ucRmNetId);
 
-    /* Modified by l60609 for L-C互操作项目, 2014-1-14, begin */
+    /* Modified by l60609 for L-C??????????, 2014-1-14, begin */
     pstIpv4v6PdpCtx->enRegStatus            = RNIC_PDP_REG_STATUS_DEACTIVE;
     pstIpv4v6PdpCtx->ucRabId                = RNIC_RAB_ID_INVALID;
     pstIpv4v6PdpCtx->ucPdnId                = RNIC_PDN_ID_INVALID;
-    /* Modified by l60609 for L-C互操作项目, 2014-1-14, end */
+    /* Modified by l60609 for L-C??????????, 2014-1-14, end */
 
     pstPdpAddr->stIpv4PdpInfo.ucRabId       = RNIC_RAB_ID_INVALID;
     pstPdpAddr->stIpv6PdpInfo.ucRabId       = RNIC_RAB_ID_INVALID;
@@ -294,7 +294,7 @@ VOS_VOID RNIC_InitResetSem(VOS_VOID)
 {
     g_stRnicCtx.hResetSem  = VOS_NULL_PTR;
 
-    /* 分配二进制信号量 */
+    /* ???????????????? */
     if (VOS_OK != VOS_SmBCreate( "RNIC", 0, VOS_SEMA4_FIFO, &g_stRnicCtx.hResetSem))
     {
         PS_PRINTF("Create rnic acpu cnf sem failed!\r\n");
@@ -324,7 +324,7 @@ VOS_VOID RNIC_InitIpfMode(
 
     pstRnicCtx->ucIpfMode = 0;
 
-    /* 读取NV项 */
+    /* ????NV?? */
     if (NV_OK == NV_ReadEx(MODEM_ID_0, en_NV_Item_ADS_IPF_MODE_CFG,
                       &stIpfMode, (VOS_UINT32)sizeof(TAF_NV_ADS_IPF_MODE_CFG_STRU)))
     {

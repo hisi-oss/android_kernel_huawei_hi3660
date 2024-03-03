@@ -42,14 +42,14 @@ extern "C" {
 #define WIFI_BAND_BOTH_WITH_DFS         (7)    /* both bands with DFS channels */
 
 
-/* 2G信道与5G信道总数 */
+/* 2G??????5G???????? */
 #define VENDOR_CHANNEL_LIST_ALL  (MAC_CHANNEL_FREQ_2_BUTT + MAC_CHANNEL_FREQ_5_BUTT)
 
 /* firmware event ring, ring id 2 */
 #define VENDOR_FW_EVENT_RING_NAME    "fw_event"
 #define VENDOR_FW_EVENT_RING_SIZE    (64 * 1024)
 
-/* Feature enums *//* 需和wifi_hal.h中定义保持一致 */
+/* Feature enums *//* ????wifi_hal.h?????????????? */
 #define WIFI_FEATURE_INFRA              0x0001      /** Basic infrastructure mode */
 #define WIFI_FEATURE_INFRA_5G           0x0002      /** Support for 5 GHz Band */
 #define WIFI_FEATURE_HOTSPOT            0x0004      /** Support for GAS/ANQP */

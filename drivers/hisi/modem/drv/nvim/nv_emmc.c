@@ -125,10 +125,10 @@ void nv_emmc_help(u32 type)
  * count off in this sec,bewteen sec head to off in this sec,EMMC:vir_off == phy_off
  */
 
-/*lint -save -e715*//*715表示入参fd未使用*/
+/*lint -save -e715*//*715????????fd??????*/
 u32 nv_sec_off_count(struct nv_emmc_file_header_stru* fd,u32 vir_off, loff_t* phy_off)
 {
-    *phy_off = (loff_t)(unsigned long)vir_off;/* [false alarm]:屏蔽Fortify */
+    *phy_off = (loff_t)(unsigned long)vir_off;/* [false alarm]:????Fortify */
     return NV_OK;
 }
 /*lint -restore*/
@@ -234,7 +234,7 @@ u32 nv_dload_file_info_init1(const s8* name, nv_file_map_s* sec_info)
 u32 nv_dload_file_info_init(void)
 {
     u32 ret;
-    /*lint -save -e985*//*985表示nv_dload未初始化完全，但是初始化为{0}又编译不过*/
+    /*lint -save -e985*//*985????nv_dload??????????????????????????{0}??????????*/
     nv_dload_packet_head_s nv_dload = {};
     /*lint -restore*/
     xnv_map_file_s * other_card_info = NULL;
@@ -263,7 +263,7 @@ u32 nv_dload_file_info_init(void)
     }
     multi_card = (nv_dload.ulSimNumEx > 0)&&(NV_CTRL_FILE_MAGIC_NUM != nv_dload.ulSimNumEx);
 
-    /*是否支持双卡外的其他卡*/
+    /*??????????????????????*/
     if(multi_card)
     {
         other_card_info = (xnv_map_file_s *)nv_malloc(nv_dload.ulSimNumEx * sizeof(xnv_map_file_s));
@@ -318,7 +318,7 @@ u32 nv_dload_file_info_init(void)
 }
 
 /*
- * 读nand接口
+ * ??nand????
  * mtd      :   mtd device
  * off      :   loggic offset in this file,need
  * len      :   data len write to flash ,len <= mtd->erasesize
@@ -327,7 +327,7 @@ u32 nv_dload_file_info_init(void)
 u32 nv_blk_read(struct nv_emmc_file_header_stru* fd,FSZ off,u32 len,u8* ptr)
 {
     u32 ret;
-    loff_t offset = 0;    /*传进来的偏移相对于文件头的逻辑偏移*/
+    loff_t offset = 0;    /*??????????????????????????????????*/
 
     /* coverity[incompatible] */
     ret = nv_sec_off_count(fd, (u32)off,&offset);
@@ -342,7 +342,7 @@ u32 nv_blk_read(struct nv_emmc_file_header_stru* fd,FSZ off,u32 len,u8* ptr)
 
 
 /*
- * 写nand接口
+ * ??nand????
  * mtd      :   mtd device
  * off      :   loggic offset in this file,need
  * len      :   data len write to flash ,len <= mtd->erasesize
@@ -351,7 +351,7 @@ u32 nv_blk_read(struct nv_emmc_file_header_stru* fd,FSZ off,u32 len,u8* ptr)
 u32 nv_blk_write(struct nv_emmc_file_header_stru* fd,FSZ off,u32 len,u8* ptr)
 {
     u32 ret;
-    loff_t offset = 0;    /*传进来的偏移相对于文件头的逻辑偏移*/
+    loff_t offset = 0;    /*??????????????????????????????????*/
 
     ret = nv_sec_off_count(fd, (u32)off, &offset);
     if(ret != NAND_OK)
@@ -816,7 +816,7 @@ u32 nv_emmc_read(u8* ptr, u32 size, u32 count, FILE* fp)
 
     real_size = ((fd->seek+len) < fd->length)? len: (fd->length - fd->seek );
 
-    ret = nv_blk_read(fd, (FSZ)((unsigned long)fd->off+fd->seek),real_size,ptr);/*读取注意文件seek位置*/
+    ret = nv_blk_read(fd, (FSZ)((unsigned long)fd->off+fd->seek),real_size,ptr);/*????????????seek????*/
     if(ret != NAND_OK)
     {
         nv_file_debug(NV_FILE_READ_API,2,(u32)ret,real_size,fd->emmc_type);
@@ -990,7 +990,7 @@ u32 nv_emmc_remove(const s8* path)
         case NV_FILE_CUST_CARD_3:
             if(NV_SUPPORT_MULTI_CARD)
             {
-                /*将支持的其他卡数量改为0，则检测是否支持多卡时会返回不支持*/
+                /*??????????????????????0??????????????????????????????????*/
                 g_emmc_info.nv_dload.ulSimNumEx = 0;
                 g_emmc_info.nv_dload.xnv_file[0].stCustFile.magic_num = NV_FLASH_NULL;
             }
@@ -998,7 +998,7 @@ u32 nv_emmc_remove(const s8* path)
         case NV_FILE_XNV_CARD_3:
             if(NV_SUPPORT_MULTI_CARD)
             {
-                /*将支持的其他卡数量改为0，则检测是否支持多卡时会返回不支持*/
+                /*??????????????????????0??????????????????????????????????*/
                 g_emmc_info.nv_dload.ulSimNumEx = 0;
                 g_emmc_info.nv_dload.xnv_file[0].stXnvFile.magic_num = NV_FLASH_NULL;
             }
@@ -1012,7 +1012,7 @@ u32 nv_emmc_remove(const s8* path)
         case NV_FILE_XNV_MAP_CARD_3:
             if(NV_SUPPORT_MULTI_CARD)
             {
-                /*将支持的其他卡数量改为0，则检测是否支持多卡时会返回不支持*/
+                /*??????????????????????0??????????????????????????????????*/
                 g_emmc_info.nv_dload.ulSimNumEx = 0;
                 g_emmc_info.nv_dload.xnv_file[0].stMapFile.magic_num = NV_FLASH_NULL;
             }
@@ -1174,11 +1174,11 @@ u32 nv_emmc_access(const s8* path,s32 mode)
 
 
 /*****************************************************************************
- 函 数 名  : nv_support_multi_card
- 功能描述  : 是否支持多卡nv
- 输入参数  : void
- 输出参数  : 无
- 返 回 值  : 1:支持 0:不支持
+ ?? ?? ??  : nv_support_multi_card
+ ????????  : ????????????nv
+ ????????  : void
+ ????????  : ??
+ ?? ?? ??  : 1:???? 0:??????
 *****************************************************************************/
 u32 nv_support_multi_card(void)
 {
@@ -1195,11 +1195,11 @@ u32 nv_support_multi_card(void)
 
 }
 /*****************************************************************************
- 函 数 名  : nv_get_dload_file_len
- 功能描述  : 计算dload分区的大小,不包含最后的升级包的CRC校验码
- 输入参数  : void
- 输出参数  : 无
- 返 回 值  : 1:支持 0:不支持
+ ?? ?? ??  : nv_get_dload_file_len
+ ????????  : ????dload??????????,????????????????????CRC??????
+ ????????  : void
+ ????????  : ??
+ ?? ?? ??  : 1:???? 0:??????
 *****************************************************************************/
 u32 nv_get_dload_file_len(void)
 {
@@ -1238,11 +1238,11 @@ do{\
 }
 
 /*****************************************************************************
- 函 数 名  : nv_flash_update_info
- 功能描述  : 更新各个分区的信息
- 输入参数  : void
- 输出参数  : 无
- 返 回 值  : 0 成功 其他失败
+ ?? ?? ??  : nv_flash_update_info
+ ????????  : ??????????????????
+ ????????  : void
+ ????????  : ??
+ ?? ?? ??  : 0 ???? ????????
 *****************************************************************************/
 u32 nv_emmc_update_info(const s8* path)
 {

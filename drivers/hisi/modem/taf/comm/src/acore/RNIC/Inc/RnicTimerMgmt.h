@@ -50,7 +50,7 @@
 #define __RNIC_TIMERMGMT_H__
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 #include "vos.h"
 #include "product_config.h"
@@ -65,17 +65,17 @@ extern "C" {
 #pragma pack(4)
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
 
-/* RNIC中同时运行的定时器的最大数目 */
+/* RNIC???????????????????????????? */
 #define RNIC_MAX_TIMER_NUM                      (TI_RNIC_TIMER_BUTT)
 
 #define TI_RNIC_UNIT                            (1000)                          /* 1s = 1000ms */
 
-#define TI_RNIC_DSFLOW_STATS_LEN                (2000)                          /* 2秒统计一次速率 */
-#define TI_RNIC_DEMAND_DIAL_DISCONNECT_LEN      (10000)                         /* 10秒拨号断开定时器 */
-#define TI_RNIC_DEMAND_DIAL_PROTECT_LEN         (1000)                          /* 1秒拨号保护定时器 */
+#define TI_RNIC_DSFLOW_STATS_LEN                (2000)                          /* 2?????????????? */
+#define TI_RNIC_DEMAND_DIAL_DISCONNECT_LEN      (10000)                         /* 10???????????????? */
+#define TI_RNIC_DEMAND_DIAL_PROTECT_LEN         (1000)                          /* 1???????????????? */
 
 #if (FEATURE_ON == FEATURE_MULTI_MODEM)
 #if  (MULTI_MODEM_NUMBER == 3)
@@ -103,23 +103,23 @@ extern "C" {
 #endif
 
 /*****************************************************************************
-  3 枚举定义
+  3 ????????
 *****************************************************************************/
 
 
 enum RNIC_TIMER_ID_TYPE_ENUM
 {
-    TI_RNIC_DEMAND_DIAL_DISCONNECT,                                             /* 按需拨号断开定时器 */
-    TI_RNIC_DEMAND_DIAL_PROTECT,                                                /* 按需拨号保护定时器 */
-    TI_RNIC_DSFLOW_STATS_0,                                                     /* 网卡0的2秒的流量统计定时器 */
-    TI_RNIC_DSFLOW_STATS_1,                                                     /* 网卡1的2秒的流量统计定时器 */
-    TI_RNIC_DSFLOW_STATS_2,                                                     /* 网卡2的2秒的流量统计定时器 */
+    TI_RNIC_DEMAND_DIAL_DISCONNECT,                                             /* ?????????????????? */
+    TI_RNIC_DEMAND_DIAL_PROTECT,                                                /* ?????????????????? */
+    TI_RNIC_DSFLOW_STATS_0,                                                     /* ????0??2?????????????????? */
+    TI_RNIC_DSFLOW_STATS_1,                                                     /* ????1??2?????????????????? */
+    TI_RNIC_DSFLOW_STATS_2,                                                     /* ????2??2?????????????????? */
 #if (FEATURE_ON == FEATURE_MULTI_MODEM)
-    TI_RNIC_DSFLOW_STATS_3,                                                     /* 网卡3的2秒的流量统计定时器 */
-    TI_RNIC_DSFLOW_STATS_4,                                                     /* 网卡4的2秒的流量统计定时器 */
+    TI_RNIC_DSFLOW_STATS_3,                                                     /* ????3??2?????????????????? */
+    TI_RNIC_DSFLOW_STATS_4,                                                     /* ????4??2?????????????????? */
 #if  (MULTI_MODEM_NUMBER == 3)
-    TI_RNIC_DSFLOW_STATS_5,                                                     /* 网卡5的2秒的流量统计定时器 */
-    TI_RNIC_DSFLOW_STATS_6,                                                     /* 网卡6的2秒的流量统计定时器 */
+    TI_RNIC_DSFLOW_STATS_5,                                                     /* ????5??2?????????????????? */
+    TI_RNIC_DSFLOW_STATS_6,                                                     /* ????6??2?????????????????? */
 #endif /* #if (MULTI_MODEM_NUMBER == 3) */
 #endif
     TI_RNIC_TIMER_BUTT
@@ -129,8 +129,8 @@ typedef VOS_UINT16 RNIC_TIMER_ID_ENUM_UINT16;
 
 enum RNIC_TIMER_STATUS_ENUM
 {
-    RNIC_TIMER_STATUS_STOP,                                                     /* 定时器停止状态 */
-    RNIC_TIMER_STATUS_RUNING,                                                   /* 定时器运行状态 */
+    RNIC_TIMER_STATUS_STOP,                                                     /* ?????????????? */
+    RNIC_TIMER_STATUS_RUNING,                                                   /* ?????????????? */
     RNIC_TIMER_STATUS_BUTT
 };
 typedef VOS_UINT8 RNIC_TIMER_STATUS_ENUM_UINT8;
@@ -138,37 +138,37 @@ typedef VOS_UINT8 RNIC_TIMER_STATUS_ENUM_UINT8;
 
 enum RNIC_TIMER_OPERATION_TYPE_ENUM
 {
-    RNIC_TIMER_OPERATION_START,                                                 /* 启动定时器 */
-    RNIC_TIMER_OPERATION_STOP,                                                  /* 停止定时器 */
+    RNIC_TIMER_OPERATION_START,                                                 /* ?????????? */
+    RNIC_TIMER_OPERATION_STOP,                                                  /* ?????????? */
     RNIC_TIMER_OPERATION_TYPE_ENUM_BUTT
 };
 typedef VOS_UINT8  RNIC_TIMER_OPERATION_TYPE_ENUM_UINT8;
 
 
 /*****************************************************************************
-  4 全局变量声明
+  4 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  5 消息头定义
+  5 ??????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  6 消息定义
+  6 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  7 STRUCT定义
+  7 STRUCT????
 *****************************************************************************/
 
 typedef struct
 {
-    HTIMER                              hTimer;                                 /* 定时器的运行指针 */
-    RNIC_TIMER_STATUS_ENUM_UINT8        enTimerStatus;                          /* 定时器的运行状态,启动或停止 */
-    VOS_UINT8                           aucRsv[7];                              /* 保留 */
+    HTIMER                              hTimer;                                 /* ???????????????? */
+    RNIC_TIMER_STATUS_ENUM_UINT8        enTimerStatus;                          /* ????????????????,?????????? */
+    VOS_UINT8                           aucRsv[7];                              /* ???? */
 } RNIC_TIMER_CTX_STRU;
 
 
@@ -176,24 +176,24 @@ typedef struct
 typedef struct
 {
     VOS_MSG_HEADER
-    RNIC_TIMER_ID_ENUM_UINT16               enTimerId;                          /* 定时器ID */
-    RNIC_TIMER_OPERATION_TYPE_ENUM_UINT8    enTimeAction;                       /* 定时器操作类型 */
-    VOS_UINT8                               aucRsv[1];                          /* 保留 */
-    VOS_UINT32                              ulTimeLen;                          /* 定时器长度 */
+    RNIC_TIMER_ID_ENUM_UINT16               enTimerId;                          /* ??????ID */
+    RNIC_TIMER_OPERATION_TYPE_ENUM_UINT8    enTimeAction;                       /* ?????????????? */
+    VOS_UINT8                               aucRsv[1];                          /* ???? */
+    VOS_UINT32                              ulTimeLen;                          /* ?????????? */
 }RNIC_TIMER_INFO_STRU;
 
 /*****************************************************************************
-  8 UNION定义
+  8 UNION????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  9 OTHERS定义
+  9 OTHERS????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  10 函数声明
+  10 ????????
 *****************************************************************************/
 VOS_VOID  RNIC_InitAllTimers(
     RNIC_TIMER_CTX_STRU                 *pstRnicTimerCtx

@@ -47,7 +47,7 @@
 */
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "AtParse.h"
 #include "ATCmdProc.h"
@@ -64,26 +64,26 @@
 
 
 /*****************************************************************************
-    协议栈打印打点方式下的.C文件宏定义
+    ??????????????????????.C??????????
 *****************************************************************************/
 #define    THIS_FILE_ID        PS_FILE_ID_AT_EXTENDCMD_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
-/* 示例: ^CMDX 命令是不受E5密码保护命令，且在+CLAC列举所有命令时不显示，第一个参数是不带双引号的字符串,
-        第二个参数是带双引号的字符串，第三个参数是整数型参数
+/* ????: ^CMDX ??????????E5??????????????????+CLAC????????????????????????????????????????????????????,
+        ????????????????????????????????????????????????????
 
-   !!!!!!!!!!!注意: param1和param2是示例，实际定义命令时应尽量定义的简短(可提高解析效率)!!!!!!!!!!!!!
+   !!!!!!!!!!!????: param1??param2??????????????????????????????????????(??????????????)!!!!!!!!!!!!!
 
     {AT_CMD_CMDX,
     At_SetCmdxPara, AT_SET_PARA_TIME, At_QryCmdxPara, AT_QRY_PARA_TIME, At_TestCmdxPara, AT_NOT_SET_TIME,
     AT_ERROR, CMD_TBL_E5_IS_LOCKED | CMD_TBL_CLAC_IS_INVISIBLE,
     (VOS_UINT8*)"^CMDX", (VOS_UINT8*)"(@param1),(param2),(0-255)"},
 */
-/* SMS命令表 */
+/* SMS?????? */
 
-/* 主动上报相关命令设置和查询时需要等待回复，添加等待设置回复时间和等待查询回复时间 */
+/* ???????????????????????????????????????????????????????????????????????????????? */
 const AT_SMS_CMD_TAB_STRU gastAtSmsCmdTab[]=
 {
     /* SMS */
@@ -160,13 +160,13 @@ AT_PAR_CMD_ELEMENT_STRU g_astAtExtendCmdTbl[] =
     AT_CME_INCORRECT_PARAMETERS, CMD_TBL_LIMITED_NULL,
     (TAF_UINT8*)"+CNUM",    TAF_NULL_PTR},
 
-     /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, begin */
+     /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, begin */
     {AT_CMD_CPBF,
     At_SetCpbfPara,     AT_SET_PARA_TIME,   TAF_NULL_PTR,    AT_NOT_SET_TIME,   AT_TestCpbrPara, AT_SET_PARA_TIME,
     VOS_NULL_PTR,        AT_NOT_SET_TIME,
     AT_CME_INCORRECT_PARAMETERS, CMD_TBL_LIMITED_NULL,
     (TAF_UINT8*)"+CPBF",    (TAF_UINT8*)"(number),(text)"},
-     /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, end */
+     /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, end */
 
     /* USIM */
     {AT_CMD_CSIM,
@@ -212,14 +212,14 @@ AT_PAR_CMD_ELEMENT_STRU g_astAtExtendCmdTbl[] =
     (TAF_UINT8*)"+CRSM",  (TAF_UINT8*)"(0-255),(1-65535),(0-255),(0-255),(0-255),(cmd),(pathid)"},
 
     /* SMS CONFIG */
-    /* Added by 傅映君/f62575 for AT Project, SIM卡保护标志确认, 2011/11/15, begin */
+    /* Added by ??????/f62575 for AT Project, SIM??????????????, 2011/11/15, begin */
     {AT_CMD_CSCS,
     At_SetCscsPara,     AT_NOT_SET_TIME, At_QryCscsPara,    AT_NOT_SET_TIME,    VOS_NULL_PTR, AT_NOT_SET_TIME,
     VOS_NULL_PTR,        AT_NOT_SET_TIME,
     AT_CME_INCORRECT_PARAMETERS,       CMD_TBL_LIMITED_NULL,
     (TAF_UINT8*)"+CSCS",    (TAF_UINT8*)"(\"IRA\",\"UCS2\",\"GSM\")"},
 
-    /* Added by 傅映君/f62575 for AT Project, SIM卡保护标志确认, 2011/11/15, end */
+    /* Added by ??????/f62575 for AT Project, SIM??????????????, 2011/11/15, end */
     {AT_CMD_CMEE,
     At_SetCmeePara,     AT_NOT_SET_TIME, At_QryCmeePara,    AT_NOT_SET_TIME,    VOS_NULL_PTR, AT_NOT_SET_TIME,
     VOS_NULL_PTR,        AT_NOT_SET_TIME,
@@ -299,7 +299,7 @@ AT_PAR_CMD_ELEMENT_STRU g_astAtExtendCmdTbl[] =
     (TAF_UINT8*)"+CSCB",    (VOS_UINT8*)"(0,1),(MIDS),(DCSS)"},
     /* Added by f62575 for AT Project, 2011-10-24, end */
 
-    /* 语音新增AT命令 */
+    /* ????????AT???? */
     {AT_CMD_CLVL,
     At_SetClvlPara,     AT_SET_PARA_TIME, At_QryClvlPara,   AT_QRY_PARA_TIME,   VOS_NULL_PTR, AT_NOT_SET_TIME,
     VOS_NULL_PTR,        AT_NOT_SET_TIME,
@@ -427,14 +427,14 @@ AT_PAR_CMD_ELEMENT_STRU g_astAtExtendCmdTbl[] =
     AT_CME_INCORRECT_PARAMETERS, CMD_TBL_PIN_IS_LOCKED,
     (VOS_UINT8*)"+GMI", VOS_NULL_PTR},
 
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, begin */
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, begin */
     /* OTHER */
     {AT_CMD_CTFR,
     At_SetCtfrPara,     AT_SET_PARA_TIME, VOS_NULL_PTR,     AT_NOT_SET_TIME,    VOS_NULL_PTR, AT_NOT_SET_TIME,
     VOS_NULL_PTR,        AT_NOT_SET_TIME,
     AT_CME_INCORRECT_PARAMETERS, CMD_TBL_CLAC_IS_INVISIBLE,
     (VOS_UINT8*)"+CTFR", (VOS_UINT8*)"(number),(0-255),(subaddr),(0-255)"},
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, end */
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, end */
 
     {AT_CMD_CPWD,
     At_SetCpwdPara,     AT_SET_SS_PARA_TIME, VOS_NULL_PTR,     AT_NOT_SET_TIME,    At_TestCpwdPara, AT_NOT_SET_TIME,
@@ -650,7 +650,7 @@ AT_PAR_CMD_ELEMENT_STRU g_astAtExtendCmdTbl[] =
     AT_CME_INCORRECT_PARAMETERS, CMD_TBL_LIMITED_NULL,
     (VOS_UINT8*)"+CGEQREQ",    (VOS_UINT8*)CGEQREQ_CMD_PARA_STRING},
 
-    /* +CGEQMIN命令的测试显示结果与+CGEQREQ是一致的，故使用同一个测试函数 */
+    /* +CGEQMIN????????????????????+CGEQREQ?????????????????????????????? */
     {AT_CMD_CGEQMIN,
     AT_SetCgeqminPara,  AT_SET_PARA_TIME, At_QryCgeqminPara, AT_QRY_PARA_TIME,  At_TestCgeqreqPara, AT_NOT_SET_TIME,
     VOS_NULL_PTR,        AT_NOT_SET_TIME,
@@ -829,7 +829,7 @@ AT_PAR_CMD_ELEMENT_STRU g_astAtExtendCmdTbl[] =
 };
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 

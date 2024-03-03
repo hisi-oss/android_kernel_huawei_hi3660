@@ -45,7 +45,7 @@ void bsp_print_report_test2(void)
     bsp_trace(BSP_LOG_LEVEL_DEBUG, BSP_MODU_DLOCK,"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\n");
 }
 
-/*252个z,4个a,4个b,4个c:zz..zzzaaaa(256)|bbbbcccc*/
+/*252??z,4??a,4??b,4??c:zz..zzzaaaa(256)|bbbbcccc*/
 void bsp_print_report_test3(void)
 {
     bsp_trace(BSP_LOG_LEVEL_FATAL, BSP_MODU_LOG,"zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzaaaabbbbcccc\n");
@@ -104,8 +104,8 @@ int bsp_trans_report_test1(void)
     memcpy(trans.data,"I am happy!!!", (unsigned long)13);
 
     pstdata.ulModule = 0x01010000;      /*31-24:modemid(0x1),23-16:modeid(0x1)*/
-    pstdata.ulMsgId = 0x00005701;       /*18-0:消息id(0x5701)*/
-    pstdata.ulPid = 0x8003;             /*0x8003,代表BSP*/
+    pstdata.ulMsgId = 0x00005701;       /*18-0:????id(0x5701)*/
+    pstdata.ulPid = 0x8003;             /*0x8003,????BSP*/
     pstdata.ulLength= sizeof(trans_report_stru_info);
     pstdata.pData = (void*)(&trans);
 

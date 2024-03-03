@@ -229,7 +229,7 @@ s32 dlock_get_reset_reg(void)
         g_reset_info.mdm_vir_addr = ioremap(mdm_phy_addr, SYSCTRL_ADDR_SIZE);
     }
 
-    /*获取死锁计数分频系数寄存器，并将其写为2*/
+    /*??????????????????????????????????????2*/
 
     ret = of_property_read_u32_array(dev, "dlock_cnt_clk_div_num_reg", g_reset_info.cnt_div_num_reg, 3);
     if(ret)
@@ -335,7 +335,7 @@ s32 dlock_axi_gm_info(const char *node_name,u32 i)
     }
     memset(g_bus_info.bus_state_info[i].bus_dlock_info.mst_port_info, 0, mst_port_num*(sizeof(struct mst_port_info)));
 
-    /*确定mst_port和mst_name的一一对应关系*/
+    /*????mst_port??mst_name??????????????*/
     for(j = 0; j < mst_port_num; j++)
     {
         ret = of_property_read_u32_index(dev, "dlock_mst_port", j, &mst_port);
@@ -364,7 +364,7 @@ s32 dlock_axi_gm_info(const char *node_name,u32 i)
     }
     memset(g_bus_info.bus_state_info[i].bus_dlock_info.mst_id_info, 0, id_num*(sizeof(struct mst_id_info)));
 
-    /*确定mst_id和mst_name的一一对应关系*/
+    /*????mst_id??mst_name??????????????*/
     for(k = 0; k < id_num; k++)
     {
         ret = of_property_read_u32_index(dev, "dlock_id", k, &id);
@@ -422,7 +422,7 @@ s32 dlock_axi_fbp_info(const char *node_name,u32 i)
     }
     memset(g_bus_info.bus_state_info[i].bus_dlock_info.mst_port_info, 0, mst_port_num*(sizeof(struct mst_port_info)));
 
-    /*确定mst_port和mst_name的一一对应关系*/
+    /*????mst_port??mst_name??????????????*/
     for(j = 0; j < mst_port_num; j++)
     {
         ret = of_property_read_u32_index(dev, "dlock_mst_port", j, &mst_port);
@@ -506,7 +506,7 @@ s32 dlock_get_bus_state_reg(void)
     }
     memset(g_bus_info.bus_state_info, 0, bus_num*sizeof(struct bus_state_info));
 
-    /*获取总线锁死状态寄存器偏移、起始位、终止位*/
+    /*??????????????????????????????????????????*/
     of_property_for_each_u32(dev, "bus_state_reg", prop, p, u)
     {
     	if(j % 3 == 0)
@@ -532,7 +532,7 @@ s32 dlock_get_bus_state_reg(void)
 
     for(i = 0; i < bus_num; i++)
     {
-        /*获取锁死总线基地址、名称、标志位*/
+        /*????????????????????????????????*/
         ret = of_property_read_u32_index(dev, "bus_base_addr", i, &phy_addr);
         ret |= of_property_read_string_index(dev, "bus_name", (s32)i, &bus_name);
         if(ret)
@@ -549,7 +549,7 @@ s32 dlock_get_bus_state_reg(void)
         g_bus_info.bus_state_info[i].bus_state.bus_vir_addr = vir_addr;
         strncpy(g_bus_info.bus_state_info[i].bus_state.bus_name, bus_name, 32);
 
-        /*根据bus_name匹配对应的总线，获取对应总线锁死寄存器信息*/
+        /*????bus_name??????????????????????????????????????????*/
         dlock_bus_match(bus_name,i);
     }
     return dlock_ok;
@@ -588,14 +588,14 @@ static irqreturn_t dlock_int_handler(void)
     printk(KERN_ERR"*************************dlock_info*************************\n");
     printk(KERN_ERR"%-10s %-10s %-10s %-10s %-10s %-10s\n","Bus","Master","M_port","S_port","Slv_addr","Operation");
 
-    /*从所有axi总线中找到所有锁死总线，并将其放入全局数组中*/
+    /*??????axi????????????????????????????????????????????*/
     for(i =0; i < g_bus_info.bus_num; i++)
     {
         strncpy(dlock_bus_name, g_bus_info.bus_state_info[i].bus_state.bus_name, 32);
         hi_dlock_get_reg(&state_value, g_bus_info.bus_state_info[i].bus_state.bus_vir_addr, g_bus_info.bus_state_info[i].bus_state.bus_state_reg);
         if (1 == state_value)
         {
-            /*读取每条死锁总线的mst、slv端口号、访问地址、读写指示*/
+            /*??????????????????mst??slv??????????????????????????*/
             hi_dlock_get_reg(&mst_port, g_bus_info.bus_state_info[i].bus_state.bus_vir_addr, g_bus_info.bus_state_info[i].bus_dlock_info.mst_port_reg);
             hi_dlock_get_reg(&slv_port, g_bus_info.bus_state_info[i].bus_state.bus_vir_addr, g_bus_info.bus_state_info[i].bus_dlock_info.slv_port_reg);
             slv_addr = readl(g_bus_info.bus_state_info[i].bus_state.bus_vir_addr + g_bus_info.bus_state_info[i].bus_dlock_info.addr_reg[0]);
@@ -605,11 +605,11 @@ static irqreturn_t dlock_int_handler(void)
             else
                 strncpy(type, "read", 10);
 
-            /*根据bus_name匹配对应的总线，然后再根据mst_port、mst_id获取对应的mst_name*/
+            /*????bus_name??????????????????????????mst_port??mst_id??????????mst_name*/
             dlock_master_match(dlock_bus_name, mst_port, i, mst_name);
             mst_port++;
 
-            /*打印死锁总线dlock信息到串口，包括死锁总线、端口号、master、slv地址、读写类型*/
+            /*????????????dlock??????????????????????????????????master??slv??????????????*/
             printk(KERN_ERR"%-10s %-10s M%-9x S%-9x %#-10x %-10s\n",dlock_bus_name,mst_name,mst_port,slv_port,slv_addr,type);
             memset(mst_name, 0, sizeof(mst_name));
             num++;
@@ -639,7 +639,7 @@ s32 bsp_dlock_init(void)
     s32 ret = 0;
     DRV_DLOCK_CFG_STRU cfg = {0,0};
 
-    /*若为MBB产品，且TEEOS编译宏打开，则认为A核为非安全区，不能解析安全区的系统控制器，此时不做解析*/
+    /*????MBB????????TEEOS??????????????????A??????????????????????????????????????????????????????*/
 
     if(BSP_OK != bsp_nvm_read(NV_ID_DRV_DLOCK, (u8 *)&cfg, sizeof(DRV_DLOCK_CFG_STRU)))
 	{
@@ -652,7 +652,7 @@ s32 bsp_dlock_init(void)
         {
 	        g_dlock_reset_enable = cfg.reset_enable;
 
-            /*获取总线状态寄存器、地址寄存器等信息*/
+            /*????????????????????????????????????*/
             ret = dlock_get_bus_state_reg();
             if(ret)
             {
@@ -661,7 +661,7 @@ s32 bsp_dlock_init(void)
             }
             num = (g_bus_info.bus_num -1);
 
-            /*获取总线复位寄存器、死锁计数分频系数等信息*/
+            /*??????????????????????????????????????????*/
             ret = dlock_get_reset_reg();
             if(ret)
             {
@@ -670,10 +670,10 @@ s32 bsp_dlock_init(void)
                 return dlock_error;
             }
 
-            /*清除dlock残留状态*/
+            /*????dlock????????*/
             dlock_sysctrl_reset();
 
-            /*注册中断*/
+            /*????????*/
             dev = of_find_compatible_node(NULL, NULL, node_name);
             if(NULL == dev)
             {
@@ -692,7 +692,7 @@ s32 bsp_dlock_init(void)
             }
             g_dlock_int_no = irq;
 
-            /*解复位dlock*/
+            /*??????dlock*/
             dlock_sysctrl_unreset();
 
             dlock_print("dlock init ok\n");

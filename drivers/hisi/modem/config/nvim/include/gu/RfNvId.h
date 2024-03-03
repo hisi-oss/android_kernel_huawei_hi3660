@@ -10,7 +10,7 @@ extern "C" {
 #endif
 
 /****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 #include "NvIddef.h"
 
@@ -43,7 +43,7 @@ enum RF_NV_ID_ENUM
     en_NV_Item_DCXO_C_TRIM                                       = 10023,
     en_NV_Item_DCXO_TEMP_COMP                                    = 10024,
 
-    /* DCXO升级兼容性NV */
+    /* DCXO??????????NV */
     en_NV_Item_DCXO_BOARD_VERSION                                = 16119,
     en_NV_Item_DCXO_SOFT_VERSION                                 = 16120,
 
@@ -860,13 +860,13 @@ enum RF_NV_ID_ENUM
     en_NV_Item_W_RX_AGC_CTRL_EXT_LNA_B1                          = 11122,
     en_NV_Item_W_RX_AGC_SWITCH_THRESHOLD_EXT_LNA_B1              = 11123,
 
-    /* RF6363 NV新增 */
+    /* RF6363 NV???? */
     en_NV_Item_W_RF_RX_CAL_FREQ_LIST_B1                          = 11124,
     en_NV_Item_W_RF_RX_AGC_TABLE_USED_INFO_B1                    = 11125,
     en_NV_Item_W_RX_PATH_AGC_GAIN_TABLE_CAL_RESULT_B1            = 11126,
     en_NV_Item_W_RX_PATH_DCOC_CAL_RESULT_B1                      = 11127,
     en_NV_Item_W_RX_PATH_IP2_CAL_RESULT_B1                       = 11128,
-    /* 该NV ID TRX公用 */
+    /* ??NV ID TRX???? */
     en_NV_Item_W_RF_DUL_PATH_B1                                  = 11129,
     en_NV_Item_W_RF_DL_FEM_PATH_B1                               = 11130,
     en_NV_Item_W_RF_LNA_PATH_B1                                  = 11131,
@@ -998,7 +998,7 @@ enum RF_NV_ID_ENUM
     en_NV_Item_W_DPD_LUT_THRESHOLD_PARA_B1                       = 11280,
     en_NV_Item_W_DPD_SELF_CAL_INFO_B1                            = 11281,
 
-    /* RF 6363新增 */
+    /* RF 6363???? */
     en_NV_Item_W_RF_TX_CAL_FREQ_LIST_B1                          = 11282,
     en_NV_Item_W_RF_UL_FEM_PATH_B1                               = 11283,
     en_NV_Item_W_TX_BAND_TIMING_B1                               = 11284,
@@ -1042,13 +1042,13 @@ enum RF_NV_ID_ENUM
     en_NV_Item_W_RX_AGC_CTRL_EXT_LNA_B2                          = 11322,
     en_NV_Item_W_RX_AGC_SWITCH_THRESHOLD_EXT_LNA_B2              = 11323,
 
-    /* RF6363 NV新增 */
+    /* RF6363 NV???? */
     en_NV_Item_W_RF_RX_CAL_FREQ_LIST_B2                          = 11324,
     en_NV_Item_W_RF_RX_AGC_TABLE_USED_INFO_B2                    = 11325,
     en_NV_Item_W_RX_PATH_AGC_GAIN_TABLE_CAL_RESULT_B2            = 11326,
     en_NV_Item_W_RX_PATH_DCOC_CAL_RESULT_B2                      = 11327,
     en_NV_Item_W_RX_PATH_IP2_CAL_RESULT_B2                       = 11328,
-    /* 该NV ID TRX公用 */
+    /* ??NV ID TRX???? */
     en_NV_Item_W_RF_DUL_PATH_B2                                  = 11329,
     en_NV_Item_W_RF_DL_FEM_PATH_B2                               = 11330,
     en_NV_Item_W_RF_LNA_PATH_B2                                  = 11331,
@@ -1182,7 +1182,7 @@ enum RF_NV_ID_ENUM
     en_NV_Item_W_DPD_LUT_THRESHOLD_PARA_B2                       = 11480,
     en_NV_Item_W_DPD_SELF_CAL_INFO_B2                            = 11481,
 
-    /* RF 6363新增 */
+    /* RF 6363???? */
     en_NV_Item_W_RF_TX_CAL_FREQ_LIST_B2                          = 11482,
     en_NV_Item_W_RF_UL_FEM_PATH_B2                               = 11483,
     en_NV_Item_W_TX_BAND_TIMING_B2                               = 11484,
@@ -1226,13 +1226,13 @@ enum RF_NV_ID_ENUM
     en_NV_Item_W_RX_AGC_CTRL_EXT_LNA_B3                          = 11522,
     en_NV_Item_W_RX_AGC_SWITCH_THRESHOLD_EXT_LNA_B3              = 11523,
 
-    /* RF6363 NV新增 */
+    /* RF6363 NV???? */
     en_NV_Item_W_RF_RX_CAL_FREQ_LIST_B3                          = 11524,
     en_NV_Item_W_RF_RX_AGC_TABLE_USED_INFO_B3                    = 11525,
     en_NV_Item_W_RX_PATH_AGC_GAIN_TABLE_CAL_RESULT_B3            = 11526,
     en_NV_Item_W_RX_PATH_DCOC_CAL_RESULT_B3                      = 11527,
     en_NV_Item_W_RX_PATH_IP2_CAL_RESULT_B3                       = 11528,
-    /* 该NV ID TRX公用 */
+    /* ??NV ID TRX???? */
     en_NV_Item_W_RF_DUL_PATH_B3                                  = 11529,
     en_NV_Item_W_RF_DL_FEM_PATH_B3                               = 11530,
     en_NV_Item_W_RF_LNA_PATH_B3                                  = 11531,
@@ -1364,7 +1364,7 @@ enum RF_NV_ID_ENUM
     en_NV_Item_W_DPD_LUT_THRESHOLD_PARA_B3                       = 11680,
     en_NV_Item_W_DPD_SELF_CAL_INFO_B3                            = 11681,
 
-    /* RF 6363新增 */
+    /* RF 6363???? */
     en_NV_Item_W_RF_TX_CAL_FREQ_LIST_B3                          = 11682,
     en_NV_Item_W_RF_UL_FEM_PATH_B3                               = 11683,
     en_NV_Item_W_TX_BAND_TIMING_B3                               = 11684,
@@ -1408,13 +1408,13 @@ enum RF_NV_ID_ENUM
     en_NV_Item_W_RX_AGC_CTRL_EXT_LNA_B4                          = 11722,
     en_NV_Item_W_RX_AGC_SWITCH_THRESHOLD_EXT_LNA_B4              = 11723,
 
-     /* RF6363 NV新增 */
+     /* RF6363 NV???? */
     en_NV_Item_W_RF_RX_CAL_FREQ_LIST_B4                          = 11724,
     en_NV_Item_W_RF_RX_AGC_TABLE_USED_INFO_B4                    = 11725,
     en_NV_Item_W_RX_PATH_AGC_GAIN_TABLE_CAL_RESULT_B4            = 11726,
     en_NV_Item_W_RX_PATH_DCOC_CAL_RESULT_B4                      = 11727,
     en_NV_Item_W_RX_PATH_IP2_CAL_RESULT_B4                       = 11728,
-    /* 该NV ID TRX公用 */
+    /* ??NV ID TRX???? */
     en_NV_Item_W_RF_DUL_PATH_B4                                  = 11729,
     en_NV_Item_W_RF_DL_FEM_PATH_B4                               = 11730,
     en_NV_Item_W_RF_LNA_PATH_B4                                  = 11731,
@@ -1546,7 +1546,7 @@ enum RF_NV_ID_ENUM
     en_NV_Item_W_DPD_LUT_THRESHOLD_PARA_B4                       = 11880,
     en_NV_Item_W_DPD_SELF_CAL_INFO_B4                            = 11881,
 
-    /* RF 6363新增 */
+    /* RF 6363???? */
     en_NV_Item_W_RF_TX_CAL_FREQ_LIST_B4                          = 11882,
     en_NV_Item_W_RF_UL_FEM_PATH_B4                               = 11883,
     en_NV_Item_W_TX_BAND_TIMING_B4                               = 11884,
@@ -1590,13 +1590,13 @@ enum RF_NV_ID_ENUM
     en_NV_Item_W_RX_AGC_CTRL_EXT_LNA_B5                          = 11922,
     en_NV_Item_W_RX_AGC_SWITCH_THRESHOLD_EXT_LNA_B5              = 11923,
 
-    /* RF6363 NV新增 */
+    /* RF6363 NV???? */
     en_NV_Item_W_RF_RX_CAL_FREQ_LIST_B5                          = 11924,
     en_NV_Item_W_RF_RX_AGC_TABLE_USED_INFO_B5                    = 11925,
     en_NV_Item_W_RX_PATH_AGC_GAIN_TABLE_CAL_RESULT_B5            = 11926,
     en_NV_Item_W_RX_PATH_DCOC_CAL_RESULT_B5                      = 11927,
     en_NV_Item_W_RX_PATH_IP2_CAL_RESULT_B5                       = 11928,
-    /* 该NV ID TRX公用 */
+    /* ??NV ID TRX???? */
     en_NV_Item_W_RF_DUL_PATH_B5                                  = 11929,
     en_NV_Item_W_RF_DL_FEM_PATH_B5                               = 11930,
     en_NV_Item_W_RF_LNA_PATH_B5                                  = 11931,
@@ -1730,7 +1730,7 @@ enum RF_NV_ID_ENUM
     en_NV_Item_W_DPD_LUT_THRESHOLD_PARA_B5                       = 12080,
     en_NV_Item_W_DPD_SELF_CAL_INFO_B5                            = 12081,
 
-    /* RF 6363新增 */
+    /* RF 6363???? */
     en_NV_Item_W_RF_TX_CAL_FREQ_LIST_B5                          = 12082,
     en_NV_Item_W_RF_UL_FEM_PATH_B5                               = 12083,
     en_NV_Item_W_TX_BAND_TIMING_B5                               = 12084,
@@ -1774,13 +1774,13 @@ enum RF_NV_ID_ENUM
     en_NV_Item_W_RX_AGC_CTRL_EXT_LNA_B6                          = 12122,
     en_NV_Item_W_RX_AGC_SWITCH_THRESHOLD_EXT_LNA_B6              = 12123,
 
-    /* RF6363 NV新增 */
+    /* RF6363 NV???? */
     en_NV_Item_W_RF_RX_CAL_FREQ_LIST_B6                          = 12124,
     en_NV_Item_W_RF_RX_AGC_TABLE_USED_INFO_B6                    = 12125,
     en_NV_Item_W_RX_PATH_AGC_GAIN_TABLE_CAL_RESULT_B6            = 12126,
     en_NV_Item_W_RX_PATH_DCOC_CAL_RESULT_B6                      = 12127,
     en_NV_Item_W_RX_PATH_IP2_CAL_RESULT_B6                       = 12128,
-    /* 该NV ID TRX公用 */
+    /* ??NV ID TRX???? */
     en_NV_Item_W_RF_DUL_PATH_B6                                  = 12129,
     en_NV_Item_W_RF_DL_FEM_PATH_B6                               = 12130,
     en_NV_Item_W_RF_LNA_PATH_B6                                  = 12131,
@@ -1912,7 +1912,7 @@ enum RF_NV_ID_ENUM
     en_NV_Item_W_DPD_LUT_THRESHOLD_PARA_B6                       = 12280,
     en_NV_Item_W_DPD_SELF_CAL_INFO_B6                            = 12281,
 
-    /* RF 6363新增 */
+    /* RF 6363???? */
     en_NV_Item_W_RF_TX_CAL_FREQ_LIST_B6                          = 12282,
     en_NV_Item_W_RF_UL_FEM_PATH_B6                               = 12283,
     en_NV_Item_W_TX_BAND_TIMING_B6                               = 12284,
@@ -1956,13 +1956,13 @@ enum RF_NV_ID_ENUM
     en_NV_Item_W_RX_AGC_CTRL_EXT_LNA_B8                          = 12522,
     en_NV_Item_W_RX_AGC_SWITCH_THRESHOLD_EXT_LNA_B8              = 12523,
 
-    /* RF6363 NV新增 */
+    /* RF6363 NV???? */
     en_NV_Item_W_RF_RX_CAL_FREQ_LIST_B8                          = 12524,
     en_NV_Item_W_RF_RX_AGC_TABLE_USED_INFO_B8                    = 12525,
     en_NV_Item_W_RX_PATH_AGC_GAIN_TABLE_CAL_RESULT_B8            = 12526,
     en_NV_Item_W_RX_PATH_DCOC_CAL_RESULT_B8                      = 12527,
     en_NV_Item_W_RX_PATH_IP2_CAL_RESULT_B8                       = 12528,
-    /* 该NV ID TRX公用 */
+    /* ??NV ID TRX???? */
     en_NV_Item_W_RF_DUL_PATH_B8                                  = 12529,
     en_NV_Item_W_RF_DL_FEM_PATH_B8                               = 12530,
     en_NV_Item_W_RF_LNA_PATH_B8                                  = 12531,
@@ -2095,7 +2095,7 @@ enum RF_NV_ID_ENUM
     en_NV_Item_W_DPD_LUT_THRESHOLD_PARA_B8                       = 12680,
     en_NV_Item_W_DPD_SELF_CAL_INFO_B8                            = 12681,
 
-    /* RF 6363新增 */
+    /* RF 6363???? */
     en_NV_Item_W_RF_TX_CAL_FREQ_LIST_B8                          = 12682,
     en_NV_Item_W_RF_UL_FEM_PATH_B8                               = 12683,
     en_NV_Item_W_TX_BAND_TIMING_B8                               = 12684,
@@ -2139,13 +2139,13 @@ enum RF_NV_ID_ENUM
     en_NV_Item_W_RX_AGC_CTRL_EXT_LNA_B9                          = 12722,
     en_NV_Item_W_RX_AGC_SWITCH_THRESHOLD_EXT_LNA_B9              = 12723,
 
-    /* RF6363 NV新增 */
+    /* RF6363 NV???? */
     en_NV_Item_W_RF_RX_CAL_FREQ_LIST_B9                          = 12724,
     en_NV_Item_W_RF_RX_AGC_TABLE_USED_INFO_B9                    = 12725,
     en_NV_Item_W_RX_PATH_AGC_GAIN_TABLE_CAL_RESULT_B9            = 12726,
     en_NV_Item_W_RX_PATH_DCOC_CAL_RESULT_B9                      = 12727,
     en_NV_Item_W_RX_PATH_IP2_CAL_RESULT_B9                       = 12728,
-    /* 该NV ID TRX公用 */
+    /* ??NV ID TRX???? */
     en_NV_Item_W_RF_DUL_PATH_B9                                  = 12729,
     en_NV_Item_W_RF_DL_FEM_PATH_B9                               = 12730,
     en_NV_Item_W_RF_LNA_PATH_B9                                  = 12731,
@@ -2278,7 +2278,7 @@ enum RF_NV_ID_ENUM
     en_NV_Item_W_DPD_SELF_CAL_INFO_B9                            = 12881,
 
 
-    /* RF 6363新增 */
+    /* RF 6363???? */
     en_NV_Item_W_RF_TX_CAL_FREQ_LIST_B9                          = 12882,
     en_NV_Item_W_RF_UL_FEM_PATH_B9                               = 12883,
     en_NV_Item_W_TX_BAND_TIMING_B9                               = 12884,
@@ -2322,13 +2322,13 @@ enum RF_NV_ID_ENUM
     en_NV_Item_W_RX_AGC_CTRL_EXT_LNA_B11                         = 13122,
     en_NV_Item_W_RX_AGC_SWITCH_THRESHOLD_EXT_LNA_B11             = 13123,
 
-    /* RF6363 NV新增 */
+    /* RF6363 NV???? */
     en_NV_Item_W_RF_RX_CAL_FREQ_LIST_B11                         = 13124,
     en_NV_Item_W_RF_RX_AGC_TABLE_USED_INFO_B11                   = 13125,
     en_NV_Item_W_RX_PATH_AGC_GAIN_TABLE_CAL_RESULT_B11           = 13126,
     en_NV_Item_W_RX_PATH_DCOC_CAL_RESULT_B11                     = 13127,
     en_NV_Item_W_RX_PATH_IP2_CAL_RESULT_B11                      = 13128,
-    /* 该NV ID TRX公用 */
+    /* ??NV ID TRX???? */
     en_NV_Item_W_RF_DUL_PATH_B11                                 = 13129,
     en_NV_Item_W_RF_DL_FEM_PATH_B11                              = 13130,
     en_NV_Item_W_RF_LNA_PATH_B11                                 = 13131,
@@ -2461,7 +2461,7 @@ enum RF_NV_ID_ENUM
     en_NV_Item_W_DPD_LUT_THRESHOLD_PARA_B11                      = 13280,
     en_NV_Item_W_DPD_SELF_CAL_INFO_B11                           = 13281,
 
-    /* RF 6363新增 */
+    /* RF 6363???? */
     en_NV_Item_W_RF_TX_CAL_FREQ_LIST_B11                         = 13282,
     en_NV_Item_W_RF_UL_FEM_PATH_B11                              = 13283,
     en_NV_Item_W_TX_BAND_TIMING_B11                              = 13284,
@@ -2505,13 +2505,13 @@ enum RF_NV_ID_ENUM
     en_NV_Item_W_RX_AGC_CTRL_EXT_LNA_B19                         = 13922,
     en_NV_Item_W_RX_AGC_SWITCH_THRESHOLD_EXT_LNA_B19             = 13923,
 
-    /* RF6363 NV新增 */
+    /* RF6363 NV???? */
     en_NV_Item_W_RF_RX_CAL_FREQ_LIST_B19                         = 13924,
     en_NV_Item_W_RF_RX_AGC_TABLE_USED_INFO_B19                   = 13925,
     en_NV_Item_W_RX_PATH_AGC_GAIN_TABLE_CAL_RESULT_B19           = 13926,
     en_NV_Item_W_RX_PATH_DCOC_CAL_RESULT_B19                     = 13927,
     en_NV_Item_W_RX_PATH_IP2_CAL_RESULT_B19                      = 13928,
-    /* 该NV ID TRX公用 */
+    /* ??NV ID TRX???? */
     en_NV_Item_W_RF_DUL_PATH_B19                                 = 13929,
     en_NV_Item_W_RF_DL_FEM_PATH_B19                              = 13930,
     en_NV_Item_W_RF_LNA_PATH_B19                                 = 13931,
@@ -2643,7 +2643,7 @@ enum RF_NV_ID_ENUM
     en_NV_Item_W_DPD_LUT_THRESHOLD_PARA_B19                      = 14080,
     en_NV_Item_W_DPD_SELF_CAL_INFO_B19                           = 14081,
 
-    /* RF 6363新增 */
+    /* RF 6363???? */
     en_NV_Item_W_RF_TX_CAL_FREQ_LIST_B19                         = 14082,
     en_NV_Item_W_RF_UL_FEM_PATH_B19                              = 14083,
     en_NV_Item_W_TX_BAND_TIMING_B19                              = 14084,
@@ -2672,7 +2672,7 @@ enum RF_NV_ID_ENUM
     en_NV_Item_W_IDLE_ANT2_CTRL                                  = 16001,
 
     en_NV_Item_FEATURE_XPASS_EN                                  = 16029,
-    /* G模优化特性开关 */
+    /* G?????????????? */
     en_NV_Item_GSM_OPTIMIZE_FEATURE_EN                           = 16030,
     en_NV_Item_TCXO_AGING_THRESHOLD                              = 16031,
     en_NV_Item_GSM_NCELL_SCHEDULE_CFG_PARA                       = 16035,
@@ -2693,22 +2693,22 @@ enum RF_NV_ID_ENUM
     en_NV_Item_DCXO_SAMPLE_ARRAY_ALL_MODE                        = 16085,
 
 
-    /* TX TAS项目新增NV-GU公共 PROTOCOL */
+    /* TX TAS????????NV-GU???? PROTOCOL */
     en_NV_Item_TX_TAS_SAR_OFFSET_WEIGHT                          = 16097,
 
-    /* TX TAS项目新增NV-G-BAND PROTOCOL */
+    /* TX TAS????????NV-G-BAND PROTOCOL */
     en_NV_Item_GSM850_TX_TAS_DUAL_ANT_IMBALANCE                  = 16098,
     en_NV_Item_GSM900_TX_TAS_DUAL_ANT_IMBALANCE                  = 16099,
     en_NV_Item_GSM1800_TX_TAS_DUAL_ANT_IMBALANCE                 = 16100,
     en_NV_Item_GSM1900_TX_TAS_DUAL_ANT_IMBALANCE                 = 16101,
 
-    /* TX TAS项目新增NV-W-COMMON PROTOCOL */
+    /* TX TAS????????NV-W-COMMON PROTOCOL */
     en_NV_Item_W_TX_TAS_SAR_TAS_CTRL                             = 16102,
 
-    /* TX TAS项目新增NV-W-RX RF */
+    /* TX TAS????????NV-W-RX RF */
     en_NV_Item_W_TX_TAS_SAR_TAS_BAND_SUPPORT                     = 16103,
 
-    /* TX TAS项目新增NV-W-BAND PROTOCOL */
+    /* TX TAS????????NV-W-BAND PROTOCOL */
     en_NV_Item_W_TX_TAS_DUAL_ANT_IMBALANCE_B1                    = 16104,
     en_NV_Item_W_TX_TAS_DUAL_ANT_IMBALANCE_B2                    = 16105,
     en_NV_Item_W_TX_TAS_DUAL_ANT_IMBALANCE_B3                    = 16106,
@@ -2729,19 +2729,19 @@ enum RF_NV_ID_ENUM
     en_NV_Item_W_CS_ANT2_ENERGY_CTRL                             = 16129,
     en_NV_Item_W_NON_DCH_MAS_CTRL                                = 16135,
 
-    /* 发射功率抬升功能 */
+    /* ???????????????? */
     en_NV_Item_GSM850_UPRAISE_POWER                              = 16071,
     en_NV_Item_GSM900_UPRAISE_POWER                              = 16072,
     en_NV_Item_DCS1800_UPRAISE_POWER                             = 16073,
     en_NV_Item_PCS1900_UPRAISE_POWER                             = 16074,
 
-    /* TX PCL 异常场景优化功能 */
+    /* TX PCL ???????????????? */
     en_NV_Item_GSM850_CS_TX_PCL_OPTI_CTRL                        = 16078,
     en_NV_Item_GSM900_CS_TX_PCL_OPTI_CTRL                        = 16079,
     en_NV_Item_GSM1800_CS_TX_PCL_OPTI_CTRL                       = 16080,
     en_NV_Item_GSM1900_CS_TX_PCL_OPTI_CTRL                       = 16081,
 
-    /* 时间平均SAR功能NV */
+    /* ????????SAR????NV */
     en_NV_Item_TIME_AVG_SAR_FUNC_CONFIG                          = 16054,
 
     en_NV_Item_W_SAR_TIEM_AVG_PARA_B1                            = 16059,
@@ -2761,7 +2761,7 @@ enum RF_NV_ID_ENUM
     en_NV_Item_GSM_AGC_BLK_NOBLK_MODE_PARA                       = 16089,
     en_NV_Item_GSM_LIF_FREQ                                      = 16090,
 
-    /* GSM通信低功耗可维可测业务流程参数统计配置相关NV */
+    /* GSM??????????????????????????????????????????NV */
     en_NV_Item_GSM_PMOM_INFO_CTRL                                = 16092,
     en_NV_Item_GSM_GSDR_GPHY_PARA                                = 16094,
     en_NV_Item_GSM_NCELL_RPT_MASK_PARA                           = 16128,
@@ -2859,7 +2859,7 @@ enum RF_NV_ID_ENUM
 
     en_NV_Item_GUC_IQ_REV_CONTROL                                = 18249,
 
-    /* RF6363 新增 */
+    /* RF6363 ???? */
     en_NV_Item_RF_HW_BASIC_INFO                                  = 18250,
     en_NV_Item_GUC_TAS_DPDT_MIPI_CTRL_WORD_6363                  = 18251,
     en_NV_Item_RF_INIT_REG_INFO                                  = 18252,
@@ -2884,7 +2884,7 @@ enum RF_NV_ID_ENUM
     en_NV_EDGE_TX_RFIC_RF_GAIN_CTRL_TABLE_HB                     = 18316,
     en_NV_EDGE_TX_RFIC_RF_BIAS_CTRL_TABLE_LB                     = 18317,
     en_NV_EDGE_TX_RFIC_RF_BIAS_CTRL_TABLE_HB                     = 18318,
-    /* RF6363新增 */
+    /* RF6363???? */
     en_NV_Item_GSM_ALG_RX_AGC_SWITCH_THRESHOLD_TABLE_BANK        = 18319,
     en_NV_Item_GSM_ALG_RX_AGC_FAST_SWITCH_THRESHOLD_TABLE_BANK   = 18320,
     en_NV_Item_GSM_RF_RX_AGC_RFIC_TABLE_BANK                     = 18321,
@@ -2895,7 +2895,7 @@ enum RF_NV_ID_ENUM
     en_NV_Item_GSM_PRIVATE_TIME_DELAY                            = 18326,
     en_NV_Item_GSM_RF_RX_AGC_GAIN_TABLE_BANK                     = 18327,
 
-    /* GSM PD新增 */
+    /* GSM PD???? */
     en_NV_Item_GSM_TX_POWER_DETECT                               = 18328,
 
     en_NV_Item_W_TX_IQ_SELF_CAL                                  = 18400,
@@ -2953,7 +2953,7 @@ enum RF_NV_ID_ENUM
     en_NV_Item_GSM850_RX_AGC_CTRL                                = 20022,
     en_NV_Item_GSM850_RX_AGC_GAIN_COMP_FOR_FFT                   = 20024,
 
-    /* 6363 新增 */
+    /* 6363 ???? */
     en_NV_Item_GSM850_RF_BAND_CONFIG                             = 20025,
     en_NV_Item_GSM850_RF_DL_FEM_PATH                             = 20026,
     en_NV_Item_GSM850_RF_EXT_LNA_PATH                            = 20027,
@@ -2975,7 +2975,7 @@ enum RF_NV_ID_ENUM
     en_NV_Item_GSM850_TX_RFIC_PA_CTRL_INDEX                      = 20046,
     en_NV_Item_GSM850_TX_PRECHARGE_OFFSET_VS_PCL                 = 20047,
 
-    /* RF6363新增 */
+    /* RF6363???? */
     en_NV_Item_GSM850_RF_UL_FEM_PATH                             = 20048,
     en_NV_Item_GSM850_TX_TEMP_COMP                               = 20049,
     en_NV_Item_GSM850_MRX_GAIN_CTRL                              = 20051,
@@ -2985,9 +2985,9 @@ enum RF_NV_ID_ENUM
     en_NV_Item_GSM850_MRX_IQ_MISMATCH                            = 20053,
 
     en_NV_Item_EDGE850_TX_TIMING                                 = 20070,
-    en_NV_Item_EDGE850_TX_POLAR_RFIC_GAIN_CTRL                   = 20072,       /* NVID待给出 */
+    en_NV_Item_EDGE850_TX_POLAR_RFIC_GAIN_CTRL                   = 20072,       /* NVID?????? */
 
-    /* RF6363新增 */
+    /* RF6363???? */
     en_NV_Item_EDGE850_RF_UL_FEM_PATH                            = 20073,
     en_NV_Item_EDGE850_TX_TEMP_COMP                              = 20075,
     en_NV_Item_EDGE850_TX_FREQ_COMP_CAL_RESULT                   = 20076,
@@ -3018,7 +3018,7 @@ enum RF_NV_ID_ENUM
     en_NV_Item_GSM900_RX_AGC_CTRL                                = 20122,
     en_NV_Item_GSM900_RX_AGC_GAIN_COMP_FOR_FFT                   = 20124,
 
-    /* RF6363新增 */
+    /* RF6363???? */
     en_NV_Item_GSM900_RF_BAND_CONFIG                             = 20125,
     en_NV_Item_GSM900_RF_DL_FEM_PATH                             = 20126,
     en_NV_Item_GSM900_RF_EXT_LNA_PATH                            = 20127,
@@ -3039,7 +3039,7 @@ enum RF_NV_ID_ENUM
     en_NV_Item_GSM900_TX_RFIC_PA_CTRL_INDEX                      = 20146,
     en_NV_Item_GSM900_TX_PRECHARGE_OFFSET_VS_PCL                 = 20147,
 
-    /* RF6363新增 */
+    /* RF6363???? */
     en_NV_Item_GSM900_RF_UL_FEM_PATH                             = 20148,
     en_NV_Item_GSM900_TX_TEMP_COMP                               = 20149,
     en_NV_Item_GSM900_MRX_GAIN_CTRL                              = 20151,
@@ -3049,9 +3049,9 @@ enum RF_NV_ID_ENUM
     en_NV_Item_GSM900_MRX_IQ_MISMATCH                            = 20153,
 
     en_NV_Item_EDGE900_TX_TIMING                                 = 20170,
-    en_NV_Item_EDGE900_TX_POLAR_RFIC_GAIN_CTRL                   = 20172,       /* NVID待给出 */
+    en_NV_Item_EDGE900_TX_POLAR_RFIC_GAIN_CTRL                   = 20172,       /* NVID?????? */
 
-    /* RF6363新增 */
+    /* RF6363???? */
     en_NV_Item_EDGE900_RF_UL_FEM_PATH                            = 20173,
     en_NV_Item_EDGE900_TX_TEMP_COMP                              = 20175,
     en_NV_Item_EDGE900_TX_FREQ_COMP_CAL_RESULT                   = 20176,
@@ -3081,7 +3081,7 @@ enum RF_NV_ID_ENUM
     en_NV_Item_DCS1800_RX_AGC_CTRL                               = 20222,
     en_NV_Item_DCS1800_RX_AGC_GAIN_COMP_FOR_FFT                  = 20224,
 
-    /* RF6363新增 */
+    /* RF6363???? */
     en_NV_Item_DCS1800_RF_BAND_CONFIG                            = 20225,
     en_NV_Item_DCS1800_RF_DL_FEM_PATH                            = 20226,
     en_NV_Item_DCS1800_RF_EXT_LNA_PATH                           = 20227,
@@ -3102,7 +3102,7 @@ enum RF_NV_ID_ENUM
     en_NV_Item_DCS1800_TX_RFIC_PA_CTRL_INDEX                     = 20246,
     en_NV_Item_DCS1800_TX_PRECHARGE_OFFSET_VS_PCL                = 20247,
 
-    /* RF6363新增 */
+    /* RF6363???? */
     en_NV_Item_DCS1800_RF_UL_FEM_PATH                            = 20248,
     en_NV_Item_DCS1800_TX_TEMP_COMP                              = 20249,
     en_NV_Item_DCS1800_MRX_GAIN_CTRL                             = 20251,
@@ -3112,9 +3112,9 @@ enum RF_NV_ID_ENUM
     en_NV_Item_DCS1800_MRX_IQ_MISMATCH                           = 20253,
 
     en_NV_Item_EDGE1800_TX_TIMING                                = 20270,
-    en_NV_Item_EDGE1800_TX_POLAR_RFIC_GAIN_CTRL                  = 20272,       /* NVID待给出 */
+    en_NV_Item_EDGE1800_TX_POLAR_RFIC_GAIN_CTRL                  = 20272,       /* NVID?????? */
 
-    /* RF6363新增 */
+    /* RF6363???? */
     en_NV_Item_EDGE1800_RF_UL_FEM_PATH                           = 20273,
     en_NV_Item_EDGE1800_TX_TEMP_COMP                             = 20275,
     en_NV_Item_EDGE1800_TX_FREQ_COMP_CAL_RESULT                  = 20276,
@@ -3144,7 +3144,7 @@ enum RF_NV_ID_ENUM
     en_NV_Item_PCS1900_RX_AGC_CTRL                               = 20322,
     en_NV_Item_PCS1900_RX_AGC_GAIN_COMP_FOR_FFT                  = 20324,
 
-    /* RF6363新增 */
+    /* RF6363???? */
     en_NV_Item_PCS1900_RF_BAND_CONFIG                            = 20325,
     en_NV_Item_PCS1900_RF_DL_FEM_PATH                            = 20326,
     en_NV_Item_PCS1900_RF_EXT_LNA_PATH                           = 20327,
@@ -3165,7 +3165,7 @@ enum RF_NV_ID_ENUM
     en_NV_Item_PCS1900_TX_RFIC_PA_CTRL_INDEX                     = 20346,
     en_NV_Item_PCS1900_TX_PRECHARGE_OFFSET_VS_PCL                = 20347,
 
-    /* RF6363新增 */
+    /* RF6363???? */
     en_NV_Item_PCS1900_RF_UL_FEM_PATH                            = 20348,
     en_NV_Item_PCS1900_TX_TEMP_COMP                              = 20349,
     en_NV_Item_PCS1900_MRX_GAIN_CTRL                             = 20351,
@@ -3175,9 +3175,9 @@ enum RF_NV_ID_ENUM
     en_NV_Item_PCS1900_MRX_IQ_MISMATCH                           = 20353,
 
     en_NV_Item_EDGE1900_TX_TIMING                                = 20370,
-    en_NV_Item_EDGE1900_TX_POLAR_RFIC_GAIN_CTRL                  = 20372,       /* NVID待给出 */
+    en_NV_Item_EDGE1900_TX_POLAR_RFIC_GAIN_CTRL                  = 20372,       /* NVID?????? */
 
-    /* RF6363新增 */
+    /* RF6363???? */
     en_NV_Item_EDGE1900_RF_UL_FEM_PATH                           = 20373,
     en_NV_Item_EDGE1900_TX_TEMP_COMP                             = 20375,
     en_NV_Item_EDGE1900_TX_FREQ_COMP_CAL_RESULT                  = 20376,
@@ -3192,7 +3192,7 @@ enum RF_NV_ID_ENUM
     en_NV_Item_CMCC1800_RX_AGC_CTRL                              = 20422,
     en_NV_Item_CMCC1800_RX_AGC_GAIN_COMP_FOR_FFT                 = 20424,
 
-    /* RF6363新增 */
+    /* RF6363???? */
     en_NV_Item_CMCC1800_RF_BAND_CONFIG                           = 20425,
     en_NV_Item_CMCC1800_RF_DL_FEM_PATH                           = 20426,
     en_NV_Item_CMCC1800_RF_EXT_LNA_PATH                          = 20427,
@@ -3207,15 +3207,15 @@ enum RF_NV_ID_ENUM
     en_NV_Item_CMCC1800_RF_CTRL_PORT_SEL                         = 20441,
 
 
-    /* 上行调制数字滤波使能 */
+    /* ???????????????????? */
     en_NV_Item_GSM_TX_LPF_EN                                     = 9264,
 
-    /* C模 */
+    /* C?? */
     en_NV_Item_CDMA_RF_MAIN_BAND                                 = 20500,
     en_NV_Item_CDMA_RF_DIV_BAND                                  = 20501,
     en_NV_Item_CDMA_RF_BAND_CONFIG                               = 20502,
-    en_NV_Item_CDMA_PA_CONTROL_MODE                              = 20503,       /* PA控制方式 */
-    en_NV_Item_CDMA_ANT_SWITCH_CONTROL_MODE                      = 20504,       /*天线开关配置方式*/
+    en_NV_Item_CDMA_PA_CONTROL_MODE                              = 20503,       /* PA???????? */
+    en_NV_Item_CDMA_ANT_SWITCH_CONTROL_MODE                      = 20504,       /*????????????????*/
     en_NV_Item_CDMA_TX_PA_APT_ENABLE                             = 20509,
     en_NV_Item_CDMA_TX_RF_GAIN_CTRL                              = 20510,
     en_NV_Item_CDMA_TX_RF_BIAS                                   = 20512,
@@ -3260,9 +3260,9 @@ enum RF_NV_ID_ENUM
     en_NV_Item_CDMA_FEM_CHAN_CONNECT_BC0                         = 20614,
     en_NV_Item_CDMA_RF_TRX_CONFIG_BC0                            = 20617,
     en_NV_Item_CDMA_RF_CTRL_PORT_SEL_BC0                         = 20618,
-    en_NV_Item_CDMA_RX_RFIC_BIAS_CTRL_BC0                        = 20619,       /* BIAS控制字 */
+    en_NV_Item_CDMA_RX_RFIC_BIAS_CTRL_BC0                        = 20619,       /* BIAS?????? */
     en_NV_Item_CDMA_RX_AGC_CTRL_EXT_LNA_BC0                      = 20620,
-    en_NV_Item_CDMA_EXT_LNA_COMMON_INFO_BC0                      = 20621,       /* 外置LNA配置 */
+    en_NV_Item_CDMA_EXT_LNA_COMMON_INFO_BC0                      = 20621,       /* ????LNA???? */
 
     /* CDMA RX */
     en_NV_Item_CDMA_BAND_CONFIG_BC0                              = 20622,
@@ -3274,8 +3274,8 @@ enum RF_NV_ID_ENUM
     en_NV_Item_CDMA_RX_PATH_IP2_CAL_RESULT_BC0                   = 20628,
     en_NV_Item_CDMA_RX_PATH_DCOC_CAL_RESULT_BC0                  = 20629,
     en_NV_Item_CDMA_RX_AGC_CAL_RESULT_TABLE_BC0                  = 20630,
-    en_NV_Item_CDMA_RX_AGC_FREQ_COMP_MAIN_BC0                    = 20631,       /* 主集AGC频补 */
-    en_NV_Item_CDMA_RX_AGC_FREQ_COMP_DIV_BC0                     = 20632,       /* 分集AGC频补 */
+    en_NV_Item_CDMA_RX_AGC_FREQ_COMP_MAIN_BC0                    = 20631,       /* ????AGC???? */
+    en_NV_Item_CDMA_RX_AGC_FREQ_COMP_DIV_BC0                     = 20632,       /* ????AGC???? */
     en_NV_Item_CDMA_RX_TEMP_COMP_BC0                             = 20633,
     /* end */
 
@@ -3325,9 +3325,9 @@ enum RF_NV_ID_ENUM
     en_NV_Item_CDMA_TX_LOW_GAIN_TEMP_COMP_LC_BC0                 = 20745,
     en_NV_Item_CDMA_TX_GAIN_COMP_VS_PA_CH_BC0                    = 20746,
     en_NV_Item_CDMA_TX_APC_DBB_ATTEN_ULTRA_LOW_GAIN_BC0          = 20748,
-    en_NV_Item_CDMA_RFFE_MIPI_PA_CTRL_BC0                        = 20749,       /* PA MIPI控制字 */
-    en_NV_Item_CDMA_ANT_SWITCH_MIPI_BC0                          = 20750,       /* 天线开关 MIPI控制字 */
-    /* APT相关nv */
+    en_NV_Item_CDMA_RFFE_MIPI_PA_CTRL_BC0                        = 20749,       /* PA MIPI?????? */
+    en_NV_Item_CDMA_ANT_SWITCH_MIPI_BC0                          = 20750,       /* ???????? MIPI?????? */
+    /* APT????nv */
     en_NV_Item_CDMA_TX_PA_APT_HIGH_GAIN_TEMP_COMP_BC0            = 20752,
     en_NV_Item_CDMA_TX_PA_APT_MID_GAIN_TEMP_COMP_BC0             = 20753,
     en_NV_Item_CDMA_TX_PA_APT_LOW_GAIN_TEMP_COMP_BC0             = 20754,
@@ -3339,13 +3339,13 @@ enum RF_NV_ID_ENUM
     en_NV_Item_CDMA_TX_APT_COMP_BC0                              = 20761,
     en_NV_Item_CDMA_TX_PA_APT_TABLE_BC0                          = 20762,
 
-    /* 降SAR相关NV */
+    /* ??SAR????NV */
     en_NV_Item_CDMA_TX_SAR_BACKOFF_BC0                           = 20766,
     en_NV_Item_CDMA_TX_SAR_BACKOFF_DPDT_SWAP_BC0                 = 20767,
 
-    /* DCDC电源使能控制 */
+    /* DCDC???????????? */
     en_NV_Item_CDMA_TX_DCDC_EN_CTRL_BC0                          = 20771,
-    /* RF6363新增 */
+    /* RF6363???? */
     en_NV_Item_CDMA_RF_UL_FEM_PATH_BC0                           = 20772,
 
     en_NV_Item_CDMA_MRX_IQ_MISMATCH_BC0                          = 20773,

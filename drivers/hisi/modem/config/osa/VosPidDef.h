@@ -49,7 +49,7 @@
 
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 #ifndef _VOS_PID_DEF_H
 #define _VOS_PID_DEF_H
@@ -63,15 +63,15 @@ extern "C" {
 #endif /* __cpluscplus */
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
 
-/* 24到31bit保留，16到23bit是CPU ID，0到15bit是PID */
+/* 24??31bit??????16??23bit??CPU ID??0??15bit??PID */
 
-/* 支持互相发送消息的多核的最大数目 */
+/* ???????????????????????????????? */
 #define VOS_SUPPORT_CPU_NUM_MAX     (5)
 
-/* CPU0 系统PID定义结束标志 */
+/* CPU0 ????PID???????????? */
 #define VOS_PID_CPU_ID_0_DOPRAEND   (5)
 
 /* macro defined for PID management */
@@ -84,7 +84,7 @@ extern "C" {
         VOS_CPU_ID_0_PID_BUTT \
     };
 
-/* CPU1 系统PID定义结束标志 */
+/* CPU1 ????PID???????????? */
 #define VOS_PID_CPU_ID_1_DOPRAEND   (65536)
 
 /* macro defined for PID management */
@@ -97,7 +97,7 @@ extern "C" {
         VOS_CPU_ID_1_PID_BUTT \
     };
 
-/* CPU2 系统PID定义结束标志 */
+/* CPU2 ????PID???????????? */
 #define VOS_PID_CPU_ID_2_DOPRAEND   (131072)
 
 
@@ -111,7 +111,7 @@ extern "C" {
         VOS_CPU_ID_2_PID_BUTT \
     };
 
-/* CPU3 系统PID定义结束标志 */
+/* CPU3 ????PID???????????? */
 #define VOS_PID_CPU_ID_3_DOPRAEND   (196608)
 
 
@@ -125,7 +125,7 @@ extern "C" {
         VOS_CPU_ID_3_PID_BUTT \
     };
 
-/* CPU4 系统PID定义结束标志 */
+/* CPU4 ????PID???????????? */
 #define VOS_PID_CPU_ID_4_DOPRAEND   (262144)
 
 
@@ -139,7 +139,7 @@ extern "C" {
         VOS_CPU_ID_4_PID_BUTT \
     };
 
-/* CPU5 系统PID定义结束标志 */
+/* CPU5 ????PID???????????? */
 #define VOS_PID_CPU_ID_5_DOPRAEND   (327680)
 
 /* macro defined for PID management */
@@ -152,12 +152,12 @@ extern "C" {
         VOS_CPU_ID_5_PID_BUTT \
     };
 
-/* 注意: 从0x8000开始的PID号已经归外部模块使用 */
+/* ????: ??0x8000??????PID???????????????????? */
 
-/* 具体申明一个PID */
+/* ????????????PID */
 #define DEFINE_PID(pid) pid,
 
-/* 根据PID 得到 CPU ID */
+/* ????PID ???? CPU ID */
 #define VOS_GetCpuId(pid)      (((pid)>>16)&0x0FF)
 #define VOS_GET_CPU_ID(pid)    (((pid)>>16)&0x0FF)
 
@@ -166,7 +166,7 @@ extern "C" {
     }
 
 /*****************************************************************************
-  3 枚举定义
+  3 ????????
 *****************************************************************************/
 
 #if  ( FEATURE_MULTI_MODEM == FEATURE_ON )
@@ -208,12 +208,12 @@ enum MODEM_ID_ENUM
 typedef VOS_UINT16 MODEM_ID_ENUM_UINT16;
 
 /*****************************************************************************
- 枚举名    :VOS_RATMODE_ENUM_UINT32
- 协议表格  :
- ASN.1描述 :
- 枚举说明  :接入模式定义
-            注意；双卡双待的枚举值定义与协议栈和DRV协商为GULT;
-            需要和DrvInterface.h中的PWC_COMM_MODE_E保持一致
+ ??????    :VOS_RATMODE_ENUM_UINT32
+ ????????  :
+ ASN.1???? :
+ ????????  :????????????
+            ????????????????????????????????????DRV??????GULT;
+            ??????DrvInterface.h????PWC_COMM_MODE_E????????
 
 *****************************************************************************/
 enum VOS_RATMODE_ENUM
@@ -229,7 +229,7 @@ enum VOS_RATMODE_ENUM
 typedef VOS_UINT32 VOS_RATMODE_ENUM_UINT32;
 
 
-/* CPU ID 的定义 0 是CCPU 1 是ACPU 2 是ZSP500,GU DSP 3 是Hifi,Med */
+/* CPU ID ?????? 0 ??CCPU 1 ??ACPU 2 ??ZSP500,GU DSP 3 ??Hifi,Med */
 enum VOS_CPU_ID_ENUM
 {
     VOS_CPU_ID_CCPU = 0,
@@ -243,7 +243,7 @@ enum VOS_CPU_ID_ENUM
 
 BEGIN_CPU_ID_0_PID_DEFINITION()
 
-/*卡1的PID定义*/
+/*??1??PID????*/
     DEFINE_PID(I1_UEPS_PID_XSMS)            /* = 5 */
     DEFINE_PID(I1_UEPS_PID_MSCC)            /* = 6 */
     DEFINE_PID(I1_WUEPS_PID_CSIMA)          /* = 7 */
@@ -330,12 +330,12 @@ BEGIN_CPU_ID_0_PID_DEFINITION()
     DEFINE_PID(I0_UEPS_PID_XSMS)            /* = 89 */
     DEFINE_PID(I0_UEPS_PID_XPDS)            /* = 90 */
     DEFINE_PID(UEPS_PID_HRM)                /* = 91 */
-    DEFINE_PID(CDMA_PID_ED)                 /* = 92  CDMA 编解码使用 */
+    DEFINE_PID(CDMA_PID_ED)                 /* = 92  CDMA ?????????? */
     DEFINE_PID(MSPS_PID_MIP)                /* = 93 */
 
-    DEFINE_PID(PC_PID_TOOLRFU = 99)         /* = 99  工具已使用*/
-    DEFINE_PID(PC_PID_TOOL = 100)           /* = 100 工具已使用*/
-/* 新增PID 添加到reserved位置，并将reserved删除 */
+    DEFINE_PID(PC_PID_TOOLRFU = 99)         /* = 99  ??????????*/
+    DEFINE_PID(PC_PID_TOOL = 100)           /* = 100 ??????????*/
+/* ????PID ??????reserved??????????reserved???? */
     DEFINE_PID(I0_WUEPS_PID_USIM)           /* = 101 */
     DEFINE_PID(I0_MAPS_STK_PID)             /* = 102 */
     DEFINE_PID(I0_MAPS_PIH_PID)             /* = 103 */
@@ -528,11 +528,11 @@ BEGIN_CPU_ID_0_PID_DEFINITION()
     DEFINE_PID(DSP_PID_CSDR_HRPD_SM_AGENT)  /* = 290 */
     DEFINE_PID(DSP_PID_GSDR_HIGHPRI_AGENT)  /* = 291 */
     DEFINE_PID(LINKH_PID_LINKH_ARM)         /* = 292 */
-    /* CCPU PID最大不能超过65535,使用65536以及65536以上的PID会造成单板异常复位 */
+    /* CCPU PID????????????65535,????65536????65536??????PID?????????????????? */
 
 /******************************************************************************
-    上面是单板侧的PID
-    下面是PC侧的PID
+    ??????????????PID
+    ??????PC????PID
 *******************************************************************************/
 
 #if (VOS_WIN32 == VOS_OS_VER)
@@ -590,7 +590,7 @@ END_CPU_ID_1_PID_DEFINITION()
 /* ACPU PID end */
 
 
-/* GU DSP 的PID 定义 */
+/* GU DSP ??PID ???? */
 BEGIN_CPU_ID_2_PID_DEFINITION()
 
 END_CPU_ID_2_PID_DEFINITION()
@@ -609,27 +609,27 @@ BEGIN_CPU_ID_3_PID_DEFINITION()
 END_CPU_ID_3_PID_DEFINITION()
 
 #if (FEATURE_VOICE_UP == FEATURE_ON)
-/* 语音软件上移时, 使用ACPU的PID */
+/* ??????????????, ????ACPU??PID */
 #define DSP_PID_VOICE_RT    DSP_PID_VOICE_RT_ACPU
 #define DSP_PID_VOICE       DSP_PID_VOICE_ACPU
 #else
-/* 语音软件不上移时, 使用HIFI的PID */
+/* ????????????????, ????HIFI??PID */
 #define DSP_PID_VOICE_RT    DSP_PID_VOICE_RT_HIFI
 #define DSP_PID_VOICE       DSP_PID_VOICE_HIFI
 #endif
 
-/* MED HiFi的PID 定义，为保证其它组件编译通过，暂时保留MED_RT等PID */
+/* MED HiFi??PID ??????????????????????????????????????MED_RT??PID */
 #define DSP_PID_MED_RT  DSP_PID_VOICE_RT
 #define DSP_PID_MED     DSP_PID_VOICE
 #define DSP_PID_MED_OM  DSP_PID_HIFI_OM
 
 
-/* MCU的PID 定义 */
+/* MCU??PID ???? */
 BEGIN_CPU_ID_4_PID_DEFINITION()
     DEFINE_PID(ACPU_PID_MCU_OM)
 END_CPU_ID_4_PID_DEFINITION()
 
-/* BBE16的PID */
+/* BBE16??PID */
 BEGIN_CPU_ID_5_PID_DEFINITION()
     DEFINE_PID(DSP_PID_TDPHY_RESERVED)
     DEFINE_PID(DSP_PID_TDPHY)
@@ -647,27 +647,27 @@ END_CPU_ID_5_PID_DEFINITION()
 
 
 /*****************************************************************************
-  4 消息头定义
+  4 ??????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  5 消息定义
+  5 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  6 STRUCT定义
+  6 STRUCT????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  7 UNION定义
+  7 UNION????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  8 OTHERS定义
+  8 OTHERS????
 *****************************************************************************/
 #if defined (INSTANCE_1)
 #define WUEPS_PID_USIM  I1_WUEPS_PID_USIM
@@ -894,12 +894,12 @@ END_CPU_ID_5_PID_DEFINITION()
 
 
 /*****************************************************************************
-  9 全局变量声明
+  9 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  10 函数声明
+  10 ????????
 *****************************************************************************/
 
 

@@ -50,7 +50,7 @@
 
 #include "osl_types.h"
 
-/*modem ap flag ∂®“Â*/
+/*modem ap flag ????*/
 #define DUMP_INIT_FLAG_CONFIG                 (0x5B5B0000)
 #define DUMP_INIT_FLAG_BASEINFO               (0x5B5B0001)
 #define DUMP_INIT_FLAG_SAVETASK               (0x5B5B0002)

@@ -50,7 +50,7 @@
 #define _APS_L4A_INTERFACE_H_
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 #include "vos.h"
 
@@ -66,17 +66,17 @@ extern "C" {
 
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
-#define APS_L4A_MAX_IPV6_PREFIX_NUM             (6)                             /* 最大IPv6地址前缀数量 */
+#define APS_L4A_MAX_IPV6_PREFIX_NUM             (6)                             /* ????IPv6???????????? */
 
-#define APS_L4A_MAX_APN_LEN                     (99)                            /* APN最大长度 */
+#define APS_L4A_MAX_APN_LEN                     (99)                            /* APN???????? */
 #define APS_L4A_MAX_IPV4_ADDR_LEN               (4)
 #define APS_L4A_MAX_IPV6_ADDR_LEN               (16)
 
-#define APS_L4A_MAX_ACCESS_NUM_LEN              (32)                            /* L模定义, 暂不使用 */
-#define APS_L4A_MAX_USERNAME_LEN                (255)                           /* 鉴权用户名长度 */
-#define APS_L4A_MAX_PASSWORD_LEN                (255)                           /* 鉴权密码长度 */
+#define APS_L4A_MAX_ACCESS_NUM_LEN              (32)                            /* L??????, ???????? */
+#define APS_L4A_MAX_USERNAME_LEN                (255)                           /* ?????????????? */
+#define APS_L4A_MAX_PASSWORD_LEN                (255)                           /* ???????????? */
 
 #define APS_L4A_MAX_SDF_PF_NUM                  (16)
 
@@ -117,7 +117,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  3 枚举定义
+  3 ????????
 *****************************************************************************/
 
 enum APS_L4A_MSG_ID_ENUM
@@ -189,10 +189,10 @@ typedef VOS_UINT32 APS_L4A_MSG_ID_ENUM_UINT32;
 
 enum APS_L4A_PDP_TYPE_ENUM
 {
-    APS_L4A_PDP_IPV4                            = 0x01,                         /* IPV4类型 */
-    APS_L4A_PDP_IPV6                            = 0x02,                         /* IPV6类型 */
-    APS_L4A_PDP_IPV4V6                          = 0x03,                         /* IPV4V6类型 */
-    APS_L4A_PDP_PPP                             = 0x04,                         /* PPP类型 */
+    APS_L4A_PDP_IPV4                            = 0x01,                         /* IPV4???? */
+    APS_L4A_PDP_IPV6                            = 0x02,                         /* IPV6???? */
+    APS_L4A_PDP_IPV4V6                          = 0x03,                         /* IPV4V6???? */
+    APS_L4A_PDP_PPP                             = 0x04,                         /* PPP???? */
 
     APS_L4A_PDP_BUTT                            = 0xFF
 };
@@ -204,7 +204,7 @@ enum APS_L4A_PDP_DATA_COMP_ENUM
 {
     APS_L4A_PDP_DATA_COMP_OFF                   = 0x00,                         /* default if value is omitted */
     APS_L4A_PDP_DATA_COMP_ON                    = 0x01,                         /* manufacturer preferred compression */
-    APS_L4A_PDP_DATA_COMP_V42                   = 0x02,                         /* V42压缩算法 */
+    APS_L4A_PDP_DATA_COMP_V42                   = 0x02,                         /* V42???????? */
 
     APS_L4A_PDP_DATA_COMP_BUTT                  = 0xFF
 };
@@ -215,8 +215,8 @@ enum APS_L4A_PDP_HEAD_COMP_ENUM
 {
     APS_L4A_PDP_HEAD_COMP_OFF                   = 0x00,                         /* default if value is omitted */
     APS_L4A_PDP_HEAD_COMP_ON                    = 0x01,                         /* manufacturer preferred compression */
-    APS_L4A_PDP_HEAD_COMP_RFC1144               = 0x02,                         /* RFC1144压缩算法，applicable for SNDCP only */
-    APS_L4A_PDP_HEAD_COMP_RFC2507               = 0x03,                         /* RFC2507，applicable for SNDCP only */
+    APS_L4A_PDP_HEAD_COMP_RFC1144               = 0x02,                         /* RFC1144??????????applicable for SNDCP only */
+    APS_L4A_PDP_HEAD_COMP_RFC2507               = 0x03,                         /* RFC2507??applicable for SNDCP only */
 
     APS_L4A_PDP_HEAD_COMP_BUTT                  = 0xFF
 };
@@ -309,8 +309,8 @@ typedef VOS_UINT8 APS_L4A_TRAFFIC_HANDLE_PRIO_ENUM_UINT8;
 
 enum APS_L4A_PDP_STATE_ENUM
 {
-    APS_L4A_PDP_STATE_INACTIVE                  = 0x00,                         /* PDP没激活 */
-    APS_L4A_PDP_STATE_ACTIVE                    = 0x01,                         /* PDP已激活 */
+    APS_L4A_PDP_STATE_INACTIVE                  = 0x00,                         /* PDP?????? */
+    APS_L4A_PDP_STATE_ACTIVE                    = 0x01,                         /* PDP?????? */
 
     APS_L4A_PDP_STATE_BUTT                      = 0xFF
 };
@@ -354,8 +354,8 @@ typedef VOS_UINT8 APS_L4A_IPV4_ADDR_ALLOC_TYPE_ENUM_UINT8;
 
 enum APS_L4A_BEARER_TYPE_ENUM
 {
-    APS_L4A_BEARER_TYPE_DEFAULT                 = 0x00,                         /* 缺省承载 */
-    APS_L4A_BEARER_TYPE_DEDICATED               = 0x01,                         /* 专有承载 */
+    APS_L4A_BEARER_TYPE_DEFAULT                 = 0x00,                         /* ???????? */
+    APS_L4A_BEARER_TYPE_DEDICATED               = 0x01,                         /* ???????? */
 
     APS_L4A_BEARER_TYPE_BUTT                    = 0xFF
 };
@@ -375,8 +375,8 @@ typedef VOS_UINT32 APS_L4A_GW_AUTH_TYPE_ENUM_UINT32;
 
 enum APS_L4A_BEARER_MANAGE_TYPE_ENUM
 {
-    APS_L4A_BEARER_MANAGE_TYPE_ACCEPT           = 0x00,                         /* 接受 */
-    APS_L4A_BEARER_MANAGE_TYPE_REJ              = 0x01,                         /* 拒绝 */
+    APS_L4A_BEARER_MANAGE_TYPE_ACCEPT           = 0x00,                         /* ???? */
+    APS_L4A_BEARER_MANAGE_TYPE_REJ              = 0x01,                         /* ???? */
 
     APS_L4A_BEARER_MANANGE_TYPE_BUTT            = 0xFF
 };
@@ -385,8 +385,8 @@ typedef VOS_UINT8 APS_L4A_BEARER_MANAGE_TYPE_ENUM_UINT8;
 
 enum APS_L4A_BEARER_MANAGE_MODE_ENUM
 {
-    APS_L4A_BEARER_MANAGE_MODE_AUTO             = 0x00,                         /* 自动 */
-    APS_L4A_BEARER_MANAGE_MODE_MANUAL           = 0x01,                         /* 手动 */
+    APS_L4A_BEARER_MANAGE_MODE_AUTO             = 0x00,                         /* ???? */
+    APS_L4A_BEARER_MANAGE_MODE_MANUAL           = 0x01,                         /* ???? */
 
     APS_L4A_BEARER_MANAGE_MODE_BUTT             = 0xFF
 };
@@ -434,7 +434,7 @@ enum APS_L4A_IMS_CN_SIG_FLAG_ENUM
 typedef VOS_UINT8 APS_L4A_IMS_CN_SIG_FLAG_ENUM_UINT8;
 
 
-/* Modified by l60609 for L-C互操作项目, 2014-01-06, Begin */
+/* Modified by l60609 for L-C??????????, 2014-01-06, Begin */
 
 enum APS_L4A_PDN_REQUEST_TYPE_ENUM
 {
@@ -456,34 +456,34 @@ enum APS_L4A_PDN_REQUEST_TYPE_ENUM
 
 typedef VOS_UINT8 APS_L4A_PDN_REQUEST_TYPE_ENUM_UINT8;
 
-/* Modified by l60609 for L-C互操作项目, 2014-01-06, End */
+/* Modified by l60609 for L-C??????????, 2014-01-06, End */
 
 
 /*****************************************************************************
-  4 全局变量声明
+  4 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  5 消息头定义
+  5 ??????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  6 消息定义
+  6 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  7 STRUCT定义
+  7 STRUCT????
 *****************************************************************************/
 
 
 typedef struct
 {
-    VOS_UINT32                          ulPid;                                  /* 针对AT或者DIAG的多应用 L4A发消息给该PID */
-    VOS_UINT32                          ulClientId;                             /* 多AT窗口 */
-    VOS_UINT32                          ulOpId;                                 /* 操作字，针对多次请求，每次请求加一,让用户结合 */
+    VOS_UINT32                          ulPid;                                  /* ????AT????DIAG???????? L4A??????????PID */
+    VOS_UINT32                          ulClientId;                             /* ??AT???? */
+    VOS_UINT32                          ulOpId;                                 /* ??????????????????????????????????,?????????? */
 } APS_L4A_APPCTRL_STRU;
 
 
@@ -492,7 +492,7 @@ typedef struct
     APS_L4A_GW_AUTH_TYPE_ENUM_UINT32    enGwAuthType;
     VOS_UINT8                           ucAccNumLen;
     VOS_UINT8                           aucRsv1[3];
-    VOS_UINT8                           auAccessNum[APS_L4A_MAX_ACCESS_NUM_LEN];/*此参数保留，暂时不使用*/
+    VOS_UINT8                           auAccessNum[APS_L4A_MAX_ACCESS_NUM_LEN];/*??????????????????????*/
     VOS_UINT8                           ucUserNameLen;
     VOS_UINT8                           aucRsv2[3];
     VOS_UINT8                           aucUserName[APS_L4A_MAX_USERNAME_LEN];
@@ -511,9 +511,9 @@ typedef struct
 
 typedef struct
 {
-    APS_L4A_BEARER_MANAGE_MODE_ENUM_UINT8   enMode;                             /* 承载管理模式 */
-    APS_L4A_BEARER_MANAGE_TYPE_ENUM_UINT8   enType;                             /* 承载管理类型 */
-    VOS_UINT8                               aucReserved[2];                     /* 四字节对齐，保留 */
+    APS_L4A_BEARER_MANAGE_MODE_ENUM_UINT8   enMode;                             /* ???????????? */
+    APS_L4A_BEARER_MANAGE_TYPE_ENUM_UINT8   enType;                             /* ???????????? */
+    VOS_UINT8                               aucReserved[2];                     /* ???????????????? */
 }APS_L4A_PDP_MANAGE_INFO_STRU;
 
 
@@ -569,23 +569,23 @@ typedef struct
     VOS_UINT16                          usSingleRmtPort;
     VOS_UINT16                          usRmtPortHighLimit;
     VOS_UINT16                          usRmtPortLowLimit;
-    VOS_UINT8                           ucProtocolId;             /*协议号*/
+    VOS_UINT8                           ucProtocolId;             /*??????*/
     VOS_UINT8                           ucTypeOfService;          /*TOS*/
     VOS_UINT8                           ucTypeOfServiceMask;      /*TOS Mask*/
     VOS_UINT8                           aucReserved[1];
 
     VOS_UINT8                           aucRmtIpv4AddreTAFss[APS_L4A_MAX_IPV4_ADDR_LEN];
-                                                                  /*ucSourceIpAddress[0]为IP地址高字节位
-                                                                    ucSourceIpAddress[3]为低字节位*/
+                                                                  /*ucSourceIpAddress[0]??IP????????????
+                                                                    ucSourceIpAddress[3]??????????*/
     VOS_UINT8                           aucRmtIpv4Mask[APS_L4A_MAX_IPV4_ADDR_LEN];
-                                                                  /*ucSourceIpMask[0]为IP地址高字节位 ,
-                                                                    ucSourceIpMask[3]为低字节位*/
+                                                                  /*ucSourceIpMask[0]??IP???????????? ,
+                                                                    ucSourceIpMask[3]??????????*/
     VOS_UINT8                           aucRmtIpv6Address[APS_L4A_MAX_IPV6_ADDR_LEN];
-                                                                  /*ucRmtIpv6Address[0]为IPv6接口标识高字节位
-                                                                    ucRmtIpv6Address[7]为IPv6接口标识低字节位*/
+                                                                  /*ucRmtIpv6Address[0]??IPv6????????????????
+                                                                    ucRmtIpv6Address[7]??IPv6????????????????*/
     VOS_UINT8                           aucRmtIpv6Mask[APS_L4A_MAX_IPV6_ADDR_LEN];
-                                                                  /*ucRmtIpv6Mask[0]为高字节位
-                                                                    ucRmtIpv6Mask[7]为低字节位*/
+                                                                  /*ucRmtIpv6Mask[0]??????????
+                                                                    ucRmtIpv6Mask[7]??????????*/
 
     VOS_UINT32                          ulFlowLabelType;          /*FlowLabelType*/
 
@@ -625,7 +625,7 @@ typedef struct
     APS_L4A_MSG_ID_ENUM_UINT32          enMsgId;                                /* _H2ASN_Skip */
 
     APS_L4A_APPCTRL_STRU                stCtrl;
-    VOS_UINT32                          ulErrorCode;                            /* 错误码     */
+    VOS_UINT32                          ulErrorCode;                            /* ??????     */
 
 } APS_L4A_SET_CGDCONT_CNF_STRU;
 
@@ -636,7 +636,7 @@ typedef struct
     APS_L4A_MSG_ID_ENUM_UINT32          enMsgId;                                /* _H2ASN_Skip */
 
     APS_L4A_APPCTRL_STRU                stCtrl;
-    VOS_UINT32                          ulErrorCode;                            /* 错误码     */
+    VOS_UINT32                          ulErrorCode;                            /* ??????     */
 
 } APS_L4A_SET_CGDSCONT_CNF_STRU;
 
@@ -647,7 +647,7 @@ typedef struct
     APS_L4A_MSG_ID_ENUM_UINT32          enMsgId;                                /* _H2ASN_Skip */
 
     APS_L4A_APPCTRL_STRU                stCtrl;
-    VOS_UINT32                          ulErrorCode;                            /* 错误码     */
+    VOS_UINT32                          ulErrorCode;                            /* ??????     */
 
 } APS_L4A_SET_CGTFT_CNF_STRU;
 
@@ -657,10 +657,10 @@ typedef struct
     VOS_MSG_HEADER                                                              /* _H2ASN_Skip */
     APS_L4A_MSG_ID_ENUM_UINT32          enMsgId;                                /* _H2ASN_Skip */
 
-    VOS_UINT16                          usClientId;                             /* 客户端ID   */
-    VOS_UINT8                           ucOpId;                                 /* 操作码ID   */
+    VOS_UINT16                          usClientId;                             /* ??????ID   */
+    VOS_UINT8                           ucOpId;                                 /* ??????ID   */
     VOS_UINT8                           aucReserved[1];
-    VOS_UINT32                          ulErrorCode;                            /* 错误码     */
+    VOS_UINT32                          ulErrorCode;                            /* ??????     */
 
 } APS_L4A_SET_CGANS_CNF_STRU;
 
@@ -671,7 +671,7 @@ typedef struct
     APS_L4A_MSG_ID_ENUM_UINT32          enMsgId;                                /* _H2ASN_Skip */
 
     APS_L4A_APPCTRL_STRU                stCtrl;
-    VOS_UINT32                          ulErrorCode;                            /* 错误码     */
+    VOS_UINT32                          ulErrorCode;                            /* ??????     */
 
 } APS_L4A_SET_CGAUTO_CNF_STRU;
 
@@ -733,9 +733,9 @@ typedef struct
     APS_L4A_MSG_ID_ENUM_UINT32          enMsgId;                                /* _H2ASN_Skip */
 
     APS_L4A_APPCTRL_STRU                stCtrl;
-    VOS_UINT32                          ulErrorCode;                            /* 错误码   */
-    VOS_UINT32                          ulCidNum;                               /* CID数量  */
-    APS_L4A_PRIM_PDP_DYNAMIC_EXT_STRU   astPrimParaInfo[0];                     /* 缺省承载动态参数 */
+    VOS_UINT32                          ulErrorCode;                            /* ??????   */
+    VOS_UINT32                          ulCidNum;                               /* CID????  */
+    APS_L4A_PRIM_PDP_DYNAMIC_EXT_STRU   astPrimParaInfo[0];                     /* ???????????????? */
 
 } APS_L4A_SET_CGCONTRDP_CNF_STRU;
 
@@ -761,9 +761,9 @@ typedef struct
     APS_L4A_MSG_ID_ENUM_UINT32          enMsgId;                                /* _H2ASN_Skip */
 
     APS_L4A_APPCTRL_STRU                stCtrl;
-    VOS_UINT32                          ulErrorCode;                            /* 错误码   */
-    VOS_UINT32                          ulCidNum;                               /* CID数量  */
-    APS_L4A_SEC_PDP_DYNAMIC_EXT_STRU    astSecParaInfo[0];                      /* 专用承载动态参数 */
+    VOS_UINT32                          ulErrorCode;                            /* ??????   */
+    VOS_UINT32                          ulCidNum;                               /* CID????  */
+    APS_L4A_SEC_PDP_DYNAMIC_EXT_STRU    astSecParaInfo[0];                      /* ???????????????? */
 
 } APS_L4A_SET_CGSCONTRDP_CNF_STRU;
 
@@ -825,9 +825,9 @@ typedef struct
     APS_L4A_MSG_ID_ENUM_UINT32          enMsgId;                                /* _H2ASN_Skip */
 
     APS_L4A_APPCTRL_STRU                stCtrl;
-    VOS_UINT32                          ulErrorCode;                            /* 错误码      */
-    VOS_UINT32                          ulCidNum;                               /* CID数量     */
-    APS_L4A_SDF_PF_TFT_STRU             astPfTftInfo[0];                        /* 动态TFT参数 */
+    VOS_UINT32                          ulErrorCode;                            /* ??????      */
+    VOS_UINT32                          ulCidNum;                               /* CID????     */
+    APS_L4A_SDF_PF_TFT_STRU             astPfTftInfo[0];                        /* ????TFT???? */
 
 } APS_L4A_SET_CGTFTRDP_CNF_STRU;
 
@@ -838,7 +838,7 @@ typedef struct
     APS_L4A_MSG_ID_ENUM_UINT32          enMsgId;                                /* _H2ASN_Skip */
 
     APS_L4A_APPCTRL_STRU                stCtrl;
-    VOS_UINT32                          ulErrorCode;                            /* 错误码     */
+    VOS_UINT32                          ulErrorCode;                            /* ??????     */
 
 } APS_L4A_SET_CGEQOS_CNF_STRU;
 
@@ -882,9 +882,9 @@ typedef struct
     APS_L4A_MSG_ID_ENUM_UINT32          enMsgId;                                /* _H2ASN_Skip */
 
     APS_L4A_APPCTRL_STRU                stCtrl;
-    VOS_UINT32                          ulErrorCode;                            /* 错误码      */
-    VOS_UINT32                          ulCidNum;                               /* CID数量     */
-    APS_L4A_EPS_QOS_EXT_STRU            astEpsQosInfo[0];                       /* 动态EPS QOS */
+    VOS_UINT32                          ulErrorCode;                            /* ??????      */
+    VOS_UINT32                          ulCidNum;                               /* CID????     */
+    APS_L4A_EPS_QOS_EXT_STRU            astEpsQosInfo[0];                       /* ????EPS QOS */
 
 } APS_L4A_SET_CGEQOSRDP_CNF_STRU;
 
@@ -895,7 +895,7 @@ typedef struct
     APS_L4A_MSG_ID_ENUM_UINT32          enMsgId;                                /* _H2ASN_Skip */
 
     APS_L4A_APPCTRL_STRU                stCtrl;
-    VOS_UINT32                          ulErrorCode;                            /* 错误码     */
+    VOS_UINT32                          ulErrorCode;                            /* ??????     */
 
 } APS_L4A_SET_AUTHDATA_CNF_STRU;
 
@@ -906,7 +906,7 @@ typedef struct
     APS_L4A_MSG_ID_ENUM_UINT32          enMsgId;                                /* _H2ASN_Skip */
 
     VOS_UINT8                           ucRabId;
-    VOS_UINT8                           ucIpv6PrefixNum;                        /* IPv6地址前缀数量 */
+    VOS_UINT8                           ucIpv6PrefixNum;                        /* IPv6???????????? */
     VOS_UINT8                           aucReserved[2];
     APS_L4A_PDP_IPV6_PREFIX_STRU        astIpv6PrefixArray[APS_L4A_MAX_IPV6_PREFIX_NUM];
 
@@ -1018,7 +1018,7 @@ typedef struct
 
     APS_L4A_APPCTRL_STRU                stCtrl;
     APS_L4A_AUTO_ANS_MODE_ENUM_UINT32   enAnsMode;
-    VOS_UINT32                          ulTimeout;                              /* 用户回复IND的超时设定, ms为单位, 超过该时间未反馈则自动接受 */
+    VOS_UINT32                          ulTimeout;                              /* ????????IND??????????, ms??????, ?????????????????????????? */
 
 }APS_L4A_SET_CGAUTO_REQ_STRU;
 
@@ -1119,7 +1119,7 @@ typedef struct
     VOS_UINT8                           ucCid;                                  /* 1~16 */
     VOS_UINT8                           ucDefined;                              /* 0:undefined,1:defined */
     VOS_UINT16                          usAuthType;                             /* 0,1,2,0xFF */
-    VOS_UINT32                          ulPLMN;                                 /* 16进制存储 */
+    VOS_UINT32                          ulPLMN;                                 /* 16???????? */
     VOS_UINT8                           ucPwdLen;
     VOS_UINT8                           aucReserved1[3];
     VOS_UINT8                           aucPassword[APS_L4A_AUTHDATA_MAX_PASSWORD_LEN + 1];
@@ -1157,7 +1157,7 @@ typedef struct
 
     APS_L4A_PDP_TYPE_ENUM_UINT8         enPdnType;
     APS_L4A_IPV4_ADDR_ALLOC_TYPE_ENUM_UINT8 enIpv4AddrAllocType;
-    APS_L4A_BEARER_TYPE_ENUM_UINT8      enBearerCntxtType;                      /* SM上下文对应承载的类型 */
+    APS_L4A_BEARER_TYPE_ENUM_UINT8      enBearerCntxtType;                      /* SM???????????????????? */
 
     APS_L4A_EMC_IND_ENUM_UINT8          enEmergencyInd;
     APS_L4A_PCSCF_DISCOVERY_ENUM_UINT8  enPcscfDiscovery;
@@ -1165,8 +1165,8 @@ typedef struct
     VOS_UINT8                           enImsSuppFlag;
     VOS_UINT8                           aucReserved[1];
 
-    VOS_UINT32                          ulCid;                                  /* 承载上下文ID */
-    VOS_UINT32                          ulLinkdCid;                             /* 关联CID */
+    VOS_UINT32                          ulCid;                                  /* ??????????ID */
+    VOS_UINT32                          ulLinkdCid;                             /* ????CID */
 
     VOS_UINT32                          ulPfNum;
     APS_L4A_EPS_QOS_STRU                stSdfQosInfo;
@@ -1197,9 +1197,9 @@ typedef struct
     APS_L4A_APPCTRL_STRU                stCtrl;
     VOS_UINT32                          ulErrorCode;
 
-    VOS_UINT32                          ulCurrentUeMode;                        /*当前UE模式*/
-    VOS_UINT32                          ulSupportModeCnt;                       /*UE能够支持的模式的个数*/
-    VOS_UINT32                          aulSupportModeList[4];                  /*UE能够支持的模式*/
+    VOS_UINT32                          ulCurrentUeMode;                        /*????UE????*/
+    VOS_UINT32                          ulSupportModeCnt;                       /*UE????????????????????*/
+    VOS_UINT32                          aulSupportModeList[4];                  /*UE??????????????*/
 } APS_L4A_GET_CEMODE_CNF_STRU;
 
 
@@ -1219,7 +1219,7 @@ typedef struct
     APS_L4A_MSG_ID_ENUM_UINT32          enMsgId;                                /* _H2ASN_Skip */
 
     APS_L4A_APPCTRL_STRU                stCtrl;
-    VOS_UINT32                          ulErrorCode;                            /* 错误码     */
+    VOS_UINT32                          ulErrorCode;                            /* ??????     */
 
     VOS_UINT8                             ucSmsOverSGs;
     VOS_UINT8                             ucSmsOverIMS;
@@ -1279,20 +1279,20 @@ typedef struct
     APS_L4A_MSG_ID_ENUM_UINT32          enMsgId;                                /* _H2ASN_Skip */
 
     APS_L4A_APPCTRL_STRU                stCtrl;
-    VOS_UINT32                          ulErrorCode;                            /* 错误码     */
+    VOS_UINT32                          ulErrorCode;                            /* ??????     */
 
 } APS_L4A_SET_PDPROFMOD_CNF_STRU;
 
 /*****************************************************************************
-  8 UNION定义
+  8 UNION????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  9 OTHERS定义
+  9 OTHERS????
 *****************************************************************************/
 /*****************************************************************************
-  H2ASN顶级消息结构定义
+  H2ASN????????????????
 *****************************************************************************/
 typedef struct
 {
@@ -1313,19 +1313,19 @@ typedef struct
 
 
 /*****************************************************************************
-  10 函数声明
+  10 ????????
 *****************************************************************************/
 
 /*****************************************************************************
- 函 数 名  : TAF_APS_GetCidSdfParaInfo
- 功能描述  : 获取CID对应的SDF参数, 由APS保证获取的SDF参数有效, 如果CID对应的
-             SDF参数无效, 返回VOS_ERR, 否则返回VOS_OK
- 输入参数  : ucCid                      - CID
- 输出参数  : pstSdfParaInfo             - CID对应的SDF参数
- 返 回 值  : VOS_OK                     - CID对应的SDF参数有效, 获取成功
-             VOS_ERR                    - CID对应的SDF参数无效, 获取失败
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : TAF_APS_GetCidSdfParaInfo
+ ????????  : ????CID??????SDF????, ??APS??????????SDF????????, ????CID??????
+             SDF????????, ????VOS_ERR, ????????VOS_OK
+ ????????  : ucCid                      - CID
+ ????????  : pstSdfParaInfo             - CID??????SDF????
+ ?? ?? ??  : VOS_OK                     - CID??????SDF????????, ????????
+             VOS_ERR                    - CID??????SDF????????, ????????
+ ????????  :
+ ????????  :
 *****************************************************************************/
 extern VOS_UINT32 TAF_APS_GetCidSdfParaInfo(
     VOS_UINT8                           ucCid,
@@ -1333,27 +1333,27 @@ extern VOS_UINT32 TAF_APS_GetCidSdfParaInfo(
 );
 
 /*****************************************************************************
- 函 数 名  : TAF_APS_GetCidImsCfgFlag
- 功能描述  : 获取CID对应的IMS配置
- 输入参数  : ucCid                      - CID
- 输出参数  : 无
- 返 回 值  : VOS_TRUE                   - CID支持IMS
-             VOS_FALSE                  - CID不支持IMS
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : TAF_APS_GetCidImsCfgFlag
+ ????????  : ????CID??????IMS????
+ ????????  : ucCid                      - CID
+ ????????  : ??
+ ?? ?? ??  : VOS_TRUE                   - CID????IMS
+             VOS_FALSE                  - CID??????IMS
+ ????????  :
+ ????????  :
 *****************************************************************************/
 extern VOS_UINT8 TAF_APS_GetCidImsCfgFlag(VOS_UINT8 ucCid);
 
 
 /*****************************************************************************
- 函 数 名  : TAF_APS_GetPdpManageInfo
- 功能描述  : 获取PDP管理模式(自动应答/拒绝), 无失败场景
- 输入参数  : 无
- 输出参数  : pstPdpManageInfo           - PDP管理模式
- 返 回 值  : VOS_OK                     - 获取PDP管理模式成功
-             VOS_ERR                    - 获取PDP管理模式失败
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : TAF_APS_GetPdpManageInfo
+ ????????  : ????PDP????????(????????/????), ??????????
+ ????????  : ??
+ ????????  : pstPdpManageInfo           - PDP????????
+ ?? ?? ??  : VOS_OK                     - ????PDP????????????
+             VOS_ERR                    - ????PDP????????????
+ ????????  :
+ ????????  :
 *****************************************************************************/
 extern VOS_UINT32 TAF_APS_GetPdpManageInfo(
     APS_L4A_PDP_MANAGE_INFO_STRU       *pstPdpManageInfo

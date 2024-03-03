@@ -49,30 +49,30 @@
 
 
 /*****************************************************************************
-    协议栈打印打点方式下的.C文件宏定义
+    ??????????????????????.C??????????
 *****************************************************************************/
 #define    THIS_FILE_ID                 PS_FILE_ID_ADS_DEBUG_C
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "AdsDebug.h"
 #include "AdsCtx.h"
 
 
 /*****************************************************************************
-  2 外部函数声明
+  2 ????????????
 *****************************************************************************/
 
 
 /******************************************************************************
-   3 私有定义
+   3 ????????
 ******************************************************************************/
 
 
 /******************************************************************************
-   4 全局变量定义
+   4 ????????????
 ******************************************************************************/
 
 ADS_STATS_INFO_STRU                     g_stAdsStats;
@@ -80,7 +80,7 @@ ADS_LOG_LEVEL_ENUM_UINT32               g_enAdsLogLevel = ADS_LOG_LEVEL_ERROR;
 
 
 /******************************************************************************
-   5 函数实现
+   5 ????????
 ******************************************************************************/
 
 
@@ -128,7 +128,7 @@ VOS_VOID ADS_ShowEntityStats(VOS_VOID)
         }
     }
 
-    PS_PRINTF("ADS上行正在发送标识              %d\n",g_stAdsCtx.stAdsIpfCtx.ucSendingFlg);
+    PS_PRINTF("ADS????????????????              %d\n",g_stAdsCtx.stAdsIpfCtx.ucSendingFlg);
     PS_PRINTF("\r\n");
 
     return;
@@ -298,15 +298,15 @@ VOS_VOID ADS_Help(VOS_VOID)
     PS_PRINTF("=================================================\n");
     PS_PRINTF("ADS DEBUG ENTRY                                  \n");
     PS_PRINTF("=================================================\n");
-    PS_PRINTF("ADS_ShowEntityStats          显示实体信息\n");
-    PS_PRINTF("ADS_ShowEventProcStats       显示事件统计信息\n");
-    PS_PRINTF("ADS_ShowULPktProcStats       显示上行数据统计信息\n");
-    PS_PRINTF("ADS_ShowULBdProcStats        显示上行BD统计信息\n");
-    PS_PRINTF("ADS_ShowDLPktProcStats       显示下行数据统计信息\n");
-    PS_PRINTF("ADS_ShowDLRdProcStats        显示下行RD统计信息\n");
-    PS_PRINTF("ADS_ShowDLAdProcStats        显示下行AD统计信息\n");
-    PS_PRINTF("ADS_ShowResetProcStats       显示C核复位统计信息\n");
-    PS_PRINTF("ADS_ResetDebugInfo           重置统计信息\n");
+    PS_PRINTF("ADS_ShowEntityStats          ????????????\n");
+    PS_PRINTF("ADS_ShowEventProcStats       ????????????????\n");
+    PS_PRINTF("ADS_ShowULPktProcStats       ????????????????????\n");
+    PS_PRINTF("ADS_ShowULBdProcStats        ????????BD????????\n");
+    PS_PRINTF("ADS_ShowDLPktProcStats       ????????????????????\n");
+    PS_PRINTF("ADS_ShowDLRdProcStats        ????????RD????????\n");
+    PS_PRINTF("ADS_ShowDLAdProcStats        ????????AD????????\n");
+    PS_PRINTF("ADS_ShowResetProcStats       ????C??????????????\n");
+    PS_PRINTF("ADS_ResetDebugInfo           ????????????\n");
     PS_PRINTF("\r\n");
 
     return;
@@ -379,10 +379,10 @@ VOS_VOID ADS_DLFlowAdd(VOS_UINT32 ulSduLen)
 {
     if (PS_TRUE == g_stAdsStats.stDlComStatsInfo.ulDLFlowDebugFlag)
     {
-        /* 流量统计 */
+        /* ???????? */
         g_stAdsStats.stDlComStatsInfo.ulDLFlowInfo += ulSduLen;
 
-        /* 流量统计上报 */
+        /* ???????????? */
         if (g_stAdsStats.stDlComStatsInfo.ulDLFlowInfo >= g_stAdsStats.stDlComStatsInfo.ulDLFlowRptThreshold)
         {
             g_stAdsStats.stDlComStatsInfo.ulDLEndSlice   = VOS_GetSlice();
@@ -405,10 +405,10 @@ VOS_VOID ADS_ULFlowAdd(VOS_UINT32 ulSduLen)
 {
     if (PS_TRUE == g_stAdsStats.stUlComStatsInfo.ulULFlowDebugFlag)
     {
-        /* 流量统计 */
+        /* ???????? */
         g_stAdsStats.stUlComStatsInfo.ulULFlowInfo += ulSduLen;
 
-        /* 流量统计上报 */
+        /* ???????????? */
         if (g_stAdsStats.stUlComStatsInfo.ulULFlowInfo >= g_stAdsStats.stUlComStatsInfo.ulULFlowRptThreshold)
         {
             g_stAdsStats.stUlComStatsInfo.ulULEndSlice   = VOS_GetSlice();
@@ -433,7 +433,7 @@ VOS_VOID ADS_LogPrintf(ADS_LOG_LEVEL_ENUM_UINT32 enLevel, VOS_CHAR *pcFmt, ...)
     va_list                             pArgList;
     VOS_UINT32                          ulPrintLength = 0;
 
-    /* 打印级别过滤 */
+    /* ???????????? */
     if (enLevel < g_enAdsLogLevel)
     {
         return;

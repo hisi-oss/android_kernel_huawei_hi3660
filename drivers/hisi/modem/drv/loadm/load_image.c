@@ -68,7 +68,7 @@
 #include "load_image.h"
 #include "modem_dtb.h"
 
-/* Dalls之后手机和MBB融合代码 */
+/* Dalls??????????MBB???????? */
 
 #define SECBOOT_BUFLEN  (0x100000)      /*1MB*/
 
@@ -78,7 +78,7 @@
 
 char* modem_fw_dir = MODEM_IMAGE_PATH;
 
-/* 带安全OS需要安全加载，预留连续内存，否则在系统长时间运行后，单独复位时可能申请不到连续内存 */
+/* ??????OS?????????????????????????????????????????????????????????????????????????????????? */
 static  u8 SECBOOT_BUFFER[SECBOOT_BUFLEN];
 
 struct image_type_name
@@ -92,12 +92,12 @@ struct image_type_name
 struct image_type_name modem_images[] =
 {
     {MODEM, DDR_MCORE_ADDR,         DDR_MCORE_SIZE,         "balong_modem.bin"},
-    {HIFI,  DDR_HIFI_ADDR,          DDR_HIFI_SIZE,          "hifi.img"},/* 预留 */
+    {HIFI,  DDR_HIFI_ADDR,          DDR_HIFI_SIZE,          "hifi.img"},/* ???? */
     {DSP,   DDR_TLPHY_IMAGE_ADDR,   DDR_TLPHY_IMAGE_SIZE,   "lphy.bin"},
     {XDSP,  DDR_CBBE_IMAGE_ADDR,    DDR_CBBE_IMAGE_SIZE,    "xphy_mcore.bin"},
     {TAS,   0,                      0,                      "tas.bin"},
     {WAS,   0,                      0,                      "was.bin"},
-    {CAS,   0,                      0,                      "cas.bin"}, /* 预留 */
+    {CAS,   0,                      0,                      "cas.bin"}, /* ???? */
     {MODEM_DTB, DDR_MCORE_DTS_ADDR, DDR_MCORE_DTS_SIZE,     "modem_dt.img"},
     {SOC_MAX,       0,              0,                      ""},
 };
@@ -147,7 +147,7 @@ static int get_image(struct image_type_name** image, enum SVC_SECBOOT_IMG_TYPE e
         sec_print_err("can not find image of type id %d\n", etype);
         return -ENOENT;
     }
-    /*如果是tas was镜像的话要*/
+    /*??????tas was??????????*/
     if(!img->run_addr)
     {
         img->run_addr = run_addr ;
@@ -175,7 +175,7 @@ static int get_file_size(const char *filename)
 
 static int get_file_name(char *file_name, const struct image_type_name *image, bool *is_sec)
 {
-    /* 尝试以sec_开头的安全镜像 */
+    /* ??????sec_?????????????? */
     *is_sec = true;
     file_name[0] = '\0';
     strncat(file_name, modem_fw_dir, strlen(modem_fw_dir));
@@ -186,7 +186,7 @@ static int get_file_name(char *file_name, const struct image_type_name *image, b
     {
         sec_print_info("file %s can't access, try unsec image\n", file_name);
 
-        /* 尝试以非安全镜像 */
+        /* ???????????????? */
         *is_sec = false;
         file_name[0] = '\0';
         strncat(file_name, modem_fw_dir, strlen(modem_fw_dir));
@@ -434,10 +434,10 @@ static int trans_data_to_os(enum SVC_SECBOOT_IMG_TYPE  image,
 
     operation.params[0].value.a = image;
     operation.params[0].value.b = (u32)(paddr & 0xFFFFFFFF);;
-    operation.params[1].value.a = (u32)((u64)paddr >> 32);/* 手机和MBB 兼容 */
+    operation.params[1].value.a = (u32)((u64)paddr >> 32);/* ??????MBB ???? */
     operation.params[1].value.b = offset;
-    operation.params[2].value.a = (u32)virt_to_phys(buf);/* 手机和MBB 兼容 */
-    operation.params[2].value.b = (u64)virt_to_phys(buf) >> 32;/* 手机和MBB 兼容 */
+    operation.params[2].value.a = (u32)virt_to_phys(buf);/* ??????MBB ???? */
+    operation.params[2].value.b = (u64)virt_to_phys(buf) >> 32;/* ??????MBB ???? */
     operation.params[3].value.a = size;
     result = TEEK_InvokeCommand(
                 session,
@@ -485,7 +485,7 @@ static int verify_soc_image(enum SVC_SECBOOT_IMG_TYPE  image,
      operation.params[0].value.a = image;
      operation.params[0].value.b = 0;/*SECBOOT_LOCKSTATE , not used currently*/
      operation.params[1].value.a = (u32)(paddr & 0xFFFFFFFF);
-     operation.params[1].value.b = (u32)((u64)paddr >> 32);/* 手机和MBB 兼容 */
+     operation.params[1].value.b = (u32)((u64)paddr >> 32);/* ??????MBB ???? */
      result = TEEK_InvokeCommand(session,
                                    SECBOOT_CMD_ID_VERIFY_DATA_TYPE,
                                     &operation,
@@ -499,14 +499,14 @@ static int verify_soc_image(enum SVC_SECBOOT_IMG_TYPE  image,
 
 /******************************************************************************
 Function:       load_data_to_secos
-Description:    从指定偏移开始传送指定大小的镜像
+Description:    ????????????????????????????????
 Input:
-            part_name   - 要发送镜像的名称
-            offset    - 偏移地址
-            sizeToRead  - 输入参数，要写入的镜像的bytes大小
+            part_name   - ????????????????
+            offset    - ????????
+            sizeToRead  - ????????????????????????bytes????
 
 Output:         none
-Return:         SEC_OK: OK  SEC_ERROR: ERROR码
+Return:         SEC_OK: OK  SEC_ERROR: ERROR??
 ******************************************************************************/
 static int load_data_to_secos(const char* file_name, u32 offset, u32 size,
             const struct image_type_name* image, bool is_sec)
@@ -524,15 +524,15 @@ static int load_data_to_secos(const char* file_name, u32 offset, u32 size,
       {
           is_compress_check_need = 1;
       }
-    /* 读取指定偏移的指定大小 */
+    /* ?????????????????????? */
     if(0 != offset)
     {
         skip_offset = offset;
         remain_bytes = (int)size;
     }
-    else    /* 读取整个文件 */
+    else    /* ???????????? */
     {
-        is_compress_check_need = 1; /* 只有从起始位置加载需要检查是否有gzip的头 */
+        is_compress_check_need = 1; /* ????????????????????????????????gzip???? */
         remain_bytes = get_file_size(file_name);
         if (remain_bytes <=0)
         {
@@ -552,7 +552,7 @@ static int load_data_to_secos(const char* file_name, u32 offset, u32 size,
         }
     }
 
-    /* 检查读取的大小是否超过ddr分区大小 */
+    /* ??????????????????????ddr???????? */
     if((u32)remain_bytes > image->ddr_size)
     {
         sec_print_err("remain_bytes larger than ddr size:  remain_bytes 0x%x > ddr_size 0x%x!\n", remain_bytes, image->ddr_size);
@@ -576,7 +576,7 @@ static int load_data_to_secos(const char* file_name, u32 offset, u32 size,
         if ((is_compress_check_need) && (readed_bytes >= 10)) {
             is_compress_check_need = 0;
             if (gzip_header_check((unsigned char*)SECBOOT_BUFFER)) {
-                /* 将整个gzip格式的压缩镜像放在DDR空间结束位置 */
+                /* ??????gzip??????????????????DDR???????????? */
                 load_position_offset = (u32)(image->ddr_size - (u32)remain_bytes);
             }
         }
@@ -706,7 +706,7 @@ static int get_dtb_entry(unsigned int modemid, unsigned int num, struct modem_dt
     sec_id[2] = MODEMID_M_BITS(modemid);
     sec_id[3] = MODEMID_L_BITS(modemid);
 
-    /* 获取与modemid匹配的acore/ccore dt_entry 指针,复用dtctool，modem config.dts中将boardid配置为对应modem_id值 */
+    /* ??????modemid??????acore/ccore dt_entry ????,????dtctool??modem config.dts????boardid??????????modem_id?? */
     for (i = 0; i < num; i++)
     {
         if ((dt_entry_ptr->boardid[0] == sec_id[0]) &&
@@ -763,7 +763,7 @@ static s32 load_and_verify_dtb_data(void)
     }
     sec_print_info("find file %s, is_sec: %d\n", file_name, is_sec);
 
-       /* 安全版本跳过sec VRL头 */
+       /* ????????????sec VRL?? */
     if(is_sec)
     {
         offset = VRL_SIZE;
@@ -797,7 +797,7 @@ static s32 load_and_verify_dtb_data(void)
        goto err_out;
     }
       offset -= sizeof(struct modem_dt_table_t);
-    /* 需要mask掉射频扣板ID号或modemid的bit[9:0] */
+    /* ????mask??????????ID????modemid??bit[9:0] */
     modem_id = bsp_get_version_info()->board_id_udp_masked;
     sec_print_err("modem_id 0x%x \n", modem_id);
 
@@ -810,7 +810,7 @@ static s32 load_and_verify_dtb_data(void)
         goto err_out;
     }
 
-    /* 安全版本且使能了签名 */
+    /* ???????????????????? */
     if(is_sec && 0 != dt_entry_ptr.vrl_size)
     {
         /*load vrl data to sec os*/
@@ -865,11 +865,11 @@ err_out:
 }
 
 /*****************************************************************************
- 函 数 名  : Modem相关镜像加载接口
- 功能描述  : Modem相关镜像加载接口
- 输入参数  : 无
- 输出参数  : 无
- 返 回 值  : 成功返回OK,失败返回ERROR
+ ?? ?? ??  : Modem????????????????
+ ????????  : Modem????????????????
+ ????????  : ??
+ ????????  : ??
+ ?? ?? ??  : ????????OK,????????ERROR
 *****************************************************************************/
 int bsp_load_modem_images(void)
 {
@@ -936,11 +936,11 @@ error:
 }
 
 /*****************************************************************************
- 函 数 名  : was.img、tas.img等动态加载镜像接口
- 功能描述  : Modem相关镜像加载接口
- 输入参数  : 无
- 输出参数  : 无
- 返 回 值  : 成功返回OK,失败返回ERROR
+ ?? ?? ??  : was.img??tas.img??????????????????
+ ????????  : Modem????????????????
+ ????????  : ??
+ ????????  : ??
+ ?? ?? ??  : ????????OK,????????ERROR
 *****************************************************************************/
 int bsp_load_modem_single_image(enum SVC_SECBOOT_IMG_TYPE ecoretype, u32 run_addr, u32 ddr_size)
 {

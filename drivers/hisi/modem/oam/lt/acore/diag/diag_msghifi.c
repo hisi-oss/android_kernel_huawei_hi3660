@@ -96,7 +96,7 @@ DIAG_ERROR:
 
     stDiagInfo.ulMsgType = pstReq->stID.pri4b;
 
-    /*组包回复*/
+    /*????????*/
     ulRet = DIAG_MsgReport(&stDiagInfo, &stHifiCnf, sizeof(stHifiCnf));
 
     return ulRet;
@@ -105,7 +105,7 @@ DIAG_ERROR:
 
 /*****************************************************************************
  Function Name   : diag_HifiMsgInit
- Description     : MSG HIFI部分初始化
+ Description     : MSG HIFI??????????
  Input           : None
  Output          : None
  Return          : None
@@ -114,7 +114,7 @@ DIAG_ERROR:
 *****************************************************************************/
 VOS_VOID diag_HifiMsgInit(VOS_VOID)
 {
-    /*注册message消息回调*/
+    /*????message????????*/
     DIAG_MsgProcReg(DIAG_MSG_TYPE_AUDIO, diag_HifiMsgProc);
 }
 

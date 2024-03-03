@@ -31,9 +31,9 @@ extern "C" {
 /*
  * 2 Global Variable Definition
  */
-int32 g_al_host_init_params_etc[WLAN_CFG_INIT_BUTT] = {0};      /* ini定制化参数数组 */
-int32 g_al_dts_params_etc[WLAN_CFG_DTS_BUTT] = {0};             /* dts定制化参数数组 */
-uint16 g_aus_nv_params[NUM_OF_NV_PARAMS] = {0};              /* nv定制化参数数组 */
+int32 g_al_host_init_params_etc[WLAN_CFG_INIT_BUTT] = {0};      /* ini?????????????? */
+int32 g_al_dts_params_etc[WLAN_CFG_DTS_BUTT] = {0};             /* dts?????????????? */
+uint16 g_aus_nv_params[NUM_OF_NV_PARAMS] = {0};              /* nv?????????????? */
 int8  g_ac_country_code_etc[COUNTRY_CODE_LEN] = "00";
 int8  g_chipid_cfg[MAX_CHIPID_COUNT][CHIPID_CFG_LEN] = {{0}};
 
@@ -44,16 +44,16 @@ wlan_ixia_mac_addr_stru g_ixia_mac_addr_cfg[MAX_IXIA_MAC_ADDR_COUNT];
 
 #ifdef _PRE_WLAN_MAC_ADDR_EDCA_FIX
 uint16 g_us_mac_addr_num = 0;
-wlan_edca_mac_addr_stru g_edca_mac_addr_cfg[MAX_EDCA_MAC_ADDR_COUNT];//保存定制化中mac地址以及对应的be edca
+wlan_edca_mac_addr_stru g_edca_mac_addr_cfg[MAX_EDCA_MAC_ADDR_COUNT];//????????????mac??????????????be edca
 #endif
 
 uint8 g_auc_wifimac_etc[MAC_LEN] = {0x00,0x00,0x00,0x00,0x00,0x00};
 int32 g_al_nvram_init_params[NVRAM_PARAMS_INDEX_BUTT] = {0};
-wlan_customize_private_stru g_al_priv_cust_params[WLAN_CFG_PRIV_BUTT] = {{0,0}};  /* 私有定制化参数数组 */
-wlan_cust_country_code_ingore_flag_stru g_st_cust_country_code_ignore_flag = {0}; /* 定制化国家码配置 */
+wlan_customize_private_stru g_al_priv_cust_params[WLAN_CFG_PRIV_BUTT] = {{0,0}};  /* ?????????????????? */
+wlan_cust_country_code_ingore_flag_stru g_st_cust_country_code_ignore_flag = {0}; /* ???????????????? */
 
 /*
- * 定制化结构体
+ * ????????????
  * default values as follows:
  * ampdu_tx_max_num:            WLAN_AMPDU_TX_MAX_NUM               = 64
  * switch:                      ON                                  = 1
@@ -240,7 +240,7 @@ OAL_STATIC regdomain_plat_tag_map_stru g_ast_plat_tag_mapping_table[] =
 OAL_STATIC wlan_cfg_cmd g_ast_wifi_config_dts[] =
 {
 #ifdef _PRE_WLAN_RF_CALI_1151V2
-    /* Hi1151V200 校准序列 */
+    /* Hi1151V200 ???????? */
     {"1151v2_cali_seq_0",                                    WLAN_CFG_DTS_CALI_1151V2_CALI_SEQ_0},
     {"1151v2_cali_seq_1",                                    WLAN_CFG_DTS_CALI_1151V2_CALI_SEQ_1},
     {"1151v2_cali_seq_2",                                    WLAN_CFG_DTS_CALI_1151V2_CALI_SEQ_2},
@@ -275,7 +275,7 @@ OAL_STATIC wlan_cfg_cmd g_ast_wifi_config_dts[] =
     {"1151v2_cali_seq_31",                                   WLAN_CFG_DTS_CALI_1151V2_CALI_SEQ_31},
 #endif
 
-    /* 校准 */
+    /* ???? */
     {"cali_txpwr_pa_dc_ref_2g_val_chan1",                    WLAN_CFG_DTS_CALI_TXPWR_PA_DC_REF_2G_VAL_CHAN1},
     {"cali_txpwr_pa_dc_ref_2g_val_chan2",                    WLAN_CFG_DTS_CALI_TXPWR_PA_DC_REF_2G_VAL_CHAN2},
     {"cali_txpwr_pa_dc_ref_2g_val_chan3",                    WLAN_CFG_DTS_CALI_TXPWR_PA_DC_REF_2G_VAL_CHAN3},
@@ -313,9 +313,9 @@ OAL_STATIC wlan_cfg_cmd g_ast_wifi_config_dts[] =
     {"cali_txpwr_pa_dc_ref_5g_val_band7",                    WLAN_CFG_DTS_CALI_TXPWR_PA_DC_REF_5G_VAL_BAND7},
     {"cali_tone_amp_grade",                                  WLAN_CFG_DTS_CALI_TONE_AMP_GRADE},
     {"mimo_pow_adjust",                                      WLAN_CFG_DTS_MIMO_POW_ADJUST},
-    /* 动态校准 */
+    /* ???????? */
     { "dyn_cali_dscr_interval",                              WLAN_CFG_DTS_DYN_CALI_DSCR_ITERVL},
-    /* FCC认证 */
+    /* FCC???? */
     {"band_edge_limit_2g_11g_txpwr",                         WLAN_CFG_DTS_BAND_EDGE_LIMIT_2G_11G_TXPWR},
     {"band_edge_limit_2g_11n_ht20_txpwr",                    WLAN_CFG_DTS_BAND_EDGE_LIMIT_2G_11N_HT20_TXPWR},
     {"band_edge_limit_2g_11n_ht40_txpwr",                    WLAN_CFG_DTS_BAND_EDGE_LIMIT_2G_11N_HT40_TXPWR},
@@ -329,7 +329,7 @@ OAL_STATIC wlan_cfg_cmd g_ast_wifi_config_dts[] =
     {"band_edge_limit_5g_ht40_vht40_dbb_scaling",            WLAN_CFG_DTS_BAND_EDGE_LIMIT_5G_HT40_VHT40_DBB_SCALING},
     {"band_edge_limit_5g_vht80_dbb_scaling",                 WLAN_CFG_DTS_BAND_EDGE_LIMIT_5G_VHT80_DBB_SCALING},
 
-    /* 动态校准 */
+    /* ???????? */
     {"dync_cali_ofdm_single_stone_2g_c0_chan1",              WLAN_CFG_DTS_DYNC_CALI_OFDM_SINGLE_STONE_2G_C0_CHAN1},
     {"dync_cali_ofdm_single_stone_2g_c0_chan2",              WLAN_CFG_DTS_DYNC_CALI_OFDM_SINGLE_STONE_2G_C0_CHAN2},
     {"dync_cali_ofdm_single_stone_2g_c0_chan3",              WLAN_CFG_DTS_DYNC_CALI_OFDM_SINGLE_STONE_2G_C0_CHAN3},
@@ -401,7 +401,7 @@ OAL_STATIC wlan_cfg_cmd g_ast_wifi_config_dts[] =
     {"dync_cali_ofdm_single_stone_txpower_spec",             WLAN_CFG_DTS_DYNC_CALI_OFDM_SINGLE_STONE_TXPOW_SPEC},
     {"dync_cali_equip_txpower_lut",                          WLAN_CFG_DTS_DYNC_CALI_EQUIP_TXPOW_LUT},
 
-    /* 动态校准天线与线缆负载差异补偿值 */
+    /* ???????????????????????????????? */
     {"dync_cali_pow_offset_2g_c0",                           WLAN_CFG_DTS_DYNC_CALI_POW_OFFSET_2G_C0},
     {"dync_cali_pow_offset_2g_c1",                           WLAN_CFG_DTS_DYNC_CALI_POW_OFFSET_2G_C1},
     {"dync_cali_pow_offset_5g_c0_1",                         WLAN_CFG_DTS_DYNC_CALI_POW_OFFSET_5G_C0_1},
@@ -409,7 +409,7 @@ OAL_STATIC wlan_cfg_cmd g_ast_wifi_config_dts[] =
     {"dync_cali_pow_offset_5g_c0_2",                         WLAN_CFG_DTS_DYNC_CALI_POW_OFFSET_5G_C0_2},
     {"dync_cali_pow_offset_5g_c1_2",                         WLAN_CFG_DTS_DYNC_CALI_POW_OFFSET_5G_C1_2},
 
-    /* 动态校准pow&pdet曲线多项式参数值 */
+    /* ????????pow&pdet???????????????? */
     {"dync_cali_polynomial_para_2g_b1_fst",                  WLAN_CFG_DTS_DYNC_CALI_POLYNOMIAL_PARA_2G_BAND1_FST},
     {"dync_cali_polynomial_para_2g_b1_snd",                  WLAN_CFG_DTS_DYNC_CALI_POLYNOMIAL_PARA_2G_BAND1_SND},
     {"dync_cali_polynomial_para_2g_b1_trd",                  WLAN_CFG_DTS_DYNC_CALI_POLYNOMIAL_PARA_2G_BAND1_TRD},
@@ -484,7 +484,7 @@ OAL_STATIC wlan_cfg_cmd g_ast_wifi_config_dts[] =
 
 OAL_STATIC wlan_cfg_cmd g_ast_wifi_config_priv[] =
 {
-    /* 校准开关 */
+    /* ???????? */
     {"cali_mask",                   WLAN_CFG_PRIV_CALI_MASK},
     {"cali_auto_cali_mask",         WLAN_CFG_PRIV_CALI_AUTOCALI_MASK},
 
@@ -508,7 +508,7 @@ OAL_STATIC wlan_cfg_cmd g_ast_wifi_config_cmds[] =
     {"delta_b",                         WLAN_CFG_INIT_DELTA_B},
     {"delta_a",                         WLAN_CFG_INIT_DELTA_A},
 
-    /* 性能 */
+    /* ???? */
     {"ampdu_tx_max_num",                WLAN_CFG_INIT_AMPDU_TX_MAX_NUM},
     {"used_mem_for_start",              WLAN_CFG_INIT_USED_MEM_FOR_START},
     {"used_mem_for_stop",               WLAN_CFG_INIT_USED_MEM_FOR_STOP},
@@ -516,7 +516,7 @@ OAL_STATIC wlan_cfg_cmd g_ast_wifi_config_cmds[] =
     {"sdio_d2h_assemble_count",         WLAN_CFG_INIT_SDIO_D2H_ASSEMBLE_COUNT},
     {"sdio_h2d_assemble_count",         WLAN_CFG_INIT_SDIO_H2D_ASSEMBLE_COUNT},
 
-    /* 自动调频 */
+    /* ???????? */
 #ifdef _PRE_WLAN_FEATURE_AUTO_FREQ
     {"pss_threshold_level_0",           WLAN_CFG_INIT_PSS_THRESHOLD_LEVEL_0},
     {"cpu_freq_limit_level_0",          WLAN_CFG_INIT_CPU_FREQ_LIMIT_LEVEL_0},
@@ -535,22 +535,22 @@ OAL_STATIC wlan_cfg_cmd g_ast_wifi_config_cmds[] =
     {"device_type_level_2",             WLAN_CFG_INIT_DEVICE_TYPE_LEVEL_2},
     {"device_type_level_3",             WLAN_CFG_INIT_DEVICE_TYPE_LEVEL_3},
 #endif
-    /* AP开Tx amsdu */
+    /* AP??Tx amsdu */
     {"ap_tx_amsdu",                     WLAN_CFG_INIT_AP_TX_AMSDU},
-    /* AP开Rx amsdu */
+    /* AP??Rx amsdu */
     {"ap_rx_amsdu",                     WLAN_CFG_INIT_AP_RX_AMSDU},
-    /* 低功耗 */
+    /* ?????? */
     {"powermgmt_switch",                WLAN_CFG_INIT_POWERMGMT_SWITCH},
-    /* 可维可测 */
+    /* ???????? */
     {"loglevel",                        WLAN_CFG_INIT_LOGLEVEL},
-    /* 2G RF前端 */
+    /* 2G RF???? */
     {"rf_line_txrx_gain_db_2g_band1_mult4",     WLAN_CFG_INIT_RF_LINE_TXRX_GAIN_DB_2G_BAND1_MULT4},
     {"rf_line_txrx_gain_db_2g_band1_mult10",    WLAN_CFG_INIT_RF_LINE_TXRX_GAIN_DB_2G_BAND1_MULT10},
     {"rf_line_txrx_gain_db_2g_band2_mult4",     WLAN_CFG_INIT_RF_LINE_TXRX_GAIN_DB_2G_BAND2_MULT4},
     {"rf_line_txrx_gain_db_2g_band2_mult10",    WLAN_CFG_INIT_RF_LINE_TXRX_GAIN_DB_2G_BAND2_MULT10},
     {"rf_line_txrx_gain_db_2g_band3_mult4",     WLAN_CFG_INIT_RF_LINE_TXRX_GAIN_DB_2G_BAND3_MULT4},
     {"rf_line_txrx_gain_db_2g_band3_mult10",    WLAN_CFG_INIT_RF_LINE_TXRX_GAIN_DB_2G_BAND3_MULT10},
-    /* 5G RF前端 */
+    /* 5G RF???? */
     {"rf_line_txrx_gain_db_5g_band1_mult4",     WLAN_CFG_INIT_RF_LINE_TXRX_GAIN_DB_5G_BAND1_MULT4},
     {"rf_line_txrx_gain_db_5g_band1_mult10",    WLAN_CFG_INIT_RF_LINE_TXRX_GAIN_DB_5G_BAND1_MULT10},
     {"rf_line_txrx_gain_db_5g_band2_mult4",     WLAN_CFG_INIT_RF_LINE_TXRX_GAIN_DB_5G_BAND2_MULT4},
@@ -587,9 +587,9 @@ OAL_STATIC wlan_cfg_cmd g_ast_wifi_config_cmds[] =
     /* 11AC2G */
     {"11ac2g_enable",                   WLAN_CFG_INIT_11AC2G_ENABLE},
     {"disable_capab_2ght40",            WLAN_CFG_INIT_DISABLE_CAPAB_2GHT40},
-    {"dual_antenna_enable",             WLAN_CFG_INIT_DUAL_ANTENNA_ENABLE}, /* 双天线开关 */
+    {"dual_antenna_enable",             WLAN_CFG_INIT_DUAL_ANTENNA_ENABLE}, /* ?????????? */
     /* sta keepalive cnt th*/
-    {"sta_keepalive_cnt_th",            WLAN_CFG_INIT_STA_KEEPALIVE_CNT_TH}, /* 动态功率校准 */
+    {"sta_keepalive_cnt_th",            WLAN_CFG_INIT_STA_KEEPALIVE_CNT_TH}, /* ???????????? */
     {"far_dist_pow_gain_switch",        WLAN_CFG_INIT_FAR_DIST_POW_GAIN_SWITCH},
     {"far_dist_dsss_scale_promote_switch",      WLAN_CFG_INIT_FAR_DIST_DSSS_SCALE_PROMOTE_SWITCH},
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC != _PRE_MULTI_CORE_MODE)
@@ -602,7 +602,7 @@ OAL_STATIC wlan_cfg_cmd g_ast_wifi_config_cmds[] =
     {"obss_rssi_th",                    WLAN_CFG_INIT_OBSS_RSSI_TH},
     {"dyn_bw_enable",                   WLAN_CFG_INIT_DYN_BW_ENABLE},
     {OAL_PTR_NULL, 0}
-};//注意顺序与宏定义顺序对应
+};//????????????????????????
 
 OAL_STATIC wlan_cfg_cmd g_ast_nvram_config_ini[NVRAM_PARAMS_INDEX_BUTT] =
 {
@@ -715,7 +715,7 @@ OAL_STATIC oal_void original_value_for_nvram_params(oal_void)
 OAL_STATIC oal_void original_value_for_dts_params(oal_void)
 {
 #ifdef _PRE_WLAN_RF_CALI_1151V2
-    /* hi1151v2 校准定制化初始值 */
+    /* hi1151v2 ???????????????? */
     g_al_dts_params_etc[WLAN_CFG_DTS_CALI_1151V2_CALI_SEQ_0]        = 0x90221;
     g_al_dts_params_etc[WLAN_CFG_DTS_CALI_1151V2_CALI_SEQ_1]        = 0x90221;
     g_al_dts_params_etc[WLAN_CFG_DTS_CALI_1151V2_CALI_SEQ_2]        = 0x90221;
@@ -749,11 +749,11 @@ OAL_STATIC oal_void original_value_for_dts_params(oal_void)
     g_al_dts_params_etc[WLAN_CFG_DTS_CALI_1151V2_CALI_SEQ_30]       = 0x90221;
     g_al_dts_params_etc[WLAN_CFG_DTS_CALI_1151V2_CALI_SEQ_31]       = 0x90221;
 
-    /* hi1151v2 动态校准开关*/
+    /* hi1151v2 ????????????*/
     g_al_dts_params_etc[WLAN_CFG_DTS_DYN_CALI_DSCR_ITERVL]          = 0x0;
 #endif
 
-    /* 校准 */
+    /* ???? */
     g_al_dts_params_etc[WLAN_CFG_DTS_CALI_TXPWR_PA_DC_REF_2G_VAL_CHAN1]     = 0x228F1D70;
     g_al_dts_params_etc[WLAN_CFG_DTS_CALI_TXPWR_PA_DC_REF_2G_VAL_CHAN2]     = 0x228F228F;
     g_al_dts_params_etc[WLAN_CFG_DTS_CALI_TXPWR_PA_DC_REF_2G_VAL_CHAN3]     = 0x20002148;
@@ -792,7 +792,7 @@ OAL_STATIC oal_void original_value_for_dts_params(oal_void)
     g_al_dts_params_etc[WLAN_CFG_DTS_CALI_TONE_AMP_GRADE]                   = 0;
     g_al_dts_params_etc[WLAN_CFG_DTS_MIMO_POW_ADJUST]                       = 0;
 
-    /* 动态校准 */
+    /* ???????? */
     g_al_dts_params_etc[WLAN_CFG_DTS_DYNC_CALI_OFDM_SINGLE_STONE_2G_C0_CHAN1]     = 0xE2FBFDF9;
     g_al_dts_params_etc[WLAN_CFG_DTS_DYNC_CALI_OFDM_SINGLE_STONE_2G_C0_CHAN2]     = 0xDEFD05F9;
     g_al_dts_params_etc[WLAN_CFG_DTS_DYNC_CALI_OFDM_SINGLE_STONE_2G_C0_CHAN3]     = 0xE40509F9;
@@ -942,7 +942,7 @@ OAL_STATIC oal_void original_value_for_dts_params(oal_void)
     g_al_dts_params_etc[WLAN_CFG_DTS_DAC_LPF_GAIN_5G_11AC_HT80_2]    = 0x10100000;
     g_al_dts_params_etc[WLAN_CFG_DTS_DAC_LPF_GAIN_5G_11AC_HT80_3]    = 0x00000000;
 
-    /* FCC认证 */
+    /* FCC???? */
     g_al_dts_params_etc[WLAN_CFG_DTS_BAND_EDGE_LIMIT_2G_11G_TXPWR]                      = 150;
     g_al_dts_params_etc[WLAN_CFG_DTS_BAND_EDGE_LIMIT_2G_11N_HT20_TXPWR]                 = 150;
     g_al_dts_params_etc[WLAN_CFG_DTS_BAND_EDGE_LIMIT_2G_11N_HT40_TXPWR]                 = 150;
@@ -952,9 +952,9 @@ OAL_STATIC oal_void original_value_for_dts_params(oal_void)
     g_al_dts_params_etc[WLAN_CFG_DTS_BAND_EDGE_LIMIT_2G_11G_DBB_SCALING]                = 0x68;
     g_al_dts_params_etc[WLAN_CFG_DTS_BAND_EDGE_LIMIT_2G_11N_HT20_DBB_SCALING]           = 0x62;
     g_al_dts_params_etc[WLAN_CFG_DTS_BAND_EDGE_LIMIT_2G_11N_HT40_DBB_SCALING]           = 0x62;
-    g_al_dts_params_etc[WLAN_CFG_DTS_BAND_EDGE_LIMIT_5G_11A_HT20_VHT20_DBB_SCALING]     = 0x68;/* 待定 */
-    g_al_dts_params_etc[WLAN_CFG_DTS_BAND_EDGE_LIMIT_5G_HT40_VHT40_DBB_SCALING]         = 0x68;/* 待定 */
-    g_al_dts_params_etc[WLAN_CFG_DTS_BAND_EDGE_LIMIT_5G_VHT80_DBB_SCALING]              = 0x68;/* 待定 */
+    g_al_dts_params_etc[WLAN_CFG_DTS_BAND_EDGE_LIMIT_5G_11A_HT20_VHT20_DBB_SCALING]     = 0x68;/* ???? */
+    g_al_dts_params_etc[WLAN_CFG_DTS_BAND_EDGE_LIMIT_5G_HT40_VHT40_DBB_SCALING]         = 0x68;/* ???? */
+    g_al_dts_params_etc[WLAN_CFG_DTS_BAND_EDGE_LIMIT_5G_VHT80_DBB_SCALING]              = 0x68;/* ???? */
 
     /* RF PLL */
     g_al_dts_params_etc[WLAN_CFG_DTS_RF_PLL_PPM_2G]                                     = -57;
@@ -971,7 +971,7 @@ OAL_STATIC oal_void host_params_init_first(oal_void)
     g_al_host_init_params_etc[WLAN_CFG_INIT_DELTA_B]                           = 10;
     g_al_host_init_params_etc[WLAN_CFG_INIT_DELTA_A]                           = 10;
 
-    /* 性能 */
+    /* ???? */
     g_al_host_init_params_etc[WLAN_CFG_INIT_AMPDU_TX_MAX_NUM]                  = WLAN_AMPDU_TX_MAX_BUF_SIZE;
     g_al_host_init_params_etc[WLAN_CFG_INIT_USED_MEM_FOR_START]                = 45;
     g_al_host_init_params_etc[WLAN_CFG_INIT_USED_MEM_FOR_STOP]                 = 25;
@@ -979,7 +979,7 @@ OAL_STATIC oal_void host_params_init_first(oal_void)
     g_al_host_init_params_etc[WLAN_CFG_INIT_SDIO_D2H_ASSEMBLE_COUNT]           = HISDIO_DEV2HOST_SCATT_MAX;
     g_al_host_init_params_etc[WLAN_CFG_INIT_SDIO_H2D_ASSEMBLE_COUNT]           = 16;
 
-    /* 自动调频 */
+    /* ???????? */
 #ifdef _PRE_WLAN_FEATURE_AUTO_FREQ
     g_al_host_init_params_etc[WLAN_CFG_INIT_PSS_THRESHOLD_LEVEL_0]             = PPS_VALUE_0;
     g_al_host_init_params_etc[WLAN_CFG_INIT_CPU_FREQ_LIMIT_LEVEL_0]            = CPU_MIN_FREQ_VALUE_0;
@@ -998,23 +998,23 @@ OAL_STATIC oal_void host_params_init_first(oal_void)
     g_al_host_init_params_etc[WLAN_CFG_INIT_DDR_FREQ_LIMIT_LEVEL_3]            = DDR_MIN_FREQ_VALUE_3;
     g_al_host_init_params_etc[WLAN_CFG_INIT_DEVICE_TYPE_LEVEL_3]               = FREQ_HIGHEST;
 #endif
-    /* AP开tx amsdu */
+    /* AP??tx amsdu */
     g_al_host_init_params_etc[WLAN_CFG_INIT_AP_TX_AMSDU]                       = 0;
-     /* AP开rx amsdu */
+     /* AP??rx amsdu */
     g_al_host_init_params_etc[WLAN_CFG_INIT_AP_RX_AMSDU]                       = 0;
-    /* 低功耗 */
+    /* ?????? */
     g_al_host_init_params_etc[WLAN_CFG_INIT_POWERMGMT_SWITCH]                  = 0;
-    /* 可维可测 */
-    /* 日志级别 */
+    /* ???????? */
+    /* ???????? */
     g_al_host_init_params_etc[WLAN_CFG_INIT_LOGLEVEL]                          = OAM_LOG_LEVEL_WARNING;
-    /* 2G RF前端 */
+    /* 2G RF???? */
     g_al_host_init_params_etc[WLAN_CFG_INIT_RF_LINE_TXRX_GAIN_DB_2G_BAND1_MULT4]    = -12;
     g_al_host_init_params_etc[WLAN_CFG_INIT_RF_LINE_TXRX_GAIN_DB_2G_BAND1_MULT10]   = -30;
     g_al_host_init_params_etc[WLAN_CFG_INIT_RF_LINE_TXRX_GAIN_DB_2G_BAND2_MULT4]    = -12;
     g_al_host_init_params_etc[WLAN_CFG_INIT_RF_LINE_TXRX_GAIN_DB_2G_BAND2_MULT10]   = -30;
     g_al_host_init_params_etc[WLAN_CFG_INIT_RF_LINE_TXRX_GAIN_DB_2G_BAND3_MULT4]    = -12;
     g_al_host_init_params_etc[WLAN_CFG_INIT_RF_LINE_TXRX_GAIN_DB_2G_BAND3_MULT10]   = -30;
-    /* 5G RF前端 */
+    /* 5G RF???? */
     g_al_host_init_params_etc[WLAN_CFG_INIT_RF_LINE_TXRX_GAIN_DB_5G_BAND1_MULT4]    = -8;
     g_al_host_init_params_etc[WLAN_CFG_INIT_RF_LINE_TXRX_GAIN_DB_5G_BAND1_MULT10]   = -20;
     g_al_host_init_params_etc[WLAN_CFG_INIT_RF_LINE_TXRX_GAIN_DB_5G_BAND2_MULT4]    = -8;
@@ -1082,12 +1082,12 @@ regdomain_enum hwifi_get_regdomain_from_country_code(const countrycode_t country
         {
             if (en_real_regdomain)
             {
-                /* HERA产品的HILINK接口需要返回真实的区域码 */
+                /* HERA??????HILINK???????????????????????? */
                 en_regdomain = g_ast_country_info_table[ul_table_idx].en_regdomain;
             }
             else
             {
-                /* ONT产品只区分FCC和非FCC */
+                /* ONT??????????FCC????FCC */
                 en_regdomain = (g_ast_country_info_table[ul_table_idx].en_regdomain == REGDOMAIN_FCC) ? REGDOMAIN_FCC : REGDOMAIN_COMMON;
             }
             break;
@@ -1246,7 +1246,7 @@ OAL_STATIC int32 hwifi_config_init_nvram(void)
         {
             OAM_ERROR_LOG1(0, OAM_SF_ANY, "hwifi_config_init_nvram read id[%d] from ini failed!", l_cfg_id);
 
-            /* 读取失败时将数组置零，防止下发至device */
+            /* ????????????????????????????????device */
             oal_memcopy(g_aus_nv_params, g_al_nvram_init_params, sizeof(g_aus_nv_params));
             return INI_FAILED;
         }
@@ -1266,7 +1266,7 @@ OAL_STATIC int32 hwifi_config_init_private_custom(void)
 
     for(l_cfg_id = 0; l_cfg_id < WLAN_CFG_PRIV_BUTT; l_cfg_id++)
     {
-        /* 获取 private 的配置值 */
+        /* ???? private ???????? */
         l_ret = get_cust_conf_int32_etc(INI_MODU_WIFI, g_ast_wifi_config_priv[l_cfg_id].name, &(g_al_priv_cust_params[l_cfg_id].l_val));
 
         if (INI_FAILED == l_ret)
@@ -1322,7 +1322,7 @@ int32 hwifi_config_init_etc(int32 cus_tag)
 
     for(l_cfg_id = 0; l_cfg_id < l_wlan_cfg_butt; l_cfg_id++)
     {
-        /* 获取ini的配置值 */
+        /* ????ini???????? */
         l_ret = get_cust_conf_int32_etc(INI_MODU_WIFI, pgast_wifi_config[l_cfg_id].name, &l_cfg_value);
 
         if (INI_FAILED == l_ret)
@@ -1444,7 +1444,7 @@ int8* hwifi_get_country_code_etc(void)
         return g_ac_country_code_etc;
     }
 
-    /* 获取cust国家码 */
+    /* ????cust?????? */
     l_ret = get_cust_conf_string_etc(INI_MODU_WIFI, STR_COUNTRY_CODE, g_ac_country_code_etc, sizeof(g_ac_country_code_etc)-1);
 
     if(INI_FAILED == l_ret)
@@ -1526,7 +1526,7 @@ char* hwifi_get_chip_id_cfg(oal_uint8 uc_chip_id)
 
     OAL_MEMZERO(g_chipid_cfg[uc_chip_id],CHIPID_CFG_LEN);
 
-    /* 获取chip id配置信息 */
+    /* ????chip id???????? */
     l_ret = get_cust_conf_string_etc(INI_MODU_WIFI, auc_var_name, g_chipid_cfg[uc_chip_id], CHIPID_CFG_LEN-1);
 
     if(INI_FAILED == l_ret)
@@ -1599,7 +1599,7 @@ oal_void hwifi_get_wavap_mac_cfg(oal_void)
     char        auc_mac_name[IXIA_MAC_ADDR_CFG_LEN]={0};
     oal_uint8   uc_index = 0;
 
-    //1. 获取mac地址  string
+    //1. ????mac????  string
     for (i=0; i<MAX_IXIA_MAC_ADDR_COUNT; i++)
     {
         OAL_SPRINTF(auc_tmp_name, IXIA_MAC_ADDR_CFG_LEN, "ixia_mac_addr%d", i);
@@ -1609,7 +1609,7 @@ oal_void hwifi_get_wavap_mac_cfg(oal_void)
             continue;
         }
 
-        /* 将带冒号的mac地址转化为数字 */
+        /* ??????????mac?????????????? */
         oal_strtoaddr(auc_mac_name, g_ixia_mac_addr_cfg[uc_index].auc_user_mac_addr);
 
         OAL_IO_PRINT("hwifi_get_wavap_mac_cfg:: g_ixia_mac_addr_cfg[%d]=[%02X:XX:XX:XX:%02X:%02X]\n", uc_index,
@@ -1667,7 +1667,7 @@ oal_void hwifi_get_edca_fix_cfg(oal_void)
     oal_uint8   uc_index = 0;
     oal_uint32  ul_tmp = 0;
 
-    //1. 获取mac地址  string
+    //1. ????mac????  string
     for (i=0; i<MAX_EDCA_MAC_ADDR_COUNT; i++)
     {
         OAL_SPRINTF(auc_tmp_name, MAC_ADDR_CFG_LEN, "edca_mac_addr%d", i);
@@ -1677,15 +1677,15 @@ oal_void hwifi_get_edca_fix_cfg(oal_void)
             continue;
         }
 
-        //将逗号分隔的分离
+        //????????????????
         pc_str_1 = OAL_STRSTR(auc_mac_name, ",");
         if(OAL_PTR_NULL != pc_str_1)
         {
             *pc_str_1 = '\0';
 
-            /* 前面已对分隔符赋值 \0, 可以直接通过auc_mac_name取分隔符之前的部分 */
+            /* ?????????????????? \0, ????????????auc_mac_name?????????????????? */
             oal_strtoaddr(auc_mac_name, g_edca_mac_addr_cfg[uc_index].auc_user_mac_addr);
-            //取分隔符后面的edca
+            //??????????????edca
             if(OAL_PTR_NULL == (pc_str_1 + 1))
             {
                 return;
@@ -1698,7 +1698,7 @@ oal_void hwifi_get_edca_fix_cfg(oal_void)
 
             *pc_str_2 = '\0';
 
-            //读取uplink edca值
+            //????uplink edca??
             l_ret = OAL_SSCANF(pc_str_1 + 1, "%x", &ul_tmp);
             uc_up_edca = ul_tmp;
             if(l_ret < 0)
@@ -1707,7 +1707,7 @@ oal_void hwifi_get_edca_fix_cfg(oal_void)
                 return;
             }
 
-            //读取downlink edca值
+            //????downlink edca??
             l_ret = OAL_SSCANF(pc_str_2 + 1, "%x", &ul_tmp);
             uc_down_edca = ul_tmp;
             if(l_ret < 0)
@@ -1809,11 +1809,11 @@ int plat_main_init(void)
     hwifi_config_init_etc(CUS_TAG_NV);
     hwifi_config_init_etc(CUS_TAG_INI);
 
-    /******************************************** 性能 ********************************************/
+    /******************************************** ???? ********************************************/
     l_val = hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_AMPDU_TX_MAX_NUM);
     g_st_wlan_customize_etc.ul_ampdu_tx_max_num = (WLAN_AMPDU_TX_MAX_NUM >= l_val && 1 <= l_val) ? (oal_uint32)l_val : g_st_wlan_customize_etc.ul_ampdu_tx_max_num;
 
-    /******************************************** 扫描 ********************************************/
+    /******************************************** ???? ********************************************/
     l_val = hwifi_get_init_value_etc(CUS_TAG_INI, WLAN_CFG_INIT_RANDOM_MAC_ADDR_SCAN);
     g_st_wlan_customize_etc.uc_random_mac_addr_scan = !!l_val;
 
@@ -1831,7 +1831,7 @@ void plat_main_exit(void)
     ini_cfg_exit_etc();
 #endif
 }
-/* 导出符号 */
+/* ???????? */
 
 oal_module_init(plat_main_init);
 oal_module_exit(plat_main_exit);

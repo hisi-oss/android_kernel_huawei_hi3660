@@ -11,7 +11,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 #include "oal_ext_if.h"
 #include "oal_queue.h"
@@ -21,45 +21,45 @@ extern "C" {
 #define THIS_FILE_ID OAM_FILE_ID_MAC_RESOURCE_H
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
 
-/* 最大dev数量 */
+/* ????dev???? */
 #define MAC_RES_MAX_DEV_NUM     WLAN_SERVICE_DEVICE_SUPPORT_MAX_NUM_SPEC
-#define MAX_MAC_FCS_MEM_RES 2           /* CPU,MAC总线访问约束需要修改fcs发帧内存位置 */
-#define MAX_MAC_BEACON_BUFF_NUM 2       /* CPU,MAC总线访问约束需要修改fcs发帧内存位置 */
+#define MAX_MAC_FCS_MEM_RES 2           /* CPU,MAC????????????????????fcs???????????? */
+#define MAX_MAC_BEACON_BUFF_NUM 2       /* CPU,MAC????????????????????fcs???????????? */
 
-/*board最大关联用户数 = 1个CHIP支持的最大关联用户数 * board上面的CHIP数目*/
+/*board?????????????? = 1??CHIP???????????????????? * board??????CHIP????*/
 #define MAC_RES_MAX_ASOC_USER_NUM    (WLAN_ASSOC_USER_MAX_NUM * WLAN_CHIP_MAX_NUM_PER_BOARD)
-/*board最大组播用户数 = 整board支持的业务vap个数(每个业务vap一个组播用户)*/
+/*board?????????????? = ??board??????????vap????(????????vap????????????)*/
 #define MAC_RES_MAX_BCAST_USER_NUM   (WLAN_MULTI_USER_MAX_NUM_LIMIT)
-/*board资源最大用户数 = 最大关联用户数 + 组播用户个数 */
+/*board?????????????? = ?????????????? + ???????????? */
 #define MAC_RES_MAX_USER_LIMIT       (MAC_RES_MAX_ASOC_USER_NUM + MAC_RES_MAX_BCAST_USER_NUM)
 
 /*****************************************************************************
-  3 枚举定义
+  3 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  4 全局变量声明
+  4 ????????????
 *****************************************************************************/
 extern oal_uint16  g_us_max_asoc_user_etc;
 extern oal_uint8   g_uc_max_active_user;
 
 
 /*****************************************************************************
-  5 消息头定义
+  5 ??????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  6 消息定义
+  6 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  7 STRUCT定义
+  7 STRUCT????
 *****************************************************************************/
 
 /*
@@ -121,18 +121,18 @@ typedef struct
 }mac_res_stru;
 
 /*****************************************************************************
-  8 UNION定义
+  8 UNION????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  9 OTHERS定义
+  9 OTHERS????
 *****************************************************************************/
 extern mac_res_stru    g_st_mac_res_etc;
 extern mac_res_stru  *g_pst_mac_res;
 
 /*****************************************************************************
-  10 函数声明
+  10 ????????
 *****************************************************************************/
 extern oal_uint32  mac_res_alloc_dmac_dev_etc(oal_uint8    *puc_dev_idx);
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
@@ -170,7 +170,7 @@ OAL_STATIC OAL_INLINE oal_uint32  mac_res_alloc_hmac_vap(oal_uint8 *puc_idx, oal
 
     ul_idx_temp = (oal_uint)oal_queue_dequeue(&(g_pst_mac_res->st_vap_res.st_queue));
 
-    /* 0为无效值 */
+    /* 0???????? */
     if (0 == ul_idx_temp)
     {
         return OAL_FAIL;
@@ -206,9 +206,9 @@ OAL_STATIC OAL_INLINE oal_uint32  mac_res_alloc_dmac_user(oal_uint16 us_idx)
         return OAL_FAIL;
     }
 
-    /* 非ffload模式，用户自增在hmac侧已经执行 */
+    /* ??ffload????????????????hmac?????????? */
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
-    /* DMAC仅需要设置为有效即可 */
+    /* DMAC???????????????????? */
     (g_pst_mac_res->st_user_res.puc_user_cnt[us_idx])++;
 #endif
 
@@ -245,7 +245,7 @@ OAL_STATIC OAL_INLINE oal_void*  mac_res_get_mac_vap(oal_uint8 uc_idx)
         return OAL_PTR_NULL;
     }
 
-    /* 这里返回偏移内存空间 */
+    /* ???????????????????? */
     return (oal_void *)((oal_uint8 *)(g_pst_mac_res->st_vap_res.past_vap_info[uc_idx])
                         + g_pst_mac_res->st_vap_res.us_hmac_priv_size);
 
@@ -269,7 +269,7 @@ OAL_STATIC OAL_INLINE oal_uint32  mac_res_alloc_hmac_user(oal_uint16 *pus_idx, o
 
     ul_idx_temp = (oal_uint)oal_queue_dequeue_16(&(g_pst_mac_res->st_user_res.st_queue));
 
-    /* 0为无效值 */
+    /* 0???????? */
     if (0 == ul_idx_temp)
     {
         return OAL_FAIL;
@@ -304,7 +304,7 @@ OAL_STATIC OAL_INLINE oal_void*  _mac_res_get_mac_user(oal_uint16 us_idx)
         return OAL_PTR_NULL;
     }
 
-    /* 这里偏移内存空间 */
+    /* ???????????????? */
     return (oal_void *)((oal_uint8 *)(g_pst_mac_res->st_user_res.past_user_info[us_idx])
                         + g_pst_mac_res->st_user_res.us_hmac_priv_size);
 }

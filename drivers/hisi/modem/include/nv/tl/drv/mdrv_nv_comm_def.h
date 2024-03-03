@@ -68,12 +68,12 @@ typedef unsigned long long   u64;
 #endif
 
 /*****************************************************************************
- 结构名       :  NV_FEMPIN_TO_GPIO_STRU
- 结构说明  :  射频管脚编号和gpio编号对应关系nv定义
+ ??????       :  NV_FEMPIN_TO_GPIO_STRU
+ ????????  :  ??????????????gpio????????????nv????
  NV ID               : 18003
 *****************************************************************************/
-#define FEM_IO_CFG_MAX    16 /*18002 nv中最多支持的配置个数*/
-#define FEM_PIN_MAX       32 /*射频管脚个数*/
+#define FEM_IO_CFG_MAX    16 /*18002 nv????????????????????*/
+#define FEM_PIN_MAX       32 /*????????????*/
 
 typedef struct{
     u32 uwFemPinToGpio[FEM_PIN_MAX];
@@ -81,53 +81,53 @@ typedef struct{
 
 typedef struct
 {
-    u32 uwGpioMask;              /*射频管脚掩码,0表示该bit位不需要控制*/
-    u32 uwGpioValue;             /*射频管脚输出电平 值,0表示该低电平，1表示高电平*/
+    u32 uwGpioMask;              /*????????????,0??????bit????????????*/
+    u32 uwGpioValue;             /*???????????????? ??,0??????????????1??????????*/
 }RFFE_GPIO_VALUE_STRU;
 
 /*****************************************************************************
- 结构名    : RF_NV_MIPIDEV_CMD_STRU
- 协议表格  :
- ASN.1描述 :
- 结构说明  : MIPI命令控制结构体
+ ??????    : RF_NV_MIPIDEV_CMD_STRU
+ ????????  :
+ ASN.1???? :
+ ????????  : MIPI??????????????
 *****************************************************************************/
 typedef struct
 {
-    u32  bitByteCnt          :5;     /* 0表示该CMMAND无效，取值0~4 */
+    u32  bitByteCnt          :5;     /* 0??????CMMAND??????????0~4 */
     u32  bitMipiPortSel      :3;     /* mipi port 0~7 */
     u32  bitSlaveID          :4;     /* slave id 0~15 */
     u32  bitRegAddr          :16;    /* reg addr 0~65535 */
-    u32  bitRsv              :4;     /* 四字节对齐 */
+    u32  bitRsv              :4;     /* ?????????? */
 } RF_NV_MIPIDEV_CMD_STRU;
 
 typedef RF_NV_MIPIDEV_CMD_STRU PHY_MIPIDEV_CMD_STRU;
 
 /*****************************************************************************
- 结构名    : RF_NV_MIPIDEV_DATA_STRU
- 协议表格  :
- ASN.1描述 :
- 结构说明  : MIPI数据结构体
+ ??????    : RF_NV_MIPIDEV_DATA_STRU
+ ????????  :
+ ASN.1???? :
+ ????????  : MIPI??????????
 *****************************************************************************/
 typedef struct
 {
-    u32  bitByte0  :8;    /* 第一个byte */
-    u32  bitByte1  :8;    /* 第二个byte */
-    u32  bitByte2  :8;    /* 第三个byte */
-    u32  bitByte3  :8;    /* 第四个byte */
+    u32  bitByte0  :8;    /* ??????byte */
+    u32  bitByte1  :8;    /* ??????byte */
+    u32  bitByte2  :8;    /* ??????byte */
+    u32  bitByte3  :8;    /* ??????byte */
 } RF_NV_MIPIDEV_DATA_STRU;
 
 typedef RF_NV_MIPIDEV_DATA_STRU PHY_MIPIDEV_DATA_STRU;
 
 /*****************************************************************************
- 结构名    : RF_NV_MIPIDEV_UNIT_STRU
- 协议表格  :
- ASN.1描述 :
- 结构说明  : MIPI命令最小单元
+ ??????    : RF_NV_MIPIDEV_UNIT_STRU
+ ????????  :
+ ASN.1???? :
+ ????????  : MIPI????????????
 *****************************************************************************/
 typedef struct
 {
-    RF_NV_MIPIDEV_CMD_STRU      stCmd;    /*控制域*/
-    RF_NV_MIPIDEV_DATA_STRU     stData;   /*数据域,一个MIPI占用2个UINT32*/
+    RF_NV_MIPIDEV_CMD_STRU      stCmd;    /*??????*/
+    RF_NV_MIPIDEV_DATA_STRU     stData;   /*??????,????MIPI????2??UINT32*/
 } RF_NV_MIPIDEV_UNIT_STRU;
 
 typedef RF_NV_MIPIDEV_UNIT_STRU PHY_MIPIDEV_UNIT_STRU;
@@ -137,9 +137,9 @@ typedef struct{
 }RF_NV_MIPIDEV_04CMD;
 typedef struct
 {
-    u32                     enMode;         /*配置模式*/
-    RFFE_GPIO_VALUE_STRU    stGpioCtrl;     /*GPIO 配置  */
-    RF_NV_MIPIDEV_04CMD     stMipiCtrl;     /*MIPI  配置  */
+    u32                     enMode;         /*????????*/
+    RFFE_GPIO_VALUE_STRU    stGpioCtrl;     /*GPIO ????  */
+    RF_NV_MIPIDEV_04CMD     stMipiCtrl;     /*MIPI  ????  */
 }FEM_GPIO_MIPIDEV_CTRL_STRU;
 
 typedef struct

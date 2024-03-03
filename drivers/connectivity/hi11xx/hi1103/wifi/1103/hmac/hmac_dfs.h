@@ -12,7 +12,7 @@ extern "C" {
 #ifdef _PRE_WLAN_FEATURE_DFS
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 #include "oal_ext_if.h"
 #include "frw_ext_if.h"
@@ -24,71 +24,71 @@ extern "C" {
 #define THIS_FILE_ID OAM_FILE_ID_HMAC_DFS_H
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
 #define HMAC_DFS_ONE_SEC_IN_MS    1000
 #define HMAC_DFS_ONE_MIN_IN_MS    (60 * HMAC_DFS_ONE_SEC_IN_MS)
 #define HMAC_DFS_SIXTY_TWO_SEC_IN_MS (62 * HMAC_DFS_ONE_SEC_IN_MS)  
 
-/* CAC检测时长，5600MHz ~ 5650MHz频段外，默认60秒 */
+/* CAC??????????5600MHz ~ 5650MHz????????????60?? */
 #define HMAC_DFS_CAC_OUTOF_5600_TO_5650_MHZ_TIME_MS           HMAC_DFS_SIXTY_TWO_SEC_IN_MS
 
-/* CAC检测时长，5600MHz ~ 5650MHz频段内，默认10分钟 */
+/* CAC??????????5600MHz ~ 5650MHz????????????10???? */
 #define HMAC_DFS_CAC_IN_5600_TO_5650_MHZ_TIME_MS              (10 * HMAC_DFS_ONE_MIN_IN_MS)
 
-/* Off-Channel CAC检测时长，5600MHz ~ 5650MHz频段外，默认6分钟 */
+/* Off-Channel CAC??????????5600MHz ~ 5650MHz????????????6???? */
 #define HMAC_DFS_OFF_CH_CAC_OUTOF_5600_TO_5650_MHZ_TIME_MS    (6 * HMAC_DFS_ONE_MIN_IN_MS)
 
-/* Off-Channel CAC检测时长，5600MHz ~ 5650MHz频段内，默认60分钟 */
+/* Off-Channel CAC??????????5600MHz ~ 5650MHz????????????60???? */
 #define HMAC_DFS_OFF_CH_CAC_IN_5600_TO_5650_MHZ_TIME_MS       (60 * HMAC_DFS_ONE_MIN_IN_MS)
 
-/* Non-Occupancy Period时长，默认30分钟 */
+/* Non-Occupancy Period??????????30???? */
 #define HMAC_DFS_NON_OCCUPANCY_PERIOD_TIME_MS                 (30 * HMAC_DFS_ONE_MIN_IN_MS)
 
-/* Off-Channel CAC在工作信道上的驻留时长 */
+/* Off-Channel CAC?????????????????????? */
 #define HMAC_DFS_OFF_CHAN_CAC_PERIOD_TIME_MS                  15
 
-/* Off-channel CAC在Off-channel信道上的驻留时长 */
+/* Off-channel CAC??Off-channel???????????????? */
 #define HMAC_DFS_OFF_CHAN_CAC_DWELL_TIME_MS                   30
 
 
 /*****************************************************************************
-  3 枚举定义
+  3 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  4 全局变量声明
+  4 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  5 消息头定义
+  5 ??????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  6 消息定义
+  6 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  7 STRUCT定义
+  7 STRUCT????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  8 UNION定义
+  8 UNION????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  9 OTHERS定义
+  9 OTHERS????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  10 函数声明
+  10 ????????
 *****************************************************************************/
 extern oal_void  hmac_dfs_init_etc(mac_device_stru *pst_mac_device);
 extern oal_void  hmac_dfs_channel_list_init_etc(mac_device_stru *pst_mac_device);
@@ -120,7 +120,7 @@ extern oal_uint32  hmac_dfs_ap_pause_radar_handler(hmac_vap_stru *pst_hmac_vap);
 
 
 /*****************************************************************************
-  11 内联函数定义
+  11 ????????????
 *****************************************************************************/
 
 OAL_STATIC OAL_INLINE oal_bool_enum_uint8  hmac_dfs_need_for_cac(mac_device_stru *pst_mac_device, mac_vap_stru *pst_mac_vap)
@@ -132,14 +132,14 @@ OAL_STATIC OAL_INLINE oal_bool_enum_uint8  hmac_dfs_need_for_cac(mac_device_stru
     oal_uint8               uc_dfs_ch_cnt = 0;
     mac_channel_stru       *pst_channel;
 
-    /* dfs使能位 */
+    /* dfs?????? */
     if (OAL_FALSE == mac_vap_get_dfs_enable(pst_mac_vap))
     {
         OAM_WARNING_LOG0(0, OAM_SF_DFS, "dfs not enable\n");
         return OAL_FALSE;
     }
 
-    /* 定时器使能位 */
+    /* ???????????? */
     if (OAL_TRUE == pst_mac_device->st_dfs.st_dfs_cac_timer.en_is_enabled)
     {
         OAM_WARNING_LOG0(0, OAM_SF_DFS, "dfs tiemer enabled\n");
@@ -154,7 +154,7 @@ OAL_STATIC OAL_INLINE oal_bool_enum_uint8  hmac_dfs_need_for_cac(mac_device_stru
         return OAL_FALSE;
     }
 
-    /* 获取信道索引 */
+    /* ???????????? */
     ul_ret = mac_get_channel_idx_from_num_etc(MAC_RC_START_FREQ_5, pst_channel->uc_chan_number, &uc_idx);
     if (OAL_UNLIKELY(OAL_SUCC != ul_ret))
     {
@@ -167,7 +167,7 @@ OAL_STATIC OAL_INLINE oal_bool_enum_uint8  hmac_dfs_need_for_cac(mac_device_stru
 
     for(uc_ch = 0; uc_ch < st_chan_info.ul_channels; uc_ch++)
     {
-        /* 信道状态 */
+        /* ???????? */
         if ((MAC_CHAN_DFS_REQUIRED != pst_mac_device->st_ap_channel_list[st_chan_info.ast_channels[uc_ch].uc_idx].en_ch_status)
             &&(MAC_CHAN_BLOCK_DUE_TO_RADAR != pst_mac_device->st_ap_channel_list[st_chan_info.ast_channels[uc_ch].uc_idx].en_ch_status))
         {
@@ -182,7 +182,7 @@ OAL_STATIC OAL_INLINE oal_bool_enum_uint8  hmac_dfs_need_for_cac(mac_device_stru
         return OAL_FALSE;
     }
 
-    /* CAC使能位 */
+    /* CAC?????? */
     if (OAL_FALSE == mac_dfs_get_cac_enable(pst_mac_device))
     {
         OAM_WARNING_LOG0(0, OAM_SF_DFS, "cac not enabled");

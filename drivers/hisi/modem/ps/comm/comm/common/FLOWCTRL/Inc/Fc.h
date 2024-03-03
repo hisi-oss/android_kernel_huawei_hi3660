@@ -51,7 +51,7 @@
 
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 #include "vos.h"
 #include "PsLib.h"
@@ -69,12 +69,12 @@ extern "C" {
 #pragma pack(4)
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
 #if (OSA_CPU_CCPU == VOS_OSA_CPU)
-#define FC_MAX_POINT_NUM                (22)    /* C核CPU和温保会初始化最多2*FC_UL_RATE_MAX_LEV个 */
+#define FC_MAX_POINT_NUM                (22)    /* C??CPU??????????????????2*FC_UL_RATE_MAX_LEV?? */
 #else
-#define FC_MAX_POINT_NUM                (10)    /* A核暂定值 */
+#define FC_MAX_POINT_NUM                (10)    /* A???????? */
 #endif
 #define FC_MEM_THRESHOLD_MAX_NUM        (4)
 
@@ -82,7 +82,7 @@ extern "C" {
 #define FC_PRI_HIGHEST                  (FC_PRI_9)
 
 #define FC_MAX_NUM                      (10)
-#define FC_RAB_MASK_ALL                 (0x0000FFFE)                            /* RAB范围 1~15 */
+#define FC_RAB_MASK_ALL                 (0x0000FFFE)                            /* RAB???? 1~15 */
 
 #if (OSA_CPU_CCPU == VOS_OSA_CPU)
 #define UEPS_FID_FLOWCTRL               (UEPS_FID_FLOWCTRL_C)
@@ -118,7 +118,7 @@ extern "C" {
 #define FC_ACPU_CDS_GU_ASSEM_ON_MASK    (1 << 2)
 
 
-#define CPU_MAX_SET_DRV_FAIL_SMOOTH_CNT (50)                   /* 配置驱动失败平滑系数 */
+#define CPU_MAX_SET_DRV_FAIL_SMOOTH_CNT (50)                   /* ???????????????????? */
 #define CPU_DRV_ASSEM_PARA_MAX_NV_LEV   (4)
 
 
@@ -127,22 +127,22 @@ extern "C" {
 #define FC_ADS_TIMER_LEN                (50)
 #define FC_MODEM_ID_NUM                 (2)
 
-#define FC_CCPU_TRACE_CPULOAD_TIMELEN   (1000)              /* CCPU负载上报周期，1s */
+#define FC_CCPU_TRACE_CPULOAD_TIMELEN   (1000)              /* CCPU??????????????1s */
 #define TIMER_FC_CCPU_TRACE_CPULOAD     (0x1001)
 
-#define FC_CCPU_PTR_OCTET_OCCUPIED      (1)       /* CCPU上指针占用1个U32 */
-#define FC_ACPU_PTR_OCTET_OCCUPIED      (2)       /* ACPU上指针占用1个U32 */
+#define FC_CCPU_PTR_OCTET_OCCUPIED      (1)       /* CCPU??????????1??U32 */
+#define FC_ACPU_PTR_OCTET_OCCUPIED      (2)       /* ACPU??????????1??U32 */
 #define FC_PTR_MAX_OCTET_OCCUPIED       (2)
 
 
 /*****************************************************************************
-  3 枚举定义
+  3 ????????
 *****************************************************************************/
 enum FC_PRI_OPER_ENUM
 {
-    FC_PRI_CHANGE_AND_CONTINUE          = 0,                    /* 1.Lev改变，继续下一级流控 */
-    FC_PRI_CHANGE_AND_BREAK,                                    /* 2.Lev改变，退出当前操作 */
-    FC_PRI_KEEP_AND_BREAK,                                      /* 3.维持Lev不变，退出当前操作 */
+    FC_PRI_CHANGE_AND_CONTINUE          = 0,                    /* 1.Lev???????????????????? */
+    FC_PRI_CHANGE_AND_BREAK,                                    /* 2.Lev?????????????????? */
+    FC_PRI_KEEP_AND_BREAK,                                      /* 3.????Lev?????????????????? */
     FC_PRI_OPER_BUTT
 };
 typedef VOS_UINT32 FC_PRI_OPER_ENUM_UINT32;
@@ -176,7 +176,7 @@ enum FC_TIMER_NAME_ENUM
 typedef VOS_UINT32 FC_TIMER_NAME_ENUM_UINT32;
 
 
-/*====================================*//* FC内部流控策略ID */
+/*====================================*//* FC????????????ID */
 enum FC_PRIVATE_POLICY_ID_ENUM
 {
     FC_PRIVATE_POLICY_ID_MEM_MODEM_0                    = 0,
@@ -200,40 +200,40 @@ enum FC_PRIVATE_POLICY_ID_ENUM
 typedef VOS_UINT8 FC_PRIVATE_POLICY_ID_ENUM_UINT8;
 
 /*****************************************************************************
-  5 消息头定义
+  5 ??????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  6 消息定义
+  6 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  7 STRUCT定义
+  7 STRUCT????
 *****************************************************************************/
 /*****************************************************************************
-结构名    : FC_POLICY_STRU
-协议表格  : 无
-ASN.1描述 : 无
-结构说明  : 流控优先级结构
+??????    : FC_POLICY_STRU
+????????  : ??
+ASN.1???? : ??
+????????  : ??????????????
 *****************************************************************************/
 typedef struct
 {
-    VOS_UINT8                           ucValid;                   /*PS_TRUE:有效, PS_FALSE:无效 */
-    VOS_UINT8                           ucFcIdCnt;                 /*当前优先级对应的流控Id个数 */
+    VOS_UINT8                           ucValid;                   /*PS_TRUE:????, PS_FALSE:???? */
+    VOS_UINT8                           ucFcIdCnt;                 /*????????????????????Id???? */
     VOS_UINT8                           ucFcIdIndex;
-    FC_PRI_ENUM_UINT8                   enPri;                     /*当前优先级*/
-    FC_ID_ENUM_UINT8                    aenFcId[FC_MAX_POINT_NUM]; /*当前优先级对应的流控Id */
+    FC_PRI_ENUM_UINT8                   enPri;                     /*??????????*/
+    FC_ID_ENUM_UINT8                    aenFcId[FC_MAX_POINT_NUM]; /*????????????????????Id */
     VOS_UINT8                           aucRsv[6];
 } FC_PRI_STRU;
 
 
 /*****************************************************************************
- 结构名    : FC_POLICY_STRU
- 协议表格  : 无
- ASN.1描述 : 无
- 结构说明  : 流控通用策略结构，进行
+ ??????    : FC_POLICY_STRU
+ ????????  : ??
+ ASN.1???? : ??
+ ????????  : ??????????????????????
 *****************************************************************************/
 typedef VOS_UINT32 (*FC_POLICY_POSTPROCESS)(VOS_UINT32 ulParam1, VOS_UINT32 ulParam2);
 typedef VOS_UINT32 (*FC_POLICY_ADJUST_FOR_UP_FUNC)(FC_PRI_ENUM_UINT8 enPointPri, FC_ID_ENUM_UINT8 enFcId);
@@ -242,38 +242,38 @@ typedef VOS_UINT32 (*FC_POLICY_ADJUST_FOR_DOWN_FUNC)(FC_PRI_ENUM_UINT8 enPointPr
 
 typedef struct
 {
-    FC_PRIVATE_POLICY_ID_ENUM_UINT8     enPolicyId;             /* 策略ID */
-    VOS_UINT8                           ucPriCnt;               /* 当前策略的优先级总数 */
-    FC_PRI_ENUM_UINT8                   enHighestPri;           /* 当前流控策略的最高优先级别 */
-    FC_PRI_ENUM_UINT8                   enDonePri;              /* 当前处理过的优先级 */
+    FC_PRIVATE_POLICY_ID_ENUM_UINT8     enPolicyId;             /* ????ID */
+    VOS_UINT8                           ucPriCnt;               /* ???????????????????? */
+    FC_PRI_ENUM_UINT8                   enHighestPri;           /* ?????????????????????????? */
+    FC_PRI_ENUM_UINT8                   enDonePri;              /* ?????????????????? */
     FC_PRI_ENUM_UINT8                   enToPri;
     VOS_UINT8                           aucRsv[3];
-    FC_PRI_STRU                         astFcPri[FC_PRI_BUTT];  /* 某一个优先级流控对应的处理 */
+    FC_PRI_STRU                         astFcPri[FC_PRI_BUTT];  /* ?????????????????????????? */
     FC_POLICY_ADJUST_FOR_UP_FUNC        pAdjustForUpFunc;       /* _H2ASN_Replace VOS_UINT32  pAdjustForUpFunc; */
     FC_POLICY_ADJUST_FOR_DOWN_FUNC      pAdjustForDownFunc;     /* _H2ASN_Replace VOS_UINT32  pAdjustForDownFunc; */
-    FC_POLICY_POSTPROCESS               pPostFunc;              /* 该流控策略执行到最后一级的回调函数 *//* _H2ASN_Replace VOS_UINT32  pPostFunc; */
+    FC_POLICY_POSTPROCESS               pPostFunc;              /* ?????????????????????????????????? *//* _H2ASN_Replace VOS_UINT32  pPostFunc; */
 } FC_POLICY_STRU;
 
 typedef struct
 {
-    FC_ID_ENUM_UINT8                    enFcId;                 /* 流控ID */
+    FC_ID_ENUM_UINT8                    enFcId;                 /* ????ID */
     VOS_UINT8                           aucRsv[1];
     MODEM_ID_ENUM_UINT16                enModemId;              /* ModemId */   /* _H2ASN_Replace VOS_UINT16  enModemId; */
-    VOS_UINT32                          ulPolicyMask;           /* 该流控点关联的流控策略，便于查找核删除 */
-    VOS_UINT32                          ulFcMask;               /* 流控投票管理 */
-    VOS_UINT32                          ulParam1;               /* 该流控点注册时，记录的参数值 */
-    VOS_UINT32                          ulParam2;               /* 该流控点注册时，记录的参数值 */
-    FC_SET_FUNC                         pSetFunc;               /* 流控执行函数 */  /* _H2ASN_Replace VOS_UINT32  pSetFunc; */
-    FC_CLR_FUNC                         pClrFunc;               /* 流控解除函数 */  /* _H2ASN_Replace VOS_UINT32  pClrFunc; */
-    FC_RST_FUNC                         pRstFunc;               /* 新增的复位处理与恢复接口 */  /* _H2ASN_Replace VOS_UINT32  pRstFunc; */
+    VOS_UINT32                          ulPolicyMask;           /* ?????????????????????????????????????? */
+    VOS_UINT32                          ulFcMask;               /* ???????????? */
+    VOS_UINT32                          ulParam1;               /* ???????????????????????????? */
+    VOS_UINT32                          ulParam2;               /* ???????????????????????????? */
+    FC_SET_FUNC                         pSetFunc;               /* ???????????? */  /* _H2ASN_Replace VOS_UINT32  pSetFunc; */
+    FC_CLR_FUNC                         pClrFunc;               /* ???????????? */  /* _H2ASN_Replace VOS_UINT32  pClrFunc; */
+    FC_RST_FUNC                         pRstFunc;               /* ???????????????????????? */  /* _H2ASN_Replace VOS_UINT32  pRstFunc; */
 } FC_POINT_STRU;
 
 
 /*****************************************************************************
- 结构名    : FC_POINT_MGR_STRU
- 协议表格  : 无
- ASN.1描述 : 无
- 结构说明  : 流控点管理结构
+ ??????    : FC_POINT_MGR_STRU
+ ????????  : ??
+ ASN.1???? : ??
+ ????????  : ??????????????
 *****************************************************************************/
 typedef struct
 {
@@ -285,46 +285,46 @@ typedef struct
 
 typedef struct
 {
-    VOS_UINT32                          ulLastByteCnt;                          /* 上次统计时的值 */
-    VOS_UINT32                          ulRate;                                 /* 网桥速率，单位:bps */
+    VOS_UINT32                          ulLastByteCnt;                          /* ?????????????? */
+    VOS_UINT32                          ulRate;                                 /* ??????????????:bps */
 } FC_BRIDGE_RATE_STRU;
 
 
-/*====================================*//*一个FC上FC 和RAB之间的映射关系*/
+/*====================================*//*????FC??FC ??RAB??????????????*/
 typedef struct
 {
     FC_ID_ENUM_UINT8                    enFcId;
     VOS_UINT8                           aucRsv[7];
-    VOS_UINT32                          ulIncludeRabMask;                       /* 该Fc Id对应的所有RAB，用掩码表示 */
-    VOS_UINT32                          ulNoFcRabMask;                          /* 该Fc Id上不要求流控的RAB，没有RAB流控时等于ulIncludeRabMask */
+    VOS_UINT32                          ulIncludeRabMask;                       /* ??Fc Id??????????RAB???????????? */
+    VOS_UINT32                          ulNoFcRabMask;                          /* ??Fc Id??????????????RAB??????RAB??????????ulIncludeRabMask */
 } FC_RAB_MAPPING_INFO_STRU;
 
 
 typedef struct
 {
-    FC_ID_ENUM_UINT8                    enFcIdCnt;                              /* FC Id流控实体个数 */
+    FC_ID_ENUM_UINT8                    enFcIdCnt;                              /* FC Id???????????? */
     VOS_UINT8                           aucRsv[3];
-    FC_RAB_MAPPING_INFO_STRU            astFcRabMappingInfo[FC_MAX_NUM];        /* FC 和RAB之间的映射关系集合 */
+    FC_RAB_MAPPING_INFO_STRU            astFcRabMappingInfo[FC_MAX_NUM];        /* FC ??RAB?????????????????? */
 } FC_RAB_MAPPING_INFO_SET_STRU;
 
 
-/*====================================*//* 可维可测信息 */
-/* 流控点钩包结构 */
+/*====================================*//* ???????????? */
+/* ?????????????? */
 typedef struct
 {
-    FC_ID_ENUM_UINT8                    enFcId;                 /* 流控ID */
+    FC_ID_ENUM_UINT8                    enFcId;                 /* ????ID */
     VOS_UINT8                           aucRsv[5];
     MODEM_ID_ENUM_UINT16                enModemId;              /* ModemId */   /* _H2ASN_Replace VOS_UINT16  enModemId; */
-    VOS_UINT32                          ulPolicyMask;           /* 该流控点关联的流控策略，便于查找核删除 */
-    VOS_UINT32                          ulFcMask;               /* 流控投票管理 */
-    VOS_UINT32                          ulParam1;               /* 该流控点注册时，记录的参数值 */
-    VOS_UINT32                          ulParam2;               /* 该流控点注册时，记录的参数值 */
-    VOS_UINT32                          aulPointSetAddr[FC_PTR_MAX_OCTET_OCCUPIED];    /* 记录流控执行函数的地址 */
-    VOS_UINT32                          aulPointClrAddr[FC_PTR_MAX_OCTET_OCCUPIED];    /* 记录流控清除函数的地址 */
-    VOS_UINT32                          aulPointRstAddr[FC_PTR_MAX_OCTET_OCCUPIED];    /* 记录流控复位处理与恢复函数的地址 */
+    VOS_UINT32                          ulPolicyMask;           /* ?????????????????????????????????????? */
+    VOS_UINT32                          ulFcMask;               /* ???????????? */
+    VOS_UINT32                          ulParam1;               /* ???????????????????????????? */
+    VOS_UINT32                          ulParam2;               /* ???????????????????????????? */
+    VOS_UINT32                          aulPointSetAddr[FC_PTR_MAX_OCTET_OCCUPIED];    /* ?????????????????????? */
+    VOS_UINT32                          aulPointClrAddr[FC_PTR_MAX_OCTET_OCCUPIED];    /* ?????????????????????? */
+    VOS_UINT32                          aulPointRstAddr[FC_PTR_MAX_OCTET_OCCUPIED];    /* ???????????????????????????????? */
 } FC_MNTN_POINT_INFO_STRU;
 
-/* 流控点钩包TRACE结构 */
+/* ??????????TRACE???? */
 typedef struct
 {
     VOS_MSG_HEADER                                                              /* _H2ASN_Skip */
@@ -335,22 +335,22 @@ typedef struct
     VOS_UINT32                          ulResult;
 } FC_MNTN_POINT_FC_STRU;
 
-/* 流控策略钩包结构 */
+/* ???????????????? */
 typedef struct
 {
-    FC_PRIVATE_POLICY_ID_ENUM_UINT8     enPolicyId;             /* 策略ID */
-    VOS_UINT8                           ucPriCnt;               /* 当前策略的优先级总数 */
-    FC_PRI_ENUM_UINT8                   enHighestPri;           /* 当前流控策略的最高优先级别 */
-    FC_PRI_ENUM_UINT8                   enDonePri;              /* 当前处理过的优先级 */
+    FC_PRIVATE_POLICY_ID_ENUM_UINT8     enPolicyId;             /* ????ID */
+    VOS_UINT8                           ucPriCnt;               /* ???????????????????? */
+    FC_PRI_ENUM_UINT8                   enHighestPri;           /* ?????????????????????????? */
+    FC_PRI_ENUM_UINT8                   enDonePri;              /* ?????????????????? */
     FC_PRI_ENUM_UINT8                   enToPri;
     VOS_UINT8                           aucRsv[3];
-    FC_PRI_STRU                         astFcPri[FC_PRI_BUTT];  /* 某一个优先级流控对应的处理 */
-    VOS_UINT32                          aulPolicyUpAddr[FC_PTR_MAX_OCTET_OCCUPIED];    /* 记录流控策略升执行函数的地址 */
-    VOS_UINT32                          aulPolicyDownAddr[FC_PTR_MAX_OCTET_OCCUPIED];    /* 记录流控策略降执行函数的地址 */
-    VOS_UINT32                          aulPolicyPostAddr[FC_PTR_MAX_OCTET_OCCUPIED];    /* 流控策略执行到最后一级的回调函数的地址 */
+    FC_PRI_STRU                         astFcPri[FC_PRI_BUTT];  /* ?????????????????????????? */
+    VOS_UINT32                          aulPolicyUpAddr[FC_PTR_MAX_OCTET_OCCUPIED];    /* ???????????????????????????? */
+    VOS_UINT32                          aulPolicyDownAddr[FC_PTR_MAX_OCTET_OCCUPIED];    /* ???????????????????????????? */
+    VOS_UINT32                          aulPolicyPostAddr[FC_PTR_MAX_OCTET_OCCUPIED];    /* ?????????????????????????????????????? */
 } FC_MNTN_POLICY_INFO_STRU;
 
-/* 流控策略钩包TRACE结构 */
+/* ????????????TRACE???? */
 typedef struct
 {
     VOS_MSG_HEADER                                                              /* _H2ASN_Skip */
@@ -378,87 +378,87 @@ typedef struct
 
 typedef struct
 {
-    VOS_UINT32                          ulSmoothTimerLen;       /* CPU流控的平滑次数，连续若干次CPU超标，才进行CPU流控 */
+    VOS_UINT32                          ulSmoothTimerLen;       /* CPU??????????????????????????CPU????????????CPU???? */
     VOS_UINT8                           aucRsv[4];
-    HTIMER                              pstStopAttemptTHandle;  /* CPU流控解除优化定时器 */
+    HTIMER                              pstStopAttemptTHandle;  /* CPU?????????????????? */
 } FC_CPU_CTRL_STRU;
 
 typedef struct
 {
-    const VOS_UINT32                    ulTraceCpuLoadTimerLen; /* 上报CCPU负载定时器时长 */ /* _H2ASN_Skip */
-    VOS_UINT32                          ulCpuLoadRecord;        /* 记录底软上报的CPU负载 */
-    HTIMER                              pstTraceCpuLoadTHandle; /* 上报CCPU负载定时器 */
+    const VOS_UINT32                    ulTraceCpuLoadTimerLen; /* ????CCPU?????????????? */ /* _H2ASN_Skip */
+    VOS_UINT32                          ulCpuLoadRecord;        /* ??????????????CPU???? */
+    HTIMER                              pstTraceCpuLoadTHandle; /* ????CCPU?????????? */
 } FC_TRACE_CPULOAD_STRU;
 
 
 /*****************************************************************************
- 结构名    : FC_CFG_MEM_STRU
- 协议表格  : 无
- ASN.1描述 : 无
- 结构说明  : MEM流控的门限和配置值
+ ??????    : FC_CFG_MEM_STRU
+ ????????  : ??
+ ASN.1???? : ??
+ ????????  : MEM??????????????????
 *****************************************************************************/
 typedef struct
 {
     VOS_UINT32                          ulThresholdCnt;
-    FC_CFG_MEM_THRESHOLD_STRU           astThreshold[FC_MEM_THRESHOLD_LEV_BUTT];/* A核内存流控门限 */
+    FC_CFG_MEM_THRESHOLD_STRU           astThreshold[FC_MEM_THRESHOLD_LEV_BUTT];/* A?????????????? */
 } FC_CFG_MEM_STRU;
 
 
 /*****************************************************************************
- 结构名    : FC_CFG_GPRS_STRU
- 协议表格  : 无
- ASN.1描述 : 无
- 结构说明  : GPRS流控门限
+ ??????    : FC_CFG_GPRS_STRU
+ ????????  : ??
+ ASN.1???? : ??
+ ????????  : GPRS????????
 *****************************************************************************/
 typedef struct
 {
-    FC_CFG_MEM_THRESHOLD_STRU           stThresholdMemSize;                     /* G模内存总量流控门限 */
-    FC_CFG_MEM_THRESHOLD_STRU           stThresholdMemCnt;                      /* G模内存块数流控门限 */
+    FC_CFG_MEM_THRESHOLD_STRU           stThresholdMemSize;                     /* G?????????????????? */
+    FC_CFG_MEM_THRESHOLD_STRU           stThresholdMemCnt;                      /* G?????????????????? */
 } FC_CFG_GPRS_STRU;
 
 
 /*****************************************************************************
- 结构名    : FC_CFG_CDMA_STRU
- 协议表格  : 无
- ASN.1描述 : 无
- 结构说明  : CDMA流控门限
+ ??????    : FC_CFG_CDMA_STRU
+ ????????  : ??
+ ASN.1???? : ??
+ ????????  : CDMA????????
 *****************************************************************************/
 typedef struct
 {
-    FC_CFG_MEM_THRESHOLD_STRU           stThresholdMemSize;                     /* X模内存总量流控门限 */
-    FC_CFG_MEM_THRESHOLD_STRU           stThresholdMemCnt;                      /* X模内存块数流控门限 */
+    FC_CFG_MEM_THRESHOLD_STRU           stThresholdMemSize;                     /* X?????????????????? */
+    FC_CFG_MEM_THRESHOLD_STRU           stThresholdMemCnt;                      /* X?????????????????? */
 } FC_CFG_CDMA_STRU;
 
 
 /*****************************************************************************
- 结构名    : FC_CFG_CST_STRU
- 协议表格  : 无
- ASN.1描述 : 无
- 结构说明  : CST流控门限
+ ??????    : FC_CFG_CST_STRU
+ ????????  : ??
+ ASN.1???? : ??
+ ????????  : CST????????
 *****************************************************************************/
 typedef struct
 {
-    FC_CFG_MEM_THRESHOLD_STRU           stThreshold;                            /* CST内存门限 */
+    FC_CFG_MEM_THRESHOLD_STRU           stThreshold;                            /* CST???????? */
 } FC_CFG_CST_STRU;
 
 
 /*****************************************************************************
- 结构名    : FC_CFG_STRUs
- 协议表格  : 无
- ASN.1描述 : 无
- 结构说明  : 流控配置项，可以从NV读取
+ ??????    : FC_CFG_STRUs
+ ????????  : ??
+ ASN.1???? : ??
+ ????????  : ??????????????????NV????
 *****************************************************************************/
 typedef struct
 {
-    VOS_UINT32                          ulFcEnbaleMask;                         /* 流控使能标识 */
-    FC_CFG_CPU_STRU                     stFcCfgCpuA;                            /* A核CPU流控门限 */
-    FC_CFG_MEM_STRU                     stFcCfgMem;                             /* A核内存流控门限 */
-    FC_CFG_CST_STRU                     stFcCfgCst;                             /* CSD业务流控门限 */
-    FC_CFG_GPRS_STRU                    stFcCfgGprs;                            /* G模流控门限 */
-    FC_CFG_CPU_STRU                     stFcCfgCpuC;                            /* C核CPU流控门限 */
-    FC_CFG_UM_UL_RATE_STRU              stFcCfgUmUlRateForCpu;                  /* C核CPU流控上行速率档位配置 */
-    FC_CFG_UM_UL_RATE_STRU              stFcCfgUmUlRateForTmp;                  /* C核温度流控上行行速率档位配置 */
-    FC_CFG_CDMA_STRU                    stFcCfgCdma;                            /* X模流控门限 */
+    VOS_UINT32                          ulFcEnbaleMask;                         /* ???????????? */
+    FC_CFG_CPU_STRU                     stFcCfgCpuA;                            /* A??CPU???????? */
+    FC_CFG_MEM_STRU                     stFcCfgMem;                             /* A?????????????? */
+    FC_CFG_CST_STRU                     stFcCfgCst;                             /* CSD???????????? */
+    FC_CFG_GPRS_STRU                    stFcCfgGprs;                            /* G?????????? */
+    FC_CFG_CPU_STRU                     stFcCfgCpuC;                            /* C??CPU???????? */
+    FC_CFG_UM_UL_RATE_STRU              stFcCfgUmUlRateForCpu;                  /* C??CPU???????????????????? */
+    FC_CFG_UM_UL_RATE_STRU              stFcCfgUmUlRateForTmp;                  /* C???????????????????????????? */
+    FC_CFG_CDMA_STRU                    stFcCfgCdma;                            /* X?????????? */
 } FC_CFG_STRU;
 
 
@@ -484,8 +484,8 @@ typedef struct
 }FC_CPU_DRV_ASSEM_PARA_ENTITY_STRU;
 
 /*****************************************************************************
- 结构名    : FC_CPU_DRV_ASSEM_PARA_NV_STRU
- 结构说明  : FC_CPU_DRV_ASSEM对应的NV结构
+ ??????    : FC_CPU_DRV_ASSEM_PARA_NV_STRU
+ ????????  : FC_CPU_DRV_ASSEM??????NV????
 *****************************************************************************/
 typedef struct
 {
@@ -497,19 +497,19 @@ typedef struct
 }FC_CPU_DRV_ASSEM_CONFIG_PARA_STRU;
 
 /*****************************************************************************
-  4 全局变量声明
+  4 ????????????
 *****************************************************************************/
-extern FC_POLICY_STRU                          g_astFcPolicy[]; /* 流控策略实体 */
-extern FC_POINT_MGR_STRU                       g_stFcPointMgr;  /* 流控点管理实体 */
-extern FC_CFG_STRU                             g_stFcCfg;       /* 流控配置实体 */
-/* 流控内部策略表 */
+extern FC_POLICY_STRU                          g_astFcPolicy[]; /* ???????????? */
+extern FC_POINT_MGR_STRU                       g_stFcPointMgr;  /* ?????????????? */
+extern FC_CFG_STRU                             g_stFcCfg;       /* ???????????? */
+/* ?????????????? */
 extern FC_PRIVATE_POLICY_ID_ENUM_UINT8         g_aenPrivatePolicyTbl[FC_MODEM_ID_NUM][FC_POLICY_ID_BUTT];
 
 /*****************************************************************************
-  5 OTHERS定义
+  5 OTHERS????
 *****************************************************************************/
 /*****************************************************************************
-  H2ASN顶级消息结构定义
+  H2ASN????????????????
 *****************************************************************************/
 typedef struct
 {
@@ -530,18 +530,18 @@ typedef struct
 
 
 /*****************************************************************************
-  8 UNION定义
+  8 UNION????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  9 OTHERS定义
+  9 OTHERS????
 *****************************************************************************/
 
 
 
 /*****************************************************************************
-  10 函数声明
+  10 ????????
 *****************************************************************************/
 extern VOS_VOID     FC_LOG
 (

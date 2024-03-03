@@ -9,7 +9,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "oam_main.h"
 #include "oam_trace.h"
@@ -18,39 +18,39 @@ extern "C" {
 #define THIS_FILE_ID OAM_FILE_ID_OAM_TRACE_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 
 #ifdef _PRE_PROFILING_MODE
 /*****************************************************************************
-    2.1 profiling全局变量定义
+    2.1 profiling????????????
 *****************************************************************************/
-/* 保存tx profiling测试的所有数据 */
+/* ????tx profiling?????????????? */
 oam_profiling_tx_statistic_stru g_oam_profiling_statistic_tx;
 
-/* 保存rx profiling测试的所有数据 */
+/* ????rx profiling?????????????? */
 oam_profiling_rx_statistic_stru g_oam_profiling_statistic_rx;
 
-/* 保存tx profiling测试的所有数据 */
+/* ????tx profiling?????????????? */
 oam_profiling_alg_statistic_stru g_oam_profiling_statistic_alg;
 
-/* 保存芯片start time测试数据 */
+/* ????????start time???????? */
 oam_profiling_starttime_statistic_stru g_oam_profiling_statistic_starttime;
 
-/* 保存芯片信道切换测试数据 */
+/* ???????????????????????? */
 oam_profiling_chswitch_statistic_stru g_oam_profiling_statistic_chswitch;
 
-/* 用于profiling test的全局开关 */
+/* ????profiling test?????????? */
 oam_profiling_statistic_debug_stru g_oam_profiling_statistic_debug;
 
 #endif
 
 /*****************************************************************************
-    2.2 trace全局变量定义
+    2.2 trace????????????
 *****************************************************************************/
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 #ifdef _PRE_PROFILING_MODE
@@ -106,13 +106,13 @@ oal_uint32  oam_profiling_compute_time_offset(
                 oal_time_us_stru    st_time_second,
                 oal_time_us_stru   *pst_time_offset)
 {
-    /* 未跨越1sec */
+    /* ??????1sec */
     if (st_time_first.i_sec == st_time_second.i_sec)
     {
         pst_time_offset->i_sec     = 0;
         pst_time_offset->i_usec    = st_time_second.i_usec - st_time_first.i_usec;
     }
-    /* 跨越1sec */
+    /* ????1sec */
     else
     {
         pst_time_offset->i_sec     = 0;
@@ -127,11 +127,11 @@ oal_void  oam_profiling_packet_add(oam_profiling_enum_uint8 en_profiling_type)
 {
     switch (en_profiling_type)
     {
-        /* 接收流程 */
+        /* ???????? */
         case OAM_PROFILING_RX:
             g_oam_profiling_statistic_rx.uc_skb_id_idx++;
             break;
-        /* 发送流程 */
+        /* ???????? */
         case OAM_PROFILING_TX:
             g_oam_profiling_statistic_tx.uc_skb_id_idx++;
             break;
@@ -166,7 +166,7 @@ oal_void  oam_profiling_rx_init(oal_void)
 
 oal_void oam_profiling_rx_save_data(oam_profiling_rx_func_enum_uint8 en_func_index)
 {
-    /* 开关判断 */
+    /* ???????? */
     if (OAM_PROFILING_SWITCH_OFF == g_oam_profiling_statistic_debug.i_profiling_rx_debuging_enable)
     {
         return;
@@ -192,7 +192,7 @@ oal_bool_enum_uint8  oam_profiling_judge_data(oal_uint8 uc_packet_idx, oal_uint3
             continue;
         }
         uc_rx_profiling_point_idx_start = uc_rx_profiling_point_idx;
-        //寻找下一个不为0的节点值
+        //??????????????0????????
         uc_rx_profiling_point_idx++;
         while (0 == past_profiling_data[uc_packet_idx][uc_rx_profiling_point_idx])
         {
@@ -222,12 +222,12 @@ oal_void  oam_profiling_print_all_point(oal_uint8 uc_show_level, oal_uint8 uc_pa
 
     for(uc_packet_idx=0; uc_packet_idx<uc_packet_num; uc_packet_idx++)
     {
-        //判断数据是否合法
+        //????????????????
         en_ret = oam_profiling_judge_data(uc_packet_idx, g_oam_profiling_statistic_rx.ast_rx_func_stand_time);
         if (OAL_FALSE == en_ret)
         {
             //OAL_IO_PRINT("this packet idx's data is wrong! packet_idx=%d\n",uc_packet_idx);
-            //log level为2时，才打印错误的packet节点信息
+            //log level??2????????????????packet????????
             if (OAM_PROFILING_LOG_LEVEL_2 != uc_show_level)
             {
                 continue;
@@ -236,7 +236,7 @@ oal_void  oam_profiling_print_all_point(oal_uint8 uc_show_level, oal_uint8 uc_pa
 
         OAL_IO_PRINT("packet_idx:%d\t", uc_packet_idx);
 
-        //当数据ok时 打印所有节点值
+        //??????ok?? ??????????????
         for (uc_rx_profiling_point_idx=0; uc_rx_profiling_point_idx<en_offset_max_num; uc_rx_profiling_point_idx++)
         {
             ul_rx_packet_idx_offset_time_tmp = past_profiling_data[uc_packet_idx][uc_rx_profiling_point_idx];
@@ -263,12 +263,12 @@ oal_uint32 past_profiling_data[][OAM_PROFILING_MAX_POINT_NUM], oal_uint16 *past_
 
     for(uc_packet_idx=0; uc_packet_idx<uc_packet_num; uc_packet_idx++)
     {
-        //判断数据是否合法
+        //????????????????
         en_ret = oam_profiling_judge_data(uc_packet_idx, past_profiling_data);
         if (OAL_FALSE == en_ret)
         {
             //OAL_IO_PRINT("this packet idx's data is wrong! packet_idx=%d\n",uc_packet_idx);
-            //log level为2时，才打印错误的packet节点信息
+            //log level??2????????????????packet????????
             if (OAM_PROFILING_LOG_LEVEL_2 != uc_show_level)
             {
                 continue;
@@ -288,7 +288,7 @@ oal_uint32 past_profiling_data[][OAM_PROFILING_MAX_POINT_NUM], oal_uint16 *past_
             OAL_IO_PRINT("%10u\t", ul_rx_packet_idx_offset_time_tmp);
             ul_rx_packet_idx_offset_time_tmp_total += ul_rx_packet_idx_offset_time_tmp;
         }
-        //将总的offset 时间存放在全局变量aus_rx_skb_id_list中，
+        //??????offset ??????????????????aus_rx_skb_id_list????
         past_profiling_packet_total_time_list[uc_packet_idx] = ul_rx_packet_idx_offset_time_tmp_total;
         OAL_IO_PRINT("\t%10u\n",past_profiling_packet_total_time_list[uc_packet_idx]);
         ul_average += past_profiling_packet_total_time_list[uc_packet_idx];
@@ -314,7 +314,7 @@ oal_void  oam_profiling_rx_show_offset(oal_uint8 uc_show_level)
 
 
     OAL_IO_PRINT("RX:\n");
-    //打印每段的信息
+    //??????????????
     OAL_IO_PRINT("\n");
     for (uc_rx_profiling_point_idx=0; uc_rx_profiling_point_idx<OAM_PROFILING_RX_OFFSET_COUNT; uc_rx_profiling_point_idx++)
     {
@@ -345,7 +345,7 @@ oal_void  oam_profiling_rx_show_offset(oal_uint8 uc_show_level)
         return;
     }
 
-    //打印每个节点的时间
+    //??????????????????
     OAL_IO_PRINT("\n");
     for (uc_rx_profiling_point_idx=OAM_PROFILING_FUNC_RX_COMP_START; uc_rx_profiling_point_idx<OAM_PROFILING_RX_FUNC_BUTT; uc_rx_profiling_point_idx++)
     {
@@ -384,7 +384,7 @@ oal_void oam_profiling_tx_save_data(
                 oal_void                    *pst_netbuf,
                 oam_profiling_tx_func_enum_uint8    en_func_index)
 {
-    /* 开关判断 */
+    /* ???????? */
     if (OAM_PROFILING_SWITCH_OFF == g_oam_profiling_statistic_debug.i_profiling_tx_debuging_enable)
     {
         return;
@@ -416,7 +416,7 @@ oal_void  oam_profiling_tx_show_offset(oal_uint8 uc_show_level)
 
     OAL_IO_PRINT("TX:\n");
 
-    //打印每段的信息
+    //??????????????
     OAL_IO_PRINT("\n");
     for (uc_tx_profiling_point_idx=0; uc_tx_profiling_point_idx<OAM_PROFILING_TX_OFFSET_COUNT; uc_tx_profiling_point_idx++)
     {
@@ -453,7 +453,7 @@ oal_void  oam_profiling_tx_show_offset(oal_uint8 uc_show_level)
         return;
     }
 
-    //打印每个节点的时间
+    //??????????????????
     OAL_IO_PRINT("\n");
     for (uc_tx_profiling_point_idx=OAM_PROFILING_FUNC_CONFIG_XMIT_START; uc_tx_profiling_point_idx<OAM_PROFILING_TX_FUNC_BUTT; uc_tx_profiling_point_idx++)
     {
@@ -476,7 +476,7 @@ oal_void  oam_profiling_alg_init(oal_void)
 
     for(ul_packet_idx = 0; ul_packet_idx < OAM_PROFILING_ALG_PACKET_MAX_COUNT; ul_packet_idx++)
     {
-        /* 注意，netbuf的对应的SKB_ID，需要从0开始，并且 */
+        /* ??????netbuf????????SKB_ID????????0?????????? */
         g_oam_profiling_statistic_alg.aus_alg_skb_id_list[ul_packet_idx] = OAM_PROFILING_PACKET_INVALID_VALUE;
         g_oam_profiling_statistic_alg.uc_skb_id_idx      = 0;
         g_oam_profiling_statistic_alg.uc_idx_for_array   = 0;
@@ -496,13 +496,13 @@ oal_void  oam_profiling_alg_init(oal_void)
 
 oal_void oam_profiling_alg_save_data(oam_profiling_alg_func_enum_uint8    en_func_index)
 {
-    /* 开关判断 */
+    /* ???????? */
     /*if (OAM_PROFILING_SWITCH_OFF == g_oam_profiling_statistic_debug.i_profiling_alg_debuging_enable)
     {
         return;
     }*/
 
-    /*原值等于0才计数， 不会去覆盖已经记录好的值*/
+    /*????????0???????? ????????????????????????*/
     if (0 == g_oam_profiling_statistic_alg.ast_alg_func_stand_time[g_oam_profiling_statistic_alg.uc_skb_id_idx][en_func_index])
     {
        g_oam_profiling_statistic_alg.ast_alg_func_stand_time[g_oam_profiling_statistic_alg.uc_skb_id_idx][en_func_index] = oal_5115timer_get_10ns();
@@ -521,7 +521,7 @@ oal_uint32  oam_profiling_alg_show_offset(oal_void)
     for(ul_packet_idx = 0; ul_packet_idx < 1/*OAM_PROFILING_ALG_PACKET_MAX_COUNT*/; ul_packet_idx++)
     {
         OAL_IO_PRINT("ALG time show:\n");
-        /* 打印XX的时间 */
+        /* ????XX?????? */
         OAL_IO_PRINT("      arrive_time      offset  ");
         for(ul_func_idx = OAM_PROFILING_ALG_START; ul_func_idx <= OAM_PROFILING_ALG_END; ul_func_idx++)
         {
@@ -550,7 +550,7 @@ oal_uint32  oam_profiling_alg_show_offset(oal_void)
 
     OAL_IO_PRINT("ALG total time is: %d (10ns)     \n", ul_time_offset);
 
-    /* 清零 */
+    /* ???? */
     oam_profiling_alg_init();
 
     return OAL_SUCC;
@@ -579,7 +579,7 @@ oal_void  oam_profiling_starttime_show_offset(oal_void)
 {
     oal_uint32 ul_idx;
 
-    /* 打印所有记录的时间点 */
+    /* ???????????????????? */
     OAL_IO_PRINT("Print all chip start timestamps: \n");
     for (ul_idx = 0; ul_idx < OAM_PROFILING_STARTTIME_FUNC_BUTT; ul_idx++)
     {
@@ -609,7 +609,7 @@ oal_void  oam_profiling_chswitch_show_offset(oal_void)
 {
     oal_uint32 ul_idx;
 
-    /* 打印所有记录的时间点 */
+    /* ???????????????????? */
     OAL_IO_PRINT("Print all chswitch timestamps: \n");
     for (ul_idx = 0; ul_idx < OAM_PROFILING_CHSWITCH_FUNC_BUTT; ul_idx++)
     {
@@ -636,21 +636,21 @@ oal_uint32  oam_profiling_set_switch(oam_profiling_enum_uint8 en_profiling_type,
     }
     switch (en_profiling_type)
     {
-        /* 接收流程 */
+        /* ???????? */
         case OAM_PROFILING_RX:
             g_oam_profiling_statistic_debug.i_profiling_rx_debuging_enable = en_profiling_switch;
             oam_profiling_rx_init();
 
             break;
 
-        /* 发送流程 */
+        /* ???????? */
         case OAM_PROFILING_TX:
             g_oam_profiling_statistic_debug.i_profiling_tx_debuging_enable = en_profiling_switch;
             oam_profiling_tx_init();
 
             break;
 
-        /* ALG流程 */
+        /* ALG???? */
         case OAM_PROFILING_ALG:
             g_oam_profiling_statistic_debug.i_profiling_alg_debuging_enable = en_profiling_switch;
 
@@ -667,22 +667,22 @@ oal_uint32  oam_profiling_set_switch(oam_profiling_enum_uint8 en_profiling_type,
 
 oal_uint32  oam_profiling_init(oal_void)
 {
-    /* 初始化定时器 */
+    /* ???????????? */
     oal_5115timer_init();
 
-    /* 初始化接收流程profiling结构 */
+    /* ??????????????profiling???? */
     oam_profiling_rx_init();
 
-    /* 初始化发送流程profiling结构 */
+    /* ??????????????profiling???? */
     oam_profiling_tx_init();
 
-     /* 初始化发送流程profiling结构 */
+     /* ??????????????profiling???? */
     oam_profiling_alg_init();
 
-    /* 初始化芯片启动profiling结构 */
+    /* ??????????????profiling???? */
     oam_profiling_statistic_init();
 
-    /* profiling初始化:默认不打开 */
+    /* profiling??????:?????????? */
     oam_profiling_set_switch(OAM_PROFILING_RX, OAM_PROFILING_SWITCH_OFF);
     oam_profiling_set_switch(OAM_PROFILING_TX, OAM_PROFILING_SWITCH_OFF);
     oam_profiling_set_switch(OAM_PROFILING_ALG, OAM_PROFILING_SWITCH_OFF);

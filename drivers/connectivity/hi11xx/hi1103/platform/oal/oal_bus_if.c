@@ -6,7 +6,7 @@ extern "C" {
 #endif
 #endif
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "oal_ext_if.h"
 #include "oal_bus_if.h"
@@ -14,10 +14,10 @@ extern "C" {
 #include "oam_ext_if.h"
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 
-/* 实际chip数量 */
+/* ????chip???? */
 OAL_STATIC oal_uint8         g_uc_bus_chip_num = 0;
 #if (((_PRE_OS_VERSION_WIN32 == _PRE_OS_VERSION) && (_PRE_TEST_MODE == _PRE_TEST_MODE_UT))||(_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1151))
 #ifdef _PRE_WLAN_FEATURE_DOUBLE_CHIP
@@ -33,7 +33,7 @@ OAL_STATIC oal_bus_chip_stru g_st_bus_chip[WLAN_CHIP_MAX_NUM_PER_BOARD] = {{0}};
 OAL_STATIC oal_int8         *g_pac_irq_pc_name[4] = {"wlan1", "wlan2", "wlan3", "wlan4"};
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 
@@ -46,7 +46,7 @@ oal_void  oal_bus_find_dev_instance(oal_bus_dev_stru **ppst_bus_dev, oal_void *p
     {
         for(uc_device_index = 0; uc_device_index < g_st_bus_chip[uc_chip_index].uc_device_num; uc_device_index++)
         {
-            /* 两个地址相等 */
+            /* ???????????? */
             if(g_st_bus_chip[uc_chip_index].st_bus_dev[uc_device_index].p_dev == p_dev)
             {
                 *ppst_bus_dev = &g_st_bus_chip[uc_chip_index].st_bus_dev[uc_device_index];
@@ -153,7 +153,7 @@ oal_uint32  oal_bus_inc_chip_num_etc(oal_void)
         return OAL_FAIL;
     }
 
-    /* WINDOWS下UT代码 */
+    /* WINDOWS??UT???? */
 #if (_PRE_OS_VERSION_WIN32 == _PRE_OS_VERSION) && (_PRE_TEST_MODE == _PRE_TEST_MODE_UT)
     g_st_bus_chip[0].uc_device_num = g_uc_bus_chip_num;
 #endif
@@ -165,7 +165,7 @@ oal_void oal_bus_init_chip_num_etc(oal_void)
 {
     g_uc_bus_chip_num = 0;
 
-    /* WINDOWS下UT代码 */
+    /* WINDOWS??UT???? */
 #if (_PRE_OS_VERSION_WIN32 == _PRE_OS_VERSION) && (_PRE_TEST_MODE == _PRE_TEST_MODE_UT)
     g_st_bus_chip[0].uc_device_num = g_uc_bus_chip_num;
 #endif

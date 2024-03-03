@@ -29,8 +29,8 @@
 #endif
 //#define CUST_COMP_NODE             "hi110x,customize"
 #define PROC_NAME_INI_FILE_NAME    "ini_file_name"
-#define CUST_PATH_SPEC             "/cust_spec"     /*某运营商在不同产品的差异配置*/
-#define CUST_PATH_COMM             "/data/cust"     /*某运营商在所有产品的相同配置*/
+#define CUST_PATH_SPEC             "/cust_spec"     /*????????????????????????????*/
+#define CUST_PATH_COMM             "/data/cust"     /*????????????????????????????*/
 /* mutex for open ini file */
 struct mutex        file_mutex;
 int8 g_ini_file_name[INI_FILE_PATH_LEN] = {0};
@@ -938,12 +938,12 @@ int8 *get_str_from_file(int8 *pc_file_path, const int8 *pc_mask_str, const int8 
     }
     INI_INFO("open file %s success to find str \"%s\"!", pc_file_path, pc_mask_str);
     uc_str_check_len = OAL_STRLEN(pc_mask_str);
-    /* 由于每次比较都会留uc_str_check_len不比较所以不是0 */
+    /* ??????????????????uc_str_check_len??????????????0 */
     while (uc_str_check_len != (ret =kernel_read(fp, fp->f_pos, ac_read_buf, INI_KERNEL_READ_LEN)))
     {
         for (loop = 0; loop < INI_KERNEL_READ_LEN-uc_str_check_len; loop++)
         {
-            /* 判断首尾减少bin_mem_check调用次数 */
+            /* ????????????bin_mem_check???????? */
             if (pc_mask_str[0] == ac_read_buf[loop]
                     && pc_mask_str[uc_str_check_len-1] == ac_read_buf[loop+uc_str_check_len-1]
                     && !(bin_mem_check(&ac_read_buf[loop], (int8 *)pc_mask_str, uc_str_check_len)))
@@ -951,9 +951,9 @@ int8 *get_str_from_file(int8 *pc_file_path, const int8 *pc_mask_str, const int8 
                 fp->f_pos += loop;
                 INI_INFO("find device sw version file local = %ld ",(long)fp->f_pos);
                 oal_memset(ac_read_buf, 0, INI_KERNEL_READ_LEN);
-                /* 读取到‘\n’或者最大192B数据到ac_read_buf */
+                /* ????????\n??????????192B??????ac_read_buf */
                 ko_read_line(fp, ac_read_buf);
-                /* 定位所需字符串位置 */
+                /* ?????????????????? */
                 pc_find_str = OAL_STRSTR(ac_read_buf, pc_target_str);
                 if (NULL == pc_find_str)
                 {

@@ -48,7 +48,7 @@
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 **************************************************************************** */
 #include "OmVcomPpm.h"
 #include "cpm.h"
@@ -59,18 +59,18 @@
 #define    THIS_FILE_ID        PS_FILE_ID_OM_VCOM_PPM_C
 
 /* ****************************************************************************
-  2 全局变量定义
+  2 ????????????
 **************************************************************************** */
-/* 用于记录 VCOM 通道发送的统计信息 */
+/* ???????? VCOM ?????????????????? */
 OM_VCOM_DEBUG_INFO                      g_stVComDebugInfo[3];
 
 /*****************************************************************************
-  3 外部引用声明
+  3 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  4 函数实现
+  4 ????????
 *****************************************************************************/
 
 
@@ -93,7 +93,7 @@ VOS_UINT32 PPM_VComCfgSendData(VOS_UINT8 *pucVirAddr, VOS_UINT8 *pucPhyAddr, VOS
         return CPM_SEND_ERR;
     }
 
-    /* 与手机软件连接时，启动延时上报，且打印到缓存中，可以输出打印 */
+    /* ???????????????????????????????????????????????????????????? */
     (void)vos_printf("vcom cnf cmd success, ind sum leng 0x%x, ind err len 0x%x.\n", \
             g_stVComDebugInfo[OM_LOGIC_CHANNEL_IND].ulVCOMSendLen, \
             g_stVComDebugInfo[OM_LOGIC_CHANNEL_IND].ulVCOMSendErrLen);
@@ -125,7 +125,7 @@ VOS_VOID PPM_VComEvtCB(VOS_UINT32 ulChan, VOS_UINT32 ulEvent)
         return;
     }
 
-    /*打开操作直接返回*/
+    /*????????????????*/
     if(ulEvent == DMS_CHAN_EVT_OPEN)
     {
         (void)vos_printf("PPM_VComEvtCB open, do nothing.\n");
@@ -174,7 +174,7 @@ VOS_UINT32 PPM_VComCfgReadData(VOS_UINT32 ulDevIndex, VOS_UINT8 *pData, VOS_UINT
         return VOS_ERR;
     }
 
-    /* 与手机软件连接时，下发命令有限，且打印到缓存中，可以输出打印 */
+    /* ???????????????????????????????????????????????????????????? */
     (void)vos_printf("vcom receive cmd, length : 0x%x, sum length : 0x%x.\n", \
         uslength, g_stVComDebugInfo[OM_LOGIC_CHANNEL_CNF].ulVCOMRcvLen);
 
@@ -233,9 +233,9 @@ OM_VCOM_DEBUG_INFO *PPM_VComGetIndInfo(VOS_VOID)
 
 VOS_VOID PPM_VComCfgPortInit(VOS_VOID)
 {
-    /* 配置数据走VCOM28，会有数据下发 */
+    /* ??????????VCOM28?????????????? */
     DMS_RegOmChanDataReadCB(DMS_VCOM_OM_CHAN_CTRL, PPM_VComCfgReadData);
-    /*CTRL口事件回调*/
+    /*CTRL??????????*/
     DMS_RegOmChanEventCB(DMS_VCOM_OM_CHAN_CTRL, PPM_VComEvtCB);
 
     CPM_PhySendReg(CPM_VCOM_CFG_PORT, PPM_VComCfgSendData);
@@ -246,9 +246,9 @@ VOS_VOID PPM_VComCfgPortInit(VOS_VOID)
 
 VOS_VOID PPM_VComIndPortInit(VOS_VOID)
 {
-    /* 可维可测数据数据上报走VCOM31，不会有数据下发 */
+    /* ??????????????????????VCOM31???????????????? */
     DMS_RegOmChanDataReadCB(DMS_VCOM_OM_CHAN_DATA, VOS_NULL_PTR);
-    /*DATA口事件回调*/
+    /*DATA??????????*/
     DMS_RegOmChanEventCB(DMS_VCOM_OM_CHAN_DATA, PPM_VComEvtCB);
 
     CPM_PhySendReg(CPM_VCOM_IND_PORT, PPM_VComIndSendData);
@@ -261,13 +261,13 @@ VOS_VOID PPM_VComPortInit(VOS_VOID)
 {
     (VOS_VOID)VOS_MemSet_s(&g_stVComDebugInfo[0], sizeof(g_stVComDebugInfo), 0, 3*sizeof(OM_VCOM_DEBUG_INFO));
 
-    /* Vcom 口OM IND通道的初始化 */
+    /* Vcom ??OM IND???????????? */
     PPM_VComIndPortInit();
 
-    /* Vcom 口OM CNF通道的初始化 */
+    /* Vcom ??OM CNF???????????? */
     PPM_VComCfgPortInit();
 
-    /* Vcom 口errorlog通道的初始化 */
+    /* Vcom ??errorlog???????????? */
     GU_OamErrLogVComPortInit();
 
     return;

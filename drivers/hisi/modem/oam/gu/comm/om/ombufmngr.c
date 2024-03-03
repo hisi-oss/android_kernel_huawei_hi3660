@@ -49,7 +49,7 @@
 
 
 /*****************************************************************************
-  1 头文件
+  1 ??????
 *****************************************************************************/
 #include "ombufmngr.h"
 #include "omprivate.h"
@@ -59,12 +59,12 @@
 #define    THIS_FILE_ID        PS_FILE_ID_OM_BUF_MMNGR_C
 
 /*****************************************************************************
-  2 全局变量声明
+  2 ????????????
 *****************************************************************************/
 OM_BUF_RECORD_STRU                      g_stOmBufRecord;
 
 /*****************************************************************************
-  3 函数申明
+  3 ????????
 *****************************************************************************/
 
 
@@ -72,7 +72,7 @@ VOS_UINT32 OM_CreateTraceBuffer(OM_BUF_CTRL_STRU *pstBufCtrl, VOS_INT32 lBufSize
 {
     VOS_UINT_PTR ulRealAddr;
 
-    /* 参数检测 */
+    /* ???????? */
     if ((VOS_NULL_PTR == pstBufCtrl) || (0 == lBufSize))
     {
         return VOS_ERR;
@@ -83,16 +83,16 @@ VOS_UINT32 OM_CreateTraceBuffer(OM_BUF_CTRL_STRU *pstBufCtrl, VOS_INT32 lBufSize
     pstBufCtrl->lPadding = 0;
     pstBufCtrl->lBufSize = lBufSize + 1;
 
-    /*申请uncache的动态内存区*/
+    /*????uncache????????????*/
     pstBufCtrl->pucBuf = (VOS_UINT8*)VOS_UnCacheMemAlloc((VOS_UINT32)pstBufCtrl->lBufSize, &ulRealAddr);
 
-    /* 分配内存失败 */
+    /* ???????????? */
     if (VOS_NULL_PTR == pstBufCtrl->pucBuf)
     {
         return VOS_ERR;
     }
 
-    /* 保存buf实地址 */
+    /* ????buf?????? */
     pstBufCtrl->pucRealBuf = (VOS_UINT8 *)ulRealAddr;
 
     PAM_MEM_SET_S(&g_stOmBufRecord, sizeof(g_stOmBufRecord), 0, sizeof(g_stOmBufRecord));
@@ -108,7 +108,7 @@ VOS_VOID* OM_AllocTraceMem(OM_BUF_CTRL_STRU *pstBufCtrl, VOS_INT32 lLen)
     VOS_INT32                           lTmpAlloc;
     VOS_INT32                           lTmpPadding;
 
-    /* 输入参数检测 */
+    /* ???????????? */
     if ((VOS_NULL_PTR == pstBufCtrl)
         || (lLen >= pstBufCtrl->lBufSize)
         || (0 == lLen))
@@ -121,10 +121,10 @@ VOS_VOID* OM_AllocTraceMem(OM_BUF_CTRL_STRU *pstBufCtrl, VOS_INT32 lLen)
     lTmpAlloc       = pstBufCtrl->lAlloc;
     lTmpPadding     = pstBufCtrl->lPadding;
 
-    /* 没有翻转 */
+    /* ???????? */
     if (pstBufCtrl->lAlloc >= pstBufCtrl->lRelease)
     {
-        /* 获取剩余内存大小 */
+        /* ???????????????? */
         if (0 == pstBufCtrl->lRelease)
         {
             lFreeSize = (pstBufCtrl->lBufSize - pstBufCtrl->lAlloc) - 1;
@@ -134,7 +134,7 @@ VOS_VOID* OM_AllocTraceMem(OM_BUF_CTRL_STRU *pstBufCtrl, VOS_INT32 lLen)
             lFreeSize = pstBufCtrl->lBufSize - pstBufCtrl->lAlloc;
         }
 
-        /* 满足用户申请内存大小则返回 */
+        /* ?????????????????????????? */
         if (lFreeSize >= lLen)
         {
             pucAddr = pstBufCtrl->pucBuf + pstBufCtrl->lAlloc;
@@ -149,7 +149,7 @@ VOS_VOID* OM_AllocTraceMem(OM_BUF_CTRL_STRU *pstBufCtrl, VOS_INT32 lLen)
         lTmpAlloc    = 0;
     }
 
-    /* 翻转，获取剩余内存大小 */
+    /* ?????????????????????? */
     lFreeSize = (pstBufCtrl->lRelease - lTmpAlloc) - 1;
 
     if (lFreeSize >= lLen)
@@ -166,7 +166,7 @@ VOS_VOID* OM_AllocTraceMem(OM_BUF_CTRL_STRU *pstBufCtrl, VOS_INT32 lLen)
 
     OM_ALLOC_RECORD(VOS_NULL_PTR, lLen);
 
-    /* 否则分配失败，返回空指针 */
+    /* ???????????????????????? */
     return VOS_NULL_PTR;
 }
 
@@ -179,13 +179,13 @@ VOS_UINT32 OM_ReleaseTraceMem(OM_BUF_CTRL_STRU *pstBufCtrl,
 
     OM_RLS_RECORD(pAddr, lLen);
 
-    /* 输入参数检测 */
+    /* ???????????? */
     if ((VOS_NULL_PTR == pstBufCtrl) || (lLen >= pstBufCtrl->lBufSize))
     {
         return VOS_ERR;
     }
 
-    /* 释放内存地址进行检测 */
+    /* ???????????????????? */
     if ((pAddr != (pstBufCtrl->pucBuf + pstBufCtrl->lRelease))
         && (pAddr != pstBufCtrl->pucBuf))
     {
@@ -193,12 +193,12 @@ VOS_UINT32 OM_ReleaseTraceMem(OM_BUF_CTRL_STRU *pstBufCtrl,
         /*return VOS_ERR;*/
     }
 
-    /* 未翻转 */
+    /* ?????? */
     if (pstBufCtrl->lAlloc >= pstBufCtrl->lRelease)
     {
         lUsedSize = pstBufCtrl->lAlloc - pstBufCtrl->lRelease;
 
-        /* 长度错误 */
+        /* ???????? */
         if (lUsedSize < lLen)
         {
             return VOS_ERR;
@@ -218,13 +218,13 @@ VOS_UINT32 OM_ReleaseTraceMem(OM_BUF_CTRL_STRU *pstBufCtrl,
         lTmpRls = ((VOS_UINT8 *)pAddr - pstBufCtrl->pucBuf + lLen) % pstBufCtrl->lBufSize;
     }
 
-    /* 输入ulLen不正确 */
+    /* ????ulLen?????? */
     if ((lTmpRls > pstBufCtrl->lAlloc) && (lTmpRls < pstBufCtrl->lRelease))
     {
         return VOS_ERR;
     }
 
-    /* 如果发生跳转则将Padding值归0 */
+    /* ????????????????Padding????0 */
     if (lTmpRls <= pstBufCtrl->lAlloc)
     {
         pstBufCtrl->lPadding = 0;
@@ -240,7 +240,7 @@ VOS_INT32 OM_TraceMemNBytes(OM_BUF_CTRL_STRU *pstBufCtrl)
 {
     VOS_INT32 lUsedBytes;
 
-    /* 输入参数检测 */
+    /* ???????????? */
     if (VOS_NULL_PTR == pstBufCtrl)
     {
         return 0;
@@ -248,7 +248,7 @@ VOS_INT32 OM_TraceMemNBytes(OM_BUF_CTRL_STRU *pstBufCtrl)
 
     lUsedBytes = pstBufCtrl->lAlloc - pstBufCtrl->lRelease;
 
-    /* 指针有翻转 */
+    /* ?????????? */
     if (lUsedBytes < 0)
     {
         lUsedBytes += pstBufCtrl->lBufSize;

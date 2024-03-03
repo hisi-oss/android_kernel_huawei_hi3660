@@ -9,7 +9,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "hmac_rx_data.h"
 #include "hmac_mgmt_bss_comm.h"
@@ -34,14 +34,14 @@ extern "C" {
 #define THIS_FILE_ID OAM_FILE_ID_HMAC_MGMT_CLASSIFIER_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 #if (defined(_PRE_PRODUCT_ID_HI110X_DEV) && !defined(_PRE_PC_LINT) && !defined(WIN32))
 OAL_STATIC oal_uint8 g_ucLinklossLogSwitch = 0;
 #endif
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 
@@ -69,7 +69,7 @@ oal_uint32  hmac_mgmt_tx_action_etc(
                     hmac_mgmt_tx_addba_req_etc(pst_hmac_vap, pst_hmac_user, pst_action_args);
                     break;
 
-                #if 0 /* 可以不使用该接口，直接调用 */
+                #if 0 /* ?????????????????????????? */
                 case BA_ACTION_ADDBA_RSP:
                     hmac_mgmt_tx_addba_rsp_etc(hmac_vap_stru * pst_hmac_vap, hmac_user_stru * pst_hmac_user, mac_action_mgmt_args_stru * pst_action_args)
                     break;
@@ -82,7 +82,7 @@ oal_uint32  hmac_mgmt_tx_action_etc(
 
                 default:
                     OAM_WARNING_LOG1(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_TX, "{hmac_mgmt_tx_action_etc::invalid ba type[%d].}", pst_action_args->uc_action);
-                    return OAL_FAIL;    /* 错误类型待修改 */
+                    return OAL_FAIL;    /* ?????????????? */
             }
             break;
 
@@ -137,7 +137,7 @@ OAL_STATIC oal_uint32  hmac_mgmt_rx_action(
                 oal_netbuf_stru        *pst_mgmt_netbuf)
 {
     oal_uint8                          *puc_frame_payload;
-    mac_ieee80211_frame_stru           *pst_frame_hdr;          /* 保存mac帧的指针 */
+    mac_ieee80211_frame_stru           *pst_frame_hdr;          /* ????mac???????? */
     hmac_rx_ctl_stru                   *pst_rx_ctrl;
     hmac_user_stru                     *pst_hmac_user;
     oal_uint32                          ul_rslt;
@@ -149,13 +149,13 @@ OAL_STATIC oal_uint32  hmac_mgmt_rx_action(
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 获取该MPDU的控制信息 */
+    /* ??????MPDU?????????? */
     pst_rx_ctrl = (hmac_rx_ctl_stru *)oal_netbuf_cb(pst_mgmt_netbuf);
 
-    /* 获取帧头信息 */
+    /* ???????????? */
     pst_frame_hdr = (mac_ieee80211_frame_stru *)pst_rx_ctrl->st_rx_info.pul_mac_hdr_start_addr;
 
-    /* 获取发送端的用户指针 */
+    /* ???????????????????? */
     ul_rslt = mac_vap_find_user_by_macaddr_etc(&pst_vap->st_vap_base_info, pst_frame_hdr->auc_address2, &us_user_idx);
 
     if (OAL_SUCC != ul_rslt)
@@ -166,15 +166,15 @@ OAL_STATIC oal_uint32  hmac_mgmt_rx_action(
 
     pst_hmac_user = (hmac_user_stru *)mac_res_get_hmac_user_etc(us_user_idx);
 
-    /* 获取payload的指针 */
+    /* ????payload?????? */
     puc_frame_payload = (oal_uint8 *)pst_frame_hdr + MAC_80211_FRAME_LEN;
 
-    /* 不同ACTION帧的分发入口 */
+    /* ????ACTION???????????? */
     switch(puc_frame_payload[MAC_ACTION_OFFSET_CATEGORY])
     {
         case MAC_ACTION_CATEGORY_BA:
         {
-            /* BA相关的ACTION帧的分发 */
+            /* BA??????ACTION???????? */
             switch(puc_frame_payload[MAC_ACTION_OFFSET_ACTION])
             {
                 case MAC_BA_ACTION_ADDBA_REQ:
@@ -212,8 +212,8 @@ oal_uint32  hmac_mgmt_rx_delba_event_etc(frw_event_mem_stru *pst_event_mem)
     frw_event_stru                     *pst_event;
     frw_event_hdr_stru                 *pst_event_hdr;
     dmac_ctx_action_event_stru         *pst_delba_event;
-    oal_uint8                          *puc_da;                                 /* 保存用户目的地址的指针 */
-    hmac_vap_stru                      *pst_vap;                                /* vap指针 */
+    oal_uint8                          *puc_da;                                 /* ?????????????????????? */
+    hmac_vap_stru                      *pst_vap;                                /* vap???? */
     hmac_user_stru                     *pst_hmac_user;
     mac_action_mgmt_args_stru           st_action_args;
 
@@ -223,12 +223,12 @@ oal_uint32  hmac_mgmt_rx_delba_event_etc(frw_event_mem_stru *pst_event_mem)
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 获取事件头和事件结构体指针 */
+    /* ?????????????????????????? */
     pst_event           = frw_get_event_stru(pst_event_mem);
     pst_event_hdr       = &(pst_event->st_event_hdr);
     pst_delba_event     = (dmac_ctx_action_event_stru *)(pst_event->auc_event_data);
 
-    /* 获取vap结构信息 */
+    /* ????vap???????? */
     pst_vap = (hmac_vap_stru *)mac_res_get_hmac_vap(pst_event_hdr->uc_vap_id);
     if (OAL_UNLIKELY(OAL_PTR_NULL == pst_vap))
     {
@@ -236,10 +236,10 @@ oal_uint32  hmac_mgmt_rx_delba_event_etc(frw_event_mem_stru *pst_event_mem)
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 获取目的用户的MAC ADDR */
+    /* ??????????????MAC ADDR */
     puc_da = pst_delba_event->auc_mac_addr;
 
-    /* 获取发送端的用户指针 */
+    /* ???????????????????? */
     pst_hmac_user = mac_vap_get_hmac_user_by_addr_etc(&pst_vap->st_vap_base_info, puc_da);
     if (OAL_PTR_NULL == pst_hmac_user)
     {
@@ -249,10 +249,10 @@ oal_uint32  hmac_mgmt_rx_delba_event_etc(frw_event_mem_stru *pst_event_mem)
 
     st_action_args.uc_category = MAC_ACTION_CATEGORY_BA;
     st_action_args.uc_action   = MAC_BA_ACTION_DELBA;
-    st_action_args.ul_arg1     = pst_delba_event->uc_tidno;     /* 该数据帧对应的TID号 */
-    st_action_args.ul_arg2     = pst_delba_event->uc_initiator; /* DELBA中，触发删除BA会话的发起端 */
-    st_action_args.ul_arg3     = pst_delba_event->uc_status;    /* DELBA中代表删除reason */
-    st_action_args.puc_arg5    = puc_da;                        /* DELBA中代表目的地址 */
+    st_action_args.ul_arg1     = pst_delba_event->uc_tidno;     /* ??????????????TID?? */
+    st_action_args.ul_arg2     = pst_delba_event->uc_initiator; /* DELBA????????????BA???????????? */
+    st_action_args.ul_arg3     = pst_delba_event->uc_status;    /* DELBA??????????reason */
+    st_action_args.puc_arg5    = puc_da;                        /* DELBA?????????????? */
 
     hmac_mgmt_tx_action_etc(pst_vap, pst_hmac_user, &st_action_args);
 
@@ -377,7 +377,7 @@ void hmac_rx_mgmt_frame_notify(hmac_vap_stru *pst_hmac_vap, oal_netbuf_stru *pst
         oal_net_device_stru        *pst_net_device;
         dmac_rx_ctl_stru           *pst_rx_ctrl;
         oal_int32                   i_rssi_temp;
-        /* 获取net_device*/
+        /* ????net_device*/
         pst_net_device = pst_hmac_vap->pst_net_device;
         if (OAL_PTR_NULL == pst_net_device)
         {
@@ -402,7 +402,7 @@ void hmac_rx_mgmt_frame_notify(hmac_vap_stru *pst_hmac_vap, oal_netbuf_stru *pst
         wrqu.data.length = (oal_uint16)buf_size;
         OAL_SPRINTF(buf, buf_size, "%s %d", tag, pst_netbuf->len);
         oal_memcopy(buf+MGMT_FRAM_TAG_SIZE, pst_netbuf->data, pst_netbuf->len);
-        /* 获取帧头信息 */
+        /* ???????????? */
         pst_rx_ctrl    = (dmac_rx_ctl_stru *)oal_netbuf_cb(pst_netbuf);
         i_rssi_temp = pst_rx_ctrl->st_rx_statistic.c_rssi_dbm + HMAC_FBT_RSSI_ADJUST_VALUE;
         if (i_rssi_temp < 0)
@@ -430,8 +430,8 @@ oal_uint32  hmac_rx_process_mgmt_event_etc(frw_event_mem_stru *pst_event_mem)
     frw_event_stru                     *pst_event;
     frw_event_hdr_stru                 *pst_event_hdr;
     dmac_wlan_crx_event_stru           *pst_crx_event;
-    oal_netbuf_stru                    *pst_netbuf;                     /* 用于保存管理帧指向的NETBUF */
-    hmac_vap_stru                      *pst_vap;                        /* vap指针 */
+    oal_netbuf_stru                    *pst_netbuf;                     /* ????????????????????NETBUF */
+    hmac_vap_stru                      *pst_vap;                        /* vap???? */
     oal_uint32                          ul_ret;
 #ifdef _PRE_WLAN_FEATURE_HILINK_HERA_PRODUCT
     dmac_rx_ctl_stru                   *pst_rx_ctl;
@@ -442,24 +442,24 @@ oal_uint32  hmac_rx_process_mgmt_event_etc(frw_event_mem_stru *pst_event_mem)
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 获取事件头和事件结构体指针 */
+    /* ?????????????????????????? */
     pst_event           = frw_get_event_stru(pst_event_mem);
     pst_event_hdr       = &(pst_event->st_event_hdr);
     pst_crx_event       = (dmac_wlan_crx_event_stru *)(pst_event->auc_event_data);
     pst_netbuf     = pst_crx_event->pst_netbuf;
 
-    /* 获取vap结构信息 */
+    /* ????vap???????? */
     pst_vap = (hmac_vap_stru *)mac_res_get_hmac_vap(pst_event_hdr->uc_vap_id);
     if (OAL_UNLIKELY(OAL_PTR_NULL == pst_vap))
     {
         OAM_WARNING_LOG0(pst_event_hdr->uc_vap_id, OAM_SF_BA, "{hmac_mgmt_rx_delba_event_etc::pst_vap null.}");
-        /* 将管理帧的空间归还内存池 */
-        //oal_netbuf_free(pst_netbuf); /* 返回不成功，最外层会统一释放，这里不需要释放 */
+        /* ???????????????????????? */
+        //oal_netbuf_free(pst_netbuf); /* ???????????????????????????????????????????? */
         return OAL_ERR_CODE_PTR_NULL;
     }
 
 #ifdef _PRE_WLAN_FEATURE_HILINK_HERA_PRODUCT
-    /* 获取帧头信息 */
+    /* ???????????? */
     pst_rx_ctl    = (dmac_rx_ctl_stru *)oal_netbuf_cb(pst_netbuf);
     if (pst_rx_ctl->st_rx_info.bit_mgmt_to_hostapd)
     {
@@ -470,7 +470,7 @@ oal_uint32  hmac_rx_process_mgmt_event_etc(frw_event_mem_stru *pst_event_mem)
     }
 #endif
 
-    /* 接收管理帧是状态机的一个输入，调用状态机接口 */
+    /* ???????????????????????????????????????????? */
     if (WLAN_VAP_MODE_BSS_AP == pst_vap->st_vap_base_info.en_vap_mode)
     {
         ul_ret = hmac_fsm_call_func_ap_etc(pst_vap, HMAC_FSM_INPUT_RX_MGMT, pst_crx_event);
@@ -488,7 +488,7 @@ oal_uint32  hmac_rx_process_mgmt_event_etc(frw_event_mem_stru *pst_event_mem)
         }
     }
 
-    /* 管理帧统一释放接口 */
+    /* ?????????????????? */
     oal_netbuf_free(pst_netbuf);
 
     return OAL_SUCC;
@@ -511,7 +511,7 @@ oal_uint32  hmac_mgmt_tbtt_event_etc(frw_event_mem_stru *pst_event_mem)
 
     OAL_MEMZERO(&st_misc_input, OAL_SIZEOF(hmac_misc_input_stru));
 
-    /* 获取事件头和事件结构体指针 */
+    /* ?????????????????????????? */
     pst_event      = frw_get_event_stru(pst_event_mem);
     pst_event_hdr  = &(pst_event->st_event_hdr);
 
@@ -524,7 +524,7 @@ oal_uint32  hmac_mgmt_tbtt_event_etc(frw_event_mem_stru *pst_event_mem)
 
     st_misc_input.en_type = HMAC_MISC_TBTT;
 
-    /* 调用sta状态机，只有sta的tbtt事件上报到hmac */
+    /* ????sta????????????sta??tbtt??????????hmac */
     ul_ret = hmac_fsm_call_func_sta_etc(pst_hmac_vap, HMAC_FSM_INPUT_MISC, &st_misc_input);
     if (OAL_SUCC != ul_ret)
     {
@@ -540,8 +540,8 @@ oal_uint32  hmac_mgmt_send_disasoc_deauth_event_etc(frw_event_mem_stru *pst_even
     frw_event_stru                     *pst_event;
     frw_event_hdr_stru                 *pst_event_hdr;
     dmac_diasoc_deauth_event           *pst_disasoc_deauth_event;
-    oal_uint8                          *puc_da;                                 /* 保存用户目的地址的指针 */
-    hmac_vap_stru                      *pst_vap;                                /* vap指针 */
+    oal_uint8                          *puc_da;                                 /* ?????????????????????? */
+    hmac_vap_stru                      *pst_vap;                                /* vap???? */
     hmac_user_stru                     *pst_hmac_user = OAL_PTR_NULL;
     oal_uint32                          ul_rslt;
     oal_uint16                          us_user_idx;
@@ -560,12 +560,12 @@ oal_uint32  hmac_mgmt_send_disasoc_deauth_event_etc(frw_event_mem_stru *pst_even
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 获取事件头和事件结构体指针 */
+    /* ?????????????????????????? */
     pst_event           = frw_get_event_stru(pst_event_mem);
     pst_event_hdr       = &(pst_event->st_event_hdr);
     pst_disasoc_deauth_event     = (dmac_diasoc_deauth_event *)(pst_event->auc_event_data);
 
-    /* 获取vap结构信息 */
+    /* ????vap???????? */
     pst_vap = (hmac_vap_stru *)mac_res_get_hmac_vap(pst_event_hdr->uc_vap_id);
     if (OAL_UNLIKELY(OAL_PTR_NULL == pst_vap))
     {
@@ -574,23 +574,23 @@ oal_uint32  hmac_mgmt_send_disasoc_deauth_event_etc(frw_event_mem_stru *pst_even
     }
     pst_mac_vap = &pst_vap->st_vap_base_info;
 
-    /* 获取目的用户的MAC ADDR */
+    /* ??????????????MAC ADDR */
     puc_da      = pst_disasoc_deauth_event->auc_des_addr;
     uc_event    = pst_disasoc_deauth_event->uc_event;
     us_err_code = pst_disasoc_deauth_event->uc_reason;
 
-    /* 发送去认证, 未关联状态收到第三类帧 */
+    /* ??????????, ?????????????????????? */
     if(DMAC_WLAN_CRX_EVENT_SUB_TYPE_DEAUTH == uc_event)
     {
         hmac_mgmt_send_deauth_frame_etc(pst_mac_vap,
                                     puc_da,
                                     us_err_code,
-                                    OAL_FALSE); // 非PMF
+                                    OAL_FALSE); // ??PMF
 
 #ifdef _PRE_WLAN_FEATURE_P2P
         pst_mac_device = mac_res_get_dev_etc(pst_mac_vap->uc_device_id);
 
-        /* 判断是异频DBAC模式时，无法判断是哪个信道收到的数据帧，两个信道都需要发去认证 */
+        /* ??????????DBAC?????????????????????????????????????????????????????????????? */
         ul_rslt = mac_device_find_2up_vap_etc(pst_mac_device, &pst_up_vap1, &pst_up_vap2);
         if (OAL_SUCC != ul_rslt)
         {
@@ -602,13 +602,13 @@ oal_uint32  hmac_mgmt_send_disasoc_deauth_event_etc(frw_event_mem_stru *pst_even
             return OAL_SUCC;
         }
 
-        /* 获取另一个VAP */
+        /* ??????????VAP */
         if (pst_mac_vap->uc_vap_id != pst_up_vap1->uc_vap_id)
         {
             pst_up_vap2 = pst_up_vap1;
         }
 
-        /* 另外一个VAP也发去认证帧。error code加上特殊标记，组去认证帧时要修改源地址 */
+        /* ????????VAP??????????????error code?????????????????????????????????????? */
         hmac_mgmt_send_deauth_frame_etc(pst_up_vap2,
                                     puc_da,
                                     us_err_code | MAC_SEND_TWO_DEAUTH_FLAG,
@@ -618,7 +618,7 @@ oal_uint32  hmac_mgmt_send_disasoc_deauth_event_etc(frw_event_mem_stru *pst_even
         return OAL_SUCC;
     }
 
-    /* 获取发送端的用户指针 */
+    /* ???????????????????? */
     ul_rslt = mac_vap_find_user_by_macaddr_etc(pst_mac_vap, puc_da, &us_user_idx);
     if (ul_rslt != OAL_SUCC)
     {
@@ -629,11 +629,11 @@ oal_uint32  hmac_mgmt_send_disasoc_deauth_event_etc(frw_event_mem_stru *pst_even
                   puc_da[4],
                   puc_da[5]);
 
-        /* 找不到用户，说明用户已经删除，直接返回成功，不需要再抛事件到dmac删除用户(统一由hmac_user_del来管理删除用户) */
+        /* ????????????????????????????????????????????????????????????dmac????????(??????hmac_user_del??????????????) */
         return OAL_SUCC;
     }
 
-    /* 获取到hmac user,使用protected标志 */
+    /* ??????hmac user,????protected???? */
     pst_hmac_user = mac_res_get_hmac_user_etc(us_user_idx);
 
     hmac_mgmt_send_disassoc_frame_etc(pst_mac_vap, puc_da, us_err_code, ((OAL_PTR_NULL==pst_hmac_user) ? OAL_FALSE : pst_hmac_user->st_user_base_info.st_cap_info.bit_pmf_active));
@@ -643,7 +643,7 @@ oal_uint32  hmac_mgmt_send_disasoc_deauth_event_etc(frw_event_mem_stru *pst_even
         hmac_handle_disconnect_rsp_etc(pst_vap, pst_hmac_user, us_err_code);
     }
 
-    /* 删除用户 */
+    /* ???????? */
     hmac_user_del_etc(pst_mac_vap, pst_hmac_user);
 
     return OAL_SUCC;
@@ -702,8 +702,8 @@ oal_uint32  hmac_proc_disasoc_misc_event_etc(frw_event_mem_stru *pst_event_mem)
 #endif
 
 #if (defined(_PRE_PRODUCT_ID_HI110X_DEV) && !defined(_PRE_PC_LINT) && !defined(WIN32))
-    /* 较强信号(大于-65dBm)下出现link loss则通过Bcpu输出全部寄存器，同时该维测默认不生效*/
-    /* 因为一旦出错需要重启手机才能正常使用，使用时需要手动修改g_ucLinklossLogSwitch=1，并编译版本 */
+    /* ????????(????-65dBm)??????link loss??????Bcpu????????????????????????????????????*/
+    /* ????????????????????????????????????????????????????????g_ucLinklossLogSwitch=1???????????? */
     if (g_ucLinklossLogSwitch && (DMAC_DISASOC_MISC_LINKLOSS == pdmac_disasoc_misc_stru->en_disasoc_reason)&& (pst_hmac_vap->station_info.signal > -65))
     {
         wifi_open_bcpu_set_etc(1);
@@ -715,10 +715,10 @@ oal_uint32  hmac_proc_disasoc_misc_event_etc(frw_event_mem_stru *pst_event_mem)
 #endif
 
     #ifdef _PRE_WLAN_CHIP_TEST
-    /* CCA测试时，需要保持STA不去关联, 如果有打开chip_test宏开关 */
+    /* CCA????????????????STA????????, ??????????chip_test?????? */
     if(0 != g_st_dmac_test_mng.uc_chip_test_open)
     {
-        /* 如果有打开cca测试 */
+        /* ??????????cca???? */
         if (1 == g_st_dmac_test_mng.uc_cca_flag)
         {
         }
@@ -740,13 +740,13 @@ oal_uint32  hmac_proc_disasoc_misc_event_etc(frw_event_mem_stru *pst_event_mem)
 #ifdef _PRE_WLAN_1103_CHR
         CHR_EXCEPTION_REPORT(CHR_PLATFORM_EXCEPTION_EVENTID, CHR_SYSTEM_WIFI, CHR_LAYER_DRV, CHR_WIFI_DRV_EVENT_SOFTAP_DISCONNECT, pdmac_disasoc_misc_stru->en_disasoc_reason);
 #endif
-        /* 抛事件上报内核，已经去关联某个STA */
+        /* ??????????????????????????????STA */
         hmac_handle_disconnect_rsp_ap_etc(pst_hmac_vap, pst_hmac_user);
 
 #ifdef _PRE_WLAN_FEATURE_BAND_STEERING
         if(DMAC_DISASOC_MISC_BSD == pdmac_disasoc_misc_stru->en_disasoc_reason)
         {
-            en_disasoc_reason_code = MAC_INACTIVITY; //MAC_POOR_CHANNEL;  //此reason code还有待测试
+            en_disasoc_reason_code = MAC_INACTIVITY; //MAC_POOR_CHANNEL;  //??reason code??????????
         }
         else
 #else
@@ -754,20 +754,20 @@ oal_uint32  hmac_proc_disasoc_misc_event_etc(frw_event_mem_stru *pst_event_mem)
             en_disasoc_reason_code = MAC_ASOC_NOT_AUTH;
         }
 #endif
-        /* 发去关联帧 */
+        /* ?????????? */
         hmac_mgmt_send_disassoc_frame_etc(&pst_hmac_vap->st_vap_base_info, pst_hmac_user->st_user_base_info.auc_user_mac_addr, en_disasoc_reason_code, en_is_protected);
-        /* 删除用户 */
+        /* ???????? */
         hmac_user_del_etc(&pst_hmac_vap->st_vap_base_info, pst_hmac_user);
 
     }
     else
     {
 
-        /* 获用户 */
+        /* ?????? */
         pst_hmac_user = mac_res_get_hmac_user_etc(pst_hmac_vap->st_vap_base_info.us_assoc_vap_id);
         if (OAL_PTR_NULL == pst_hmac_user)
         {
-            /* 和ap侧一样，上层已经删除了的话，属于正常 */
+            /* ??ap???????????????????????????????????? */
             OAM_WARNING_LOG1(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_ASSOC, "{hmac_proc_disasoc_misc_event_etc::pst_hmac_user[%d] is null.}",
                 pst_hmac_vap->st_vap_base_info.us_assoc_vap_id);
             return OAL_ERR_CODE_PTR_NULL;
@@ -776,16 +776,16 @@ oal_uint32  hmac_proc_disasoc_misc_event_etc(frw_event_mem_stru *pst_event_mem)
         en_is_protected = pst_hmac_user->st_user_base_info.st_cap_info.bit_pmf_active;
 
 
-        /* 上报断链类型的转化 */
+        /* ?????????????????? */
         en_disasoc_reason_code = hmac_disassoc_reason_exchange(pdmac_disasoc_misc_stru->en_disasoc_reason);
 
         if (pdmac_disasoc_misc_stru->en_disasoc_reason != DMAC_DISASOC_MISC_CHANNEL_MISMATCH)
         {
-            /* 发送去认证帧到AP */
+            /* ??????????????AP */
             hmac_mgmt_send_disassoc_frame_etc(&pst_hmac_vap->st_vap_base_info, pst_hmac_user->st_user_base_info.auc_user_mac_addr, en_disasoc_reason_code, en_is_protected);
         }
 
-        /* 删除对应用户 */
+        /* ???????????? */
         hmac_user_del_etc(&pst_hmac_vap->st_vap_base_info, pst_hmac_user);
         hmac_sta_handle_disassoc_rsp_etc(pst_hmac_vap, en_disasoc_reason_code);
     }

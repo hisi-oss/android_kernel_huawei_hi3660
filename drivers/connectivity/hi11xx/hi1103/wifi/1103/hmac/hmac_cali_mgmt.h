@@ -12,7 +12,7 @@ extern "C" {
 #if defined(_PRE_PRODUCT_ID_HI110X_HOST)
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 #include "frw_ext_if.h"
 #include "dmac_ext_if.h"
@@ -22,7 +22,7 @@ extern "C" {
 #undef  THIS_FILE_ID
 #define THIS_FILE_ID OAM_FILE_ID_HMAC_CALI_MGMT_H
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
 #define DPD_CORRAM_DATA_NUM (512)
 #define DPD_CORRAM_DATA_LEN (1024)
@@ -37,11 +37,11 @@ extern "C" {
 #define HI1103_DPD_OFFLINE_CALI_LUT_NUM (HI1103_2G_DPD_CALI_CHANNEL_NUM * HI1103_DPD_CALI_TPC_LEVEL_NUM)
 
 
-#define HI1103_CALI_SISO_TXDC_GAIN_LVL_NUM (8)       /* SISO tx dc补偿值档位数目 */
-#define HI1103_CALI_MIMO_TXDC_GAIN_LVL_NUM (8)       /* MIMO tx dc补偿值档位数目 */
+#define HI1103_CALI_SISO_TXDC_GAIN_LVL_NUM (8)       /* SISO tx dc?????????????? */
+#define HI1103_CALI_MIMO_TXDC_GAIN_LVL_NUM (8)       /* MIMO tx dc?????????????? */
 #define HI1103_CALI_TXDC_GAIN_LVL_NUM      (HI1103_CALI_SISO_TXDC_GAIN_LVL_NUM + HI1103_CALI_MIMO_TXDC_GAIN_LVL_NUM)
 #define HI1103_CALI_IQ_TONE_NUM            (16)
-#define HI1103_CALI_RXDC_GAIN_LVL_NUM      (8)      /* rx dc补偿值档位数目 */
+#define HI1103_CALI_RXDC_GAIN_LVL_NUM      (8)      /* rx dc?????????????? */
 #define HI1103_CALI_2G_OTHER_CHANNEL_NUM   (1)
 #define HI1103_2G_CHANNEL_NUM              (3)
 #define HI1103_5G_20M_CHANNEL_NUM          (7)
@@ -62,38 +62,38 @@ extern "C" {
 #define HI1103_CALI_TXIQ_LS_FILTER_FEQ_NUM_320M    128
 #define HI1103_CALI_TXIQ_LS_FILTER_FEQ_NUM_160M    64
 
-#define NUM_160M_SNGL_TONE_1_4_CIRCLE    16                          /* DAC 80M时1/4周期2.5M单音点采样点个数 */
-#define NUM_320M_SNGL_TONE_1_4_CIRCLE    32                          /* DAC 160M时1/4周期2.5M单音点采样点个数 */
-#define NUM_640M_SNGL_TONE_1_4_CIRCLE    64                          /* DAC 320M时1/4周期2.5M单音点采样点个数 */
+#define NUM_160M_SNGL_TONE_1_4_CIRCLE    16                          /* DAC 80M??1/4????2.5M???????????????? */
+#define NUM_320M_SNGL_TONE_1_4_CIRCLE    32                          /* DAC 160M??1/4????2.5M???????????????? */
+#define NUM_640M_SNGL_TONE_1_4_CIRCLE    64                          /* DAC 320M??1/4????2.5M???????????????? */
 
 #define HI1103_CALI_MATRIX_DATA_NUMS     (15)
 
 /*****************************************************************************
-  3 枚举定义
+  3 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  4 全局变量声明
+  4 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  5 消息头定义
+  5 ??????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  6 消息定义
+  6 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  7 STRUCT定义
+  7 STRUCT????
 *****************************************************************************/
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_DEV) || (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_HOST)
-/* 校准数据结构 */
-#if 0 //暂时和rx gain复用结构
+/* ???????????? */
+#if 0 //??????rx gain????????
 typedef struct
  {
     oal_uint8   uc_tx_mimo_cmp;
@@ -113,9 +113,9 @@ typedef enum
 
 typedef struct
 {
-    oal_uint8   uc_rx_gain_cmp_code;     /* 仅pilot RF使用，C校准补偿值 */
+    oal_uint8   uc_rx_gain_cmp_code;     /* ??pilot RF??????C?????????? */
 
-    /* LODIV 暂时和rx gain复用结构 */
+    /* LODIV ??????rx gain???????? */
     oal_uint8   uc_rx_mimo_cmp;
     oal_uint8   uc_dpd_siso_cmp;
     oal_uint8   uc_dpd_mimo_cmp;
@@ -280,7 +280,7 @@ typedef struct
 {
     oal_uint8              uc_rc_cmp_code;
     oal_uint8              uc_r_cmp_code;
-    oal_uint8              uc_c_cmp_code;      /* 重要: MPW2和PILOT RF公用, mpw2代表c校准值; pilot代表800M rejection补偿code，根据C code计算得到 */
+    oal_uint8              uc_c_cmp_code;      /* ????: MPW2??PILOT RF????, mpw2????c??????; pilot????800M rejection????code??????C code???????? */
     oal_uint8              uc_20M_rc_cmp_code;
 }hi1103_rc_r_c_cali_param_stru;
 
@@ -327,7 +327,7 @@ typedef struct
     oal_int32  l_txiq_cmp_alpha;
     oal_int32  l_txiq_cmp_beta;
     hi1103_bt20dbm_txpwr_cal_stru st_20dbmtxpwr;
-    hi1103_txdc_comp_val_stru    ast_txdc_cmp_val[8];//wifi siso tx档位
+    hi1103_txdc_comp_val_stru    ast_txdc_cmp_val[8];//wifi siso tx????
 
 }hi1103_bt20dbm_txcal_val_stru;
 typedef struct
@@ -338,16 +338,16 @@ typedef struct
 #endif
 
 /*****************************************************************************
-  8 UNION定义
+  8 UNION????
 *****************************************************************************/
 
 /*****************************************************************************
-  9 OTHERS定义
+  9 OTHERS????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  10 函数声明
+  10 ????????
 *****************************************************************************/
 extern oal_uint32  hmac_save_cali_event_etc(frw_event_mem_stru *pst_event_mem);
 extern oal_uint32 hmac_send_cali_data_etc(mac_vap_stru *pst_mac_vap);

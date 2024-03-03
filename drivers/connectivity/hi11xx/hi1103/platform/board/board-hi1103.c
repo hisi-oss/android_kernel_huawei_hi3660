@@ -477,7 +477,7 @@ int32 hi1103_wifi_enable(void)
     int32 ret = -EFAIL;
     int32 gpio = g_board_info_etc.wlan_power_on_enable;
 
-    /*第一次枚举时BUS 还未初始化*/
+    /*????????????BUS ??????????*/
     ret = hcc_bus_power_ctrl_register(hcc_get_current_110x_bus(), HCC_BUS_CTRL_POWER_UP, board_wlan_gpio_power_on, (void*)(long)gpio);
     if(ret)
     {
@@ -673,7 +673,7 @@ int32 hi1103_bfgx_dev_power_on(void)
     }
     else
     {
-        /*此时BFGX 需要解复位BCPU*/
+        /*????BFGX ??????????BCPU*/
         PS_PRINT_INFO("wifi dereset bcpu\n");
         if(BFGX_POWER_SUCCESS != wlan_pm_open_bcpu_etc())
         {
@@ -793,7 +793,7 @@ int32 hi1103_bfgx_dev_power_off(void)
 
     if(SUCCESS != uart_bfgx_close_cmd_etc())
     {
-       /*bfgx self close fail 了，后面也要通过wifi shutdown bcpu*/
+       /*bfgx self close fail ????????????????wifi shutdown bcpu*/
        PS_PRINT_ERR("bfgx self close fail\n");
        CHR_EXCEPTION_REPORT(CHR_PLATFORM_EXCEPTION_EVENTID, CHR_SYSTEM_GNSS, CHR_LAYER_DRV, CHR_GNSS_DRV_EVENT_PLAT, CHR_PLAT_DRV_ERROR_CLOSE_BCPU);
     }
@@ -802,7 +802,7 @@ int32 hi1103_bfgx_dev_power_off(void)
 
     if (SUCCESS != release_tty_drv_etc(ps_core_d->pm_data))
     {
-       /*代码执行到此处，说明六合一所有业务都已经关闭，无论tty是否关闭成功，device都要下电*/
+       /*??????????????????????????????????????????????????tty??????????????device????????*/
        PS_PRINT_ERR("wifi off, close tty is err!");
     }
 
@@ -836,13 +836,13 @@ int32 hi1103_wlan_power_off(void)
         return -FAILURE;
     }
 
-    /*先关闭SDIO TX通道*/
+    /*??????SDIO TX????*/
     hcc_bus_disable_state(hcc_get_current_110x_bus(), OAL_BUS_STATE_TX);
 
     /*wakeup dev,send poweroff cmd to wifi*/
     if(OAL_SUCC != wlan_pm_poweroff_cmd_etc())
     {
-        /*wifi self close 失败了也继续往下执行，uart关闭WCPU，异常恢复推迟到wifi下次open的时候执行*/
+        /*wifi self close ??????????????????????uart????WCPU????????????????wifi????open??????????*/
         DECLARE_DFT_TRACE_KEY_INFO("wlan_poweroff_cmd_fail",OAL_DFT_TRACE_FAIL);
         CHR_EXCEPTION_REPORT(CHR_PLATFORM_EXCEPTION_EVENTID, CHR_SYSTEM_WIFI, CHR_LAYER_DRV, CHR_WIFI_DRV_EVENT_PLAT, CHR_PLAT_DRV_ERROR_CLOSE_WCPU);
         //ssi_dump_device_regs((HI1XX_ANDROID_BUILD_VARIANT_USER == hi11xx_get_android_build_variant()) ? (0x0):(SSI_MODULE_MASK_COMM));
@@ -963,7 +963,7 @@ int32 hi1103_get_board_uart_port(void)
         return BOARD_FAIL;
     }
 
-    /*使用uart4，需要在dts里新增DTS_PROP_UART_PCLK项，指明uart4不依赖sensorhub*/
+    /*????uart4????????dts??????DTS_PROP_UART_PCLK????????uart4??????sensorhub*/
     ret = of_property_read_bool(np, DTS_PROP_HI110X_UART_PCLK);
     if (ret)
     {
@@ -1216,8 +1216,8 @@ int32 hi1103_board_get_power_pinctrl(struct platform_device *pdev)
     struct pinctrl_state *pinctrl_def;
     struct pinctrl_state *pinctrl_idle;
 
-    /* 检查是否需要prepare before board power on */
-    /* JTAG SELECT 拉低，XLDO MODE选择2.8v */
+    /* ????????????prepare before board power on */
+    /* JTAG SELECT ??????XLDO MODE????2.8v */
     ret = get_board_dts_node_etc(&np, DTS_NODE_HISI_HI110X);
     if(BOARD_SUCC != ret)
     {
@@ -1417,7 +1417,7 @@ int32 hi1103_check_wlan_wakeup_host(void)
         return -1;
     }
 
-    /*输出*/
+    /*????*/
     value |= (WLAN_DEV2HOST_GPIO);
 
     ret = write_device_reg16(GPIO_BASE_ADDR + GPIO_INOUT_CONFIG_REGADDR, value);
@@ -1491,7 +1491,7 @@ int32 hi1103_check_host_wakeup_wlan(void)
         return -1;
     }
 
-    /*输入*/
+    /*????*/
     value &= (~WLAN_HOST2DEV_GPIO);
 
     ret = write_device_reg16(GPIO_BASE_ADDR + GPIO_INOUT_CONFIG_REGADDR, value);
@@ -1672,7 +1672,7 @@ int32 hi1103_pcie_ip_test(oal_int32 test_count)
 
     if(OAL_TRUE != oal_pcie_110x_working_check())
     {
-        /*不支持PCIe,直接返回成功*/
+        /*??????PCIe,????????????*/
         oal_print_hi11xx_log(HI11XX_LOG_WARN, "do not support PCIe!");
         return OAL_SUCC;
     }
@@ -1699,7 +1699,7 @@ int32 hi1103_pcie_ip_test(oal_int32 test_count)
 
     if(HCC_BUS_PCIE != old_bus->bus_type)
     {
-        /*尝试切换到PCIE*/
+        /*??????????PCIE*/
         ret = hcc_switch_bus(HCC_CHIP_110X_DEV, HCC_BUS_PCIE);
         if(ret)
         {
@@ -1813,7 +1813,7 @@ oal_int32 hi1103_pcie_chip_poweron(oal_void* data)
 
     if(OAL_TRUE != oal_pcie_110x_working_check())
     {
-        /*不支持PCIe,直接返回成功*/
+        /*??????PCIe,????????????*/
         oal_print_hi11xx_log(HI11XX_LOG_WARN, "do not support PCIe!");
         return -OAL_ENODEV;
     }
@@ -1840,7 +1840,7 @@ oal_int32 hi1103_pcie_chip_poweron(oal_void* data)
 
     if(HCC_BUS_PCIE != old_bus->bus_type)
     {
-        /*尝试切换到PCIE*/
+        /*??????????PCIE*/
         ret = hcc_switch_bus(HCC_CHIP_110X_DEV, HCC_BUS_PCIE);
         if(ret)
         {
@@ -1955,7 +1955,7 @@ oal_int32 hi1103_pcie_chip_poweroff(oal_void* data)
 
     g_slt_pcie_status = 0;
 
-    /*SLT下电之前打印链路信息*/
+    /*SLT????????????????????*/
     hcc_bus_chip_info(pst_bus, OAL_FALSE, OAL_TRUE);
 
     hi1103_board_power_off(WLAN_POWER);

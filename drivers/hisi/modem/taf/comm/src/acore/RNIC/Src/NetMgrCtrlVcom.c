@@ -47,21 +47,21 @@
 */
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "NetMgrCtrlVcom.h"
 #include "NetMgrCtrlInterface.h"
 
 
 /*****************************************************************************
-    协议栈打印打点方式下的.C文件宏定义
+    ??????????????????????.C??????????
 *****************************************************************************/
 #define    THIS_FILE_ID        PS_FILE_ID_NET_MGR_CTRL_VCOM_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
-NM_CTRL_CTX_STRU    g_stNmCtrlCtx;                          /*设备结构体*/
+NM_CTRL_CTX_STRU    g_stNmCtrlCtx;                          /*??????????*/
 
 static const struct file_operations g_stNmCtrlCdevFops =
 {
@@ -73,13 +73,13 @@ static const struct file_operations g_stNmCtrlCdevFops =
 };
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 void NM_CTRL_SendMsg(void* pDataBuffer, unsigned int len)
 {
     /*lint --e{429}*/
-    /* 屏蔽error 429(警告pstListEntry内存没有释放，此处pstListEntry内存在read函数中释放，所以该告警屏蔽) */
+    /* ????error 429(????pstListEntry??????????????????pstListEntry??????read??????????????????????????) */
     NM_CTRL_CDEV_DATA_STRU             *pstListEntry    = VOS_NULL_PTR;
     unsigned long                       flags           = 0;
 
@@ -91,7 +91,7 @@ void NM_CTRL_SendMsg(void* pDataBuffer, unsigned int len)
        return;
     }
 
-    /* 分配链表内存kmalloc，用于存储数据 */
+    /* ????????????kmalloc?????????????? */
     pstListEntry = (NM_CTRL_CDEV_DATA_STRU *)kmalloc(sizeof(NM_CTRL_CDEV_DATA_STRU) + len, GFP_KERNEL);
     if (VOS_NULL_PTR == pstListEntry)
     {
@@ -106,15 +106,15 @@ void NM_CTRL_SendMsg(void* pDataBuffer, unsigned int len)
 
     NM_CTRL_PRINT_INFO("NM_CTRL_SendMsg: list addr %pK data addr %pK", pstListEntry, pstListEntry->aucData);
 
-    /* 获取信号量 */
+    /* ?????????? */
     spin_lock_irqsave(&(g_stNmCtrlCtx.stListLock), flags);
 
-    /* 挂接到链表末尾 */
+    /* ?????????????? */
     list_add_tail(&(pstListEntry->stMsgList), &(g_stNmCtrlCtx.stListHead));
 
     g_stNmCtrlCtx.ulDataFlg = true;
 
-    /* 释放信号量 */
+    /* ?????????? */
     spin_unlock_irqrestore(&(g_stNmCtrlCtx.stListLock), flags);
 
     wake_up_interruptible(&(g_stNmCtrlCtx.stReadInq));
@@ -143,7 +143,7 @@ int NM_CTRL_Release(struct inode *node, struct file *filp)
     unsigned long                       flags       = 0;
     int                                 ret         = 0;
 
-    /* 获取信号量 */
+    /* ?????????? */
     spin_lock_irqsave(&(g_stNmCtrlCtx.stListLock), flags);
 
     list_for_each_safe(pstCurPtr, pstNextPtr, &(g_stNmCtrlCtx.stListHead))
@@ -155,7 +155,7 @@ int NM_CTRL_Release(struct inode *node, struct file *filp)
 
     g_stNmCtrlCtx.ulDataFlg = false;
 
-    /* 释放信号量 */
+    /* ?????????? */
     spin_unlock_irqrestore(&(g_stNmCtrlCtx.stListLock), flags);
 
     NM_CTRL_PRINT_INFO("Enter NM_CTRL_release.\n");
@@ -184,10 +184,10 @@ ssize_t NM_CTRL_Read(struct file *filp, char __user *buf, size_t size, loff_t *p
         return -ERESTARTSYS;
     }
 
-    /* 获取信号量 */
+    /* ?????????? */
     spin_lock_irqsave(&(g_stNmCtrlCtx.stListLock), flags);
 
-    /* 读取数据链表 */
+    /* ???????????? */
     if (!list_empty(&(g_stNmCtrlCtx.stListHead)))
     {
         pstCurEntry = list_first_entry(&(g_stNmCtrlCtx.stListHead), NM_CTRL_CDEV_DATA_STRU, stMsgList);
@@ -220,13 +220,13 @@ ssize_t NM_CTRL_Read(struct file *filp, char __user *buf, size_t size, loff_t *p
         }
     }
 
-    /* 判断链表是否为空 list_empty(g_stNmCtrlCdevp->data)；如果是空，false；如果非空，true; */
+    /* ???????????????? list_empty(g_stNmCtrlCdevp->data)????????????false????????????true; */
     if (list_empty(&(g_stNmCtrlCtx.stListHead)))
         g_stNmCtrlCtx.ulDataFlg = false;
     else
         g_stNmCtrlCtx.ulDataFlg = true;
 
-    /* 释放信号量 */
+    /* ?????????? */
     spin_unlock_irqrestore(&(g_stNmCtrlCtx.stListLock), flags);
 
     return ret;
@@ -324,7 +324,7 @@ int __init NM_CTRL_Init(VOS_VOID)
        device_create(pstNmCtrlClass, NULL, MKDEV(g_stNmCtrlCtx.ulMajorNum, 0), NULL, NM_CTRL_DEVICE_NAME);
     }
 
-    /* 初始化 */
+    /* ?????? */
     INIT_LIST_HEAD(&(g_stNmCtrlCtx.stListHead));
 
     spin_lock_init(&(g_stNmCtrlCtx.stListLock));

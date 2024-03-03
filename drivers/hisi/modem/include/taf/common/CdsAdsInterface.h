@@ -50,7 +50,7 @@
 #define __CDSADSINTERFACE_H__
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "vos.h"
 
@@ -64,9 +64,9 @@ extern "C" {
 
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
-/* !!!!!!!!!!!暂时定义，最终的值由北京确定 */
+/* !!!!!!!!!!!???????????????????????????? */
 #define ADS_CDS_MSG_HDR                (0x00)
 #define CDS_ADS_MSG_HDR                (0x10)
 
@@ -74,7 +74,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  3 枚举定义
+  3 ????????
 *****************************************************************************/
 
 enum CDS_ADS_MSG_ID_ENUM
@@ -107,51 +107,51 @@ typedef VOS_UINT8 CDS_ADS_IP_PACKET_TYPE_ENUM_UINT8;
 
 enum CDS_ADS_DL_IPF_BEARER_ID_ENUM
 {
-    CDS_ADS_DL_IPF_BEARER_ID_RSV0     = 0,                                      /* 0~4保留 */
+    CDS_ADS_DL_IPF_BEARER_ID_RSV0     = 0,                                      /* 0~4???? */
     CDS_ADS_DL_IPF_BEARER_ID_EPSBID5  = 5,                                      /* 5~15 EPS Bearer ID*/
     CDS_ADS_DL_IPF_BEARER_ID_EPSBID15 = 15,
-    CDS_ADS_DL_IPF_BEARER_ID_DHCPV4   = 16,                                     /* 下行DHCP */
-    CDS_ADS_DL_IPF_BEARER_ID_DHCPV6   = 17,                                     /* 下行DHCPv6*/
-    CDS_ADS_DL_IPF_BEARER_ID_ICMPV4   = 18,                                     /* 下行ICMP */
-    CDS_ADS_DL_IPF_BEARER_ID_ICMPV6   = 19,                                     /* 下行ICMPv6 */
+    CDS_ADS_DL_IPF_BEARER_ID_DHCPV4   = 16,                                     /* ????DHCP */
+    CDS_ADS_DL_IPF_BEARER_ID_DHCPV6   = 17,                                     /* ????DHCPv6*/
+    CDS_ADS_DL_IPF_BEARER_ID_ICMPV4   = 18,                                     /* ????ICMP */
+    CDS_ADS_DL_IPF_BEARER_ID_ICMPV6   = 19,                                     /* ????ICMPv6 */
     CDS_ADS_DL_IPF_BEARER_ID_LL_FE80  = 20,
     CDS_ADS_DL_IPF_BEARER_ID_LL_FF    = 21,
-    CDS_ADS_DL_IPF_BEARER_ID_INVALID  = 63                                      /* 不匹配任何Filter，0x3F*/
+    CDS_ADS_DL_IPF_BEARER_ID_INVALID  = 63                                      /* ??????????Filter??0x3F*/
 };
 typedef VOS_UINT32 CDS_ADS_DL_IPF_BEARER_ID_ENUM_UINT32;
 
 
 enum ADS_CDS_PKT_TYPE_ENUM
 {
-    ADS_CDS_IPF_PKT_TYPE_IP   = 0x00,                                           /* IP类型 */
-    ADS_CDS_IPF_PKT_TYPE_PPP  = 0x01,                                           /* PPP类型 */
+    ADS_CDS_IPF_PKT_TYPE_IP   = 0x00,                                           /* IP???? */
+    ADS_CDS_IPF_PKT_TYPE_PPP  = 0x01,                                           /* PPP???? */
     ADS_CDS_IPF_PKT_TYPE_BUTT
 };
 typedef VOS_UINT8 ADS_CDS_IPF_PKT_TYPE_ENUM_UINT8;
 
 /*****************************************************************************
-  4 全局变量声明
+  4 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  5 消息头定义
+  5 ??????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  6 消息定义
+  6 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  7 STRUCT定义
+  7 STRUCT????
 *****************************************************************************/
 
 typedef struct
 {
-    VOS_MSG_HEADER                                                              /* 消息头 */
-    CDS_ADS_MSG_ID_ENUM_UINT32          enMsgId;                                /* 消息ID */
+    VOS_MSG_HEADER                                                              /* ?????? */
+    CDS_ADS_MSG_ID_ENUM_UINT32          enMsgId;                                /* ????ID */
     MODEM_ID_ENUM_UINT16                enModemId;
     VOS_UINT8                           ucRabId;                                /* Rab Id*/
     VOS_UINT8                           aucReserved[1];
@@ -161,8 +161,8 @@ typedef struct
 
 typedef struct
 {
-    VOS_MSG_HEADER                                                              /* 消息头 */
-    CDS_ADS_MSG_ID_ENUM_UINT32          enMsgId;                                /* 消息ID */
+    VOS_MSG_HEADER                                                              /* ?????? */
+    CDS_ADS_MSG_ID_ENUM_UINT32          enMsgId;                                /* ????ID */
     MODEM_ID_ENUM_UINT16                enModemId;
     VOS_UINT8                           ucRabId;                                /* Rab Id*/
     VOS_UINT8                           aucReserved[1];
@@ -171,8 +171,8 @@ typedef struct
 
 typedef struct
 {
-    VOS_MSG_HEADER                                                              /* 消息头 */
-    CDS_ADS_MSG_ID_ENUM_UINT32          enMsgId;                                /* 消息ID */
+    VOS_MSG_HEADER                                                              /* ?????? */
+    CDS_ADS_MSG_ID_ENUM_UINT32          enMsgId;                                /* ????ID */
     MODEM_ID_ENUM_UINT16                enModemId ;
     VOS_UINT8                           ucRabId;                                /* Rab Id*/
     VOS_UINT8                           aucReserved[1];
@@ -181,8 +181,8 @@ typedef struct
 
 typedef struct
 {
-    VOS_MSG_HEADER                                                              /* 消息头 */
-    CDS_ADS_MSG_ID_ENUM_UINT32          enMsgId;                                /* 消息ID */
+    VOS_MSG_HEADER                                                              /* ?????? */
+    CDS_ADS_MSG_ID_ENUM_UINT32          enMsgId;                                /* ????ID */
     MODEM_ID_ENUM_UINT16                enModemId ;
     VOS_UINT8                           ucRabId;                                /* Rab Id*/
     VOS_UINT8                           aucReserved[1];
@@ -191,21 +191,21 @@ typedef struct
 
 typedef struct
 {
-    VOS_MSG_HEADER                                                              /* 消息头 */
-    CDS_ADS_MSG_ID_ENUM_UINT32          enMsgId;                                /* 消息ID */
+    VOS_MSG_HEADER                                                              /* ?????? */
+    CDS_ADS_MSG_ID_ENUM_UINT32          enMsgId;                                /* ????ID */
     MODEM_ID_ENUM_UINT16                enModemId;
     VOS_UINT8                           ucRabId;                                /* Rab Id*/
-    VOS_UINT8                           aucRsv[1];                              /* 保留*/
+    VOS_UINT8                           aucRsv[1];                              /* ????*/
 } CDS_ADS_CLEAR_DATA_IND_STRU;
 
 
 typedef struct
 {
-    VOS_MSG_HEADER                                                              /* 消息头 */
-    CDS_ADS_MSG_ID_ENUM_UINT32          enMsgId;                                /* 消息ID */
+    VOS_MSG_HEADER                                                              /* ?????? */
+    CDS_ADS_MSG_ID_ENUM_UINT32          enMsgId;                                /* ????ID */
     MODEM_ID_ENUM_UINT16                enModemId;
     VOS_UINT8                           ucRabId;                                /* Rab Id*/
-    VOS_UINT8                           aucRsv[1];                              /* 保留*/
+    VOS_UINT8                           aucRsv[1];                              /* ????*/
 } CDS_ADS_CLEAR_DATA_RSP_STRU;
 
 
@@ -214,11 +214,11 @@ typedef struct
     VOS_MSG_HEADER                                                              /* _H2ASN_Skip */
     CDS_ADS_MSG_ID_ENUM_UINT32          enMsgId;                                /* _H2ASN_Skip */
     MODEM_ID_ENUM_UINT16                enModemId;
-    VOS_UINT8                           ucRabId;                                /* RAB标识，取值范围:[5,15] */
+    VOS_UINT8                           ucRabId;                                /* RAB??????????????:[5,15] */
     CDS_ADS_IP_PACKET_TYPE_ENUM_UINT8   enIpPacketType;                         /* IP PACKET TYPE*/
     VOS_UINT16                          usLen;                                  /* Zc Len*/
-    VOS_UINT8                           aucRsv[2];                              /* 保留*/
-    VOS_UINT8                           aucData[4];                             /* 数据包 */
+    VOS_UINT8                           aucRsv[2];                              /* ????*/
+    VOS_UINT8                           aucData[4];                             /* ?????? */
 } CDS_ADS_DATA_IND_STRU;
 
 /** ****************************************************************************
@@ -231,22 +231,22 @@ typedef struct
     VOS_MSG_HEADER                                                              /* _H2ASN_Skip */
     CDS_ADS_MSG_ID_ENUM_UINT32          enMsgId;                                /* _H2ASN_Skip */
     MODEM_ID_ENUM_UINT16                enModemId;
-    VOS_UINT8                           ucRabId;                                /* RAB标识，取值范围:[5,15] */
-    VOS_UINT8                           ucErrRate;                              /* 错包率，扩展备用，目前不处理*/
-    VOS_UINT8                           aucRsv[4];                              /* 保留*/
+    VOS_UINT8                           ucRabId;                                /* RAB??????????????:[5,15] */
+    VOS_UINT8                           ucErrRate;                              /* ????????????????????????????*/
+    VOS_UINT8                           aucRsv[4];                              /* ????*/
 }ADS_CDS_ERR_IND_STRU;
 
 /*****************************************************************************
-  8 UNION定义
+  8 UNION????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  9 OTHERS定义
+  9 OTHERS????
 *****************************************************************************/
 
 /*****************************************************************************
-  10 函数声明
+  10 ????????
 *****************************************************************************/
 
 

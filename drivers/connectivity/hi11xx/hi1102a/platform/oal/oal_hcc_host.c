@@ -53,7 +53,7 @@ EXPORT_SYMBOL_GPL(g_pst_custom_process_func);//lint !e132 !e745 !e578
 #endif
 
 /*use lint -e16 to mask the error19! */
-oal_uint32 g_pm_wifi_rxtx_count = 0; /* 在平台侧统计接收发送数据包数量 */
+oal_uint32 g_pm_wifi_rxtx_count = 0; /* ?????????????????????????????? */
 /*lint -e19 */
 oal_module_symbol(g_pm_wifi_rxtx_count);
 /*lint +e19 */
@@ -633,7 +633,7 @@ oal_int32 hcc_tx(struct hcc_handler* hcc, oal_netbuf_stru* netbuf,
 
     if(OAL_WARN_ON(hdr->pay_len > g_hcc_tx_max_buf_len))
     {
-        /*pay_len超过DEVICE 最大内存长度*/
+        /*pay_len????DEVICE ????????????*/
         oal_print_hi11xx_log(HI11XX_LOG_ERR, "[ERROR]main:%d, sub:%d,pay len:%d,netbuf len:%d, extend len:%d,pad_payload:%d,max len:%u",
                         hdr->main_type,
                         hdr->sub_type,
@@ -647,7 +647,7 @@ oal_int32 hcc_tx(struct hcc_handler* hcc, oal_netbuf_stru* netbuf,
     }
     else
     {
-        /*当长度 在1544 + [1~3] 之内， 牺牲性能,将payload 内存前移 1~3B，节省DEVICE内存*/
+        /*?????? ??1544 + [1~3] ?????? ????????,??payload ???????? 1~3B??????DEVICE????*/
         if(hdr->pad_payload + hdr->pay_len > g_hcc_tx_max_buf_len)
         {
             oal_uint8* pst_dst =  (oal_uint8*)hdr + HCC_HDR_TOTAL_LEN;
@@ -749,7 +749,7 @@ oal_int32 hcc_bus_rx_handler(oal_void* data)
 
     oal_netbuf_head_init(&head);
 
-    /*调用bus底层的实体处理接口获取netbuf list*/
+    /*????bus??????????????????????netbuf list*/
     ret = hcc_bus_rx_netbuf_list(HCC_TO_BUS(hcc), &head);
     if(OAL_UNLIKELY(OAL_SUCC != ret))
     {
@@ -772,7 +772,7 @@ oal_int32 hcc_bus_rx_handler(oal_void* data)
         if(NULL == netbuf)
             break;
 
-        /*RX 流控，当接收来不及处理时丢掉最旧的数据包,SDIO不去读DEVICE侧会堵住*/
+        /*RX ????????????????????????????????????????,SDIO??????DEVICE????????*/
 
         pst_hcc_head = (struct hcc_header *)OAL_NETBUF_DATA(netbuf);
         if(OAL_UNLIKELY(OAL_TRUE != hcc_check_header_vaild(pst_hcc_head)))
@@ -857,7 +857,7 @@ OAL_STATIC oal_int32 _queues_not_flowctrl_len_check(struct hcc_handler* hcc,
                     {
                         if(OAL_TRUE == hcc_bus_check_tx_condition(HCC_TO_BUS(hcc), hcc_queue_map_to_netbuf_queue((hcc_queue_type)i)))
                         {
-                            /*发送通道畅通*/
+                            /*????????????*/
                             oal_print_hi11xx_log(HI11XX_LOG_VERBOSE, "sdio tx cond true");
                             return OAL_TRUE;
                         }
@@ -870,7 +870,7 @@ OAL_STATIC oal_int32 _queues_not_flowctrl_len_check(struct hcc_handler* hcc,
 }
 
 /*TBD:This is not good,
-  PCIE 这层没有反压流控，靠中断反压*/
+  PCIE ????????????????????????????*/
 OAL_STATIC oal_int32 _queues_pcie_len_check(struct hcc_handler* hcc,
                                                               hcc_chan_type dir)
 {
@@ -889,7 +889,7 @@ OAL_STATIC oal_int32 _queues_pcie_len_check(struct hcc_handler* hcc,
                 {
                     if(OAL_TRUE == hcc_bus_check_tx_condition(HCC_TO_BUS(hcc), hcc_queue_map_to_netbuf_queue((hcc_queue_type)i)))
                     {
-                        /*发送通道畅通*/
+                        /*????????????*/
                         oal_print_hi11xx_log(HI11XX_LOG_VERBOSE, "pcie check tx cond true");
                         return OAL_TRUE;
                     }
@@ -1089,7 +1089,7 @@ oal_int32 hcc_tx_netbuf_restore_normal_pri_queue(struct hcc_handler *hcc, hcc_ne
     return ret;
 }
 
-/*归还待发送队列*/
+/*??????????????*/
 oal_void hcc_restore_tx_netbuf(struct hcc_handler *hcc, oal_netbuf_stru *pst_netbuf)
 {
     struct hcc_tx_cb_stru* pst_cb_stru;
@@ -1140,7 +1140,7 @@ OAL_STATIC  oal_int32 hcc_send_assemble_reset(struct hcc_handler *hcc)
 
     hcc->hcc_transer_info.tx_flow_ctrl.flowctrl_reset_count++;
 
-    /*当只发送一个聚合描述符包，并且聚合个数为0描述通知Device 重置聚合信息*/
+    /*????????????????????????????????????????0????????Device ????????????*/
     ret = hcc_send_descr_control_data(hcc, HCC_DESCR_ASSEM_RESET,NULL,0);
 
     hcc_restore_assemble_netbuf_list(hcc);
@@ -1180,7 +1180,7 @@ OAL_STATIC oal_int32 hcc_send_data_packet(struct hcc_handler* hcc,
         /*credit flowctrl*/
         uc_credit    = hcc->hcc_transer_info.tx_flow_ctrl.uc_hipriority_cnt;
 
-        /* 高优先级流控: credit值为0时不发送 */
+        /* ????????????: credit????0???????? */
         if (!(uc_credit > hcc_credit_bottom_value))
         {
             return OAL_SUCC;
@@ -1264,11 +1264,11 @@ OAL_STATIC oal_int32 hcc_send_data_packet(struct hcc_handler* hcc,
 
     ret = hcc_bus_tx_netbuf_list(HCC_TO_BUS(hcc), &head_send, hcc_queue_map_to_netbuf_queue(type));
 
-    g_pm_wifi_rxtx_count += total_send; //发送包统计 for pm
+    g_pm_wifi_rxtx_count += total_send; //?????????? for pm
 
     hcc->hcc_transer_info.hcc_queues[HCC_TX].queues[type].total_pkts += total_send;
 
-    /* 高优先级流控: 更新credit值 */
+    /* ????????????: ????credit?? */
     if(HCC_FLOWCTRL_CREDIT== pst_hcc_queue->flow_ctrl.flow_type)
     {
         oal_spin_lock(&(hcc->hcc_transer_info.tx_flow_ctrl.st_hipri_lock));
@@ -1477,8 +1477,8 @@ int hcc_send_tx_queue(struct hcc_handler *hcc, hcc_queue_type type)
     pst_hcc_queue = &hcc->hcc_transer_info.hcc_queues[HCC_TX].queues[type];
     head = &pst_hcc_queue->data_queue;
 
-    /*TBD:PCIE 内存在 PCIE驱动侧释放， SDIO在HCC中发送完成后释放，
-    后续归一,SDIO聚合需要下移到SDIO驱动,聚合独立一个模块*/
+    /*TBD:PCIE ?????? PCIE???????????? SDIO??HCC??????????????????
+    ????????,SDIO??????????????SDIO????,????????????????*/
     hcc_tx_transfer_lock(hcc);
 #ifdef WIN32
     if(0)
@@ -1487,7 +1487,7 @@ int hcc_send_tx_queue(struct hcc_handler *hcc, hcc_queue_type type)
 #endif
     {
 
-        /*参考 hcc_send_data_packet*/
+        /*???? hcc_send_data_packet*/
         if(oal_netbuf_list_empty(head))
         {
             oal_print_hi11xx_log(HI11XX_LOG_DBG, "queue type %d is empty\n", type);
@@ -1608,12 +1608,12 @@ int hcc_send_tx_queue(struct hcc_handler *hcc, hcc_queue_type type)
             {
                 uc_credit    = hcc->hcc_transer_info.tx_flow_ctrl.uc_hipriority_cnt;
 
-                /*高优先级如果没有内存，直接返回规避死循环问题。*/
+                /*??????????????????????????????????????????????*/
                 if (!(uc_credit > hcc_credit_bottom_value))
                 {
                     if(ul_pool_type_flag == OAL_TRUE)
                     {
-                        /*恢复成普通优先级*/
+                        /*????????????????*/
                         hcc_tx_netbuf_restore_normal_pri_queue(hcc,pool_type);
                     }
                     hcc_tx_transfer_unlock(hcc);
@@ -1707,7 +1707,7 @@ oal_int32 hcc_rx_register(struct hcc_handler *hcc, oal_uint8 mtype, hcc_rx_post_
 #endif
         return -OAL_EBUSY;
     }
-    /*此处暂时不加互斥锁，由流程保证。*/
+    /*????????????????????????????????*/
     rx_action->post_do = post_do;
     rx_action->pre_do = pre_do;
 
@@ -1800,7 +1800,7 @@ OAL_STATIC  oal_int32 hcc_rx(struct hcc_handler *hcc, oal_netbuf_stru* netbuf)
 
     oal_netbuf_pull(netbuf, HCC_HDR_LEN + hdr->pad_hdr + hdr->pad_payload);
 
-    /*传出去的netbuf len 包含extend_len长度!*/
+    /*????????netbuf len ????extend_len????!*/
     oal_netbuf_trim(netbuf, OAL_NETBUF_LEN(netbuf) - hdr->pay_len - (oal_uint32)extend_len);
 
     OAL_NETBUF_NEXT(netbuf) = NULL;
@@ -1830,7 +1830,7 @@ oal_int32 hcc_send_rx_queue(struct hcc_handler *hcc, hcc_queue_type type)
     netbuf_hdr = &hcc->hcc_transer_info.hcc_queues[HCC_RX].queues[type].data_queue;
     oal_netbuf_list_head_init(&st_netbuf_header);
 #ifndef WIN32
-    /*hcc队列会在中断操作，必须用irq_save*/
+    /*hcc????????????????????????irq_save*/
     spin_lock_irqsave(&netbuf_hdr->lock, ul_irq_flag);
     oal_netbuf_splice_init(netbuf_hdr, &st_netbuf_header);
     spin_unlock_irqrestore(&netbuf_hdr->lock, ul_irq_flag);
@@ -1838,7 +1838,7 @@ oal_int32 hcc_send_rx_queue(struct hcc_handler *hcc, hcc_queue_type type)
     oal_netbuf_splice_sync(&st_netbuf_header, netbuf_hdr);
 #endif
 
-    /* 依次处理队列中每个netbuf */
+    /* ??????????????????netbuf */
     for(;;)
     {
 
@@ -1906,7 +1906,7 @@ oal_int32 hcc_send_rx_queue(struct hcc_handler *hcc, hcc_queue_type type)
             /*simple process, when pre do failed,
             keep the netbuf in list,
             and skip the loop*/
-            /*pre do失败，netbuf重新入队，同时同步队列*/
+            /*pre do??????netbuf??????????????????????*/
             oal_netbuf_list_tail_nolock(&st_netbuf_header,pst_netbuf);
             oal_netbuf_splice_sync(netbuf_hdr, &st_netbuf_header);
             break;
@@ -1997,7 +1997,7 @@ oal_void   hcc_host_get_flowctl_stat(oal_void)
 {
     oal_uint16 us_queue_idx;
 
-    /* 输出各个队列的状态信息 */
+    /* ?????????????????????? */
     for(us_queue_idx = 0; us_queue_idx < HCC_QUEUE_COUNT; us_queue_idx++)
     {
         OAL_IO_PRINT("Q[%d]:bst_lmt[%d],low_wl[%d],high_wl[%d]\r\n",
@@ -2050,13 +2050,13 @@ oal_void    hcc_host_update_vi_flowctl_param(oal_uint32 be_cwmin, oal_uint32 vi_
     oal_uint16  us_low_waterline;
     oal_uint16  us_high_waterline;
 
-    /* 如果vi与be的edca参数设置为一致，则更新VI的拥塞控制参数 */
+    /* ????vi??be??edca??????????????????????VI?????????????? */
     if (be_cwmin == vi_cwmin)
     {
         hcc_host_get_flowctl_param(DATA_UDP_BE_QUEUE, &us_burst_limit, &us_low_waterline, &us_high_waterline);
         hcc_host_set_flowctl_param(DATA_UDP_VI_QUEUE, us_burst_limit, us_low_waterline, us_high_waterline);
     }
-    else //否则设置vi的拥塞控制参数为默认值
+    else //????????vi??????????????????????
     {
         hcc_host_set_flowctl_param(DATA_UDP_VI_QUEUE, 40, 40, 80);
     }
@@ -2119,7 +2119,7 @@ oal_int32 hcc_thread_process(struct hcc_handler *hcc)
         ret += hcc_send_rx_queue(hcc, DATA_HI_QUEUE);
         ret += hcc_send_tx_queue(hcc, DATA_HI_QUEUE);
 
-        /* 下行TCP优先 */
+        /* ????TCP???? */
         ret += hcc_send_rx_queue(hcc, DATA_TCP_DATA_QUEUE);
         ret += hcc_send_tx_queue(hcc, DATA_TCP_ACK_QUEUE);
 
@@ -2163,7 +2163,7 @@ oal_int32 hcc_thread_process(struct hcc_handler *hcc)
         ret += hcc_send_tx_queue(hcc, DATA_LO_QUEUE);
         ret += hcc_send_rx_queue(hcc, DATA_LO_QUEUE);
 
-        /* udp业务 */
+        /* udp???? */
         ret += hcc_send_tx_queue(hcc, DATA_UDP_VO_QUEUE);
         ret += hcc_send_rx_queue(hcc, DATA_UDP_VO_QUEUE);
 
@@ -2265,7 +2265,7 @@ oal_int32 hcc_transfer_thread(oal_void *data)
 #if (_PRE_OS_VERSION_LINUX == _PRE_OS_VERSION)
         if(!count)
         {
-            /*空转*/
+            /*????*/
             cpu_relax();
         }
 #endif
@@ -2499,7 +2499,7 @@ oal_void hcc_trans_flow_ctrl_info_reset(struct hcc_handler  *hcc)
     oal_cancel_delayed_work_sync(&hcc->hcc_transer_info.tx_flow_ctrl.worker);
 
     hcc->hcc_transer_info.tx_flow_ctrl.flowctrl_flag = D2H_MSG_FLOWCTRL_OFF;
-    hcc->hcc_transer_info.tx_flow_ctrl.uc_hipriority_cnt = 0;/*默认不允许发送等待wcpu更新credit*/
+    hcc->hcc_transer_info.tx_flow_ctrl.uc_hipriority_cnt = 0;/*??????????????????wcpu????credit*/
 }
 
 oal_void hcc_trans_flow_ctrl_info_init(struct hcc_handler  *hcc)
@@ -2539,7 +2539,7 @@ oal_void hcc_trans_flow_ctrl_info_init(struct hcc_handler  *hcc)
         hcc->hcc_transer_info.hcc_queues[HCC_RX].queues[i].flow_ctrl.high_waterline= 512;
     }
 
-    /*DEVICE 没有给高优先级预留内存，所有队列都需要流控。*/
+    /*DEVICE ????????????????????????????????????????????*/
     hcc->hcc_transer_info.hcc_queues[HCC_TX].queues[DATA_HI_QUEUE].flow_ctrl.enable = OAL_FALSE;
 #ifdef _PRE_WLAN_FEATURE_OFFLOAD_FLOWCTL
 
@@ -2629,7 +2629,7 @@ struct hcc_handler* hcc_module_init(hcc_bus_dev* pst_bus_dev)
 
     OAL_BUILD_BUG_ON(HCC_HDR_LEN > HCC_HDR_TOTAL_LEN);
 
-    /*main_type:4 只能表示16种类型*/
+    /*main_type:4 ????????16??????*/
     OAL_BUILD_BUG_ON(HCC_ACTION_TYPE_BUTT > 15);
 
     /*1544-the max netbuf len of device*/

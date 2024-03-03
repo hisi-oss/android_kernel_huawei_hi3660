@@ -285,7 +285,7 @@ static int hifi_misc_async_write(unsigned char *arg, unsigned int len)
 		goto END;
 	}
 
-	/*调用核间通信接口发送数据*/
+	/*????????????????????????*/
 	ret = SEND_MSG_TO_HIFI(MAILBOX_MAILCODE_ACPU_TO_HIFI_MISC, arg, len);
 	if (OK != ret) {
 		loge("msg send to hifi fail,ret is %d.\n", ret);
@@ -319,7 +319,7 @@ static int hifi_misc_sync_write(unsigned char  *buff, unsigned int len)
 	INIT_COMPLETION(s_misc_data.completion);
 #endif
 
-	/*调用核间通信接口发送数据，得到返回值ret*/
+	/*????????????????????????????????????ret*/
 	ret = SEND_MSG_TO_HIFI(MAILBOX_MAILCODE_ACPU_TO_HIFI_MISC, buff, len);
 	if (OK != ret) {
 		loge("msg send to hifi fail,ret is %d.\n", ret);
@@ -475,9 +475,9 @@ static void hifi_misc_handle_mail(void *usr_para, void *mail_handle, unsigned in
 	}
 	memset(recv, 0, sizeof(struct recv_request));/* unsafe_function_ignore: memset */
 
-	/* 设定SIZE */
+	/* ????SIZE */
 	recv->rev_msg.mail_buff_len = mail_len;
-	/* 分配总的空间 */
+	/* ???????????? */
 	recv->rev_msg.mail_buff = (unsigned char *)kmalloc(mail_len, GFP_ATOMIC);
 	if (NULL == recv->rev_msg.mail_buff)
 	{
@@ -486,7 +486,7 @@ static void hifi_misc_handle_mail(void *usr_para, void *mail_handle, unsigned in
 	}
 	memset(recv->rev_msg.mail_buff, 0, mail_len);/* unsafe_function_ignore: memset */
 
-	/* 将剩余内容copy透传到buff中 */
+	/* ??????????copy??????buff?? */
 	ret_mail = mailbox_read_msg_data(mail_handle, (char*)(recv->rev_msg.mail_buff), (unsigned int *)(&(recv->rev_msg.mail_buff_len)));
 
 	if ((ret_mail != MAILBOX_OK) || (recv->rev_msg.mail_buff_len == 0)) {
@@ -497,10 +497,10 @@ static void hifi_misc_handle_mail(void *usr_para, void *mail_handle, unsigned in
 	logd("ret_mail=%d, mail_buff_len=%d, msgID=0x%x.\n", ret_mail, recv->rev_msg.mail_buff_len,
 		 *((unsigned int *)(recv->rev_msg.mail_buff + mail_len - SIZE_CMD_ID)));
 
-	/* 约定，前4个字节是cmd_id */
+	/* ????????4????????cmd_id */
 	cmd_para   = (HIFI_CHN_CMD *)(recv->rev_msg.mail_buff + mail_len - SIZE_CMD_ID);
 	recmsg = (void*)recv->rev_msg.mail_buff;
-	/* 赋予不同的接收指针，由接收者释放分配空间 */
+	/* ???????????????????????????????????????? */
 	if (HIFI_CHN_SYNC_CMD == cmd_para->cmd_type) {
 		if (s_misc_data.sn == cmd_para->sn) {
 			spin_lock_bh(&s_misc_data.recv_sync_lock);
@@ -563,13 +563,13 @@ static int hifi_dsp_get_input_param(unsigned int usr_para_size, const void *usr_
 
 	IN_FUNCTION;
 
-	/* 限制分配空间 */
+	/* ???????????? */
 	if ((usr_para_size == 0) || (usr_para_size > SIZE_LIMIT_PARAM - SIZE_CMD_ID)) {
 		loge("usr_para_size(%u) exceed LIMIT(0/%u).\n", usr_para_size, SIZE_LIMIT_PARAM - SIZE_CMD_ID);
 		goto ERR;
 	}
 
-	/*获取arg入参*/
+	/*????arg????*/
 	para_size_in = usr_para_size + SIZE_CMD_ID;
 	para_in = kzalloc(para_size_in, GFP_KERNEL);
 	if (NULL == para_in) {
@@ -587,7 +587,7 @@ static int hifi_dsp_get_input_param(unsigned int usr_para_size, const void *usr_
 		goto ERR;
 	}
 
-	/* 设置出参 */
+	/* ???????? */
 	*krn_para_size = para_size_in;
 	*krn_para_addr = para_in;
 
@@ -632,14 +632,14 @@ static int hifi_dsp_get_output_param(unsigned int krn_para_size, const void *krn
 
 	IN_FUNCTION;
 
-	/* 入参判定 */
+	/* ???????? */
 	if (NULL == krn_para_addr) {
 		loge("krn_para_addr is NULL.\n");
 		ret = -EINVAL;
 		goto END;
 	}
 
-	/* 入参判定 */
+	/* ???????? */
 	if ((NULL == usr_para_addr) || (NULL == usr_para_size)) {
 		loge("usr_size_p=0x%pK, usr_addr=0x%pK.\n", usr_para_size, usr_para_addr);
 		ret = -EINVAL;
@@ -695,7 +695,7 @@ static int hifi_dsp_async_cmd(unsigned long arg)
 	}
 
 	para_addr_in = INT_TO_ADDR(param.para_in_l,param.para_in_h);
-	/*获取arg入参*/
+	/*????arg????*/
 	ret = hifi_dsp_get_input_param(param.para_size_in, para_addr_in,
 								   &para_krn_size_in, &para_krn_in);
 	if (OK != ret) {
@@ -707,7 +707,7 @@ static int hifi_dsp_async_cmd(unsigned long arg)
 	cmd_para->cmd_type = HIFI_CHN_SYNC_CMD;
 	cmd_para->sn = ACPU_TO_HIFI_ASYNC_CMD;
 
-	/*邮箱发送至HIFI, 异步*/
+	/*??????????HIFI, ????*/
 	ret = hifi_misc_async_write(para_krn_in, para_krn_size_in);
 	if (OK != ret) {
 		loge("async_write ret=%d.\n", ret);
@@ -750,7 +750,7 @@ static int hifi_dsp_sync_cmd(unsigned long arg)
 
 	para_addr_in   = INT_TO_ADDR(param.para_in_l ,param.para_in_h);
 	para_addr_out  = INT_TO_ADDR(param.para_out_l,param.para_out_h);
-	/*获取arg入参*/
+	/*????arg????*/
 	ret = hifi_dsp_get_input_param(param.para_size_in, para_addr_in,
 						&para_krn_size_in, &para_krn_in);
 	if (OK != ret) {
@@ -764,7 +764,7 @@ static int hifi_dsp_sync_cmd(unsigned long arg)
 
 	cmd_para->sn = s_misc_data.sn;
 
-	/*邮箱发送至HIFI, 同步*/
+	/*??????????HIFI, ????*/
 	ret = hifi_misc_sync_write(para_krn_in, para_krn_size_in);
 	if (OK != ret) {
 		loge("hifi_misc_sync_write ret=%d.\n", ret);
@@ -778,7 +778,7 @@ static int hifi_dsp_sync_cmd(unsigned long arg)
 		goto END;
 	}
 
-	/*将获得的rev_msg信息填充到出参arg*/
+	/*????????rev_msg??????????????arg*/
 	spin_lock_bh(&s_misc_data.recv_sync_lock);
 
 	if (!list_empty(&recv_sync_work_queue_head)) {
@@ -818,7 +818,7 @@ END:
 	if (mail_buf)
 		kfree(mail_buf);
 
-	/*释放krn入参*/
+	/*????krn????*/
 	hifi_dsp_get_input_param_free(&para_krn_in);
 
 	OUT_FUNCTION;
@@ -895,10 +895,10 @@ static int hifi_dsp_wakeup_read_thread(unsigned long arg)
 
 	wake_lock_timeout(&s_misc_data.hifi_misc_wakelock, HZ);
 
-	/* 设定SIZE */
+	/* ????SIZE */
 	recv->rev_msg.mail_buff_len = sizeof(struct misc_recmsg_param) + SIZE_CMD_ID;
 
-	/* 分配总的空间 */
+	/* ???????????? */
 	recv->rev_msg.mail_buff = (unsigned char *)kmalloc(recv->rev_msg.mail_buff_len, GFP_ATOMIC);
 	if (NULL == recv->rev_msg.mail_buff)
 	{
@@ -1279,16 +1279,16 @@ static long hifi_misc_ioctl(struct file *fd,
 		return (long)-EINVAL;
 	}
 
-	/*cmd命令处理*/
+	/*cmd????????*/
 	switch(cmd) {
-		case HIFI_MISC_IOCTL_ASYNCMSG/*异步命令*/:
+		case HIFI_MISC_IOCTL_ASYNCMSG/*????????*/:
 			logd("ioctl: HIFI_MISC_IOCTL_ASYNCMSG\n");
 			mutex_lock(&s_misc_data.ioctl_mutex);
 			ret = hifi_dsp_async_cmd((unsigned long)data32);
 			mutex_unlock(&s_misc_data.ioctl_mutex);
 			break;
 
-		case HIFI_MISC_IOCTL_SYNCMSG/*同步命令*/:
+		case HIFI_MISC_IOCTL_SYNCMSG/*????????*/:
 			logd("ioctl: HIFI_MISC_IOCTL_SYNCMSG\n");
 			ret = down_interruptible(&s_misc_sem);
 			if (ret != 0)
@@ -1300,7 +1300,7 @@ static long hifi_misc_ioctl(struct file *fd,
 			up(&s_misc_sem);
 			break;
 
-		case HIFI_MISC_IOCTL_GET_PHYS/*获取*/:
+		case HIFI_MISC_IOCTL_GET_PHYS/*????*/:
 			logd("ioctl: HIFI_MISC_IOCTL_GET_PHYS\n");
 			mutex_lock(&s_misc_data.ioctl_mutex);
 			ret = hifi_dsp_get_phys_cmd((unsigned long)data32);
@@ -1374,7 +1374,7 @@ static long hifi_misc_ioctl(struct file *fd,
 			break;
 
 		default:
-			/*打印无该CMD类型*/
+			/*????????CMD????*/
 			ret = (long)ERROR;
 			loge("ioctl: Invalid CMD 0x%x\n", (unsigned int)cmd);
 			break;
@@ -1907,7 +1907,7 @@ static int hifi_misc_probe (struct platform_device *pdev)
 
 	hifi_misc_proc_init();
 
-	/*初始化接受信号量*/
+	/*????????????????*/
 	spin_lock_init(&s_misc_data.recv_sync_lock);
 	spin_lock_init(&s_misc_data.recv_proc_lock);
 	spin_lock_init(&s_misc_data.pcm_read_lock);
@@ -1915,10 +1915,10 @@ static int hifi_misc_probe (struct platform_device *pdev)
 	mutex_init(&s_misc_data.ioctl_mutex);
 	mutex_init(&s_misc_data.proc_read_mutex);
 
-	/*初始化同步信号量*/
+	/*????????????????*/
 	init_completion(&s_misc_data.completion);
 
-	/*初始化读文件信号量*/
+	/*??????????????????*/
 	init_waitqueue_head(&s_misc_data.proc_waitq);
 	s_misc_data.wait_flag = 0;
 
@@ -1955,7 +1955,7 @@ static int hifi_misc_probe (struct platform_device *pdev)
 	s_misc_data.multi_mic_ctrl.audio_clk_state = HI6402_DP_CLK_ON;
 	INIT_LIST_HEAD(&s_misc_data.multi_mic_ctrl.cmd_queue);
 	spin_lock_init(&(s_misc_data.multi_mic_ctrl.cmd_lock));
-	/*注册双核通信处理函数*/
+	/*????????????????????*/
 	ret = mailbox_reg_msg_cb(MAILBOX_MAILCODE_HIFI_TO_ACPU_MISC, (mb_msg_cb)hifi_misc_handle_mail, NULL);
 
 	if (OK != ret) {

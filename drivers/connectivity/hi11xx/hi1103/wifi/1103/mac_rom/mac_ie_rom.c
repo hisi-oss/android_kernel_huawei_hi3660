@@ -9,7 +9,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "mac_ie.h"
 #include "mac_frame.h"
@@ -19,7 +19,7 @@ extern "C" {
 #undef  THIS_FILE_ID
 #define THIS_FILE_ID OAM_FILE_ID_MAC_IE_ROM_C
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 mac_ie_cb g_st_mac_ie_rom_cb = {OAL_PTR_NULL,
                                 OAL_PTR_NULL,
@@ -27,7 +27,7 @@ mac_ie_cb g_st_mac_ie_rom_cb = {OAL_PTR_NULL,
 
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 oal_uint8  mac_ie_get_chan_num_etc(oal_uint8 *puc_frame_body, oal_uint16 us_frame_len, oal_uint16 us_offset,oal_uint8 uc_curr_chan)
@@ -35,7 +35,7 @@ oal_uint8  mac_ie_get_chan_num_etc(oal_uint8 *puc_frame_body, oal_uint16 us_fram
     oal_uint8   uc_chan_num = 0;
     oal_uint8  *puc_ie_start_addr;
 
-    /* 在DSSS Param set ie中解析chan num */
+    /* ??DSSS Param set ie??????chan num */
     puc_ie_start_addr = mac_find_ie_etc(MAC_EID_DSPARMS, puc_frame_body + us_offset, us_frame_len - us_offset);
     if ((OAL_PTR_NULL != puc_ie_start_addr) && (puc_ie_start_addr[1] == MAC_DSPARMS_LEN))
     {
@@ -46,7 +46,7 @@ oal_uint8  mac_ie_get_chan_num_etc(oal_uint8 *puc_frame_body, oal_uint16 us_fram
         }
     }
 
-    /* 在HT operation ie中解析 chan num */
+    /* ??HT operation ie?????? chan num */
     puc_ie_start_addr = mac_find_ie_etc(MAC_EID_HT_OPERATION, puc_frame_body + us_offset, us_frame_len - us_offset);
 
     if ((OAL_PTR_NULL != puc_ie_start_addr) && (puc_ie_start_addr[1] >= 1))
@@ -81,11 +81,11 @@ oal_uint32  mac_set_channel_switch_wrapper_ie(
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 默认输出为空 */
+    /* ???????????? */
     *pauc_buffer    = '\0';
     *puc_output_len = 0;
 
-    /* 11ac 设置Channel Switch Wrapper IE                             */
+    /* 11ac ????Channel Switch Wrapper IE                             */
     /******************************************************************/
     /* -------------------------------------------------------------- */
     /* |ID |Length |New Country IE|Wideband IE |VHT power IE          */
@@ -99,10 +99,10 @@ oal_uint32  mac_set_channel_switch_wrapper_ie(
     pauc_buffer += 2;
 
     /* COUNTRY SUB ELEMENT --- N/A                       */
-    /* 当前的信道切换仅考虑由DFS触发，不会导致管制域切换 */
+    /* ??????????????????????DFS???????????????????????? */
 
     /* WIDEBAND SUB ELEMENT  */
-    /* 仅对20M以上带宽才有效 */
+    /* ????20M?????????????? */
     en_need_wideband_sub_ie = OAL_TRUE;
     uc_sub_len = 0;
     if (WLAN_BAND_WIDTH_20M == en_bw)
@@ -113,7 +113,7 @@ oal_uint32  mac_set_channel_switch_wrapper_ie(
     if (OAL_TRUE == en_need_wideband_sub_ie)
     {
         uc_sub_len = 0;
-        /* 填写Wideband 子IE */
+        /* ????Wideband ??IE */
         pauc_buffer[0] = 194;
         pauc_buffer[1] = 3;
         switch(en_bw)
@@ -162,9 +162,9 @@ oal_uint32  mac_set_channel_switch_wrapper_ie(
     uc_total_len += uc_sub_len;
 
     /* VHT POWER SUB ELEMENT --- N/A  */
-    /* 目前的切换不会导致功率改变     */
+    /* ??????????????????????????     */
 
-    /* 回填WRAPPER IE LEN */
+    /* ????WRAPPER IE LEN */
     *puc_wrapper_ie_len = uc_total_len;
 
     *puc_output_len = uc_total_len + 2;
@@ -188,11 +188,11 @@ oal_uint32  mac_set_second_channel_offset_ie_etc(
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 默认输出为空 */
+    /* ???????????? */
     *pauc_buffer    = '\0';
     *puc_output_len = 0;
 
-    /* 11n 设置Secondary Channel Offset Element */
+    /* 11n ????Secondary Channel Offset Element */
     /******************************************************************/
     /* -------------------------------------------------------------- */
     /* |Ele. ID |Length |Secondary channel offset |                   */
@@ -259,11 +259,11 @@ oal_uint32  mac_set_11ac_wideband_ie_etc(
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 默认输出为空 */
+    /* ???????????? */
     *pauc_buffer     = '\0';
     *puc_output_len  = 0;
 
-    /* 11ac 设置Wide Bandwidth Channel Switch Element                 */
+    /* 11ac ????Wide Bandwidth Channel Switch Element                 */
     /******************************************************************/
     /* -------------------------------------------------------------- */
     /* |ID |Length |New Ch width |Center Freq seg1 |Center Freq seg2  */
@@ -313,37 +313,37 @@ oal_uint32  mac_set_11ac_wideband_ie_etc(
             pauc_buffer[3] = uc_channel - 2;
         break;
 
-        /* 从20信道+1, 从40信道-1, 从80信道+1 */
+        /* ??20????+1, ??40????-1, ??80????+1 */
         case WLAN_BAND_WIDTH_160PLUSMINUSPLUS:
             pauc_buffer[2] = 1;
             pauc_buffer[3] = uc_channel + 6;
         break;
 
-        /* 从20信道+1, 从40信道-1, 从80信道-1 */
+        /* ??20????+1, ??40????-1, ??80????-1 */
         case WLAN_BAND_WIDTH_160PLUSMINUSMINUS:
             pauc_buffer[2] = 1;
             pauc_buffer[3] = uc_channel - 10;
         break;
 
-        /* 从20信道-1, 从40信道+1, 从80信道+1 */
+        /* ??20????-1, ??40????+1, ??80????+1 */
         case WLAN_BAND_WIDTH_160MINUSPLUSPLUS:
             pauc_buffer[2] = 1;
             pauc_buffer[3] = uc_channel + 10;
         break;
 
-        /* 从20信道-1, 从40信道+1, 从80信道-1 */
+        /* ??20????-1, ??40????+1, ??80????-1 */
         case WLAN_BAND_WIDTH_160MINUSPLUSMINUS:
             pauc_buffer[2] = 1;
             pauc_buffer[3] = uc_channel - 6;
         break;
 
-        /* 从20信道-1, 从40信道-1, 从80信道+1 */
+        /* ??20????-1, ??40????-1, ??80????+1 */
         case WLAN_BAND_WIDTH_160MINUSMINUSPLUS:
             pauc_buffer[2] = 1;
             pauc_buffer[3] = uc_channel + 2;
         break;
 
-        /* 从20信道-1, 从40信道-1, 从80信道-1 */
+        /* ??20????-1, ??40????-1, ??80????-1 */
         case WLAN_BAND_WIDTH_160MINUSMINUSMINUS:
             pauc_buffer[2] = 1;
             pauc_buffer[3] = uc_channel - 14;
@@ -367,8 +367,8 @@ oal_uint32  mac_set_11ac_wideband_ie_etc(
 
 oal_uint32  mac_ie_proc_chwidth_field_etc(mac_vap_stru *pst_mac_vap, mac_user_stru *pst_mac_user,oal_uint8 uc_chwidth)
 {
-    wlan_bw_cap_enum_uint8      en_bwcap_vap = 0;        /* vap自身带宽能力 */
-    wlan_bw_cap_enum_uint8      en_bwcap_user = 0;       /* user之前的带宽信息 */
+    wlan_bw_cap_enum_uint8      en_bwcap_vap = 0;        /* vap???????????? */
+    wlan_bw_cap_enum_uint8      en_bwcap_user = 0;       /* user?????????????? */
 
     if (OAL_UNLIKELY((OAL_PTR_NULL == pst_mac_user) || (OAL_PTR_NULL == pst_mac_vap)))
     {
@@ -386,8 +386,8 @@ oal_uint32  mac_ie_proc_chwidth_field_etc(mac_vap_stru *pst_mac_vap, mac_user_st
     //l00311403TODO
     if (en_bwcap_user != pst_mac_user->en_avail_bandwidth)
     {
-        /* 调用算法钩子函数 */
-        //后面需要抛事件到dmac, dmac_alg_cfg_user_spatial_stream_notify(pst_mac_user);
+        /* ???????????????? */
+        //????????????????dmac, dmac_alg_cfg_user_spatial_stream_notify(pst_mac_user);
     }
 
     return OAL_SUCC;
@@ -409,7 +409,7 @@ oal_uint32  mac_proc_ht_opern_ie_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc_p
         return ul_change;
     }
 
-    /* 长度校验，此处仅用到前6字节，后面Basic MCS Set未涉及 */
+    /* ??????????????????????6??????????Basic MCS Set?????? */
     if (puc_payload[1] < 6)
     {
         OAM_WARNING_LOG1(pst_mac_vap->uc_vap_id, OAM_SF_ANY, "{mac_proc_ht_opern_ie_etc::invalid ht opern ie len[%d].}", puc_payload[1]);
@@ -461,17 +461,17 @@ oal_uint32  mac_proc_ht_opern_ie_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *puc_p
 
     pst_ht_opern  = (mac_ht_opern_stru *)(&puc_payload[MAC_IE_HDR_LEN]);
 
-    /* 提取HT Operation IE中的"Secondary Channel Offset" */
+    /* ????HT Operation IE????"Secondary Channel Offset" */
     st_ht_hdl.bit_secondary_chan_offset = pst_ht_opern->bit_secondary_chan_offset;
 
-    /* 在2.4G用户声称20M情况下该变量不切换 */
+    /* ??2.4G????????20M?????????????????? */
     if ((WLAN_BAND_WIDTH_20M == pst_ht_opern->bit_sta_chan_width) && (WLAN_BAND_2G == pst_mac_vap->st_channel.en_band))
     {
         st_ht_hdl.bit_secondary_chan_offset = MAC_SCN;
     }
 
-    /* 保护相关 */
-    st_ht_hdl.bit_rifs_mode                         = pst_ht_opern->bit_rifs_mode;/*发送描述符填写时候需要此值*/
+    /* ???????? */
+    st_ht_hdl.bit_rifs_mode                         = pst_ht_opern->bit_rifs_mode;/*??????????????????????????*/
     st_ht_hdl.bit_HT_protection                     = pst_ht_opern->bit_HT_protection;
     st_ht_hdl.bit_nongf_sta_present                 = pst_ht_opern->bit_nongf_sta_present;
     st_ht_hdl.bit_obss_nonht_sta_present            = pst_ht_opern->bit_obss_nonht_sta_present;
@@ -538,7 +538,7 @@ oal_uint32  mac_ie_proc_obss_scan_ie_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *p
 
     mac_mib_set_OBSSScanPassiveDwell(pst_mac_vap, OAL_MAKE_WORD16(puc_payload[2], puc_payload[3]));
     mac_mib_set_OBSSScanActiveDwell(pst_mac_vap, OAL_MAKE_WORD16(puc_payload[4], puc_payload[5]));
-    /* obss扫描周期最小180秒,最大600S, 初始化默认为300秒 */
+    /* obss????????????180??,????600S, ????????????300?? */
     mac_mib_set_BSSWidthTriggerScanInterval(pst_mac_vap, OAL_MIN(OAL_MAX(us_trigger_scan_interval, 180), 600));
     mac_mib_set_OBSSScanPassiveTotalPerChannel(pst_mac_vap, OAL_MAKE_WORD16(puc_payload[8], puc_payload[9]));
     mac_mib_set_OBSSScanActiveTotalPerChannel(pst_mac_vap, OAL_MAKE_WORD16(puc_payload[10], puc_payload[11]));
@@ -566,7 +566,7 @@ oal_uint32  mac_ie_proc_vht_opern_ie_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *p
         return uc_ret;
     }
 
-    /* 长度校验 */
+    /* ???????? */
     if (puc_payload[1] < MAC_VHT_OPERN_LEN)
     {
         OAM_WARNING_LOG1(0, OAM_SF_ANY, "{mac_ie_proc_vht_opern_ie_etc::invalid vht opern len[%d].}", puc_payload[1]);
@@ -578,7 +578,7 @@ oal_uint32  mac_ie_proc_vht_opern_ie_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *p
     en_channel_width_old = st_vht_hdl.en_channel_width;
     uc_channel_center_freq_seg0_old = st_vht_hdl.uc_channel_center_freq_seg0;
 
-    /* 解析 "VHT Operation Information" */
+    /* ???? "VHT Operation Information" */
     st_vht_hdl.en_channel_width            = puc_payload[MAC_IE_HDR_LEN];
     st_vht_hdl.uc_channel_center_freq_seg0 = puc_payload[MAC_IE_HDR_LEN + 1];
     st_vht_hdl.uc_channel_center_freq_seg1 = puc_payload[MAC_IE_HDR_LEN + 2];
@@ -590,7 +590,7 @@ oal_uint32  mac_ie_proc_vht_opern_ie_etc(mac_vap_stru *pst_mac_vap, oal_uint8 *p
         st_vht_hdl.en_channel_width = WLAN_MIB_VHT_OP_WIDTH_20_40;
     }
 
-    /* 解析 "VHT Basic MCS Set field" */
+    /* ???? "VHT Basic MCS Set field" */
     us_basic_mcs_set_all_user = OAL_MAKE_WORD16(puc_payload[MAC_IE_HDR_LEN + 3], puc_payload[MAC_IE_HDR_LEN + 4]);
     st_vht_hdl.us_basic_mcs_set = us_basic_mcs_set_all_user;
 
@@ -659,7 +659,7 @@ oal_uint32 mac_ie_get_wpa_cipher(oal_uint8 *puc_ie, mac_crypto_settings_stru *ps
     pst_crypto->n_pair_suite = us_suites_count;
 #endif
 
-    /* Pairwise Cipher Suite 最多存2个 */
+    /* Pairwise Cipher Suite ??????2?? */
     for (uc_suite_idx = 0; uc_suite_idx < us_suites_count; uc_suite_idx++)
     {
         if (uc_suite_idx < WLAN_PAIRWISE_CIPHER_SUITES)
@@ -680,7 +680,7 @@ oal_uint32 mac_ie_get_wpa_cipher(oal_uint8 *puc_ie, mac_crypto_settings_stru *ps
     pst_crypto->n_akm_suites = us_suites_count;
 #endif
 
-    /* AKM Suite 最多存2个 */
+    /* AKM Suite ??????2?? */
     for (uc_suite_idx = 0; uc_suite_idx < us_suites_count; uc_suite_idx++)
     {
         if (uc_suite_idx < WLAN_AUTHENTICATION_SUITES)
@@ -741,7 +741,7 @@ oal_uint32 mac_ie_get_rsn_cipher(oal_uint8 *puc_ie, mac_crypto_settings_stru *ps
     pst_crypto->n_pair_suite = us_suites_count;
 #endif
 
-    /* Pairwise Cipher Suite 最多存2个 */
+    /* Pairwise Cipher Suite ??????2?? */
     for (us_suite_idx = 0; us_suite_idx < us_suites_count; us_suite_idx++)
     {
         if (us_suite_idx < WLAN_PAIRWISE_CIPHER_SUITES)
@@ -758,7 +758,7 @@ oal_uint32 mac_ie_get_rsn_cipher(oal_uint8 *puc_ie, mac_crypto_settings_stru *ps
     pst_crypto->n_akm_suites = us_suites_count;
 #endif
 
-    /* AKM Suite 最多存2个 */
+    /* AKM Suite ??????2?? */
     for (us_suite_idx = 0; us_suite_idx < us_suites_count; us_suite_idx++)
     {
         if (us_suite_idx < WLAN_AUTHENTICATION_SUITES)
@@ -768,10 +768,10 @@ oal_uint32 mac_ie_get_rsn_cipher(oal_uint8 *puc_ie, mac_crypto_settings_stru *ps
         puc_ie += 4;
     }
 
-    /* 越过RSN Capabilities */
+    /* ????RSN Capabilities */
     puc_ie += 2;
 
-    /* 目前PMK信息暂不做处理 */
+    /* ????PMK?????????????? */
     if(OAL_FALSE == MAC_IE_REAMIN_LEN_IS_ENOUGH(puc_src_ie, puc_ie, uc_ie_len, 2))
     {
         return OAL_SUCC;
@@ -783,7 +783,7 @@ oal_uint32 mac_ie_get_rsn_cipher(oal_uint8 *puc_ie, mac_crypto_settings_stru *ps
         puc_ie += 4;
     }
 
-    /* 获取Group Management Cipher Suite信息 */
+    /* ????Group Management Cipher Suite???? */
     if(OAL_FALSE == MAC_IE_REAMIN_LEN_IS_ENOUGH(puc_src_ie, puc_ie, uc_ie_len, 4))
     {
         return OAL_SUCC;

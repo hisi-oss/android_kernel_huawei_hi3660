@@ -66,7 +66,7 @@ extern "C"
 #define NV_RESTORE_RUNNING              0x5A5A55AA
 
 
-/******************************** NV恢复表类型 *********************************/
+/******************************** NV?????????? *********************************/
 enum NV_RESUME_ITEM
 {
     NV_MANUFACTURE_ITEM = 0,
@@ -77,51 +77,51 @@ enum NV_RESUME_ITEM
 typedef unsigned long NV_RESUME_ITEM_ENUM_UINT32;
 
 /*****************************************************************************
- *  结构名    : NV_LIST_INFO_STRU
- *  协议表格  :
- *  ASN.1描述 :
- *  结构说明  : 获取NV列表信息
+ *  ??????    : NV_LIST_INFO_STRU
+ *  ????????  :
+ *  ASN.1???? :
+ *  ????????  : ????NV????????
  ******************************************************************************/
 typedef struct tag_NV_LIST_INFO_STRU
 {
-	unsigned short usNvId;                  /*NVID值*/
-	unsigned char  ucNvModemNum;            /*NV是否存在多份*/
+	unsigned short usNvId;                  /*NVID??*/
+	unsigned char  ucNvModemNum;            /*NV????????????*/
 	unsigned char  ucRsv;
 }NV_LIST_INFO_STRU;  /*back*/
 
 
-/* 读不同Modem NV项数据 */
+/* ??????Modem NV?????? */
 unsigned int mdrv_nv_readex(unsigned int modemid, unsigned int itemid, void *pdata, unsigned int ulLength);
 
-/* 写不同Modem NV项数据 */
+/* ??????Modem NV?????? */
 unsigned int mdrv_nv_writeex(unsigned int modemid, unsigned int itemid,void *pdata, unsigned int ulLength);
 
-/* 读NV项数据 */
+/* ??NV?????? */
 unsigned int mdrv_nv_read_partex(unsigned int modemid, unsigned int itemid, unsigned int ulOffset, void *pdata, unsigned int ulLength);
 
-/* 写部分NV项数据 */
+/* ??????NV?????? */
 unsigned int mdrv_nv_write_partex(unsigned int modemid, unsigned int itemid, unsigned int ulOffset, void *pdata, unsigned int ulLength);
 
 
-/* 获取NV长度 */
+/* ????NV???? */
 unsigned int mdrv_nv_get_length(unsigned int itemid, unsigned int *pulLength);
 
-/* 读NV项数据 */
+/* ??NV?????? */
 unsigned int mdrv_nv_read(unsigned int itemid, void *pdata, unsigned int ulLength);
 
-/* 写NV项数据 */
+/* ??NV?????? */
 unsigned int mdrv_nv_write(unsigned int itemid, void *pdata, unsigned int ulLength);
 
-/* 读NV项数据 */
+/* ??NV?????? */
 unsigned int mdrv_nv_readpart(unsigned int itemid, unsigned int ulOffset, void *pdata, unsigned int ulLength);
 
-/* 写部分NV项数据 */
+/* ??????NV?????? */
 unsigned int mdrv_nv_writepart(unsigned int itemid, unsigned int ulOffset, void *pdata, unsigned int ulLength);
 
-/* 将内存中的nv数据刷到flash 文件系统中*/
+/* ??????????nv????????flash ??????????*/
 unsigned int mdrv_nv_flush(void);
 
-/* 获取校准NV项的接口 */
+/* ????????NV???????? */
 unsigned int mdrv_nv_get_revert_num(unsigned int enNvItem);
 unsigned int mdrv_nv_get_revert_list(unsigned int enNvItem, void *pusNvList, unsigned int ulNvNum);
 

@@ -43,8 +43,8 @@ extern "C" {
 extern oal_atomic g_bus_powerup_dev_wait_ack;
 OAL_STATIC oal_pcie_linux_res *g_pcie_linux_res = NULL;
 
-oal_completion          g_probe_complete;/*初始化信号量*/
-OAL_VOLATILE oal_int32               g_probe_ret;     /*probe 返回值*/
+oal_completion          g_probe_complete;/*????????????*/
+OAL_VOLATILE oal_int32               g_probe_ret;     /*probe ??????*/
 
 #ifdef CONFIG_ARCH_SD56XX
 oal_void* g_pcie_sys_ctrl = NULL;
@@ -53,7 +53,7 @@ oal_void* g_pcie_sys_ctrl = NULL;
 oal_int32 g_pcie_enum_fail_reg_dump_flag = 0;
 
 
-/*1103 MPW2 先使用INTX 中断*/
+/*1103 MPW2 ??????INTX ????*/
 oal_int32 hipci_msi_enable = 0;  /* 0 -intx 1-pci*/
 oal_int32 hipci_gen_select = PCIE_GEN2;
 oal_int32 ft_pcie_aspm_check_bypass = 0;
@@ -78,7 +78,7 @@ module_param(pcie_aspm_enable, int, S_IRUGO | S_IWUSR);
 oal_int32 pcie_performance_mode = 0;
 module_param(pcie_performance_mode, int, S_IRUGO | S_IWUSR);
 
-oal_int32 pcie_rc_bar_bypass = 1;/*清掉rc bar寄存器*/
+oal_int32 pcie_rc_bar_bypass = 1;/*????rc bar??????*/
 module_param(pcie_rc_bar_bypass, int, S_IRUGO | S_IWUSR);
 
 /*Function Declare*/
@@ -143,7 +143,7 @@ oal_int32 oal_pcie_enable_device(oal_pcie_linux_res * pst_pci_lres)
 	 */
 	pci_load_and_free_saved_state(pst_pcie_dev, &pst_pci_lres->default_state);
 
-	/*Update default state*//*TBD:应该在初始化完成后保存，这里有可能PCI还不能正常访问*/
+	/*Update default state*//*TBD:??????????????????????????????????PCI??????????????*/
 	pst_pci_lres->default_state = pci_store_saved_state(pst_pcie_dev);
 #else
 	pci_load_saved_state(pst_pcie_dev, pst_pci_lres->default_state);
@@ -220,8 +220,8 @@ oal_int32 oal_pcie_save_default_resource(oal_pcie_linux_res * pst_pci_lres)
 irqreturn_t oal_pcie_intx_isr(int irq, void*dev_id)
 {
     //oal_task_sched(&((oal_pcie_linux_res*)dev_id)->st_rx_task);
-    /*中断处理内容太多，目前无法下移，因为中断需要每次读空 ，而不在中断读的话，
-      要先锁住中断，否则中断会狂报*/
+    /*???????????????????????????????????????????????????? ????????????????????
+      ????????????????????????????*/
     oal_pcie_linux_res * pst_pci_lres = (oal_pcie_linux_res*)dev_id;
     if(OAL_UNLIKELY(oal_pcie_transfer_done(pst_pci_lres->pst_pci_res) < 0))
     {
@@ -234,7 +234,7 @@ irqreturn_t oal_pcie_intx_isr(int irq, void*dev_id)
         hcc_bus_exception_submit(pst_pci_lres->pst_bus, WIFI_TRANS_FAIL);
 
         CHR_EXCEPTION_REPORT(CHR_PLATFORM_EXCEPTION_EVENTID, CHR_SYSTEM_WIFI, CHR_LAYER_DRV, CHR_WIFI_DRV_EVENT_PLAT, CHR_PLAT_DRV_ERROR_INTX_ISR_PCIE_LINK_DOWN);
-        /*关闭低功耗*/
+        /*??????????*/
 
     }
     return IRQ_HANDLED;
@@ -246,7 +246,7 @@ oal_void oal_pcie_intx_task(oal_ulong data)
     oal_pcie_mips_start(PCIE_MIPS_HCC_RX_TOTAL);
     if(oal_pcie_transfer_done(pst_pci_lres->pst_pci_res))
     {
-        /*非0说明还需要调度*/
+        /*??0??????????????*/
         oal_pcie_mips_end(PCIE_MIPS_HCC_RX_TOTAL);
         oal_task_sched(&pst_pci_lres->st_rx_task);
     }
@@ -386,7 +386,7 @@ failed_request_msi:
     return ret;
 }
 
-/*探测到一个PCIE设备, probe 函数可能会触发多次*/
+/*??????????PCIE????, probe ??????????????????*/
 OAL_STATIC oal_int32  oal_pcie_probe(oal_pci_dev_stru *pst_pci_dev, OAL_CONST oal_pci_device_id_stru *pst_id)
 {
     oal_uint8 reg8;
@@ -406,7 +406,7 @@ OAL_STATIC oal_int32  oal_pcie_probe(oal_pci_dev_stru *pst_pci_dev, OAL_CONST oa
 
     device_id = OAL_PCI_GET_DEV_ID(pst_pci_dev);
 
-    /*设备ID 和 产品ID*/
+    /*????ID ?? ????ID*/
     OAL_IO_PRINT("[PCIe][%s]devfn:0x%x , vendor:0x%x , device:0x%x , subsystem_vendor:0x%x , subsystem_device:0x%x , class:0x%x \n",
                 dev_name(&pst_pci_dev->dev),
                 pst_pci_dev->devfn,
@@ -416,7 +416,7 @@ OAL_STATIC oal_int32  oal_pcie_probe(oal_pci_dev_stru *pst_pci_dev, OAL_CONST oa
                 pst_pci_dev->subsystem_device,
                 pst_pci_dev->class);
 
-    /*TBD:TBC 暂时只考虑一个PCIE设备*/
+    /*TBD:TBC ??????????????PCIE????*/
     if(g_pcie_linux_res)
     {
         OAL_IO_PRINT("pcie device init failed, already init!\n");
@@ -492,7 +492,7 @@ OAL_STATIC oal_int32  oal_pcie_probe(oal_pci_dev_stru *pst_pci_dev, OAL_CONST oa
 
     hcc_bus_message_register(pst_bus, D2H_MSG_SHUTDOWN_IP_PRE_RESPONSE, oal_pcie_shutdown_pre_respone, (oal_void*)pst_pci_lres);
 
-    /*硬件设备资源初始化, 5610+1103 FPGA 没有上下电接口*/
+    /*??????????????????, 5610+1103 FPGA ??????????????*/
     ret = oal_pcie_dev_init(pst_pci_lres->pst_pci_res);
     if(OAL_SUCC != ret)
     {
@@ -656,11 +656,11 @@ OAL_STATIC oal_void  oal_pcie_remove(oal_pci_dev_stru *pst_pci_dev)
 OAL_STATIC oal_int32 oal_pcie_device_wakeup_handler(void* data)
 {
     OAL_REFERENCE(data);
-    /*这里保证解复位EP控制器时efuse已经稳定*/
+    /*??????????????EP????????efuse????????*/
     board_host_wakeup_dev_set(1);
     /*TBD:TBC ,
-      dev wakeup host 被复用成了panic消息，这里需要处理*/
-    //oal_msleep(25);/*这里要用GPIO 做ACK 延迟不可靠, MPW2 硬件唤醒15ms,软件6ms*/
+      dev wakeup host ??????????panic??????????????????*/
+    //oal_msleep(25);/*????????GPIO ??ACK ??????????, MPW2 ????????15ms,????6ms*/
     PCI_PRINT_LOG(PCI_LOG_INFO, "pcie wakeup device control, pull up gpio");
     return 0;
 }
@@ -677,14 +677,14 @@ OAL_STATIC oal_int32 oal_pcie_device_wake_powerup_handler(void* data)
         OAL_INIT_COMPLETION(&pst_wlan_pm->st_wifi_powerup_done);
     }
     oal_atomic_set(&g_bus_powerup_dev_wait_ack,1);
-    /*这里保证解复位EP控制器时efuse已经稳定*/
+    /*??????????????EP????????efuse????????*/
     board_host_wakeup_dev_set(1);
     if(NULL != pst_wlan_pm)
     {
         ul_ret = oal_wait_for_completion_timeout(&pst_wlan_pm->st_wifi_powerup_done, (oal_uint32)OAL_MSECS_TO_JIFFIES(2000));
         if(OAL_UNLIKELY(0 == ul_ret))
         {
-            /*超时不做处理继续尝试建链*/
+            /*????????????????????????*/
             DECLARE_DFT_TRACE_KEY_INFO("pcie_resume_powerup ack timeout", OAL_DFT_TRACE_FAIL);
             ssi_dump_device_regs(SSI_MODULE_MASK_COMM);
         }
@@ -695,7 +695,7 @@ OAL_STATIC oal_int32 oal_pcie_device_wake_powerup_handler(void* data)
     }
     else
     {
-        oal_msleep(100);/*这里要用GPIO 做ACK 延迟不可靠, S/R 唤醒 时间较长*/
+        oal_msleep(100);/*????????GPIO ??ACK ??????????, S/R ???? ????????*/
     }
 
     oal_atomic_set(&g_bus_powerup_dev_wait_ack,0);
@@ -707,18 +707,18 @@ OAL_STATIC oal_int32 oal_pcie_device_suspend_handler(void* data)
 {
     oal_pcie_linux_res * pst_pci_lres = (oal_pcie_linux_res*)data;
 #if 0
-    /*走到这里说明wakelock已经释放，WIFI已经深睡,通知RC/EP下电，
-      发送TurnOff Message*/
-    /*下电之前关闭 PCIE HOST 控制器*/
+    /*????????????wakelock??????????WIFI????????,????RC/EP??????
+      ????TurnOff Message*/
+    /*???????????? PCIE HOST ??????*/
     kirin_pcie_power_notifiy_register(kirin_rc_idx, NULL, NULL, NULL);
     kirin_pcie_pm_control(0, kirin_rc_idx);
 #else
-    /*下电在麒麟代码中处理
+    /*????????????????????
       kirin_pcie_suspend_noirq,
-      无法判断turnoff 是否成功发送*/
+      ????????turnoff ????????????*/
 #endif
 
-    /*此处不一定是真的下电了*/
+    /*??????????????????????*/
     pst_pci_lres->power_status = PCIE_EP_IP_POWER_DOWN;
 
     oal_pcie_change_link_state(pst_pci_lres->pst_pci_res, PCI_WLAN_LINK_DEEPSLEEP);
@@ -768,7 +768,7 @@ OAL_STATIC oal_int32 oal_pcie_suspend(oal_pci_dev_stru *pst_pci_dev,oal_pm_messa
 
     if(pst_bus != HDEV_TO_HBUS(HBUS_TO_DEV(pst_bus)))
     {
-        /*pcie非当前接口*/
+        /*pcie??????????*/
         oal_print_hi11xx_log(HI11XX_LOG_INFO, "pcie is not current bus, return");
         return OAL_SUCC;
     }
@@ -843,7 +843,7 @@ OAL_STATIC oal_int32 oal_pcie_resume(oal_pci_dev_stru *pst_pci_dev)
 
     if(pst_bus != HDEV_TO_HBUS(HBUS_TO_DEV(pst_bus)))
     {
-        /*pcie非当前接口*/
+        /*pcie??????????*/
         oal_print_hi11xx_log(HI11XX_LOG_INFO, "pcie is not current bus, return");
         return OAL_SUCC;
     }
@@ -1144,8 +1144,8 @@ oal_int32 oal_pcie_shutdown_pre_respone(oal_void* data)
 oal_int32 oal_pcie_switch_clean_res(hcc_bus* pst_bus)
 {
     oal_int32 ret;
-    /*清空PCIE 通道，通知Device关闭发送通道，
-      等待DMA完成所有传输后返回*/
+    /*????PCIE ??????????Device??????????????
+      ????DMA??????????????????*/
 
     oal_pcie_linux_res* pst_pci_lres = (oal_pcie_linux_res*)pst_bus->data;
 
@@ -1187,11 +1187,11 @@ OAL_STATIC oal_int32 oal_pcie_reinit(hcc_bus *pst_bus)
     ret = oal_pcie_enable_device(pst_pci_lres);
     if(OAL_SUCC == ret)
     {
-        /*需要在初始化完成后打开*/
+        /*??????????????????????*/
         //hcc_bus_enable_state(pst_bus, OAL_BUS_STATE_ALL);
     }
 
-    /*初始化PCIE资源*/
+    /*??????PCIE????*/
     ret = oal_pcie_enable_regions(pst_pci_lres->pst_pci_res);
     if(ret)
     {
@@ -1225,20 +1225,20 @@ oal_int32 oal_pci_wlan_power_on(oal_int32 power_on)
     else
     {
 #if 1
-        /* 操作芯片1的上下电复位 */
-        /*1.设置成软件模式,配置寄存器0x149001a0第7bit为1 */
+        /* ????????1???????????? */
+        /*1.??????????????,??????????0x149001a0??7bit??1 */
         ul_val = oal_readl(pst_gpio_mode + 0x1a0);
         ul_val |= BIT11;
         oal_writel(ul_val, pst_gpio_mode + 0x1a0);
 #endif
 
-        /*2.设置数据方向，配置寄存器0x10108004第23bit为1 */
+        /*2.????????????????????????0x10108004??23bit??1 */
         ul_val =  oal_readl(pst_gpio_base + 0x4);
         ul_val |= BIT23;
         oal_writel(ul_val, pst_gpio_base + 0x4);
 
 
-        /*3.设置GPIO87拉低，GPIO芯片1下电 */
+        /*3.????GPIO87??????GPIO????1???? */
         ul_val =  oal_readl(pst_gpio_base + 0x0);
         ul_val &= ~BIT23;
         oal_writel(ul_val, pst_gpio_base + 0x0);
@@ -1248,7 +1248,7 @@ oal_int32 oal_pci_wlan_power_on(oal_int32 power_on)
             //oal_udelay(10);
             oal_msleep(100);
 
-            /*4.设置GPIO87拉高，GPIO芯片1上电 */
+            /*4.????GPIO87??????GPIO????1???? */
             ul_val =  oal_readl(pst_gpio_base + 0x0);
             ul_val |= BIT23;
             oal_writel(ul_val, pst_gpio_base + 0x0);
@@ -1275,7 +1275,7 @@ oal_int32 oal_pcie_check_link_up(oal_void)
 	unsigned int loop = 0;
 	unsigned int link_up_stable_counter = 0;
     void* __iomem pcie_sys_base_virt   = NULL;
-    /*等待建链*/
+    /*????????*/
     pcie_sys_base_virt = ioremap_nocache(0x10100000, 0x1000);
     if(NULL == pcie_sys_base_virt)
     {
@@ -1344,7 +1344,7 @@ oal_int32 oal_pci_card_detect(oal_void)
 	unsigned int loop = 0;
 	unsigned int link_up_stable_counter = 0;
     void* __iomem pcie_sys_base_virt   = NULL;
-    /*等待建链*/
+    /*????????*/
     pcie_sys_base_virt = ioremap_nocache(0x10100000, 0x1000);
     if(NULL == pcie_sys_base_virt)
     {
@@ -1443,7 +1443,7 @@ OAL_STATIC oal_int32 oal_pcie_host_unlock(hcc_bus* pst_bus)
     return OAL_SUCC;
 }
 
-/*1103 PCIE 通过 host_wakeup_dev gpio 来唤醒和通知WCPU睡眠*/
+/*1103 PCIE ???? host_wakeup_dev gpio ????????????WCPU????*/
 OAL_STATIC oal_int32 oal_pcie_sleep_request(hcc_bus* pst_bus)
 {
     oal_pcie_linux_res * pst_pci_lres;
@@ -1451,8 +1451,8 @@ OAL_STATIC oal_int32 oal_pcie_sleep_request(hcc_bus* pst_bus)
 
     oal_disable_pcie_irq(pst_pci_lres);
 
-    /*拉低GPIO，PCIE只有在system suspend的时候才会下电
-      GPIO 拉低之后 DEV 随时可能进深睡，不允许再通过PCIE 访问*/
+    /*????GPIO??PCIE??????system suspend??????????????
+      GPIO ???????? DEV ????????????????????????????PCIE ????*/
     mutex_lock(&pst_pci_lres->pst_pci_res->st_rx_mem_lock);
     oal_pcie_change_link_state(pst_pci_lres->pst_pci_res, PCI_WLAN_LINK_UP);
     mutex_unlock(&pst_pci_lres->pst_pci_res->st_rx_mem_lock);
@@ -1469,8 +1469,8 @@ OAL_STATIC oal_int32 oal_pcie_wakeup_request(hcc_bus* pst_bus)
     oal_pcie_linux_res * pst_pci_lres;
     pst_pci_lres = (oal_pcie_linux_res*)pst_bus->data;
 
-    //1.拉高 Host WakeUp Device gpio
-    //2.调用kirin_pcie_pm_control 上电RC 检查建链
+    //1.???? Host WakeUp Device gpio
+    //2.????kirin_pcie_pm_control ????RC ????????
     //3.restore state, load iatu config
 
     if(OAL_UNLIKELY(pst_pci_lres->pst_pci_res->link_state <= PCI_WLAN_LINK_DOWN))
@@ -1493,7 +1493,7 @@ OAL_STATIC oal_int32 oal_pcie_wakeup_request(hcc_bus* pst_bus)
 
         oal_atomic_set(&g_bus_powerup_dev_wait_ack, 1);
 #if 0
-        /*suspend 会下电PCIE，这里如果已经下电需要重新初始化PCIE,恢复iatu表项*/
+        /*suspend ??????PCIE????????????????????????????????PCIE,????iatu????*/
         ret = kirin_pcie_power_notifiy_register(kirin_rc_idx, oal_pcie_device_wakeup_handler,
                                             NULL, NULL);
         if(ret)
@@ -1504,7 +1504,7 @@ OAL_STATIC oal_int32 oal_pcie_wakeup_request(hcc_bus* pst_bus)
         ret = kirin_pcie_pm_control(1, kirin_rc_idx);
         if(ret)
         {
-            /*这里可以增加DFR流程，麒麟LINKUP 只有20ms的超时时间*/
+            /*????????????DFR??????????LINKUP ????20ms??????????*/
             OAL_IO_PRINT(KERN_ERR"kirin_pcie_pm_control 1 failed!ret=%d\n", ret);
             return ret;
         }
@@ -1515,7 +1515,7 @@ OAL_STATIC oal_int32 oal_pcie_wakeup_request(hcc_bus* pst_bus)
             ul_ret = oal_wait_for_completion_timeout(&pst_wlan_pm->st_wifi_powerup_done, (oal_uint32)OAL_MSECS_TO_JIFFIES(2000));
             if(OAL_UNLIKELY(0 == ul_ret))
             {
-                /*超时不做处理继续尝试建链*/
+                /*????????????????????????*/
                 DECLARE_DFT_TRACE_KEY_INFO("pcie_powerup_wakeup ack timeout", OAL_DFT_TRACE_FAIL);
             }
         }
@@ -1547,7 +1547,7 @@ OAL_STATIC oal_int32 oal_pcie_wakeup_request(hcc_bus* pst_bus)
             return -OAL_ENODEV;
         }
 
-        /*唤醒流程，RES已经初始化*/
+        /*??????????RES??????????*/
         oal_pcie_change_link_state(pst_pci_lres->pst_pci_res, PCI_WLAN_LINK_RES_UP);
 
         oal_atomic_set(&pst_pci_lres->st_pcie_wakeup_flag, 1);
@@ -1575,7 +1575,7 @@ OAL_STATIC oal_int32 oal_pcie_wakeup_request(hcc_bus* pst_bus)
     }
     else
     {
-        /*正常单芯片唤醒拉高GPIO即可*/
+        /*??????????????????GPIO????*/
         oal_pcie_device_wakeup_handler(NULL);
         pci_set_master(pst_pci_lres->pst_pcie_dev);
     }
@@ -1684,7 +1684,7 @@ oal_int32 oal_pcie_enable_device_func(oal_pcie_linux_res* pst_pci_lres)
             continue;
         }
 
-        /*第一个中断有可能在中断使能之前上报，强制调度一次RX Thread*/
+        /*????????????????????????????????????????????????RX Thread*/
         up(&pst_bus->rx_sema);
 
         if(0 == oal_wait_for_completion_timeout(&pst_pci_lres->st_pcie_ready, (oal_uint32)OAL_MSECS_TO_JIFFIES(HOST_WAIT_BOTTOM_INIT_TIMEOUT)))
@@ -1706,7 +1706,7 @@ oal_int32 oal_pcie_enable_device_func(oal_pcie_linux_res* pst_pci_lres)
             }
             else
             {
-                /*强制调度成功，说明有可能是GPIO中断未响应*/
+                /*??????????????????????????GPIO??????????*/
                 OAL_IO_PRINT(KERN_WARNING"[E]retry succ, maybe gpio interrupt issue");
                 DECLARE_DFT_TRACE_KEY_INFO("pcie gpio int issue",OAL_DFT_TRACE_FAIL);
                 break;
@@ -1726,7 +1726,7 @@ oal_int32 oal_pcie_enable_device_func(oal_pcie_linux_res* pst_pci_lres)
     return OAL_SUCC;
 }
 
-/*非中断触发，轮询消息*/
+/*????????????????????*/
 oal_int32 oal_pcie_enable_device_func_polling(oal_pcie_linux_res* pst_pci_lres)
 {
     oal_int32 ret;
@@ -1743,10 +1743,10 @@ oal_int32 oal_pcie_enable_device_func_polling(oal_pcie_linux_res* pst_pci_lres)
 
     OAL_INIT_COMPLETION(&pst_pci_lres->st_pcie_ready);
 
-   /*等待device初始化完成*/
+   /*????device??????????*/
     //oal_wlan_gpio_intr_enable(HBUS_TO_DEV(pst_pci_lres->pst_bus), OAL_FALSE);
 
-    /*通知Device已经初始化完成*/
+    /*????Device??????????????*/
     ret = oal_pcie_send_message2dev(pst_pci_lres, PCIE_H2D_MESSAGE_HOST_READY);
     if(OAL_SUCC != ret)
     {
@@ -1878,7 +1878,7 @@ OAL_STATIC oal_int32 oal_pcie_host_aspm_init(oal_pcie_linux_res* pst_pci_lres)
     oal_pci_dev_stru *pst_rc_dev;
     pst_rc_dev = pci_upstream_bridge(pst_pci_lres->pst_pcie_dev);
 
-    /*使能/去使能ASPM，RC & EP*/
+    /*????/??????ASPM??RC & EP*/
     kirin_pcie_lp_ctrl(kirin_rc_idx, 0);
     if(pcie_aspm_enable)
     {
@@ -2083,7 +2083,7 @@ oal_int32 oal_pcie_ip_l1pm_check(oal_pcie_linux_res* pst_pci_lres)
 
 oal_int32 oal_pcie_gen_mode_check(oal_pcie_linux_res* pst_pci_lres)
 {
-    /*根据实际产品来判断当前链路状态是否正常*/
+    /*??????????????????????????????????????*/
     oal_int32 gen_select = oal_pcie_get_gen_mode(pst_pci_lres->pst_pci_res);
 
     if(ft_pcie_gen_check_bypass)
@@ -2132,7 +2132,7 @@ oal_int32 oal_pcie_ip_init(hcc_bus *pst_bus)
     if(ret)
         return ret;
 
-    /*使能低功耗*/
+    /*??????????*/
     ret = oal_pcie_host_aspm_init(pst_pci_lres);
     if(ret)
         return ret;
@@ -2258,13 +2258,13 @@ oal_int32 oal_pcie_rc_slt_chip_transfer(hcc_bus *pst_bus, oal_void* ddr_address,
 
 oal_void oal_pcie_power_down(hcc_bus *pst_bus)
 {
-    /*关掉LINKDOWN注册回调函数 TBD:TBC*/
+    /*????LINKDOWN???????????? TBD:TBC*/
     oal_pcie_linux_res * pst_pci_lres;
     PCIE_EP_IP_STATUS       old_power_status;
 
     pst_pci_lres = (oal_pcie_linux_res*)pst_bus->data;
 
-    /*disable intx gpio... 等待中断处理完*/
+    /*disable intx gpio... ??????????????*/
     oal_disable_pcie_irq(pst_pci_lres);
 
     old_power_status = pst_pci_lres->power_status;
@@ -2292,7 +2292,7 @@ oal_void oal_pcie_power_down(hcc_bus *pst_bus)
     //hcc_transfer_unlock(HBUS_TO_HCC(pst_bus));
 #ifdef CONFIG_ARCH_KIRIN_PCIE
     kirin_pcie_deregister_event(&pst_pci_lres->pcie_event);
-    /*下电之前关闭 PCIE HOST 控制器*/
+    /*???????????? PCIE HOST ??????*/
     {
         oal_int32 ret;
         ret = kirin_pcie_pm_control(0, kirin_rc_idx);
@@ -2360,7 +2360,7 @@ OAL_STATIC oal_int32 oal_pcie_power_action(hcc_bus *pst_bus, HCC_BUS_POWER_ACTIO
 
     if(HCC_BUS_POWER_DOWN == action)
     {
-        /*关掉LINKDOWN注册回调函数 TBD:TBC*/
+        /*????LINKDOWN???????????? TBD:TBC*/
         hcc_disable(HBUS_TO_HCC(pst_bus), OAL_TRUE);
         oal_wlan_gpio_intr_enable(HBUS_TO_DEV(pst_bus), OAL_FALSE);
         hcc_transfer_lock(HBUS_TO_HCC(pst_bus));
@@ -2376,7 +2376,7 @@ OAL_STATIC oal_int32 oal_pcie_power_action(hcc_bus *pst_bus, HCC_BUS_POWER_ACTIO
 
     if(HCC_BUS_POWER_UP == action || HCC_BUS_SW_POWER_UP == action)
     {
-        /*上电之前打开PCIE HOST 控制器*/
+        /*????????????PCIE HOST ??????*/
 #ifdef CONFIG_ARCH_KIRIN_PCIE
         declare_time_cost_stru(cost);
         if(HCC_BUS_POWER_UP == action)
@@ -2429,7 +2429,7 @@ OAL_STATIC oal_int32 oal_pcie_power_action(hcc_bus *pst_bus, HCC_BUS_POWER_ACTIO
     if(HCC_BUS_POWER_PATCH_LAUCH == action)
     {
         OAL_IO_PRINT("power patch lauch\n");
-        /*Patch下载完后 初始化通道资源，然后等待业务初始化完成*/
+        /*Patch???????? ??????????????????????????????????????*/
 
         ret = oal_pcie_transfer_res_init(pst_pci_lres->pst_pci_res);
         if(ret)
@@ -2462,7 +2462,7 @@ OAL_STATIC oal_int32 oal_pcie_power_action(hcc_bus *pst_bus, HCC_BUS_POWER_ACTIO
             }
             else
             {
-                /*强制调度成功，说明有可能是GPIO中断未响应*/
+                /*??????????????????????????GPIO??????????*/
                 OAL_IO_PRINT(KERN_WARNING"[E]retry succ, maybe gpio interrupt issue");
                 DECLARE_DFT_TRACE_KEY_INFO("pcie gpio int issue",OAL_DFT_TRACE_FAIL);
             }
@@ -2474,7 +2474,7 @@ OAL_STATIC oal_int32 oal_pcie_power_action(hcc_bus *pst_bus, HCC_BUS_POWER_ACTIO
 
         hcc_enable(HBUS_TO_HCC(pst_bus), OAL_TRUE);
 
-        /*调度一次数据RX通道, PCIE 数据走INTX，消息走GPIO*/
+        /*????????????RX????, PCIE ??????INTX????????GPIO*/
         //oal_task_sched(&pst_pci_lres->st_rx_task);
 
         //oal_wake_lock(&pst_pci_lres->st_sr_bugfix);/*hold the AP*/
@@ -2484,7 +2484,7 @@ OAL_STATIC oal_int32 oal_pcie_power_action(hcc_bus *pst_bus, HCC_BUS_POWER_ACTIO
     if(HCC_BUS_SW_POWER_PATCH_LAUCH == action)
     {
         OAL_IO_PRINT("HCC_BUS_SW_POWER_PATCH_LAUCH\n");
-        /*Patch下载完后 初始化通道资源，然后等待业务初始化完成*/
+        /*Patch???????? ??????????????????????????????????????*/
 
         ret = oal_pcie_transfer_res_init(pst_pci_lres->pst_pci_res);
         if(ret)
@@ -2499,7 +2499,7 @@ OAL_STATIC oal_int32 oal_pcie_power_action(hcc_bus *pst_bus, HCC_BUS_POWER_ACTIO
 
         oal_enable_pcie_irq(pst_pci_lres);
 
-        /*此时GPIO不能使用，BUS还未切换*/
+        /*????GPIO??????????BUS????????*/
         ret = oal_pcie_enable_device_func_polling(pst_pci_lres);
         if(OAL_SUCC != ret)
         {
@@ -2624,7 +2624,7 @@ OAL_STATIC oal_int32 oal_pcie_gpio_irq(hcc_bus *hi_bus, oal_int32 irq)
 
     if(0 == ul_state)
     {
-        /*0==HOST_DISALLOW_TO_SLEEP表示不允许休眠*/
+        /*0==HOST_DISALLOW_TO_SLEEP??????????????*/
         hi_bus->data_int_count++;
         /*PCIE message use gpio interrupt*/
         PCI_PRINT_LOG(PCI_LOG_DBG, "pcie message come..");
@@ -2633,7 +2633,7 @@ OAL_STATIC oal_int32 oal_pcie_gpio_irq(hcc_bus *hi_bus, oal_int32 irq)
     }
     else
     {
-        /*1==HOST_ALLOW_TO_SLEEP表示当前是休眠，唤醒host*/
+        /*1==HOST_ALLOW_TO_SLEEP????????????????????host*/
         if(OAL_WARN_ON(!hi_bus->pst_pm_callback->pm_wakeup_host))
         {
             PCI_PRINT_LOG(PCI_LOG_ERR, "%s error:hi_bus->pst_pm_callback->pm_wakeup_host is null",__FUNCTION__);
@@ -2755,9 +2755,9 @@ OAL_STATIC hcc_bus* oal_pcie_bus_init(oal_pcie_linux_res * pst_pci_lres)
 
     pst_bus->bus_type = HCC_BUS_PCIE;
     pst_bus->bus_id   = 0x0;
-    pst_bus->dev_id = HCC_CHIP_110X_DEV;/*这里可以根据 vendor id 区分110X 和118X*/
+    pst_bus->dev_id = HCC_CHIP_110X_DEV;/*???????????? vendor id ????110X ??118X*/
 
-    /*PCIE 只需要4字节对齐, burst大小对性能的影响有限*/
+    /*PCIE ??????4????????, burst????????????????????*/
     pst_bus->cap.align_size[HCC_TX] = 4;
     pst_bus->cap.align_size[HCC_RX] = 4;
     pst_bus->cap.max_trans_size = 0x7fffffff;
@@ -2798,7 +2798,7 @@ oal_int32 wlan_first_power_on_callback(void* data)
 oal_int32 wlan_first_power_off_fail_callback(void* data)
 {
     OAL_REFERENCE(data);
-    /*阻止麒麟枚举失败后下电关时钟*/
+    /*????????????????????????????*/
     OAL_IO_PRINT("wlan_first_power_off_fail_callback\n");
     g_pcie_enum_fail_reg_dump_flag = 1;
     ssi_dump_device_regs(SSI_MODULE_MASK_COMM|SSI_MODULE_MASK_PCIE_CFG|SSI_MODULE_MASK_PCIE_DBI);
@@ -2874,7 +2874,7 @@ oal_int32 oal_pcie_110x_init(oal_void)
     oal_pci_wlan_power_on(OAL_TRUE);
 #endif
 #ifdef CONFIG_ARCH_KIRIN_PCIE
-    /*打开参考时钟*/
+    /*????????????*/
     ret = kirin_pcie_power_notifiy_register(kirin_rc_idx, wlan_first_power_on_callback, wlan_first_power_off_fail_callback, NULL);
     if(OAL_SUCC != ret)
     {
@@ -2925,7 +2925,7 @@ oal_int32 oal_pcie_110x_init(oal_void)
     if(g_pcie_linux_res)
     {
         hcc_bus_disable_state(g_pcie_linux_res->pst_bus, OAL_BUS_STATE_ALL);
-        /*保存PCIE 配置寄存器*/
+        /*????PCIE ??????????*/
         ret = oal_pcie_save_default_resource(g_pcie_linux_res);
         if(OAL_SUCC != ret)
         {
@@ -2941,7 +2941,7 @@ oal_int32 oal_pcie_110x_init(oal_void)
 #endif
         oal_disable_pcie_irq(g_pcie_linux_res);
         oal_pcie_power_action(g_pcie_linux_res->pst_bus, HCC_BUS_POWER_DOWN);
-        /*等到读取完nfc低电的log数据再拉低GPIO*/
+        /*??????????nfc??????log??????????GPIO*/
         hi_wlan_power_set(0);
 #endif
     }
@@ -3025,7 +3025,7 @@ oal_int32 oal_wifi_platform_load_pcie(oal_void)
         return OAL_SUCC;
     }
 
-    /*WiFi 芯片上电 + PCIE 枚举*/
+    /*WiFi ???????? + PCIE ????*/
 #ifdef _PRE_PLAT_FEATURE_HI110X_PCIE
     ret = oal_pcie_110x_init();
 #endif

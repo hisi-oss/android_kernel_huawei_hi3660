@@ -9,7 +9,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "wlan_spec.h"
 #include "mac_vap.h"
@@ -24,11 +24,11 @@ extern "C" {
 #define THIS_FILE_ID OAM_FILE_ID_HMAC_UAPSD_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 
@@ -55,7 +55,7 @@ oal_void hmac_uapsd_update_user_para_etc (oal_uint8  *puc_payload,oal_uint8  uc_
         uc_found_wmm = OAL_TRUE;
     }
 
-    /*不存在WMM IE,直接返回*/
+    /*??????WMM IE,????????*/
     if ((OAL_FALSE == uc_found_wmm) || (OAL_PTR_NULL == puc_wmm_ie))
     {
         OAM_WARNING_LOG1(pst_hmac_user->st_user_base_info.uc_vap_id, OAM_SF_PWR, "Could not find WMM IE in assoc req,user_id[%d]\n", pst_hmac_user->st_user_base_info.us_assoc_id);
@@ -65,7 +65,7 @@ oal_void hmac_uapsd_update_user_para_etc (oal_uint8  *puc_payload,oal_uint8  uc_
     OAL_MEMZERO(&st_uapsd_status,  OAL_SIZEOF(mac_user_uapsd_status_stru));
     st_uapsd_status.uc_qos_info = puc_wmm_ie[HMAC_UAPSD_WME_LEN];
 
-    /* 8为WMM IE长度 */
+    /* 8??WMM IE???? */
     if (BIT0 == (puc_wmm_ie[HMAC_UAPSD_WME_LEN] & BIT0))
     {
         st_uapsd_status.uc_ac_trigger_ena[WLAN_WME_AC_VO] = 1;
@@ -99,7 +99,7 @@ oal_void hmac_uapsd_update_user_para_etc (oal_uint8  *puc_payload,oal_uint8  uc_
         uc_uapsd_flag |= MAC_USR_UAPSD_EN;
     }
 
-    /* 设置max SP长度 */
+    /* ????max SP???? */
     uc_max_sp = (puc_wmm_ie[HMAC_UAPSD_WME_LEN] >> 5) & 0x3;
     switch(uc_max_sp)
     {

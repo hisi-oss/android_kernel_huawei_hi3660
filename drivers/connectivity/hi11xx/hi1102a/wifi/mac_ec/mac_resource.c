@@ -9,7 +9,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "wlan_spec.h"
 #include "mac_resource.h"
@@ -28,7 +28,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 #if defined(_PRE_PRODUCT_ID_HI110X_DEV)
 extern dmac_vap_stru  g_ast_dmac_vap[WLAN_VAP_SUPPORT_MAX_NUM_LIMIT];
@@ -55,20 +55,20 @@ mac_res_mem_vap_stru g_ast_mac_res_vap[WLAN_VAP_SUPPORT_MAX_NUM_LIMIT];
 #endif
 
 
-/* 1个device支持的最大关联用户数 */
+/* 1??device???????????????????? */
 oal_uint16   g_us_max_asoc_user = WLAN_ASSOC_USER_MAX_NUM;
 mac_res_stru g_st_mac_res;
 
 oal_uint16 g_us_mac_res_stru_size = OAL_SIZEOF(mac_res_stru);
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 oal_uint32  mac_res_check_spec(oal_void)
 {
     oal_uint32  ul_ret = OAL_SUCC;
-    /* 检查MAC VAP大小 */
+    /* ????MAC VAP???? */
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1151)
     if ((OAL_SIZEOF(hmac_vap_stru) + OAL_SIZEOF(dmac_vap_stru) - OAL_SIZEOF(mac_vap_stru)) > MAC_RES_VAP_SIZE)
     {
@@ -109,7 +109,7 @@ oal_void  mac_res_vap_init(oal_void)
 
         ul_one_vap_size += OAL_SIZEOF(dmac_vap_stru);
 
-        /* 初始化对应的引用计数值为0 */
+        /* ????????????????????????0 */
         g_st_mac_res.st_vap_res.auc_user_cnt[ul_loop] = 0;
     }
 }
@@ -124,13 +124,13 @@ oal_uint32  mac_res_user_init(oal_void)
     oal_uint        ul_one_user_info_size = 0;
 
     /***************************************************************************
-            初始化USER的资源管理内容
+            ??????USER??????????????
     ***************************************************************************/
     p_user_info = (oal_void *)g_ast_dmac_user;
     p_idx       = (oal_void *)g_aul_user_idx;
     p_user_cnt  = (oal_void *)g_auc_user_cnt;
 
-    /* 内存初始清0 */
+    /* ??????????0 */
     OAL_MEMZERO(p_user_info, (OAL_SIZEOF(dmac_user_stru) * MAC_RES_MAX_USER_NUM));
     OAL_MEMZERO(p_idx,       (OAL_SIZEOF(oal_uint) * MAC_RES_MAX_USER_NUM));
     OAL_MEMZERO(p_user_cnt,  (OAL_SIZEOF(oal_uint8) * MAC_RES_MAX_USER_NUM));
@@ -145,7 +145,7 @@ oal_uint32  mac_res_user_init(oal_void)
         g_st_mac_res.st_user_res.past_user_info[ul_loop]  = (oal_uint8 *)p_user_info + ul_one_user_info_size;
         ul_one_user_info_size += OAL_SIZEOF(dmac_user_stru);
 
-        /* 初始化对应的引用计数值为0 */
+        /* ????????????????????????0 */
         g_st_mac_res.st_user_res.puc_user_cnt[ul_loop] = 0;
     }
 
@@ -178,7 +178,7 @@ oal_uint32  mac_res_init(oal_void)
 
     OAL_MEMZERO(&g_st_mac_res, g_us_mac_res_stru_size);
     /***************************************************************************
-            初始化DEV的资源管理内容
+            ??????DEV??????????????
     ***************************************************************************/
     oal_queue_set(&(g_st_mac_res.st_dev_res.st_queue),
                   g_st_mac_res.st_dev_res.aul_idx,
@@ -193,21 +193,21 @@ oal_uint32  mac_res_init(oal_void)
 
     for (ul_loop = 0; ul_loop < MAC_RES_MAX_DEV_NUM; ul_loop++)
     {
-        /* 初始值保存的是对应数组下标值加1 */
+        /* ??????????????????????????????1 */
         oal_queue_enqueue(&(g_st_mac_res.st_dev_res.st_queue), (oal_void *)(ul_loop + 1));
 
-        /* 初始化对应的引用计数值为0 */
+        /* ????????????????????????0 */
         g_st_mac_res.st_dev_res.auc_user_cnt[ul_loop] = 0;
     }
 
 
     /***************************************************************************
-            初始化VAP的资源管理内容
+            ??????VAP??????????????
     ***************************************************************************/
     mac_res_vap_init();
 
     /***************************************************************************
-            初始化USER的资源管理内容
+            ??????USER??????????????
     ***************************************************************************/
     ul_ret = mac_res_user_init();
     if (OAL_SUCC != ul_ret)
@@ -295,9 +295,9 @@ oal_void  mac_res_vap_init(oal_void)
         OAL_MEMZERO(g_st_mac_res.st_vap_res.past_vap_info[ul_loop], OAL_SIZEOF(mac_res_mem_vap_stru));
     #endif
 
-        /* 初始值保存的是对应数组下标值加1 */
+        /* ??????????????????????????????1 */
         oal_queue_enqueue(&(g_st_mac_res.st_vap_res.st_queue), (oal_void *)(ul_loop + 1));
-        /* 初始化对应的引用计数值为0 */
+        /* ????????????????????????0 */
         g_st_mac_res.st_vap_res.auc_user_cnt[ul_loop] = 0;
      }
 
@@ -313,14 +313,14 @@ oal_uint32  mac_res_user_init(oal_void)
     oal_uint        ul_one_user_info_size;
 
     /***************************************************************************
-            初始化USER的资源管理内容
+            ??????USER??????????????
     ***************************************************************************/
     /*
-    最大关联用户 = 1个device支持的最大关联用户数 * board上面的device数目;
-    最大组播用户 = 1个device支持的最大业务vap数 * board上面的device数目;
-    最大用户数 = 最大关联用户 + 组播用户个数 */
+    ???????????? = 1??device???????????????????? * board??????device????;
+    ???????????? = 1??device??????????????vap?? * board??????device????;
+    ?????????? = ???????????? + ???????????? */
 
-    /* 动态申请用户资源池相关内存 */
+    /* ?????????????????????????? */
 #if (defined(_PRE_PRODUCT_ID_HI110X_HOST))
     p_user_info = (oal_void *)g_pst_hmac_user;
 #else
@@ -354,7 +354,7 @@ oal_uint32  mac_res_user_init(oal_void)
     }
 
 
-    /* 内存初始清0 */
+    /* ??????????0 */
 #if (defined(_PRE_PRODUCT_ID_HI110X_HOST))
     OAL_MEMZERO(p_user_info, (OAL_SIZEOF(hmac_user_stru) * MAC_RES_MAX_USER_NUM));
 #else
@@ -375,10 +375,10 @@ oal_uint32  mac_res_user_init(oal_void)
 
     for (ul_loop = 0; ul_loop < MAC_RES_MAX_USER_NUM; ul_loop++)
     {
-        /* 初始值保存的是对应数组下标值加1 */
+        /* ??????????????????????????????1 */
         oal_queue_enqueue(&(g_st_mac_res.st_user_res.st_queue), (oal_void *)(ul_loop + 1));
 
-        /* 初始化对应的引用位置 */
+        /* ???????????????????? */
         g_st_mac_res.st_user_res.past_user_info[ul_loop]  = (oal_uint8 *)p_user_info + ul_one_user_info_size;
     #if (defined(_PRE_PRODUCT_ID_HI110X_HOST))
         ul_one_user_info_size += OAL_SIZEOF(hmac_user_stru);
@@ -386,7 +386,7 @@ oal_uint32  mac_res_user_init(oal_void)
         ul_one_user_info_size += OAL_SIZEOF(mac_res_mem_user_stru);
     #endif
 
-        /* 初始化对应的引用计数值为0 */
+        /* ????????????????????????0 */
         g_st_mac_res.st_user_res.puc_user_cnt[ul_loop] = 0;
 
     }
@@ -422,7 +422,7 @@ oal_uint32  mac_res_init(oal_void)
 
     OAL_MEMZERO(&g_st_mac_res, g_us_mac_res_stru_size);
     /***************************************************************************
-            初始化DEV的资源管理内容
+            ??????DEV??????????????
     ***************************************************************************/
     oal_queue_set(&(g_st_mac_res.st_dev_res.st_queue),
                   g_st_mac_res.st_dev_res.aul_idx,
@@ -437,20 +437,20 @@ oal_uint32  mac_res_init(oal_void)
 
     for (ul_loop = 0; ul_loop < MAC_RES_MAX_DEV_NUM; ul_loop++)
     {
-        /* 初始值保存的是对应数组下标值加1 */
+        /* ??????????????????????????????1 */
         oal_queue_enqueue(&(g_st_mac_res.st_dev_res.st_queue), (oal_void *)(ul_loop + 1));
 
-        /* 初始化对应的引用计数值为0 */
+        /* ????????????????????????0 */
         g_st_mac_res.st_dev_res.auc_user_cnt[ul_loop] = 0;
     }
 
     /***************************************************************************
-            初始化VAP的资源管理内容
+            ??????VAP??????????????
     ***************************************************************************/
     mac_res_vap_init();
 
     /***************************************************************************
-            初始化USER的资源管理内容
+            ??????USER??????????????
     ***************************************************************************/
     ul_ret = mac_res_user_init();
     if (OAL_SUCC != ul_ret)
@@ -486,7 +486,7 @@ oal_uint32  mac_res_free_mac_user(oal_uint16 us_idx)
         return OAL_SUCC;
     }
 
-    /* 入队索引值需要加1操作 */
+    /* ????????????????1???? */
     oal_queue_enqueue(&(g_st_mac_res.st_user_res.st_queue), (oal_void *)((oal_uint)us_idx + 1));
 
     return OAL_SUCC;
@@ -514,7 +514,7 @@ oal_uint32  mac_res_free_mac_vap(oal_uint32 ul_idx)
         return OAL_SUCC;
     }
 
-    /* 入队索引值需要加1操作 */
+    /* ????????????????1???? */
     oal_queue_enqueue(&(g_st_mac_res.st_vap_res.st_queue), (oal_void *)((oal_uint)ul_idx + 1));
 
     return OAL_SUCC;
@@ -528,7 +528,7 @@ oal_uint32  mac_res_set_max_asoc_user(oal_uint16 us_num)
 {
     g_us_max_asoc_user = us_num;
 
-    /* 需要系统复位 */
+    /* ???????????? */
 
     return OAL_SUCC;
 }
@@ -548,7 +548,7 @@ oal_uint32  mac_res_set_max_asoc_user(oal_uint16 us_num)
 
     ul_dev_idx_temp = (oal_uint)oal_queue_dequeue(&(g_st_mac_res.st_dev_res.st_queue));
 
-    /* 0为无效值 */
+    /* 0???????? */
     if (0 == ul_dev_idx_temp)
     {
         OAL_IO_PRINT("mac_res_alloc_dmac_dev: 0 == ul_dev_idx_temp");
@@ -579,7 +579,7 @@ oal_uint32  mac_res_set_max_asoc_user(oal_uint16 us_num)
 
     ul_dev_idx_temp = (oal_uint)oal_queue_dequeue(&(g_st_mac_res.st_dev_res.st_queue));
 
-    /* 0为无效值 */
+    /* 0???????? */
     if (0 == ul_dev_idx_temp)
     {
         OAL_IO_PRINT("mac_res_alloc_hmac_dev: 0 == ul_dev_idx_temp");
@@ -636,7 +636,7 @@ oal_uint32  mac_res_free_dev(oal_uint32 ul_dev_idx)
         return OAL_SUCC;
     }
 
-    /* 入队索引值需要加1操作 */
+    /* ????????????????1???? */
     oal_queue_enqueue(&(g_st_mac_res.st_dev_res.st_queue), (oal_void *)((oal_uint)ul_dev_idx + 1));
 
     return OAL_SUCC;

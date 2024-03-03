@@ -7,7 +7,7 @@
 #endif
 #ifdef CONFIG_HI1102_PLAT_HW_CHR
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 
 #include <linux/init.h>
@@ -45,7 +45,7 @@
 
 
 /*****************************************************************************
-  2 函数声明
+  2 ????????
 *****************************************************************************/
 static int32 chr_misc_open(struct inode *fd, struct file *fp);
 static ssize_t chr_misc_read(struct file *fp, int8 __user *buff, size_t count, loff_t *loff);
@@ -57,10 +57,10 @@ int32 chr_bfg_dev_tx_handler(uint32 ul_errno);
 uint32 chr_rx_proc_test(uint32 errno);
 
 /*****************************************************************************
-  3 全局变量定义
+  3 ????????????
 *****************************************************************************/
 static CHR_EVENT g_chr_event;
-/* 本模块debug控制全局变量 */
+/* ??????debug???????????? */
 static int32     g_log_enable = CHR_LOG_DISABLE;
 
 static const struct file_operations chr_misc_fops = {
@@ -79,11 +79,11 @@ static struct miscdevice chr_misc_dev = {
 
 
 /*****************************************************************************
-  4 宏定义
+  4 ??????
 *****************************************************************************/
 
 /*****************************************************************************
-  5 函数实现
+  5 ????????
 *****************************************************************************/
 
 static int32 chr_misc_open(struct inode *fd, struct file *fp)
@@ -171,7 +171,7 @@ static ssize_t chr_misc_read(struct file *fp, int8 __user *buff, size_t count, l
     return data_len;
 }
 
-/*不作限制的chr上报事件*/
+/*??????????chr????????*/
 uint32 g_ul_unlimit_errno[] =
 {
     CHR_WIFI_DISCONNECT_QUERY_EVENTID,
@@ -193,7 +193,7 @@ static int32 chr_report_frequency_limit(uint32 ul_errno)
     uint32 index = 0;
     uint32 len = sizeof(g_ul_unlimit_errno)/sizeof(uint32);
 
-    /*跳过不限制的chr no*/
+    /*????????????chr no*/
     for(index = 0; index < len; index++)
     {
         if(ul_errno == g_ul_unlimit_errno[index])

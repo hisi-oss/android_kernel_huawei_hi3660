@@ -65,7 +65,7 @@ extern "C" {
 #endif
 
 /*****************************************************************************
-  #pragma pack(*)    设置字节对齐方式
+  #pragma pack(*)    ????????????????
 *****************************************************************************/
 #if (VOS_OS_VER != VOS_WIN32)
 #pragma pack(4)
@@ -117,10 +117,10 @@ extern "C" {
   5 STRUCT
 *****************************************************************************/
 /*****************************************************************************
-结构名    :RRC_PLMN_ID_STRU中
-协议表格  :
-ASN.1描述 :
-结构说明  :
+??????    :RRC_PLMN_ID_STRU??
+????????  :
+ASN.1???? :
+????????  :
     MCC, Mobile country code (aucPlmnId[0], aucPlmnId[1] bits 1 to 4)
     MNC, Mobile network code (aucPlmnId[2], aucPlmnId[1] bits 5 to 8).
 
@@ -141,7 +141,7 @@ ASN.1描述 :
     aucPlmnId[2] ||    MNC digit 2            |           MNC digit 1
     ---------------------------------------------------------------------------
 
-    AT命令：
+    AT??????
     at+cops=1,2,"mcc digit 3, mcc digit 2, mcc digit 1, mnc digit 3, mnc digit 2, mnc digit 1",2 :
 
     e.g.
@@ -152,7 +152,7 @@ ASN.1描述 :
        7         |     8       |      9      |     4       |      5      |     6
     --------------------------------------------------------------------------------
 
-    在aucPlmnId[3]中的存放格式:
+    ??aucPlmnId[3]????????????:
     ---------------------------------------------------------------------------
                  ||(BIT8)|(BIT7)|(BIT6)|(BIT5)|(BIT4)|(BIT3)|(BIT2)|(BIT1)
     ---------------------------------------------------------------------------
@@ -189,7 +189,7 @@ typedef struct
     VOS_UINT8                           aucReserved1[2];
 }LNAS_LMM_NV_IMSI_STRU;
 
-/* LEQUIP_NV使用 */
+/* LEQUIP_NV???? */
 typedef struct
 {
     VOS_UINT32                          bitOpImei     :1;
@@ -292,49 +292,49 @@ typedef LNAS_LMM_CONFIG_NWCAUSE_STRU        LNAS_LMM_NV_CONFIG_NWCAUSE_STRU;
 /* mod for AT&T program 2015-01-15 DTS begin */
 /* Modified for GU_BACK_OFF,2016-04-07,Begin */
 /*****************************************************************************
-结构名称    :LNAS_ESM_NV_BACKOFF_CONFIG_PARA_STRU
-使用说明    :DAM需求的NV数据结构
+????????    :LNAS_ESM_NV_BACKOFF_CONFIG_PARA_STRU
+????????    :DAM??????NV????????
 *****************************************************************************/
 typedef struct
 {
-    VOS_UINT32                           bitOpBackOffAlg   :1; /* Back-off算法开关     */
-    VOS_UINT32                           bitOpBackOffFx    :1; /* NV中Fx值是否有效     */
-    VOS_UINT32                           bitOpShareEntityFlag :1;  /* 是否公用一个实体；0 否；1 是 */
+    VOS_UINT32                           bitOpBackOffAlg   :1; /* Back-off????????     */
+    VOS_UINT32                           bitOpBackOffFx    :1; /* NV??Fx??????????     */
+    VOS_UINT32                           bitOpShareEntityFlag :1;  /* ??????????????????0 ????1 ?? */
     VOS_UINT32                           bitOpRsv          :29;
 
-    NAS_BACKOFF_RAT_SUPPORT_ENUM_UINT32  enBackOffRatSupport;  /* LTE和GU算法生效枚举  */
-    NAS_CONFIG_BACKOFF_FX_PARA_STRU      stBackOffFx;          /* Fx参数               */
-    NAS_CONFIG_PDP_PERM_CAUSE_STRU       stPdpPermCause;       /* 永久拒绝原因值列表   */
-    NAS_CONFIG_PDP_TEMP_CAUSE_STRU       stPdpTempCause;       /* 临时拒绝原因值列表   */
+    NAS_BACKOFF_RAT_SUPPORT_ENUM_UINT32  enBackOffRatSupport;  /* LTE??GU????????????  */
+    NAS_CONFIG_BACKOFF_FX_PARA_STRU      stBackOffFx;          /* Fx????               */
+    NAS_CONFIG_PDP_PERM_CAUSE_STRU       stPdpPermCause;       /* ??????????????????   */
+    NAS_CONFIG_PDP_TEMP_CAUSE_STRU       stPdpTempCause;       /* ??????????????????   */
 }NAS_BACKOFF_NV_BACKOFF_CONFIG_PARA_STRU;
 /* Modified for GU_BACK_OFF,2016-04-07,End */
 /* mod for AT&T program 2015-01-15 DTS end */
 
 /*Add for 4G No Account 2015-3-25 DTS start*/
 /*****************************************************************************
-结构名称    :LNAS_LMM_NV_LTE_NO_ACCOUNT_CONFIG_STRU
-使用说明    :针对LTE未开户问题特性NV
+????????    :LNAS_LMM_NV_LTE_NO_ACCOUNT_CONFIG_STRU
+????????    :????LTE??????????????NV
 *****************************************************************************/
 typedef struct
 {
-    VOS_UINT8                           ucLteNoSubscribeVplmnSwitch;    /*4G未开户特性开关, VPLMN开关，1: 打开， 0: 关闭*/
-    VOS_UINT8                           ucLteNoSubscribeHplmnSwitch;    /*4G未开户特性开关，HPLMN开关, 1: 打开， 0: 关闭*/
-    VOS_UINT8                           ucDiscardExtendedEmmCauseFlag;  /*是否忽略网络在attach rej和tau rej中的附加原因值，
-                                                                          0:不忽略,1:忽略，该项不受测试卡控制*/
-    VOS_UINT8                           ucRsv2;                         /*保留位*/
-    VOS_UINT32                          ulPublishmentTimerVplmnLen;     /*惩罚定时器时长VPLMN*/
-    VOS_UINT32                          ulPublishmentTimerHplmnLen;     /*惩罚定时器时长HPLMN*/
+    VOS_UINT8                           ucLteNoSubscribeVplmnSwitch;    /*4G??????????????, VPLMN??????1: ?????? 0: ????*/
+    VOS_UINT8                           ucLteNoSubscribeHplmnSwitch;    /*4G????????????????HPLMN????, 1: ?????? 0: ????*/
+    VOS_UINT8                           ucDiscardExtendedEmmCauseFlag;  /*??????????????attach rej??tau rej????????????????
+                                                                          0:??????,1:????????????????????????*/
+    VOS_UINT8                           ucRsv2;                         /*??????*/
+    VOS_UINT32                          ulPublishmentTimerVplmnLen;     /*??????????????VPLMN*/
+    VOS_UINT32                          ulPublishmentTimerHplmnLen;     /*??????????????HPLMN*/
 }LNAS_LMM_NV_LTE_NO_SUBSCRIBE_CONFIG_STRU;
 /*Add for 4G No Account 2015-3-25 DTS end*/
 
 /* mod for Attach/Tau Rej#17#19 Keep Conn, 2016-11-25, Begin */
 /*****************************************************************************
-结构名称    :LNAS_LMM_NV_ATTACHTAU_REJ1719_NOT_REL_STRU
-使用说明    :DOCOMO需求ATTACH/TAU被17/19拒绝后不释放链路
+????????    :LNAS_LMM_NV_ATTACHTAU_REJ1719_NOT_REL_STRU
+????????    :DOCOMO????ATTACH/TAU??17/19????????????????
 *****************************************************************************/
 typedef struct
 {
-    VOS_UINT8                           ucSwitch;    /*特性开关,1: 打开,即不释放链路 0: 关闭*/
+    VOS_UINT8                           ucSwitch;    /*????????,1: ????,???????????? 0: ????*/
     VOS_UINT8                           ucAttachCauseNum;
     VOS_UINT8                           aucAttachCause[LNAS_NV_ATTACH_REJ_NOT_REL_MAX_CAUSE_NUM];
     VOS_UINT8                           ucTauCauseNum;
@@ -345,35 +345,35 @@ typedef struct
 
 /* Added for load balance TAU 2016-12-20 start*/
 /*****************************************************************************
-结构名称    :LNAS_LMM_NV_LOAD_BALANCE_TAU_CONTROL_CONFIG_STRU
-使用说明    :网侧频繁下发释放携带load balance导致UE频繁发TAU调节控制
+????????    :LNAS_LMM_NV_LOAD_BALANCE_TAU_CONTROL_CONFIG_STRU
+????????    :????????????????????load balance????UE??????TAU????????
 *****************************************************************************/
 typedef struct
 {
-    VOS_UINT8                           ucSwitch;                   /*特性开关,1: 打开,即打开当前频繁发TAU的调节控制 0: 关闭*/
+    VOS_UINT8                           ucSwitch;                   /*????????,1: ????,????????????????TAU?????????? 0: ????*/
     VOS_UINT8                           aucRsv[3];
-    VOS_UINT32                          ulThrotCtlTimeLen;          /*调节控制的时长，单位: 毫秒*/
+    VOS_UINT32                          ulThrotCtlTimeLen;          /*????????????????????: ????*/
 }LNAS_LMM_NV_LOAD_BALANCE_TAU_CONTROL_CONFIG_STRU;
 /* Added for load balance TAU 2016-12-20 end*/
 
 /* mod for AT&T program 2015-01-04 DTS begin */
 /*****************************************************************************
-结构名称    :LNAS_LMM_NV_COMM_CONFIG_PARA_STRU
-使用说明    :LNAS关于LMM定制需求的公共NV数据结构，后续LMM相关的公共定制需求NV均在
-             此NV中进行增加，便于维护和控制
+????????    :LNAS_LMM_NV_COMM_CONFIG_PARA_STRU
+????????    :LNAS????LMM??????????????NV??????????????LMM??????????????????NV????
+             ??NV??????????????????????????
 *****************************************************************************/
 typedef struct
 {
     /* Added for DATA RETRY PHASEIV, 2016-7-25, begin */
-    VOS_UINT8                            ucMaxRej19AtmptCnt; /*  0: 按协议流程直接设置为5 ; 其余值为最大尝试次数*/
+    VOS_UINT8                            ucMaxRej19AtmptCnt; /*  0: ????????????????????5 ; ????????????????????*/
     /* Added for DATA RETRY PHASEIV, 2016-7-25, end */
-    VOS_UINT8                            ucRsv0[3];           /* 保留，留以后其他需求启用 */
-    LNAS_LMM_NV_LTE_NO_SUBSCRIBE_CONFIG_STRU    stLteNoSubscribeConfig; /* 4G未开户所需要NV*/
-    VOS_UINT32                           ulRsv1[13];          /* 保留，留以后其他需求启用 */
+    VOS_UINT8                            ucRsv0[3];           /* ???????????????????????? */
+    LNAS_LMM_NV_LTE_NO_SUBSCRIBE_CONFIG_STRU    stLteNoSubscribeConfig; /* 4G????????????NV*/
+    VOS_UINT32                           ulRsv1[13];          /* ???????????????????????? */
 /* mod for AT&T program phaseIII 2015-03-15 DTS begin */
-    NAS_TMO_IMSI_HPLMN_LIST              stTmoImsiHplmnList;  /* TMO定制需求生效的IMSI PLMN列表 */
+    NAS_TMO_IMSI_HPLMN_LIST              stTmoImsiHplmnList;  /* TMO??????????????IMSI PLMN???? */
 /* mod for AT&T program phaseIII 2015-03-15 DTS end */
-    VOS_UINT8                            ucRsv2[28];          /* 保留，留以后其他需求启用 */
+    VOS_UINT8                            ucRsv2[28];          /* ???????????????????????? */
 }LNAS_LMM_NV_COMM_CONFIG_PARA_STRU;
 
 /* mod for AT&T program 2015-01-04 DTS end */
@@ -386,43 +386,43 @@ typedef struct
 }LNAS_ESM_NV_ATTACH_BEARER_REEST_STRU;
 /* 2015-5-27 begin */
 /*****************************************************************************
- 结构名    : LNAS_FUN_FLAG_NV_BIT_STRU_1
- 协议表格  :
- ASN.1描述 :
- 结构说明  : 协议栈的和协议功能相关的开关的结构体
+ ??????    : LNAS_FUN_FLAG_NV_BIT_STRU_1
+ ????????  :
+ ASN.1???? :
+ ????????  : ????????????????????????????????????
 *****************************************************************************/
 typedef struct
 {
-    VOS_UINT32  bitOpKeyInfoFlag                       :1;/* Lnas可维可测关键信息上报控制开关,默认值:1 */
-    VOS_UINT32  bitOpKeyEventFlag                      :1;/* Lnas可维可测关键事件上报控制开关,默认值:1 */
-    VOS_UINT32  bitOpApiFlag                           :1;/* Lnas可维可测API信息上报控制开关,默认值:1 */
-    VOS_UINT32  bitOpSuccRatioFlag                     :1;/* Lnas可维可测成功率信息上报控制开关,默认值:1 */
-    VOS_UINT32  bitOpDelayFlag                         :1;/* Lnas可维可测时延信息上报控制开关,默认值:1 */
-    VOS_UINT32  bitOpEsrRej39OptimizeFlag              :1;/* Lnas Esr Rej #39被拒优化控制开关,默认值:0 */
-    VOS_UINT32  bitOpNasAustraliaFlag                  :1;/* Lnas 澳电定制需求开关,默认值:0 */
-    VOS_UINT32  bitOpImsiAttachWithInvalidTinFlag      :1;/* Lnas DSDS2.0开关 */
-    VOS_UINT32  bitOpDsdsOptimizeFlag                  :1;/* Lnas SRLTE开关 */
-    VOS_UINT32  bitOpNasSrlteFlag                      :1;/* srlte控制开关 */
-    VOS_UINT32  bitOpNasT3402DefaultFlag               :1;/* T3402默认定时器控制开关 */
-    VOS_UINT32  bitOpThrotAlgSwitchFlag                :1;/* Lnas DATA RETRY特性调节算法开关,默认值:0 */
-    VOS_UINT32  bitOpUiccResetClearFlag                :1;/* uicc reset时清除GUTI,LVR TAI，设置EU2的开关 */
-    VOS_UINT32  bitOpDataRetryCtrlFlag                 :1;/* Lnas data retry特性开关 */
-    VOS_UINT32  bitOpTauRej17OneMoreAttachOptimFlag    :1;/* LNAS TAU#17优化方案控制开关，默认值:0 */
-    VOS_UINT32  bitOpIncreaseFreqFlag                  :1;/* LNAS EMM流程发起的时候是否打开提频特性(目前仅涉及ATTACH流程)，默认值:0*/
+    VOS_UINT32  bitOpKeyInfoFlag                       :1;/* Lnas????????????????????????????,??????:1 */
+    VOS_UINT32  bitOpKeyEventFlag                      :1;/* Lnas????????????????????????????,??????:1 */
+    VOS_UINT32  bitOpApiFlag                           :1;/* Lnas????????API????????????????,??????:1 */
+    VOS_UINT32  bitOpSuccRatioFlag                     :1;/* Lnas??????????????????????????????,??????:1 */
+    VOS_UINT32  bitOpDelayFlag                         :1;/* Lnas????????????????????????????,??????:1 */
+    VOS_UINT32  bitOpEsrRej39OptimizeFlag              :1;/* Lnas Esr Rej #39????????????????,??????:0 */
+    VOS_UINT32  bitOpNasAustraliaFlag                  :1;/* Lnas ????????????????,??????:0 */
+    VOS_UINT32  bitOpImsiAttachWithInvalidTinFlag      :1;/* Lnas DSDS2.0???? */
+    VOS_UINT32  bitOpDsdsOptimizeFlag                  :1;/* Lnas SRLTE???? */
+    VOS_UINT32  bitOpNasSrlteFlag                      :1;/* srlte???????? */
+    VOS_UINT32  bitOpNasT3402DefaultFlag               :1;/* T3402?????????????????? */
+    VOS_UINT32  bitOpThrotAlgSwitchFlag                :1;/* Lnas DATA RETRY????????????????,??????:0 */
+    VOS_UINT32  bitOpUiccResetClearFlag                :1;/* uicc reset??????GUTI,LVR TAI??????EU2?????? */
+    VOS_UINT32  bitOpDataRetryCtrlFlag                 :1;/* Lnas data retry???????? */
+    VOS_UINT32  bitOpTauRej17OneMoreAttachOptimFlag    :1;/* LNAS TAU#17????????????????????????:0 */
+    VOS_UINT32  bitOpIncreaseFreqFlag                  :1;/* LNAS EMM??????????????????????????????(??????????ATTACH????)????????:0*/
     /* Mod for DSDS CSFB_FR_DELAY CHR, 2016-08-06, begin */
-    VOS_UINT32  bitOpCsfbFrChr                         :1;/* LNAS CSFB FR DEALY CHR上报控制开关，默认值:0 */
+    VOS_UINT32  bitOpCsfbFrChr                         :1;/* LNAS CSFB FR DEALY CHR????????????????????:0 */
     /* Mod for DSDS CSFB_FR_DELAY CHR, 2016-08-06, end */
     /* Added for Boston_R13_CR_PHASEI, 2016-10-18, begin */
-    VOS_UINT32  bitOpServiceCounterFlag                :1;/* Lnas Service Counter开关,默认值:0 */
+    VOS_UINT32  bitOpServiceCounterFlag                :1;/* Lnas Service Counter????,??????:0 */
     /* Added for Boston_R13_CR_PHASEI, 2016-10-18, begin */
     /* Added for Boston_R13_CR_PHASEII 2016-12-06 begin */
-    VOS_UINT32  bitOpAttachWithImsiFlag                 :1;/* Lnas Attach with IMSI特性开关,默认值:0 */
+    VOS_UINT32  bitOpAttachWithImsiFlag                 :1;/* Lnas Attach with IMSI????????,??????:0 */
     /* Added for Boston_R13_CR_PHASEII 2016-12-06 end */
     /* Added for BOSTON_R13_CR_PHASEIII 2017-01-16 begin */
-    VOS_UINT32  bitOpAcdcFlag                           :1;/* ACDC特性开关,默认值:0 */
+    VOS_UINT32  bitOpAcdcFlag                           :1;/* ACDC????????,??????:0 */
     /* Added for BOSTON_R13_CR_PHASEIII 2017-01-16 end */
     /* Added for Boston_R13_CR_PHASEIII, 2017-01-12, begin */
-    VOS_UINT32  bitOpAttachCause19WithoutEmmTimerFlag   :1;/*换APN注册时，停止T3411/T3402的特性开关，默认值关闭:0*/
+    VOS_UINT32  bitOpAttachCause19WithoutEmmTimerFlag   :1;/*??APN????????????T3411/T3402??????????????????????:0*/
     /* Added for Boston_R13_CR_PHASEIII, 2017-01-12, end */
     VOS_UINT32  bitFlag22                   :1;
     VOS_UINT32  bitFlag23                   :1;
@@ -438,10 +438,10 @@ typedef struct
 }LNAS_FUN_FLAG_NV_BIT_STRU_1;
 
 /*****************************************************************************
- 结构名    : LNAS_FUN_FLAG_NV_BIT_STRU_2
- 协议表格  :
- ASN.1描述 :
- 结构说明  : 协议栈的和协议功能相关的开关的结构体
+ ??????    : LNAS_FUN_FLAG_NV_BIT_STRU_2
+ ????????  :
+ ASN.1???? :
+ ????????  : ????????????????????????????????????
 *****************************************************************************/
 typedef struct
 {
@@ -480,10 +480,10 @@ typedef struct
 }LNAS_FUN_FLAG_NV_BIT_STRU_2;
 
 /*****************************************************************************
- 结构名    : LNAS_FUN_FLAG_NV_BIT_STRU_3
- 协议表格  :
- ASN.1描述 :
- 结构说明  : 协议栈的和协议功能相关的开关的结构体
+ ??????    : LNAS_FUN_FLAG_NV_BIT_STRU_3
+ ????????  :
+ ASN.1???? :
+ ????????  : ????????????????????????????????????
 *****************************************************************************/
 typedef struct
 {
@@ -522,10 +522,10 @@ typedef struct
 }LNAS_FUN_FLAG_NV_BIT_STRU_3;
 
 /*****************************************************************************
- 结构名    : LNAS_FUN_FLAG_NV_BIT_STRU_4
- 协议表格  :
- ASN.1描述 :
- 结构说明  : 协议栈的和协议功能相关的开关的结构体
+ ??????    : LNAS_FUN_FLAG_NV_BIT_STRU_4
+ ????????  :
+ ASN.1???? :
+ ????????  : ????????????????????????????????????
 *****************************************************************************/
 typedef struct
 {
@@ -564,10 +564,10 @@ typedef struct
 }LNAS_FUN_FLAG_NV_BIT_STRU_4;
 
 /*****************************************************************************
- 结构名    : LNAS_FUN_FLAG_NV_BIT_STRU_5
- 协议表格  :
- ASN.1描述 :
- 结构说明  : 协议栈的和协议功能相关的开关的结构体
+ ??????    : LNAS_FUN_FLAG_NV_BIT_STRU_5
+ ????????  :
+ ASN.1???? :
+ ????????  : ????????????????????????????????????
 *****************************************************************************/
 typedef struct
 {
@@ -606,10 +606,10 @@ typedef struct
 }LNAS_FUN_FLAG_NV_BIT_STRU_5;
 
 /*****************************************************************************
- 结构名    : LNAS_FUN_FLAG_NV_BIT_STRU_6
- 协议表格  :
- ASN.1描述 :
- 结构说明  : 协议栈的和协议功能相关的开关的结构体
+ ??????    : LNAS_FUN_FLAG_NV_BIT_STRU_6
+ ????????  :
+ ASN.1???? :
+ ????????  : ????????????????????????????????????
 *****************************************************************************/
 typedef struct
 {
@@ -648,10 +648,10 @@ typedef struct
 }LNAS_FUN_FLAG_NV_BIT_STRU_6;
 
 /*****************************************************************************
- 结构名    : LNAS_FUN_FLAG_NV_BIT_STRU_7
- 协议表格  :
- ASN.1描述 :
- 结构说明  : 协议栈的和协议功能相关的开关的结构体
+ ??????    : LNAS_FUN_FLAG_NV_BIT_STRU_7
+ ????????  :
+ ASN.1???? :
+ ????????  : ????????????????????????????????????
 *****************************************************************************/
 typedef struct
 {
@@ -690,10 +690,10 @@ typedef struct
 }LNAS_FUN_FLAG_NV_BIT_STRU_7;
 
 /*****************************************************************************
- 结构名    : LNAS_FUN_FLAG_NV_BIT_STRU_8
- 协议表格  :
- ASN.1描述 :
- 结构说明  : 协议栈的和协议功能相关的开关的结构体
+ ??????    : LNAS_FUN_FLAG_NV_BIT_STRU_8
+ ????????  :
+ ASN.1???? :
+ ????????  : ????????????????????????????????????
 *****************************************************************************/
 typedef struct
 {
@@ -732,18 +732,18 @@ typedef struct
 }LNAS_FUN_FLAG_NV_BIT_STRU_8;
 
 /*****************************************************************************
-结构名称    :LNAS_LMM_NV_GRADUAL_FORBIDDEN_PARA_STRU
-使用说明    :LNAS渐进Forbidden控制NV结构体
+????????    :LNAS_LMM_NV_GRADUAL_FORBIDDEN_PARA_STRU
+????????    :LNAS????Forbidden????NV??????
 *****************************************************************************/
 typedef struct
 {
-    VOS_UINT8                           ucGradualForbFlag;           /* 特性控制开关, 0: 关; 1: 开 */
+    VOS_UINT8                           ucGradualForbFlag;           /* ????????????, 0: ??; 1: ?? */
     VOS_UINT8                           ucRsv1;
     VOS_UINT8                           ucRsv2;
     VOS_UINT8                           ucRsv3;
-    VOS_UINT16                          usGradualForbTimerFirstLen;  /* 第一次被#15拒, 惩罚定时器时长, 单位分钟 */
-    VOS_UINT16                          usGradualForbTimerSecondLen; /* 第二次被#15拒, 惩罚定时器时长, 单位分钟 */
-    VOS_UINT32                          ulGradualForbAgingTimerLen;  /* 老化定时器时长, 单位分钟 */
+    VOS_UINT16                          usGradualForbTimerFirstLen;  /* ????????#15??, ??????????????, ???????? */
+    VOS_UINT16                          usGradualForbTimerSecondLen; /* ????????#15??, ??????????????, ???????? */
+    VOS_UINT32                          ulGradualForbAgingTimerLen;  /* ??????????????, ???????? */
     VOS_UINT16                          usRsv1;
     VOS_UINT16                          usRsv2;
     VOS_UINT16                          usRsv3;
@@ -755,14 +755,14 @@ typedef struct
 }LNAS_LMM_NV_GRADUAL_FORBIDDEN_PARA_STRU;
 
 /*****************************************************************************
- 结构名    : LNAS_SWITCH_PARA_STRU
- 协议表格  :
- ASN.1描述 :
- 结构说明  : LNAS控制开关的结构体(新使用BIT位,必须填写相应说明)
+ ??????    : LNAS_SWITCH_PARA_STRU
+ ????????  :
+ ASN.1???? :
+ ????????  : LNAS????????????????(??????BIT??,????????????????)
 *****************************************************************************/
 typedef struct
 {
-    /*bit位，用于LNAS控制开关*/
+    /*bit????????LNAS????????*/
     LNAS_FUN_FLAG_NV_BIT_STRU_1                 stNasFunFlag01;
     LNAS_FUN_FLAG_NV_BIT_STRU_2                 stNasFunFlag02;
     LNAS_FUN_FLAG_NV_BIT_STRU_3                 stNasFunFlag03;
@@ -774,16 +774,16 @@ typedef struct
 
     LNAS_LMM_NV_GRADUAL_FORBIDDEN_PARA_STRU stGradualForbPara;
 
-    /* 控制开关请使用上面Bit位, 以下为保留位 */
+    /* ??????????????????Bit??, ???????????? */
     /*  tau #17 2016-05-20 begin */
-    VOS_UINT8                               ucTauRej17MaxTimes;    /* TAU被17拒绝的次数，在这个次数后转换成10启动attach，取值范围1-5 */
+    VOS_UINT8                               ucTauRej17MaxTimes;    /* TAU??17??????????????????????????????10????attach??????????1-5 */
     /*  tau #17 2016-05-20 end */
     /* temp_forbidden_TA , 2016-06-17 begin */
     VOS_UINT8                               uc3402TempForbiddenTAFlag;
-    /* 0: 优化关闭  */
-    /* 1: HPLMN开启 */
-    /* 2: VPLMN开启 */
-    /* 3: 优化开启  */
+    /* 0: ????????  */
+    /* 1: HPLMN???? */
+    /* 2: VPLMN???? */
+    /* 3: ????????  */
     /* temp_forbidden_TA , 2016-06-17 end */
     VOS_UINT8                               ucRsv3;
     VOS_UINT8                               ucRsv4;
@@ -848,7 +848,7 @@ typedef struct
     VOS_UINT8                               ucRsv63;
     VOS_UINT8                               ucRsv64;
     /* temp_forbidden_TA , 2016-06-17 begin */
-    VOS_UINT16                              usTempForbTimerLen; /*单位为分钟*/
+    VOS_UINT16                              usTempForbTimerLen; /*??????????*/
     /* temp_forbidden_TA , 2016-06-17 end */
     VOS_UINT16                              usRsv2;
     VOS_UINT16                              usRsv3;
@@ -915,8 +915,8 @@ typedef struct
     VOS_UINT16                              usRsv64;
 
     /*Add for attach Vote 2016-09-05 start*/
-    VOS_UINT32                              ulCcpuIncreaseFreqValue; /*Ccpu提频的值,单位KHZ*/
-    VOS_UINT32                              ulDdrIncreaseFreqValue;  /*Ddr提频的值,单位KHZ*/
+    VOS_UINT32                              ulCcpuIncreaseFreqValue; /*Ccpu????????,????KHZ*/
+    VOS_UINT32                              ulDdrIncreaseFreqValue;  /*Ddr????????,????KHZ*/
     /*Add for attach Vote 2016-09-05 end*/
 
     VOS_UINT32                              ulRsv3;
@@ -953,7 +953,7 @@ typedef struct
 /* 2015-5-27 end */
 typedef struct
 {
-    VOS_UINT32                          bitOpPeriodicRptTimes:1;                /* 周期上报次数控制特性开关 */
+    VOS_UINT32                          bitOpPeriodicRptTimes:1;                /* ???????????????????????? */
     VOS_UINT32                          bitOp2:1;
     VOS_UINT32                          bitOp3:1;
     VOS_UINT32                          bitOp4:1;
@@ -992,7 +992,7 @@ typedef struct
 {
     LNAS_LCS_NV_FEATURE_BIT_STRU        stLcsFeatureBit;
 
-    VOS_UINT8                           ucMaxRetryTimes;                        /* 最大重新尝试次数 */
+    VOS_UINT8                           ucMaxRetryTimes;                        /* ???????????????? */
     VOS_UINT8                           ucRsv1;
     VOS_UINT8                           ucRsv2;
     VOS_UINT8                           ucRsv3;
@@ -1016,8 +1016,8 @@ typedef struct
     VOS_UINT8                           ucRsv21;
     VOS_UINT8                           ucRsv22;
     VOS_UINT8                           ucRsv23;
-    VOS_UINT16                          usRetryTimerLen;                        /* 重新尝试定时器时长, 超时后会重新建链 */
-    VOS_UINT16                          usPeriodicRptTimes;                     /* MO-LR为周期上报时,设置周期上报次数 */
+    VOS_UINT16                          usRetryTimerLen;                        /* ??????????????????, ???????????????? */
+    VOS_UINT16                          usPeriodicRptTimes;                     /* MO-LR????????????,???????????????? */
     VOS_UINT16                          usRsv2;
     VOS_UINT16                          usRsv3;
     VOS_UINT16                          usRsv4;
@@ -1053,32 +1053,32 @@ typedef struct
 
 /* Added for Boston_R13_CR_PHASEI 2016-10-17 begin */
 /*****************************************************************************
-结构名称    :LNAS_LMM_NV_T3402_INFO_STRU
-使用说明    :LNAS关于T3402定时器的NV数据结构
+????????    :LNAS_LMM_NV_T3402_INFO_STRU
+????????    :LNAS????T3402????????NV????????
 *****************************************************************************/
 typedef struct
 {
-    VOS_UINT8                           ucIsT3402DefaultValue;                  /* 3402定时器是否为默认时长，0否，1是 */
-    VOS_UINT8                           ucRsv[3];                               /* 保留 */
-    VOS_UINT32                          ul3402Len;                              /* 3402定时器时长，单位:秒 */
-    NAS_MM_PLMN_LIST_STRU               stT3402EPlmnList;                       /* 3402定时器时长生效的EPLMNLIST */
+    VOS_UINT8                           ucIsT3402DefaultValue;                  /* 3402??????????????????????0????1?? */
+    VOS_UINT8                           ucRsv[3];                               /* ???? */
+    VOS_UINT32                          ul3402Len;                              /* 3402????????????????:?? */
+    NAS_MM_PLMN_LIST_STRU               stT3402EPlmnList;                       /* 3402????????????????EPLMNLIST */
 }LNAS_LMM_NV_T3402_INFO_STRU;
 
 /* Added for Boston_R13_CR_PHASEI 2016-10-17 end */
 
 /* Added by for DATA RETRY PHASEI, 2016-03-21, Begin */
 /*****************************************************************************
-结构名称    :LNAS_LMM_NV_T3402_CTRL_STRU
-使用说明    :LNAS关于DATA RETRY特性T3402定时器针对PLMN列表维护的NV数据结构
+????????    :LNAS_LMM_NV_T3402_CTRL_STRU
+????????    :LNAS????DATA RETRY????T3402??????????PLMN??????????NV????????
 *****************************************************************************/
 typedef struct
 {
-    VOS_UINT8                           ucT3402PlmnCtrlSwitch;                  /* T3402针对PLMN有效开关，0关闭，1打开 */
-    VOS_UINT8                           ucT3402RmLenStore;                      /* T3402剩余时长是否需要保存，0否，1是 */
-    VOS_UINT8                           ucRsv1;                                 /* 保留 */
-    VOS_UINT8                           ucT3402PlmnNum;                         /* astT3402PlmnList中有效单元个数 */
+    VOS_UINT8                           ucT3402PlmnCtrlSwitch;                  /* T3402????PLMN??????????0??????1???? */
+    VOS_UINT8                           ucT3402RmLenStore;                      /* T3402??????????????????????0????1?? */
+    VOS_UINT8                           ucRsv1;                                 /* ???? */
+    VOS_UINT8                           ucT3402PlmnNum;                         /* astT3402PlmnList?????????????? */
     NAS_PLMN_T3402_STRU                 astT3402PlmnList[NAS_MM_MAX_T3402_PLMN_NUM];
-    VOS_UINT32                          ulT3402DefaultValue;                    /* 3402定时器默认时长，单位:秒 */
+    VOS_UINT32                          ulT3402DefaultValue;                    /* 3402????????????????????:?? */
 
 }LNAS_LMM_NV_T3402_CTRL_STRU;
 /* Added by for DATA RETRY PHASEI, 2016-03-21, End */
@@ -1086,28 +1086,28 @@ typedef struct
 /*Added for DATA RETRY PHASEII 2016-05-23 start*/
 typedef struct
 {
-    VOS_UINT32                                  ulRemainLogTime;    /*当前事件关机时候还剩余的时间,单位为秒*/
-    VOS_UINT16                                  usEventCnt;         /*当前原因值事件的计数*/
+    VOS_UINT32                                  ulRemainLogTime;    /*????????????????????????????,????????*/
+    VOS_UINT16                                  usEventCnt;         /*????????????????????*/
     VOS_UINT8                                   ucRsv1;
     VOS_UINT8                                   ucRsv2;
-    NAS_EMM_PLMN_ID_STRU                        stPlmnId;           /*当前PLMN ID*/
-    NAS_EMM_TAC_STRU                            stTac;              /*当前Tac*/
+    NAS_EMM_PLMN_ID_STRU                        stPlmnId;           /*????PLMN ID*/
+    NAS_EMM_TAC_STRU                            stTac;              /*????Tac*/
 }LNAS_EMM_DATA_RETRY_FAIL_EVENT_STRU;
 
 typedef struct
 {
-    VOS_UINT8                                   ucEmmcause;         /*原因值ID*/
+    VOS_UINT8                                   ucEmmcause;         /*??????ID*/
     VOS_UINT8                                   ucRsv1;
     VOS_UINT8                                   ucRsv2;
     VOS_UINT8                                   ucRsv3;
-    VOS_UINT32                                  ulEmmFailEventCnt;  /*表示当前原因值列表中存储的有效个数*/
-    LNAS_EMM_DATA_RETRY_FAIL_EVENT_STRU         astEmmFailEvent[LNAS_NV_DATA_RETRY_EMM_FAIL_CAUSE_EVENT_CNT];  /*具体原因值事件列表的list*/
+    VOS_UINT32                                  ulEmmFailEventCnt;  /*??????????????????????????????????*/
+    LNAS_EMM_DATA_RETRY_FAIL_EVENT_STRU         astEmmFailEvent[LNAS_NV_DATA_RETRY_EMM_FAIL_CAUSE_EVENT_CNT];  /*????????????????????list*/
 }LNAS_EMM_DATA_RETRY_FAIL_EVENT_LIST_STRU;
 
 typedef struct
 {
-    VOS_UINT32                                  aulMaxLogTime[LNAS_NV_DATA_RETRY_EMM_FAIL_CAUSE_NUM];       /*表示事件存储的最大时间*/
-    VOS_UINT8                                   aucMaxEventCounter[LNAS_NV_DATA_RETRY_EMM_FAIL_CAUSE_NUM];  /*表示事件在ulMaxLogTime时间内尝试的最大次数*/
+    VOS_UINT32                                  aulMaxLogTime[LNAS_NV_DATA_RETRY_EMM_FAIL_CAUSE_NUM];       /*??????????????????????*/
+    VOS_UINT8                                   aucMaxEventCounter[LNAS_NV_DATA_RETRY_EMM_FAIL_CAUSE_NUM];  /*??????????ulMaxLogTime????????????????????*/
     VOS_UINT8                                   ucRsv1;
     VOS_UINT8                                   ucRsv2;
 	LNAS_EMM_DATA_RETRY_FAIL_EVENT_LIST_STRU    astEventCause[LNAS_NV_DATA_RETRY_EMM_FAIL_CAUSE_NUM];
@@ -1122,31 +1122,31 @@ typedef struct
 
 /* Added for DATA RETRY PHASEIII, 2016-6-23, begin */
 /*****************************************************************************
-结构名称    :LNAS_APN_PRIO_INFO_STRU
-使用说明    :
+????????    :LNAS_APN_PRIO_INFO_STRU
+????????    :
 *****************************************************************************/
 typedef struct
 {
-    LNAS_APN_INFO_STRU                  stApnInfo;                              /* APN 信息 */
-    NAS_ESM_BEARER_PRIO_ENUM_UINT32     ulBearPrio;                             /* 承载优先级*/
+    LNAS_APN_INFO_STRU                  stApnInfo;                              /* APN ???? */
+    NAS_ESM_BEARER_PRIO_ENUM_UINT32     ulBearPrio;                             /* ??????????*/
 }LNAS_APN_PRIO_INFO_STRU;
 /* Added for DATA RETRY PHASEIII, 2016-6-23, end */
 
 typedef struct
 {
     LNAS_APN_INFO_STRU                  stApnInfo;                          /* APN                */
-    VOS_UINT32                          ulRemainTimerLen;                   /*当前APN关机时候调节定时器还剩余的时间*/
+    VOS_UINT32                          ulRemainTimerLen;                   /*????APN??????????????????????????????*/
 }LNAS_ESM_APN_THROT_REMAIN_TIME_INFO_STRU;
 
 typedef struct
 {
-    VOS_UINT32                                  ulWaitTime;            /* 在PDN去连接之后，在waittime之后才能发起PDN建立流程,单位:s*/
-    VOS_UINT32                                  ulPdnMaxConnTime;      /* 最大连接时间，标识每一个PDN第一次发起以来经过的最大时间，单位:s*/
-    VOS_UINT32                                  ulPdnMaxConnCount;     /* 最大连接次数，在最大连接时间，允许发起PDN的最大连接次数*/
-    VOS_UINT8                                   ucApnTotalNum;         /* 正在使用的APN上下文总数 */
-    VOS_UINT8                                   aucRsv[3];              /* 保留 */
+    VOS_UINT32                                  ulWaitTime;            /* ??PDN??????????????waittime????????????PDN????????,????:s*/
+    VOS_UINT32                                  ulPdnMaxConnTime;      /* ????????????????????????PDN??????????????????????????????????:s*/
+    VOS_UINT32                                  ulPdnMaxConnCount;     /* ??????????????????????????????????????PDN??????????????*/
+    VOS_UINT8                                   ucApnTotalNum;         /* ??????????APN?????????? */
+    VOS_UINT8                                   aucRsv[3];              /* ???? */
 
-    /* PDN调节定时器启动期间关机，维护剩余时间列表，连续存储*/
+    /* PDN??????????????????????????????????????????????????*/
     LNAS_ESM_APN_THROT_REMAIN_TIME_INFO_STRU    astApnThrotRemainTimeInfo[LNAS_NV_MAX_APN_CONTEXT_NUM];
 }LNAS_ESM_DATA_RETRY_NV_PARA_CONFIG_STRU;
 
@@ -1154,39 +1154,39 @@ typedef struct
 
 /* Added for DSDS OPTIMIZE MT DETACH BY TAU, 2016-06-16, Begin */
 /*****************************************************************************
-结构名称    :LNAS_LMM_NV_MT_DETACH_TAU_CTRL_STRU
-使用说明    :LNAS关于产品线定制的周期性收到网络层DETACH，因DSDS可能无法收到
-             网侧DETACH,导致UE长时间被叫不通问题的定制NV数据结构.
+????????    :LNAS_LMM_NV_MT_DETACH_TAU_CTRL_STRU
+????????    :LNAS????????????????????????????????DETACH????DSDS????????????
+             ????DETACH,????UE????????????????????????NV????????.
 
-             (1)当ucPlmnNum = 1,且列表中该PLMN设为全F,则特性适用所有PLMN;
-             (2)其他情况,特性只适用于驻留在此列表中的PLMN。
+             (1)??ucPlmnNum = 1,??????????PLMN??????F,??????????????PLMN;
+             (2)????????,????????????????????????????PLMN??
 *****************************************************************************/
 typedef struct
 {
-    VOS_UINT8                           ucActiveFlag;                           /* 特性开关, 1:特性开启，0:打特性关闭 */
-    VOS_UINT8                           ucRsv0;                                 /* 保留，留以后其他需求启用 */
-    VOS_UINT8                           ucRsv1;                                 /* 保留，留以后其他需求启用 */
-    VOS_UINT8                           ucPlmnNum;                              /* 特性适用的PLMN个数  */
-    NAS_MM_PLMN_ID_STRU                 astPlmnId[NAS_MT_DETACH_TAU_PLMN_MAX_NUM];/* 特性适用的具体PLMN列表。 */
+    VOS_UINT8                           ucActiveFlag;                           /* ????????, 1:??????????0:?????????? */
+    VOS_UINT8                           ucRsv0;                                 /* ???????????????????????? */
+    VOS_UINT8                           ucRsv1;                                 /* ???????????????????????? */
+    VOS_UINT8                           ucPlmnNum;                              /* ??????????PLMN????  */
+    NAS_MM_PLMN_ID_STRU                 astPlmnId[NAS_MT_DETACH_TAU_PLMN_MAX_NUM];/* ??????????????PLMN?????? */
 }LNAS_LMM_NV_MT_DETACH_TAU_CTRL_STRU;
 /* Added for DSDS OPTIMIZE MT DETACH BY TAU, 2016-06-16, End */
 
 /* Added for network not include eps_network_feature_support IE  ,2017-08-25,begin */
 /*****************************************************************************
-结构名称    :LNAS_LMM_NV_NETWORK_FEATURE_VOPS_OPTIMIZE_CTRL_STRU
-使用说明    :此NV用于解决沙特运营商zain网络未在ATTACH_ACP中携带eps_network_feature_support
-             可选信元时,VOLTE无法进行IMS注册的问题.
-             网络未携带eps network feature support信元时,正常按照协议的处理是把信元相关
-             项都置为不支持;此NV开关打开时,为了解决IMS无法注册问题,需要把此信元的VOPS能力项
-             设为支持.
-             此NV由终端定制是否打开。
+????????    :LNAS_LMM_NV_NETWORK_FEATURE_VOPS_OPTIMIZE_CTRL_STRU
+????????    :??NV??????????????????zain????????ATTACH_ACP??????eps_network_feature_support
+             ??????????,VOLTE????????IMS??????????.
+             ??????????eps network feature support??????,??????????????????????????????
+             ??????????????;??NV??????????,????????IMS????????????,??????????????VOPS??????
+             ????????.
+             ??NV????????????????????
 *****************************************************************************/
 typedef struct
 {
-    VOS_UINT8                           ucNetVopsOptimizeCtrl;                  /* 特性开关, 1:特性开启，0:特性关闭. 默认关闭 */
-    VOS_UINT8                           ucRsv0;                                 /* 保留，留以后其他需求启用 */
-    VOS_UINT8                           ucRsv1;                                 /* 保留，留以后其他需求启用 */
-    VOS_UINT8                           ucRsv2;                                 /* 保留，留以后其他需求启用 */
+    VOS_UINT8                           ucNetVopsOptimizeCtrl;                  /* ????????, 1:??????????0:????????. ???????? */
+    VOS_UINT8                           ucRsv0;                                 /* ???????????????????????? */
+    VOS_UINT8                           ucRsv1;                                 /* ???????????????????????? */
+    VOS_UINT8                           ucRsv2;                                 /* ???????????????????????? */
 }LNAS_LMM_NV_NETWORK_FEATURE_VOPS_OPTIMIZE_CTRL_STRU;
 /* Added for network not include eps_network_feature_support IE  ,2017-08-25,end */
 
@@ -1194,22 +1194,22 @@ typedef struct
 typedef struct
 {
     LNAS_APN_PRIO_INFO_STRU             stApnAndPrioInfo;                       /* APN and Prio INFO */
-    VOS_UINT32                          ulT3396RemainLenForNonCustom;           /* 单位为秒 */
-    VOS_UINT8                           ucPlmnNum;                              /* PLMN个数 */
+    VOS_UINT32                          ulT3396RemainLenForNonCustom;           /* ???????? */
+    VOS_UINT8                           ucPlmnNum;                              /* PLMN???? */
     VOS_UINT8                           aucRsv[3];
     NAS_PLMN_T3396_STRU                 astT3396PlmnList[NAS_MM_MAX_T3396_PLMN_NUM];
 }LNAS_ESM_T3396_APN_PLMN_INFO_STRU;
 /*****************************************************************************
-结构名称    :LNAS_ESM_NV_T3396_CTRL_CONFIG_STRU
-使用说明    :LNAS关于DATA RETRY特性T3396定时器针对PLMN/APN列表维护的NV数据结构
+????????    :LNAS_ESM_NV_T3396_CTRL_CONFIG_STRU
+????????    :LNAS????DATA RETRY????T3396??????????PLMN/APN??????????NV????????
 *****************************************************************************/
 
 typedef struct
 {
-    VOS_UINT8                           ucT3396CtrlSwitch;                      /* T3396特性开关，0关闭，1打开 */
-    VOS_UINT8                           ucIsPlmnCustom;                         /* PLMN定制标识，0非定制，1定制 */
-    VOS_UINT8                           ucApnTotalNum;                          /* 正在使用的APN上下文总数 */
-    VOS_UINT8                           ucRsv;                                  /* 保留 */
+    VOS_UINT8                           ucT3396CtrlSwitch;                      /* T3396??????????0??????1???? */
+    VOS_UINT8                           ucIsPlmnCustom;                         /* PLMN??????????0????????1???? */
+    VOS_UINT8                           ucApnTotalNum;                          /* ??????????APN?????????? */
+    VOS_UINT8                           ucRsv;                                  /* ???? */
 
     LNAS_ESM_T3396_APN_PLMN_INFO_STRU    astT3396ApnPlmnInfo[LNAS_NV_MAX_APN_CONTEXT_NUM];
 
@@ -1218,29 +1218,29 @@ typedef struct
 
 /*Added for DATA RETRY PHASEIII 2016-06-21 start*/
 /*****************************************************************************
-结构名称    :LNAS_LMM_NV_EAB_CONFIG_STRU
-使用说明    :LNAS关于EAB特性的NV数据结构
+????????    :LNAS_LMM_NV_EAB_CONFIG_STRU
+????????    :LNAS????EAB??????NV????????
 *****************************************************************************/
 typedef struct
 {
-    VOS_UINT8                           ucUeCapacityLowPri;             /* UE能力，是否支持信令低优先级， 0不支持，1支持 */
-    VOS_UINT8                           ucUeCapacityEab;                /* UE能力，是否支持EAB， 0不支持，1支持 */
-    VOS_UINT8                           ucEabFlag;                      /* EAB特性开关，0不支持，1支持 */
-    VOS_UINT8                           ucSigLowPriFlag;                /* NAS Signalling Priority 标志位，0非低优先级，1低优先级 */
-    VOS_UINT8                           ucOverrideSigLowPriFlag;        /* NAS Signalling Priority 重写标志，0不可重写，1可重写 */
-    VOS_UINT8                           ucOverrideEabFlag;              /* EAB开关重写标志，0不可重写，1可重写 */
+    VOS_UINT8                           ucUeCapacityLowPri;             /* UE???????????????????????????? 0????????1???? */
+    VOS_UINT8                           ucUeCapacityEab;                /* UE??????????????EAB?? 0????????1???? */
+    VOS_UINT8                           ucEabFlag;                      /* EAB??????????0????????1???? */
+    VOS_UINT8                           ucSigLowPriFlag;                /* NAS Signalling Priority ????????0????????????1???????? */
+    VOS_UINT8                           ucOverrideSigLowPriFlag;        /* NAS Signalling Priority ??????????0??????????1?????? */
+    VOS_UINT8                           ucOverrideEabFlag;              /* EAB??????????????0??????????1?????? */
     VOS_UINT8                           ucRsv1;
     VOS_UINT8                           ucRsv2;
 }LNAS_LMM_NV_EAB_CONFIG_STRU;
 
 /*Added for DATA RETRY PHASEIII 2016-06-21 end*/
 /*****************************************************************************
-结构体名    :LNAS_LMM_NV_COMPATIBLE_OPTIMIZE_FOR_PROTCL_AND_NET_STRU
-使用说明    :网络兼容性问题优化控制开关
+????????    :LNAS_LMM_NV_COMPATIBLE_OPTIMIZE_FOR_PROTCL_AND_NET_STRU
+????????    :??????????????????????????
 *****************************************************************************/
 typedef struct
 {
-    VOS_UINT8                           ucSelectPlmnWhenAuthInTauCtrl;/*共享网络下TAU过程中发生鉴权，鉴权参数PLMN的选择开关，1-打开，0-关闭， 默认打开*/
+    VOS_UINT8                           ucSelectPlmnWhenAuthInTauCtrl;/*??????????TAU????????????????????????PLMN????????????1-??????0-?????? ????????*/
     VOS_UINT8                           ucRsv2;
     VOS_UINT8                           ucRsv3;
     VOS_UINT8                           ucRsv4;
@@ -1264,18 +1264,18 @@ typedef struct
 
 /* Added  for DATA RETRY PHASEIV, 2016-07-25, begin */
 /*****************************************************************************
-结构名称    :LNAS_EMM_NV_T3346_CTRL_CONFIG_STRU
-使用说明    :LNAS T3346定时器的NV数据结构
+????????    :LNAS_EMM_NV_T3346_CTRL_CONFIG_STRU
+????????    :LNAS T3346????????NV????????
 *****************************************************************************/
 
 typedef struct
 {
-    VOS_UINT8                           ucT3346CtrlSwitch;                      /* T3346特性开关，0关闭，1打开 */
-    VOS_UINT8                           ucNasSigPrio;                           /* NAS Signalling Priority ，0非低优先级，1低优先级 */
-    VOS_UINT8                           ucRsv1;                                 /* 保留 */
-    VOS_UINT8                           ucRsv2;                                 /* 保留 */
+    VOS_UINT8                           ucT3346CtrlSwitch;                      /* T3346??????????0??????1???? */
+    VOS_UINT8                           ucNasSigPrio;                           /* NAS Signalling Priority ??0????????????1???????? */
+    VOS_UINT8                           ucRsv1;                                 /* ???? */
+    VOS_UINT8                           ucRsv2;                                 /* ???? */
 
-    VOS_UINT32                          ulT3346RemainLen;                       /* 单位为秒 */
+    VOS_UINT32                          ulT3346RemainLen;                       /* ???????? */
     NAS_MM_PLMN_ID_STRU                 stPlmnId;                               /* PLMN */
     NAS_MM_PLMN_LIST_STRU               stEPlmnList;                            /* equivalent PLMN list */
 
@@ -1284,14 +1284,14 @@ typedef struct
 
 /* Added for DATA RETRY PHASEIV, 2016-7-25, begin */
 /*****************************************************************************
-结构名称    :LNAS_ESM_NV_APN_SWITCH_CTRL_CONFIG_STRU
-使用说明    :
+????????    :LNAS_ESM_NV_APN_SWITCH_CTRL_CONFIG_STRU
+????????    :
 *****************************************************************************/
 
 typedef struct
 {
-    VOS_UINT8                           ucApnSwitchForVZW;          /*APN SWTICH 功能开关: 1 开启；0 关闭*/
-    VOS_UINT8                           ucApnSwitchForNonVZW;      /*APN SWTICH 功能开关: 1 开启；0 关闭*/
+    VOS_UINT8                           ucApnSwitchForVZW;          /*APN SWTICH ????????: 1 ??????0 ????*/
+    VOS_UINT8                           ucApnSwitchForNonVZW;      /*APN SWTICH ????????: 1 ??????0 ????*/
     VOS_UINT8                           ucRsv1;
     VOS_UINT8                           ucRsv2;
 
@@ -1299,53 +1299,53 @@ typedef struct
 /* Added for DATA RETRY PHASEIV, 2016-7-25, end */
 /* Added  for Boston_R13_CR_PHASEIII, 2017-01-16, Begin */
 /*****************************************************************************
-结构名称    :LNAS_ESM_NV_BACKOFF_CTRL_CONFIG_STRU
-使用说明    :LNAS关于back-off的NV数据结构
+????????    :LNAS_ESM_NV_BACKOFF_CTRL_CONFIG_STRU
+????????    :LNAS????back-off??NV????????
 *****************************************************************************/
 
 typedef struct
 {
-    VOS_UINT8                           ucBackOffCtrlSwitch;                    /* back-off特性开关，0关闭，1打开 */
-    VOS_UINT8                           aucRsv[3];                              /* 保留 */
+    VOS_UINT8                           ucBackOffCtrlSwitch;                    /* back-off??????????0??????1???? */
+    VOS_UINT8                           aucRsv[3];                              /* ???? */
 
 }LNAS_ESM_NV_BACKOFF_CTRL_CONFIG_STRU;
 /* Added  for Boston_R13_CR_PHASEIII, 2017-01-16, End */
 
 /* Added for ,2016-10-28,Begin */
 /*****************************************************************************
-结构名称    :LNAS_EMM_NV_HO_TAU_DELAY_CTRL_CONFIG_STRU
-使用说明    :
+????????    :LNAS_EMM_NV_HO_TAU_DELAY_CTRL_CONFIG_STRU
+????????    :
 *****************************************************************************/
 
 typedef struct
 {
-    VOS_UINT8                           ucSwitchFlag;              /*SWTICH 功能开关: 1 开启；0 关闭,默认开启*/
+    VOS_UINT8                           ucSwitchFlag;              /*SWTICH ????????: 1 ??????0 ????,????????*/
     VOS_UINT8                           aucRsv[3];
 
-    VOS_UINT32                          ulHoTauDelayTimeLen;      /*HO TAU DELAY 定时器时长 ms */
+    VOS_UINT32                          ulHoTauDelayTimeLen;      /*HO TAU DELAY ?????????? ms */
 }LNAS_EMM_NV_HO_TAU_DELAY_CTRL_CONFIG_STRU;
 
 /*****************************************************************************
-结构名称    :LNAS_ESM_NV_NDIS_CONN_DELAY_CTRL_CONFIG_STRU
-使用说明    :
+????????    :LNAS_ESM_NV_NDIS_CONN_DELAY_CTRL_CONFIG_STRU
+????????    :
 *****************************************************************************/
 
 typedef struct
 {
-    VOS_UINT8                           ucSwitchFlag;              /* SWTICH 功能开关: 1 开启；0 关闭,默认开启*/
+    VOS_UINT8                           ucSwitchFlag;              /* SWTICH ????????: 1 ??????0 ????,????????*/
     VOS_UINT8                           aucRsv[3];
 
-    VOS_UINT32                          ulNdisConnDelayTimeLen;      /*NDIS CONN DELAY 定时器时长 ms */
+    VOS_UINT32                          ulNdisConnDelayTimeLen;      /*NDIS CONN DELAY ?????????? ms */
 }LNAS_ESM_NV_NDIS_CONN_DELAY_CTRL_CONFIG_STRU;
 
 /* Added for ,2016-10-28,End */
 
 /* add for separate special part from original NV  , 2016-11-07, begin */
 /*****************************************************************************
- 结构名    : LNAS_AUSTRALIA_FLAG_CONFIG_STRU
- 协议表格  :
- ASN.1描述 :
- 结构说明  : 澳电定制的控制开关结构体(新使用BIT位,必须填写相应说明)
+ ??????    : LNAS_AUSTRALIA_FLAG_CONFIG_STRU
+ ????????  :
+ ASN.1???? :
+ ????????  : ????????????????????????(??????BIT??,????????????????)
 *****************************************************************************/
 typedef struct
 {
@@ -1355,43 +1355,43 @@ typedef struct
 /* add for separate special part from original NV  , 2016-11-07, end */
 /* Added for MTU_REQUIRE,2016-11-12,Begin */
 /*****************************************************************************
-结构名称    :LNAS_ESM_NV_NDIS_CONN_DELAY_CTRL_CONFIG_STRU
-使用说明    :
+????????    :LNAS_ESM_NV_NDIS_CONN_DELAY_CTRL_CONFIG_STRU
+????????    :
 *****************************************************************************/
 
 typedef struct
 {
-    VOS_UINT8                           ucIpv4MtuForImsApnFlag;             /* 针对IMS APN是否请求ipv4 mtu: 1 请求；0 不请求,默认请求*/
-    VOS_UINT8                           ucIpv4MtuForOtherApnFlag;           /* 针对其他 APN是否请求ipv4 mtu: 1 请求；0 不请求,默认不请求*/
+    VOS_UINT8                           ucIpv4MtuForImsApnFlag;             /* ????IMS APN????????ipv4 mtu: 1 ??????0 ??????,????????*/
+    VOS_UINT8                           ucIpv4MtuForOtherApnFlag;           /* ???????? APN????????ipv4 mtu: 1 ??????0 ??????,??????????*/
     VOS_UINT8                           aucRsv[2];
 }LNAS_ESM_NV_IPV4_MTU_CTRL_CONFIG_STRU;
 /* Added for MTU_REQUIRE,2016-11-12,End */
 /* Added for BOSTON_R13_CR_PHASEII,2016-12-05,Begin */
 /*****************************************************************************
-结构名称    :LNAS_ESM_NV_NDIS_CONN_DELAY_CTRL_CONFIG_STRU
-使用说明    :
+????????    :LNAS_ESM_NV_NDIS_CONN_DELAY_CTRL_CONFIG_STRU
+????????    :
 *****************************************************************************/
 
 typedef struct
 {
-    VOS_UINT8                           ucSwitchFlag;                       /* 特性是否开启: 1 开启；0不开启*/
+    VOS_UINT8                           ucSwitchFlag;                       /* ????????????: 1 ??????0??????*/
     VOS_UINT8                           aucRsv[3];
-    VOS_UINT8                           ucUsimInvalidForGprsMaxValue;       /* GRPS业务卡无效计数最大值 */
-    VOS_UINT8                           ucUsimInvalidForNonGprsMaxValue;    /* 非GRPS业务卡无效计数最大值 */
-    VOS_UINT8                           ucPlmnSpecificAttemptMaxValue;      /* 特定PLMN尝试计数最大值 */
-    VOS_UINT8                           ucPlmnSpecificPsAttemptMaxValue;    /* 特定PLMN PS尝试计数最大值 */
+    VOS_UINT8                           ucUsimInvalidForGprsMaxValue;       /* GRPS???????????????????? */
+    VOS_UINT8                           ucUsimInvalidForNonGprsMaxValue;    /* ??GRPS???????????????????? */
+    VOS_UINT8                           ucPlmnSpecificAttemptMaxValue;      /* ????PLMN?????????????? */
+    VOS_UINT8                           ucPlmnSpecificPsAttemptMaxValue;    /* ????PLMN PS?????????????? */
 }LNAS_EMM_NV_PLAIN_NAS_REJ_MSG_CTRL_CONFIG_STRU;
 /* Added for BOSTON_R13_CR_PHASEII,2016-12-05,End */
 /* Added for MO_DETACH_REL,2017-01-05,Begin */
 /*****************************************************************************
-结构名称    :LNAS_ESM_NV_NDIS_CONN_DELAY_CTRL_CONFIG_STRU
-使用说明    :
+????????    :LNAS_ESM_NV_NDIS_CONN_DELAY_CTRL_CONFIG_STRU
+????????    :
 *****************************************************************************/
 
 typedef struct
 {
-    VOS_UINT8                           ucSwitchFlag;                       /* 特性是否开启: 1 开启；0不开启*/
-    VOS_UINT8                           ucMaxDetachAttemptCnt;              /* detach最大尝试次数 */
+    VOS_UINT8                           ucSwitchFlag;                       /* ????????????: 1 ??????0??????*/
+    VOS_UINT8                           ucMaxDetachAttemptCnt;              /* detach???????????? */
     VOS_UINT8                           aucRsv[2];
 
 }LNAS_EMM_NV_DETACH_ATTEMPT_CNT_CTRL_CONFIG_STRU;
@@ -1401,13 +1401,13 @@ typedef struct
 
 /* Added by 2016-12-14 for KDDI,begin */
 /*****************************************************************************
-结构名称    :LNAS_ESM_NV_CHANGE_TO_IMSAPN_CONFIG_STRU
-使用说明    :
+????????    :LNAS_ESM_NV_CHANGE_TO_IMSAPN_CONFIG_STRU
+????????    :
 *****************************************************************************/
 
 typedef struct
 {
-    VOS_UINT8                           ucChangeToImsApnFlag;             /* ATTACH被拒后，是否要替换为IMS APN，VOS_TRUE:需要；VOS_fALSE_不需要*/
+    VOS_UINT8                           ucChangeToImsApnFlag;             /* ATTACH????????????????????IMS APN??VOS_TRUE:??????VOS_fALSE_??????*/
     VOS_UINT8                           ucRsv1;
     VOS_UINT8                           ucRsv2;
     VOS_UINT8                           ucRsv3;
@@ -1415,13 +1415,13 @@ typedef struct
 /* Added by 2016-12-14 for KDDI,end */
 /* Added for MODETACH_ATTACH_COLLISION,2017-01-05,Begin */
 /*****************************************************************************
-结构名称    :LNAS_EMM_NV_STORE_MMC_DETACH_CTRL_CONFIG_STRU
-使用说明    :
+????????    :LNAS_EMM_NV_STORE_MMC_DETACH_CTRL_CONFIG_STRU
+????????    :
 *****************************************************************************/
 
 typedef struct
 {
-    VOS_UINT8                           ucSwitchFlag;                       /* 特性是否开启: 1 开启；0不开启*/
+    VOS_UINT8                           ucSwitchFlag;                       /* ????????????: 1 ??????0??????*/
     VOS_UINT8                           aucRsv[3];
 
 }LNAS_EMM_NV_STORE_MMC_DETACH_CTRL_CONFIG_STRU;
@@ -1431,30 +1431,30 @@ typedef struct
 
 /*Added for BOSTON_R13_CR_PHASEIII 2017-01-16 begin */
 /*****************************************************************************
-结构名称    :LNAS_LMM_NV_ACDC_APP_STRU
-使用说明    :LNAS关于ACDC特性APP-ACDCcategory的数据结构
+????????    :LNAS_LMM_NV_ACDC_APP_STRU
+????????    :LNAS????ACDC????APP-ACDCcategory??????????
 *****************************************************************************/
 typedef struct
 {
     VOS_UINT8                                               aucOsId[LNAS_NV_ACDC_OSID_LEN];        /* OSID */
     VOS_UINT8                                               aucAppId[LNAS_NV_ACDC_MAX_APPID_LEN];      /* APPID */
     VOS_UINT8                                               ucAcdcCategory;     /* APPID */
-    VOS_UINT8                                               ucRsv[3];           /* 保留 */
+    VOS_UINT8                                               ucRsv[3];           /* ???? */
 }LNAS_LMM_NV_ACDC_APP_STRU;
 
 /*Added for MT-DETACH issue 2017-04-13 start*/
 /*****************************************************************************
-结构名称    :NAS_EMM_MT_DETACH_OPTIMIZE_STRU
-使用说明    :MT-DETACH优化的结构
+????????    :NAS_EMM_MT_DETACH_OPTIMIZE_STRU
+????????    :MT-DETACH??????????
 *****************************************************************************/
 typedef struct
 {
     /*
-    表示MT-detach re-attach-not-required 携带原因值，协议明确规定了如下的原因值:
-    2、3、6、7、8、11、12、13、14、15、25 这些原因值协议有明确规定了处理原则，除开
-    之外的其他原因值，统一当成other原因值处理了，本次优化针对other原因值。
+    ????MT-detach re-attach-not-required ??????????????????????????????????????:
+    2??3??6??7??8??11??12??13??14??15??25 ????????????????????????????????????????
+    ??????????????????????????other??????????????????????????other????????
     */
-    VOS_UINT8                           aucMtDetachOptForGivenCauseList[LNAS_NV_MT_DETACH_OPT_OTHER_CAUSE_CNT]; /*MT-DETACH优化的原因值列表*/
+    VOS_UINT8                           aucMtDetachOptForGivenCauseList[LNAS_NV_MT_DETACH_OPT_OTHER_CAUSE_CNT]; /*MT-DETACH????????????????*/
     VOS_UINT16                          usRsv1;
     VOS_UINT16                          usRsv2;
     VOS_UINT16                          usRsv3;
@@ -1466,12 +1466,12 @@ typedef struct
 /*Added for MT-DETACH issue 2017-04-13 end*/
 
 /*****************************************************************************
-结构名称    :LNAS_ESM_NV_COMPATIBILITY_CONFIG_STRU
-使用说明    :
+????????    :LNAS_ESM_NV_COMPATIBILITY_CONFIG_STRU
+????????    :
 *****************************************************************************/
 typedef struct
 {
-    VOS_UINT8                           ucApnTotalLengthCheckCompaSwitch;     /* 0关闭，1打开 */
+    VOS_UINT8                           ucApnTotalLengthCheckCompaSwitch;     /* 0??????1???? */
     VOS_UINT8                           ucDelPfLengthCheckCompaSwitch;
     VOS_UINT8                           ucRsv1;
     VOS_UINT8                           ucRsv2;
@@ -1491,40 +1491,40 @@ typedef struct
 
 
 /*****************************************************************************
-结构名称    :LNAS_LMM_NV_ACDC_APP_LIST_STRU
-使用说明    :LNAS关于ACDC特性APP列表的数据结构
+????????    :LNAS_LMM_NV_ACDC_APP_LIST_STRU
+????????    :LNAS????ACDC????APP??????????????
 *****************************************************************************/
 typedef struct
 {
-    VOS_UINT32                          ulAppNum;                               /* APP列表个数 */
-    LNAS_LMM_NV_ACDC_APP_STRU           astAcdcAppList[LNAS_NV_ACDC_APP_MAX_NUM]; /* APP列表 */
+    VOS_UINT32                          ulAppNum;                               /* APP???????? */
+    LNAS_LMM_NV_ACDC_APP_STRU           astAcdcAppList[LNAS_NV_ACDC_APP_MAX_NUM]; /* APP???? */
 }LNAS_EMM_NV_ACDC_CONFIG_STRU;
 /*Added for BOSTON_R13_CR_PHASEIII 2017-01-16 end */
 
 /* add for separate special part from original NV  , 2017-03-07, begin */
 /*****************************************************************************
-结构名    : LNAS_LMM_NV_DSDS_OPTIMIZE_FLAG_CONFIG_STRU
-协议表格  :
-ASN.1描述 :
-结构说明  : DSDS2.0优化的控制开关结构体
+??????    : LNAS_LMM_NV_DSDS_OPTIMIZE_FLAG_CONFIG_STRU
+????????  :
+ASN.1???? :
+????????  : DSDS2.0????????????????????
 *****************************************************************************/
 typedef struct
 {
-    VOS_UINT8                           ucDsdsOptimizeFlag;                 /* 特性是否开启: 1:开启；0:关闭 */
+    VOS_UINT8                           ucDsdsOptimizeFlag;                 /* ????????????: 1:??????0:???? */
     VOS_UINT8                           ucRsv1;
     VOS_UINT8                           ucRsv2;
     VOS_UINT8                           ucRsv3;
 }LNAS_LMM_NV_DSDS_OPTIMIZE_FLAG_CONFIG_STRU;
 
 /*****************************************************************************
-结构名    : LNAS_LMM_NV_SRLTE_FLAG_CONFIG_STRU
-协议表格  :
-ASN.1描述 :
-结构说明  : SRLTE的控制开关结构体
+??????    : LNAS_LMM_NV_SRLTE_FLAG_CONFIG_STRU
+????????  :
+ASN.1???? :
+????????  : SRLTE????????????????
 *****************************************************************************/
 typedef struct
 {
-    VOS_UINT8                           ucSrlteFlag;                       /* 特性是否开启: 1:开启；0:关闭 */
+    VOS_UINT8                           ucSrlteFlag;                       /* ????????????: 1:??????0:???? */
     VOS_UINT8                           ucRsv1;
     VOS_UINT8                           ucRsv2;
     VOS_UINT8                           ucRsv3;
@@ -1532,17 +1532,17 @@ typedef struct
 /* add for separate special part from original NV  , 2017-03-07, end */
 
 /*****************************************************************************
-结构名称    :LNAS_ESM_NV_PROTOCOL_CONFIG_STRU
-使用说明    :协议相关控制开关
+????????    :LNAS_ESM_NV_PROTOCOL_CONFIG_STRU
+????????    :????????????????
 *****************************************************************************/
 typedef struct
 {
     VOS_UINT8                           ucRsv1;
     VOS_UINT8                           ucRsv2;
     VOS_UINT8                           ucRsv3;
-    VOS_UINT8                           ucAllowUplinkPFmodifyToZeroFlag;/* 网络承载修改导致上行PF为0，是否按照协议回复#44拒绝，0:按照协议回复#44拒绝，1:不回#44拒绝，默认为0*/
-    VOS_UINT8                           ucIgnorePfPrecedenceCollisionFlag;/* 忽略PF优先级冲突开关，0:关闭 1:打开，默认为0 */
-    VOS_UINT8                           ucNotAllowNullApnAttachFlag;/* 在无APN可用时，是否禁止使用空APN尝试注册 0:    关闭1:    打开,默认为0     */
+    VOS_UINT8                           ucAllowUplinkPFmodifyToZeroFlag;/* ????????????????????PF??0??????????????????#44??????0:????????????#44??????1:????#44????????????0*/
+    VOS_UINT8                           ucIgnorePfPrecedenceCollisionFlag;/* ????PF????????????????0:???? 1:????????????0 */
+    VOS_UINT8                           ucNotAllowNullApnAttachFlag;/* ????APN??????????????????????APN???????? 0:    ????1:    ????,??????0     */
     VOS_UINT8                           ucRsv7;
     VOS_UINT8                           ucRsv8;
     VOS_UINT8                           ucRsv9;

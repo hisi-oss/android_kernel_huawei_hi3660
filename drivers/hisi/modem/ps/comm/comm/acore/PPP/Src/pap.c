@@ -53,7 +53,7 @@ static const VOS_CHAR * const papcodes[] = {
 #define MAXPAPCODE (sizeof papcodes / sizeof papcodes[0] - 1)
 
 /*****************************************************************************
-    协议栈打印打点方式下的.C文件宏定义
+    ??????????????????????.C??????????
 *****************************************************************************/
 #define    THIS_FILE_ID        PS_FILE_ID_PAP_C
 
@@ -116,10 +116,10 @@ VOS_VOID SendPapCode(struct link *l, VOS_CHAR code, VOS_CHAR *message)
     return;
   }
 
-  /*预留头部*/
+  /*????????*/
   bp->m_offset = PPP_RECIEVE_RESERVE_FOR_HEAD;
 
-  /*头部与尾部都留出来了*/
+  /*????????????????????*/
   bp->m_len = plen + sizeof(struct fsmheader);
 
   PSACORE_MEM_CPY(PPP_MBUF_CTOP(bp), sizeof(struct fsmheader), &lh, sizeof(struct fsmheader));
@@ -175,7 +175,7 @@ PPP_ZC_STRU * pap_Input(struct link *l, PPP_ZC_STRU *pstMem)
   VOS_INT32 txtlen;
   struct ppp_mbuf *bp;
 
-  /* 初始化 */
+  /* ?????? */
   PSACORE_MEM_SET(&nlen, sizeof(nlen), 0x0, sizeof(nlen));
 
   bp = ppp_m_get_from_ttfmem(pstMem);
@@ -225,7 +225,7 @@ PPP_ZC_STRU * pap_Input(struct link *l, PPP_ZC_STRU *pstMem)
 
   if (authp->in.hdr.code == PAP_REQUEST)
   {
-    /*将config req报文头部拷贝到缓存中*/
+    /*??config req????????????????????*/
     PSACORE_MEM_CPY(l->pap.RecordData.BufRequest,sizeof(authp->in.hdr),&(authp->in.hdr),sizeof(authp->in.hdr));
 
     ppp_mbuf_View(bp,(l->pap.RecordData.BufRequest + sizeof(authp->in.hdr)),

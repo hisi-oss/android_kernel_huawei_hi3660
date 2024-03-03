@@ -50,7 +50,7 @@
 #define __RNICCONFIGINTERFACE_H__
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 #ifdef __cplusplus
 #if __cplusplus
@@ -61,7 +61,7 @@ extern "C" {
 #pragma pack(4)
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
 #define RNIC_MODEM_TYPE_IS_VALID(enModemType)\
     (((enModemType) == RNIC_MODEM_TYPE_INSIDE)\
@@ -79,13 +79,13 @@ extern "C" {
 
 
 /*****************************************************************************
-   3 枚举定义
+   3 ????????
 *****************************************************************************/
 
 enum RNIC_MODEM_TYPE_ENUM
 {
-    RNIC_MODEM_TYPE_INSIDE,                                                     /* 内部modem */
-    RNIC_MODEM_TYPE_OUTSIDE,                                                    /* 外部modem */
+    RNIC_MODEM_TYPE_INSIDE,                                                     /* ????modem */
+    RNIC_MODEM_TYPE_OUTSIDE,                                                    /* ????modem */
 
     RNIC_MODEM_TYPE_BUTT
 };
@@ -95,9 +95,9 @@ typedef unsigned char RNIC_MODEM_TYPE_ENUM_UINT8;
 
 enum RNIC_RMNET_STATUS_ENUM
 {
-    RNIC_RMNET_STATUS_UP,                                                       /* PDP激活，设置网卡up状态 */
-    RNIC_RMNET_STATUS_DOWN,                                                     /* PDP去激活，设置网卡down状态 */
-    RNIC_RMNET_STATUS_SWITCH,                                                   /* 内外modem PDP状态切换，设置网卡switch状态 */
+    RNIC_RMNET_STATUS_UP,                                                       /* PDP??????????????up???? */
+    RNIC_RMNET_STATUS_DOWN,                                                     /* PDP????????????????down???? */
+    RNIC_RMNET_STATUS_SWITCH,                                                   /* ????modem PDP??????????????????switch???? */
 
     RNIC_RMNET_STATUS_BUTT
 };
@@ -130,36 +130,36 @@ typedef struct
 }RNIC_RMNET_CONFIG_STRU;
 
 /*****************************************************************************
-   10 函数声明
+   10 ????????
 *****************************************************************************/
 
-/* RNIC网卡状态设置函数，供外部模块调用 */
+/* RNIC???????????????????????????????? */
 unsigned long RNIC_ConfigRmnetStatus(
     RNIC_RMNET_CONFIG_STRU             *pstConfigInfo
 );
 
 /*****************************************************************************
- 函 数 名  : RNIC_StartFlowCtrl
- 功能描述  : 启动上行流控
- 输入参数  : ucRmNetId : 网卡ID
- 输出参数  : 无
- 返 回 值  : VOS_OK     - 启动流控成功
-             VOS_ERR    - 启动流控失败
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : RNIC_StartFlowCtrl
+ ????????  : ????????????
+ ????????  : ucRmNetId : ????ID
+ ????????  : ??
+ ?? ?? ??  : VOS_OK     - ????????????
+             VOS_ERR    - ????????????
+ ????????  :
+ ????????  :
 *****************************************************************************/
 unsigned int RNIC_StartFlowCtrl(unsigned char ucRmNetId);
 
 
 /*****************************************************************************
- 函 数 名  : RNIC_StopFlowCtrl
- 功能描述  : 停止上行流控
- 输入参数  : ucRmNetId : 网卡ID
- 输出参数  : 无
- 返 回 值  : VOS_OK     - 停止流控成功
-             VOS_ERR    - 停止流控失败
- 调用函数  :
- 被调函数  :
+ ?? ?? ??  : RNIC_StopFlowCtrl
+ ????????  : ????????????
+ ????????  : ucRmNetId : ????ID
+ ????????  : ??
+ ?? ?? ??  : VOS_OK     - ????????????
+             VOS_ERR    - ????????????
+ ????????  :
+ ????????  :
 *****************************************************************************/
 unsigned int RNIC_StopFlowCtrl(unsigned char ucRmNetId);
 

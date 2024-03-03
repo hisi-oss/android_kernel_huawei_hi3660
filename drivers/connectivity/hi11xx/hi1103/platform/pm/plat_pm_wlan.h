@@ -31,16 +31,16 @@
 #define WLAN_POWEROFF_ACK_WAIT_TIMEOUT  (1000)
 #define WLAN_OPEN_BCPU_WAIT_TIMEOUT     (1000)
 #define WLAN_HALT_BCPU_TIMEOUT          (1000)
-#define WLAN_SLEEP_TIMER_PERIOD         (20)    /*睡眠定时器50ms定时*/
-#define WLAN_SLEEP_DEFAULT_CHECK_CNT    (5)     /*默认100ms*/
-#define WLAN_SLEEP_LONG_CHECK_CNT       (20)    /*入网阶段,延长至400ms*/
+#define WLAN_SLEEP_TIMER_PERIOD         (20)    /*??????????50ms????*/
+#define WLAN_SLEEP_DEFAULT_CHECK_CNT    (5)     /*????100ms*/
+#define WLAN_SLEEP_LONG_CHECK_CNT       (20)    /*????????,??????400ms*/
 #define WLAN_SLEEP_FAST_CHECK_CNT       (1)     /*fast sleep,20ms*/
 #define WLAN_WAKELOCK_HOLD_TIME         (500)   /*hold wakelock 500ms*/
 
 #define WLAN_SDIO_MSG_RETRY_NUM         (3)
-#define WLAN_WAKEUP_FAIL_MAX_TIMES      (1)     /* 连续多少次wakeup失败，可进入DFR流程 */
-#define WLAN_PACKET_CHECK_TIME          (5000)  /* 唤醒后，每5s打印一次报文个数用于持锁是否异常的debug*/
-#define WLAN_SLEEP_FORBID_CHECK_TIME    (2*60*1000) /* 连续2分钟sleep forbid*/
+#define WLAN_WAKEUP_FAIL_MAX_TIMES      (1)     /* ??????????wakeup????????????DFR???? */
+#define WLAN_PACKET_CHECK_TIME          (5000)  /* ??????????5s??????????????????????????????????debug*/
+#define WLAN_SLEEP_FORBID_CHECK_TIME    (2*60*1000) /* ????2????sleep forbid*/
 
 
 #define WLAN_PM_MODULE               "[wlan]"
@@ -58,11 +58,11 @@ enum WLAN_PM_CPU_FREQ_ENUM
 
 enum WLAN_PM_SLEEP_STAGE
 {
-    SLEEP_STAGE_INIT    = 0,  //初始
-    SLEEP_REQ_SND       = 1,  //sleep request发送完成
-    SLEEP_ALLOW_RCV     = 2,  //收到allow sleep response
-    SLEEP_DISALLOW_RCV  = 3,  //收到allow sleep response
-    SLEEP_CMD_SND       = 4,  //允许睡眠reg设置完成
+    SLEEP_STAGE_INIT    = 0,  //????
+    SLEEP_REQ_SND       = 1,  //sleep request????????
+    SLEEP_ALLOW_RCV     = 2,  //????allow sleep response
+    SLEEP_DISALLOW_RCV  = 3,  //????allow sleep response
+    SLEEP_CMD_SND       = 4,  //????????reg????????
 };
 
 #define ALLOW_IDLESLEEP     (1)
@@ -93,29 +93,29 @@ struct wifi_srv_callback_handler
 
 struct wlan_pm_s
 {
-    hcc_bus                *pst_bus;              //保存oal_bus 的指针
+    hcc_bus                *pst_bus;              //????oal_bus ??????
 
-    oal_uint                ul_wlan_pm_enable;    //pm使能开关
+    oal_uint                ul_wlan_pm_enable;    //pm????????
     oal_uint                ul_wlan_power_state;  //wlan power on state
-    oal_uint                ul_apmode_allow_pm_flag;   /* ap模式下，是否允许下电操作,1:允许,0:不允许 */
+    oal_uint                ul_apmode_allow_pm_flag;   /* ap????????????????????????,1:????,0:?????? */
 
     volatile oal_uint       ul_wlan_dev_state;    //wlan sleep state
 
     oal_workqueue_stru*     pst_pm_wq;           //pm work quque
-    oal_work_stru           st_wakeup_work;       //唤醒work
+    oal_work_stru           st_wakeup_work;       //????work
     oal_work_stru           st_sleep_work;        //sleep work
     oal_work_stru           st_ram_reg_test_work;  //ram_reg_test work
 
     oal_timer_list_stru     st_watchdog_timer;   //sleep watch dog
     oal_timer_list_stru     st_deepsleep_delay_timer;
     oal_wakelock_stru       st_deepsleep_wakelock;
-    oal_uint32              ul_packet_cnt;        //睡眠周期内统计的packet个数
-    oal_uint32              ul_packet_total_cnt;  //从上次唤醒至今的packet个数，定期输出for debug
+    oal_uint32              ul_packet_cnt;        //????????????????packet????
+    oal_uint32              ul_packet_total_cnt;  //????????????????packet??????????????for debug
     unsigned long           ul_packet_check_time;
     unsigned long           ul_sleep_forbid_check_time;
     oal_uint32              ul_wdg_timeout_cnt;  //timeout check cnt
     oal_uint32              ul_wdg_timeout_curr_cnt;  //timeout check current cnt
-    volatile oal_uint       ul_sleep_stage;      //睡眠过程阶段标识
+    volatile oal_uint       ul_sleep_stage;      //????????????????
 
     oal_completion          st_open_bcpu_done;
     oal_completion          st_close_bcpu_done;
@@ -132,7 +132,7 @@ struct wlan_pm_s
 
     struct wifi_srv_callback_handler st_wifi_srv_handler;
 
-    /* 维测统计 */
+    /* ???????? */
     oal_uint32              ul_open_cnt;
     oal_uint32              ul_open_bcpu_done_callback;
     oal_uint32              ul_close_bcpu_done_callback;
@@ -154,7 +154,7 @@ struct wlan_pm_s
     oal_uint32              ul_sleep_fail_set_reg;
     oal_uint32              ul_sleep_request_host_forbid;
     oal_uint32              ul_sleep_fail_forbid;
-    oal_uint32              ul_sleep_fail_forbid_cnt;/*forbid 计数，当睡眠成功后清除，维测信息*/
+    oal_uint32              ul_sleep_fail_forbid_cnt;/*forbid ????????????????????????????????*/
     oal_uint32              ul_sleep_work_submit;
 
 

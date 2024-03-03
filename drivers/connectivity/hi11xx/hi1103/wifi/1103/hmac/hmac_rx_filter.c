@@ -9,7 +9,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "wlan_spec.h"
 #include "wlan_types.h"
@@ -25,11 +25,11 @@ extern "C" {
 #define THIS_FILE_ID OAM_FILE_ID_HMAC_RX_FILTER_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 oal_bool_enum_uint8 hmac_find_is_sta_up_etc(mac_device_stru *pst_mac_device)
@@ -115,7 +115,7 @@ oal_uint32 hmac_calc_up_ap_num_etc(mac_device_stru *pst_mac_device)
 oal_uint32 hmac_find_up_vap_etc(mac_device_stru *pst_mac_device, mac_vap_stru **ppst_mac_vap)
 {
     oal_uint32                     ul_ret;
-    mac_vap_stru                  *pst_vap_up;     /* 处在UP状态的VAP */
+    mac_vap_stru                  *pst_vap_up;     /* ????UP??????VAP */
 
     /* find up VAP */
     ul_ret = mac_device_find_up_vap_etc(pst_mac_device, &pst_vap_up);

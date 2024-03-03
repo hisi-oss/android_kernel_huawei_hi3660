@@ -47,7 +47,7 @@
 */
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "AtCtx.h"
 #include "AtDataProc.h"
@@ -55,15 +55,15 @@
 
 
 /*****************************************************************************
-    协议栈打印打点方式下的.C文件宏定义
+    ??????????????????????.C??????????
 *****************************************************************************/
 #define    THIS_FILE_ID                 PS_FILE_ID_AT_CTX_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
-/***************************AT的全局变量表 Begin******************************/
-/* AT与编译两次的PID对应表  */
+/***************************AT???????????? Begin******************************/
+/* AT????????????PID??????  */
 AT_MODEM_PID_TAB_STRU                   g_astAtModemPidTab[] =
 {
     {I0_WUEPS_PID_USIM,         I1_WUEPS_PID_USIM,          I2_WUEPS_PID_USIM,      0},
@@ -101,52 +101,52 @@ AT_MODEM_PID_TAB_STRU                   g_astAtModemPidTab[] =
 
 VOS_UINT32                              g_ulCtzuFlag = 0;
 
-/* AT模块公共上下文 */
+/* AT?????????????? */
 AT_COMM_CTX_STRU                        g_stAtCommCtx;
 
-/* AT模块与Modem相关的上下文 */
+/* AT??????Modem???????????? */
 AT_MODEM_CTX_STRU                       g_astAtModemCtx[MODEM_ID_BUTT];
 
-/* AT模块与Client相关的上下文 */
+/* AT??????Client???????????? */
 AT_CLIENT_CTX_STRU                      g_astAtClientCtx[AT_MAX_CLIENT_NUM];
 
-/* AT模块复位相关的上下文 */
+/* AT???????????????????? */
 AT_RESET_CTX_STRU                       g_stAtResetCtx;
 
-/***************************AT的全局变量表 End******************************/
+/***************************AT???????????? End******************************/
 
-/*********************************后续需要调整的*************************************/
-/* 是否具有权限标志(控制DIAG/SHELL口的权限) */
+/*********************************??????????????*************************************/
+/* ????????????????(????DIAG/SHELL????????) */
 AT_E5_RIGHT_FLAG_ENUM_U32               g_enATE5RightFlag;
 
-/* 由于 g_stATDislogPwd 中的 DIAG口的状态要放入备份NV列表; 而密码不用备份
-   故将 g_stATDislogPwd 中的密码废弃, 仅使用其中的 DIAG 口状态;
-   重新定义NV项用来保存密码  */
+/* ???? g_stATDislogPwd ???? DIAG??????????????????NV????; ??????????????
+   ???? g_stATDislogPwd ????????????, ???????????? DIAG ??????;
+   ????????NV??????????????  */
 VOS_INT8                                g_acATOpwordPwd[AT_OPWORD_PWD_LEN+1];
 
-/* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, begin */
-/* 用于当前是否有权限操作AT端口 */
+/* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, begin */
+/* ??????????????????????AT???? */
 AT_RIGHT_OPEN_FLAG_STRU                 g_stAtRightOpenFlg;
-/* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, begin */
+/* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, begin */
 
-/* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, begin */
-/* 使能禁止SD卡时需要的密码 */
+/* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, begin */
+/* ????????SD?????????????? */
 VOS_INT8                                g_acATE5DissdPwd[AT_DISSD_PWD_LEN+1];
-/* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, end */
+/* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, end */
 
-/* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, begin */
-/*命令不支持提示字串*/
+/* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, begin */
+/*??????????????????*/
 VOS_UINT8                               gaucAtCmdNotSupportStr[AT_NOTSUPPORT_STR_LEN+4];
-/* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, end */
+/* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, end */
 
-AT_ABORT_CMD_CTX_STRU                   gstAtAbortCmdCtx;   /* 用于保存打断的信息 */
+AT_ABORT_CMD_CTX_STRU                   gstAtAbortCmdCtx;   /* ?????????????????? */
 
-/*纪录拨号错误码是否使能 */
+/*?????????????????????? */
 PPP_DIAL_ERR_CODE_ENUM                  gucPppDialErrCodeRpt;
 
 AT_DIAL_CONNECT_DISPLAY_RATE_STRU       g_stDialConnectDisplayRate;
 
-/* UE下行能力: 包含协议版本和能力值 */
+/* UE????????: ???????????????????? */
 AT_DOWNLINK_RATE_CATEGORY_STRU          g_stAtDlRateCategory;
 
 VOS_UINT8                               ucAtS3          = 13;                   /* <CR> */
@@ -156,9 +156,9 @@ VOS_UINT8                               ucAtS6          = 2;                    
 VOS_UINT8                               ucAtS7          = 50;                   /* Number of seconds in which connection must be established or call will be disconnected,
                                                                                    default value = 50(refer to Q)*/
 
-/* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, begin */
-AT_CMEE_TYPE                            gucAtCmeeType;                          /* E5错误码默认错误编号 */
-/* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, end */
+/* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, begin */
+AT_CMEE_TYPE                            gucAtCmeeType;                          /* E5?????????????????? */
+/* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, end */
 
 TAF_UINT32                              g_ulSTKFunctionFlag = TAF_FALSE;
 
@@ -260,7 +260,7 @@ const VOS_UINT8                         g_ucAtClientCfgMapTabLen = AT_ARRAY_SIZE
 
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 VOS_VOID AT_InitUsimStatus(MODEM_ID_ENUM_UINT16 enModemId)
@@ -287,7 +287,7 @@ VOS_VOID AT_InitPlatformRatList(MODEM_ID_ENUM_UINT16 enModemId)
 
     pstSptRat = AT_GetSptRatFromModemId(enModemId);
 
-    /* 默认情况下单板只支持GSM */
+    /* ????????????????????GSM */
     pstSptRat->ucPlatformSptGsm        = VOS_TRUE;
     pstSptRat->ucPlatformSptWcdma      = VOS_FALSE;
     pstSptRat->ucPlatformSptLte        = VOS_FALSE;
@@ -398,7 +398,7 @@ VOS_VOID AT_InitMsgNumCtrlCtx(VOS_VOID)
 
     pstMsgNumCtrlCtx = AT_GetMsgNumCtrlCtxAddr();
 
-    /* 锁初始化 */
+    /* ???????? */
     VOS_SpinLockInit(&(pstMsgNumCtrlCtx->stSpinLock));
 
     pstMsgNumCtrlCtx->ulMsgCount = 0;
@@ -440,7 +440,7 @@ VOS_VOID AT_InitModemCcCtx(MODEM_ID_ENUM_UINT16 enModemId)
     pstCcCtx->ulCurIsExistCallFlag = VOS_FALSE;
     pstCcCtx->enCsErrCause         = TAF_CS_CAUSE_SUCCESS;
 
-    /* 语音自动应答参数初始化 */
+    /* ?????????????????????? */
     TAF_MEM_SET_S(&(pstCcCtx->stS0TimeInfo), sizeof(pstCcCtx->stS0TimeInfo), 0x00, sizeof(pstCcCtx->stS0TimeInfo));
 
     TAF_MEM_SET_S(&(pstCcCtx->stEconfInfo), sizeof(pstCcCtx->stEconfInfo), 0x00, sizeof(pstCcCtx->stEconfInfo));
@@ -494,7 +494,7 @@ VOS_VOID AT_InitModemSmsCtx(MODEM_ID_ENUM_UINT16 enModemId)
     pstSmsCtx->ucSmsAutoReply       = VOS_FALSE;
     pstSmsCtx->enCsmsMsgVersion     = MN_MSG_CSMS_MSG_VERSION_PHASE2_PLUS;
 
-    /* ME存储状态初始化 */
+    /* ME?????????????? */
     pstSmsCtx->enMsgMeStorageStatus = MN_MSG_ME_STORAGE_DISABLE;
     /* modified by l65478 for 2013-05-23 begin */
     pstSmsCtx->ucLocalStoreFlg      = VOS_TRUE;
@@ -511,15 +511,15 @@ VOS_VOID AT_InitModemSmsCtx(MODEM_ID_ENUM_UINT16 enModemId)
     pstSmsCtx->stCnmiType.CnmiTmpDsType   = AT_CNMI_DS_NO_SEND_TYPE;
     pstSmsCtx->stCnmiType.CnmiTmpBfrType  = AT_CNMI_BFR_SEND_TYPE;
 
-    /* 发送域初始化 */
+    /* ???????????? */
     pstSmsCtx->stCgsmsSendDomain.ucActFlg     = VOS_FALSE;
     pstSmsCtx->stCgsmsSendDomain.enSendDomain = MN_MSG_SEND_DOMAIN_CS_PREFERRED;
 
-    /* 短信接收定制类型初始化*/
+    /* ??????????????????????*/
     pstSmsCtx->stSmMeFullCustomize.ucActFlg      = VOS_FALSE;
     pstSmsCtx->stSmMeFullCustomize.enMtCustomize = MN_MSG_MT_CUSTOMIZE_NONE;
 
-    /* 文本短信相关参数初始化 */
+    /* ?????????????????????? */
     /*
     27005 3 Text Mode 3.1 Parameter Definitions
     Message Data Parameters
@@ -539,27 +539,27 @@ VOS_VOID AT_InitModemSmsCtx(MODEM_ID_ENUM_UINT16 enModemId)
 
     pstSmsCtx->stCscaCsmpInfo.ucDefaultSmspIndex     = AT_CSCA_CSMP_STORAGE_INDEX;
 
-    /* 短信及状态报告读，删除，写，发送或接收存储介质初始化 */
+    /* ???????????????????????????????????????????????????? */
     pstSmsCtx->stCpmsInfo.stRcvPath.enStaRptMemStore = MN_MSG_MEM_STORE_SIM;
     pstSmsCtx->stCpmsInfo.stRcvPath.enSmMemStore     = MN_MSG_MEM_STORE_SIM;
     pstSmsCtx->stCpmsInfo.enMemReadorDelete          = MN_MSG_MEM_STORE_SIM;
     pstSmsCtx->stCpmsInfo.enMemSendorWrite           = MN_MSG_MEM_STORE_SIM;
 
-    /* 短信及状态报告接收上报方式初始化 */
+    /* ???????????????????????????????? */
     pstSmsCtx->stCpmsInfo.stRcvPath.enRcvSmAct       = MN_MSG_RCVMSG_ACT_STORE;
     pstSmsCtx->stCpmsInfo.stRcvPath.enRcvStaRptAct   = MN_MSG_RCVMSG_ACT_STORE;
     pstSmsCtx->stCpmsInfo.stRcvPath.enSmsServVersion = MN_MSG_CSMS_MSG_VERSION_PHASE2_PLUS;
 
-    /* 短信或状态报告不存储直接上报PDU的缓存初始化 */
+    /* ????????????????????????????PDU???????????? */
     TAF_MEM_SET_S(&(pstSmsCtx->stSmtBuffer), sizeof(pstSmsCtx->stSmtBuffer), 0x00, sizeof(pstSmsCtx->stSmtBuffer));
 
-    /* 短信自动应答缓存数据指针初始化 */
+    /* ?????????????????????????????? */
     TAF_MEM_SET_S(pstSmsCtx->astSmsMtBuffer,
                sizeof(pstSmsCtx->astSmsMtBuffer),
                0x00,
                (sizeof(AT_SMS_MT_BUFFER_STRU) * AT_SMSMT_BUFFER_MAX));
 
-    /* 广播短信的语言选择和不存储直接上报PDU的缓存初始化 */
+    /* ??????????????????????????????????PDU???????????? */
     TAF_MEM_SET_S(&(pstSmsCtx->stCbsDcssInfo), sizeof(pstSmsCtx->stCbsDcssInfo), 0x00, sizeof(pstSmsCtx->stCbsDcssInfo));
     TAF_MEM_SET_S(&(pstSmsCtx->stCbmBuffer), sizeof(pstSmsCtx->stCbmBuffer), 0x00, sizeof(pstSmsCtx->stCbmBuffer));
 
@@ -618,13 +618,13 @@ VOS_VOID AT_InitModemPsCtx(
 
     pstPsCtx = AT_GetModemPsCtxAddrFromModemId(enModemId);
 
-    /* 初始化CID和呼叫实体映射表 */
+    /* ??????CID???????????????? */
     for (ulCnt = 0; ulCnt <= TAF_MAX_CID; ulCnt++)
     {
         pstPsCtx->aucCidToIndexTbl[ulCnt] = AT_PS_CALL_INVALID_CALLID;
     }
 
-    /* 初始化呼叫实体 */
+    /* ?????????????? */
     for (ulCnt = 0; ulCnt < AT_PS_MAX_CALL_NUM; ulCnt++)
     {
         pstPsCtx->astCallEntity[ulCnt].ulUsedFlg   = VOS_FALSE;
@@ -647,7 +647,7 @@ VOS_VOID AT_InitModemPsCtx(
                    sizeof(pstPsCtx->astCallEntity[ulCnt].stIpv6DhcpInfo), 0x00, sizeof(AT_IPV6_DHCP_PARAM_STRU));
     }
 
-    /* 初始化CHDATA CFG */
+    /* ??????CHDATA CFG */
     for (ulCnt = 0; ulCnt <= TAF_MAX_CID; ulCnt++)
     {
         pstPsCtx->astChannelCfg[ulCnt].ulUsed        = VOS_FALSE;
@@ -655,10 +655,10 @@ VOS_VOID AT_InitModemPsCtx(
         pstPsCtx->astChannelCfg[ulCnt].ulRmNetActFlg = VOS_FALSE;
     }
 
-    /* 初始化错误码 */
+    /* ???????????? */
     pstPsCtx->enPsErrCause = TAF_PS_CAUSE_SUCCESS;
 
-    /* 初始化IP地址与RABID的映射表 */
+    /* ??????IP??????RABID???????? */
     TAF_MEM_SET_S(pstPsCtx->aulIpAddrRabIdMap, sizeof(pstPsCtx->aulIpAddrRabIdMap), 0x00, (sizeof(VOS_UINT32) * AT_PS_RABID_MAX_NUM));
 
     TAF_MEM_SET_S(&(pstPsCtx->stImsEmcRdp), sizeof(AT_IMS_EMC_RDP_STRU), 0x00, sizeof(AT_IMS_EMC_RDP_STRU));
@@ -748,7 +748,7 @@ VOS_VOID AT_InitResetCtx(VOS_VOID)
     pstResetCtx->hResetSem     = VOS_NULL_PTR;
     pstResetCtx->ulResetingFlag = VOS_FALSE;
 
-    /* 分配二进制信号量 */
+    /* ???????????????? */
     if (VOS_OK != VOS_SmBCreate( "AT", 0, VOS_SEMA4_FIFO, &pstResetCtx->hResetSem))
     {
         (VOS_VOID)vos_printf("Create AT acpu cnf sem failed!\r\n");
@@ -784,14 +784,14 @@ VOS_VOID AT_InitCommCtx(VOS_VOID)
 
     pstCommCtx = AT_GetCommCtxAddr();
 
-    /* 默认应该类型为MP */
+    /* ??????????????MP */
     pstCommCtx->ucSystemAppConfigAddr = SYSTEM_APP_MP;
 
-    /* 初始化MUX相关的上下文 */
+    /* ??????MUX???????????? */
     TAF_MEM_SET_S(&(pstCommCtx->stMuxCtx), (VOS_UINT32)sizeof(pstCommCtx->stMuxCtx), 0x00, (VOS_UINT32)sizeof(AT_MUX_CTX_STRU));
 
     /* Modified by l60609 for V9R1 IPv6&TAF/SM Project, 2013-5-2, begin */
-    /* 初始化PS域公共的上下文 */
+    /* ??????PS?????????????? */
     AT_InitCommPsCtx();
     /* Modified by l60609 for V9R1 IPv6&TAF/SM Project, 2013-5-2, end */
 
@@ -1178,28 +1178,28 @@ VOS_UINT32 AT_GetModemIdFromClient(
 {
     AT_CLIENT_CTX_STRU                 *pstAtClientCtx = VOS_NULL_PTR;
 
-    /* 判断是否是MODEM0广播的client index */
+    /* ??????????MODEM0??????client index */
     if ((AT_BROADCAST_CLIENT_INDEX_MODEM_0 == usClientId)
      || (AT_BROADCAST_CLIENT_ID_MODEM_0 == usClientId))
     {
         *pModemId = MODEM_ID_0;
     }
-    /* 判断是否是MODEM1广播的client index */
+    /* ??????????MODEM1??????client index */
     else if ((AT_BROADCAST_CLIENT_INDEX_MODEM_1 == usClientId)
           || (AT_BROADCAST_CLIENT_ID_MODEM_1 == usClientId))
     {
         *pModemId = MODEM_ID_1;
     }
-    /* 判断是否是MODEM2广播的client index */
+    /* ??????????MODEM2??????client index */
     else if ((AT_BROADCAST_CLIENT_INDEX_MODEM_2 == usClientId)
           || (AT_BROADCAST_CLIENT_ID_MODEM_2 == usClientId))
     {
         *pModemId = MODEM_ID_2;
     }
-    /* 非广播client index */
+    /* ??????client index */
     else
     {
-        /* client index 无效，直接返回 */
+        /* client index ?????????????? */
         if (usClientId >= AT_CLIENT_BUTT)
         {
             return VOS_ERR;
@@ -1210,7 +1210,7 @@ VOS_UINT32 AT_GetModemIdFromClient(
         *pModemId = pstAtClientCtx->stClientConfiguration.enModemId;
     }
 
-    /* 在单卡的时候NV里读出来的MODEMID为MODEM1时，会发生内存越界，此处做个异常保护 */
+    /* ????????????NV??????????MODEMID??MODEM1???????????????????????????????????? */
     if (*pModemId >= MODEM_ID_BUTT)
     {
         AT_ERR_LOG("AT_GetModemIdFromClient: modem id is invalid");
@@ -1234,10 +1234,10 @@ VOS_UINT32 AT_GetDestPid(
 
     enModemId = MODEM_ID_0;
 
-    /* 获取client id对应的Modem Id */
+    /* ????client id??????Modem Id */
     ulRslt = AT_GetModemIdFromClient(usClientId, &enModemId);
 
-    /* modem 1上ulRcvPid对应的pid */
+    /* modem 1??ulRcvPid??????pid */
     if ((VOS_OK == ulRslt)
      && (MODEM_ID_0 != enModemId))
     {
@@ -1259,7 +1259,7 @@ VOS_UINT32 AT_GetDestPid(
             }
         }
 
-        /* 如果出现找不到对应的PID应该时出错了 */
+        /* ????????????????????PID???????????? */
         if (i >= (sizeof(g_astAtModemPidTab)/sizeof(AT_MODEM_PID_TAB_STRU)))
         {
             (VOS_VOID)vos_printf("AT_GetDestPid: usClientId is %d, ulRcvPid is %d no modem1 pid. \r\n", usClientId, ulRcvPid);
@@ -1277,10 +1277,10 @@ MN_CLIENT_ID_T AT_GetRealClientId(
 {
     MODEM_ID_ENUM_UINT16                enModemId;
 
-    /* 根据Pid的值获取ModemId */
+    /* ????Pid????????ModemId */
     enModemId = AT_GetModemIDFromPid(ulPid);
 
-    /* 根据ModemId获取ClientId */
+    /* ????ModemId????ClientId */
     if (MODEM_ID_0 == enModemId)
     {
         return (usClientId & AT_BROADCAST_CLIENT_ID_MODEM_0);
@@ -1641,7 +1641,7 @@ VOS_VOID AT_AddUsedClientId2Tab(VOS_UINT16 usClientId)
 
     pstPortBuffCfg = AT_GetPortBuffCfgInfo();
 
-    /*  排除内部通道 */
+    /*  ???????????? */
     if ( (usClientId >= AT_MIN_APP_CLIENT_ID)
       && (usClientId <= AT_MAX_APP_CLIENT_ID))
     {
@@ -1654,7 +1654,7 @@ VOS_VOID AT_AddUsedClientId2Tab(VOS_UINT16 usClientId)
         pstPortBuffCfg->ucNum = AT_MAX_CLIENT_NUM -1;
     }
 
-    /* 循环查找是否已经记录过 */
+    /* ?????????????????????? */
     for (ucIndex = 0; ucIndex < pstPortBuffCfg->ucNum; ucIndex++)
     {
         if (usClientId == pstPortBuffCfg->ulUsedClientID[ucIndex])
@@ -1663,7 +1663,7 @@ VOS_VOID AT_AddUsedClientId2Tab(VOS_UINT16 usClientId)
         }
     }
 
-    /* 如果没有记录过，测记录到最后 */
+    /* ???????????????????????????? */
     if (ucIndex == pstPortBuffCfg->ucNum)
     {
         pstPortBuffCfg->ulUsedClientID[ucIndex] = (VOS_UINT32)usClientId;
@@ -1684,7 +1684,7 @@ VOS_VOID AT_RmUsedClientIdFromTab(VOS_UINT16 usClientId)
         pstPortBuffCfg->ucNum = AT_MAX_CLIENT_NUM;
     }
 
-    /* 循环查找是否已经记录过 */
+    /* ?????????????????????? */
     for (ulIndex = 0; ulIndex < pstPortBuffCfg->ucNum; ulIndex++)
     {
         if (usClientId == pstPortBuffCfg->ulUsedClientID[ulIndex])
@@ -1693,13 +1693,13 @@ VOS_VOID AT_RmUsedClientIdFromTab(VOS_UINT16 usClientId)
         }
     }
 
-    /* 如果没有记录过则直接退出 */
+    /* ???????????????????????? */
     if (ulIndex == pstPortBuffCfg->ucNum)
     {
         return;
     }
 
-    /* 如果找到就删除对应的client */
+    /* ????????????????????client */
     if (ulIndex == pstPortBuffCfg->ucNum - 1)
     {
         pstPortBuffCfg->ucNum--;

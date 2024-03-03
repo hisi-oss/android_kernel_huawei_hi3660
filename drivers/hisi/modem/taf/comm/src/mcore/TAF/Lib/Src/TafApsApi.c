@@ -48,7 +48,7 @@
 
 
 /*****************************************************************************
-   1 头文件包含
+   1 ??????????
 *****************************************************************************/
 
 
@@ -60,22 +60,22 @@
 
 
 /*****************************************************************************
-    协议栈打印打点方式下的.C文件宏定义
+    ??????????????????????.C??????????
 *****************************************************************************/
 #define    THIS_FILE_ID        PS_FILE_ID_TAF_APS_API_C
 
 
 /*****************************************************************************
-   2 全局变量定义
+   2 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-   3 外部函数声明
+   3 ????????????
 *****************************************************************************/
 
 /*****************************************************************************
-   4 函数实现
+   4 ????????
 *****************************************************************************/
 
 
@@ -109,7 +109,7 @@ VOS_UINT32 TAF_PS_SndMsg(
             return VOS_ERR;
     }
 
-    /* 构造消息 */
+    /* ???????? */
     pstMsg = (TAF_PS_MSG_STRU*)PS_ALLOC_MSG_WITH_HEADER_LEN(
                                 ulPid,
                                 sizeof(MSG_HEADER_STRU) + ulLength);
@@ -121,10 +121,10 @@ VOS_UINT32 TAF_PS_SndMsg(
     pstMsg->stHeader.ulReceiverPid      = ulPid;
     pstMsg->stHeader.ulMsgName          = ulMsgId;
 
-    /* 填写消息内容 */
+    /* ???????????? */
     TAF_MEM_CPY_S(pstMsg->aucContent, ulLength, pData, ulLength);
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = PS_SEND_MSG(ulPid, pstMsg);
     if (VOS_OK != ulResult)
     {
@@ -145,17 +145,17 @@ VOS_UINT32 TAF_PS_SetPrimPdpContextInfo(
     VOS_UINT32                                  ulResult;
     TAF_PS_SET_PRIM_PDP_CONTEXT_INFO_REQ_STRU   stSetPdpCtxInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stSetPdpCtxInfoReq, sizeof(stSetPdpCtxInfoReq), 0x00, sizeof(TAF_PS_SET_PRIM_PDP_CONTEXT_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_SET_PRIM_PDP_CONTEXT_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_SET_PRIM_PDP_CONTEXT_INFO_REQ???? */
     stSetPdpCtxInfoReq.stCtrl.ulModuleId = ulModuleId;
     stSetPdpCtxInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stSetPdpCtxInfoReq.stCtrl.ucOpId     = ucOpId;
     stSetPdpCtxInfoReq.stPdpContextInfo  = *pstPdpContextInfo;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_SET_PRIM_PDP_CONTEXT_INFO_REQ,
                              &stSetPdpCtxInfoReq,
@@ -174,16 +174,16 @@ VOS_UINT32 TAF_PS_GetPrimPdpContextInfo(
     VOS_UINT32                                  ulResult;
     TAF_PS_GET_PRIM_PDP_CONTEXT_INFO_REQ_STRU   stGetPdpCtxInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stGetPdpCtxInfoReq, sizeof(stGetPdpCtxInfoReq), 0x00, sizeof(TAF_PS_GET_PRIM_PDP_CONTEXT_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_GET_PRIM_PDP_CONTEXT_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_GET_PRIM_PDP_CONTEXT_INFO_REQ???? */
     stGetPdpCtxInfoReq.stCtrl.ulModuleId = ulModuleId;
     stGetPdpCtxInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetPdpCtxInfoReq.stCtrl.ucOpId     = ucOpId;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_PRIM_PDP_CONTEXT_INFO_REQ,
                              &stGetPdpCtxInfoReq,
@@ -202,16 +202,16 @@ VOS_UINT32 TAF_PS_GetPdpContextInfo(
     VOS_UINT32                                  ulResult;
     TAF_PS_GET_PDP_CONTEXT_INFO_REQ_STRU        stGetPdpCtxInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stGetPdpCtxInfoReq, sizeof(stGetPdpCtxInfoReq), 0x00, sizeof(TAF_PS_GET_PDP_CONTEXT_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_GET_PRIM_PDP_CONTEXT_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_GET_PRIM_PDP_CONTEXT_INFO_REQ???? */
     stGetPdpCtxInfoReq.stCtrl.ulModuleId = ulModuleId;
     stGetPdpCtxInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetPdpCtxInfoReq.stCtrl.ucOpId     = ucOpId;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_PDPCONT_INFO_REQ,
                              &stGetPdpCtxInfoReq,
@@ -231,17 +231,17 @@ VOS_UINT32 TAF_PS_SetSecPdpContextInfo(
     VOS_UINT32                                  ulResult;
     TAF_PS_SET_SEC_PDP_CONTEXT_INFO_REQ_STRU    stSetPdpCtxInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stSetPdpCtxInfoReq, sizeof(stSetPdpCtxInfoReq), 0x00, sizeof(TAF_PS_SET_SEC_PDP_CONTEXT_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_SET_SEC_PDP_CONTEXT_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_SET_SEC_PDP_CONTEXT_INFO_REQ???? */
     stSetPdpCtxInfoReq.stCtrl.ulModuleId = ulModuleId;
     stSetPdpCtxInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stSetPdpCtxInfoReq.stCtrl.ucOpId     = ucOpId;
     stSetPdpCtxInfoReq.stPdpContextInfo  = *pstPdpContextInfo;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_SET_SEC_PDP_CONTEXT_INFO_REQ,
                              &stSetPdpCtxInfoReq,
@@ -260,16 +260,16 @@ VOS_UINT32 TAF_PS_GetSecPdpContextInfo(
     VOS_UINT32                                  ulResult;
     TAF_PS_GET_SEC_PDP_CONTEXT_INFO_REQ_STRU    stGetPdpCtxInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stGetPdpCtxInfoReq, sizeof(stGetPdpCtxInfoReq), 0x00, sizeof(TAF_PS_GET_SEC_PDP_CONTEXT_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_GET_SEC_PDP_CONTEXT_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_GET_SEC_PDP_CONTEXT_INFO_REQ???? */
     stGetPdpCtxInfoReq.stCtrl.ulModuleId = ulModuleId;
     stGetPdpCtxInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetPdpCtxInfoReq.stCtrl.ucOpId     = ucOpId;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_SEC_PDP_CONTEXT_INFO_REQ,
                              &stGetPdpCtxInfoReq,
@@ -289,17 +289,17 @@ VOS_UINT32 TAF_PS_SetTftInfo(
     VOS_UINT32                          ulResult;
     TAF_PS_SET_TFT_INFO_REQ_STRU        stSetTftInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stSetTftInfoReq, sizeof(stSetTftInfoReq), 0x00, sizeof(TAF_PS_SET_TFT_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_SET_TFT_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_SET_TFT_INFO_REQ???? */
     stSetTftInfoReq.stCtrl.ulModuleId = ulModuleId;
     stSetTftInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stSetTftInfoReq.stCtrl.ucOpId     = ucOpId;
     stSetTftInfoReq.stTftInfo         = *pstTftInfo;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_SET_TFT_INFO_REQ,
                              &stSetTftInfoReq,
@@ -318,16 +318,16 @@ VOS_UINT32 TAF_PS_GetTftInfo(
     VOS_UINT32                          ulResult;
     TAF_PS_GET_TFT_INFO_REQ_STRU        stGetTftInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stGetTftInfoReq, sizeof(stGetTftInfoReq), 0x00, sizeof(TAF_PS_GET_TFT_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_GET_SEC_PDP_CONTEXT_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_GET_SEC_PDP_CONTEXT_INFO_REQ???? */
     stGetTftInfoReq.stCtrl.ulModuleId = ulModuleId;
     stGetTftInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetTftInfoReq.stCtrl.ucOpId     = ucOpId;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_TFT_INFO_REQ,
                              &stGetTftInfoReq,
@@ -347,17 +347,17 @@ VOS_UINT32 TAF_PS_SetUmtsQosInfo(
     VOS_UINT32                          ulResult;
     TAF_PS_SET_UMTS_QOS_INFO_REQ_STRU   stSetUmtsQosInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stSetUmtsQosInfoReq, sizeof(stSetUmtsQosInfoReq), 0x00, sizeof(TAF_PS_SET_UMTS_QOS_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_SET_UMTS_QOS_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_SET_UMTS_QOS_INFO_REQ???? */
     stSetUmtsQosInfoReq.stCtrl.ulModuleId = ulModuleId;
     stSetUmtsQosInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stSetUmtsQosInfoReq.stCtrl.ucOpId     = ucOpId;
     stSetUmtsQosInfoReq.stUmtsQosInfo     = *pstUmtsQosInfo;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_SET_UMTS_QOS_INFO_REQ,
                              &stSetUmtsQosInfoReq,
@@ -376,16 +376,16 @@ VOS_UINT32 TAF_PS_GetUmtsQosInfo(
     VOS_UINT32                          ulResult;
     TAF_PS_GET_UMTS_QOS_INFO_REQ_STRU   stGetUmtsQosInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stGetUmtsQosInfoReq, sizeof(stGetUmtsQosInfoReq), 0x00, sizeof(TAF_PS_GET_UMTS_QOS_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_GET_UMTS_QOS_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_GET_UMTS_QOS_INFO_REQ???? */
     stGetUmtsQosInfoReq.stCtrl.ulModuleId = ulModuleId;
     stGetUmtsQosInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetUmtsQosInfoReq.stCtrl.ucOpId     = ucOpId;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_UMTS_QOS_INFO_REQ,
                              &stGetUmtsQosInfoReq,
@@ -405,17 +405,17 @@ VOS_UINT32 TAF_PS_SetUmtsQosMinInfo(
     VOS_UINT32                              ulResult;
     TAF_PS_SET_UMTS_QOS_MIN_INFO_REQ_STRU   stSetUmtsQosMinInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stSetUmtsQosMinInfoReq, sizeof(stSetUmtsQosMinInfoReq), 0x00, sizeof(TAF_PS_SET_UMTS_QOS_MIN_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_SET_UMTS_QOS_MIN_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_SET_UMTS_QOS_MIN_INFO_REQ???? */
     stSetUmtsQosMinInfoReq.stCtrl.ulModuleId = ulModuleId;
     stSetUmtsQosMinInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stSetUmtsQosMinInfoReq.stCtrl.ucOpId     = ucOpId;
     stSetUmtsQosMinInfoReq.stUmtsQosMinInfo  = *pstUmtsQosMinInfo;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_SET_UMTS_QOS_MIN_INFO_REQ,
                              &stSetUmtsQosMinInfoReq,
@@ -434,16 +434,16 @@ VOS_UINT32 TAF_PS_GetUmtsQosMinInfo(
     VOS_UINT32                              ulResult;
     TAF_PS_GET_UMTS_QOS_MIN_INFO_REQ_STRU   stGetUmtsQosMinInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stGetUmtsQosMinInfoReq, sizeof(stGetUmtsQosMinInfoReq), 0x00, sizeof(TAF_PS_GET_UMTS_QOS_MIN_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_GET_UMTS_QOS_MIN_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_GET_UMTS_QOS_MIN_INFO_REQ???? */
     stGetUmtsQosMinInfoReq.stCtrl.ulModuleId = ulModuleId;
     stGetUmtsQosMinInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetUmtsQosMinInfoReq.stCtrl.ucOpId     = ucOpId;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_UMTS_QOS_MIN_INFO_REQ,
                              &stGetUmtsQosMinInfoReq,
@@ -463,17 +463,17 @@ VOS_UINT32 TAF_PS_GetDynamicUmtsQosInfo(
     VOS_UINT32                                  ulResult;
     TAF_PS_GET_DYNAMIC_UMTS_QOS_INFO_REQ_STRU   stGetDynamicUmtsQosInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stGetDynamicUmtsQosInfoReq, sizeof(stGetDynamicUmtsQosInfoReq), 0x00, sizeof(TAF_PS_GET_DYNAMIC_UMTS_QOS_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_GET_DYNAMIC_UMTS_QOS_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_GET_DYNAMIC_UMTS_QOS_INFO_REQ???? */
     stGetDynamicUmtsQosInfoReq.stCtrl.ulModuleId = ulModuleId;
     stGetDynamicUmtsQosInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetDynamicUmtsQosInfoReq.stCtrl.ucOpId     = ucOpId;
     stGetDynamicUmtsQosInfoReq.stCidListInfo     = *pstCidListInfo;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_DYNAMIC_UMTS_QOS_INFO_REQ,
                              &stGetDynamicUmtsQosInfoReq,
@@ -493,17 +493,17 @@ VOS_UINT32 TAF_PS_SetPdpContextState(
     VOS_UINT32                          ulResult;
     TAF_PS_SET_PDP_STATE_REQ_STRU       stSetPdpStateReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stSetPdpStateReq, sizeof(stSetPdpStateReq), 0x00, sizeof(TAF_PS_SET_PDP_STATE_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_SET_PDP_STATE_REQ消息 */
+    /* ????ID_MSG_TAF_PS_SET_PDP_STATE_REQ???? */
     stSetPdpStateReq.stCtrl.ulModuleId = ulModuleId;
     stSetPdpStateReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stSetPdpStateReq.stCtrl.ucOpId     = ucOpId;
     stSetPdpStateReq.stCidListStateInfo   = *pstCidListStateInfo;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_SET_PDP_CONTEXT_STATE_REQ,
                              &stSetPdpStateReq,
@@ -522,16 +522,16 @@ VOS_UINT32 TAF_PS_GetPdpContextState(
     VOS_UINT32                          ulResult;
     TAF_PS_GET_PDP_STATE_REQ_STRU       stGetPdpStateReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stGetPdpStateReq, sizeof(stGetPdpStateReq), 0x00, sizeof(TAF_PS_GET_PDP_STATE_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_GET_PDP_STATE_REQ消息 */
+    /* ????ID_MSG_TAF_PS_GET_PDP_STATE_REQ???? */
     stGetPdpStateReq.stCtrl.ulModuleId = ulModuleId;
     stGetPdpStateReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetPdpStateReq.stCtrl.ucOpId     = ucOpId;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_PDP_CONTEXT_STATE_REQ,
                              &stGetPdpStateReq,
@@ -551,17 +551,17 @@ VOS_UINT32 TAF_PS_CallModify(
     VOS_UINT32                          ulResult;
     TAF_PS_CALL_MODIFY_REQ_STRU         stCallModifyReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stCallModifyReq, sizeof(stCallModifyReq), 0x00, sizeof(TAF_PS_CALL_MODIFY_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_CALL_MODIFY_REQ消息 */
+    /* ????ID_MSG_TAF_PS_CALL_MODIFY_REQ???? */
     stCallModifyReq.stCtrl.ulModuleId = ulModuleId;
     stCallModifyReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stCallModifyReq.stCtrl.ucOpId     = ucOpId;
     stCallModifyReq.stCidListInfo     = *pstCidListInfo;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_CALL_MODIFY_REQ,
                              &stCallModifyReq,
@@ -581,17 +581,17 @@ VOS_UINT32 TAF_PS_CallAnswer(
     VOS_UINT32                          ulResult;
     TAF_PS_CALL_ANSWER_REQ_STRU         stCallAnswerReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stCallAnswerReq, sizeof(stCallAnswerReq), 0x00, sizeof(TAF_PS_CALL_ANSWER_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_CALL_ANSWER_REQ消息 */
+    /* ????ID_MSG_TAF_PS_CALL_ANSWER_REQ???? */
     stCallAnswerReq.stCtrl.ulModuleId = ulModuleId;
     stCallAnswerReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stCallAnswerReq.stCtrl.ucOpId     = ucOpId;
     stCallAnswerReq.stAnsInfo         = *pstAnsInfo;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_CALL_ANSWER_REQ,
                              &stCallAnswerReq,
@@ -610,16 +610,16 @@ VOS_UINT32 TAF_PS_CallHangup(
     VOS_UINT32                          ulResult;
     TAF_PS_CALL_HANGUP_REQ_STRU         stCallHangupReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stCallHangupReq, sizeof(stCallHangupReq), 0x00, sizeof(TAF_PS_CALL_HANGUP_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_CALL_HANGUP_REQ消息 */
+    /* ????ID_MSG_TAF_PS_CALL_HANGUP_REQ???? */
     stCallHangupReq.stCtrl.ulModuleId = ulModuleId;
     stCallHangupReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stCallHangupReq.stCtrl.ucOpId     = ucOpId;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_CALL_HANGUP_REQ,
                              &stCallHangupReq,
@@ -639,11 +639,11 @@ VOS_UINT32 TAF_PS_CallOrig(
     VOS_UINT32                          ulResult;
     TAF_PS_CALL_ORIG_REQ_STRU           stCallOrigReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stCallOrigReq, sizeof(stCallOrigReq), 0x00, sizeof(TAF_PS_CALL_ORIG_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_CALL_ORIG_REQ消息 */
+    /* ????ID_MSG_TAF_PS_CALL_ORIG_REQ???? */
     stCallOrigReq.stCtrl.ulModuleId = ulModuleId;
     stCallOrigReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stCallOrigReq.stCtrl.ucOpId     = ucOpId;
@@ -653,7 +653,7 @@ VOS_UINT32 TAF_PS_CallOrig(
                pstDialParaInfo,
                sizeof(TAF_PS_DIAL_PARA_STRU));
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_CALL_ORIG_REQ,
                              &stCallOrigReq,
@@ -685,18 +685,18 @@ VOS_UINT32 TAF_PS_CallEndEx(
     VOS_UINT32                          ulResult;
     TAF_PS_CALL_END_REQ_STRU            stCallEndReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stCallEndReq, sizeof(stCallEndReq), 0x00, sizeof(TAF_PS_CALL_END_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_CALL_END_REQ消息 */
+    /* ????ID_MSG_TAF_PS_CALL_END_REQ???? */
     stCallEndReq.stCtrl.ulModuleId = ulModuleId;
     stCallEndReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stCallEndReq.stCtrl.ucOpId     = ucOpId;
     stCallEndReq.ucCid             = ucCid;
     stCallEndReq.enCause           = enCause;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_CALL_END_REQ,
                              &stCallEndReq,
@@ -716,17 +716,17 @@ VOS_UINT32 TAF_PS_GetPdpIpAddrInfo(
     VOS_UINT32                              ulResult;
     TAF_PS_GET_PDP_IP_ADDR_INFO_REQ_STRU    stGetPdpIpAddrReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stGetPdpIpAddrReq, sizeof(stGetPdpIpAddrReq), 0x00, sizeof(TAF_PS_GET_PDP_IP_ADDR_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_GET_PDP_IP_ADDR_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_GET_PDP_IP_ADDR_INFO_REQ???? */
     stGetPdpIpAddrReq.stCtrl.ulModuleId = ulModuleId;
     stGetPdpIpAddrReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetPdpIpAddrReq.stCtrl.ucOpId     = ucOpId;
     stGetPdpIpAddrReq.stCidListInfo     = *pstCidListInfo;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_PDP_IP_ADDR_INFO_REQ,
                              &stGetPdpIpAddrReq,
@@ -746,17 +746,17 @@ VOS_UINT32 TAF_PS_SetAnsModeInfo(
     VOS_UINT32                              ulResult;
     TAF_PS_SET_ANSWER_MODE_INFO_REQ_STRU    stSetAnsModeReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stSetAnsModeReq, sizeof(stSetAnsModeReq), 0x00, sizeof(TAF_PS_SET_ANSWER_MODE_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_SET_ANSWER_MODE_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_SET_ANSWER_MODE_INFO_REQ???? */
     stSetAnsModeReq.stCtrl.ulModuleId = ulModuleId;
     stSetAnsModeReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stSetAnsModeReq.stCtrl.ucOpId     = ucOpId;
     stSetAnsModeReq.ulAnsMode         = ulAnsMode;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_SET_ANSWER_MODE_INFO_REQ,
                              &stSetAnsModeReq,
@@ -775,16 +775,16 @@ VOS_UINT32 TAF_PS_GetAnsModeInfo(
     VOS_UINT32                              ulResult;
     TAF_PS_GET_ANSWER_MODE_INFO_REQ_STRU    stGetAnsModeReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stGetAnsModeReq, sizeof(stGetAnsModeReq), 0x00, sizeof(TAF_PS_GET_ANSWER_MODE_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_SET_ANSWER_MODE_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_SET_ANSWER_MODE_INFO_REQ???? */
     stGetAnsModeReq.stCtrl.ulModuleId   = ulModuleId;
     stGetAnsModeReq.stCtrl.usClientId   = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetAnsModeReq.stCtrl.ucOpId       = ucOpId;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_ANSWER_MODE_INFO_REQ,
                              &stGetAnsModeReq,
@@ -804,17 +804,17 @@ VOS_UINT32 TAF_PS_GetDynamicPrimPdpContextInfo(
     VOS_UINT32                                          ulResult;
     TAF_PS_GET_DYNAMIC_PRIM_PDP_CONTEXT_INFO_REQ_STRU   stGetDynamicPrimPdpCtxInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stGetDynamicPrimPdpCtxInfoReq, sizeof(stGetDynamicPrimPdpCtxInfoReq), 0x00, sizeof(TAF_PS_GET_DYNAMIC_PRIM_PDP_CONTEXT_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_GET_DYNAMIC_PRIM_PDP_CONTEXT_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_GET_DYNAMIC_PRIM_PDP_CONTEXT_INFO_REQ???? */
     stGetDynamicPrimPdpCtxInfoReq.stCtrl.ulModuleId = ulModuleId;
     stGetDynamicPrimPdpCtxInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetDynamicPrimPdpCtxInfoReq.stCtrl.ucOpId     = ucOpId;
     stGetDynamicPrimPdpCtxInfoReq.ucCid             = ucCid;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_DYNAMIC_PRIM_PDP_CONTEXT_INFO_REQ,
                              &stGetDynamicPrimPdpCtxInfoReq,
@@ -834,17 +834,17 @@ VOS_UINT32 TAF_PS_GetDynamicSecPdpContextInfo(
     VOS_UINT32                                          ulResult;
     TAF_PS_GET_DYNAMIC_SEC_PDP_CONTEXT_INFO_REQ_STRU    stGetDynamicSecPdpCtxInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stGetDynamicSecPdpCtxInfoReq, sizeof(stGetDynamicSecPdpCtxInfoReq), 0x00, sizeof(TAF_PS_GET_DYNAMIC_SEC_PDP_CONTEXT_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_GET_DYNAMIC_SEC_PDP_CONTEXT_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_GET_DYNAMIC_SEC_PDP_CONTEXT_INFO_REQ???? */
     stGetDynamicSecPdpCtxInfoReq.stCtrl.ulModuleId = ulModuleId;
     stGetDynamicSecPdpCtxInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetDynamicSecPdpCtxInfoReq.stCtrl.ucOpId     = ucOpId;
     stGetDynamicSecPdpCtxInfoReq.ucCid             = ucCid;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_DYNAMIC_SEC_PDP_CONTEXT_INFO_REQ,
                              &stGetDynamicSecPdpCtxInfoReq,
@@ -864,17 +864,17 @@ VOS_UINT32 TAF_PS_GetDynamicTftInfo(
     VOS_UINT32                              ulResult;
     TAF_PS_GET_DYNAMIC_TFT_INFO_REQ_STRU    stGetDynamicTftInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stGetDynamicTftInfoReq, sizeof(stGetDynamicTftInfoReq), 0x00, sizeof(TAF_PS_GET_DYNAMIC_TFT_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_GET_DYNAMIC_TFT_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_GET_DYNAMIC_TFT_INFO_REQ???? */
     stGetDynamicTftInfoReq.stCtrl.ulModuleId = ulModuleId;
     stGetDynamicTftInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetDynamicTftInfoReq.stCtrl.ucOpId     = ucOpId;
     stGetDynamicTftInfoReq.ucCid             = ucCid;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_DYNAMIC_TFT_INFO_REQ,
                              &stGetDynamicTftInfoReq,
@@ -894,17 +894,17 @@ VOS_UINT32 TAF_PS_SetEpsQosInfo(
     VOS_UINT32                          ulResult;
     TAF_PS_SET_EPS_QOS_INFO_REQ_STRU    stSetEpsQosInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stSetEpsQosInfoReq, sizeof(stSetEpsQosInfoReq), 0x00, sizeof(TAF_PS_SET_EPS_QOS_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_SET_EPS_QOS_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_SET_EPS_QOS_INFO_REQ???? */
     stSetEpsQosInfoReq.stCtrl.ulModuleId = ulModuleId;
     stSetEpsQosInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stSetEpsQosInfoReq.stCtrl.ucOpId     = ucOpId;
     stSetEpsQosInfoReq.stEpsQosInfo      = *pstEpsQosInfo;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_SET_EPS_QOS_INFO_REQ,
                              &stSetEpsQosInfoReq,
@@ -923,16 +923,16 @@ VOS_UINT32 TAF_PS_GetEpsQosInfo(
     VOS_UINT32                          ulResult;
     TAF_PS_GET_EPS_QOS_INFO_REQ_STRU    stGetEpsQosInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stGetEpsQosInfoReq, sizeof(stGetEpsQosInfoReq), 0x00, sizeof(TAF_PS_GET_EPS_QOS_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_GET_EPS_QOS_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_GET_EPS_QOS_INFO_REQ???? */
     stGetEpsQosInfoReq.stCtrl.ulModuleId = ulModuleId;
     stGetEpsQosInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetEpsQosInfoReq.stCtrl.ucOpId     = ucOpId;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_EPS_QOS_INFO_REQ,
                              &stGetEpsQosInfoReq,
@@ -952,17 +952,17 @@ VOS_UINT32 TAF_PS_GetDynamicEpsQosInfo(
     VOS_UINT32                                  ulResult;
     TAF_PS_GET_DYNAMIC_EPS_QOS_INFO_REQ_STRU    stGetDynamicEpsQosInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stGetDynamicEpsQosInfoReq, sizeof(stGetDynamicEpsQosInfoReq), 0x00, sizeof(TAF_PS_GET_DYNAMIC_EPS_QOS_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_GET_DYNAMIC_EPS_QOS_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_GET_DYNAMIC_EPS_QOS_INFO_REQ???? */
     stGetDynamicEpsQosInfoReq.stCtrl.ulModuleId = ulModuleId;
     stGetDynamicEpsQosInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetDynamicEpsQosInfoReq.stCtrl.ucOpId     = ucOpId;
     stGetDynamicEpsQosInfoReq.ucCid             = ucCid;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_DYNAMIC_EPS_QOS_INFO_REQ,
                              &stGetDynamicEpsQosInfoReq,
@@ -981,16 +981,16 @@ VOS_UINT32 TAF_PS_GetDsFlowInfo(
     VOS_UINT32                          ulResult;
     TAF_PS_GET_DSFLOW_INFO_REQ_STRU     stGetDsFlowInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stGetDsFlowInfoReq, sizeof(stGetDsFlowInfoReq), 0x00, sizeof(TAF_PS_GET_DSFLOW_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_GET_DSFLOW_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_GET_DSFLOW_INFO_REQ???? */
     stGetDsFlowInfoReq.stCtrl.ulModuleId = ulModuleId;
     stGetDsFlowInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetDsFlowInfoReq.stCtrl.ucOpId     = ucOpId;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_DSFLOW_INFO_REQ,
                              &stGetDsFlowInfoReq,
@@ -1010,17 +1010,17 @@ VOS_UINT32 TAF_PS_ClearDsFlowInfo(
     VOS_UINT32                          ulResult;
     TAF_PS_CLEAR_DSFLOW_REQ_STRU        stClearDsFlowReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stClearDsFlowReq, sizeof(stClearDsFlowReq), 0x00, sizeof(TAF_PS_CLEAR_DSFLOW_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_CLEAR_DSFLOW_REQ消息 */
+    /* ????ID_MSG_TAF_PS_CLEAR_DSFLOW_REQ???? */
     stClearDsFlowReq.stCtrl.ulModuleId = ulModuleId;
     stClearDsFlowReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stClearDsFlowReq.stCtrl.ucOpId     = ucOpId;
     stClearDsFlowReq.stClearConfigInfo = *pstClearConfigInfo;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_CLEAR_DSFLOW_REQ,
                              &stClearDsFlowReq,
@@ -1040,17 +1040,17 @@ VOS_UINT32 TAF_PS_ConfigDsFlowRpt(
     VOS_UINT32                          ulResult;
     TAF_PS_CONFIG_DSFLOW_RPT_REQ_STRU   stConfigDsFlowRptReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stConfigDsFlowRptReq, sizeof(stConfigDsFlowRptReq), 0x00, sizeof(TAF_PS_CONFIG_DSFLOW_RPT_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_CONFIG_DSFLOW_RPT_REQ消息 */
+    /* ????ID_MSG_TAF_PS_CONFIG_DSFLOW_RPT_REQ???? */
     stConfigDsFlowRptReq.stCtrl.ulModuleId = ulModuleId;
     stConfigDsFlowRptReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stConfigDsFlowRptReq.stCtrl.ucOpId     = ucOpId;
     stConfigDsFlowRptReq.stReportConfigInfo   = *pstReportConfigInfo;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_CONFIG_DSFLOW_RPT_REQ,
                              &stConfigDsFlowRptReq,
@@ -1070,17 +1070,17 @@ VOS_UINT32 TAF_PS_SetPdpDnsInfo(
     VOS_UINT32                          ulResult;
     TAF_PS_SET_PDP_DNS_INFO_REQ_STRU    stSetPdpDnsInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stSetPdpDnsInfoReq, sizeof(stSetPdpDnsInfoReq), 0x00, sizeof(TAF_PS_SET_PDP_DNS_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_SET_PDP_DNS_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_SET_PDP_DNS_INFO_REQ???? */
     stSetPdpDnsInfoReq.stCtrl.ulModuleId = ulModuleId;
     stSetPdpDnsInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stSetPdpDnsInfoReq.stCtrl.ucOpId     = ucOpId;
     stSetPdpDnsInfoReq.stPdpDnsInfo      = *pstPdpDnsInfo;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_SET_PDP_DNS_INFO_REQ,
                              &stSetPdpDnsInfoReq,
@@ -1099,16 +1099,16 @@ VOS_UINT32 TAF_PS_GetPdpDnsInfo(
     VOS_UINT32                          ulResult;
     TAF_PS_GET_PDP_DNS_INFO_REQ_STRU    stGetPdpDnsInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stGetPdpDnsInfoReq, sizeof(stGetPdpDnsInfoReq), 0x00, sizeof(TAF_PS_GET_PDP_DNS_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_GET_PDP_DNS_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_GET_PDP_DNS_INFO_REQ???? */
     stGetPdpDnsInfoReq.stCtrl.ulModuleId = ulModuleId;
     stGetPdpDnsInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetPdpDnsInfoReq.stCtrl.ucOpId     = ucOpId;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_PDP_DNS_INFO_REQ,
                              &stGetPdpDnsInfoReq,
@@ -1128,17 +1128,17 @@ VOS_UINT32 TAF_PS_TrigGprsData(
     VOS_UINT32                          ulResult;
     TAF_PS_TRIG_GPRS_DATA_REQ_STRU      stTrigGprsDataReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stTrigGprsDataReq, sizeof(stTrigGprsDataReq), 0x00, sizeof(TAF_PS_TRIG_GPRS_DATA_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_TRIG_GPRS_DATA_REQ消息 */
+    /* ????ID_MSG_TAF_PS_TRIG_GPRS_DATA_REQ???? */
     stTrigGprsDataReq.stCtrl.ulModuleId = ulModuleId;
     stTrigGprsDataReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stTrigGprsDataReq.stCtrl.ucOpId     = ucOpId;
     stTrigGprsDataReq.stGprsDataInfo    = *pstGprsDataInfo;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_TRIG_GPRS_DATA_REQ,
                              &stTrigGprsDataReq,
@@ -1158,17 +1158,17 @@ VOS_UINT32 TAF_PS_ConfigNbnsFunction(
     VOS_UINT32                              ulResult;
     TAF_PS_CONFIG_NBNS_FUNCTION_REQ_STRU    stConfigNbnsFunReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stConfigNbnsFunReq, sizeof(stConfigNbnsFunReq), 0x00, sizeof(TAF_PS_CONFIG_NBNS_FUNCTION_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_CONFIG_NBNS_FUNCTION_REQ消息 */
+    /* ????ID_MSG_TAF_PS_CONFIG_NBNS_FUNCTION_REQ???? */
     stConfigNbnsFunReq.stCtrl.ulModuleId = ulModuleId;
     stConfigNbnsFunReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stConfigNbnsFunReq.stCtrl.ucOpId     = ucOpId;
     stConfigNbnsFunReq.ulEnabled         = ulEnabled;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_CONFIG_NBNS_FUNCTION_REQ,
                              &stConfigNbnsFunReq,
@@ -1189,17 +1189,17 @@ VOS_UINT32 TAF_PS_SetAuthDataInfo(
     VOS_UINT32                          ulResult;
     TAF_PS_SET_AUTHDATA_INFO_REQ_STRU   stSetAuthDataInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stSetAuthDataInfoReq, sizeof(stSetAuthDataInfoReq), 0x00, sizeof(TAF_PS_SET_AUTHDATA_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_SET_AUTHDATA_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_SET_AUTHDATA_INFO_REQ???? */
     stSetAuthDataInfoReq.stCtrl.ulModuleId = ulModuleId;
     stSetAuthDataInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stSetAuthDataInfoReq.stCtrl.ucOpId     = ucOpId;
     stSetAuthDataInfoReq.stAuthDataInfo    = *pstAuthDataInfo;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_SET_AUTHDATA_INFO_REQ,
                              &stSetAuthDataInfoReq,
@@ -1218,16 +1218,16 @@ VOS_UINT32 TAF_PS_GetAuthDataInfo(
     VOS_UINT32                          ulResult;
     TAF_PS_GET_AUTHDATA_INFO_REQ_STRU   stGetAuthDataInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stGetAuthDataInfoReq, sizeof(stGetAuthDataInfoReq), 0x00, sizeof(TAF_PS_GET_AUTHDATA_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_GET_AUTHDATA_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_GET_AUTHDATA_INFO_REQ???? */
     stGetAuthDataInfoReq.stCtrl.ulModuleId = ulModuleId;
     stGetAuthDataInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetAuthDataInfoReq.stCtrl.ucOpId     = ucOpId;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_AUTHDATA_INFO_REQ,
                              &stGetAuthDataInfoReq,
@@ -1247,17 +1247,17 @@ VOS_UINT32 TAF_PS_GetGprsActiveType(
     VOS_UINT32                              ulResult;
     TAF_PS_GET_D_GPRS_ACTIVE_TYPE_REQ_STRU  stGetGprsActiveTypeReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stGetGprsActiveTypeReq, sizeof(stGetGprsActiveTypeReq), 0x00, sizeof(TAF_PS_GET_D_GPRS_ACTIVE_TYPE_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_GET_AUTHDATA_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_GET_AUTHDATA_INFO_REQ???? */
     stGetGprsActiveTypeReq.stCtrl.ulModuleId = ulModuleId;
     stGetGprsActiveTypeReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetGprsActiveTypeReq.stCtrl.ucOpId     = ucOpId;
     stGetGprsActiveTypeReq.stAtdPara         = *pstAtdPara;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_D_GPRS_ACTIVE_TYPE_REQ,
                              &stGetGprsActiveTypeReq,
@@ -1278,11 +1278,11 @@ VOS_UINT32 TAF_PS_PppDialOrig(
     VOS_UINT32                          ulResult;
     TAF_PS_PPP_DIAL_ORIG_REQ_STRU       stPppDialOrigReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stPppDialOrigReq, sizeof(stPppDialOrigReq), 0x00, sizeof(TAF_PS_PPP_DIAL_ORIG_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_PPP_DIAL_ORIG_REQ消息 */
+    /* ????ID_MSG_TAF_PS_PPP_DIAL_ORIG_REQ???? */
     stPppDialOrigReq.stCtrl.ulModuleId          = ulModuleId;
     stPppDialOrigReq.stCtrl.usClientId          = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stPppDialOrigReq.stCtrl.ucOpId              = ucOpId;
@@ -1295,7 +1295,7 @@ VOS_UINT32 TAF_PS_PppDialOrig(
                pstPppReqConfigInfo,
                sizeof(TAF_PPP_REQ_CONFIG_INFO_STRU));
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_PPP_DIAL_ORIG_REQ,
                              &stPppDialOrigReq,
@@ -1315,17 +1315,17 @@ VOS_UINT32 TAF_PS_GetLteCsInfo(
     VOS_UINT32                                  ulResult;
     TAF_PS_LTECS_REQ_STRU   stGetLteCsInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stGetLteCsInfoReq, sizeof(stGetLteCsInfoReq), 0x00, sizeof(TAF_PS_LTECS_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_SET_PRIM_PDP_CONTEXT_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_SET_PRIM_PDP_CONTEXT_INFO_REQ???? */
     stGetLteCsInfoReq.stCtrl.ulModuleId = ulModuleId;
     stGetLteCsInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetLteCsInfoReq.stCtrl.ucOpId     = ucOpId;
 
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_LTE_CS_REQ,
                              &stGetLteCsInfoReq,
@@ -1347,17 +1347,17 @@ VOS_UINT32 TAF_PS_GetCemodeInfo(
 
 
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stGetCemodeInfoReq, sizeof(stGetCemodeInfoReq), 0x00, sizeof(TAF_PS_CEMODE_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_SET_PRIM_PDP_CONTEXT_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_SET_PRIM_PDP_CONTEXT_INFO_REQ???? */
     stGetCemodeInfoReq.stCtrl.ulModuleId = ulModuleId;
     stGetCemodeInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetCemodeInfoReq.stCtrl.ucOpId     = ucOpId;
 
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_CEMODE_REQ,
                              &stGetCemodeInfoReq,
@@ -1378,17 +1378,17 @@ VOS_UINT32 TAF_PS_SetPdpProfInfo(
     VOS_UINT32                          ulResult;
     TAF_PS_SET_PROFILE_INFO_REQ_STRU    stSetPdpProfInfoReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stSetPdpProfInfoReq, sizeof(stSetPdpProfInfoReq), 0x00, sizeof(TAF_PS_SET_PROFILE_INFO_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_SET_AUTHDATA_INFO_REQ消息 */
+    /* ????ID_MSG_TAF_PS_SET_AUTHDATA_INFO_REQ???? */
     stSetPdpProfInfoReq.stCtrl.ulModuleId = ulModuleId;
     stSetPdpProfInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stSetPdpProfInfoReq.stCtrl.ucOpId     = ucOpId;
     stSetPdpProfInfoReq.stPdpProfInfo     = *stPdpProfInfo;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_SET_PDPROFMOD_INFO_REQ,
                              &stSetPdpProfInfoReq,
@@ -1411,15 +1411,15 @@ VOS_UINT32 TAF_PS_GetCidSdfParaInfo(
     ulResult = VOS_ERR;
     TAF_MEM_SET_S(&stSdfInfoReq, sizeof(stSdfInfoReq), 0x00, sizeof(TAF_PS_SDF_INFO_REQ_STRU));
 
-    /* 如果出参为空，则采用异步方式获取SDF信息 */
+    /* ????????????????????????????????SDF???? */
     if (VOS_NULL_PTR == pstSdfQueryInfo)
     {
-        /* 构造ID_MSG_TAF_GET_CID_SDF_REQ消息 */
+        /* ????ID_MSG_TAF_GET_CID_SDF_REQ???? */
         stSdfInfoReq.stCtrl.ulModuleId = ulModuleId;
         stSdfInfoReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
         stSdfInfoReq.stCtrl.ucOpId     = ucOpId;
 
-        /* 发送消息 */
+        /* ???????? */
         ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                                  ID_MSG_TAF_PS_GET_CID_SDF_REQ,
                                  &stSdfInfoReq,
@@ -1429,7 +1429,7 @@ VOS_UINT32 TAF_PS_GetCidSdfParaInfo(
     }
 
     TAF_MEM_SET_S(pstSdfQueryInfo, sizeof(TAF_SDF_PARA_QUERY_INFO_STRU), 0x00, sizeof(TAF_SDF_PARA_QUERY_INFO_STRU));
-/* 同步方式目前仅支持C核 */
+/* ??????????????????C?? */
 
     return ulResult;
 }
@@ -1449,11 +1449,11 @@ VOS_UINT32 TAF_PS_GetUnusedCid(
 
     if (VOS_NULL_PTR == puCid)
     {
-        /* 目前暂不支持异步方式 */
+        /* ???????????????????? */
         return VOS_ERR;
     }
 
-/* 同步方式目前仅支持C核 */
+/* ??????????????????C?? */
 
     return ulResult;
 }
@@ -1470,10 +1470,10 @@ VOS_UINT32 TAF_PS_GetDynamicDnsInfo(
 
     TAF_PS_GET_NEGOTIATION_DNS_REQ_STRU stNegoDns;
 
-    /* 初始化 */
+    /* ?????? */
     TAF_MEM_SET_S(&stNegoDns, sizeof(stNegoDns), 0x00, sizeof(TAF_PS_GET_NEGOTIATION_DNS_REQ_STRU));
 
-    /* 填充消息结构 */
+    /* ???????????? */
     stNegoDns.stCtrl.ulModuleId = ulModuleId;
     stNegoDns.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stNegoDns.stCtrl.ucOpId     = ucOpId;
@@ -1497,17 +1497,17 @@ VOS_UINT32 TAF_PS_SetCqosPriInfo(
     VOS_UINT32                          ulResult;
     TAF_PS_SET_1X_CQOS_PRI_REQ_STRU     stSetCqosPriReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stSetCqosPriReq, sizeof(stSetCqosPriReq), 0x00, sizeof(TAF_PS_SET_1X_CQOS_PRI_REQ_STRU));
 
-    /* 构造TAF_PS_SET_CQOS_PRI_REQ_STRU消息 */
+    /* ????TAF_PS_SET_CQOS_PRI_REQ_STRU???? */
     stSetCqosPriReq.stCtrl.ulModuleId = ulModuleId;
     stSetCqosPriReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stSetCqosPriReq.stCtrl.ucOpId     = 0;
     stSetCqosPriReq.enPri             = enPri;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_SET_CQOS_PRI_REQ,
                              &stSetCqosPriReq,
@@ -1529,7 +1529,7 @@ VOS_UINT32 TAF_PS_SetApDsFlowRptCfg(
 
     TAF_MEM_SET_S(&stSetRptCfgReq, sizeof(stSetRptCfgReq), 0x00, sizeof(TAF_PS_SET_APDSFLOW_RPT_CFG_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_SET_APDSFLOW_RPT_CFG_REQ消息 */
+    /* ????ID_MSG_TAF_PS_SET_APDSFLOW_RPT_CFG_REQ???? */
     stSetRptCfgReq.stCtrl.ulModuleId = ulModuleId;
     stSetRptCfgReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stSetRptCfgReq.stCtrl.ucOpId     = ucOpId;
@@ -1539,7 +1539,7 @@ VOS_UINT32 TAF_PS_SetApDsFlowRptCfg(
                pstRptCfg,
                sizeof(TAF_APDSFLOW_RPT_CFG_STRU));
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_SET_APDSFLOW_RPT_CFG_REQ,
                              &stSetRptCfgReq,
@@ -1560,12 +1560,12 @@ VOS_UINT32 TAF_PS_GetApDsFlowRptCfg(
 
     TAF_MEM_SET_S(&stGetRptCfgReq, sizeof(stGetRptCfgReq), 0x00, sizeof(TAF_PS_GET_APDSFLOW_RPT_CFG_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_GET_APDSFLOW_RPT_CFG_REQ消息 */
+    /* ????ID_MSG_TAF_PS_GET_APDSFLOW_RPT_CFG_REQ???? */
     stGetRptCfgReq.stCtrl.ulModuleId = ulModuleId;
     stGetRptCfgReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetRptCfgReq.stCtrl.ucOpId     = ucOpId;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_APDSFLOW_RPT_CFG_REQ,
                              &stGetRptCfgReq,
@@ -1587,7 +1587,7 @@ VOS_UINT32 TAF_PS_SetDsFlowNvWriteCfg(
 
     TAF_MEM_SET_S(&stSetWriteNvCfgReq, sizeof(stSetWriteNvCfgReq), 0x00, sizeof(TAF_PS_SET_DSFLOW_NV_WRITE_CFG_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_SET_DSFLOW_NV_WRITE_CFG_REQ消息 */
+    /* ????ID_MSG_TAF_PS_SET_DSFLOW_NV_WRITE_CFG_REQ???? */
     stSetWriteNvCfgReq.stCtrl.ulModuleId = ulModuleId;
     stSetWriteNvCfgReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stSetWriteNvCfgReq.stCtrl.ucOpId     = ucOpId;
@@ -1597,7 +1597,7 @@ VOS_UINT32 TAF_PS_SetDsFlowNvWriteCfg(
                pstNvWriteCfg,
                sizeof(TAF_DSFLOW_NV_WRITE_CFG_STRU));
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_SET_DSFLOW_NV_WRITE_CFG_REQ,
                              &stSetWriteNvCfgReq,
@@ -1618,12 +1618,12 @@ VOS_UINT32 TAF_PS_GetDsFlowNvWriteCfg(
 
     TAF_MEM_SET_S(&stGetNvWriteCfgReq, sizeof(stGetNvWriteCfgReq), 0x00, sizeof(TAF_PS_GET_DSFLOW_NV_WRITE_CFG_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_GET_DSFLOW_WRITE_NV_CFG_REQ消息 */
+    /* ????ID_MSG_TAF_PS_GET_DSFLOW_WRITE_NV_CFG_REQ???? */
     stGetNvWriteCfgReq.stCtrl.ulModuleId = ulModuleId;
     stGetNvWriteCfgReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetNvWriteCfgReq.stCtrl.ucOpId     = ucOpId;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_DSFLOW_NV_WRITE_CFG_REQ,
                              &stGetNvWriteCfgReq,
@@ -1645,7 +1645,7 @@ VOS_UINT32 TAF_PS_SetCtaInfo(
 
     TAF_MEM_SET_S(&stSetPktCdataInactivityTmrlenReq, sizeof(stSetPktCdataInactivityTmrlenReq), 0x00, sizeof(stSetPktCdataInactivityTmrlenReq));
 
-    /* 构造ID_MSG_TAF_PS_GET_DSFLOW_WRITE_NV_CFG_REQ消息 */
+    /* ????ID_MSG_TAF_PS_GET_DSFLOW_WRITE_NV_CFG_REQ???? */
     stSetPktCdataInactivityTmrlenReq.stCtrl.ulModuleId  = ulModuleId;
     stSetPktCdataInactivityTmrlenReq.stCtrl.usClientId  = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stSetPktCdataInactivityTmrlenReq.stCtrl.ucOpId      = ucOpId;
@@ -1654,7 +1654,7 @@ VOS_UINT32 TAF_PS_SetCtaInfo(
     stSetPktCdataInactivityTmrlenReq.ucPktCdataInactivityTmrLen = ucTimeLen;
 
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_SET_CTA_INFO_REQ,
                              &stSetPktCdataInactivityTmrlenReq,
@@ -1678,7 +1678,7 @@ VOS_UINT32 TAF_PS_GetCtaInfo(
     stGetPktCdataInactivityTmrlenReq.stCtrl.usClientId  = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetPktCdataInactivityTmrlenReq.stCtrl.ucOpId      = ucOpId;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_CTA_INFO_REQ,
                              &stGetPktCdataInactivityTmrlenReq,
@@ -1704,7 +1704,7 @@ VOS_UINT32 TAF_PS_GetCgmtuInfo(
     stGetCgmtuValueReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGetCgmtuValueReq.stCtrl.ucOpId     = ucOpId;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_CGMTU_VALUE_REQ,
                              &stGetCgmtuValueReq,
@@ -1724,17 +1724,17 @@ VOS_UINT32 TAF_PS_SetCdataDialModeInfo(
     VOS_UINT32                          ulResult;
     TAF_PS_CDATA_DIAL_MODE_REQ_STRU     stDialModeReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stDialModeReq, sizeof(stDialModeReq), 0x00, sizeof(TAF_PS_CDATA_DIAL_MODE_REQ_STRU));
 
-    /* 构造TAF_PS_CDATA_DIAL_MODE_REQ_STRU消息 */
+    /* ????TAF_PS_CDATA_DIAL_MODE_REQ_STRU???? */
     stDialModeReq.stCtrl.ulModuleId     = ulModuleId;
     stDialModeReq.stCtrl.usClientId     = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stDialModeReq.stCtrl.ucOpId         = 0;
     stDialModeReq.enDialMode            = enDialMode;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_SET_CDMA_DIAL_MODE_REQ,
                              &stDialModeReq,
@@ -1754,17 +1754,17 @@ VOS_UINT32 TAF_PS_SetImsPdpCfg(
     VOS_UINT32                          ulResult;
     TAF_PS_SET_IMS_PDP_CFG_REQ_STRU     stSetImsPdpCfgReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&stSetImsPdpCfgReq, sizeof(stSetImsPdpCfgReq), 0x00, sizeof(TAF_PS_SET_IMS_PDP_CFG_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_SET_IMS_PDP_CFG_REQ消息 */
+    /* ????ID_MSG_TAF_PS_SET_IMS_PDP_CFG_REQ???? */
     stSetImsPdpCfgReq.stCtrl.ulModuleId = ulModuleId;
     stSetImsPdpCfgReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stSetImsPdpCfgReq.stCtrl.ucOpId     = ucOpId;
     stSetImsPdpCfgReq.stImsPdpCfg       = *pstImsPdpCfg;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_SET_IMS_PDP_CFG_REQ,
                              &stSetImsPdpCfgReq,
@@ -1784,17 +1784,17 @@ VOS_UINT32 TAF_PS_SetCdmaDormantTimer(
     VOS_UINT32                          ulResult;
     TAF_PS_SET_1X_DORM_TIMER_REQ_STRU   st1xDormTimerReq;
 
-    /* 初始化 */
+    /* ?????? */
     ulResult = VOS_OK;
     TAF_MEM_SET_S(&st1xDormTimerReq, sizeof(st1xDormTimerReq), 0x00, sizeof(TAF_PS_SET_1X_DORM_TIMER_REQ_STRU));
 
-    /* 构造ID_MSG_TAF_PS_SET_1X_DORMANT_TIMER_REQ消息 */
+    /* ????ID_MSG_TAF_PS_SET_1X_DORMANT_TIMER_REQ???? */
     st1xDormTimerReq.stCtrl.ulModuleId = ulModuleId;
     st1xDormTimerReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     st1xDormTimerReq.stCtrl.ucOpId     = ucOpId;
     st1xDormTimerReq.ucDormantTimer    = ucDormantTimer;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_SET_1X_DORM_TIMER_REQ,
                              &st1xDormTimerReq,
@@ -1819,7 +1819,7 @@ VOS_UINT32 TAF_PS_ProcCdmaDormTimerQryReq(
     stGet1xDormTimerReq.stCtrl.usClientId = TAF_PS_GET_CLIENTID_FROM_EXCLIENTID(usExClientId);
     stGet1xDormTimerReq.stCtrl.ucOpId     = ucOpId;
 
-    /* 发送消息 */
+    /* ???????? */
     ulResult = TAF_PS_SndMsg(TAF_PS_GET_MODEMID_FROM_EXCLIENTID(usExClientId),
                              ID_MSG_TAF_PS_GET_1X_DORM_TIEMR_REQ,
                              &stGet1xDormTimerReq,

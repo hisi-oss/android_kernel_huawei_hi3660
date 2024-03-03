@@ -9,7 +9,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "platform_spec.h"
 #include "oam_ext_if.h"
@@ -27,25 +27,25 @@ extern "C" {
 
 
 /*****************************************************************************
-  2 STRUCT定义
+  2 STRUCT????
 *****************************************************************************/
 /*****************************************************************************
-  结构名  : frw_event_cfg_stru
-  结构说明: 事件队列配置信息结构体
+  ??????  : frw_event_cfg_stru
+  ????????: ??????????????????????
 *****************************************************************************/
 typedef struct
 {
-    oal_uint8                      uc_weight;        /* 队列权重 */
-    oal_uint8                      uc_max_events;    /* 队列所能容纳的最大事件个数 */
-    frw_sched_policy_enum_uint8    en_policy;        /* 队列所属调度策略(高优先级、普通优先级) */
+    oal_uint8                      uc_weight;        /* ???????? */
+    oal_uint8                      uc_max_events;    /* ?????????????????????????? */
+    frw_sched_policy_enum_uint8    en_policy;        /* ????????????????(????????????????????) */
     oal_uint8                      auc_resv;
 }frw_event_cfg_stru;
 
 
 
 /*****************************************************************************
-  结构名  : frw_event_ipc_register_stru
-  结构说明: IPC模块注册结构体
+  ??????  : frw_event_ipc_register_stru
+  ????????: IPC??????????????
 *****************************************************************************/
 typedef struct
 {
@@ -57,25 +57,25 @@ typedef struct
 
 
 /*****************************************************************************
-  3 全局变量定义
+  3 ????????????
 *****************************************************************************/
 /******************************************************************************
-    事件队列配置信息全局变量
+    ????????????????????????
 *******************************************************************************/
 OAL_STATIC frw_event_cfg_stru g_ast_event_queue_cfg_table[] = WLAN_FRW_EVENT_CFG_TABLE;
 
 /******************************************************************************
-    事件管理实体
+    ????????????
 *******************************************************************************/
 frw_event_mgmt_stru g_ast_event_manager[WLAN_FRW_MAX_NUM_CORES];
 
 /******************************************************************************
-    事件表全局变量
+    ??????????????
 *******************************************************************************/
 frw_event_table_item_stru g_ast_event_table[FRW_EVENT_TABLE_MAX_ITEMS];
 
 /******************************************************************************
-    IPC注册管理实体
+    IPC????????????
 *******************************************************************************/
 OAL_STATIC frw_event_ipc_register_stru g_st_ipc_register;
 
@@ -186,7 +186,7 @@ OAL_STATIC DECLARE_WIFI_PANIC_STRU(frw_panic_stat,frw_print_panic_stat);
 #endif
 
 /*****************************************************************************
-  4 函数实现
+  4 ????????
 *****************************************************************************/
 
 OAL_STATIC oal_uint32  frw_event_init_event_queue(oal_void)
@@ -197,7 +197,7 @@ OAL_STATIC oal_uint32  frw_event_init_event_queue(oal_void)
 
     for (ul_core_id = 0; ul_core_id < WLAN_FRW_MAX_NUM_CORES; ul_core_id++)
     {
-        /* 循环初始化事件队列 */
+        /* ?????????????????? */
         for (us_qid = 0; us_qid < FRW_EVENT_MAX_NUM_QUEUES; us_qid++)
         {
             ul_ret = frw_event_queue_init(&g_ast_event_manager[ul_core_id].st_event_queue[us_qid],
@@ -223,7 +223,7 @@ OAL_STATIC oal_void  frw_event_destroy_event_queue(oal_uint32 ul_core_id)
 {
     oal_uint16    us_qid;
 
-    /* 循环销毁事件队列 */
+    /* ???????????????? */
     for (us_qid = 0; us_qid < FRW_EVENT_MAX_NUM_QUEUES; us_qid++)
     {
         frw_event_queue_destroy(&g_ast_event_manager[ul_core_id].st_event_queue[us_qid]);
@@ -239,7 +239,7 @@ OAL_STATIC oal_uint32  frw_event_init_sched(oal_void)
 
     for (ul_core_id = 0; ul_core_id < WLAN_FRW_MAX_NUM_CORES; ul_core_id++)
     {
-        /* 循环初始化调度器 */
+        /* ???????????????? */
         for (us_qid = 0; us_qid < FRW_SCHED_POLICY_BUTT; us_qid++)
         {
             ul_ret = frw_event_sched_init(&g_ast_event_manager[ul_core_id].st_sched_queue[us_qid]);
@@ -309,7 +309,7 @@ oal_uint32  frw_event_dispatch_event(frw_event_mem_stru *pst_event_mem)
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 异常: 内存写越界 */
+    /* ????: ?????????? */
 #ifdef _PRE_DEBUG_MODE
     ul_dog_tag = (*((oal_uint32 *)(pst_event_mem->puc_origin_data + pst_event_mem->us_len - OAL_DOG_TAG_SIZE)));
     if (OAL_DOG_TAG != ul_dog_tag)
@@ -321,7 +321,7 @@ oal_uint32  frw_event_dispatch_event(frw_event_mem_stru *pst_event_mem)
 #endif
 
 #if (_PRE_MULTI_CORE_MODE_PIPELINE_AMP == _PRE_MULTI_CORE_MODE)
-    /* 如果没有开启核间通信，则根据事件分段号处理事件(入队或者执行相应的处理函数) */
+    /* ??????????????????????????????????????????????(??????????????????????????) */
     if (OAL_PTR_NULL == st_ipc_register.p_frw_event_deploy_pipeline_func)
     {
         return frw_event_process(pst_event_mem);
@@ -334,7 +334,7 @@ oal_uint32  frw_event_dispatch_event(frw_event_mem_stru *pst_event_mem)
         return ul_ret;
     }
 
-    /* 如果为核间通信，则直接返回成功。否则，根据事件分段号处理事件 */
+    /* ???????????????????????????????????????????????????????????? */
     if (FRW_EVENT_DEPLOY_IPC == en_deploy)
     {
         return OAL_SUCC;
@@ -437,7 +437,7 @@ oal_uint32 frw_event_init(oal_void)
     oal_smp_task_lock_init(&g_frw_event_task_lock);
 #endif
 
-    /* 初始化事件队列 */
+    /* ?????????????? */
     ul_ret = frw_event_init_event_queue();
     if (OAL_UNLIKELY(OAL_SUCC != ul_ret))
     {
@@ -445,7 +445,7 @@ oal_uint32 frw_event_init(oal_void)
         return ul_ret;
     }
 
-    /* 初始化调度器 */
+    /* ???????????? */
     ul_ret = frw_event_init_sched();
     if (OAL_UNLIKELY(OAL_SUCC != ul_ret))
     {
@@ -489,7 +489,7 @@ oal_uint32  frw_event_exit(oal_void)
 
     for (ul_core_id = 0; ul_core_id < WLAN_FRW_MAX_NUM_CORES; ul_core_id++)
     {
-        /* 销毁事件队列 */
+        /* ???????????? */
         frw_event_destroy_event_queue(ul_core_id);
     }
 
@@ -545,7 +545,7 @@ oal_uint32  frw_event_post_event(frw_event_mem_stru *pst_event_mem,oal_uint32 ul
     frw_event_sched_queue_stru  *pst_sched_queue;
 
 
-    /* 获取事件队列ID */
+    /* ????????????ID */
     ul_ret = frw_event_to_qid(pst_event_mem, &us_qid);
     if (OAL_UNLIKELY(OAL_SUCC != ul_ret))
     {
@@ -559,35 +559,35 @@ oal_uint32  frw_event_post_event(frw_event_mem_stru *pst_event_mem,oal_uint32 ul
         return OAL_ERR_CODE_ARRAY_OVERFLOW;
     }
 
-    /* 根据核号 + 队列ID，找到相应的事件队列 */
+    /* ???????? + ????ID???????????????????? */
     pst_event_mgmt  = &g_ast_event_manager[ul_core_id];
 
     pst_event_queue = &pst_event_mgmt->st_event_queue[us_qid];
 
-    /* 检查policy */
+    /* ????policy */
     if (OAL_UNLIKELY(pst_event_queue->en_policy >= FRW_SCHED_POLICY_BUTT))
     {
         OAM_ERROR_LOG1(0, OAM_SF_FRW, "{frw_event_post_event, array overflow!%d}", pst_event_queue->en_policy);
         return OAL_ERR_CODE_ARRAY_OVERFLOW;
     }
 
-    /* 获取调度队列 */
+    /* ???????????? */
     pst_sched_queue = &pst_event_mgmt->st_sched_queue[pst_event_queue->en_policy];
 
 
-    /* 事件内存引用计数加1 */
+    /* ??????????????????1 */
 #ifdef _PRE_DEBUG_MODE
-    /* 异常: 该内存块上的共享用户数已为最大值 */
+    /* ????: ???????????????????????????????? */
     if (OAL_UNLIKELY((oal_uint16)(pst_event_mem->uc_user_cnt + 1) > WLAN_MEM_MAX_USERS_NUM))
     {
         OAM_WARNING_LOG1(0, OAM_SF_FRW, "{pst_event_mem->uc_user_cnt is too large.%d}", pst_event_mem->uc_user_cnt);
         return OAL_ERR_CODE_ARRAY_OVERFLOW;
     }
 #endif
-    /* 先取得引用，防止enqueue与取得引用之间被释放 */
+    /* ????????????????enqueue???????????????????? */
     pst_event_mem->uc_user_cnt++;
 
-    /* 事件入队 */
+    /* ???????? */
     ul_ret = frw_event_queue_enqueue(pst_event_queue, pst_event_mem);
     if (OAL_UNLIKELY(OAL_SUCC != ul_ret))
     {
@@ -605,7 +605,7 @@ oal_uint32  frw_event_post_event(frw_event_mem_stru *pst_event_mem,oal_uint32 ul
                         pst_event_hdr->en_pipeline,
                         pst_event_queue->st_queue.uc_max_elements);
 #else
-        /*因CPU动态调频造成跑流个别事件入队失败，暂时修改为warning*/
+        /*??CPU????????????????????????????????????????????warning*/
         OAM_WARNING_LOG4(0, OAM_SF_FRW, "frw_event_post_event:: enqueue fail. core %d, type %d, sub type %d, pipeline %d ",
                                       ul_core_id,
                                       pst_event_hdr->en_type,
@@ -618,7 +618,7 @@ oal_uint32  frw_event_post_event(frw_event_mem_stru *pst_event_mem,oal_uint32 ul
                         pst_event_hdr->en_pipeline,
                         pst_event_queue->st_queue.uc_max_elements);
 
-         /* 添加针对mac error错误的维测讯息，看是什么错误导致队列溢出*/
+         /* ????????mac error????????????????????????????????????????*/
         if((FRW_EVENT_TYPE_HIGH_PRIO == pst_event_hdr->en_type)
             && (HAL_EVENT_ERROR_IRQ_MAC_ERROR == pst_event_hdr->uc_sub_type)
             && (FRW_EVENT_PIPELINE_STAGE_0 == pst_event_hdr->en_pipeline))
@@ -633,15 +633,15 @@ oal_uint32  frw_event_post_event(frw_event_mem_stru *pst_event_mem,oal_uint32 ul
         }
 
 #endif
-        /* 释放事件内存引用 */
+        /* ???????????????? */
         FRW_EVENT_FREE(pst_event_mem);
 
         return ul_ret;
     }
 
-    /*此处不能返回，调度策略都需要在自旋锁内完成.*/
+    /*??????????????????????????????????????????.*/
 
-    /* 根据所属调度策略，将事件队列加入可调度队列 */
+    /* ?????????????????????????????????????????? */
     ul_ret = frw_event_sched_activate_queue(pst_sched_queue, pst_event_queue);
     if (OAL_UNLIKELY(OAL_SUCC != ul_ret))
     {
@@ -682,7 +682,7 @@ oal_void  frw_event_table_register(
         return;
     }
 
-    /* 根据事件类型及分段号计算事件表索引 */
+    /* ?????????????????????????????????? */
     uc_index = (oal_uint8)((en_type << 1) | (en_pipeline & 0x01));
 
     if (OAL_UNLIKELY(uc_index >= FRW_EVENT_TABLE_MAX_ITEMS))
@@ -746,7 +746,7 @@ oal_void  frw_event_process_all_event(oal_uint ui_data)
     }
 #endif
 
-    /* 获取核号 */
+    /* ???????? */
     ul_core_id = OAL_GET_CORE_ID();
 
 
@@ -765,7 +765,7 @@ oal_void  frw_event_process_all_event(oal_uint ui_data)
 
     pst_sched_queue = g_ast_event_manager[ul_core_id].st_sched_queue;
 
-    /* 调用事件调度模块，选择一个事件 */
+    /* ?????????????????????????????? */
     pst_event_mem = (frw_event_mem_stru *)frw_event_schedule(pst_sched_queue);
 
 #if defined(_PRE_DEBUG_MODE) && (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
@@ -781,7 +781,7 @@ oal_void  frw_event_process_all_event(oal_uint ui_data)
     while (OAL_PTR_NULL != pst_event_mem)
     {
 
-        /* 获取事件头结构 */
+        /* ?????????????? */
         pst_event_hrd  = (frw_event_hdr_stru *)frw_get_event_data(pst_event_mem);
 #if defined(_PRE_DEBUG_MODE) && (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
         ul_timestamp_start = oal_5115timer_get_10ns();
@@ -791,7 +791,7 @@ oal_void  frw_event_process_all_event(oal_uint ui_data)
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC != _PRE_MULTI_CORE_MODE)
        if(FRW_EVENT_TYPE_WLAN_DRX == pst_event_hrd->en_type)
        {
-           /* 获取事件头和事件结构体指针 */
+           /* ?????????????????????????? */
            pst_event               = frw_get_event_stru(pst_event_mem);
            pst_wlan_rx_event       = (hal_wlan_rx_event_stru *)(pst_event->auc_event_data);
            pst_device              = pst_wlan_rx_event->pst_hal_device;
@@ -843,7 +843,7 @@ oal_void  frw_event_process_all_event(oal_uint ui_data)
         /*trace the event serial*/
         frw_event_trace(pst_event_mem, ul_core_id);
 #endif
-        /* 根据事件找到对应的事件处理函数 */
+        /* ?????????????????????????????? */
         frw_event_task_lock();
         frw_event_lookup_process_entry(pst_event_mem, pst_event_hrd);
         frw_event_task_unlock();
@@ -864,7 +864,7 @@ oal_void  frw_event_process_all_event(oal_uint ui_data)
         }
 
 #endif
-        /* 释放事件内存 */
+        /* ???????????? */
         FRW_EVENT_FREE(pst_event_mem);
 #if (_PRE_FRW_FEATURE_PROCCESS_ENTITY_TYPE == _PRE_FRW_FEATURE_PROCCESS_ENTITY_THREAD)
         if(OAL_LIKELY(ul_core_id < WLAN_FRW_MAX_NUM_CORES))
@@ -879,7 +879,7 @@ oal_void  frw_event_process_all_event(oal_uint ui_data)
 
         if (--ul_mac_process_event)
         {
-            /* 调用事件调度模块，选择一个事件 */
+            /* ?????????????????????????????? */
             pst_event_mem = (frw_event_mem_stru *)frw_event_schedule(pst_sched_queue);
         }
         else
@@ -906,18 +906,18 @@ oal_uint32  frw_event_flush_event_queue(frw_event_type_enum_uint8 uc_event_type)
     frw_event_hdr_stru     *pst_event_hrd;
     oal_uint32              ul_event_succ = 0;;
 
-    /* 遍历每个核的每个vap对应的事件队列 */
+    /* ????????????????vap?????????????? */
     for(ul_core_id = 0; ul_core_id < WLAN_FRW_MAX_NUM_CORES; ul_core_id++)
     {
         for(uc_vap_id = 0; uc_vap_id < WLAN_VAP_SUPPORT_MAX_NUM_LIMIT; uc_vap_id++)
         {
             us_qid = uc_vap_id * FRW_EVENT_TYPE_BUTT + uc_event_type;
 
-            /* 根据核号 + 队列ID，找到相应的事件队列 */
+            /* ???????? + ????ID???????????????????? */
             pst_event_mgmt  = &g_ast_event_manager[ul_core_id];
             pst_event_queue = &pst_event_mgmt->st_event_queue[us_qid];
 
-            /*flush所有的event*/
+            /*flush??????event*/
             while( 0 != pst_event_queue->st_queue.uc_element_cnt)
             {
                 pst_event_mem = (frw_event_mem_stru *)frw_event_queue_dequeue(pst_event_queue);
@@ -926,19 +926,19 @@ oal_uint32  frw_event_flush_event_queue(frw_event_type_enum_uint8 uc_event_type)
                     continue;
                 }
 
-                /* 获取事件头结构 */
+                /* ?????????????? */
                 pst_event_hrd = (frw_event_hdr_stru *)frw_get_event_data(pst_event_mem);
 
-                /* 根据事件找到对应的事件处理函数 */
+                /* ?????????????????????????????? */
                 frw_event_lookup_process_entry(pst_event_mem, pst_event_hrd);
 
-                /* 释放事件内存 */
+                /* ???????????? */
                 FRW_EVENT_FREE(pst_event_mem);
 
                 ul_event_succ++;
             }
 #if 1
-            /* 如果事件队列变空，需要将其从调度队列上删除，并将事件队列状态置为不活跃(不可被调度) */
+            /* ??????????????????????????????????????????????????????????????????????(??????????) */
             if (0 == pst_event_queue->st_queue.uc_element_cnt)
             {
                 frw_event_sched_deactivate_queue(&g_ast_event_manager[ul_core_id].st_sched_queue[pst_event_queue->en_policy], pst_event_queue);
@@ -1022,7 +1022,7 @@ OAL_STATIC oal_void  frw_event_get_info_from_event_queue(frw_event_queue_stru *p
        #endif
 
     #if  0
-        /* 获取事件头信息并填写到要上报给SDT的结构体中 */
+        /* ??????????????????????????????SDT?????????? */
         st_event_queue_info.ast_event_hdr_info[uc_loop].en_pipeline  = pst_event->st_event_hdr.en_pipeline;
         st_event_queue_info.ast_event_hdr_info[uc_loop].uc_sub_type  = pst_event->st_event_hdr.uc_sub_type;
         st_event_queue_info.ast_event_hdr_info[uc_loop].us_length    = pst_event->st_event_hdr.us_length;
@@ -1047,7 +1047,7 @@ oal_uint32  frw_event_queue_info(oal_void)
     oal_dlist_head_stru            *pst_dlist;
     oal_uint                        ul_irq_flag;
 
-    /* 获取核号 */
+    /* ???????? */
     ul_core_id = OAL_GET_CORE_ID();
     OAL_IO_PRINT("frw_event_queue_info get core id is %d.\n", ul_core_id);
 
@@ -1071,24 +1071,24 @@ oal_uint32  frw_event_queue_info(oal_void)
             oal_spin_unlock_irq_restore(&pst_event_queue->st_lock, &ul_irq_flag);
 
         }
-         /* 根据核号，找到相应的事件管理结构体 */
+         /* ?????????????????????????????????? */
         pst_event_mgmt  = &g_ast_event_manager[ul_core_id];
 
-        /* 遍历获取调度队列 */
+        /* ???????????????? */
         for (us_qid = 0; us_qid < FRW_SCHED_POLICY_BUTT; us_qid++)
         {
-            /* 获取事件管理结构体中的调度队列 */
+            /* ?????????????????????????????? */
             pst_sched_queue = &pst_event_mgmt->st_sched_queue[us_qid];
             oal_spin_lock_irq_save(&pst_sched_queue->st_lock, &ul_irq_flag);
-            /* 获取调度队列中每个事件队列的每个事件的信息 */
+            /* ?????????????????????????????????????????? */
             if (!oal_dlist_is_empty(&pst_sched_queue->st_head))
             {
-                /* 获取调度队列中的每一个事件队列 */
+                /* ?????????????????????????????? */
                 OAL_DLIST_SEARCH_FOR_EACH(pst_dlist, &pst_sched_queue->st_head)
                 {
                     pst_event_queue = OAL_DLIST_GET_ENTRY(pst_dlist, frw_event_queue_stru, st_list);
 
-                    /* 获取队列中每一个事件的事件头信息 */
+                    /* ???????????????????????????????? */
                     oal_spin_lock(&pst_event_queue->st_lock);
                     frw_event_get_info_from_event_queue(pst_event_queue);
                     oal_spin_unlock(&pst_event_queue->st_lock);
@@ -1123,13 +1123,13 @@ oal_void frw_event_vap_pause_event(oal_uint8 uc_vap_id)
         return;
     }
 
-    /* 根据核号，找到相应的事件管理 */
+    /* ???????????????????????????? */
     pst_event_mgmt = &g_ast_event_manager[ul_core_id];
 
-    /* 根据队列ID，找到相应的VAP的第一个事件队列 */
+    /* ????????ID????????????VAP???????????????? */
     pst_event_queue = &pst_event_mgmt->st_event_queue[uc_vap_id * FRW_EVENT_TYPE_BUTT];
 
-    /* 如果事件队列已经被pause的话，直接返回，不然循环中调度队列总权重会重复减去事件队列的权重 */
+    /* ??????????????????pause???????????????????????????????????????????????????????????????? */
     if(FRW_VAP_STATE_PAUSE == pst_event_queue->en_vap_state)
     {
         return;
@@ -1137,7 +1137,7 @@ oal_void frw_event_vap_pause_event(oal_uint8 uc_vap_id)
 
     for (us_qid = 0; us_qid < FRW_EVENT_TYPE_BUTT; us_qid++)
     {
-        /* 根据队列ID，找到相应的事件队列 */
+        /* ????????ID???????????????????? */
         pst_event_queue = &pst_event_mgmt->st_event_queue[uc_vap_id * FRW_EVENT_TYPE_BUTT + us_qid];
         pst_sched_queue = &g_ast_event_manager[ul_core_id].st_sched_queue[pst_event_queue->en_policy];
 
@@ -1162,13 +1162,13 @@ oal_void frw_event_vap_resume_event(oal_uint8 uc_vap_id)
         return;
     }
 
-    /* 根据核号，找到相应的事件管理 */
+    /* ???????????????????????????? */
     pst_event_mgmt = &g_ast_event_manager[ul_core_id];
 
-    /* 根据队列ID，找到相应的VAP的第一个事件队列 */
+    /* ????????ID????????????VAP???????????????? */
     pst_event_queue = &pst_event_mgmt->st_event_queue[uc_vap_id * FRW_EVENT_TYPE_BUTT];
 
-    /* 如果事件队列已经被resume的话，直接返回，不然循环中调度队列总权重会重复减去事件队列的权重 */
+    /* ??????????????????resume???????????????????????????????????????????????????????????????? */
     if(FRW_VAP_STATE_RESUME == pst_event_queue->en_vap_state)
     {
         return;
@@ -1176,14 +1176,14 @@ oal_void frw_event_vap_resume_event(oal_uint8 uc_vap_id)
 
     for (us_qid = 0; us_qid < FRW_EVENT_TYPE_BUTT; us_qid++)
     {
-        /* 根据队列ID，找到相应的事件队列 */
+        /* ????????ID???????????????????? */
         pst_event_queue = &pst_event_mgmt->st_event_queue[uc_vap_id * FRW_EVENT_TYPE_BUTT + us_qid];
         pst_sched_queue = &g_ast_event_manager[ul_core_id].st_sched_queue[pst_event_queue->en_policy];
 
         frw_event_sched_resume_queue(pst_sched_queue, pst_event_queue);
     }
 
-    /* 唤醒线程 */
+    /* ???????? */
     frw_task_sched(ul_core_id);
 
 }
@@ -1201,7 +1201,7 @@ oal_uint32  frw_event_vap_flush_event(oal_uint8           uc_vap_id,
     frw_event_mem_stru     *pst_event_mem;
     frw_event_hdr_stru     *pst_event_hrd;
 
-    /* 获取核号 */
+    /* ???????? */
     ul_core_id = OAL_GET_CORE_ID();
     if(OAL_UNLIKELY(ul_core_id >= WLAN_FRW_MAX_NUM_CORES))
     {
@@ -1216,17 +1216,17 @@ oal_uint32  frw_event_vap_flush_event(oal_uint8           uc_vap_id,
 
     us_qid = uc_vap_id * FRW_EVENT_TYPE_BUTT + en_event_type;
 
-    /* 根据核号 + 队列ID，找到相应的事件队列 */
+    /* ???????? + ????ID???????????????????? */
     pst_event_mgmt  = &g_ast_event_manager[ul_core_id];
     pst_event_queue = &pst_event_mgmt->st_event_queue[us_qid];
 
-    /* 如果事件队列本身为空，没有事件，不在调度队列，返回错误 */
+    /* ?????????????????????????????????????????????????????? */
     if (0 == pst_event_queue->st_queue.uc_element_cnt)
     {
         return OAL_FAIL;
     }
 
-    /* flush所有的event */
+    /* flush??????event */
     while(0 != pst_event_queue->st_queue.uc_element_cnt)
     {
         pst_event_mem = (frw_event_mem_stru *)frw_event_queue_dequeue(pst_event_queue);
@@ -1236,21 +1236,21 @@ oal_uint32  frw_event_vap_flush_event(oal_uint8           uc_vap_id,
         }
 
 
-        /* 处理事件，否则直接释放事件内存而丢弃事件 */
+        /* ???????????????????????????????????????? */
         if(0 == en_drop)
         {
-            /* 获取事件头结构 */
+            /* ?????????????? */
             pst_event_hrd = (frw_event_hdr_stru *)frw_get_event_data(pst_event_mem);
 
-            /* 根据事件找到对应的事件处理函数 */
+            /* ?????????????????????????????? */
             frw_event_lookup_process_entry(pst_event_mem, pst_event_hrd);
         }
 
-        /* 释放事件内存 */
+        /* ???????????? */
         FRW_EVENT_FREE(pst_event_mem);
     }
 
-    /* 若事件队列已经变空，需要将其从调度队列上删除，并将事件队列状态置为不活跃(不可被调度) */
+    /* ????????????????????????????????????????????????????????????????????????(??????????) */
     if(0 == pst_event_queue->st_queue.uc_element_cnt)
     {
         frw_event_sched_deactivate_queue(&g_ast_event_manager[ul_core_id].st_sched_queue[pst_event_queue->en_policy], pst_event_queue);
@@ -1283,7 +1283,7 @@ oal_bool_enum_uint8  frw_is_event_queue_empty(frw_event_type_enum_uint8 uc_event
     frw_event_mgmt_stru    *pst_event_mgmt;
     frw_event_queue_stru   *pst_event_queue;
 
-    /* 获取核号 */
+    /* ???????? */
     ul_core_id = OAL_GET_CORE_ID();
     if(OAL_UNLIKELY(ul_core_id >= WLAN_FRW_MAX_NUM_CORES))
     {
@@ -1294,12 +1294,12 @@ oal_bool_enum_uint8  frw_is_event_queue_empty(frw_event_type_enum_uint8 uc_event
 
     pst_event_mgmt = &g_ast_event_manager[ul_core_id];
 
-    /* 遍历该核上每个VAP对应的事件队列， */
+    /* ??????????????VAP???????????????? */
     for (uc_vap_id = 0; uc_vap_id < WLAN_VAP_SUPPORT_MAX_NUM_LIMIT; uc_vap_id++)
     {
         us_qid = uc_vap_id * FRW_EVENT_TYPE_BUTT + uc_event_type;
 
-        /* 根据核号 + 队列ID，找到相应的事件队列 */
+        /* ???????? + ????ID???????????????????? */
         pst_event_queue = &pst_event_mgmt->st_event_queue[us_qid];
 
         if (0 != pst_event_queue->st_queue.uc_element_cnt)
@@ -1324,7 +1324,7 @@ oal_bool_enum_uint8  frw_is_vap_event_queue_empty(oal_uint32 ul_core_id, oal_uin
     us_qid  = (oal_uint16)(uc_vap_id * FRW_EVENT_TYPE_BUTT + event_type);
 #endif
 
-    /* 根据核号 + 队列ID，找到相应的事件队列 */
+    /* ???????? + ????ID???????????????????? */
     pst_event_mgmt = &g_ast_event_manager[ul_core_id];
 
     pst_event_queue = &pst_event_mgmt->st_event_queue[us_qid];
@@ -1340,9 +1340,9 @@ oal_bool_enum_uint8  frw_is_vap_event_queue_empty(oal_uint32 ul_core_id, oal_uin
 
 oal_uint8 frw_task_thread_condition_check(oal_uint32 ul_core_id)
 {
-    /* 返回OAL_TRUE
-        1.调度队列非空
-        2.调度队列里有非pause的队列
+    /* ????OAL_TRUE
+        1.????????????
+        2.??????????????pause??????
     */
     oal_uint8                     sched_policy;
     oal_uint                      ul_irq_flag = 0;
@@ -1355,7 +1355,7 @@ oal_uint8 frw_task_thread_condition_check(oal_uint32 ul_core_id)
     for(sched_policy = 0; sched_policy < FRW_SCHED_POLICY_BUTT; sched_policy++)
     {
         oal_spin_lock_irq_save(&pst_sched_queue[sched_policy].st_lock, &ul_irq_flag);
-        /* 遍历整个调度链表 */
+        /* ???????????????? */
         OAL_DLIST_SEARCH_FOR_EACH(pst_list, &pst_sched_queue[sched_policy].st_head)
         {
             pst_event_queue = OAL_DLIST_GET_ENTRY(pst_list, frw_event_queue_stru, st_list);
@@ -1364,18 +1364,18 @@ oal_uint8 frw_task_thread_condition_check(oal_uint32 ul_core_id)
                 continue;
             }
 
-            /* 如果事件队列的vap_state为暂停，则跳过，继续挑选下一个事件队列 */
+            /* ??????????????vap_state?????????????????????????????????????? */
             if (FRW_VAP_STATE_PAUSE == pst_event_queue->en_vap_state)
             {
                 continue;
             }
-            /*找到事件队列非空*/
+            /*????????????????*/
             oal_spin_unlock_irq_restore(&pst_sched_queue[sched_policy].st_lock, &ul_irq_flag);
             return OAL_TRUE;
         }
         oal_spin_unlock_irq_restore(&pst_sched_queue[sched_policy].st_lock, &ul_irq_flag);
     }
-    /*空返回OAL_FALSE*/
+    /*??????OAL_FALSE*/
     return OAL_FALSE;
 }
 

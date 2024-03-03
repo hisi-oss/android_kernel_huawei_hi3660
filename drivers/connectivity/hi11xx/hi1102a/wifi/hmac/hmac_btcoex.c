@@ -12,7 +12,7 @@
 #ifdef _PRE_WLAN_FEATURE_BTCOEX
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "hmac_vap.h"
 #include "hmac_ext_if.h"
@@ -26,11 +26,11 @@
 #define THIS_FILE_ID OAM_FILE_ID_HMAC_BTCOEX_C
 
 /*****************************************************************************
-  2 函数声明
+  2 ????????
 *****************************************************************************/
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 
@@ -73,7 +73,7 @@ OAL_STATIC oal_uint32 hmac_btcoex_delba_from_user(mac_vap_stru *pst_mac_vap, hma
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 属于黑名单AP，并且已经处于电话业务时，不进行删BA逻辑 */
+    /* ??????????AP??????????????????????????????????BA???? */
     if (OAL_FALSE == pst_hmac_user->st_hmac_user_btcoex.st_hmac_btcoex_addba_req.en_ba_handle_allow)
     {
         if(BTCOEX_BLACKLIST_TPYE_FIX_BASIZE == HMAC_BTCOEX_GET_BLACKLIST_TYPE(pst_hmac_user))
@@ -84,14 +84,14 @@ OAL_STATIC oal_uint32 hmac_btcoex_delba_from_user(mac_vap_stru *pst_mac_vap, hma
         {
             OAM_WARNING_LOG0(0, OAM_SF_COEX, "{hmac_btcoex_delba_from_user::need to reassoc to READDBA.}");
 
-            /* 发起reassoc req */
+            /* ????reassoc req */
             //hmac_roam_trigger_handle(pst_hmac_vap, -122, OAL_TRUE);
             hmac_roam_start(pst_hmac_vap, ROAM_SCAN_CHANNEL_ORG_0, OAL_FALSE, ROAM_TRIGGER_COEX);
 
-            /* 重关联之后，刷新为允许建立聚合 */
+            /* ?????????????????????????????? */
             pst_hmac_user->st_hmac_user_btcoex.st_hmac_btcoex_addba_req.en_ba_handle_allow = OAL_TRUE;
 
-            /* 保证wifi恢复聚合64 */
+            /* ????wifi????????64 */
             pst_hmac_user->st_hmac_user_btcoex.uc_ba_size = 0;
         }
 
@@ -99,7 +99,7 @@ OAL_STATIC oal_uint32 hmac_btcoex_delba_from_user(mac_vap_stru *pst_mac_vap, hma
     }
     else if(OAL_TRUE == hmac_btcoex_check_exception_in_list(pst_hmac_vap, pst_hmac_user->st_user_base_info.auc_user_mac_addr))
     {
-        /* 在黑名单之中，例如845N上行跑流，即使上行跑流没有进入黑名单，蓝牙结束仍然需要采用重关联，不然对端不回复arp rsp */
+        /* ??????????????????845N????????????????????????????????????????????????????????????????????????????????arp rsp */
         if(WLAN_AMPDU_RX_BA_LUT_WSIZE == pst_hmac_user->st_hmac_user_btcoex.uc_ba_size)
         {
             OAM_WARNING_LOG0(0, OAM_SF_COEX, "{hmac_btcoex_delba_from_user::blacklist user need to reassoc when bt is over.}");
@@ -108,7 +108,7 @@ OAL_STATIC oal_uint32 hmac_btcoex_delba_from_user(mac_vap_stru *pst_mac_vap, hma
         }
         else
         {
-            /* 电话场景下, 在黑名单中的AP不再建立聚合 */
+            /* ??????????, ????????????AP???????????? */
             pst_hmac_user->st_hmac_user_btcoex.st_hmac_btcoex_addba_req.en_ba_handle_allow = OAL_FALSE;
         }
     }
@@ -147,7 +147,7 @@ oal_uint32 hmac_btcoex_rx_delba_trigger(mac_vap_stru *pst_mac_vap, oal_uint8 uc_
 
     if(OAL_TRUE == pst_dmac_to_hmac_btcoex_rx_delba->en_need_delba)
     {
-        /* 刷新共存触发删建BA标记 */
+        /* ????????????????BA???? */
         pst_hmac_user->st_hmac_user_btcoex.en_delba_btcoex_trigger  = OAL_TRUE;
     }
 
@@ -245,15 +245,15 @@ oal_void hmac_btcoex_arp_fail_delba_process(oal_netbuf_stru *pst_netbuf, mac_vap
 
     if((pst_hmac_user_btcoex->uc_ba_size > 0) && (pst_hmac_user_btcoex->uc_ba_size < WLAN_AMPDU_RX_BA_LUT_WSIZE))
     {
-        /* 参数外面已经做检查，里面没必要再做检查了 */
+        /* ???????????????????????????????????????? */
         uc_data_type =  mac_get_data_type_from_8023((oal_uint8 *)pst_mac_ether_hdr, MAC_NETBUFF_PAYLOAD_ETH);
 
         pst_hmac_btcoex_arp_req_process = &(pst_hmac_user_btcoex->st_hmac_btcoex_arp_req_process);
 
-        /* 发送方向创建定时器 */
+        /* ?????????????????? */
         if((MAC_DATA_ARP_REQ == uc_data_type) && (OAL_FALSE == pst_hmac_btcoex_arp_req_process->st_delba_opt_timer.en_is_registerd))
         {
-            /* 每次重启定时器之前清零,保证统计的时间 */
+            /* ??????????????????????,?????????????? */
             oal_atomic_set(&(pst_hmac_btcoex_arp_req_process->ul_rx_unicast_pkt_to_lan), 0);
 
             FRW_TIMER_CREATE_TIMER(&(pst_hmac_btcoex_arp_req_process->st_delba_opt_timer),
@@ -367,7 +367,7 @@ oal_void hmac_btcoex_check_rx_same_baw_start_from_addba_req(hmac_vap_stru *pst_h
 
     pst_hmac_btcoex_addba_req = &(pst_hmac_user_btcoex->st_hmac_btcoex_addba_req);
 
-    /* 两次收到addba req的start num一样且不是重传帧，认为对端移窗卡死  */
+    /* ????????addba req??start num??????????????????????????????????  */
     if (OAL_TRUE == pst_frame_hdr->st_frame_control.bit_retry
         && pst_frame_hdr->bit_seq_num == pst_hmac_btcoex_addba_req->us_last_seq_num)
     {
@@ -411,13 +411,13 @@ oal_void hmac_btcoex_check_rx_same_baw_start_from_addba_req(hmac_vap_stru *pst_h
 
         if(BTCOEX_BLACKLIST_TPYE_FIX_BASIZE == HMAC_BTCOEX_GET_BLACKLIST_TYPE(pst_hmac_user))
         {
-            /* 发送去认证帧到AP */
+            /* ??????????????AP */
             hmac_mgmt_send_disassoc_frame(&pst_hmac_vap->st_vap_base_info,
                                         pst_frame_hdr->auc_address2,
                                         MAC_UNSPEC_REASON,
                                         pst_hmac_user->st_user_base_info.st_cap_info.bit_pmf_active);
 
-            /* 删除对应用户 */
+            /* ???????????? */
             hmac_user_del(&pst_hmac_vap->st_vap_base_info, pst_hmac_user);
             hmac_sta_handle_disassoc_rsp(pst_hmac_vap, MAC_AUTH_NOT_VALID);
         }
@@ -444,7 +444,7 @@ oal_uint32  hmac_config_print_btcoex_status(mac_vap_stru *pst_mac_vap, oal_uint1
     }
 
     /***************************************************************************
-        抛事件到DMAC层, 同步DMAC数据
+        ????????DMAC??, ????DMAC????
     ***************************************************************************/
     ul_ret = hmac_config_send_event(pst_mac_vap, WLAN_CFGID_BTCOEX_STATUS_PRINT, us_len, puc_param);
     if (OAL_UNLIKELY(OAL_SUCC != ul_ret))

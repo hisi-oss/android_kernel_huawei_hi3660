@@ -94,7 +94,7 @@ VOS_UINT32 diag_MspMsgProc(DIAG_FRAME_INFO_STRU *pData);
 
 /*****************************************************************************
  Function Name   : diag_MspMsgInit
- Description     : MSP诊断命令初始化接口
+ Description     : MSP??????????????????
 
  History         :
     1.c64416         2014-11-18  Draft Enact
@@ -129,7 +129,7 @@ VOS_UINT32 diag_GetModemNum(VOS_UINT8* pstReq)
 
     stModemNum.ulRc  = ERR_MSP_SUCCESS;
 
-    /*组包给FW回复*/
+    /*??????FW????*/
     ret = DIAG_MsgReport(&stDiagInfo, &stModemNum, sizeof(stModemNum));
 
     return (VOS_UINT32)ret;
@@ -158,7 +158,7 @@ VOS_UINT32 diag_GetPidTable(VOS_UINT8* pstReq)
     }
     else
     {
-        /* 获取A核PID table */
+        /* ????A??PID table */
         for(i = 0; i < (VOS_CPU_ID_1_PID_BUTT - VOS_PID_CPU_ID_1_DOPRAEND); i++)
         {
             if(VOS_PID_AVAILABLE == VOS_CheckPidValidity(VOS_PID_CPU_ID_1_DOPRAEND + i))
@@ -167,7 +167,7 @@ VOS_UINT32 diag_GetPidTable(VOS_UINT8* pstReq)
             }
         }
 
-        /* 获取C核PID table */
+        /* ????C??PID table */
         for(i = 0; i < (VOS_CPU_ID_0_PID_BUTT - VOS_PID_CPU_ID_0_DOPRAEND); i++)
         {
             if(VOS_PID_AVAILABLE == VOS_CheckPidValidity(VOS_PID_CPU_ID_0_DOPRAEND + i))
@@ -222,7 +222,7 @@ VOS_UINT32 diag_GuGtrProcEntry(VOS_UINT8* pstReq)
     return ulRet;
 
 DIAG_ERROR:
-    /* 不需要回复失败 */
+    /* ?????????????? */
     return ERR_MSP_FAILURE;
 }
 
@@ -259,8 +259,8 @@ DIAG_ERROR:
 
 /*****************************************************************************
  Function Name   : diag_MspMsgProc
- Description     : MSP的诊断命令处理
- Input           : pData    诊断命令请求的内容
+ Description     : MSP??????????????
+ Input           : pData    ??????????????????
  Output          : None
  Return          : VOS_UINT32
 

@@ -47,7 +47,7 @@ typedef struct _oal_pcie_linux_res__
     oal_completion          st_pcie_ready;
     oal_completion          st_pcie_shutdown_response;
 
-    oal_wakelock_stru           st_sr_bugfix;/*暂时规避PCIE S/R失败的问题*/
+    oal_wakelock_stru           st_sr_bugfix;/*????????PCIE S/R??????????*/
 }oal_pcie_linux_res;
 oal_int32 oal_wifi_platform_load_pcie(oal_void);
 oal_void oal_wifi_platform_unload_pcie(oal_void);

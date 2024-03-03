@@ -47,24 +47,24 @@
 */
 #define    THIS_FILE_ID        PS_FILE_ID_TAF_MMI_STRPARSE_C
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include  "vos.h"
 #include  "Taf_MmiStrParse.h"
 #include  "TafAppSsa.h"
 #include  "MnErrorCode.h"
-/* A核和C核编解码都要用到 */
+/* A????C???????????????? */
 #include  "MnMsgTs.h"
 #include "TafStdlib.h"
 
 
 
 /*****************************************************************************
-  2 常量定义
+  2 ????????
 *****************************************************************************/
 
 /*****************************************************************************
-  3 宏定义
+  3 ??????
 *****************************************************************************/
 
 
@@ -73,7 +73,7 @@
 #define MN_MMI_BS_MAX_ENTRY (sizeof(f_stMmiBSInfo)/sizeof(MN_MMI_BS_TABLE_STRU))
 
 /* Added by f62575 for SS FDN&Call Control, 2013-05-06, begin */
-/* 通用补充业务操作码映射表: 第一列补充业务操作码对应的MMI字符串，第二列补充业务操作码 */
+/* ????????????????????????: ??????????????????????????MMI???????????????????????????? */
 MN_MMI_SS_OP_Tbl_STRU                   g_astTafMmiOporationTypeTbl[] = {
                                                     {"**", TAF_MMI_REGISTER_SS,    {0, 0, 0, 0, 0, 0, 0}},
                                                     {"*",  TAF_MMI_ACTIVATE_SS,    {0, 0, 0, 0, 0, 0, 0}},
@@ -84,13 +84,13 @@ MN_MMI_SS_OP_Tbl_STRU                   g_astTafMmiOporationTypeTbl[] = {
 /* Added by f62575 for SS FDN&Call Control, 2013-05-06, end */
 
 /*****************************************************************************
-  4 类型定义
+  4 ????????
 *****************************************************************************/
 
 
 
 /*****************************************************************************
-  5 变量定义
+  5 ????????
 *****************************************************************************/
 MN_MMI_SC_TABLE_STRU     f_stMmiScInfo[] =
 
@@ -172,7 +172,7 @@ MN_CALL_CLIR_CFG_ENUM_U8  f_enClirOperate = MN_CALL_CLIR_AS_SUBS;
 
 
 /*****************************************************************************
-  6 函数实现
+  6 ????????
 *****************************************************************************/
 /* Added by f62575 for SS FDN&Call Control, 2013-5-20, begin */
 
@@ -303,7 +303,7 @@ VOS_BOOL MMI_DecodeScAndSi(
 
     if (TAF_MMI_REGISTER_PASSWD != pMmiOpParam->MmiOperationType)
     {
-        /*跳过开始的几个字符*/
+        /*??????????????????*/
         for (i =0; (!MN_MMI_isdigit(pInMmiStr[i])) && (i < 2); i++)
         {
             usOffset++;
@@ -445,7 +445,7 @@ LOCAL  VOS_BOOL MMI_JudgePinOperation(
                 break;
 
             default:
-                /*该分支永远不会走到*/
+                /*??????????????????*/
                 break;
             }
 
@@ -610,7 +610,7 @@ LOCAL  VOS_BOOL MMI_JudgeImeiOperation(
 {
     VOS_UINT32       ulStrLen = VOS_StrNLen((VOS_CHAR *)pcMmiStr, TAF_SS_MAX_UNPARSE_PARA_LEN);
 
-    /*判断依据*/
+    /*????????*/
     /*
     3) #-string:
     Input of the form.
@@ -634,7 +634,7 @@ VOS_UINT32 MMI_TransMmiSsCodeToNetSsCode(
 {
     VOS_UINT8       i = 0;
 
-    /*转换SS Code*/
+    /*????SS Code*/
     while(i < MN_MMI_SC_MAX_ENTRY)
     {
         if (0 == VOS_MemCmp(f_stMmiScInfo[i].pcMmiSc,
@@ -668,9 +668,9 @@ LOCAL VOS_UINT32 MMI_TransMmiBsCodeToNetBsCode(
     VOS_CHAR                            acBs[MN_MMI_MAX_SIA_LEN + 1];
     VOS_UINT16                          i;
 
-    /*是不是需要设定那些需要调用此函数的限定?*/
+    /*???????????????????????????????????????*/
 
-    /*这一段是转换对应的BS code*/
+    /*??????????????????BS code*/
     if ((TAF_ALL_FORWARDING_SS_CODE == (ucNetSsCode & 0xF0))
       ||(TAF_ALL_BARRING_SS_CODE == (ucNetSsCode & 0xF0)))
     {
@@ -708,7 +708,7 @@ LOCAL VOS_UINT32 MMI_TransMmiBsCodeToNetBsCode(
 
     return VOS_OK;
 
-    /* BS Code 的转换完成 */
+    /* BS Code ?????????? */
 }
 
 
@@ -732,10 +732,10 @@ VOS_UINT32 MMI_FillInRegisterSSPara(
     {
         pstRegisterSsReq->OP_FwdToNum = 1;
         pstRegisterSsReq->OP_NumType = 1;
-        /*如果是带'+'号，认为是国际号码，号码类型的值为0x91*/
+        /*????????'+'??????????????????????????????????0x91*/
         if ('+' == pstScSiPara->acSia[0])
         {
-            /*去除头部的'+'号*/
+            /*??????????'+'??*/
             pstRegisterSsReq->NumType = 0x91;
 
             if (0 != VOS_StrNLen((VOS_CHAR *)pstScSiPara->acSia, MN_MMI_MAX_SIA_LEN))
@@ -786,7 +786,7 @@ VOS_UINT32 MMI_FillInRegisterSSPara(
         else
         {
             /* Modified by f62575 for SS FDN&Call Control, 2013-05-06, begin */
-            /* Delete TAF_ALL_BARRING_SS_CODE密码相关操作 */
+            /* Delete TAF_ALL_BARRING_SS_CODE???????????? */
             if (0 == VOS_StrNLen((VOS_CHAR *)pstScSiPara->acSib, MN_MMI_MAX_SIB_LEN))
             {
                 return MN_ERR_NO_ERROR;
@@ -852,7 +852,7 @@ VOS_UINT32 MMI_FillInEraseSSPara(
         else
         {
             /* Modified by f62575 for SS FDN&Call Control, 2013-05-06, begin */
-            /* Delete TAF_ALL_BARRING_SS_CODE密码相关操作 */
+            /* Delete TAF_ALL_BARRING_SS_CODE???????????? */
             if (0 == VOS_StrNLen((VOS_CHAR *)pstScSiPara->acSib, MN_MMI_MAX_SIB_LEN))
             {
                 return MN_ERR_NO_ERROR;
@@ -890,8 +890,8 @@ VOS_UINT32 MMI_FillInActivateSSPara(
     VOS_UINT32                          ulPasswordLen;
 
     /*
-        呼叫转移业务注册前缀是*且存在参数A情况需要按注册处理
-        参考协议3GPP 22030 6.5.2 struct of MMI
+        ??????????????????????*??????????A??????????????????
+        ????????3GPP 22030 6.5.2 struct of MMI
     */
     if (TAF_ALL_FORWARDING_SS_CODE == (ucNetSsCode & TAF_SS_CODE_MASK))
     {
@@ -931,7 +931,7 @@ VOS_UINT32 MMI_FillInActivateSSPara(
         else
         {
             /* Modified by f62575 for SS FDN&Call Control, 2013-05-06, begin */
-            /* 保存密码到激活消息参数结构 */
+            /* ?????????????????????????? */
             ulPasswordLen = VOS_StrNLen((VOS_CHAR *)pstScSiPara->acSia, MN_MMI_MAX_SIA_LEN);
             if (TAF_SS_MAX_PASSWORD_LEN != ulPasswordLen)
             {
@@ -1041,7 +1041,7 @@ VOS_UINT32 MMI_FillInDeactivateSSPara(
         else
         {
             /* Modified by f62575 for SS FDN&Call Control, 2013-05-06, begin */
-            /* 保存密码到去激活消息参数结构 */
+            /* ???????????????????????????? */
             ulPasswordLen = VOS_StrNLen((VOS_CHAR *)pstScSiPara->acSia, MN_MMI_MAX_SIA_LEN);
             if (TAF_SS_MAX_PASSWORD_LEN != ulPasswordLen)
             {
@@ -1114,7 +1114,7 @@ VOS_UINT32 MMI_FillInInterrogateSSPara(
         else
         {
             /* Delete by f62575 for SS FDN&Call Control, 2013-05-06, begin */
-            /* Delete TAF_MMI_GET_PASSWD密码相关操作 */
+            /* Delete TAF_MMI_GET_PASSWD???????????? */
             /* Delete by f62575 for SS FDN&Call Control, 2013-05-06, end */
             if (0 == VOS_StrNLen((VOS_CHAR *)pstScSiPara->acSib, MN_MMI_MAX_SIB_LEN))
             {
@@ -1191,7 +1191,7 @@ LOCAL VOS_UINT32 MMI_FillInCallOrigPara(
     VOS_UINT32                          ulRslt;
 
 
-    /*输入的字串不能超过语音呼叫允许的最大长度*/
+    /*????????????????????????????????????????*/
     if (VOS_StrNLen((VOS_CHAR *)pcMmiStr, TAF_SS_MAX_UNPARSE_PARA_LEN) >  (MN_CALL_MAX_BCD_NUM_LEN*2))
     {
         return MN_ERR_INVALIDPARM;
@@ -1199,7 +1199,7 @@ LOCAL VOS_UINT32 MMI_FillInCallOrigPara(
 
     if ('+' == pcMmiStr[0])
     {
-        /*将Ascii码转换成对应的BCD码*/
+        /*??Ascii??????????????BCD??*/
         ulRslt = TAF_STD_ConvertAsciiNumberToBcd(pcMmiStr + 1,
                                      pstMmiOpParam->MnCallOrig.stDialNumber.aucBcdNum,
                                      &pstMmiOpParam->MnCallOrig.stDialNumber.ucNumLen);
@@ -1208,7 +1208,7 @@ LOCAL VOS_UINT32 MMI_FillInCallOrigPara(
     }
     else
     {
-        /*将Ascii码转换成对应的BCD码*/
+        /*??Ascii??????????????BCD??*/
         ulRslt = TAF_STD_ConvertAsciiNumberToBcd(pcMmiStr,
                                  pstMmiOpParam->MnCallOrig.stDialNumber.aucBcdNum,
                                  &pstMmiOpParam->MnCallOrig.stDialNumber.ucNumLen);
@@ -1224,7 +1224,7 @@ LOCAL VOS_UINT32 MMI_FillInCallOrigPara(
         return ulRslt;
     }
 
-    /*填写其他需要的参数*/
+    /*??????????????????*/
     pstMmiOpParam->MmiOperationType = TAF_MMI_CALL_ORIG;
     pstMmiOpParam->MnCallOrig.enCallType = MN_CALL_TYPE_VOICE;
 
@@ -1249,9 +1249,9 @@ LOCAL VOS_UINT32 MMI_FillInCallOrigPara(
     VOS_UINT8                           ucNetSsCode
 )
 {
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, begin */
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, begin */
 
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, end */
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, end */
 
 
     switch(pMmiOpParam->MmiOperationType)
@@ -1283,13 +1283,13 @@ LOCAL VOS_UINT32 MMI_FillInCallOrigPara(
                                                    pMmiOpParam);
         break;
 
-     /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, begin */
+     /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, begin */
      case TAF_MMI_DEACTIVATE_CCBS:
         *pulErrCode = MMI_FillInDeactivateCCBSPara(pstScSiPara,
                                                    pMmiOpParam,
                                                    ucNetSsCode);
         break;
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, end */
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, end */
 
     default:
         break;
@@ -1308,9 +1308,9 @@ LOCAL VOS_UINT32 MMI_FillInCallOrigPara(
     VOS_UINT8                           *pucNetSsCode
 )
 {
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, begin */
-    /* 获取特性控制NV地址 */
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, end */
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, begin */
+    /* ????????????NV???? */
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, end */
 
     if (VOS_FALSE == MMI_DecodeScAndSi(pInMmiStr, pMmiOpParam, pstScSiPara, ppOutRestMmiStr))
     {
@@ -1328,7 +1328,7 @@ LOCAL VOS_UINT32 MMI_FillInCallOrigPara(
         pMmiOpParam->MmiOperationType = TAF_MMI_PROCESS_USSD_REQ;
     }
 
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, begin */
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, begin */
     if ((TAF_MMI_DEACTIVATE_SS == pMmiOpParam->MmiOperationType) && (TAF_CCBS_A_SS_CODE == *pucNetSsCode))
     {
         pMmiOpParam->MmiOperationType = TAF_MMI_DEACTIVATE_CCBS;
@@ -1341,7 +1341,7 @@ LOCAL VOS_UINT32 MMI_FillInCallOrigPara(
     {
         ;
     }
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, end */
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, end */
 
     return VOS_TRUE;
 
@@ -1513,7 +1513,7 @@ LOCAL VOS_BOOL MMI_JudgeChldOperation(
         break;
 
     default:
-        /*认为是CCBS,因为目前不支持CCBS,暂时没写处理代码*/
+        /*??????CCBS,??????????????CCBS,????????????????*/
         *pulErrCode = MN_ERR_INVALIDPARM;
         break;
 
@@ -1554,7 +1554,7 @@ TAF_UINT32 MN_MmiStringParse(
 
     TAF_MEM_SET_S(pMmiOpParam, sizeof(MN_MMI_OPERATION_PARAM_STRU), 0x00, sizeof(MN_MMI_OPERATION_PARAM_STRU));
 
-    /*判断当前是不是显示IMEI操作*/
+    /*??????????????????IMEI????*/
     if (VOS_TRUE == MMI_JudgeImeiOperation(pInMmiStr,
                                            ppOutRestMmiStr,
                                            pMmiOpParam))
@@ -1562,18 +1562,18 @@ TAF_UINT32 MN_MmiStringParse(
         return MN_ERR_NO_ERROR;
     }
 
-    /*判断当前是不是临时模式下抑制或者激活CLIR操作*/
+    /*????????????????????????????????????CLIR????*/
     if (VOS_TRUE == MMI_JudgeTmpModeClirOp(pInMmiStr,
                                            ppOutRestMmiStr,
                                            pMmiOpParam))
     {
         /* Deleted by f62575 for SS FDN&Call Control, 2013-05-06, begin */
-        /* 作为独立的解码函数，不应与AT模块的业务功能耦合，删除AT模块业务全局变量的赋值操作 */
+        /* ??????????????????????????AT????????????????????????AT?????????????????????????? */
         /* Deleted by f62575 for SS FDN&Call Control, 2013-05-06, end */
         return MN_ERR_NO_ERROR;
     }
 
-    /*判断当前的操作类型是不是PIN操作类型 */
+    /*????????????????????????PIN???????? */
     if (VOS_TRUE == MMI_JudgePinOperation(pInMmiStr,
                                           pMmiOpParam,
                                           ppOutRestMmiStr,
@@ -1582,7 +1582,7 @@ TAF_UINT32 MN_MmiStringParse(
         return ulRtrnRslt;
     }
 
-    /*判断当前的操作类型是不是修改密码操作 */
+    /*???????????????????????????????????? */
     if (VOS_TRUE == MMI_JudgePwdOperation(pInMmiStr,
                                           pMmiOpParam,
                                           ppOutRestMmiStr,
@@ -1591,7 +1591,7 @@ TAF_UINT32 MN_MmiStringParse(
         return ulRtrnRslt;
     }
 
-    /*判断当前的操作类型是不是其他已知的呼叫无关补充业务操作*/
+    /*??????????????????????????????????????????????????????*/
     if (VOS_TRUE == MMI_JudgeSsOperation(pInMmiStr,
                                          ppOutRestMmiStr,
                                          pMmiOpParam,
@@ -1601,28 +1601,28 @@ TAF_UINT32 MN_MmiStringParse(
     }
 
     /*
-    对于短字串的处理，根据协议22.030中的规定:
+    ??????????????????????????22.030????????:
     "Entry of 1 or 2 characters defined in the 3GPP TS 23.038 [8] Default Alphabet followed by SEND"
-    以及22.030中的对应的流程图处理
+    ????22.030????????????????????
     */
     if ((2 == ulStrLen) || (1 == ulStrLen))
     {
         if (VOS_TRUE == inCall)
         {
-            /*判定是不是CHLD命令*/
+            /*??????????CHLD????*/
             if (VOS_TRUE == MMI_JudgeChldOperation(pInMmiStr, pMmiOpParam, &ulRtrnRslt))
             {
                 *ppOutRestMmiStr = pInMmiStr + VOS_StrNLen((VOS_CHAR *)pInMmiStr, TAF_SS_MAX_UNPARSE_PARA_LEN);
                 return ulRtrnRslt;
             }
 
-            /* 如果不是CHLD命令，那么认为是USSD操作，填写相应的参数 */
+            /* ????????CHLD????????????????USSD???????????????????? */
             pMmiOpParam->MmiOperationType = TAF_MMI_PROCESS_USSD_REQ;
             return MMI_FillInProcessUssdReqPara(pInMmiStr, ppOutRestMmiStr, pMmiOpParam);
         }
         else
         {
-            /*在这种情况下，如果是'1'开头，那么认为应该发起一个呼叫*/
+            /*????????????????????'1'??????????????????????????????*/
             if ('1' == pInMmiStr[0])
             {
                 ulRslt = MMI_FillInCallOrigPara(pInMmiStr,
@@ -1636,7 +1636,7 @@ TAF_UINT32 MN_MmiStringParse(
             }
             else
             {
-                /*如果不是'1'开头，那么也是作为USSD字串来处理 */
+                /*????????'1'??????????????????USSD?????????? */
                 pMmiOpParam->MmiOperationType = TAF_MMI_PROCESS_USSD_REQ;
                 return MMI_FillInProcessUssdReqPara(pInMmiStr, ppOutRestMmiStr, pMmiOpParam);
             }
@@ -1647,8 +1647,8 @@ TAF_UINT32 MN_MmiStringParse(
 
     return MMI_FillInCallOrigPara(pInMmiStr, pMmiOpParam, ppOutRestMmiStr);
 
-    /* 先删除，对于字符'P','W'的处理，是否放在这里，尚待讨论，
-       暂时不支持， */
+    /* ????????????????'P','W'????????????????????????????????
+       ???????????? */
 
 }
 

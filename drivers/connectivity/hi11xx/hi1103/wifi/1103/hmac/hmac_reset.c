@@ -9,7 +9,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "mac_device.h"
 #include "mac_resource.h"
@@ -20,7 +20,7 @@ extern "C" {
 #define THIS_FILE_ID OAM_FILE_ID_HMAC_RESET_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
 extern oal_uint32  hmac_config_send_event_etc(
@@ -31,7 +31,7 @@ extern oal_uint32  hmac_config_send_event_etc(
 
 #endif
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
 
@@ -108,7 +108,7 @@ oal_uint32  hmac_proc_query_response_event_etc(mac_vap_stru *pst_mac_vap, oal_ui
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 37))
         pst_hmac_vap->station_info.tx_retries =  pst_query_station_reponse_event->ul_tx_retries;
-        pst_hmac_vap->station_info.rx_dropped_misc =  pst_query_station_reponse_event->ul_rx_dropped_misc; //和其他几个参数一样，前面有叠加了，丢一个帧+ 1，这不需要累加，累加操作在dmac_rx_process_frame
+        pst_hmac_vap->station_info.rx_dropped_misc =  pst_query_station_reponse_event->ul_rx_dropped_misc; //??????????????????????????????????????????+ 1??????????????????????????dmac_rx_process_frame
         pst_hmac_vap->station_info.tx_failed        =  pst_query_station_reponse_event->ul_tx_failed;
 #endif
         pst_hmac_vap->station_info.txrate.mcs    = pst_query_station_reponse_event->st_txrate.mcs;
@@ -118,7 +118,7 @@ oal_uint32  hmac_proc_query_response_event_etc(mac_vap_stru *pst_mac_vap, oal_ui
 #endif
 
     /*
-         * 速率flag因内核版本而异，而DMAC依3.8.0为准给出全部结果，在此提取并转换flags
+         * ????flag??????????????????DMAC??3.8.0????????????????????????????????flags
          * linux < 3.5.0
          *     RATE_INFO_FLAGS_MCS             = 1<<0,
          *     RATE_INFO_FLAGS_40_MHZ_WIDTH    = 1<<1,
@@ -191,7 +191,7 @@ oal_uint32  hmac_proc_query_response_event_etc(mac_vap_stru *pst_mac_vap, oal_ui
         pst_hmac_vap->st_station_info_extend.ul_bcn_tout_cnt = pst_query_station_reponse_event->st_station_info_extend.ul_bcn_tout_cnt;
     }
 
-   /* 唤醒wal_sdt_recv_reg_cmd等待的进程 */
+   /* ????wal_sdt_recv_reg_cmd?????????? */
    pst_hmac_vap->station_info_query_completed_flag = OAL_TRUE;
    OAL_WAIT_QUEUE_WAKE_UP_INTERRUPT(&(pst_hmac_vap->query_wait_q));
 
@@ -219,7 +219,7 @@ oal_uint32 hmac_config_reset_operate_etc(mac_vap_stru *pst_mac_vap, oal_uint16 u
         return OAL_ERR_CODE_PTR_NULL;
     }
 
-    /* 获取复位信息 */
+    /* ???????????? */
     pc_token = oal_strtok((oal_int8 *)puc_param, pc_sep, &pc_ctx);
     if (NULL == pc_token)
     {
@@ -231,7 +231,7 @@ oal_uint32 hmac_config_reset_operate_etc(mac_vap_stru *pst_mac_vap, oal_uint16 u
 
     if (MAC_RESET_SWITCH_SET_TYPE == st_reset_sys.en_reset_sys_type)
     {
-        /* 获取Channel List */
+        /* ????Channel List */
         pc_token = oal_strtok(OAL_PTR_NULL, pc_sep, &pc_ctx);
         if (NULL == pc_token)
         {

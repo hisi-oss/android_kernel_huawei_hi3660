@@ -9,7 +9,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "oal_mem.h"
 #include "oal_net.h"
@@ -24,11 +24,11 @@ extern "C" {
 #define THIS_FILE_ID OAM_FILE_ID_MAC_DATA_C
 
 /*****************************************************************************
-  2 全局变量定义
+  2 ????????????
 *****************************************************************************/
 
 /*****************************************************************************
-  3 函数实现
+  3 ????????
 *****************************************************************************/
 
 oal_uint8 mac_get_data_type_from_80211_etc(oal_netbuf_stru *pst_netbuff, oal_uint16 us_mac_hdr_len)
@@ -131,7 +131,7 @@ pkt_trace_type_enum_uint8 mac_pkt_should_trace(oal_uint8 *puc_frame_hdr, mac_net
     oal_ip_header_stru             *pst_ip;
     oal_uint8                      *puc_icmp_body;
 
-    //识别出DHCP/ECHO/EAPOL/ARP
+    //??????DHCP/ECHO/EAPOL/ARP
 
     uc_data_type = mac_get_data_type_from_8023_etc(puc_frame_hdr, uc_hdr_type);
 
@@ -171,10 +171,10 @@ pkt_trace_type_enum_uint8 mac_pkt_should_trace(oal_uint8 *puc_frame_hdr, mac_net
         /*lint -e778*/
         if (OAL_HOST2NET_SHORT(ETHER_TYPE_IP) == us_ether_type)
         {
-            pst_ip = (oal_ip_header_stru *)puc_frame_body;      /* 偏移一个以太网头，取ip头 */
+            pst_ip = (oal_ip_header_stru *)puc_frame_body;      /* ????????????????????ip?? */
 
             if (MAC_ICMP_PROTOCAL == pst_ip->uc_protocol)
-            {//判定为ICMP报文之后，进而筛选出ICMP REQ和ICMP REPLY
+            {//??????ICMP????????????????????ICMP REQ??ICMP REPLY
                 puc_icmp_body = puc_frame_body + (oal_uint16)OAL_SIZEOF(oal_ip_header_stru);
                 if(0 == *puc_icmp_body || 8 == *puc_icmp_body)
                 {
@@ -294,8 +294,8 @@ mac_eapol_type_enum_uint8 mac_get_eapol_key_type_etc(oal_uint8 *pst_payload)
     oal_bool_enum_uint8      en_key_len_set = OAL_FALSE;
     mac_eapol_type_enum_uint8 en_eapol_type = MAC_EAPOL_PTK_BUTT;
 
-    /* 调用此接口,需保证已默认识别Ethertype为0x888E, EAPOL */
-    /* 入参payload为LLC或者Ether头后 */
+    /* ??????????,????????????????Ethertype??0x888E, EAPOL */
+    /* ????payload??LLC????Ether???? */
     pst_eapol_header = (mac_eapol_header_stru *)(pst_payload);
 
     if (mac_is_eapol_key_ptk_etc(pst_eapol_header) == OAL_TRUE)
@@ -317,17 +317,17 @@ mac_eapol_type_enum_uint8 mac_get_eapol_key_type_etc(oal_uint8 *pst_payload)
             en_key_len_set = OAL_TRUE;
         }
 
-        /* ack设置,表明STA发起期望响应 */
+        /* ack????,????STA???????????? */
         if (OAL_TRUE == en_key_ack_set)
         {
             if ((OAL_FALSE == en_key_mic_set) && (OAL_FALSE == en_key_len_set))
             {
-                /* 1/4识别:ACK=1,MIC=0,LEN=0 */
+                /* 1/4????:ACK=1,MIC=0,LEN=0 */
                 en_eapol_type = MAC_EAPOL_PTK_1_4;
             }
             else if ((OAL_TRUE == en_key_mic_set) && (OAL_TRUE == en_key_len_set))
             {
-                /* 3/4识别:ACK=1,MIC=1,LEN=1 */
+                /* 3/4????:ACK=1,MIC=1,LEN=1 */
                 en_eapol_type = MAC_EAPOL_PTK_3_4;
             }
         }
@@ -335,12 +335,12 @@ mac_eapol_type_enum_uint8 mac_get_eapol_key_type_etc(oal_uint8 *pst_payload)
         {
             if ((OAL_TRUE == en_key_mic_set) && (OAL_TRUE == en_key_len_set))
             {
-                /* 2/4识别:ACK=0,MIC=0,LEN=1 */
+                /* 2/4????:ACK=0,MIC=0,LEN=1 */
                 en_eapol_type = MAC_EAPOL_PTK_2_4;
             }
             else if ((OAL_TRUE == en_key_mic_set) && (OAL_FALSE == en_key_len_set))
             {
-                /* 4/4识别:ACK=0,MIC=1,LEN=0 */
+                /* 4/4????:ACK=0,MIC=1,LEN=0 */
                 en_eapol_type = MAC_EAPOL_PTK_4_4;
             }
         }
@@ -366,7 +366,7 @@ oal_bool_enum mac_snap_is_protocol_type(oal_uint8 uc_snap_type)
         }
     }
 
-    /* 无法识别的类型默认protocl type形式，与原逻辑保持一致 */
+    /* ??????????????????protocl type?????????????????????? */
     return OAL_TRUE;
 }
 

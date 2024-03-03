@@ -5,7 +5,7 @@
 
 
 /**************************************************************************
-  OTHERS∂®“Â
+  OTHERS????
 **************************************************************************/
 #define dump_debug(fmt, ...)    (bsp_trace(BSP_LOG_LEVEL_ERROR,   BSP_MODU_DUMP, "[MODEM_DUMP]: <%s> "fmt, __FUNCTION__, ##__VA_ARGS__))
 #define dump_warning(fmt, ...)  (bsp_trace(BSP_LOG_LEVEL_WARNING, BSP_MODU_DUMP, "[MODEM_DUMP]: <%s> "fmt, __FUNCTION__, ##__VA_ARGS__))

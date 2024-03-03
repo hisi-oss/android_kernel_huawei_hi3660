@@ -11,7 +11,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 其他头文件包含
+  1 ??????????????
 *****************************************************************************/
 #include "mac_frame.h"
 #include "dmac_ext_if.h"
@@ -26,9 +26,9 @@ extern "C" {
 
 
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
-/* 基本能力信息中关于是否是QOS的能力位 */
+/* ????????????????????????QOS???????? */
 #define HMAC_CAP_INFO_QOS_MASK 0x0200
 
 #define WLAN_TOS_TO_TID(_tos) (      \
@@ -71,9 +71,9 @@ extern "C" {
 #define WLAN_TCP_ACK_FILTER_THROUGHPUT_TH_HIGH  50
 #define WLAN_TCP_ACK_FILTER_THROUGHPUT_TH_LOW   20
 
-#define WLAN_AMPDU_HW_SWITCH_PERIOD     300 /* 1分钟 */
+#define WLAN_AMPDU_HW_SWITCH_PERIOD     300 /* 1???? */
 /*****************************************************************************
-  3 枚举定义
+  3 ????????
 *****************************************************************************/
 typedef enum
 {
@@ -84,30 +84,30 @@ typedef enum
 }hmac_tx_bss_qos_type_enum;
 
 /*****************************************************************************
-  4 全局变量声明
+  4 ????????????
 *****************************************************************************/
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
 extern oal_uint8  g_uc_tx_ba_policy_select;
 #endif
 /*****************************************************************************
-  5 消息头定义
+  5 ??????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  6 消息定义
+  6 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  7 STRUCT定义
+  7 STRUCT????
 *****************************************************************************/
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
 typedef struct
 {
-    oal_uint32          ul_pkt_len;  /* HOST来帧量统计 */
-    oal_uint32          ul_snd_pkts;  /* 驱动实际发送帧统计 */
-    oal_uint32          ul_start_time; /* 均速统计开始时间 */
+    oal_uint32          ul_pkt_len;  /* HOST?????????? */
+    oal_uint32          ul_snd_pkts;  /* ?????????????????? */
+    oal_uint32          ul_start_time; /* ???????????????? */
 }hmac_tx_pkts_stat_stru;
 extern hmac_tx_pkts_stat_stru g_host_tx_pkts;
 #endif
@@ -115,9 +115,9 @@ extern hmac_tx_pkts_stat_stru g_host_tx_pkts;
 #ifdef _PRE_WLAN_FEATURE_AMPDU_TX_HW
 typedef struct
 {
-    /* 定制化硬件聚合是否生效,默认为软件聚合 */
+    /* ??????????????????????,?????????????? */
     oal_uint8    uc_ampdu_hw_en;
-    /* 当前聚合是硬件聚合还是软件聚合 */
+    /* ?????????????????????????????? */
     oal_uint8    uc_ampdu_hw_enable;
     oal_uint16   us_remain_hw_cnt;
     oal_uint16   us_throughput_high;
@@ -127,11 +127,11 @@ extern hmac_tx_ampdu_hw_stru g_st_ampdu_hw;
 #endif
 
 /*****************************************************************************
-  8 UNION定义
+  8 UNION????
 *****************************************************************************/
 
 /*****************************************************************************
-  10 函数声明
+  10 ????????
 *****************************************************************************/
 extern oal_uint32  hmac_tx_encap_etc(hmac_vap_stru    *pst_vap,
                                             hmac_user_stru   *pst_user,
@@ -173,7 +173,7 @@ extern oal_void hmac_tx_small_amsdu_switch(oal_uint32 ul_rx_throughput_mbps,oal_
 extern oal_void hmac_tx_tcp_ack_buf_switch(oal_uint32 ul_rx_throughput_mbps);
 #endif
 /*****************************************************************************
-  9 OTHERS定义
+  9 OTHERS????
 *****************************************************************************/
 
 
@@ -263,14 +263,14 @@ OAL_STATIC OAL_INLINE oal_void hmac_tx_set_frame_ctrl(oal_uint32                
     mac_ieee80211_qos_htc_frame_stru *pst_hdr = OAL_PTR_NULL;
     if (HMAC_TX_BSS_QOS == ul_qos)
     {
-        /* 设置帧控制字段 */
+        /* ?????????????? */
         mac_hdr_set_frame_control((oal_uint8 *)pst_hdr_addr4, (WLAN_FC0_TYPE_DATA | WLAN_FC0_SUBTYPE_QOS));
 
-        /* 更新帧头长度 */
+        /* ???????????? */
         if (OAL_FALSE == MAC_GET_CB_IS_4ADDRESS(pst_tx_ctl))
         {
             pst_hdr = (mac_ieee80211_qos_htc_frame_stru *)pst_hdr_addr4;
-            /* 设置QOS控制字段 */
+            /* ????QOS???????? */
             pst_hdr->bit_qc_tid        = MAC_GET_CB_WME_TID_TYPE(pst_tx_ctl);
             pst_hdr->bit_qc_eosp       = 0;
             pst_hdr->bit_qc_ack_polocy = MAC_GET_CB_ACK_POLACY(pst_tx_ctl);
@@ -280,7 +280,7 @@ OAL_STATIC OAL_INLINE oal_void hmac_tx_set_frame_ctrl(oal_uint32                
         }
         else
         {
-            /* 设置QOS控制字段 */
+            /* ????QOS???????? */
             pst_hdr_addr4->bit_qc_tid        = MAC_GET_CB_WME_TID_TYPE(pst_tx_ctl);
             pst_hdr_addr4->bit_qc_eosp       = 0;
             pst_hdr_addr4->bit_qc_ack_polocy = MAC_GET_CB_ACK_POLACY(pst_tx_ctl);
@@ -289,14 +289,14 @@ OAL_STATIC OAL_INLINE oal_void hmac_tx_set_frame_ctrl(oal_uint32                
             MAC_GET_CB_FRAME_HEADER_LENGTH(pst_tx_ctl) = MAC_80211_QOS_4ADDR_FRAME_LEN;
         }
 
-        /* 由DMAC考虑是否需要HTC */
+        /* ??DMAC????????????HTC */
     }
     else
     {
-        /* 设置帧控制字段 */
+        /* ?????????????? */
         mac_hdr_set_frame_control((oal_uint8 *)pst_hdr_addr4, WLAN_FC0_TYPE_DATA | WLAN_FC0_SUBTYPE_DATA);
 
-        /* 非QOS数据帧帧控制字段设置 */
+        /* ??QOS???????????????????? */
         if (MAC_GET_CB_IS_4ADDRESS(pst_tx_ctl))
         {
             MAC_GET_CB_FRAME_HEADER_LENGTH(pst_tx_ctl) = MAC_80211_4ADDR_FRAME_LEN;
@@ -316,17 +316,17 @@ OAL_STATIC OAL_INLINE oal_uint32 hmac_tx_set_addresses(
                 mac_ether_header_stru                   *pst_ether_hdr,
                 mac_ieee80211_qos_htc_frame_addr4_stru  *pst_hdr)
 {
-    /* 分片号置成0，后续分片特性需要重新赋值 */
+    /* ??????????0?????????????????????????? */
     pst_hdr->bit_frag_num    = 0;
     pst_hdr->bit_seq_num     = 0;
 
     if ((WLAN_VAP_MODE_BSS_AP == pst_vap->st_vap_base_info.en_vap_mode)
           && (!(MAC_GET_CB_IS_4ADDRESS(pst_tx_ctl)))) /* From AP */
     {
-        /* From DS标识位设置 */
+        /* From DS?????????? */
         mac_hdr_set_from_ds((oal_uint8 *)pst_hdr, 1);
 
-        /* to DS标识位设置 */
+        /* to DS?????????? */
         mac_hdr_set_to_ds((oal_uint8 *)pst_hdr, 0);
 
         /* Set Address1 field in the WLAN Header with destination address */
@@ -335,7 +335,7 @@ OAL_STATIC OAL_INLINE oal_uint32 hmac_tx_set_addresses(
         /* Set Address2 field in the WLAN Header with the BSSID */
         oal_set_mac_addr(pst_hdr->auc_address2, pst_vap->st_vap_base_info.auc_bssid);
 
-        if (MAC_GET_CB_IS_AMSDU(pst_tx_ctl)) /* AMSDU情况，地址3填写BSSID */
+        if (MAC_GET_CB_IS_AMSDU(pst_tx_ctl)) /* AMSDU??????????3????BSSID */
         {
             /* Set Address3 field in the WLAN Header with the BSSID */
             oal_set_mac_addr(pst_hdr->auc_address3, pst_vap->st_vap_base_info.auc_bssid);
@@ -350,10 +350,10 @@ OAL_STATIC OAL_INLINE oal_uint32 hmac_tx_set_addresses(
     else if ((WLAN_VAP_MODE_BSS_STA == pst_vap->st_vap_base_info.en_vap_mode)
           && (!(MAC_GET_CB_IS_4ADDRESS(pst_tx_ctl))))
     {
-        /* From DS标识位设置 */
+        /* From DS?????????? */
         mac_hdr_set_from_ds((oal_uint8 *)pst_hdr, 0);
 
-        /* to DS标识位设置 */
+        /* to DS?????????? */
         mac_hdr_set_to_ds((oal_uint8 *)pst_hdr, 1);
 
         /* Set Address1 field in the WLAN Header with BSSID */
@@ -370,7 +370,7 @@ OAL_STATIC OAL_INLINE oal_uint32 hmac_tx_set_addresses(
             oal_set_mac_addr(pst_hdr->auc_address2, mac_mib_get_StationID(&pst_vap->st_vap_base_info));
         }
 
-        if (MAC_GET_CB_IS_AMSDU(pst_tx_ctl)) /* AMSDU情况，地址3填写BSSID */
+        if (MAC_GET_CB_IS_AMSDU(pst_tx_ctl)) /* AMSDU??????????3????BSSID */
         {
             /* Set Address3 field in the WLAN Header with the BSSID */
             oal_set_mac_addr(pst_hdr->auc_address3, pst_user->st_user_base_info.auc_user_mac_addr);
@@ -384,43 +384,43 @@ OAL_STATIC OAL_INLINE oal_uint32 hmac_tx_set_addresses(
     else if (MAC_GET_CB_IS_4ADDRESS(pst_tx_ctl))
     /* WDS */
     {
-        /* TO DS标识位设置 */
+        /* TO DS?????????? */
         mac_hdr_set_to_ds((oal_uint8 *)pst_hdr, 1);
 
-        /* From DS标识位设置 */
+        /* From DS?????????? */
         mac_hdr_set_from_ds((oal_uint8 *)pst_hdr, 1);
 
-        /* 地址1是 RA */
+        /* ????1?? RA */
         oal_set_mac_addr(pst_hdr->auc_address1, pst_user->st_user_base_info.auc_user_mac_addr);
 
-        /* 地址2是 TA (当前只有BSSID) */
+        /* ????2?? TA (????????BSSID) */
         oal_set_mac_addr(pst_hdr->auc_address2, mac_mib_get_StationID(&pst_vap->st_vap_base_info));
 
-        if (MAC_GET_CB_IS_AMSDU(pst_tx_ctl)) /* AMSDU情况，地址3和地址4填写BSSID */
+        if (MAC_GET_CB_IS_AMSDU(pst_tx_ctl)) /* AMSDU??????????3??????4????BSSID */
         {
             if (WLAN_VAP_MODE_BSS_STA == pst_vap->st_vap_base_info.en_vap_mode)
             {
-                /* 地址3是 BSSID */
+                /* ????3?? BSSID */
                 oal_set_mac_addr(pst_hdr->auc_address3, pst_user->st_user_base_info.auc_user_mac_addr);
 
-                /* 地址4也是 BSSID */
+                /* ????4???? BSSID */
                 oal_set_mac_addr(pst_hdr->auc_address4, pst_user->st_user_base_info.auc_user_mac_addr);
             }
             else if (WLAN_VAP_MODE_BSS_AP == pst_vap->st_vap_base_info.en_vap_mode)
             {
-                /* 地址3是 BSSID */
+                /* ????3?? BSSID */
                 oal_set_mac_addr(pst_hdr->auc_address3, mac_mib_get_StationID(&pst_vap->st_vap_base_info));
 
-                /* 地址4也是 BSSID */
+                /* ????4???? BSSID */
                 oal_set_mac_addr(pst_hdr->auc_address4, mac_mib_get_StationID(&pst_vap->st_vap_base_info));
             }
         }
         else
         {
-            /* 地址3是 DA */
+            /* ????3?? DA */
             oal_set_mac_addr(pst_hdr->auc_address3, (oal_uint8*)pst_ether_hdr->auc_ether_dhost);
 
-            /* 地址4是 SA */
+            /* ????4?? SA */
             oal_set_mac_addr(pst_hdr->auc_address4, (oal_uint8*)pst_ether_hdr->auc_ether_shost);
         }
 
@@ -462,7 +462,7 @@ OAL_STATIC OAL_INLINE oal_bool_enum_uint8 hmac_vap_ba_is_setup(hmac_user_stru *p
 
 OAL_STATIC OAL_INLINE oal_void hmac_tx_ba_del(hmac_vap_stru *pst_hmac_vap, hmac_user_stru *pst_hmac_user, oal_uint8 uc_tidno)
 {
-    mac_action_mgmt_args_stru       st_action_args;   /* 用于填写ACTION帧的参数 */
+    mac_action_mgmt_args_stru       st_action_args;   /* ????????ACTION???????? */
 
     st_action_args.uc_category = MAC_ACTION_CATEGORY_BA;
     st_action_args.uc_action   = MAC_BA_ACTION_DELBA;
@@ -488,7 +488,7 @@ OAL_STATIC OAL_INLINE oal_bool_enum_uint8 hmac_tid_need_ba_session(
     mac_device_stru       *pst_mac_device;
 #endif
 
-    /* 该tid下不允许建BA，配置命令需求 */
+    /* ??tid??????????BA?????????????? */
     if (OAL_FALSE == pst_hmac_user->ast_tid_info[uc_tidno].en_ba_handle_tx_enable)
     {
         return OAL_FALSE;
@@ -502,7 +502,7 @@ OAL_STATIC OAL_INLINE oal_bool_enum_uint8 hmac_tid_need_ba_session(
         }
 
 #ifdef _PRE_WLAN_FEATURE_AMPDU_TX_HW
-        /* 判断需要删除BA,配置命令处可能已经删除BA,因此需要再次判断删除BA条件 */
+        /* ????????????BA,??????????????????????BA,????????????????????BA???? */
         oal_spin_lock_bh(&pst_hmac_vap->st_ampdu_lock);
         if (OAL_FALSE == mac_mib_get_CfgAmpduTxAtive(&pst_hmac_vap->st_vap_base_info) &&
             (OAL_TRUE == hmac_tid_ba_is_setup(pst_hmac_user, uc_tidno)))
@@ -517,13 +517,13 @@ OAL_STATIC OAL_INLINE oal_bool_enum_uint8 hmac_tid_need_ba_session(
 
     }
 
-    /* 配置命令不允许建立聚合时返回 */
+    /* ???????????????????????????? */
     if (OAL_FALSE == mac_mib_get_CfgAmpduTxAtive(&pst_hmac_vap->st_vap_base_info))
     {
         return OAL_FALSE;
     }
 
-    /* 建立BA会话，需要判断VAP的AMPDU的支持情况，因为需要实现建立BA会话时，一定发AMPDU */
+    /* ????BA??????????????VAP??AMPDU????????????????????????????BA??????????????AMPDU */
     if(OAL_FALSE == hmac_user_xht_support(pst_hmac_user))
     {
         if (DMAC_BA_INIT != pst_hmac_user->ast_tid_info[uc_tidno].st_ba_tx_info.en_ba_status)
@@ -534,7 +534,7 @@ OAL_STATIC OAL_INLINE oal_bool_enum_uint8 hmac_tid_need_ba_session(
         return OAL_FALSE;
     }
 
-    /* wep/tkip不支持11n及以上协议 */
+    /* wep/tkip??????11n?????????? */
     en_cipher_type = pst_hmac_user->st_user_base_info.st_key_info.en_cipher_type;
     en_ampdu_support = ((WLAN_80211_CIPHER_SUITE_NO_ENCRYP == en_cipher_type) ||
                         (WLAN_80211_CIPHER_SUITE_CCMP == en_cipher_type) ||
@@ -551,13 +551,13 @@ OAL_STATIC OAL_INLINE oal_bool_enum_uint8 hmac_tid_need_ba_session(
         return OAL_FALSE;
     }
 
-    /* 针对VO业务, 根据VAP标志位确定是否建立BA会话 */
+    /* ????VO????, ????VAP??????????????????BA???? */
     if ((WLAN_WME_AC_VO == WLAN_WME_TID_TO_AC(uc_tidno)) && (OAL_FALSE == pst_hmac_vap->st_vap_base_info.bit_voice_aggr))
     {
         return OAL_FALSE;
     }
 
-    /* 判断HMAC VAP的是否支持聚合 */
+    /* ????HMAC VAP?????????????? */
     if (!(mac_mib_get_TxAggregateActived(&pst_hmac_vap->st_vap_base_info) || (pst_hmac_vap->st_vap_base_info.st_cap_flag.bit_rifs_tx_on)))
     {
         OAM_INFO_LOG0(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_BA, "{hmac_tid_need_ba_session::en_tx_aggr_on of vap is off");
@@ -585,7 +585,7 @@ OAL_STATIC OAL_INLINE oal_bool_enum_uint8 hmac_tid_need_ba_session(
     }
 #endif
 
-    /* 需要先发送5个单播帧，再进行BA会话的建立 */
+    /* ??????????5????????????????BA?????????? */
     if ((OAL_TRUE == pst_hmac_user->st_user_base_info.st_cap_info.bit_qos) &&
         (pst_hmac_user->auc_ba_flag[uc_tidno] < DMAC_UCAST_FRAME_TX_COMP_TIMES))
     {
@@ -594,7 +594,7 @@ OAL_STATIC OAL_INLINE oal_bool_enum_uint8 hmac_tid_need_ba_session(
         hmac_tx_ba_cnt_vary_etc(pst_hmac_vap, pst_hmac_user, uc_tidno, pst_buf);
         return OAL_FALSE;
     }
-    /* 针对关闭WMM，非QOS帧处理 */
+    /* ????????WMM????QOS?????? */
     else if(OAL_FALSE == pst_hmac_user->st_user_base_info.st_cap_info.bit_qos)
     {
         OAM_INFO_LOG0(pst_hmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_TX,"{UnQos Frame pass!!}");

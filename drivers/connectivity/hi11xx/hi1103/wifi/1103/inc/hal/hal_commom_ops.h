@@ -11,7 +11,7 @@ extern "C" {
 
 
 /*****************************************************************************
-  1 头文件包含
+  1 ??????????
 *****************************************************************************/
 #include "oal_types.h"
 #include "wlan_spec.h"
@@ -21,12 +21,12 @@ extern "C" {
 
 /*****************************************************************************/
 /*****************************************************************************/
-/*                        HI1102 产品宏定义、枚举                            */
+/*                        HI1102 ????????????????                            */
 /*****************************************************************************/
 /*****************************************************************************/
 #if ((_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1102_DEV) || (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1102_HOST)) || ((_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_DEV) || (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_HOST))
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
 #if ((_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1102_DEV) || (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1102_HOST))
 #define HAL_PUBLIC_HOOK_FUNC(_func) \
@@ -38,11 +38,11 @@ extern "C" {
 #endif
 
 
-#define HAL_RX_DSCR_GET_SW_ADDR(_addr)     hal_rx_dscr_get_sw_addr(_addr)   /* 一个字节中包含的bit数目 */
-#define HAL_RX_DSCR_GET_REAL_ADDR(_addr)   hal_rx_dscr_get_real_addr(_addr)   /* 一个字节中包含的bit数目 */
+#define HAL_RX_DSCR_GET_SW_ADDR(_addr)     hal_rx_dscr_get_sw_addr(_addr)   /* ????????????????bit???? */
+#define HAL_RX_DSCR_GET_REAL_ADDR(_addr)   hal_rx_dscr_get_real_addr(_addr)   /* ????????????????bit???? */
 
-#define HAL_MAX_AP_NUM                     2      /* HAL AP个数 */
-#define HAL_MAX_STA_NUM                    3      /* HAL STA个数 */
+#define HAL_MAX_AP_NUM                     2      /* HAL AP???? */
+#define HAL_MAX_STA_NUM                    3      /* HAL STA???? */
 #define HAL_MAX_VAP_NUM                    (HAL_MAX_AP_NUM + HAL_MAX_STA_NUM)  /* HAL VAP???? */
 
 #if ((_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1102_DEV) || (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1102_HOST))
@@ -54,27 +54,27 @@ extern "C" {
 #endif
 
 /*****************************************************************************
-  3 枚举
+  3 ????
 *****************************************************************************/
 typedef enum
 {
-    HAL_TX_QUEUE_BE        = 0,        /* 尽力而为业务 */
-    HAL_TX_QUEUE_BK        = 1,        /* 背景业务 */
-    HAL_TX_QUEUE_VI        = 2,        /* 视频业务 */
-    HAL_TX_QUEUE_VO        = 3,        /* 语音业务 */
-    HAL_TX_QUEUE_HI        = 4,        /* 高优先级队列(管理帧/控制帧用此队列) */
+    HAL_TX_QUEUE_BE        = 0,        /* ???????????? */
+    HAL_TX_QUEUE_BK        = 1,        /* ???????? */
+    HAL_TX_QUEUE_VI        = 2,        /* ???????? */
+    HAL_TX_QUEUE_VO        = 3,        /* ???????? */
+    HAL_TX_QUEUE_HI        = 4,        /* ????????????(??????/??????????????) */
 #ifndef _PRE_WLAN_MAC_BUGFIX_MCAST_HW_Q
-    HAL_TX_QUEUE_MC        = 5,        /* 组播帧发送队列 */
+    HAL_TX_QUEUE_MC        = 5,        /* ?????????????? */
 #endif
     HAL_TX_QUEUE_BUTT
 }hal_tx_queue_type_enum;
 typedef oal_uint8 hal_tx_queue_type_enum_uint8;
 
 #ifdef _PRE_WLAN_FEATURE_BTCOEX
-/* ldac mode类型 */
+/* ldac mode???? */
 typedef enum
 {
-    HAL_BTCOEX_LDAC_MODE_330     = 0,   /* 330或者sbc */
+    HAL_BTCOEX_LDAC_MODE_330     = 0,   /* 330????sbc */
     HAL_BTCOEX_LDAC_MODE_APTXHD  = 1,   /* aptxhd */
     HAL_BTCOEX_LDAC_MODE_660     = 2,   /* 660 */
     HAL_BTCOEX_LDAC_MODE_990     = 3,   /* 990 */
@@ -83,27 +83,27 @@ typedef enum
 }hal_btcoex_ldac_mode_enum;
 typedef oal_uint8 hal_btcoex_ldac_mode_enum_uint8;
 
-/* sco 电话mode类型 */
+/* sco ????mode???? */
 typedef enum
 {
-    HAL_BTCOEX_SCO_MODE_NONE    = 0,   /* 电话结束 */
-    HAL_BTCOEX_SCO_MODE_12SLOT  = 1,   /* 12slot电话 */
-    HAL_BTCOEX_SCO_MODE_6SLOT   = 2,   /* 6slot电话 */
+    HAL_BTCOEX_SCO_MODE_NONE    = 0,   /* ???????? */
+    HAL_BTCOEX_SCO_MODE_12SLOT  = 1,   /* 12slot???? */
+    HAL_BTCOEX_SCO_MODE_6SLOT   = 2,   /* 6slot???? */
 
     HAL_BTCOEX_SCO_MODE_BUTT
 }hal_btcoex_sco_mode_enum;
 typedef oal_uint8 hal_btcoex_sco_mode_enum_uint8;
 
-/* sw preempt机制下蓝牙业务状态，a2dp|transfer  page|inquiry 或者  both */
+/* sw preempt????????????????????a2dp|transfer  page|inquiry ????  both */
 typedef enum
 {
-    HAL_BTCOEX_PS_STATUE_ACL       = 1,   /* only a2dp|数传 BIT0 */
+    HAL_BTCOEX_PS_STATUE_ACL       = 1,   /* only a2dp|???? BIT0 */
     HAL_BTCOEX_PS_STATUE_PAGE_INQ  = 2,   /* only  page|inquiry BIT1 */
-    HAL_BTCOEX_PS_STATUE_PAGE_ACL  = 3,   /* both a2dp|数传 and page|inquiry BIT0|BIT1 */
+    HAL_BTCOEX_PS_STATUE_PAGE_ACL  = 3,   /* both a2dp|???? and page|inquiry BIT0|BIT1 */
     HAL_BTCOEX_PS_STATUE_LDAC      = 4,   /* only ldac BIT2 */
-    HAL_BTCOEX_PS_STATUE_LDAC_ACL  = 5,   /* ldac and a2dp|数传 BIT2|BIT0 */
+    HAL_BTCOEX_PS_STATUE_LDAC_ACL  = 5,   /* ldac and a2dp|???? BIT2|BIT0 */
     HAL_BTCOEX_PS_STATUE_LDAC_PAGE = 6,   /* ldac and page|inquiry BIT2|BIT1 */
-    HAL_BTCOEX_PS_STATUE_TRIPLE    = 7,   /* ldac and page|inquiry and a2dp|数传 BIT2|BIT1|BIT0 */
+    HAL_BTCOEX_PS_STATUE_TRIPLE    = 7,   /* ldac and page|inquiry and a2dp|???? BIT2|BIT1|BIT0 */
 
     HAL_BTCOEX_PS_STATUE_BUTT
 }hal_btcoex_ps_status_enum;
@@ -144,7 +144,7 @@ typedef enum
     HAL_BTCOEX_SW_POWSAVE_SUB_IDLE     = 1,
     HAL_BTCOEX_SW_POWSAVE_SUB_SCAN     = 2,
     HAL_BTCOEX_SW_POWSAVE_SUB_CONNECT  = 3,
-    HAL_BTCOEX_SW_POWSAVE_SUB_PSM_FORBIT  = 4, /* 低功耗唤醒时，连续出现多次ps=1状态，要禁止psm 做状态判断，直到soc中断来更新 */
+    HAL_BTCOEX_SW_POWSAVE_SUB_PSM_FORBIT  = 4, /* ??????????????????????????ps=1????????????psm ????????????????soc?????????? */
 
     HAL_BTCOEX_SW_POWSAVE_SUB_BUTT
 } hal_coex_sw_preempt_subtype_enum;
@@ -161,12 +161,12 @@ typedef oal_uint8 hal_btcoex_fix_freq_type_enum_uint8;
 #endif
 
 #ifdef _PRE_WLAN_FEATURE_STA_PM
-/* HAL_DEVICE_WORK_STATE子状态 */
+/* HAL_DEVICE_WORK_STATE?????? */
 typedef enum {
-    HAL_DEVICE_WORK_SUB_STATE_ACTIVE         = 0,              /* active子状态 */
-    HAL_DEVICE_WORK_SUB_STATE_AWAKE          = 1,              /* awake子状态 */
-    HAL_DEVICE_WORK_SUB_STATE_DOZE           = 2,              /* doze子状态 */
-    HAL_DEVICE_WORK_SUB_STATE_INIT           = 3,              /* init子状态 */
+    HAL_DEVICE_WORK_SUB_STATE_ACTIVE         = 0,              /* active?????? */
+    HAL_DEVICE_WORK_SUB_STATE_AWAKE          = 1,              /* awake?????? */
+    HAL_DEVICE_WORK_SUB_STATE_DOZE           = 2,              /* doze?????? */
+    HAL_DEVICE_WORK_SUB_STATE_INIT           = 3,              /* init?????? */
     HAL_DEVICE_WORK_SUB_STATE_BUTT
 } hal_device_work_sub_state_info;
 #define HAL_WORK_SUB_STATE_NUM      (HAL_DEVICE_WORK_SUB_STATE_INIT - HAL_DEVICE_WORK_SUB_STATE_ACTIVE)
@@ -176,12 +176,12 @@ typedef enum {
 
 /*****************************************************************************/
 /*****************************************************************************/
-/*                        HI1151 产品宏定义、枚举                            */
+/*                        HI1151 ????????????????                            */
 /*****************************************************************************/
 /*****************************************************************************/
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1151)
 /*****************************************************************************
-  2 宏定义
+  2 ??????
 *****************************************************************************/
 #define HAL_PUBLIC_HOOK_FUNC(_func) \
          hi1151##_func
@@ -192,36 +192,36 @@ typedef enum {
 #define HAL_TX_DSCR_GET_REAL_ADDR(_addr)  (_addr)
 
 #ifdef _PRE_WLAN_PRODUCT_1151V200
-#define HAL_MAX_AP_NUM                     16       /* 支持多BSSID特性的规格，最大为4 AP*/
-#define HAL_MAX_STA_NUM                    3        /* HAL STA个数 */
-#define HAL_MAX_VAP_NUM                    (HAL_MAX_AP_NUM + HAL_MAX_STA_NUM)  /* HAL VAP总个数 */
+#define HAL_MAX_AP_NUM                     16       /* ??????BSSID??????????????????4 AP*/
+#define HAL_MAX_STA_NUM                    3        /* HAL STA???? */
+#define HAL_MAX_VAP_NUM                    (HAL_MAX_AP_NUM + HAL_MAX_STA_NUM)  /* HAL VAP?????? */
 #define HAL_VAP_ID_IS_VALID(_vap_id)      ((_vap_id <= 5) || ((_vap_id >= 16) && (_vap_id <= 28)))
 #define HAL_VAP_ID_IS_VALID_PSTA(_vap_id) ((_vap_id < WLAN_HAL_OHTER_BSS_ID)||((_vap_id >= WLAN_PROXY_STA_START_ID) && (_vap_id <= WLAN_PROXY_STA_END_ID)))
 #define HAL_AP_ID_IS_VALID(_vap_id)       ((_vap_id <= 3) || ((_vap_id >= 16) && (_vap_id <= 27)))
 #define HAL_STA_ID_IS_VALID(_vap_id)      (((_vap_id >= 4) && (_vap_id <= 5)))
 #else
-#define HAL_MAX_AP_NUM                     4       /* 支持多BSSID特性的规格，最大为4 AP*/
-#define HAL_MAX_STA_NUM                    1      /* HAL STA个数 */
-#define HAL_MAX_VAP_NUM                    (HAL_MAX_AP_NUM + HAL_MAX_STA_NUM)  /* HAL VAP总个数 */
+#define HAL_MAX_AP_NUM                     4       /* ??????BSSID??????????????????4 AP*/
+#define HAL_MAX_STA_NUM                    1      /* HAL STA???? */
+#define HAL_MAX_VAP_NUM                    (HAL_MAX_AP_NUM + HAL_MAX_STA_NUM)  /* HAL VAP?????? */
 #define HAL_VAP_ID_IS_VALID(_vap_id)      ((_vap_id == 0) || (_vap_id == 1)|| (_vap_id == 2) || (_vap_id == 3) || (_vap_id == 4))
 #define HAL_VAP_ID_IS_VALID_PSTA(_vap_id) ((_vap_id < WLAN_HAL_OHTER_BSS_ID)||((_vap_id >= WLAN_PROXY_STA_START_ID) && (_vap_id <= WLAN_PROXY_STA_END_ID)))
 #endif
-#define HAL_80211_FRAME_LEN                24   /* 帧头长度，刷cache用 */
-#define HAL_PREP_DONE_TIME_OUT            4000  /* 等待prep done的超时时间 */
+#define HAL_80211_FRAME_LEN                24   /* ????????????cache?? */
+#define HAL_PREP_DONE_TIME_OUT            4000  /* ????prep done?????????? */
 
 #define SIFSTIME             16
 #define ACK_CTS_FRAME_LEN    14
 
 /*****************************************************************************
-  3 枚举
+  3 ????
 *****************************************************************************/
 typedef enum
 {
-    HAL_TX_QUEUE_BK        = 0,        /* 背景业务 */
-    HAL_TX_QUEUE_BE        = 1,        /* 尽力而为业务 */
-    HAL_TX_QUEUE_VI        = 2,        /* 视频业务 */
-    HAL_TX_QUEUE_VO        = 3,        /* 语音业务 */
-    HAL_TX_QUEUE_HI        = 4,        /* 高优先级队列(管理帧/控制帧用此队列) */
+    HAL_TX_QUEUE_BK        = 0,        /* ???????? */
+    HAL_TX_QUEUE_BE        = 1,        /* ???????????? */
+    HAL_TX_QUEUE_VI        = 2,        /* ???????? */
+    HAL_TX_QUEUE_VO        = 3,        /* ???????? */
+    HAL_TX_QUEUE_HI        = 4,        /* ????????????(??????/??????????????) */
     HAL_TX_QUEUE_BUTT
 }hal_tx_queue_type_enum;
 typedef oal_uint8 hal_tx_queue_type_enum_uint8;
@@ -230,76 +230,76 @@ typedef oal_uint8 hal_tx_queue_type_enum_uint8;
 
 /*****************************************************************************/
 /*****************************************************************************/
-/*                        公共宏定义、枚举、结构体                           */
+/*                        ????????????????????????                           */
 /*****************************************************************************/
 /*****************************************************************************/
 
-#define HAL_POW_11B_RATE_NUM                4               /* 11b速率数目 */
-#define HAL_POW_11G_RATE_NUM                8               /* 11g速率数目 */
-#define HAL_POW_11A_RATE_NUM                8               /* 11a速率数目 */
+#define HAL_POW_11B_RATE_NUM                4               /* 11b???????? */
+#define HAL_POW_11G_RATE_NUM                8               /* 11g???????? */
+#define HAL_POW_11A_RATE_NUM                8               /* 11a???????? */
 
 #ifdef _PRE_WLAN_FEATURE_11AC_20M_MCS9
 #ifdef _PRE_WLAN_FEATURE_1024QAM
-#define HAL_POW_11AC_20M_NUM                12              /* 11n_11ac_2g速率数目 */
+#define HAL_POW_11AC_20M_NUM                12              /* 11n_11ac_2g???????? */
 #else
-#define HAL_POW_11AC_20M_NUM                10              /* 11n_11ac_2g速率数目 */
+#define HAL_POW_11AC_20M_NUM                10              /* 11n_11ac_2g???????? */
 #endif
 #else
-#define HAL_POW_11AC_20M_NUM                9               /* 11n_11ac_2g速率数目 */
+#define HAL_POW_11AC_20M_NUM                9               /* 11n_11ac_2g???????? */
 #endif
 
 #ifdef _PRE_WLAN_FEATURE_1024QAM
-#define HAL_POW_11AC_40M_NUM                13              /* 11n_11ac_2g速率数目 */
-#define HAL_POW_11AC_80M_NUM                12              /* 11n_11ac_2g速率数目 */
+#define HAL_POW_11AC_40M_NUM                13              /* 11n_11ac_2g???????? */
+#define HAL_POW_11AC_80M_NUM                12              /* 11n_11ac_2g???????? */
 #else
-#define HAL_POW_11AC_40M_NUM                11              /* 11n_11ac_2g速率数目 */
-#define HAL_POW_11AC_80M_NUM                10              /* 11n_11ac_2g速率数目 */
+#define HAL_POW_11AC_40M_NUM                11              /* 11n_11ac_2g???????? */
+#define HAL_POW_11AC_80M_NUM                10              /* 11n_11ac_2g???????? */
 #endif
 
 #ifdef _PRE_WLAN_FEATURE_160M
 #ifdef _PRE_WLAN_FEATURE_1024QAM
-#define HAL_POW_11AC_160M_NUM                12              /* 11n_11ac_2g速率数目 */
+#define HAL_POW_11AC_160M_NUM                12              /* 11n_11ac_2g???????? */
 #else
-#define HAL_POW_11AC_160M_NUM                10              /* 11n_11ac_2g速率数目 */
+#define HAL_POW_11AC_160M_NUM                10              /* 11n_11ac_2g???????? */
 #endif
 #else
-#define HAL_POW_11AC_160M_NUM                0              /* 11n_11ac_2g速率数目(用于打桩计算HAL_POW_RATE_POW_CODE_TABLE_LEN) */
+#define HAL_POW_11AC_160M_NUM                0              /* 11n_11ac_2g????????(????????????HAL_POW_RATE_POW_CODE_TABLE_LEN) */
 #endif
 
 #define HAL_POW_RATE_POW_CODE_TABLE_LEN     (HAL_POW_11B_RATE_NUM+HAL_POW_11G_RATE_NUM+HAL_POW_11AC_20M_NUM \
-                                                    +HAL_POW_11AC_40M_NUM+HAL_POW_11AC_80M_NUM+HAL_POW_11AC_160M_NUM)   /* rate-tpccode table中速率个数 */
+                                                    +HAL_POW_11AC_40M_NUM+HAL_POW_11AC_80M_NUM+HAL_POW_11AC_160M_NUM)   /* rate-tpccode table?????????? */
 
 #define HAL_POW_RATE_POW_CODE_TABLE_2G_LEN  (HAL_POW_11B_RATE_NUM+HAL_POW_11G_RATE_NUM+HAL_POW_11AC_20M_NUM \
-                                                    +HAL_POW_11AC_40M_NUM)   /* rate-tpccode table中速率个数 */
+                                                    +HAL_POW_11AC_40M_NUM)   /* rate-tpccode table?????????? */
 
-/* 为了保证idx从0开始，个数中包含11B速率个数 */
+/* ????????idx??0????????????????11B???????? */
 #define HAL_POW_RATE_POW_CODE_TABLE_5G_LEN  (HAL_POW_11B_RATE_NUM+HAL_POW_11G_RATE_NUM+HAL_POW_11AC_20M_NUM \
-                                                    +HAL_POW_11AC_40M_NUM+HAL_POW_11AC_80M_NUM+HAL_POW_11AC_160M_NUM)   /* rate-tpccode table中速率个数 */
+                                                    +HAL_POW_11AC_40M_NUM+HAL_POW_11AC_80M_NUM+HAL_POW_11AC_160M_NUM)   /* rate-tpccode table?????????? */
 
 #define HAL_VAP_ID_IS_VALID_PSTA(_vap_id) ((_vap_id < WLAN_HAL_OHTER_BSS_ID)||((_vap_id >= WLAN_PROXY_STA_START_ID) && (_vap_id <= WLAN_PROXY_STA_END_ID)))
 
-#define HAL_POW_CUSTOM_24G_11B_RATE_NUM            2    /* 定制化11b速率数目 */
-#define HAL_POW_CUSTOM_11G_11A_RATE_NUM            5    /* 定制化11g/11a速率数目 */
-#define HAL_POW_CUSTOM_HT20_VHT20_RATE_NUM         6    /* 定制化HT20_VHT20速率数目 */
+#define HAL_POW_CUSTOM_24G_11B_RATE_NUM            2    /* ??????11b???????? */
+#define HAL_POW_CUSTOM_11G_11A_RATE_NUM            5    /* ??????11g/11a???????? */
+#define HAL_POW_CUSTOM_HT20_VHT20_RATE_NUM         6    /* ??????HT20_VHT20???????? */
 #define HAL_POW_CUSTOM_24G_HT40_VHT40_RATE_NUM     8
 #define HAL_POW_CUSTOM_5G_HT40_VHT40_RATE_NUM      7
 #define HAL_POW_CUSTOM_5G_VHT80_RATE_NUM           6
-/* 定制化全部速率 */
+/* ?????????????? */
 #define HAL_POW_CUSTOM_MCS9_10_11_RATE_NUM         3
 #define HAL_POW_CUSTOM_MCS10_11_RATE_NUM           2
-#define HAL_POW_CUSTOM_5G_VHT160_RATE_NUM          12   /* 定制化5G_11ac_VHT160速率数目 */
-#define HAL_POW_CUSTOM_HT20_VHT20_DPD_RATE_NUM     5    /* 定制化DPD速率数目 */
+#define HAL_POW_CUSTOM_5G_VHT160_RATE_NUM          12   /* ??????5G_11ac_VHT160???????? */
+#define HAL_POW_CUSTOM_HT20_VHT20_DPD_RATE_NUM     5    /* ??????DPD???????? */
 #define HAL_POW_CUSTOM_HT40_VHT40_DPD_RATE_NUM     5
 
 
 #if (defined(_PRE_PRODUCT_ID_HI110X_DEV) || defined(_PRE_PRODUCT_ID_HI110X_HOST))
 
 #ifdef _PRE_WLAN_FIT_BASED_REALTIME_CALI
-#define HI1103_DYN_CALI_5G_SECTION                      2            /* 5G TX Power分 high & low power校准 */
+#define HI1103_DYN_CALI_5G_SECTION                      2            /* 5G TX Power?? high & low power???? */
 #endif
 
-/* 定制化相关宏 */
-/* NVRAM中存储的各协议速率最大发射功率参数的个数 From:24G_11b_1M To:5G_VHT80_MCS7 */
+/* ???????????? */
+/* NVRAM???????????????????????????????????????? From:24G_11b_1M To:5G_VHT80_MCS7 */
 #define NUM_OF_NV_NORMAL_MAX_TXPOWER   (HAL_POW_CUSTOM_24G_11B_RATE_NUM + \
                                         HAL_POW_CUSTOM_11G_11A_RATE_NUM + HAL_POW_CUSTOM_HT20_VHT20_RATE_NUM + \
                                         HAL_POW_CUSTOM_24G_HT40_VHT40_RATE_NUM + HAL_POW_CUSTOM_11G_11A_RATE_NUM + \
@@ -319,83 +319,83 @@ typedef oal_uint8 hal_tx_queue_type_enum_uint8;
 #define NUM_OF_NV_2G_LOW_POW_DELTA_VAL     (4)
 
 #endif
-#define HAL_CUS_NUM_5G_BW                        4   /* 定制化5g带宽数 */
-#define HAL_CUS_NUM_FCC_CE_2G_PRO                3   /* 定制化2g FCC 11B+OFDM_20M+OFDM_40M */
-#define HAL_CUS_NUM_OF_SAR_PARAMS                8   /* 定制化降SAR参数 5G_BAND1~7 2.4G */
-#define HAL_NUM_5G_20M_SIDE_BAND                 6   /* 定制化5g边带数 */
+#define HAL_CUS_NUM_5G_BW                        4   /* ??????5g?????? */
+#define HAL_CUS_NUM_FCC_CE_2G_PRO                3   /* ??????2g FCC 11B+OFDM_20M+OFDM_40M */
+#define HAL_CUS_NUM_OF_SAR_PARAMS                8   /* ????????SAR???? 5G_BAND1~7 2.4G */
+#define HAL_NUM_5G_20M_SIDE_BAND                 6   /* ??????5g?????? */
 #define HAL_NUM_5G_40M_SIDE_BAND                 6
 #define HAL_NUM_5G_80M_SIDE_BAND                 5
 #define HAL_NUM_5G_160M_SIDE_BAND                2
 
-#define HAL_POW_MAX_CHAIN_NUM           2           /* 最大通道数 */
-#define HAL_POW_PRECISION_SHIFT         10          /*TPC算法中功率的精度*/
+#define HAL_POW_MAX_CHAIN_NUM           2           /* ?????????? */
+#define HAL_POW_PRECISION_SHIFT         10          /*TPC????????????????*/
 
-#define HAL_POW_PA_LUT_NUM              4          /* 筛选使用的PA档位数目 */
+#define HAL_POW_PA_LUT_NUM              4          /* ??????????PA???????? */
 
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_DEV)
 #ifdef _PRE_WLAN_FIT_BASED_REALTIME_CALI
-#define HAL_AL_TX_DYN_CAL_INTERVAL_NUM   10        /* 不指定数目常发动态校准帧间隔 */
+#define HAL_AL_TX_DYN_CAL_INTERVAL_NUM   10        /* ???????????????????????????? */
 #endif
-#define HAL_POW_UPC_RF_LUT_NUM          256        /* UPC在RF中的最大档位数目 */
-#define HAL_2G_POW_UPC_RF_LUT_NUM       256        /* UPC在RF中的档位数目 8bit */
+#define HAL_POW_UPC_RF_LUT_NUM          256        /* UPC??RF???????????????? */
+#define HAL_2G_POW_UPC_RF_LUT_NUM       256        /* UPC??RF???????????? 8bit */
 #define HAL_5G_POW_UPC_RF_LUT_NUM       64
 
 #ifdef _PRE_WLAN_1103_PILOT
-#define HAL_POW_UPC_LUT_NUM             2     /* 筛选使用的UPC档位数目(03 pilot upc code 修订为1bit) */
+#define HAL_POW_UPC_LUT_NUM             2     /* ??????????UPC????????(03 pilot upc code ??????1bit) */
 #else
-#define HAL_POW_UPC_LUT_NUM             32     /* 筛选使用的UPC档位数目(03 EVB2 upc code 修订为5bit) */
+#define HAL_POW_UPC_LUT_NUM             32     /* ??????????UPC????????(03 EVB2 upc code ??????5bit) */
 #endif
 #else //#if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_DEV)
-#define HAL_POW_UPC_RF_LUT_NUM          64        /* UPC在RF中的档位数目 */
-#define HAL_POW_DBB_LUT_NUM             128       /* 数字DBB的档位数目 */
+#define HAL_POW_UPC_RF_LUT_NUM          64        /* UPC??RF???????????? */
+#define HAL_POW_DBB_LUT_NUM             128       /* ????DBB?????????? */
 #define HAL_2G_POW_UPC_RF_LUT_NUM       64
 #define HAL_5G_POW_UPC_RF_LUT_NUM       64
 
-#define HAL_POW_UPC_LUT_NUM             16          /* 筛选使用的UPC档位数目 */
+#define HAL_POW_UPC_LUT_NUM             16          /* ??????????UPC???????? */
 #endif //#if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_DEV)
 
-#define HAL_POW_PA_BASE_IDX                 2           /* 基准PA Index */
-#define HAL_POW_11B_LPF_BASE_IDX            1           /* 11B基准LPF Index */
+#define HAL_POW_PA_BASE_IDX                 2           /* ????PA Index */
+#define HAL_POW_11B_LPF_BASE_IDX            1           /* 11B????LPF Index */
 
-#define HAL_POW_2G_LPF_BASE_IDX             2           /* 2G基准LPF Index */
-#define HAL_POW_2G_DAC_BASE_IDX             0           /* 2G基准DAC Index */
-#define HAL_POW_5G_LPF_BASE_IDX             3           /* 5G基准LPF Index */
-#define HAL_POW_5G_DAC_BASE_IDX             2           /* 5G基准DAC Index */
-#define HAL_POW_LPF_BASE_IDX(_en_band)      ((_en_band == WLAN_BAND_2G) ? HAL_POW_2G_LPF_BASE_IDX : HAL_POW_5G_LPF_BASE_IDX)  /* 基准LPF Index */
-#define HAL_POW_DAC_BASE_IDX(_en_band)      ((_en_band == WLAN_BAND_2G) ? HAL_POW_2G_DAC_BASE_IDX : HAL_POW_5G_DAC_BASE_IDX)  /* 基准DAC Index */
+#define HAL_POW_2G_LPF_BASE_IDX             2           /* 2G????LPF Index */
+#define HAL_POW_2G_DAC_BASE_IDX             0           /* 2G????DAC Index */
+#define HAL_POW_5G_LPF_BASE_IDX             3           /* 5G????LPF Index */
+#define HAL_POW_5G_DAC_BASE_IDX             2           /* 5G????DAC Index */
+#define HAL_POW_LPF_BASE_IDX(_en_band)      ((_en_band == WLAN_BAND_2G) ? HAL_POW_2G_LPF_BASE_IDX : HAL_POW_5G_LPF_BASE_IDX)  /* ????LPF Index */
+#define HAL_POW_DAC_BASE_IDX(_en_band)      ((_en_band == WLAN_BAND_2G) ? HAL_POW_2G_DAC_BASE_IDX : HAL_POW_5G_DAC_BASE_IDX)  /* ????DAC Index */
 
 
 #ifdef _PRE_WLAN_1103_PILOT
 #define HAL_UPC_DATA_REG_NUM                1
-#define HAL_POW_UPC_LOW_START_IDX           0           /* UPC低档位的起始索引 */
-#define HAL_POW_CFR_BASE_IDX                0           /* 基准cfr_index Index */
-#define HAL_POW_DPD_TPC_BASE_IDX            0           /* 基准dpd_tpc_lv Index */
-#define HAL_POW_DELTA_DBB_SCAL_BASE_IDX     HAL_DBB_SCALING_FOR_MAX_TXPWR_BASE  /* 基准delta_dbb_scaling Index */
+#define HAL_POW_UPC_LOW_START_IDX           0           /* UPC???????????????? */
+#define HAL_POW_CFR_BASE_IDX                0           /* ????cfr_index Index */
+#define HAL_POW_DPD_TPC_BASE_IDX            0           /* ????dpd_tpc_lv Index */
+#define HAL_POW_DELTA_DBB_SCAL_BASE_IDX     HAL_DBB_SCALING_FOR_MAX_TXPWR_BASE  /* ????delta_dbb_scaling Index */
 #else
-#define HAL_POW_UPC_LOW_START_IDX           1           /* UPC低档位的起始索引 */
+#define HAL_POW_UPC_LOW_START_IDX           1           /* UPC???????????????? */
 #define HAL_POW_UPC_LUT_IDX_FOR_FAR_DIST    0
 #define HAL_POW_UPC_LUT_IDX_FOR_CALI_CODE   1
-#define HAL_POW_DBB_SCAL2_C0_BASE_IDX       0           /* 基准dbb_scale2_c0 Index */
-#define HAL_POW_DBB_SCAL2_C1_BASE_IDX       0           /* 基准dbb_scale2_c1 Index */
+#define HAL_POW_DBB_SCAL2_C0_BASE_IDX       0           /* ????dbb_scale2_c0 Index */
+#define HAL_POW_DBB_SCAL2_C1_BASE_IDX       0           /* ????dbb_scale2_c1 Index */
 
-/* 单个通道的UPC数据寄存器数目 */
+/* ??????????UPC?????????????? */
 #define HAL_UPC_DATA_REG_NUM      (HAL_POW_UPC_LUT_NUM >> 2)
 #endif
-/*TPC档位设置*/
-#define HAL_POW_LEVEL_NUM               5                   /*算法总档位数目*/
-#define HAL_POW_ADJUST_LEVEL_NUM        HAL_POW_LEVEL_NUM   /*算法支持可调整的档位数目*/
-#define HAL_POW_MAX_POW_LEVEL           0                   /*算法的最大功率档位*/
-#define HAL_POW_MIN_POW_LEVEL           (HAL_POW_LEVEL_NUM - 1)         /*算法的最小功率档位*/
-#define HAL_POW_LEVEL_DOWN_LIMIT        (HAL_POW_ADJUST_LEVEL_NUM - 1)    /*功率衰减的最小档位*/
-#define HAL_POW_LEVEL_UP_LIMIT          (HAL_POW_MAX_POW_LEVEL)           /*功率回升的最大档位*/
-#define HAL_POW_RF_LIMIT_POW_LEVEL      (HAL_POW_LEVEL_NUM)    /*极远距离的功率档位标识*/
-#define HAL_POW_INVALID_POW_LEVEL        0xff        /*无效功率档位*/
+/*TPC????????*/
+#define HAL_POW_LEVEL_NUM               5                   /*??????????????*/
+#define HAL_POW_ADJUST_LEVEL_NUM        HAL_POW_LEVEL_NUM   /*????????????????????????*/
+#define HAL_POW_MAX_POW_LEVEL           0                   /*??????????????????*/
+#define HAL_POW_MIN_POW_LEVEL           (HAL_POW_LEVEL_NUM - 1)         /*??????????????????*/
+#define HAL_POW_LEVEL_DOWN_LIMIT        (HAL_POW_ADJUST_LEVEL_NUM - 1)    /*??????????????????*/
+#define HAL_POW_LEVEL_UP_LIMIT          (HAL_POW_MAX_POW_LEVEL)           /*??????????????????*/
+#define HAL_POW_RF_LIMIT_POW_LEVEL      (HAL_POW_LEVEL_NUM)    /*??????????????????????*/
+#define HAL_POW_INVALID_POW_LEVEL        0xff        /*????????????*/
 
-#define HAL_POW_2G_1MBPS_RATE_POW_IDX       0               /* 2G 1Mbps对应的功率表索引 */
-#define HAL_POW_5G_6MBPS_RATE_POW_IDX       4               /* 5G 6Mbps对应的功率表索引 */
-#define HAL_POW_5G_6P5MBPS_RATE_POW_IDX     12              /* 5G 6.5Mbps对应的功率表索引, ht20 mcs0 */
+#define HAL_POW_2G_1MBPS_RATE_POW_IDX       0               /* 2G 1Mbps???????????????? */
+#define HAL_POW_5G_6MBPS_RATE_POW_IDX       4               /* 5G 6Mbps???????????????? */
+#define HAL_POW_5G_6P5MBPS_RATE_POW_IDX     12              /* 5G 6.5Mbps????????????????, ht20 mcs0 */
 
-/* 发送队列异常检测描述符最大个数 */
+/* ?????????????????????????????? */
 #define HAL_TXQ_STALL_CHECK_DEPTH           2
 
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_DEV)
@@ -412,7 +412,7 @@ typedef oal_uint8 hal_tx_queue_type_enum_uint8;
 #define HAL_GET_CFR_IDEX_FROM_POW_CODE(_ul_pow_code)     ((oal_uint8)(OAL_GET_BITS((_ul_pow_code), NUM_2_BITS, BIT_OFFSET_2)))
 #define HAL_GET_DPD_TPC_LVL_FROM_POW_CODE(_ul_pow_code)  ((oal_uint8)(OAL_GET_BITS((_ul_pow_code), NUM_2_BITS, BIT_OFFSET_0)))
 
-// TODO: pilot超远距暂不处理，后面考虑DPD来实现
+// TODO: pilot????????????????????????DPD??????
 #define HAL_POW_SET_RF_LIMIT_POW(_pow_level,_ul_code)    \
     if((_pow_level) == HAL_POW_RF_LIMIT_POW_LEVEL)  { ; } \
 
@@ -495,10 +495,10 @@ typedef oal_uint8 hal_tx_queue_type_enum_uint8;
           ((_aus_rf_pow_limit)[(_uc_idx)][(_uc_end_chain)]))
 
 
-/* 获取当前帧所使用的协议模式 */
+/* ?????????????????????????? */
 #define HAL_GET_DATA_PROTOCOL_MODE(_val)      ((_val) >> 6)
 
-/* hal device下挂算法的私有结构体 */
+/* hal device???????????????????? */
 #define HAL_DEV_ALG_PRIV(_pst_hal_dev)                  ((_pst_hal_dev)->p_alg_priv)
 
 #define GET_DEV_RSSI_TRIGGER(_pst_hal_dev)       (_pst_hal_dev->st_rssi.en_rssi_trigger)
@@ -520,7 +520,7 @@ typedef oal_uint8 hal_tx_queue_type_enum_uint8;
 #define GET_RSSI(_c_rssi_dbm, _c_rssi_ant0, _c_rssi_ant1) _c_rssi_dbm
 #endif
 
-/* hal device下挂接收描述符控制相关宏定义 */
+/* hal device???????????????????????????? */
 #define GET_DEV_RX_DSCR_MAX_USED_CNT(_pst_hal_dev, _uc_queue_id) \
     (((alg_rx_dscr_ctl_alg_info_stru *)((_pst_hal_dev)->st_rx_dscr_ctl.pst_rx_dscr_ctl_alg_info + (_uc_queue_id)))->us_rx_max_dscr_used_cnt)
 
@@ -553,25 +553,25 @@ typedef oal_uint8 hal_tx_queue_type_enum_uint8;
 
 #ifdef _PRE_WLAN_FEATURE_TPC_OPT
 
-/* 获取hal dev下的TX功率控制相关的参数 */
+/* ????hal dev????TX?????????????????? */
 #define HAL_DEV_GET_TX_PWR_CTRL(_pst_hal_dev) (((hal_to_dmac_device_stru *)(_pst_hal_dev))->st_tx_pwr_ctrl)
 
-/* 获取各速率最大发送功率 */
+/* ?????????????????????? */
 #define HAL_DEV_GET_PER_RATE_MAX_POW_CTRL(_pst_hal_dev, _uc_rate_idx, _en_freq_band, _uc_subband_idx) \
     ((oal_uint8)(((HAL_DEV_GET_TX_PWR_CTRL(_pst_hal_dev)).pst_max_tx_pow_per_rate_ctrl->auc_rate_max_tx_pow_ctrl_table[OAL_MIN(HAL_POW_RATE_POW_CODE_TABLE_LEN - 1, _uc_rate_idx)][(_en_freq_band)]) \
       + ((WLAN_BAND_5G == (_en_freq_band)) ? g_ac_5g_delt_txpwr_base_params[(_uc_subband_idx)] : 0)))
 
-/* 获取各速率的dbb scaling */
+/* ????????????dbb scaling */
 #define HAL_DEV_GET_PER_RATE_DBB_SCALING_CTRL(_pst_hal_dev, _uc_scale_idx) \
         ((HAL_DEV_GET_TX_PWR_CTRL(_pst_hal_dev)).aus_dbb_scale_per_rate_ctrl[(_uc_scale_idx)])
 
-/* 获取各速率的lpf idx */
+/* ????????????lpf idx */
 #define HAL_DEV_GET_PER_RATE_LPF_IDX_CTRL(_pst_hal_dev, _en_freq_band, _uc_rate_idx) \
  ((WLAN_BAND_2G == _en_freq_band) ? \
     (HAL_DEV_GET_TX_PWR_CTRL(_pst_hal_dev).puc_lpf_idx_per_rate_ctrl_2g[OAL_MIN(HAL_POW_RATE_POW_CODE_TABLE_2G_LEN - 1, (_uc_rate_idx))]) : \
      (HAL_DEV_GET_TX_PWR_CTRL(_pst_hal_dev).puc_lpf_idx_per_rate_ctrl_5g[OAL_MIN(HAL_POW_RATE_POW_CODE_TABLE_5G_LEN - 1, (_uc_rate_idx))]))
 
-/* 设置各速率的lpf idx */
+/* ????????????lpf idx */
 #define HAL_DEV_SET_PER_RATE_LPF_IDX_CTRL(_pst_hal_dev, _en_freq_band, _uc_rate_idx, _uc_lpf_idx) \
 do {    \
     if (WLAN_BAND_2G == (_en_freq_band)) \
@@ -580,17 +580,17 @@ do {    \
          {(HAL_DEV_GET_TX_PWR_CTRL(_pst_hal_dev).puc_lpf_idx_per_rate_ctrl_5g[OAL_MIN(HAL_POW_RATE_POW_CODE_TABLE_5G_LEN - 1, (_uc_rate_idx))]) = (oal_uint8)(_uc_lpf_idx);} \
    } while(0)
 
-/* 获取tpc档位对应的目标功率增益 */
+/* ????tpc?????????????????????? */
 #define HAL_DEV_GET_IDX_TARGET_POW_GAIN(_pst_hal_dev, _uc_pow_idx, _en_freq_band) \
             ((HAL_DEV_GET_TX_PWR_CTRL(_pst_hal_dev)).pst_tpc_lvl_vs_gain_ctrl->as_pow_level_table[(_uc_pow_idx)][(_en_freq_band)])
 
-/* 获取tpc档位对应的TPC CODE */
+/* ????tpc??????????TPC CODE */
 #define HAL_DEV_GET_PER_RATE_TPC_CODE_BY_LVL(_pst_hal_dev, _en_freq_band, _uc_rate_idx, _uc_pow_idx) \
      ((WLAN_BAND_2G == _en_freq_band) ? \
         (HAL_DEV_GET_TX_PWR_CTRL(_pst_hal_dev).pst_rate_pow_table_2g[_uc_rate_idx].aul_pow_code_level[(_uc_pow_idx)]) : \
          (HAL_DEV_GET_TX_PWR_CTRL(_pst_hal_dev).pst_rate_pow_table_5g[_uc_rate_idx].aul_pow_code_level[(_uc_pow_idx)]))
 
-/* 设置tpc档位对应的TPC CODE */
+/* ????tpc??????????TPC CODE */
 #define HAL_DEV_SET_PER_RATE_TPC_CODE_BY_LVL(_pst_hal_dev, _en_freq_band, _uc_rate_idx, _uc_pow_idx, _ul_pow_code) \
  do {    \
      if (WLAN_BAND_2G == (_en_freq_band)) \
@@ -599,13 +599,13 @@ do {    \
           {(HAL_DEV_GET_TX_PWR_CTRL(_pst_hal_dev).pst_rate_pow_table_5g[OAL_MIN(HAL_POW_RATE_POW_CODE_TABLE_5G_LEN - 1, (_uc_rate_idx))].aul_pow_code_level[(_uc_pow_idx)]) = (oal_uint32)(_ul_pow_code);} \
     } while(0)
 
-/* 获取tpc档位对应的实际功率增益 */
+/* ????tpc?????????????????????? */
 #define HAL_DEV_GET_PER_RATE_TPC_GAIN_BY_LVL(_pst_hal_dev, _en_freq_band, _uc_rate_idx, _uc_pow_idx) \
     ((WLAN_BAND_2G == _en_freq_band) ? \
        (HAL_DEV_GET_TX_PWR_CTRL(_pst_hal_dev).pst_rate_pow_table_2g[_uc_rate_idx].as_pow_gain_level[(_uc_pow_idx)]) : \
         (HAL_DEV_GET_TX_PWR_CTRL(_pst_hal_dev).pst_rate_pow_table_5g[_uc_rate_idx].as_pow_gain_level[(_uc_pow_idx)]))
 
-/* 设置tpc档位对应的实际功率增益 */
+/* ????tpc?????????????????????? */
 #define HAL_DEV_SET_PER_RATE_TPC_GAIN_BY_LVL(_pst_hal_dev, _en_freq_band, _uc_rate_idx, _uc_pow_idx, _s_pow_gain) \
     do {    \
         if (WLAN_BAND_2G == (_en_freq_band)) \
@@ -614,17 +614,17 @@ do {    \
              {(HAL_DEV_GET_TX_PWR_CTRL(_pst_hal_dev).pst_rate_pow_table_5g[(_uc_rate_idx)].as_pow_gain_level[(_uc_pow_idx)]) = (oal_int16)(_s_pow_gain);} \
        } while(0)
 
-/* 设置各速率基准最大发送功率,信道切换时获取实际目标发射功率 */
+/* ??????????????????????????,?????????????????????????????? */
 #define HAL_DEV_SET_PER_RATE_MAX_POW_CTRL(_pst_hal_dev, _uc_rate_idx, _en_freq_band) \
         ((HAL_DEV_GET_TX_PWR_CTRL(_pst_hal_dev)).pst_max_tx_pow_per_rate_ctrl->auc_rate_max_tx_pow_ctrl_table[OAL_MIN(HAL_POW_RATE_POW_CODE_TABLE_LEN - 1, _uc_rate_idx)][(_en_freq_band)])
 
-/* 计算PAPA=5.5时，对应的功率补偿值 单位0.1dBm */
-/* 根据实验室测试数据，一次拟合得到计算功率偏差公式0.25+0.03*delt_power，推导对应6M&MCS0有如下功率补偿值计算公式，小于-0.5dB时不需要补偿 */
+/* ????PAPA=5.5???????????????????? ????0.1dBm */
+/* ????????????????????????????????????????????????0.25+0.03*delt_power??????????6M&MCS0??????????????????????????????-0.5dB???????????? */
 #define HAL_DEV_CFR_GET_COMPSEN_BY_DELTPOW(_c_delt_pow) ((oal_uint8)(((_c_delt_pow) < -5) ? 0 : (((3*(_c_delt_pow) + 25) + 5) / 10)))
 
 #else
 
-/* 获取各速率的lpf idx */
+/* ????????????lpf idx */
 #define HAL_DEV_GET_PER_RATE_LPF_IDX_CTRL(_pst_hal_dev, _en_freq_band, _uc_rate_idx) \
     ((WLAN_BAND_2G == _en_freq_band) ? \
     (g_uc_rate_lpf_code_tbl_2g[OAL_MIN(HAL_POW_RATE_POW_CODE_TABLE_2G_LEN - 1, (_uc_rate_idx))]) : \
@@ -633,9 +633,9 @@ do {    \
 #endif
 
 /*****************************************************************************
-  3 枚举定义
+  3 ????????
 *****************************************************************************/
-/* 2.4GHz频段: 信道号对应的信道索引值 */
+/* 2.4GHz????: ?????????????????????? */
 typedef enum
 {
     HAL_2G_CHANNEL1  = 0,
@@ -669,11 +669,11 @@ typedef oal_uint8 hal_fcs_protect_type_enum_uint8;
 
 typedef enum
 {
-    HAL_FCS_SERVICE_TYPE_DBAC      = 0,    /* DBAC业务    */
-    HAL_FCS_SERVICE_TYPE_SCAN,             /* 扫描业务    */
-    HAL_FCS_SERVICE_TYPE_M2S,              /* m2s切换业务 */
-    HAL_FCS_SERVICE_TYPE_BTCOEX_NORMAL,    /* btcoex共存业务 */
-    HAL_FCS_SERVICE_TYPE_BTCOEX_LDAC,      /* btcoex共存业务 */
+    HAL_FCS_SERVICE_TYPE_DBAC      = 0,    /* DBAC????    */
+    HAL_FCS_SERVICE_TYPE_SCAN,             /* ????????    */
+    HAL_FCS_SERVICE_TYPE_M2S,              /* m2s???????? */
+    HAL_FCS_SERVICE_TYPE_BTCOEX_NORMAL,    /* btcoex???????? */
+    HAL_FCS_SERVICE_TYPE_BTCOEX_LDAC,      /* btcoex???????? */
 
     HAL_FCS_PROTECT_NOTIFY_BUTT
 }hal_fcs_service_type_enum;
@@ -711,7 +711,7 @@ typedef enum
 }hal_oper_mode_enum;
 typedef oal_uint8 hal_oper_mode_enum_uint8;
 
-/**** RF测试用，用于指示配置TX描述符字段 ****/
+/**** RF????????????????????TX?????????? ****/
 typedef enum
 {
     HAL_RF_TEST_DATA_RATE_ZERO,
@@ -746,7 +746,7 @@ typedef oal_uint8 hal_resp_pow_lut_oper_type_enum_uint8;
 
 
 /*****************************************************************************
-  3.1 队列相关枚举定义
+  3.1 ????????????????
 *****************************************************************************/
 
 #ifndef _PRE_WLAN_MAC_BUGFIX_MCAST_HW_Q
@@ -787,10 +787,10 @@ typedef oal_uint8 hal_resp_pow_lut_oper_type_enum_uint8;
         WLAN_WME_AC_BE)
 #endif
 
-#define HAL_TX_QUEUE_MGMT               HAL_TX_QUEUE_HI     /* 0~3代表AC发送队列，4代表管理帧、控制帧发送队列 */
+#define HAL_TX_QUEUE_MGMT               HAL_TX_QUEUE_HI     /* 0~3????AC??????????4?????????????????????????? */
 
 /*****************************************************************************
-  3.3 描述符相关枚举定义
+  3.3 ??????????????????
 *****************************************************************************/
 typedef enum
 {
@@ -828,33 +828,33 @@ typedef enum
     HAL_RX_TKIP_MIC_FAILURE       = 0x9,
     HAL_RX_BIP_MIC_FAILURE        = 0xA,
     HAL_RX_BIP_REPLAY_FAILURE     = 0xB,
-    HAL_RX_MUTI_KEY_SEARCH_FAILURE= 0xC     /*组播广播*/
+    HAL_RX_MUTI_KEY_SEARCH_FAILURE= 0xC     /*????????*/
 } hal_rx_status_enum;
 typedef oal_uint8 hal_rx_status_enum_uint8;
 
 typedef enum
 {
-    HAL_TX_INVALID   = 0,                /*无效*/
-    HAL_TX_SUCC,                         /*成功*/
-    HAL_TX_FAIL,                         /*发送失败（超过重传限制：接收响应帧超时）*/
-    HAL_TX_TIMEOUT,                      /*lifetime超时（没法送出去）*/
-    HAL_TX_RTS_FAIL,                     /*RTS 发送失败（超出重传限制：接收cts超时）*/
-    HAL_TX_NOT_COMPRASS_BA,              /*收到的BA是非压缩块确认*/
-    HAL_TX_TID_MISMATCH,                 /*收到的BA中TID与发送时填写在描述符中的TID不一致*/
+    HAL_TX_INVALID   = 0,                /*????*/
+    HAL_TX_SUCC,                         /*????*/
+    HAL_TX_FAIL,                         /*????????????????????????????????????????*/
+    HAL_TX_TIMEOUT,                      /*lifetime??????????????????*/
+    HAL_TX_RTS_FAIL,                     /*RTS ????????????????????????????cts??????*/
+    HAL_TX_NOT_COMPRASS_BA,              /*??????BA??????????????*/
+    HAL_TX_TID_MISMATCH,                 /*??????BA??TID????????????????????????TID??????*/
     HAL_TX_KEY_SEARCH_FAIL,              /* Key search failed*/
-    HAL_TX_AMPDU_MISMATCH,               /*描述符异常*/
-    HAL_TX_PENDING,                      /*02:没有中断均为pending;03:发送过程中为pending */
-    HAL_TX_FAIL_ACK_ERROR,               /*发送失败（超过重传限制：接收到的响应帧错误）*/
-    HAL_TX_RTS_FAIL_CTS_ERROR,           /*RTS发送失败（超出重传限制：接收到的CTS错误）*/
-    HAL_TX_FAIL_ABORT,                   /*发送失败（因为abort）*/
-    HAL_TX_FAIL_STATEMACHINE_PHY_ERROR,  /*MAC发送该帧异常结束（状态机超时、phy提前结束等原因）*/
-    HAL_TX_SOFT_PSM_BACK,                /*软件节能回退*/
-    HAL_TX_AMPDU_BITMAP_MISMATCH,        /*硬件解析bitmap，当前mpdu未被确认*/
+    HAL_TX_AMPDU_MISMATCH,               /*??????????*/
+    HAL_TX_PENDING,                      /*02:????????????pending;03:????????????pending */
+    HAL_TX_FAIL_ACK_ERROR,               /*????????????????????????????????????????????*/
+    HAL_TX_RTS_FAIL_CTS_ERROR,           /*RTS????????????????????????????????CTS??????*/
+    HAL_TX_FAIL_ABORT,                   /*??????????????abort??*/
+    HAL_TX_FAIL_STATEMACHINE_PHY_ERROR,  /*MAC??????????????????????????????phy????????????????*/
+    HAL_TX_SOFT_PSM_BACK,                /*????????????*/
+    HAL_TX_AMPDU_BITMAP_MISMATCH,        /*????????bitmap??????mpdu????????*/
 } hal_tx_dscr_status_enum;
 typedef oal_uint8 hal_tx_status_enum_uint8;
 
 
-/* 接收描述符队列状态 */
+/* ?????????????????? */
 typedef enum
 {
     HAL_DSCR_QUEUE_INVALID  = 0,
@@ -870,7 +870,7 @@ typedef enum
 }hal_dscr_queue_status_enum;
 typedef oal_uint8 hal_dscr_queue_status_enum_uint8;
 
-/* 接收描述符队列号 */
+/* ???????????????? */
 typedef enum
 {
     HAL_RX_DSCR_NORMAL_PRI_QUEUE = 0,
@@ -893,24 +893,24 @@ typedef enum
 typedef oal_uint8 hal_rx_add_dscr_handle_type_enum_uint8;
 
 
-/* HAL模块需要抛出的WLAN_DRX事件子类型的定义
- 说明:该枚举需要和dmac_wlan_drx_event_sub_type_enum_uint8枚举一一对应 */
+/* HAL??????????????WLAN_DRX????????????????
+ ????:????????????dmac_wlan_drx_event_sub_type_enum_uint8???????????? */
 typedef enum
 {
-    HAL_WLAN_DRX_EVENT_SUB_TYPE_RX,     /* WLAN DRX 流程 */
+    HAL_WLAN_DRX_EVENT_SUB_TYPE_RX,     /* WLAN DRX ???? */
 
     HAL_WLAN_DRX_EVENT_SUB_TYPE_BUTT
 }hal_wlan_drx_event_sub_type_enum;
 typedef oal_uint8 hal_wlan_drx_event_sub_type_enum_uint8;
 
-/* HAL模块需要抛出的WLAN_CRX事件子类型的定义
-   说明:该枚举需要和dmac_wlan_crx_event_sub_type_enum_uint8枚举一一对应 */
+/* HAL??????????????WLAN_CRX????????????????
+   ????:????????????dmac_wlan_crx_event_sub_type_enum_uint8???????????? */
 typedef enum
 {
-    HAL_WLAN_CRX_EVENT_SUB_TYPE_RX,    /* WLAN CRX 流程 */
+    HAL_WLAN_CRX_EVENT_SUB_TYPE_RX,    /* WLAN CRX ???? */
 
 #ifdef _PRE_WLAN_FEATURE_FTM
-    HAL_EVENT_DMAC_MISC_FTM_ACK_COMPLETE,   /* FTM ACK发送完成中断 */
+    HAL_EVENT_DMAC_MISC_FTM_ACK_COMPLETE,   /* FTM ACK???????????? */
 #endif
 
     HAL_WLAN_CRX_EVENT_SUB_TYPE_BUTT
@@ -935,11 +935,11 @@ typedef enum
 }hal_event_tbtt_sub_type_enum;
 typedef oal_uint8 hal_event_tbtt_sub_type_enum_uint8;
 
-/* 功率模式 */
+/* ???????? */
 typedef enum
 {
-    HAL_POW_MODE_MARGIN        = 0,    /* 有余量模式: 默认 */
-    HAL_POW_MODE_NO_MARGIN     = 1,    /* 没有余量模式 */
+    HAL_POW_MODE_MARGIN        = 0,    /* ??????????: ???? */
+    HAL_POW_MODE_NO_MARGIN     = 1,    /* ???????????? */
 
     HAL_POW_MODE_BUTT
 }hal_pow_mode_enum;
@@ -964,7 +964,7 @@ typedef enum
     HAL_COEX_SW_IRQ_LTE_TX_ASSERT     = 0x4,  /* BIT2 */
     HAL_COEX_SW_IRQ_LTE_TX_DEASSERT   = 0x8,  /* BIT3 */
 #if(_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1102_DEV)
-    HAL_COEX_SW_IRQ_BT                = 0x20,  /* 02芯片问题，需要配置为BIT5 */
+    HAL_COEX_SW_IRQ_BT                = 0x20,  /* 02????????????????????BIT5 */
 #else
     HAL_COEX_SW_IRQ_BT                = 0x10,  /* BIT4 */
 #endif
@@ -973,97 +973,97 @@ typedef enum
 }hal_coex_sw_irq_type_enum;
 typedef oal_uint8 hal_coex_sw_irq_type_enum_uint8;
 
-/* 检查是否为11b 1M速率 */
+/* ??????????11b 1M???? */
 #define HAL_PHY_11B_1M_RATE(_a, _b)  ((WLAN_11B_PHY_PROTOCOL_MODE == _a) && (0 == _b))
 
 /*****************************************************************************
-  3.4 中断相关枚举定义
+  3.4 ????????????????
 *****************************************************************************/
 #if ((_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_DEV) || (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_HOST))
-/* 因为mac error和dmac misc优先级一致，03将high prio做实时事件队列来处理，mac error并入dmac misc */
-/****3.4.1 实时事件中断类型 ************************************************/
+/* ????mac error??dmac misc????????????03??high prio??????????????????????mac error????dmac misc */
+/****3.4.1 ???????????????? ************************************************/
 typedef enum
 {
-    HAL_EVENT_DMAC_HIGH_PRIO_BTCOEX_PS,        /* BTCOEX ps中断, 因为rom化，目前只能放置一个 */
-    HAL_EVENT_DMAC_HIGH_PRIO_BTCOEX_LDAC,      /* BTCOEX LDAC中断 */
+    HAL_EVENT_DMAC_HIGH_PRIO_BTCOEX_PS,        /* BTCOEX ps????, ????rom???????????????????? */
+    HAL_EVENT_DMAC_HIGH_PRIO_BTCOEX_LDAC,      /* BTCOEX LDAC???? */
 
     HAL_EVENT_DMAC_HIGH_PRIO_SUB_TYPE_BUTT
 }hal_event_dmac_high_prio_sub_type_enum;
 typedef oal_uint8 hal_event_dmac_high_prio_sub_type_enum_uint8;
 
 #else
-/****3.4.1 芯片错误中断类型 ************************************************/
+/****3.4.1 ???????????????? ************************************************/
 typedef enum
 {
-    HAL_EVENT_ERROR_IRQ_MAC_ERROR,      /* MAC错误中断时间*/
-    HAL_EVENT_ERROR_IRQ_SOC_ERROR,      /* SOC错误中断事件*/
+    HAL_EVENT_ERROR_IRQ_MAC_ERROR,      /* MAC????????????*/
+    HAL_EVENT_ERROR_IRQ_SOC_ERROR,      /* SOC????????????*/
 
     HAL_EVENT_ERROR_IRQ_SUB_TYPE_BUTT
 }hal_event_error_irq_sub_type_enum;
 typedef oal_uint8 hal_event_error_irq_sub_type_enum_uint8;
 #endif
 
-/****3.4.2  MAC错误中断类型 (枚举值与错误中断状态寄存器的位一一对应!)********/
+/****3.4.2  MAC???????????? (??????????????????????????????????????!)********/
 typedef enum
 {
-    HAL_MAC_ERROR_PARA_CFG_ERR                  = 0,        /*描述符参数配置异常,包括AMPDU长度配置不匹配,AMPDU中MPDU长度超长,sub msdu num错误*/
+    HAL_MAC_ERROR_PARA_CFG_ERR                  = 0,        /*??????????????????,????AMPDU??????????????,AMPDU??MPDU????????,sub msdu num????*/
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1151)
-    HAL_MAC_ERROR_RXBUFF_LEN_TOO_SMALL          = 1,        /*接收非AMSDU帧长大于RxBuff大小异常*/
+    HAL_MAC_ERROR_RXBUFF_LEN_TOO_SMALL          = 1,        /*??????AMSDU????????RxBuff????????*/
 #elif(_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_DEV)
-    HAL_MAC_ERROR_TX_VECTOR_ERR                 = 1,        /*发送vector中参数错误*/
+    HAL_MAC_ERROR_TX_VECTOR_ERR                 = 1,        /*????vector??????????*/
 #elif(_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1102_DEV)
     HAL_MAC_ERROR_RESERVED_2                    = 1,
 #endif
-    HAL_MAC_ERROR_BA_ENTRY_NOT_FOUND            = 2,        /*未找到BA会话表项异常0*/
-    HAL_MAC_ERROR_PHY_TRLR_TIME_OUT             = 3,        /*PHY_RX_TRAILER超时*/
-    HAL_MAC_ERROR_PHY_RX_FIFO_OVERRUN           = 4,        /*PHY_RX_FIFO满写异常*/
-    HAL_MAC_ERROR_TX_DATAFLOW_BREAK             = 5,        /*发送帧数据断流*/
-    HAL_MAC_ERROR_RX_FSM_ST_TIMEOUT             = 6,        /*RX_FSM状态机超时*/
-    HAL_MAC_ERROR_TX_FSM_ST_TIMEOUT             = 7,        /*TX_FSM状态机超时*/
-    HAL_MAC_ERROR_RX_HANDLER_ST_TIMEOUT         = 8,        /*RX_HANDLER状态机超时*/
-    HAL_MAC_ERROR_TX_HANDLER_ST_TIMEOUT         = 9,        /*TX_HANDLER状态机超时*/
-    HAL_MAC_ERROR_TX_INTR_FIFO_OVERRUN          = 10,       /*TX 中断FIFO满写*/
-    HAL_MAC_ERROR_RX_INTR_FIFO_OVERRUN          = 11,       /*RX中断 FIFO满写*/
-    HAL_MAC_ERROR_HIRX_INTR_FIFO_OVERRUN        = 12,       /*HIRX中断FIFO满写*/
-    HAL_MAC_ERROR_UNEXPECTED_RX_Q_EMPTY         = 13,       /*接收到普通优先级帧但此时RX BUFFER指针为空*/
-    HAL_MAC_ERROR_UNEXPECTED_HIRX_Q_EMPTY       = 14,       /*接收到高优先级帧但此时HI RX BUFFER指针为空*/
-    HAL_MAC_ERROR_BUS_RLEN_ERR                  = 15,       /*总线读请求长度为0异常*/
-    HAL_MAC_ERROR_BUS_RADDR_ERR                 = 16,       /*总线读请求地址无效异常*/
-    HAL_MAC_ERROR_BUS_WLEN_ERR                  = 17,       /*总线写请求长度为0异常*/
-    HAL_MAC_ERROR_BUS_WADDR_ERR                 = 18,       /*总线写请求地址无效异常*/
-    HAL_MAC_ERROR_TX_ACBK_Q_OVERRUN             = 19,       /*tx acbk队列fifo满写*/
-    HAL_MAC_ERROR_TX_ACBE_Q_OVERRUN             = 20,       /*tx acbe队列fifo满写*/
-    HAL_MAC_ERROR_TX_ACVI_Q_OVERRUN             = 21,       /*tx acvi队列fifo满写*/
-    HAL_MAC_ERROR_TX_ACVO_Q_OVERRUN             = 22,       /*tx acv0队列fifo满写*/
-    HAL_MAC_ERROR_TX_HIPRI_Q_OVERRUN            = 23,       /*tx hipri队列fifo满写*/
-    HAL_MAC_ERROR_MATRIX_CALC_TIMEOUT           = 24,       /*matrix计算超时*/
-    HAL_MAC_ERROR_CCA_TIME_OUT                  = 25,       /*cca超时*/
-    HAL_MAC_ERROR_DCOL_DATA_OVERLAP             = 26,       /*数采overlap告警*/
-    HAL_MAC_ERROR_BEACON_MISS                   = 27,       /*连续发送beacon失败*/
-    HAL_MAC_ERROR_INTR_FIFO_UNEXPECTED_READ     = 28,       /*interrupt fifo空读异常*/
-    HAL_MAC_ERROR_UNEXPECTED_RX_DESC_ADDR       = 29,       /*rx desc地址错误异常*/
-    HAL_MAC_ERROR_RX_OVERLAP_ERR                = 30,       /*mac没有处理完前一帧,phy又上报了一帧异常*/
+    HAL_MAC_ERROR_BA_ENTRY_NOT_FOUND            = 2,        /*??????BA????????????0*/
+    HAL_MAC_ERROR_PHY_TRLR_TIME_OUT             = 3,        /*PHY_RX_TRAILER????*/
+    HAL_MAC_ERROR_PHY_RX_FIFO_OVERRUN           = 4,        /*PHY_RX_FIFO????????*/
+    HAL_MAC_ERROR_TX_DATAFLOW_BREAK             = 5,        /*??????????????*/
+    HAL_MAC_ERROR_RX_FSM_ST_TIMEOUT             = 6,        /*RX_FSM??????????*/
+    HAL_MAC_ERROR_TX_FSM_ST_TIMEOUT             = 7,        /*TX_FSM??????????*/
+    HAL_MAC_ERROR_RX_HANDLER_ST_TIMEOUT         = 8,        /*RX_HANDLER??????????*/
+    HAL_MAC_ERROR_TX_HANDLER_ST_TIMEOUT         = 9,        /*TX_HANDLER??????????*/
+    HAL_MAC_ERROR_TX_INTR_FIFO_OVERRUN          = 10,       /*TX ????FIFO????*/
+    HAL_MAC_ERROR_RX_INTR_FIFO_OVERRUN          = 11,       /*RX???? FIFO????*/
+    HAL_MAC_ERROR_HIRX_INTR_FIFO_OVERRUN        = 12,       /*HIRX????FIFO????*/
+    HAL_MAC_ERROR_UNEXPECTED_RX_Q_EMPTY         = 13,       /*????????????????????????RX BUFFER????????*/
+    HAL_MAC_ERROR_UNEXPECTED_HIRX_Q_EMPTY       = 14,       /*??????????????????????HI RX BUFFER????????*/
+    HAL_MAC_ERROR_BUS_RLEN_ERR                  = 15,       /*????????????????0????*/
+    HAL_MAC_ERROR_BUS_RADDR_ERR                 = 16,       /*??????????????????????*/
+    HAL_MAC_ERROR_BUS_WLEN_ERR                  = 17,       /*????????????????0????*/
+    HAL_MAC_ERROR_BUS_WADDR_ERR                 = 18,       /*??????????????????????*/
+    HAL_MAC_ERROR_TX_ACBK_Q_OVERRUN             = 19,       /*tx acbk????fifo????*/
+    HAL_MAC_ERROR_TX_ACBE_Q_OVERRUN             = 20,       /*tx acbe????fifo????*/
+    HAL_MAC_ERROR_TX_ACVI_Q_OVERRUN             = 21,       /*tx acvi????fifo????*/
+    HAL_MAC_ERROR_TX_ACVO_Q_OVERRUN             = 22,       /*tx acv0????fifo????*/
+    HAL_MAC_ERROR_TX_HIPRI_Q_OVERRUN            = 23,       /*tx hipri????fifo????*/
+    HAL_MAC_ERROR_MATRIX_CALC_TIMEOUT           = 24,       /*matrix????????*/
+    HAL_MAC_ERROR_CCA_TIME_OUT                  = 25,       /*cca????*/
+    HAL_MAC_ERROR_DCOL_DATA_OVERLAP             = 26,       /*????overlap????*/
+    HAL_MAC_ERROR_BEACON_MISS                   = 27,       /*????????beacon????*/
+    HAL_MAC_ERROR_INTR_FIFO_UNEXPECTED_READ     = 28,       /*interrupt fifo????????*/
+    HAL_MAC_ERROR_UNEXPECTED_RX_DESC_ADDR       = 29,       /*rx desc????????????*/
+    HAL_MAC_ERROR_RX_OVERLAP_ERR                = 30,       /*mac????????????????,phy????????????????*/
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1151) && defined(_PRE_WLAN_PRODUCT_1151V200)
-    HAL_MAC_ERROR_NAV_THRESHOLD_ERR             = 31,       /* NAV阈值超时 */
+    HAL_MAC_ERROR_NAV_THRESHOLD_ERR             = 31,       /* NAV???????? */
 #else
-    HAL_MAC_ERROR_RESERVED_31                   = 31,       /* 保留位 */
+    HAL_MAC_ERROR_RESERVED_31                   = 31,       /* ?????? */
 #endif
 #if(_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1102_DEV) || (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_DEV)
-    HAL_MAC_ERROR_TX_ACBE_BACKOFF_TIMEOUT       = 32,       /*发送BE队列退避超时*/
-    HAL_MAC_ERROR_TX_ACBK_BACKOFF_TIMEOUT       = 33,       /*发送BK队列退避超时*/
-    HAL_MAC_ERROR_TX_ACVI_BACKOFF_TIMEOUT       = 34,       /*发送VI队列退避超时*/
-    HAL_MAC_ERROR_TX_ACVO_BACKOFF_TIMEOUT       = 35,       /*发送VO队列退避超时*/
-    HAL_MAC_ERROR_TX_HIPRI_BACKOFF_TIMEOUT      = 36,       /*发送高优先级队列退避超时*/
-    HAL_MAC_ERROR_RX_SMALL_Q_EMPTY              = 37,       /*接收普通队列的小包，但是小包队列指针为空*/
-    HAL_MAC_ERROR_PARA_CFG_2ERR                 = 38,       /*发送描述符中AMPDU中MPDU长度过长*/
-    HAL_MAC_ERROR_PARA_CFG_3ERR                 = 39,       /*发送描述符中11a，11b，11g发送时，mpdu配置长度超过4095*/
-    HAL_MAC_ERROR_EDCA_ST_TIMEOUT               = 40,       /*CH_ACC_EDCA_CTRL状态机超时*/
+    HAL_MAC_ERROR_TX_ACBE_BACKOFF_TIMEOUT       = 32,       /*????BE????????????*/
+    HAL_MAC_ERROR_TX_ACBK_BACKOFF_TIMEOUT       = 33,       /*????BK????????????*/
+    HAL_MAC_ERROR_TX_ACVI_BACKOFF_TIMEOUT       = 34,       /*????VI????????????*/
+    HAL_MAC_ERROR_TX_ACVO_BACKOFF_TIMEOUT       = 35,       /*????VO????????????*/
+    HAL_MAC_ERROR_TX_HIPRI_BACKOFF_TIMEOUT      = 36,       /*????????????????????????*/
+    HAL_MAC_ERROR_RX_SMALL_Q_EMPTY              = 37,       /*????????????????????????????????????????*/
+    HAL_MAC_ERROR_PARA_CFG_2ERR                 = 38,       /*????????????AMPDU??MPDU????????*/
+    HAL_MAC_ERROR_PARA_CFG_3ERR                 = 39,       /*????????????11a??11b??11g????????mpdu????????????4095*/
+    HAL_MAC_ERROR_EDCA_ST_TIMEOUT               = 40,       /*CH_ACC_EDCA_CTRL??????????*/
 #if(_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_DEV)
-    HAL_MAC_ERROR_PARA_CFG_4ERR                 = 41,       /*发送描述符中11a/b/g发送时，打开了ampdu使能*/
-    HAL_MAC_ERROR_TX_BC_Q_OVERRUN               = 42,       /* TX广播帧队列fifo满写错误，最后一次写的地址丢弃*/
-    HAL_MAC_ERROR_BSS_NAV_PORT                  = 43,       /*接收到本bss的帧，duration很大，nav保护起作用*/
-    HAL_MAC_ERROR_OBSS_NAV_PORT                 = 44,       /*接收到其他obss的帧，duration很大，nav保护起作用*/
-    HAL_MAC_ERROR_BUS_RW_TIMEOUT                = 45,       /*读写访问超时*/
+    HAL_MAC_ERROR_PARA_CFG_4ERR                 = 41,       /*????????????11a/b/g??????????????ampdu????*/
+    HAL_MAC_ERROR_TX_BC_Q_OVERRUN               = 42,       /* TX??????????fifo??????????????????????????????*/
+    HAL_MAC_ERROR_BSS_NAV_PORT                  = 43,       /*????????bss??????duration??????nav??????????*/
+    HAL_MAC_ERROR_OBSS_NAV_PORT                 = 44,       /*??????????obss??????duration??????nav??????????*/
+    HAL_MAC_ERROR_BUS_RW_TIMEOUT                = 45,       /*????????????*/
 #endif
 #endif
     HAL_MAC_ERROR_TYPE_BUTT
@@ -1071,32 +1071,32 @@ typedef enum
 typedef oal_uint8 hal_mac_error_type_enum_uint8;
 
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1151)
-/****3.4.3 SOC错误中断类型 (需要在DMAC模块进行处理的error irq的类型定义)*****/
+/****3.4.3 SOC???????????? (??????DMAC??????????????error irq??????????)*****/
 typedef enum
 {
-    /* SOC错误中断 */
-    HAL_SOC_ERROR_BUCK_OCP,                                                 /* PMU BUCK过流中断 */
-    HAL_SOC_ERROR_BUCK_SCP,                                                 /* PMU BUCK短路中断 */
-    HAL_SOC_ERROR_OCP_RFLDO1,                                               /* PMU RFLDO1过流中断 */
-    HAL_SOC_ERROR_OCP_RFLDO2,                                               /* PMU RFLDO2过流中断 */
-    HAL_SOC_ERROR_OCP_CLDO,                                                 /* PMU CLDO过流中断 */
-    HAL_SOC_ERROR_RF_OVER_TEMP,                                             /* RF过热中断 */
-    HAL_SOC_ERROR_CMU_UNLOCK,                                               /* CMU PLL失锁中断 */
-    HAL_SOC_ERROR_PCIE_SLV_ERR,                                             /* PCIE总线错误中断 */
+    /* SOC???????? */
+    HAL_SOC_ERROR_BUCK_OCP,                                                 /* PMU BUCK???????? */
+    HAL_SOC_ERROR_BUCK_SCP,                                                 /* PMU BUCK???????? */
+    HAL_SOC_ERROR_OCP_RFLDO1,                                               /* PMU RFLDO1???????? */
+    HAL_SOC_ERROR_OCP_RFLDO2,                                               /* PMU RFLDO2???????? */
+    HAL_SOC_ERROR_OCP_CLDO,                                                 /* PMU CLDO???????? */
+    HAL_SOC_ERROR_RF_OVER_TEMP,                                             /* RF???????? */
+    HAL_SOC_ERROR_CMU_UNLOCK,                                               /* CMU PLL???????? */
+    HAL_SOC_ERROR_PCIE_SLV_ERR,                                             /* PCIE???????????? */
 
     HAL_SOC_ERROR_TYPE_BUTT
 }hal_soc_error_type_enum;
 typedef oal_uint8 hal_soc_error_type_enum_uint8;
 #endif
 
-/* DMAC MISC 子事件枚举定义 */
+/* DMAC MISC ?????????????? */
 typedef enum
 {
-    HAL_EVENT_DMAC_MISC_CH_STATICS_COMP,    /* 信道统计/测量完成中断 */
-    HAL_EVENT_DMAC_MISC_RADAR_DETECTED,     /* 检测到雷达信号 */
-    HAL_EVENT_DMAC_MISC_DFS_AUTH_CAC,       /* DFS认证CAC测试 */
+    HAL_EVENT_DMAC_MISC_CH_STATICS_COMP,    /* ????????/???????????? */
+    HAL_EVENT_DMAC_MISC_RADAR_DETECTED,     /* ?????????????? */
+    HAL_EVENT_DMAC_MISC_DFS_AUTH_CAC,       /* DFS????CAC???? */
     HAL_EVENT_DMAC_MISC_DBAC,               /* DBAC */
-    HAL_EVENT_DMAC_MISC_MWO_DET,            /* 微波炉识别中断 */
+    HAL_EVENT_DMAC_MISC_MWO_DET,            /* ?????????????? */
 #ifdef _PRE_WLAN_DFT_REG
     HAL_EVENT_DMAC_REG_REPORT,
 #endif
@@ -1113,14 +1113,14 @@ typedef enum
     HAL_EVENT_DMAC_P2P_NOA_ABSENT_END,
     HAL_EVENT_DMAC_P2P_CTWINDOW_END,
 #endif
-    HAL_EVENT_DMAC_BEACON_TIMEOUT,          /* 等待beacon帧超时 */
-    HAL_EVENT_DMAC_CALI_TO_HMAC,            /* 校准数据从dmac抛到hmac */
+    HAL_EVENT_DMAC_BEACON_TIMEOUT,          /* ????beacon?????? */
+    HAL_EVENT_DMAC_CALI_TO_HMAC,            /* ??????????dmac????hmac */
 
 #ifdef _PRE_WLAN_ONLINE_DPD
     HAL_EVENT_DMAC_DPD_TO_HMAC,
 #endif
 #ifdef _PRE_WLAN_RF_AUTOCALI
-    HAL_EVENT_DMAC_AUTOCALI_TO_HMAC,        /* 自动化校准数据从dmac抛到hmac */
+    HAL_EVENT_DMAC_AUTOCALI_TO_HMAC,        /* ????????????????dmac????hmac */
 #endif
     HAL_EVENT_DMAC_MISC_WOW_WAKE,
 
@@ -1129,26 +1129,26 @@ typedef enum
     HAL_EVENT_DMAC_DUAL_ANTENNA_SWITCH,
 #endif
 #ifdef _PRE_WLAN_FEATURE_PSD_ANALYSIS
-    HAL_EVENT_DMAC_MISC_PSD_COMPLETE,       /* PSD采集完成完成中断 */
+    HAL_EVENT_DMAC_MISC_PSD_COMPLETE,       /* PSD???????????????? */
 #endif
 #ifdef _PRE_WLAN_FEATURE_CSI
-    HAL_EVENT_DMAC_MISC_CSI_COMPLETE,       /* CSI完成中断 */
+    HAL_EVENT_DMAC_MISC_CSI_COMPLETE,       /* CSI???????? */
 #endif
 
 
 #ifdef _PRE_WLAN_FEATURE_GNSS_SCAN
-    HAL_EVENT_DMAC_MISC_IPC_IRQ,       /* IPC中断 */
+    HAL_EVENT_DMAC_MISC_IPC_IRQ,       /* IPC???? */
 #endif
 
 #ifdef _PRE_WLAN_FEATURE_NO_FRM_INT
-    HAL_EVENT_DMAC_MISC_BCN_NO_FRM,          /* 硬件解析无缓存帧中断 */
+    HAL_EVENT_DMAC_MISC_BCN_NO_FRM,          /* ???????????????????? */
 #endif
 
 #if ((_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_DEV) || (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_HOST))
-    HAL_EVENT_ERROR_IRQ_MAC_ERROR,          /* MAC错误中断时间*/
-    HAL_EVENT_ERROR_IRQ_SOC_ERROR,          /* SOC错误中断事件*/
+    HAL_EVENT_ERROR_IRQ_MAC_ERROR,          /* MAC????????????*/
+    HAL_EVENT_ERROR_IRQ_SOC_ERROR,          /* SOC????????????*/
 #endif
-    HAL_EVENT_DMAC_MISC_CHR,                /* dmac处理上报的chr事件*/
+    HAL_EVENT_DMAC_MISC_CHR,                /* dmac??????????chr????*/
 
 #ifdef _PRE_WLAN_FEATURE_BTCOEX
     HAL_EVENT_DMAC_BT_ASSOC_AP_CHECK,
@@ -1160,9 +1160,9 @@ typedef enum
 typedef oal_uint8  hal_dmac_misc_sub_type_enum_uint8;
 
 /*****************************************************************************
-  3.5 复位相关枚举定义
+  3.5 ????????????????
 *****************************************************************************/
-/****3.5.1  复位事件子类型定义 **********************************************/
+/****3.5.1  ?????????????????? **********************************************/
 typedef enum
 {
     HAL_RESET_HW_TYPE_ALL = 0,
@@ -1184,7 +1184,7 @@ typedef enum
 }hal_reset_hw_type_enum;
 typedef oal_uint8 hal_reset_hw_type_enum_uint8;
 
-/****3.5.1  复位MAC子模块定义 **********************************************/
+/****3.5.1  ????MAC?????????? **********************************************/
 typedef enum
 {
     HAL_RESET_MAC_ALL = 0,
@@ -1216,7 +1216,7 @@ typedef oal_uint8   hal_lpm_soc_set_enum_uint8;
 
 #if defined(_PRE_WLAN_FEATURE_SMPS) || defined(_PRE_WLAN_CHIP_TEST)
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1151)
-/* SMPS模式设置:  1151
+/* SMPS????????:  1151
   00 - SMPS_DISABLE
   01 - SMPS_STATIC
   10 - SMPS_DYNAMIC
@@ -1230,11 +1230,11 @@ typedef enum
     HAL_SMPS_MODE_BUTT
 }hal_smps_mode_enum;
 #else
-/*SMPS模式配置：  1103
-  00：SMPS_STATIC（始终单路接收）
-  01：SMPS_DYNAMIC
-  10：reserved
-  11：SMPS_DISABLE（始终多路接收）*/
+/*SMPS??????????  1103
+  00??SMPS_STATIC????????????????
+  01??SMPS_DYNAMIC
+  10??reserved
+  11??SMPS_DISABLE????????????????*/
 typedef enum
 {
     HAL_SMPS_MODE_STATIC = 0,
@@ -1272,22 +1272,22 @@ typedef oal_uint8 hal_isr_type_enum_uint8;
 
 
 
-/*性能测试相关*/
+/*????????????*/
 typedef enum {
-    HAL_ALWAYS_TX_DISABLE,         /* 禁用常发 */
-    HAL_ALWAYS_TX_RF,              /* 保留给RF测试广播报文*/
-    HAL_ALWAYS_TX_AMPDU_ENABLE,    /* 使能AMPDU聚合包常发 */
-    HAL_ALWAYS_TX_MPDU,            /* 使能非聚合包常发 */
+    HAL_ALWAYS_TX_DISABLE,         /* ???????? */
+    HAL_ALWAYS_TX_RF,              /* ??????RF????????????*/
+    HAL_ALWAYS_TX_AMPDU_ENABLE,    /* ????AMPDU?????????? */
+    HAL_ALWAYS_TX_MPDU,            /* ???????????????? */
     HAL_ALWAYS_TX_BUTT
 }hal_device_always_tx_state_enum;
 typedef oal_uint8 hal_device_always_tx_enum_uint8;
 
 
 typedef enum {
-    HAL_ALWAYS_RX_DISABLE,         /* 禁用常收 */
-    HAL_ALWAYS_RX_RESERVED,        /* 保留给RF测试广播报文*/
-    HAL_ALWAYS_RX_AMPDU_ENABLE,    /* 使能AMPDU聚合包常收 */
-    HAL_ALWAYS_RX_ENABLE,          /* 使能非聚合包常收 */
+    HAL_ALWAYS_RX_DISABLE,         /* ???????? */
+    HAL_ALWAYS_RX_RESERVED,        /* ??????RF????????????*/
+    HAL_ALWAYS_RX_AMPDU_ENABLE,    /* ????AMPDU?????????? */
+    HAL_ALWAYS_RX_ENABLE,          /* ???????????????? */
     HAL_ALWAYS_RX_BUTT
 }hal_device_always_rx_state_enum;
 typedef oal_uint8 hal_device_always_rx_enum_uint8;
@@ -1324,7 +1324,7 @@ typedef oal_uint8 hal_radar_filter_enum_uint8;
 typedef enum
 {
     HAL_VAP_STATE_INIT               = 0,
-    HAL_VAP_STATE_CONNECT            = 1,       /* sta独有 */
+    HAL_VAP_STATE_CONNECT            = 1,       /* sta???? */
     HAL_VAP_STATE_UP                 = 2,       /* VAP UP */
     HAL_VAP_STATE_PAUSE              = 3,       /* pause , for ap &sta */
 
@@ -1333,21 +1333,21 @@ typedef enum
 typedef oal_uint8  hal_vap_state_enum_uint8;
 
 /*****************************************************************************
-  3.6 加密相关枚举定义
+  3.6 ????????????????
 *****************************************************************************/
-/****3.6.1  芯片密钥类型定义 ************************************************/
+/****3.6.1  ???????????????? ************************************************/
 
 typedef enum
 {
     HAL_KEY_TYPE_TX_GTK              = 0,       /*Hi1102:HAL_KEY_TYPE_TX_IGTK */
     HAL_KEY_TYPE_PTK                 = 1,
     HAL_KEY_TYPE_RX_GTK              = 2,
-    HAL_KEY_TYPE_RX_GTK2             = 3,       /* 02使用，03和51不使用 */
+    HAL_KEY_TYPE_RX_GTK2             = 3,       /* 02??????03??51?????? */
     HAL_KEY_TYPE_BUTT
 } hal_cipher_key_type_enum;
 typedef oal_uint8 hal_cipher_key_type_enum_uint8;
 
-/****3.6.2  芯片加密算法类型对应芯片中的值 **********************************/
+/****3.6.2  ?????????????????????????????? **********************************/
 typedef enum
 {
     HAL_WEP40                      = 0,
@@ -1364,11 +1364,11 @@ typedef enum
 } hal_cipher_protocol_type_enum;
 typedef oal_uint8 hal_cipher_protocol_type_enum_uint8;
 
-/****3.6.3  芯片填写加密寄存器CE_LUT_CONFIG AP/STA **************************/
+/****3.6.3  ??????????????????CE_LUT_CONFIG AP/STA **************************/
 typedef enum
 {
-    HAL_AUTH_KEY = 0,      /* 表明该设备为认证者 */
-    HAL_SUPP_KEY = 1,      /* 表明该设备为申请者 */
+    HAL_AUTH_KEY = 0,      /* ?????????????????? */
+    HAL_SUPP_KEY = 1,      /* ?????????????????? */
 
     HAL_KEY_ORIGIN_BUTT,
 } hal_key_origin_enum;
@@ -1401,43 +1401,43 @@ typedef oal_uint8 hal_dyn_cali_adj_type_enum_uint8;
 
 
 /*****************************************************************************
-  4 全局变量声明
+  4 ????????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  5 消息头定义
+  5 ??????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  6 消息定义
+  6 ????????
 *****************************************************************************/
 
 
 /*****************************************************************************
-  7 STRUCT定义
+  7 STRUCT????
 *****************************************************************************/
-/* NVRAM 参数结构体 FCC认证 非FCC */
+/* NVRAM ?????????? FCC???? ??FCC */
 #ifdef _PRE_WLAN_1103_PILOT
 typedef struct
 {
-    oal_uint8       uc_max_txpower;     /* 最大发送功率 */
+    oal_uint8       uc_max_txpower;     /* ???????????? */
 }hal_cfg_custom_nvram_params_stru;
 #else
 typedef struct
 {
-    oal_uint8       uc_index;           /* 下标表示偏移 */
-    oal_uint8       uc_max_txpower;     /* 最大发送功率 */
-    oal_uint16      us_dbb_scale;       /* DBB幅值 */
+    oal_uint8       uc_index;           /* ???????????? */
+    oal_uint8       uc_max_txpower;     /* ???????????? */
+    oal_uint16      us_dbb_scale;       /* DBB???? */
 }hal_cfg_custom_nvram_params_stru;
 #endif
 
 typedef struct hal_pwr_fit_para_stru
 {
-    oal_int32 l_pow_par2;   /* 二次项系数 */
-    oal_int32 l_pow_par1;   /* 一次 */
-    oal_int32 l_pow_par0;   /* 常数项 */
+    oal_int32 l_pow_par2;   /* ?????????? */
+    oal_int32 l_pow_par1;   /* ???? */
+    oal_int32 l_pow_par0;   /* ?????? */
 }hal_pwr_fit_para_stru;
 
 typedef struct hal_pwr_efuse_amend_stru
@@ -1446,7 +1446,7 @@ typedef struct hal_pwr_efuse_amend_stru
     oal_int16 s_efuse_dc;     /* pdbuf-VGA offset */
 }hal_pwr_efuse_amend_stru;
 
-/* FCC/CE边带功率定制项 */
+/* FCC/CE?????????????? */
 typedef struct
 {
     oal_uint8 auc_5g_fcc_txpwr_limit_params_20M[HAL_NUM_5G_20M_SIDE_BAND];
@@ -1468,15 +1468,15 @@ typedef struct
 {
     hal_fcs_protect_type_enum_uint8     en_protect_type;
     hal_fcs_protect_cnt_enum_uint8      en_protect_cnt;
-    oal_uint16                          bit_protect_coex_pri          :2;     /* btcoex下使用，one pkt发送优先级 */
+    oal_uint16                          bit_protect_coex_pri          :2;     /* btcoex????????one pkt?????????? */
     oal_uint16                          bit_cfg_one_pkt_tx_vap_index  :4;
     oal_uint16                          bit_cfg_one_pkt_tx_peer_index :5;
     oal_uint16                          bit_rsv                       :5;
     oal_uint32                          ul_tx_mode;
     oal_uint32                          ul_tx_data_rate;
-    oal_uint16                          us_duration;    /* 单位 us */
+    oal_uint16                          us_duration;    /* ???? us */
     oal_uint16                          us_timeout;
-    oal_uint16                          us_wait_timeout;     /* 软件定时器超时时间 */
+    oal_uint16                          us_wait_timeout;     /* ?????????????????? */
     oal_uint8                           auc_rsv[2];
     oal_uint8                           auc_protect_frame[HAL_FCS_PROT_MAX_FRAME_LEN];
 }hal_one_packet_cfg_stru;
@@ -1491,23 +1491,23 @@ typedef struct
 
 typedef struct
 {
-    oal_uint8     uc_pn_tid;          /* tid,0~7, 对rx pn lut有效 */
-    oal_uint8     uc_pn_peer_idx;     /* 对端peer索引,0~31 */
+    oal_uint8     uc_pn_tid;          /* tid,0~7, ??rx pn lut???? */
+    oal_uint8     uc_pn_peer_idx;     /* ????peer????,0~31 */
     oal_uint8     uc_pn_key_type;     /* 1151 0:multicast,1:unicast */
-                                      /* 1102 tx pn: 0x0：GTK(multicast) 0x1：PTK(unicast) 0x2：IGTK others：reserved*/
-                                      /* 1102 rx pn: 0x0：组播/广播数据帧 0x1：单播qos数据帧 0x2：单播非qos数据帧
-                                         0x3：单播管理帧  0x4：组播/广播管理帧 others：保留 */
-    oal_uint8     uc_all_tid;         /* 0:仅配置TID,1:所有TID 对rx pn lut有效*/
-    oal_uint32    ul_pn_msb;          /* pn值的高32位,写操作时做入参，读操作时做返回值 */
-    oal_uint32    ul_pn_lsb;          /* pn值的低32位，写操作时做入参，读操作时做返回值 */
+                                      /* 1102 tx pn: 0x0??GTK(multicast) 0x1??PTK(unicast) 0x2??IGTK others??reserved*/
+                                      /* 1102 rx pn: 0x0??????/?????????? 0x1??????qos?????? 0x2????????qos??????
+                                         0x3????????????  0x4??????/?????????? others?????? */
+    oal_uint8     uc_all_tid;         /* 0:??????TID,1:????TID ??rx pn lut????*/
+    oal_uint32    ul_pn_msb;          /* pn??????32??,???????????????????????????????? */
+    oal_uint32    ul_pn_lsb;          /* pn??????32???????????????????????????????????? */
 }hal_pn_lut_cfg_stru;
 
 #ifdef _PRE_WLAN_FEATURE_USER_EXTEND
-/* pn号结构体 */
+/* pn???????? */
 typedef struct
 {
-    oal_uint32  ul_pn_msb;              /* pn值的高32位 */
-    oal_uint32  ul_pn_lsb;              /* pn值的低32位 */
+    oal_uint32  ul_pn_msb;              /* pn??????32?? */
+    oal_uint32  ul_pn_lsb;              /* pn??????32?? */
 }hal_pn_stru;
 #endif
 
@@ -1516,7 +1516,7 @@ typedef struct
 typedef struct
 {
     oal_uint8   uc_lut_index;           /* lut index */
-    oal_uint8   uc_peer_resp_dis;       /* 1:表示无论ack policy为何均不回复响应帧 */
+    oal_uint8   uc_peer_resp_dis;       /* 1:????????ack policy?????????????????? */
     oal_uint8   auc_resv[2];
 }hal_peer_resp_dis_cfg_stru;
 #endif
@@ -1550,11 +1550,11 @@ typedef struct {
                bit_bt_6slot         : 2,
                bit_ble_init         : 1,
                bit_bt_acl           : 1,
-               bit_bt_ldac          : 2,  /* 扩展1bit 0-sbc 1-APTXHD 2-660 3-990 */
+               bit_bt_ldac          : 2,  /* ????1bit 0-sbc 1-APTXHD 2-660 3-990 */
                bit_bt_hid           : 1,
                bit_ble_hid          : 1,
                bit_bt_20dbm         : 1,
-               bit_bt_siso_ap       : 1,  /* 是否申请切换到切siso 当前考虑a2dp业务，其他业务暂时hold */
+               bit_bt_siso_ap       : 1,  /* ????????????????siso ????????a2dp??????????????????hold */
                bit_bt_ba            : 1;
 } ble_status_stru;
 
@@ -1597,7 +1597,7 @@ typedef struct
 #endif
 
 /*****************************************************************************
-  7.0 寄存器配置结构
+  7.0 ??????????????
 *****************************************************************************/
 /*lint -e958*/
 #if (_PRE_WLAN_CHIP_VERSION == _PRE_WLAN_CHIP_FPGA_HI1101RF)
@@ -1660,20 +1660,20 @@ typedef struct witp_single_tune_reg_cfg witp_single_tune_reg_cfg_stru;
 
 /*lint +e958*/
 /*****************************************************************************
-  7.1 基准发送描述符定义
+  7.1 ??????????????????
 *****************************************************************************/
 typedef struct tag_hal_tx_dscr_stru
 {
     oal_dlist_head_stru                 st_entry;
     oal_netbuf_stru                    *pst_skb_start_addr;         /* Sub MSDU 0 Skb Address */
-    oal_uint16                          us_original_mpdu_len;       /* mpdu长度 含帧头 */
-    hal_tx_queue_type_enum_uint8        uc_q_num;                   /* 发送队列队列号 */
-    oal_uint8                           bit_is_retried          :1; /* 是不是重传包 */
-    oal_uint8                           bit_is_ampdu            :1; /* 是不是ampdu */
-    oal_uint8                           bit_is_rifs             :1; /* 是不是rifs发送 */
-    oal_uint8                           bit_is_first            :1; /* 标志是否是第一个描述符 */
+    oal_uint16                          us_original_mpdu_len;       /* mpdu???? ?????? */
+    hal_tx_queue_type_enum_uint8        uc_q_num;                   /* ?????????????? */
+    oal_uint8                           bit_is_retried          :1; /* ???????????? */
+    oal_uint8                           bit_is_ampdu            :1; /* ??????ampdu */
+    oal_uint8                           bit_is_rifs             :1; /* ??????rifs???? */
+    oal_uint8                           bit_is_first            :1; /* ?????????????????????? */
 #ifdef _PRE_WLAN_FEATURE_PROXYSTA
-    oal_uint8                           bit_tx_hal_vap_id       :4; /* Proxy STA的tx hal_vap_id */
+    oal_uint8                           bit_tx_hal_vap_id       :4; /* Proxy STA??tx hal_vap_id */
 #else
     oal_uint8                           bit_resv                 : 4;
 #endif
@@ -1685,100 +1685,100 @@ typedef struct tag_hal_tx_dscr_stru
 #define HAL_PSTA_ID2ORI(id) ((id) + HAL_PROXY_STA_START_IDX - 1)
 #endif
 /*****************************************************************************
-  7.2 基准接收描述符定义
+  7.2 ??????????????????
 *****************************************************************************/
 #if defined(_PRE_PRODUCT_ID_HI110X_DEV)
 typedef struct tag_hal_rx_dscr_stru
 {
     oal_dlist_head_stru         st_entry;
-    oal_netbuf_stru            *pst_skb_start_addr;          /* 描述符中保存的netbuf的首地址 */
+    oal_netbuf_stru            *pst_skb_start_addr;          /* ??????????????netbuf???????? */
     oal_uint8                   data[4];
 }hal_rx_dscr_stru;
 #else
 typedef struct tag_hal_rx_dscr_stru
 {
-    oal_uint32                 *pul_prev_rx_dscr;           /* 前一个描述符的地址           */
-    oal_uint32                  ul_skb_start_addr;          /* 描述符中保存的netbuf的首地址 */
-    oal_uint32                 *pul_next_rx_dscr;           /* 前一个描述符的地址(物理地址) */
+    oal_uint32                 *pul_prev_rx_dscr;           /* ??????????????????           */
+    oal_uint32                  ul_skb_start_addr;          /* ??????????????netbuf???????? */
+    oal_uint32                 *pul_next_rx_dscr;           /* ??????????????????(????????) */
 }hal_rx_dscr_stru;
 #endif
 /*****************************************************************************
-  7.3 对外部发送提供接口所用数据结构
+  7.3 ??????????????????????????????
 *****************************************************************************/
 
 /*****************************************************************************
-  结构名  : hal_channel_matrix_dsc_stru
-  结构说明: 矩阵信息结构体
+  ??????  : hal_channel_matrix_dsc_stru
+  ????????: ??????????????
 *****************************************************************************/
 typedef struct
 {
-    /*(第10 23行) */
+    /*(??10 23??) */
     oal_uint8                            bit_codebook              : 2;
     oal_uint8                            bit_grouping              : 2;
     oal_uint8                            bit_row_num               : 4;
 
     oal_uint8                            bit_column_num            : 4;
-    oal_uint8                            bit_response_flag         : 1;     /* 在Tx 描述符中不用填写该字段;发送完成中断后，将有无信道矩阵信息存储在此 */
+    oal_uint8                            bit_response_flag         : 1;     /* ??Tx ??????????????????????;?????????????????????????????????????????? */
     oal_uint8                            bit_reserve1              : 3;
 
-    oal_uint16                           us_channel_matrix_length;          /*信道矩阵的总字节(Byte)数 */
-    oal_uint32                           ul_steering_matrix;                /* txbf需要使用的矩阵地址,填写发送描述符时候使用 */
+    oal_uint16                           us_channel_matrix_length;          /*????????????????(Byte)?? */
+    oal_uint32                           ul_steering_matrix;                /* txbf??????????????????,?????????????????????? */
 }hal_channel_matrix_dsc_stru;
 
 typedef struct
 {
-    /* PHY TX MODE 1(第13行) */
-    /* (1) 速率自适应填写 */
-    oal_uint8                               uc_extend_spatial_streams;      /* 扩展空间流个数 */
-    wlan_channel_code_enum_uint8            en_channel_code;                /* 信道编码(BCC或LDPC) */
+    /* PHY TX MODE 1(??13??) */
+    /* (1) ?????????????? */
+    oal_uint8                               uc_extend_spatial_streams;      /* ?????????????? */
+    wlan_channel_code_enum_uint8            en_channel_code;                /* ????????(BCC??LDPC) */
 
-    /* (2) ACS填写 */
-    hal_channel_assemble_enum_uint8         en_channel_bandwidth;           /* 工作带宽 */
+    /* (2) ACS???? */
+    hal_channel_assemble_enum_uint8         en_channel_bandwidth;           /* ???????? */
 
-    oal_uint8                               bit_lsig_txop       : 1;        /* L-SIG TXOP保护 0:不开启保护，1: 开启保护*/
+    oal_uint8                               bit_lsig_txop       : 1;        /* L-SIG TXOP???? 0:????????????1: ????????*/
     oal_uint8                               bit_reserved        : 4;
     oal_uint8                               bit_he_max_pe_fld         : 2;
     oal_uint8                               bit_uplink_flag           : 1;
 
-    oal_uint8                               dyn_bandwidth_in_non_ht;        /* 如果是本设备或者对端设备不是VHT设备，或者寄存器设置的速率为non-HT速率，那么该字段无意义（可填0)*/
-    oal_uint8                               dyn_bandwidth_in_non_ht_exist;  /* 如果本设备和对端设备都为VHT设备，并且寄存器设置的速率为non-HT速率，那么该字段填1 */
-    oal_uint8                               ch_bandwidth_in_non_ht_exist;   /* 如果本设备和对端设备都为VHT设备，并且寄存器设置的速率为non-HT速率，那么该字段填1 */
+    oal_uint8                               dyn_bandwidth_in_non_ht;        /* ????????????????????????????VHT????????????????????????????non-HT????????????????????????????0)*/
+    oal_uint8                               dyn_bandwidth_in_non_ht_exist;  /* ????????????????????????VHT????????????????????????????non-HT??????????????????1 */
+    oal_uint8                               ch_bandwidth_in_non_ht_exist;   /* ????????????????????????VHT????????????????????????????non-HT??????????????????1 */
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1102_DEV) || (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_DEV)
-    /* 02芯片测试添加抗干扰变量，为tx描述符赋值 */
+    /* 02??????????????????????????tx?????????? */
     oal_uint8                               bit_anti_intf_1thr              : 2;
     oal_uint8                               bit_anti_intf_0thr              : 2;
     oal_uint8                               bit_anti_intf_en                : 1;
     oal_uint8                               bit_reserve                     : 3;
 #endif
-    oal_uint8                               uc_smoothing;                   /* 通知接收端是否对信道矩阵做平滑 */
-    wlan_sounding_enum_uint8                en_sounding_mode;               /* sounding模式 */
+    oal_uint8                               uc_smoothing;                   /* ?????????????????????????????? */
+    wlan_sounding_enum_uint8                en_sounding_mode;               /* sounding???? */
 }hal_tx_txop_rate_params_stru;
 
 typedef union
 {
     oal_uint32  ul_value;
-    /* (第14 19 20 21行) */
+    /* (??14 19 20 21??) */
     struct
     {
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1151)
-        oal_uint8   bit_tx_count              : 2;                      /* 传输次数 */
-        oal_uint8   bit_stbc_mode             : 2;                      /* 空时分组编码 */
+        oal_uint8   bit_tx_count              : 2;                      /* ???????? */
+        oal_uint8   bit_stbc_mode             : 2;                      /* ???????????? */
 #else
 #ifdef _PRE_WLAN_1103_PILOT
-        oal_uint8   bit_tx_count              : 3;                      /* 传输次数 */
-        oal_uint8   bit_tx_he_enable          : 1;                      /*HE 使能，0==非HE,1==HE*/
+        oal_uint8   bit_tx_count              : 3;                      /* ???????? */
+        oal_uint8   bit_tx_he_enable          : 1;                      /*HE ??????0==??HE,1==HE*/
 #else
-        oal_uint8   bit_tx_count              : 4;                      /* 传输次数 */
+        oal_uint8   bit_tx_count              : 4;                      /* ???????? */
 #endif
 #endif
-        oal_uint8   bit_tx_chain_selection    : 4;                      /* 发送通道选择 (单通道:0x1, 双通道:0x3, 三通道:0x7, 四通道:0xf) */
+        oal_uint8   bit_tx_chain_selection    : 4;                      /* ???????????? (??????:0x1, ??????:0x3, ??????:0x7, ??????:0xf) */
 
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_DEV)
         oal_uint8   bit_stbc_mode             : 2;                      /* 1103 stbc mode */
-        oal_uint8   bit_tx_antenna            : 2;                      /* 1103 发送天线选择 */
+        oal_uint8   bit_tx_antenna            : 2;                      /* 1103 ???????????? */
         oal_uint8   bit_reserve2              : 4;
 #else
-        oal_uint8   bit_tx_antenna            : 8;                      /* 1151描述符中定义的tx antenna为8bit,保留8个bit，命名统一 */
+        oal_uint8   bit_tx_antenna            : 8;                      /* 1151??????????????tx antenna??8bit,????8??bit?????????? */
 #endif
 
         union
@@ -1787,38 +1787,38 @@ typedef union
             struct
             {
                 oal_uint8   bit_he_mcs       : 4;
-                oal_uint8   bit_nss_mode     : 2;                       /* 该速率对应的空间流枚举值 */
-                oal_uint8   bit_ppdu_format  : 2;                       /* HE发帧类型 */
+                oal_uint8   bit_nss_mode     : 2;                       /* ???????????????????????? */
+                oal_uint8   bit_ppdu_format  : 2;                       /* HE???????? */
             } st_he_nss_mcs;
         #endif
             struct
             {
                 oal_uint8   bit_vht_mcs       : 4;
-                oal_uint8   bit_nss_mode      : 2;                       /* 该速率对应的空间流枚举值 */
-                oal_uint8   bit_protocol_mode : 2;                       /* 协议模式 */
+                oal_uint8   bit_nss_mode      : 2;                       /* ???????????????????????? */
+                oal_uint8   bit_protocol_mode : 2;                       /* ???????? */
             } st_vht_nss_mcs;
             struct
             {
                 oal_uint8   bit_ht_mcs        : 6;
-                oal_uint8   bit_protocol_mode : 2;                       /* 协议模式 */
+                oal_uint8   bit_protocol_mode : 2;                       /* ???????? */
             } st_ht_rate;
             struct
             {
                 oal_uint8   bit_legacy_rate   : 4;
                 oal_uint8   bit_reserved1     : 2;
-                oal_uint8   bit_protocol_mode : 2;                       /* 协议模式 */
+                oal_uint8   bit_protocol_mode : 2;                       /* ???????? */
             } st_legacy_rate;
         } un_nss_rate;
 
-        oal_uint8   bit_rts_cts_enable        : 1;                      /* 是否使能RTS */
-        oal_uint8   bit_txbf_mode             : 2;                      /* txbf模式 */
-        oal_uint8   bit_preamble_mode         : 1;                      /* 前导码 */
+        oal_uint8   bit_rts_cts_enable        : 1;                      /* ????????RTS */
+        oal_uint8   bit_txbf_mode             : 2;                      /* txbf???? */
+        oal_uint8   bit_preamble_mode         : 1;                      /* ?????? */
 #ifdef _PRE_WLAN_1103_PILOT
         oal_uint8   bit_short_gi_enable       : 1;
         oal_uint8   bit_short_gi_type_tx      : 1;
         oal_uint8   bit_tx_he_ltf_type        : 2;
 #else
-        oal_uint8   bit_short_gi_enable     : 1;   /* 短保护间隔 */
+        oal_uint8   bit_short_gi_enable     : 1;   /* ?????????? */
         oal_uint8   bit_reserve             : 3;
 #endif
     }rate_bit_stru;
@@ -1826,20 +1826,20 @@ typedef union
 
 typedef struct
 {
-    /* PHY TX MODE 2 (第15行) */
-    oal_uint8                               uc_tx_rts_antenna;          /* 发送RTS使用的天线组合 */
-    oal_uint8                               uc_rx_ctrl_antenna;         /* 接收CTS/ACK/BA使用的天线组合 */
-    oal_uint8                               auc_reserve1[1];            /* TX VAP index 不是算法填写，故在此也填0 */
-    oal_uint8                               bit_txop_ps_not_allowed: 1; /* 0代表允许TXOP POWER save，1代表不允许TXOP POWER save */
-    oal_uint8                               bit_long_nav_enable:     1; /* NAV保护enable字段，1代表Long nav保护，0代表non long nav保护 */
-    oal_uint8                               bit_group_id:            6; /* 这个字段暂时由软件填写，最终可能由算法填写，故先列出 */
+    /* PHY TX MODE 2 (??15??) */
+    oal_uint8                               uc_tx_rts_antenna;          /* ????RTS?????????????? */
+    oal_uint8                               uc_rx_ctrl_antenna;         /* ????CTS/ACK/BA?????????????? */
+    oal_uint8                               auc_reserve1[1];            /* TX VAP index ????????????????????????0 */
+    oal_uint8                               bit_txop_ps_not_allowed: 1; /* 0????????TXOP POWER save??1??????????TXOP POWER save */
+    oal_uint8                               bit_long_nav_enable:     1; /* NAV????enable??????1????Long nav??????0????non long nav???? */
+    oal_uint8                               bit_group_id:            6; /* ???????????????????????????????????????????????????? */
 
 }hal_tx_txop_antenna_params_stru;
 
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1151)
 typedef struct
 {
-    /* TX POWER (第22行) */
+    /* TX POWER (??22??) */
     oal_uint8                               bit_lpf_gain_level0           : 1;
     oal_uint8                               bit_pa_gain_level0            : 1;
     oal_uint8                               bit_upc_gain_level0           : 4;
@@ -1864,7 +1864,7 @@ typedef struct
 #elif ((_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1102_DEV) || (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1102_HOST))
 typedef struct
 {
-    /* TX POWER (第14行) */
+    /* TX POWER (??14??) */
     oal_uint8                               bit_lpf_gain_level0           : 2;
     oal_uint8                               bit_upc_gain_level0           : 4;
     oal_uint8                               bit_pa_gain_level0            : 2;
@@ -1885,16 +1885,16 @@ typedef struct
 typedef struct
 {
 #ifdef _PRE_WLAN_1103_PILOT
-    /* TX POWER (第11行) */
+    /* TX POWER (??11??) */
     oal_uint8                               bit_dpd_enable                 : 1;
 
-    /* TX POWER (第13行) */
+    /* TX POWER (??13??) */
     oal_uint8                               bit_upc_gain_level0            : 1;
     oal_uint8                               bit_upc_gain_level1            : 1;
     oal_uint8                               bit_upc_gain_level2            : 1;
     oal_uint8                               bit_upc_gain_level3            : 1;
 
-    /* TX POWER (第15~17行) */
+    /* TX POWER (??15~17??) */
     oal_uint32                              bit_pa_gain_level0              : 2;
     oal_uint32                              bit_pa_gain_level1              : 2;
     oal_uint32                              bit_pa_gain_level2              : 2;
@@ -1919,13 +1919,13 @@ typedef struct
     oal_uint32                              bit_dpd_tpc_lv2              : 2;
     oal_uint32                              bit_dpd_tpc_lv3              : 2;
 
-    /* TX POWER (第18行) */
+    /* TX POWER (??18??) */
     oal_uint32                              bit_cfr_idx0                 : 2;
     oal_uint32                              bit_cfr_idx1                 : 2;
     oal_uint32                              bit_cfr_idx2                 : 2;
     oal_uint32                              bit_cfr_idx3                 : 2;
 #else
-    /* TX POWER (第15~17行) */
+    /* TX POWER (??15~17??) */
     oal_uint8                               bit_upc_gain_level0               : 5;
     oal_uint8                               bit_lpf_gain_level0               : 3;
     oal_uint8                               bit_upc_gain_level1               : 5;
@@ -1960,13 +1960,13 @@ typedef struct
 
 typedef struct
 {
-    wlan_tx_ack_policy_enum_uint8           en_ack_policy;     /* ACK 策略 */
-    oal_uint8                               uc_tid_no;        /* 通信标识符 */
-    oal_uint8                               uc_qos_enable;    /* 是否开启QoS */
+    wlan_tx_ack_policy_enum_uint8           en_ack_policy;     /* ACK ???? */
+    oal_uint8                               uc_tid_no;        /* ?????????? */
+    oal_uint8                               uc_qos_enable;    /* ????????QoS */
     oal_uint8                               uc_nonqos_seq_bypass;
 }hal_wmm_txop_params_stru;
 
-/* 第12 17行 */
+/* ??12 17?? */
 typedef struct
 {
     oal_uint16                              us_tsf_timestamp;
@@ -2017,56 +2017,56 @@ typedef struct
     oal_uint16                           us_mpdu_len;
     oal_uint8                            uc_is_retried;
     oal_uint8                            uc_bandwidth;
-    oal_uint8                            uc_sounding_mode;           /* 表示该帧sounding类型 */
-    oal_uint8                            uc_status;                  /* 该帧的发送结果 */
-    oal_uint8                            uc_ampdu_enable;            /* 表示该帧是否为AMPDU聚合帧 */
-    oal_uint16                           us_origin_mpdu_lenth;       /* mpdu长度 */
+    oal_uint8                            uc_sounding_mode;           /* ????????sounding???? */
+    oal_uint8                            uc_status;                  /* ?????????????? */
+    oal_uint8                            uc_ampdu_enable;            /* ??????????????AMPDU?????? */
+    oal_uint16                           us_origin_mpdu_lenth;       /* mpdu???? */
     oal_uint8                            en_channel_code;
 
     oal_uint64                           ull_ampdu_result;
-    hal_channel_matrix_dsc_stru          st_tx_dsc_chnl_matrix;      /*发送描述符中的信道矩阵信息*/
+    hal_channel_matrix_dsc_stru          st_tx_dsc_chnl_matrix;      /*??????????????????????????*/
     hal_tx_txop_per_rate_params_union    ast_per_rate[HAL_TX_RATE_MAX_NUM];
     oal_uint32                           ul_ampdu_length;
     hal_tx_txop_tx_power_stru            st_tx_power;
-    oal_uint32                           ul_tx_comp_mwo_cyc_time;/*   上报的微波炉周期寄存器的计数值*/
+    oal_uint32                           ul_tx_comp_mwo_cyc_time;/*   ??????????????????????????????*/
 #ifdef _PRE_WLAN_FEATURE_PF_SCH
-    oal_uint32                           ul_tx_consumed_airtime;      /* 调度算法使用一次发送的空口时间 */
+    oal_uint32                           ul_tx_consumed_airtime;      /* ?????????????????????????????? */
 #endif
 
     oal_uint32                           ul_now_time_ms;
     oal_uint8                            uc_normal_pkt_num;
-    oal_uint8                            uc_tx_desc_rate_rank;       /* 发送成功时选择的速率等级，status=1时有效 */
-    oal_uint8                            uc_first_succ_cnt;  /* 第一次发送速率级别成功的帧数 */
-    oal_uint8                            uc_first_fail_cnt;  /* 第一次发送速率级别失败的帧数 */
+    oal_uint8                            uc_tx_desc_rate_rank;       /* ??????????????????????????status=1?????? */
+    oal_uint8                            uc_first_succ_cnt;  /* ???????????????????????????? */
+    oal_uint8                            uc_first_fail_cnt;  /* ???????????????????????????? */
 }hal_tx_dscr_ctrl_one_param;
 
 
 typedef struct
 {
-    /* 由安全特性更新 */
-    wlan_security_txop_params_stru           st_security;         /* 第16行 MAC TX MODE 2 */
+    /* ?????????????? */
+    wlan_security_txop_params_stru           st_security;         /* ??16?? MAC TX MODE 2 */
 
-    /* groupid和partial_aid */
-    wlan_groupid_partial_aid_stru            st_groupid_partial_aid;  /* 第12和15行部分 */
+    /* groupid??partial_aid */
+    wlan_groupid_partial_aid_stru            st_groupid_partial_aid;  /* ??12??15?????? */
 
 }hal_tx_txop_feature_stru;
 /*****************************************************************************
-  结构名  : hal_tx_txop_alg_stru
-  结构说明: DMAC模块TXOP发送控制结构
+  ??????  : hal_tx_txop_alg_stru
+  ????????: DMAC????TXOP????????????
 *****************************************************************************/
 typedef struct
 {
-    /*tx dscr中算法填写的参数 */
-    hal_channel_matrix_dsc_stru          st_txbf_matrix;                     /* 第10 23行  */
-    hal_tx_txop_rate_params_stru         st_rate;                            /* 第13行(HY TX MODE 1)*/
-    hal_tx_txop_per_rate_params_union    ast_per_rate[HAL_TX_RATE_MAX_NUM];  /* 第14(PHY TX RATA 1) 19 20 21 行*/
-    hal_tx_txop_antenna_params_stru      st_antenna_params;                  /* 第15行(PHY TX MODE 2) */
-    hal_tx_txop_tx_power_stru            st_tx_power;                        /* 第22行(TX POWER)*/
+    /*tx dscr???????????????? */
+    hal_channel_matrix_dsc_stru          st_txbf_matrix;                     /* ??10 23??  */
+    hal_tx_txop_rate_params_stru         st_rate;                            /* ??13??(HY TX MODE 1)*/
+    hal_tx_txop_per_rate_params_union    ast_per_rate[HAL_TX_RATE_MAX_NUM];  /* ??14(PHY TX RATA 1) 19 20 21 ??*/
+    hal_tx_txop_antenna_params_stru      st_antenna_params;                  /* ??15??(PHY TX MODE 2) */
+    hal_tx_txop_tx_power_stru            st_tx_power;                        /* ??22??(TX POWER)*/
 }hal_tx_txop_alg_stru;
 
 /*****************************************************************************
-  结构名  : hal_rate_pow_code_gain_table_stru
-  结构说明: HAL模块POW Code表结构
+  ??????  : hal_rate_pow_code_gain_table_stru
+  ????????: HAL????POW Code??????
 *****************************************************************************/
 typedef struct
 {
@@ -2080,8 +2080,8 @@ typedef struct
 
 #ifndef _PRE_WLAN_FEATURE_TPC_OPT
 /*****************************************************************************
-  结构名  : hal_upc_gain_code_lut_stru
-  结构说明: HAL模块UPC Code表结构
+  ??????  : hal_upc_gain_code_lut_stru
+  ????????: HAL????UPC Code??????
 *****************************************************************************/
 typedef struct
 {
@@ -2091,51 +2091,51 @@ typedef struct
 #endif
 
 /*****************************************************************************
-  结构名  : hal_vap_pow_info_stru
-  结构说明: HAL模块VAP级别功率结构
+  ??????  : hal_vap_pow_info_stru
+  ????????: HAL????VAP????????????
 *****************************************************************************/
 typedef struct
 {
-    hal_rate_pow_code_gain_table_stru   *pst_rate_pow_table;  /* 速率-TPC code&TPC gain对应表 */
+    hal_rate_pow_code_gain_table_stru   *pst_rate_pow_table;  /* ????-TPC code&TPC gain?????? */
 #ifndef _PRE_WLAN_FEATURE_TPC_OPT
     hal_upc_gain_code_lut_stru          *past_upc_gain_code_lut[HAL_POW_MAX_CHAIN_NUM];
     oal_uint8                            uc_active_upc_lut_len;
 #endif  /* _PRE_WLAN_FEATURE_TPC_OPT */
     oal_uint16                           us_reg_pow;
-    oal_bool_enum_uint8                  en_debug_flag;     /* rate_pow table调试开关 */
+    oal_bool_enum_uint8                  en_debug_flag;     /* rate_pow table???????? */
     oal_uint8                            _rom[4];
 }hal_vap_pow_info_stru;
 
 /*****************************************************************************
-  结构名  : hal_user_pow_info_stru
-  结构说明: HAL模块USER级别功率结构
+  ??????  : hal_user_pow_info_stru
+  ????????: HAL????USER????????????
 *****************************************************************************/
 typedef struct
 {
-    hal_rate_pow_code_gain_table_stru   *pst_rate_pow_table;        /* EVM功率表单结构体指针*/
-    hal_tx_txop_alg_stru                *pst_txop_param;            /* 用户速率描述符信息结构体 */
-    oal_bool_enum_uint8                  en_rf_limit_pow;           /*是否使能RF limit功率*/
+    hal_rate_pow_code_gain_table_stru   *pst_rate_pow_table;        /* EVM??????????????????*/
+    hal_tx_txop_alg_stru                *pst_txop_param;            /* ???????????????????????? */
+    oal_bool_enum_uint8                  en_rf_limit_pow;           /*????????RF limit????*/
     oal_uint8                            auc_resv[3];
 }hal_user_pow_info_stru;
 
 /*****************************************************************************
-  结构名  : hal_tx_ppdu_feature_stru
-  结构说明: DMAC模块PPDU发送控制结构
+  ??????  : hal_tx_ppdu_feature_stru
+  ????????: DMAC????PPDU????????????
 *****************************************************************************/
 typedef struct
 {
-    /* 第15 16行 TX VAP index 和 RA LUT Index */
+    /* ??15 16?? TX VAP index ?? RA LUT Index */
     hal_tx_ppdu_addr_index_params_stru  st_ppdu_addr_index;
 
-    /* 第16 17行 */
-    oal_uint32                          ul_ampdu_length;         /* 不包括null data的ampdu总长度 */
-    oal_uint16                          us_min_mpdu_length;      /* 根据速率查表得到的ampdu最小mpdu的长度 */
+    /* ??16 17?? */
+    oal_uint32                          ul_ampdu_length;         /* ??????null data??ampdu?????? */
+    oal_uint16                          us_min_mpdu_length;      /* ??????????????????ampdu????mpdu?????? */
 
-    /* 第13行 */
-    oal_uint8                           uc_ampdu_enable;         /* 是否使能AMPDU */
-    oal_uint8                           uc_rifs_enable;          /* rifs模式下发送时，MPDU链最后是否挂一个BAR帧 */
+    /* ??13?? */
+    oal_uint8                           uc_ampdu_enable;         /* ????????AMPDU */
+    oal_uint8                           uc_rifs_enable;          /* rifs??????????????MPDU????????????????BAR?? */
 
-    /* 第12行  MAC TX MODE 1 */
+    /* ??12??  MAC TX MODE 1 */
     oal_uint16                          us_tsf;
     oal_uint8                           en_retry_flag_hw_bypass;
     oal_uint8                           en_duration_hw_bypass;
@@ -2144,27 +2144,27 @@ typedef struct
     oal_uint8                           en_addba_ssn_hw_bypass;
     oal_uint8                           en_tx_pn_hw_bypass;
     oal_uint8                           en_long_nav_enable;
-    oal_uint8                           uc_mpdu_num;             /* ampdu中mpdu的个数 */
+    oal_uint8                           uc_mpdu_num;             /* ampdu??mpdu?????? */
     oal_uint8                           uc_tx_ampdu_session_index;
     oal_uint8                           auc_resv[1];
 }hal_tx_ppdu_feature_stru;
 
 /*****************************************************************************
-  结构名  : hal_tx_mpdu_stru
-  结构说明: DMAC模块MPDU发送控制结构
+  ??????  : hal_tx_mpdu_stru
+  ????????: DMAC????MPDU????????????
 *****************************************************************************/
 typedef struct
 {
-    /* 从11MAC帧头中获取 针对MPDU*/
+    /* ??11MAC?????????? ????MPDU*/
     hal_wmm_txop_params_stru              st_wmm;
-    hal_tx_mpdu_mac_hdr_params_stru       st_mpdu_mac_hdr;                          /* 第12 17行(PHY TX MODE 2) */
-    hal_tx_mpdu_address_params_stru       st_mpdu_addr;                             /* 第18行(MAC TX MODE 2)*/
-    hal_tx_msdu_address_params            ast_msdu_addr[WLAN_DSCR_SUBTABEL_MAX_NUM];/* 第24,25...行*/
-    oal_uint16                            us_mpdu_len;                              /* 发送帧的长度,包括head */
+    hal_tx_mpdu_mac_hdr_params_stru       st_mpdu_mac_hdr;                          /* ??12 17??(PHY TX MODE 2) */
+    hal_tx_mpdu_address_params_stru       st_mpdu_addr;                             /* ??18??(MAC TX MODE 2)*/
+    hal_tx_msdu_address_params            ast_msdu_addr[WLAN_DSCR_SUBTABEL_MAX_NUM];/* ??24,25...??*/
+    oal_uint16                            us_mpdu_len;                              /* ????????????,????head */
     oal_uint16                            us_resv;
 }hal_tx_mpdu_stru;
 
-/* Beacon帧发送参数 */
+/* Beacon?????????? */
 typedef struct
 {
     oal_uint32              ul_pkt_ptr;
@@ -2172,15 +2172,15 @@ typedef struct
     hal_tx_txop_alg_stru   *pst_tx_param;
     oal_uint32              ul_tx_chain_mask;
 
-    //dmac看不到描述符，这两个寄存器赋值放到hal
-    //oal_uint32  ul_phy_tx_mode;     /* 同tx描述符 phy tx mode 1 */
-    //oal_uint32  ul_tx_data_rate;    /* 同tx描述符 data rate 0 */
+    //dmac??????????????????????????????????hal
+    //oal_uint32  ul_phy_tx_mode;     /* ??tx?????? phy tx mode 1 */
+    //oal_uint32  ul_tx_data_rate;    /* ??tx?????? data rate 0 */
 
 }hal_beacon_tx_params_stru;
 
 /*****************************************************************************
-  结构名  : hal_security_key_stru
-  结构说明: DMAC模块安全密钥配置结构体
+  ??????  : hal_security_key_stru
+  ????????: DMAC??????????????????????
 *****************************************************************************/
 typedef struct
 {
@@ -2196,7 +2196,7 @@ typedef struct
 }hal_security_key_stru;
 
 /*****************************************************************************
-  7.4 基准VAP和Device结构
+  7.4 ????VAP??Device????
 *****************************************************************************/
 typedef struct
 {
@@ -2220,7 +2220,7 @@ typedef struct
 }hal_tbtt_offset_probe_stru;
 
 #define TBTT_OFFSET_PROBE_STEP_US  (30)
-#define TBTT_OFFSET_PROBE_MAX      (10)    /*最多增加30*10 = 300us*/
+#define TBTT_OFFSET_PROBE_MAX      (10)    /*????????30*10 = 300us*/
 
 #define TBTT_OFFSET_UP_PROBE_STEP     (2)    /*up probe*/
 #define TBTT_OFFSET_DOWN_PROBE_STEP   (1)
@@ -2229,8 +2229,8 @@ typedef struct
 #define TBTT_OFFSET_DOWN_PROBE_ACCETP_DIF  (TBTT_OFFSET_PROBE_ACCETP_DIF*TBTT_OFFSET_DOWN_PROBE_STEP)
 
 
-#define TBTT_OFFSET_PROBE_CALCURATE_PERIOD   (100)    /*beacon接收率计算周期*/
-#define TBTT_OFFSET_PROBE_RATIO              (100/TBTT_OFFSET_PROBE_CALCURATE_PERIOD)    /*beacon接收率百分比*/
+#define TBTT_OFFSET_PROBE_CALCURATE_PERIOD   (100)    /*beacon??????????????*/
+#define TBTT_OFFSET_PROBE_RATIO              (100/TBTT_OFFSET_PROBE_CALCURATE_PERIOD)    /*beacon????????????*/
 
 
 /*state define*/
@@ -2250,7 +2250,7 @@ typedef struct
 #elif (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1102_DEV)
     oal_uint16                           us_inner_tbtt_offset;
 #endif
-    oal_uint8                            uc_bcn_rf_chain;                            /* 唤醒后收beacon的通道，在hal device状态机awake子状态时生效 */
+    oal_uint8                            uc_bcn_rf_chain;                            /* ????????beacon??????????hal device??????awake???????????? */
 #ifdef _PRE_PM_DYN_SET_TBTT_OFFSET
     hal_tbtt_offset_training_hdl_stru    ast_training_handle[2];
 #endif
@@ -2264,25 +2264,25 @@ typedef struct
 
 typedef struct tag_hal_to_dmac_vap_stru
 {
-    oal_uint8                            uc_chip_id;                                 /* 芯片ID */
-    oal_uint8                            uc_device_id;                               /* 设备hal device ID */
+    oal_uint8                            uc_chip_id;                                 /* ????ID */
+    oal_uint8                            uc_device_id;                               /* ????hal device ID */
     oal_uint8                            uc_vap_id;                                  /* VAP ID */
-    wlan_vap_mode_enum_uint8             en_vap_mode;                                /* VAP工作模式 */
+    wlan_vap_mode_enum_uint8             en_vap_mode;                                /* VAP???????? */
     wlan_p2p_mode_enum_uint8             en_p2p_mode;                                /* P2P */
-    oal_uint8                            uc_mac_vap_id;                              /* 保存mac vap id */
+    oal_uint8                            uc_mac_vap_id;                              /* ????mac vap id */
     oal_uint8                            uc_dtim_cnt;                                /* dtim count */
-    oal_uint8                            uc_sleep_time_too_short_cnt;                /* 计算所得睡眠时间连续不满足最小睡眠时间计数 */
-    hal_vap_state_enum_uint8             en_hal_vap_state;                           /* hal vap state状态 */
+    oal_uint8                            uc_sleep_time_too_short_cnt;                /* ?????????????????????????????????????????? */
+    hal_vap_state_enum_uint8             en_hal_vap_state;                           /* hal vap state???? */
 #ifdef _PRE_PRODUCT_ID_HI110X_DEV
     hal_pm_info_stru                     st_pm_info;
 #endif
-    /* ROM化后资源扩展指针 */
+    /* ROM???????????????? */
     oal_void                            *_rom;
 }hal_to_dmac_vap_stru;
 
 
 /*****************************************************************************
-  7.5 对外部接收提供接口所用数据结构
+  7.5 ??????????????????????????????
 *****************************************************************************/
 typedef struct
 {
@@ -2297,18 +2297,18 @@ typedef struct
             oal_uint8   bit_vht_mcs       : 4;
             oal_uint8   bit_nss_mode      : 2;
             oal_uint8   bit_protocol_mode : 2;
-        } st_vht_nss_mcs;                                   /* 11ac的速率集定义 */
+        } st_vht_nss_mcs;                                   /* 11ac???????????? */
         struct
         {
             oal_uint8   bit_ht_mcs        : 6;
             oal_uint8   bit_protocol_mode : 2;
-        } st_ht_rate;                                       /* 11n的速率集定义 */
+        } st_ht_rate;                                       /* 11n???????????? */
         struct
         {
             oal_uint8   bit_legacy_rate   : 4;
             oal_uint8   bit_reserved1     : 2;
             oal_uint8   bit_protocol_mode : 2;
-        } st_legacy_rate;                                   /* 11a/b/g的速率集定义 */
+        } st_legacy_rate;                                   /* 11a/b/g???????????? */
     } un_nss_rate;
 
     /*byte 2-3 */
@@ -2320,15 +2320,15 @@ typedef struct
     oal_int16           s_rssi_ant0;
     oal_int16           s_rssi_ant1;
 #elif (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_DEV)
-    oal_int8           c_ant0_rssi;        /* ANT0上报当前帧RSSI */
-    oal_int8           c_ant1_rssi;        /* ANT1上报当前帧RSSI */
+    oal_int8           c_ant0_rssi;        /* ANT0??????????RSSI */
+    oal_int8           c_ant1_rssi;        /* ANT1??????????RSSI */
 #elif (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1102_DEV)
     oal_uint16         us_channel_matrix_len;
 #endif
 
 #if defined _PRE_WLAN_PRODUCT_1151V200
-    oal_uint16          us_mpdu_num;                         /*AMPDU中子帧个数*/
-    oal_uint8           auc_resv[2];                        /* 四字节对齐   */
+    oal_uint16          us_mpdu_num;                         /*AMPDU??????????*/
+    oal_uint8           auc_resv[2];                        /* ??????????   */
 #endif
 }hal_rx_statistic_stru;
 
@@ -2338,35 +2338,35 @@ typedef enum
     HAL_TAS_MEASURE_INIT,
     HAL_TAS_MEASURING,
     HAL_TAS_ANT_INVALID,
-    HAL_TAS_ANT_AVAILABLE,    //瞬态，上报内核后切回init状态
-    HAL_TAS_NOTIFY_COMPLETED, //瞬态，上报内核后切回init状态
-    HAL_TAS_ANT_RSSI_MEASURE_TIMEOUT, //瞬态，上报内核后切回init状态
+    HAL_TAS_ANT_AVAILABLE,    //????????????????????init????
+    HAL_TAS_NOTIFY_COMPLETED, //????????????????????init????
+    HAL_TAS_ANT_RSSI_MEASURE_TIMEOUT, //????????????????????init????
     HAL_TAS_STATUS_BUTT,
 }hal_tas_rssi_measure_flag_enum;
 typedef oal_uint8 hal_tas_rssi_measure_flag_enum_uint8;
 
 typedef struct
 {
-    frw_timeout_stru                       st_tas_rssi_measure_timer;                     /* tas天线测量定时器 */
-    oal_int16                              s_tas_rssi_smth_access;                        /* tas天线测量 core RSSI */
+    frw_timeout_stru                       st_tas_rssi_measure_timer;                     /* tas?????????????? */
+    oal_int16                              s_tas_rssi_smth_access;                        /* tas???????? core RSSI */
     oal_uint8                              auc_resv[2];
 
     oal_uint8                              uc_cur_measured_core;
     oal_uint8                              uc_measure_vap_id;
     oal_uint8                              uc_frame_cnt;
-    hal_tas_rssi_measure_flag_enum_uint8   en_tas_rssi_measure_flag;  /* tas天线测量状态标志位 */
+    hal_tas_rssi_measure_flag_enum_uint8   en_tas_rssi_measure_flag;  /* tas?????????????????? */
 }hal_tas_rssi_measure_stru;
 #endif
 
-/* dmac_pkt_captures使用,tx rx均会使用 */
+/* dmac_pkt_captures????,tx rx???????? */
 typedef struct
 {
-    oal_uint8        en_ant_rssi_sw;     /* 通过ANT RSSI切换使能。bit0:管理帧切换使能 bit1:数据帧切换使能 */
+    oal_uint8        en_ant_rssi_sw;     /* ????ANT RSSI??????????bit0:?????????????? bit1:?????????????? */
     oal_bool_enum_uint8 en_log_print;
-    oal_uint8        uc_rssi_high;       /* RSSI高门限 */
-    oal_uint8        uc_rssi_low;        /* RSSI低门限 */
+    oal_uint8        uc_rssi_high;       /* RSSI?????? */
+    oal_uint8        uc_rssi_low;        /* RSSI?????? */
 
-    oal_int16        s_ant0_rssi_smth;   /* 平滑处理后历史RSSI */
+    oal_int16        s_ant0_rssi_smth;   /* ??????????????RSSI */
     oal_int16        s_ant1_rssi_smth;
 
     oal_uint16       uc_rssi_high_cnt;
@@ -2375,32 +2375,32 @@ typedef struct
     oal_uint16       uc_rssi_low_cnt;
     oal_uint16       uc_rssi_low_cnt_th;
 
-    oal_int8         c_min_rssi_th;      /* 最小rssi的切换门限 */
+    oal_int8         c_min_rssi_th;      /* ????rssi?????????? */
     oal_uint8        auc_resv[3];
 }hal_rx_ant_rssi_stru;
 
 typedef struct
 {
-    oal_bool_enum_uint8 en_ant_rssi_sw;     /* 通过ANT RSSI切换使能 */
+    oal_bool_enum_uint8 en_ant_rssi_sw;     /* ????ANT RSSI???????? */
     oal_bool_enum_uint8 en_log_print;
-    oal_int8            c_ctrl_rssi_th;     /* 控制帧单双通道发送门限 */
-    oal_uint8           uc_rssi_change_valid_cnt;   /* RSSI mgmt chain切换满足门限的cnt */
+    oal_int8            c_ctrl_rssi_th;     /* ?????????????????????? */
+    oal_uint8           uc_rssi_change_valid_cnt;   /* RSSI mgmt chain??????????????cnt */
 
-    oal_uint8           uc_rssi_mgmt_pre_chain;     /* 当前rssi mgmt的pre通道 */
-    oal_uint8           uc_rssi_mgmt_new_chain;     /* 当前rssi mgmt的new通道 */
-    oal_bool_enum_uint8 en_ctrl_frm_tx_double_chain_pre_flag;   /* 响应帧采用双通道发送的pre标志 */
-    oal_bool_enum_uint8 en_ctrl_frm_tx_double_chain_new_flag;   /* 响应帧采用双通道发送的new标志 */
+    oal_uint8           uc_rssi_mgmt_pre_chain;     /* ????rssi mgmt??pre???? */
+    oal_uint8           uc_rssi_mgmt_new_chain;     /* ????rssi mgmt??new???? */
+    oal_bool_enum_uint8 en_ctrl_frm_tx_double_chain_pre_flag;   /* ??????????????????????pre???? */
+    oal_bool_enum_uint8 en_ctrl_frm_tx_double_chain_new_flag;   /* ??????????????????????new???? */
 
-    oal_int16           s_ant0_rssi_smth;   /* 平滑处理后历史RSSI */
+    oal_int16           s_ant0_rssi_smth;   /* ??????????????RSSI */
     oal_int16           s_ant1_rssi_smth;
 }hal_rx_ant_rssi_mgmt_stru;
 
 typedef struct
 {
-    oal_int8            c_ant0_snr;        /* ANT0上报当前帧SNR */
-    oal_int8            c_ant1_snr;        /* ANT1上报当前帧SNR */
-    oal_uint8           uc_snr_high;       /* SNR高门限 */
-    oal_uint8           uc_snr_low;        /* SNR低门限 */
+    oal_int8            c_ant0_snr;        /* ANT0??????????SNR */
+    oal_int8            c_ant1_snr;        /* ANT1??????????SNR */
+    oal_uint8           uc_snr_high;       /* SNR?????? */
+    oal_uint8           uc_snr_low;        /* SNR?????? */
 
     oal_uint16          uc_snr_high_cnt;
     oal_uint16          uc_snr_high_cnt_th;
@@ -2408,27 +2408,27 @@ typedef struct
     oal_uint16          uc_snr_low_cnt;
     oal_uint16          uc_snr_low_cnt_th;
 
-    oal_bool_enum_uint8 en_ant_snr_sw;     /* 通过ANT SNR切换使能 */
+    oal_bool_enum_uint8 en_ant_snr_sw;     /* ????ANT SNR???????? */
     oal_bool_enum_uint8 en_log_print;
     oal_bool_enum_uint8 en_reserv[2];
 }hal_rx_ant_snr_stru;
 
-/* ant_detect结构体 */
+/* ant_detect?????? */
 typedef struct
 {
     hal_rx_ant_rssi_stru   st_rx_rssi;
     hal_rx_ant_snr_stru    st_rx_snr;
     oal_void              *pst_cb;
 
-    oal_bool_enum_uint8   en_rssi_trigger; /* 状态机是否由RSSI/SNR触发从MIMO切换至SISO */
-    oal_bool_enum_uint8   en_miso_hold;     /* 是否保持在MISO状态 */
-    oal_uint8             uc_tbtt_cnt;     /* 当前统计的tbtt中断数 */
-    oal_uint8             uc_tbtt_cnt_th;  /* tbtt中断门限值 */
+    oal_bool_enum_uint8   en_rssi_trigger; /* ????????????RSSI/SNR??????MIMO??????SISO */
+    oal_bool_enum_uint8   en_miso_hold;     /* ??????????MISO???? */
+    oal_uint8             uc_tbtt_cnt;     /* ??????????tbtt?????? */
+    oal_uint8             uc_tbtt_cnt_th;  /* tbtt?????????? */
 
     oal_int8              c_ori_max_th;
     oal_int8              c_cur_max_th;
-    oal_uint8             uc_mimo_tbtt_open_th;  /* tbtt中断开启探测门限值 */
-    oal_uint8             uc_mimo_tbtt_close_th; /* tbtt中断关闭探测门限值 */
+    oal_uint8             uc_mimo_tbtt_open_th;  /* tbtt?????????????????? */
+    oal_uint8             uc_mimo_tbtt_close_th; /* tbtt?????????????????? */
     oal_int8              c_ori_min_th;
     oal_int8              c_cur_min_th;
     oal_uint8             uc_diff_th;
@@ -2436,7 +2436,7 @@ typedef struct
 }hal_rssi_stru;
 
 
-/* dmac_pkt_captures使用,tx rx均会使用 */
+/* dmac_pkt_captures????,tx rx???????? */
 typedef struct
 {
     union
@@ -2446,18 +2446,18 @@ typedef struct
             oal_uint8   bit_vht_mcs       : 4;
             oal_uint8   bit_nss_mode      : 2;
             oal_uint8   bit_protocol_mode : 2;
-        } st_vht_nss_mcs;                                   /* 11ac的速率集定义 */
+        } st_vht_nss_mcs;                                   /* 11ac???????????? */
         struct
         {
             oal_uint8   bit_ht_mcs        : 6;
             oal_uint8   bit_protocol_mode : 2;
-        } st_ht_rate;                                       /* 11n的速率集定义 */
+        } st_ht_rate;                                       /* 11n???????????? */
         struct
         {
             oal_uint8   bit_legacy_rate   : 4;
             oal_uint8   bit_reserved1     : 2;
             oal_uint8   bit_protocol_mode : 2;
-        } st_legacy_rate;                                   /* 11a/b/g的速率集定义 */
+        } st_legacy_rate;                                   /* 11a/b/g???????????? */
     } un_nss_rate;
 
     oal_uint8           uc_short_gi;
@@ -2470,28 +2470,28 @@ typedef struct
 }hal_statistic_stru;
 
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC == _PRE_MULTI_CORE_MODE)
-/* HOST专属 */
+/* HOST???? */
 typedef struct
 {
-    oal_uint32                 *pul_mac_hdr_start_addr;     /* 对应的帧的帧头地址,虚拟地址 */
-    oal_uint16                  us_da_user_idx;             /* 目的地址用户索引 */
-    oal_uint16                  us_rsv;                     /* 对齐 */
+    oal_uint32                 *pul_mac_hdr_start_addr;     /* ??????????????????,???????? */
+    oal_uint16                  us_da_user_idx;             /* ???????????????? */
+    oal_uint16                  us_rsv;                     /* ???? */
 }mac_rx_expand_cb_stru;
 
-/* 裸系统下需要传输给HMAC模块的信息 */
-/* hal_rx_ctl_stru结构的修改要考虑hi110x_rx_get_info_dscr函数中的优化 */
-/* 1字节对齐 */
+/* ??????????????????HMAC?????????? */
+/* hal_rx_ctl_stru????????????????hi110x_rx_get_info_dscr???????????? */
+/* 1???????? */
 #pragma pack(push,1)
 struct mac_rx_ctl
 {
     /* byte 0*/
     oal_uint8                   bit_vap_id            :5;
-    oal_uint8                   bit_amsdu_enable      :1;   /* 是否为amsdu帧,每个skb标记 */
-    oal_uint8                   bit_is_first_buffer   :1;   /* 当前skb是否为amsdu的首个skb */
+    oal_uint8                   bit_amsdu_enable      :1;   /* ??????amsdu??,????skb???? */
+    oal_uint8                   bit_is_first_buffer   :1;   /* ????skb??????amsdu??????skb */
     oal_uint8                   bit_is_fragmented     :1;
 
     /* byte 1*/
-    oal_uint8                   uc_msdu_in_buffer;          /* 每个skb包含的msdu数,amsdu用,每帧标记 */
+    oal_uint8                   uc_msdu_in_buffer;          /* ????skb??????msdu??,amsdu??,???????? */
 
     /* byte 2*/
     oal_uint8                   bit_ta_user_idx       :5;
@@ -2499,20 +2499,20 @@ struct mac_rx_ctl
     oal_uint8                   bit_is_key_frame      :1;
 
     /* byte 3*/
-    oal_uint8                   uc_mac_header_len     :6;   /* mac header帧头长度 */
+    oal_uint8                   uc_mac_header_len     :6;   /* mac header???????? */
     oal_uint8                   bit_is_beacon         :1;
     oal_uint8                   bit_is_last_buffer    :1;
     /* byte 4-5 */
-    oal_uint16                  us_frame_len;                /* 帧头与帧体的总长度,AMSDU非首帧不填 */
+    oal_uint16                  us_frame_len;                /* ??????????????????,AMSDU?????????? */
 
     /* byte 6 */
-    oal_uint8                   uc_mac_vap_id         :4;   /* 业务侧vap id号 */
-    oal_uint8                   bit_buff_nums         :4;   /* 每个MPDU占用的SKB数,AMSDU帧占多个 */
+    oal_uint8                   uc_mac_vap_id         :4;   /* ??????vap id?? */
+    oal_uint8                   bit_buff_nums         :4;   /* ????MPDU??????SKB??,AMSDU???????? */
     /* byte 7 */
-    oal_uint8                   uc_channel_number;          /* 接收帧的信道 */
+    oal_uint8                   uc_channel_number;          /* ???????????? */
 
 #ifndef _PRE_PRODUCT_ID_HI110X_DEV
-    /* OFFLOAD架构下，HOST相对DEVICE的CB增量 */
+    /* OFFLOAD????????HOST????DEVICE??CB???? */
     mac_rx_expand_cb_stru       st_expand_cb;
 #endif
 }__OAL_DECLARE_PACKED;
@@ -2520,18 +2520,18 @@ typedef struct mac_rx_ctl  hal_rx_ctl_stru;
 #pragma pack(pop)
 
 #else
-/* 存放于对应的netbuf的CB字段中，最大值为48字节 */
-/* 后续需要传输给HMAC模块的信息，与mac_rx_ctl_stru结构体保持一致*/
+/* ????????????netbuf??CB????????????????48???? */
+/* ??????????????HMAC??????????????mac_rx_ctl_stru??????????????*/
 
 typedef struct
 {
     /*word 0*/
 #ifdef _PRE_WLAN_PRODUCT_1151V200
-    oal_uint8                   bit_vap_id            :6;   /* 对应hal vap id */
+    oal_uint8                   bit_vap_id            :6;   /* ????hal vap id */
     oal_uint8                   bit_mgmt_to_hostapd   :1;
     oal_uint8                   bit_reserved1         :1;
 #else
-    oal_uint8                   bit_vap_id            :5;   /* 对应hal vap id */
+    oal_uint8                   bit_vap_id            :5;   /* ????hal vap id */
     oal_uint8                   bit_mgmt_to_hostapd   :1;
     oal_uint8                   bit_reserved1         :2;
 #endif
@@ -2541,26 +2541,26 @@ typedef struct
     oal_uint8                   bit_is_first_buffer   :1;
     oal_uint8                   bit_is_fragmented     :1;
     oal_uint8                   bit_is_beacon         :1;
-    oal_uint8                   bit_buff_nums         :4;   /* 每个MPDU占用的buf数目 */
+    oal_uint8                   bit_buff_nums         :4;   /* ????MPDU??????buf???? */
 
 
-    oal_uint8                   uc_mac_header_len;          /* mac header帧头长度 */
+    oal_uint8                   uc_mac_header_len;          /* mac header???????? */
     /*word 1*/
-    oal_uint16                  us_frame_len;               /* 帧头与帧体的总长度 */
-    oal_uint16                  us_da_user_idx;             /* 目的地址用户索引 */
+    oal_uint16                  us_frame_len;               /* ?????????????????? */
+    oal_uint16                  us_da_user_idx;             /* ???????????????? */
     /*word 2*/
-    oal_uint32                 *pul_mac_hdr_start_addr;     /* 对应的帧的帧头地址,虚拟地址 */
+    oal_uint32                 *pul_mac_hdr_start_addr;     /* ??????????????????,???????? */
     /*word 3*/
-    oal_uint16                  us_ta_user_idx;             /* 发送端地址用户索引 */
+    oal_uint16                  us_ta_user_idx;             /* ?????????????????? */
     oal_uint8                   uc_mac_vap_id;
-    oal_uint8                   uc_channel_number;          /* 接收帧的信道 */
+    oal_uint8                   uc_channel_number;          /* ???????????? */
 }hal_rx_ctl_stru;
 #endif
 
-/* 对DMAC SCAN 模块提供的硬件MAC/PHY信道测量结果结构体 */
+/* ??DMAC SCAN ??????????????MAC/PHY?????????????????? */
 typedef struct
 {
-    /* MAC信道统计 */
+    /* MAC???????? */
     oal_uint32  ul_ch_stats_time_us;
     oal_uint32  ul_pri20_free_time_us;
     oal_uint32  ul_pri40_free_time_us;
@@ -2568,7 +2568,7 @@ typedef struct
     oal_uint32  ul_ch_rx_time_us;
     oal_uint32  ul_ch_tx_time_us;
 
-    /* PHY信道测量 */
+    /* PHY???????? */
     oal_uint8  uc_phy_ch_estimate_time_ms;
     oal_int8   c_pri20_idle_power;
     oal_int8   c_pri40_idle_power;
@@ -2583,7 +2583,7 @@ typedef struct
 
 #define RADAR_INFO_FLAG_DUMMY   0x10
 
-/* 脉冲信息结构体 */
+/* ?????????????? */
 typedef struct
 {
     oal_uint32  ul_timestamp;
@@ -2594,18 +2594,18 @@ typedef struct
     oal_uint8   auc_resv[1];
 }hal_pulse_info_stru;
 
-#define MAX_RADAR_PULSE_NUM   32            /* 最大雷达脉冲数 */
-#define RADAR_TYPE_CHIRP      10            /* 芯片上报的chirp雷达类型标号 */
-#define RADAR_MIN_ETSI_CHIRP_PULSE_NUM  5   /*ETSI chirp最小脉冲个数*/
+#define MAX_RADAR_PULSE_NUM   32            /* ?????????????? */
+#define RADAR_TYPE_CHIRP      10            /* ??????????chirp???????????? */
+#define RADAR_MIN_ETSI_CHIRP_PULSE_NUM  5   /*ETSI chirp????????????*/
 
-/* 保存多个脉冲信息结构体 */
+/* ?????????????????????? */
 typedef struct
 {
     hal_pulse_info_stru     ast_pulse_info[MAX_RADAR_PULSE_NUM];
     oal_uint32              ul_pulse_cnt;
 }hal_radar_pulse_info_stru;
 
-/* 对DMAC SCAN模块提供的硬件雷达检测信息结构体 */
+/* ??DMAC SCAN???????????????????????????????? */
 typedef struct
 {
 #if defined(_PRE_WLAN_FEATURE_DFS_OPTIMIZE) || defined(_PRE_WLAN_FEATURE_DFS)
@@ -2630,17 +2630,17 @@ typedef struct
 
 #if defined(_PRE_PRODUCT_ID_HI110X_DEV)
 /*
- *裸系统下针对接收，提供读取接口
- * frame_len长度
- * 802.11帧头长度(uc_mac_hdr_len)
+ *??????????????????????????????
+ * frame_len????
+ * 802.11????????(uc_mac_hdr_len)
 */
 #pragma pack(push,1)
 
 typedef struct
 {
     /*byte 0*/
-    oal_uint8   bit_cipher_protocol_type  : 4;      /* 接收帧加密类型 */
-    oal_uint8   bit_dscr_status           : 4;      /* 接收状态 */
+    oal_uint8   bit_cipher_protocol_type  : 4;      /* ?????????????? */
+    oal_uint8   bit_dscr_status           : 4;      /* ???????? */
 
     /*byte 1*/
     oal_uint8   bit_channel_code          : 1;
@@ -2684,16 +2684,16 @@ typedef struct
 
 #else
 /*
- *针对接收，提供读取接口
- * frame_len长度
- * 802.11帧头长度(uc_mac_hdr_len)
+ *??????????????????????
+ * frame_len????
+ * 802.11????????(uc_mac_hdr_len)
 */
 
 typedef struct
 {
     /*word 0*/
-    oal_uint8   bit_cipher_protocol_type  : 4;  /* 帧的加密类型*/
-    oal_uint8   bit_dscr_status           : 4;     /* 描述符接收状态 */
+    oal_uint8   bit_cipher_protocol_type  : 4;  /* ????????????*/
+    oal_uint8   bit_dscr_status           : 4;     /* ?????????????? */
     oal_uint8   bit_ext_spatial_streams   : 2;
     oal_uint8   bit_smoothing             : 1;
     oal_uint8   bit_freq_bandwidth_mode   : 4;
@@ -2706,7 +2706,7 @@ typedef struct
     oal_uint8   bit_sounding_mode         : 2;
     oal_uint8   uc_reserved1;
     /*word 1*/
-    oal_uint8   bit_code_book             : 2;              /* 信道矩阵相关信息 */
+    oal_uint8   bit_code_book             : 2;              /* ???????????????? */
     oal_uint8   bit_grouping              : 2;
     oal_uint8   bit_row_number            : 4;
     oal_uint8   bit_column_number         : 4;
@@ -2717,10 +2717,10 @@ typedef struct
     oal_uint8   bit_rsp_flag              : 3;
 #endif
     oal_uint8   bit_last_mpdu_flag        : 1;
-    oal_uint16  us_channel_matrix_len;                   /* 信道矩阵长度 */
+    oal_uint16  us_channel_matrix_len;                   /* ???????????? */
 
     /*word 2*/
-    oal_uint32  ul_tsf_timestamp;                        /* TSF时间戳 */
+    oal_uint32  ul_tsf_timestamp;                        /* TSF?????? */
     /*word 3*/
 
 }hal_rx_status_stru;
@@ -2728,7 +2728,7 @@ typedef struct
 
 
 /*****************************************************************************
-  7.6 对外部保留的VAP级接口列表，建议外部不做直接调用，而是调用对应的内联函数
+  7.6 ????????????VAP????????????????????????????????????????????????????????
 *****************************************************************************/
 typedef struct
 {
@@ -2737,61 +2737,61 @@ typedef struct
 }hal_vap_stru;
 
 /*****************************************************************************
-  结构名  : hal_rx_dscr_queue_header_stru
-  结构说明: 接收描述符队列头的结构体
+  ??????  : hal_rx_dscr_queue_header_stru
+  ????????: ????????????????????????
 *****************************************************************************/
 #if defined(_PRE_PRODUCT_ID_HI110X_DEV)
 typedef struct
 {
-    oal_dlist_head_stru                     st_header;          /* 发送描述符队列头结点 */
-    oal_uint16                              us_element_cnt;     /* 接收描述符队列中元素的个数 */
-    hal_dscr_queue_status_enum_uint8        uc_queue_status;    /* 接收描述符队列的状态 */
-    oal_uint8                               uc_available_res_cnt; /* 当前队列中硬件可用描述符个数 */
+    oal_dlist_head_stru                     st_header;          /* ???????????????????? */
+    oal_uint16                              us_element_cnt;     /* ?????????????????????????? */
+    hal_dscr_queue_status_enum_uint8        uc_queue_status;    /* ???????????????????? */
+    oal_uint8                               uc_available_res_cnt; /* ???????????????????????????? */
 }hal_rx_dscr_queue_header_stru;
 #else
 typedef struct
 {
-    oal_uint32                             *pul_element_head;   /* 指向接收描述符链表的第一个元素 */
-    oal_uint32                             *pul_element_tail;   /* 指向接收描述符链表的最后一个元素 */
-    oal_uint16                              us_element_cnt;     /* 接收描述符队列中元素的个数 */
-    hal_dscr_queue_status_enum_uint8        uc_queue_status;    /* 接收描述符队列的状态 */
+    oal_uint32                             *pul_element_head;   /* ?????????????????????????????? */
+    oal_uint32                             *pul_element_tail;   /* ???????????????????????????????? */
+    oal_uint16                              us_element_cnt;     /* ?????????????????????????? */
+    hal_dscr_queue_status_enum_uint8        uc_queue_status;    /* ???????????????????? */
     oal_uint8                               auc_resv[1];
 }hal_rx_dscr_queue_header_stru;
 #endif
 /*****************************************************************************
-  结构名  : dmac_tx_dscr_queue_header_stru
-  结构说明: 发送描述符队列头的结构体
+  ??????  : dmac_tx_dscr_queue_header_stru
+  ????????: ????????????????????????
 *****************************************************************************/
 typedef struct
 {
-    oal_dlist_head_stru                     st_header;          /* 发送描述符队列头结点 */
-    hal_dscr_queue_status_enum_uint8        en_queue_status;    /* 发送描述符队列状态 */
-    oal_uint8                               uc_ppdu_cnt;     /* 发送描述符队列中元素的个数 */
+    oal_dlist_head_stru                     st_header;          /* ???????????????????? */
+    hal_dscr_queue_status_enum_uint8        en_queue_status;    /* ?????????????????? */
+    oal_uint8                               uc_ppdu_cnt;     /* ?????????????????????????? */
     oal_uint8                               auc_resv[2];
 }hal_tx_dscr_queue_header_stru;
 
 /*****************************************************************************
-  结构名  : dmac_tx_dscr_queue_header_stru
-  结构说明: 发送描述符队列头的结构体
+  ??????  : dmac_tx_dscr_queue_header_stru
+  ????????: ????????????????????????
 *****************************************************************************/
 typedef struct
 {
-    oal_uint8         uc_nulldata_awake;              /* AP时收到节能位为0的null data是否唤醒*/
+    oal_uint8         uc_nulldata_awake;              /* AP??????????????0??null data????????*/
     oal_uint8         uc_rsv[3];
-    oal_uint32        ul_nulldata_phy_mode;           /* STA时发送null data的phy mode */
-    oal_uint32        ul_nulldata_rate;               /* STA时发送null data的速率*/
-    oal_uint32        ul_nulldata_interval;           /* STA时发送null data的间隔*/
-    oal_uint32        ul_nulldata_address;            /* STA时发送null data的速率*/
-    oal_uint32        ul_ap0_probe_resp_address;      /* AP0的probe response内存地址*/
-    oal_uint32        ul_ap0_probe_resp_len;          /* AP0的probe response长度*/
-    oal_uint32        ul_ap1_probe_resp_address;      /* AP1的probe response内存地址*/
-    oal_uint32        ul_ap1_probe_resp_len;          /* AP1的probe response长度*/
-    oal_uint32        ul_ap0_probe_resp_phy;          /* AP0的probe response发送phy模式*/
-    oal_uint32        ul_ap0_probe_resp_rate;         /* AP0的probe response发送reate*/
-    oal_uint32        ul_ap1_probe_resp_phy;          /* AP1的probe response发送phy模式*/
-    oal_uint32        ul_ap1_probe_resp_rate;         /* AP1的probe response发送reate*/
+    oal_uint32        ul_nulldata_phy_mode;           /* STA??????null data??phy mode */
+    oal_uint32        ul_nulldata_rate;               /* STA??????null data??????*/
+    oal_uint32        ul_nulldata_interval;           /* STA??????null data??????*/
+    oal_uint32        ul_nulldata_address;            /* STA??????null data??????*/
+    oal_uint32        ul_ap0_probe_resp_address;      /* AP0??probe response????????*/
+    oal_uint32        ul_ap0_probe_resp_len;          /* AP0??probe response????*/
+    oal_uint32        ul_ap1_probe_resp_address;      /* AP1??probe response????????*/
+    oal_uint32        ul_ap1_probe_resp_len;          /* AP1??probe response????*/
+    oal_uint32        ul_ap0_probe_resp_phy;          /* AP0??probe response????phy????*/
+    oal_uint32        ul_ap0_probe_resp_rate;         /* AP0??probe response????reate*/
+    oal_uint32        ul_ap1_probe_resp_phy;          /* AP1??probe response????phy????*/
+    oal_uint32        ul_ap1_probe_resp_rate;         /* AP1??probe response????reate*/
 
-    oal_uint32        ul_set_bitmap;                  /* wow开关 */
+    oal_uint32        ul_set_bitmap;                  /* wow???? */
 }hal_wow_param_stru;
 
 typedef struct
@@ -2828,8 +2828,8 @@ typedef enum
 typedef oal_uint32 hal_tx_status_enum_uint32;
 
 /*****************************************************************************
-  结构名  : hal_lpm_chip_state
-  结构说明: 芯片低功耗状态枚举
+  ??????  : hal_lpm_chip_state
+  ????????: ??????????????????
 *****************************************************************************/
 typedef enum
 {
@@ -2845,35 +2845,35 @@ typedef enum
 typedef oal_uint8 hal_lpm_state_enum_uint8;
 
 /*****************************************************************************
-  结构名  : hal_lpm_state_para
-  结构说明: 芯片低功耗状态设置参数
+  ??????  : hal_lpm_state_para
+  ????????: ??????????????????????
 *****************************************************************************/
 typedef struct
 {
-    oal_uint8         uc_dtim_count;              /* 当前的DTIM count值，STA节能时设置相位*/
+    oal_uint8         uc_dtim_count;              /* ??????DTIM count????STA??????????????*/
     oal_uint8         uc_dtim_period;
-    oal_uint8         bit_gpio_sleep_en:1,        /* soc睡眠唤醒的方式,GPIO管脚方式使能*/
-                      bit_soft_sleep_en:1,        /* soc睡眠睡眠的方式,软睡眠方式使能*/
-                      bit_set_bcn_interval:1,     /* 是否调整beacon inter*/
+    oal_uint8         bit_gpio_sleep_en:1,        /* soc??????????????,GPIO????????????*/
+                      bit_soft_sleep_en:1,        /* soc??????????????,??????????????*/
+                      bit_set_bcn_interval:1,     /* ????????beacon inter*/
                       bit_rsv          :6;
-    oal_uint8         uc_rx_chain;               /* 接收通道值*/
-    oal_uint32        ul_idle_bcn_interval;      /* idle状态下beaon inter*/
-    oal_uint32        ul_sleep_time;             /* 软定时睡眠时间，单位ms*/
+    oal_uint8         uc_rx_chain;               /* ??????????*/
+    oal_uint32        ul_idle_bcn_interval;      /* idle??????beaon inter*/
+    oal_uint32        ul_sleep_time;             /* ????????????????????ms*/
 }hal_lpm_state_param_stru;
 
 
 /*****************************************************************************
-  结构名  : hal_cfg_rts_tx_param_stru
-  结构说明: RTS设置发送参数
+  ??????  : hal_cfg_rts_tx_param_stru
+  ????????: RTS????????????
 *****************************************************************************/
 typedef struct
 {
-    wlan_legacy_rate_value_enum_uint8   auc_rate[HAL_TX_RATE_MAX_NUM];           /*发送速率，单位mpbs*/
-    wlan_phy_protocol_enum_uint8        auc_protocol_mode[HAL_TX_RATE_MAX_NUM] ; /*协议模式, 取值参见wlan_phy_protocol_enum_uint8*/
+    wlan_legacy_rate_value_enum_uint8   auc_rate[HAL_TX_RATE_MAX_NUM];           /*??????????????mpbs*/
+    wlan_phy_protocol_enum_uint8        auc_protocol_mode[HAL_TX_RATE_MAX_NUM] ; /*????????, ????????wlan_phy_protocol_enum_uint8*/
     wlan_channel_band_enum_uint8        en_band;
     oal_uint8                           auc_recv[3];
 }hal_cfg_rts_tx_param_stru;
-/* txbf sounding帧速率，支持6M/24M/VHT MCS0/MCS3可配 */
+/* txbf sounding????????????6M/24M/VHT MCS0/MCS3???? */
 typedef enum
 {
     HAL_TXBF_REPORT_VHT_MCS0,
@@ -2887,7 +2887,7 @@ typedef oal_uint8 hal_txbf_sounding_rate_enum_uint8;
 
 
 /*****************************************************************************
-  7.7 对外部保留的设备级接口列表，建议外部不做直接调用，而是调用对应的内联函数
+  7.7 ????????????????????????????????????????????????????????????????????????
 *****************************************************************************/
 typedef oal_void (* p_hal_alg_isr_func)(oal_uint8 uc_vap_id, oal_void *p_hal_to_dmac_device);
 typedef oal_void (* p_hal_gap_isr_func)(oal_uint8 uc_vap_id, oal_void *p_hal_to_dmac_device);
@@ -2905,29 +2905,29 @@ typedef struct
     oal_uint8       auc_resv[2];
     oal_uint32      ul_timestamp;
 
-    oal_uint32      ul_arrive_time;     /* 下半部到来时间 */
-    oal_uint32      ul_handle_time;     /* 下半部处理时间 */
+    oal_uint32      ul_arrive_time;     /* ?????????????? */
+    oal_uint32      ul_handle_time;     /* ?????????????? */
     oal_uint32      ul_irq_cnt;
     oal_cpu_usage_stat_stru st_cpu_state;
 }hal_rx_dpart_track_stru;
 
-/* 保存硬件上报接收中断信息结构 */
+/* ???????????????????????????? */
 typedef struct
 {
     oal_dlist_head_stru         st_dlist_head;
-    oal_uint32                 *pul_base_dscr;      /* 本次中断描述符地址 */
-    oal_uint16                  us_dscr_num;        /* 接收到的描述符的个数 */
-    oal_uint8                   uc_channel_num;     /* 本次中断时，所在的信道号 */
+    oal_uint32                 *pul_base_dscr;      /* ?????????????????? */
+    oal_uint16                  us_dscr_num;        /* ???????????????????? */
+    oal_uint8                   uc_channel_num;     /* ???????????????????????? */
     oal_uint8                   uc_queue_id;
 }hal_hw_rx_dscr_info_stru;
 
-/* 2g/5g rf定制化对应得到phy+rf chain能力定制化 */
+/* 2g/5g rf??????????????phy+rf chain?????????? */
 typedef struct
 {
-    wlan_nss_enum_uint8                     en_2g_nss_num;              /* 2G Nss 空间流个数 */
-    wlan_nss_enum_uint8                     en_5g_nss_num;              /* 5G Nss 空间流个数 */
-    oal_uint8                               uc_2g_support_rf_chain;     /* rf通道1/2/3(双通道),解决方案和芯片都不支持交叉 */
-    oal_uint8                               uc_5g_support_rf_chain;     /* rf通道1/2/3(双通道),解决方案和芯片都不支持交叉 */
+    wlan_nss_enum_uint8                     en_2g_nss_num;              /* 2G Nss ?????????? */
+    wlan_nss_enum_uint8                     en_5g_nss_num;              /* 5G Nss ?????????? */
+    oal_uint8                               uc_2g_support_rf_chain;     /* rf????1/2/3(??????),?????????????????????????? */
+    oal_uint8                               uc_5g_support_rf_chain;     /* rf????1/2/3(??????),?????????????????????????? */
 }hal_cfg_rf_custom_cap_info_stru;
 
 #ifdef _PRE_WLAN_FEATURE_BTCOEX
@@ -2935,9 +2935,9 @@ typedef struct
 {
     oal_timer_list_stru         st_btcoex_ps_slot_timer;
 #ifdef _PRE_WLAN_FEATURE_BT_20DBM
-    oal_bool_enum_uint8         en_bt20dbm_poweroff_on;   /* psoff 在20dbm=0时在执行，不要做恢复信道配置 */
+    oal_bool_enum_uint8         en_bt20dbm_poweroff_on;   /* psoff ??20dbm=0???????????????????????????? */
 #endif
-    oal_void                   *p_drv_arg;              /* 中断处理函数参数,对应的pst_dmac_vap */
+    oal_void                   *p_drv_arg;              /* ????????????????,??????pst_dmac_vap */
 }hal_chip_btcoex_mgr_stru;
 #endif
 
@@ -2981,63 +2981,63 @@ typedef oal_uint8 hal_dfr_timer_step_enum_uint8;
 
 typedef struct
 {
-    frw_timeout_stru                 st_tx_prot_timer;        /* 检测无发送完成中断定时器 */
-    hal_dfr_timer_step_enum_uint8    en_tx_prot_timer_step;   /* 超时标志，表明第几次超时 */
-    oal_uint16                       us_tx_prot_time;         /* 超时时间 */
+    frw_timeout_stru                 st_tx_prot_timer;        /* ???????????????????????? */
+    hal_dfr_timer_step_enum_uint8    en_tx_prot_timer_step;   /* ???????????????????????? */
+    oal_uint16                       us_tx_prot_time;         /* ???????? */
     oal_uint8                        auc_resv[1];
 }hal_dfr_tx_prot_stru;
 
 typedef struct
 {
-    oal_uint16    us_tbtt_cnt;   /* TBTT中断计数，每10次TBTT中断，将us_err_cnt清零 */
-    oal_uint16    us_err_cnt;    /* 每10次TBTT中断，产生的MAC错误中断个数 */
+    oal_uint16    us_tbtt_cnt;   /* TBTT????????????10??TBTT????????us_err_cnt???? */
+    oal_uint16    us_err_cnt;    /* ??10??TBTT????????????MAC???????????? */
 }hal_dfr_err_opern_stru;
 
 typedef struct
 {
-    oal_uint32                      ul_error1_val; /* 错误1中断状态 */
-    oal_uint32                      ul_error2_val; /* 错误2中断状态 */
+    oal_uint32                      ul_error1_val; /* ????1???????? */
+    oal_uint32                      ul_error2_val; /* ????2???????? */
 }hal_error_state_stru;
 
 typedef struct
 {
     oal_dlist_head_stru   st_entry;
-    oal_uint32            ul_phy_addr;    /* 接收描述符物理地址 */
+    oal_uint32            ul_phy_addr;    /* ?????????????????? */
 }witp_rx_dscr_recd_stru;
 
 
 /*****************************************************************************
-  结构名  : hal_phy_pow_param_stru
-  结构说明: PHY 功率相关寄存器参数, 在2.4G/5G频点切换时使用
+  ??????  : hal_phy_pow_param_stru
+  ????????: PHY ??????????????????, ??2.4G/5G??????????????
 *****************************************************************************/
 typedef struct
 {
 #ifndef _PRE_WLAN_FEATURE_TPC_OPT
-    oal_uint32                      ul_pa_bias_addr;                        /* PA_BIAS地址 */
+    oal_uint32                      ul_pa_bias_addr;                        /* PA_BIAS???? */
     oal_uint32                      aul_pa_bias_gain_code[WLAN_BAND_BUTT];  /* 2G/5G PA_BIAS CODE */
-    oal_uint32                      ul_pa_addr;                             /* PA地址 */
-    oal_uint32                      aul_2g_upc_addr[WLAN_2G_SUB_BAND_NUM];  /* 2G UPC地址 */
-    oal_uint32                      aul_5g_upc_addr[WLAN_5G_SUB_BAND_NUM];  /* 5G UPC地址 */
-    oal_uint32                      aul_2g_upc1_data[WLAN_2G_SUB_BAND_NUM][HAL_UPC_DATA_REG_NUM];/* 2G 通道1 UPC DATA */
-    oal_uint32                      aul_2g_upc2_data[WLAN_2G_SUB_BAND_NUM][HAL_UPC_DATA_REG_NUM];/* 2G 通道2 UPC DATA */
-    oal_uint32                      aul_5g_upc1_data[WLAN_5G_SUB_BAND_NUM][HAL_UPC_DATA_REG_NUM];/* 5G 通道1 UPC DATA */
-    oal_uint32                      aul_5g_upc2_data[WLAN_5G_SUB_BAND_NUM][HAL_UPC_DATA_REG_NUM];/* 5G 通道2 UPC DATA */
-    oal_uint8                       auc_2g_cali_upc_code[WLAN_RF_CHANNEL_NUMS][WLAN_2G_SUB_BAND_NUM];/* 2G校准的UPC Code */
-    oal_uint8                       auc_5g_cali_upc_code[WLAN_RF_CHANNEL_NUMS][WLAN_5G_CALI_SUB_BAND_NUM];  /* 5G校准的UPC Code(区分20M和80M) */
+    oal_uint32                      ul_pa_addr;                             /* PA???? */
+    oal_uint32                      aul_2g_upc_addr[WLAN_2G_SUB_BAND_NUM];  /* 2G UPC???? */
+    oal_uint32                      aul_5g_upc_addr[WLAN_5G_SUB_BAND_NUM];  /* 5G UPC???? */
+    oal_uint32                      aul_2g_upc1_data[WLAN_2G_SUB_BAND_NUM][HAL_UPC_DATA_REG_NUM];/* 2G ????1 UPC DATA */
+    oal_uint32                      aul_2g_upc2_data[WLAN_2G_SUB_BAND_NUM][HAL_UPC_DATA_REG_NUM];/* 2G ????2 UPC DATA */
+    oal_uint32                      aul_5g_upc1_data[WLAN_5G_SUB_BAND_NUM][HAL_UPC_DATA_REG_NUM];/* 5G ????1 UPC DATA */
+    oal_uint32                      aul_5g_upc2_data[WLAN_5G_SUB_BAND_NUM][HAL_UPC_DATA_REG_NUM];/* 5G ????2 UPC DATA */
+    oal_uint8                       auc_2g_cali_upc_code[WLAN_RF_CHANNEL_NUMS][WLAN_2G_SUB_BAND_NUM];/* 2G??????UPC Code */
+    oal_uint8                       auc_5g_cali_upc_code[WLAN_RF_CHANNEL_NUMS][WLAN_5G_CALI_SUB_BAND_NUM];  /* 5G??????UPC Code(????20M??80M) */
     oal_uint32                      aul_pa_gain_code[WLAN_BAND_BUTT];       /* 2G/5G PAIN CODE */
-    oal_uint32                      ul_dac_addr;                            /* DAC地址 */
+    oal_uint32                      ul_dac_addr;                            /* DAC???? */
     oal_uint32                      aul_dac_data[WLAN_BAND_BUTT];           /* 2G/5G DAC DATA */
-    oal_uint32                      ul_lpf_addr;                            /* DAC地址 */
+    oal_uint32                      ul_lpf_addr;                            /* DAC???? */
     oal_uint32                      aul_lpf_data[WLAN_BAND_BUTT];           /* 2G/5G LPF DATA */
     oal_uint8                       auc_reserve_addr[2];
 #endif  /* _PRE_WLAN_FEATURE_TPC_OPT */
 
-    /* V200新增通道1 dac and pa code */
+    /* V200????????1 dac and pa code */
 #ifdef _PRE_WLAN_PRODUCT_1151V200
-    oal_uint32                      aul_dac_pa_code_ch1[WLAN_BAND_BUTT];       /* 通道1 2G/5G dac and PA CODE */
+    oal_uint32                      aul_dac_pa_code_ch1[WLAN_BAND_BUTT];       /* ????1 2G/5G dac and PA CODE */
 #endif
 
-    /*不同帧的tpc code*/
+    /*????????tpc code*/
 #if ((_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_DEV) || (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_HOST))
     oal_uint32                      aul_ack_cts_pow_code[WLAN_OFDM_ACK_CTS_TYPE_BUTT][WLAN_2G_SUB_BAND_NUM+WLAN_5G_SUB_BAND_NUM];
     oal_uint32                      aul_2g_dsss_ack_cts_pow_code[WLAN_2G_SUB_BAND_NUM];
@@ -3071,7 +3071,7 @@ typedef struct
     oal_uint8                       auc_reserve[2];
 #endif
 #endif
-    /*读取不同帧格式的速率*/
+    /*????????????????????*/
     oal_uint8                       uc_rate_bar;
     oal_uint8                       uc_rsv[3];
 #if ((_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_DEV) || (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_HOST))
@@ -3108,7 +3108,7 @@ typedef struct
 
 typedef struct
 {
-    /*误报新增过滤条件*/
+    /*????????????????*/
     oal_bool_enum_uint8             en_fcc_chirp_duration_diff;
     oal_bool_enum_uint8             en_fcc_chirp_pow_diff;
     oal_bool_enum_uint8             en_fcc_type4_duration_diff;
@@ -3118,8 +3118,8 @@ typedef struct
 typedef struct
 {
     oal_bool_enum_uint8  en_chirp_enable;
-    oal_uint8            uc_chirp_wow_wake_flag;      //在wow的gpio中断上半部标记，表示刚从wow唤醒
-    oal_uint8            uc_chirp_detect_flag;        //在wow的gpio中断使用
+    oal_uint8            uc_chirp_wow_wake_flag;      //??wow??gpio????????????????????????wow????
+    oal_uint8            uc_chirp_detect_flag;        //??wow??gpio????????
 #if defined(_PRE_WLAN_FEATURE_DFS_OPTIMIZE) || defined(_PRE_WLAN_FEATURE_DFS)
     oal_bool_enum_uint8             en_log_switch;
 
@@ -3145,7 +3145,7 @@ typedef struct
     /*normal pulse det timer*/
     hal_dfs_normal_pulse_det_stru   st_dfs_normal_pulse_det;
 
-    /*误报过滤条件*/
+    /*????????????*/
     hal_dfs_pulse_check_filter_stru st_dfs_pulse_check_filter;
 
 #else
@@ -3162,32 +3162,32 @@ typedef struct
 #if (defined(_PRE_PRODUCT_ID_HI110X_DEV))
 typedef struct
 {
-    oal_uint16     us_max_offset_tsf;     /* 最长耗时的时间 */
-    oal_uint16     us_mpdu_len;           /* 最长耗时的mpdu长度 */
-    oal_uint16     us_tx_excp_cnt;        /* 发送完成耗时异常统计 */
-    oal_uint8      uc_q_num;              /* 最长耗时的q_num*/
+    oal_uint16     us_max_offset_tsf;     /* ?????????????? */
+    oal_uint16     us_mpdu_len;           /* ??????????mpdu???? */
+    oal_uint16     us_tx_excp_cnt;        /* ???????????????????? */
+    oal_uint8      uc_q_num;              /* ??????????q_num*/
     oal_uint8      auc_resv;
 }hal_tx_excp_info_stru;
 #endif
 
 typedef struct
 {
-    oal_uint32          ul_tkipccmp_rep_fail_cnt;    /* 重放攻击检测计数TKIP + CCMP */
-    oal_uint32          ul_tx_mpdu_cnt;              /* 发送计数非ampdu高优先级 + 普通优先级 + ampdu中mpdu */
-    oal_uint32          ul_rx_passed_mpdu_cnt;       /* 属于AMPDU MPDU的FCS正确的MPDU数量 */
-    oal_uint32          ul_rx_failed_mpdu_cnt;       /* 属于AMPDU MPDU的FCS错误的MPDU数量 */
-    oal_uint32          ul_rx_tkipccmp_mic_fail_cnt; /* kip mic + ccmp mic fail的帧数 */
-    oal_uint32          ul_key_search_fail_cnt;      /* 接收key serach fail的帧数 */
-    oal_uint32          ul_phy_rx_dotb_ok_frm_cnt;       /* PHY接收dotb ok的帧个数 */
-    oal_uint32          ul_phy_rx_htvht_ok_frm_cnt;      /* PHY接收vht ht ok的帧个数 */
-    oal_uint32          ul_phy_rx_lega_ok_frm_cnt;       /* PHY接收legace ok的帧个数 */
-    oal_uint32          ul_phy_rx_dotb_err_frm_cnt;      /* PHY接收dotb err的帧个数 */
-    oal_uint32          ul_phy_rx_htvht_err_frm_cnt;     /* PHY接收vht ht err的帧个数 */
-    oal_uint32          ul_phy_rx_lega_err_frm_cnt;      /* PHY接收legace err的帧个数 */
+    oal_uint32          ul_tkipccmp_rep_fail_cnt;    /* ????????????????TKIP + CCMP */
+    oal_uint32          ul_tx_mpdu_cnt;              /* ??????????ampdu???????? + ?????????? + ampdu??mpdu */
+    oal_uint32          ul_rx_passed_mpdu_cnt;       /* ????AMPDU MPDU??FCS??????MPDU???? */
+    oal_uint32          ul_rx_failed_mpdu_cnt;       /* ????AMPDU MPDU??FCS??????MPDU???? */
+    oal_uint32          ul_rx_tkipccmp_mic_fail_cnt; /* kip mic + ccmp mic fail?????? */
+    oal_uint32          ul_key_search_fail_cnt;      /* ????key serach fail?????? */
+    oal_uint32          ul_phy_rx_dotb_ok_frm_cnt;       /* PHY????dotb ok???????? */
+    oal_uint32          ul_phy_rx_htvht_ok_frm_cnt;      /* PHY????vht ht ok???????? */
+    oal_uint32          ul_phy_rx_lega_ok_frm_cnt;       /* PHY????legace ok???????? */
+    oal_uint32          ul_phy_rx_dotb_err_frm_cnt;      /* PHY????dotb err???????? */
+    oal_uint32          ul_phy_rx_htvht_err_frm_cnt;     /* PHY????vht ht err???????? */
+    oal_uint32          ul_phy_rx_lega_err_frm_cnt;      /* PHY????legace err???????? */
 
 }hal_mac_key_statis_info_stru;
 
-/* 会影响目标vdet值的参数集合 */
+/* ??????????vdet???????????? */
 typedef union                                                   /* todo */
 {
     struct
@@ -3247,25 +3247,25 @@ typedef struct
 
 typedef struct hal_dyn_cali_val{
     oal_uint16              aus_cali_en_cnt[WLAN_BAND_BUTT];
-    oal_uint16              aus_cali_en_interval[WLAN_BAND_BUTT];      /* 两次动态校准间隔描述符个数  */
+    oal_uint16              aus_cali_en_interval[WLAN_BAND_BUTT];      /* ??????????????????????????  */
 
-    oal_uint16              us_cali_ch_sw_interval;   /* 通道切换间隔校准使能描述符个数  */
-    oal_uint16              us_cali_ch_sw_cnt;        /*通道发送动态校准使能描述符个数*/
+    oal_uint16              us_cali_ch_sw_interval;   /* ??????????????????????????????  */
+    oal_uint16              us_cali_ch_sw_cnt;        /*??????????????????????????????*/
 
-    oal_uint8               uc_cali_pdet_min_th;      /* 动态校准极小阈值  */
-    oal_uint8               uc_cali_pdet_max_th;      /* 动态校准极大阈值  */
-    oal_uint8               uc_cali_chain;            /*  当前动态校准校准通道号  */
-    oal_bool_enum_uint8     en_realtime_cali_adjust;      /* 动态校准使能补偿开关 */
+    oal_uint8               uc_cali_pdet_min_th;      /* ????????????????  */
+    oal_uint8               uc_cali_pdet_max_th;      /* ????????????????  */
+    oal_uint8               uc_cali_chain;            /*  ??????????????????????  */
+    oal_bool_enum_uint8     en_realtime_cali_adjust;      /* ???????????????????? */
 
     hal_dyn_cali_usr_record_stru   ast_vap_pow_info[WLAN_RF_CHANNEL_NUMS];
     hal_dyn_cali_chain_status_stru st_cali_chain_status_info;
 
-    oal_int16               s_temp;                       /* Tsensor检测温度 */
-    oal_bool_enum_uint8     en_realtime_cali_comp_flag;   /* 动态校准处理完成标志 */
+    oal_int16               s_temp;                       /* Tsensor???????? */
+    oal_bool_enum_uint8     en_realtime_cali_comp_flag;   /* ???????????????????? */
 }hal_dyn_cali_val_stru;
 #endif
 
-/* 扫描状态，通过判断当前扫描的状态，判断多个扫描请求的处理策略以及上报扫描结果的策略 */
+/* ?????????????????????????????????????????????????????????????????????????????????? */
 typedef enum
 {
     MAC_SCAN_STATE_IDLE,
@@ -3275,7 +3275,7 @@ typedef enum
 }mac_scan_state_enum;
 typedef oal_uint8 mac_scan_state_enum_uint8;
 
-/* 扫描状态，通过判断当前扫描的状态，判断多个扫描请求的处理策略以及上报扫描结果的策略 */
+/* ?????????????????????????????????????????????????????????????????????????????????? */
 typedef enum
 {
     HAL_SCAN_PASUE_TYPE_CHAN_CONFLICT,
@@ -3285,7 +3285,7 @@ typedef enum
 }hal_scan_pasue_enum;
 typedef oal_uint8 hal_scan_pause_type_enum_uint8;
 
-/* 扫描状态，打印tx dscr控制 */
+/* ??????????????tx dscr???? */
 typedef enum
 {
     HAL_SCAN_TX_DSCR_DBG_CTL_INIT,
@@ -3298,53 +3298,53 @@ typedef oal_uint8 hal_scan_tx_dscr_dbg_ctl_enum_uint8;
 
 typedef struct
 {
-    frw_timeout_stru             st_scan_timer;                             /* 扫描定时器用于切换信道 */
-    mac_channel_stru             st_home_channel;                           /* 记录home channel */
+    frw_timeout_stru             st_scan_timer;                             /* ?????????????????????? */
+    mac_channel_stru             st_home_channel;                           /* ????home channel */
 
-    oal_uint8                    auc_original_mac_addr[WLAN_MAC_ADDR_LEN];  /* 扫描开始前保存原始的MAC地址 */
-    wlan_scan_mode_enum_uint8    en_scan_mode;                              /* 扫描模式*/
-    oal_uint8                    uc_scan_pause_bitmap;                         /* 扫描是否被暂停 */
+    oal_uint8                    auc_original_mac_addr[WLAN_MAC_ADDR_LEN];  /* ????????????????????MAC???? */
+    wlan_scan_mode_enum_uint8    en_scan_mode;                              /* ????????*/
+    oal_uint8                    uc_scan_pause_bitmap;                         /* ?????????????? */
 
-    oal_uint8                    uc_start_chan_idx;                         /* 扫描起始idx */
-    oal_uint8                    uc_scan_chan_idx;                          /* 当前扫描信道索引累加值 */
-    oal_uint8                    uc_channel_nums;                           /* 此hal扫描的信道个数 */
-    mac_scan_state_enum_uint8    en_curr_scan_state;                        /* 此hal扫描状态 */
+    oal_uint8                    uc_start_chan_idx;                         /* ????????idx */
+    oal_uint8                    uc_scan_chan_idx;                          /* ?????????????????????? */
+    oal_uint8                    uc_channel_nums;                           /* ??hal?????????????? */
+    mac_scan_state_enum_uint8    en_curr_scan_state;                        /* ??hal???????? */
 
-    oal_uint8                    uc_scan_ap_num_in_2p4;                     /* 在2.4g上扫到ap的信道个数 */
-    oal_uint8                    uc_last_channel_band;                      /* 上一个channel的频段 */
-    oal_bool_enum_uint8          en_scan_curr_chan_find_bss_flag;           /* 本信道是否扫到bss */
-    oal_bool_enum_uint8          en_need_switch_back_home_channel;          /* 背景扫描时，扫描完一个信道，判断是否需要切回工作信道工作 */
+    oal_uint8                    uc_scan_ap_num_in_2p4;                     /* ??2.4g??????ap?????????? */
+    oal_uint8                    uc_last_channel_band;                      /* ??????channel?????? */
+    oal_bool_enum_uint8          en_scan_curr_chan_find_bss_flag;           /* ??????????????bss */
+    oal_bool_enum_uint8          en_need_switch_back_home_channel;          /* ???????????????????????????????????????????????????????? */
 
-    oal_uint8                    uc_curr_channel_scan_count;                /* 记录当前信道的扫描次数，第一次发送广播ssid的probe req帧，后面发送指定ssid的probe req帧 */
-    oal_uint8                    uc_max_scan_count_per_channel;             /* 每个信道的扫描次数 */
-    oal_uint8                    uc_scan_channel_interval;                  /* 间隔n个信道，切回工作信道工作一段时间 */
-    oal_bool_enum_uint8          en_working_in_home_chan;                   /* 是否工作在工作信道 */
+    oal_uint8                    uc_curr_channel_scan_count;                /* ??????????????????????????????????????ssid??probe req????????????????ssid??probe req?? */
+    oal_uint8                    uc_max_scan_count_per_channel;             /* ?????????????????? */
+    oal_uint8                    uc_scan_channel_interval;                  /* ????n???????????????????????????????? */
+    oal_bool_enum_uint8          en_working_in_home_chan;                   /* ?????????????????? */
 
-    oal_uint16                   us_scan_time;                              /* 扫描在某一信道停留此时间后，扫描结束, ms，必须配置为MAC负载统计周期的整数倍 */
-    oal_uint16                   us_work_time_on_home_channel;              /* 背景扫描时，返回工作信道工作的时间 */
+    oal_uint16                   us_scan_time;                              /* ????????????????????????????????????, ms????????????MAC???????????????????? */
+    oal_uint16                   us_work_time_on_home_channel;              /* ?????????????????????????????????? */
 
-    oal_uint32                   ul_scan_timestamp;                         /* 记录最新一次扫描开始的时间 */
+    oal_uint32                   ul_scan_timestamp;                         /* ?????????????????????????? */
 
-    oal_uint8                    uc_scan_ap_num_in_5p0;                     /* 在5g上扫到ap的信道个数 */
+    oal_uint8                    uc_scan_ap_num_in_5p0;                     /* ??5g??????ap?????????? */
     oal_bool_enum_uint8          en_is_fast_scan;
-    wlan_channel_band_enum_uint8 en_scan_band;                              /* 扫描的频段,支持fast scan使用 */
-    hal_scan_tx_dscr_dbg_ctl_enum_uint8 en_tx_dscr_debug_ctl;               /* 控制扫描时打印部分tx dscr */
+    wlan_channel_band_enum_uint8 en_scan_band;                              /* ??????????,????fast scan???? */
+    hal_scan_tx_dscr_dbg_ctl_enum_uint8 en_tx_dscr_debug_ctl;               /* ??????????????????tx dscr */
 }hal_scan_params_stru;
 
 typedef struct
 {
     oal_uint8                    uc_num_channels_2G;
     oal_uint8                    uc_num_channels_5G;
-    oal_uint8                    uc_max_scan_count_per_channel;   /* 每个信道的扫描次数 */
+    oal_uint8                    uc_max_scan_count_per_channel;   /* ?????????????????? */
     oal_bool_enum_uint8          en_is_fast_scan;
 
-    oal_uint8                    uc_scan_channel_interval;       /* 间隔n个信道，切回工作信道工作一段时间 */
+    oal_uint8                    uc_scan_channel_interval;       /* ????n???????????????????????????????? */
     wlan_scan_mode_enum_uint8    en_scan_mode;
-    wlan_channel_band_enum_uint8 en_scan_band;                   /* 扫描的频段,支持fast scan使用 */
+    wlan_channel_band_enum_uint8 en_scan_band;                   /* ??????????,????fast scan???? */
     oal_uint8                    auc_resv[1];
 
-    oal_uint16                   us_scan_time;                   /* 扫描在某一信道停留此时间后，扫描结束, ms，必须配置为MAC负载统计周期的整数倍 */
-    oal_uint16                   us_work_time_on_home_channel;   /* 背景扫描时，返回工作信道工作的时间 */
+    oal_uint16                   us_scan_time;                   /* ????????????????????????????????????, ms????????????MAC???????????????????? */
+    oal_uint16                   us_work_time_on_home_channel;   /* ?????????????????????????????????? */
 }hal_scan_info_stru;
 
 struct tag_hal_to_dmac_device_stru;
@@ -3358,18 +3358,18 @@ typedef struct
     p_dmac_scan_one_channel_start_cb         p_dmac_scan_one_channel_start;
 }hal_device_fsm_cb;
 
-/* hal device状态机结构体 */
+/* hal device???????????? */
 typedef struct _hal_device_handle_handler
 {
-    oal_fsm_stru                     st_oal_fsm;                     /* 状态机 */
-    oal_uint8                        uc_is_fsm_attached;             /* 状态机是否已经注册 */
+    oal_fsm_stru                     st_oal_fsm;                     /* ?????? */
+    oal_uint8                        uc_is_fsm_attached;             /* ?????????????????? */
 #ifdef _PRE_WLAN_FEATURE_STA_PM
-    oal_uint8                        bit_wait_hw_txq_empty    :1;    /* 标记是否等待硬件队列为空后关闭mac pa */
+    oal_uint8                        bit_wait_hw_txq_empty    :1;    /* ??????????????????????????????mac pa */
     oal_uint8                        bit_mac_pa_switch_en     :1;
     oal_uint8                        bit_resv                 :6;
-    oal_uint8                        uc_is_work_sub_fsm_attached;    /* 子状态机是否已经注册 */
+    oal_uint8                        uc_is_work_sub_fsm_attached;    /* ???????????????????? */
 
-    oal_fsm_stru                     st_oal_work_sub_fsm;            /* 子状态机 */
+    oal_fsm_stru                     st_oal_work_sub_fsm;            /* ???????? */
     oal_uint32                       aul_vap_pm_state_bitmap[HAL_WORK_SUB_STATE_NUM];     /* vap ps state bitmap */
     oal_uint8                        auc_last_set_vap_id[HAL_WORK_SUB_STATE_NUM];
     oal_uint16                       aus_last_event[HAL_WORK_SUB_STATE_NUM];
@@ -3378,35 +3378,35 @@ typedef struct _hal_device_handle_handler
     oal_uint8                        _rom[4];
 } hal_dev_fsm_stru;
 
-/* hal device m2s状态机结构体 */
+/* hal device m2s???????????? */
 typedef struct
 {
-    oal_fsm_stru                     st_oal_fsm;                     /* 状态机 */
-    oal_uint8                        uc_is_fsm_attached;             /* 状态机是否已经注册 */
-    wlan_m2s_type_enum_uint8         en_m2s_type;                    /*0:软切换 1:硬切换*/
-    wlan_m2s_mode_stru               st_m2s_mode;                    /* m2s业务申请占用bitmap，用户优先级管理 */
-    oal_bool_enum_uint8              en_command_scan_on;             /* command下优化扫描是否在执行，防止miso时误end */
+    oal_fsm_stru                     st_oal_fsm;                     /* ?????? */
+    oal_uint8                        uc_is_fsm_attached;             /* ?????????????????? */
+    wlan_m2s_type_enum_uint8         en_m2s_type;                    /*0:?????? 1:??????*/
+    wlan_m2s_mode_stru               st_m2s_mode;                    /* m2s????????????bitmap???????????????? */
+    oal_bool_enum_uint8              en_command_scan_on;             /* command??????????????????????????miso????end */
     oal_uint8                        _rom[4];
 } hal_m2s_fsm_stru;
 
-/* 配置相关信息(包含定制化) */
+/* ????????????(??????????) */
 typedef struct
 {
-    wlan_nss_enum_uint8                     en_nss_num;              /* Nss 空间流个数 */
-    oal_uint8                               uc_phy_chain;            /* phy通道1/2/3 */
+    wlan_nss_enum_uint8                     en_nss_num;              /* Nss ?????????? */
+    oal_uint8                               uc_phy_chain;            /* phy????1/2/3 */
     oal_uint8                               uc_single_tx_chain;
-    /* 管理帧采用单通道发送时选择的通道(单通道时要配置和uc_phy_chain一致),或者用于配置phy接收通道寄存器 */
-    oal_uint8                               uc_rf_chain;             /* rf通道1/2/3(双通道),解决方案和芯片都不支持交叉 */
+    /* ????????????????????????????????(????????????????uc_phy_chain????),????????????phy?????????????? */
+    oal_uint8                               uc_rf_chain;             /* rf????1/2/3(??????),?????????????????????????? */
 
-    oal_bool_enum_uint8                     en_tx_stbc_is_supp;      /* 是否支持最少2x1 STBC发送*/
-    oal_bool_enum_uint8                     en_rx_stbc_is_supp;      /* 是否支持stbc接收,支持2个空间流 */
+    oal_bool_enum_uint8                     en_tx_stbc_is_supp;      /* ????????????2x1 STBC????*/
+    oal_bool_enum_uint8                     en_rx_stbc_is_supp;      /* ????????stbc????,????2???????? */
     oal_bool_enum_uint8                     uc_dpd_switch2G;
     oal_bool_enum_uint8                     uc_dpd_switch5G;
 
-    oal_bool_enum_uint8                     en_su_bfmer_is_supp;     /* 是否支持单用户beamformer */
-    oal_bool_enum_uint8                     en_su_bfmee_is_supp;     /* 是否支持单用户beamformee */
-    oal_bool_enum_uint8                     en_mu_bfmer_is_supp;     /* 是否支持多用户beamformer */
-    oal_bool_enum_uint8                     en_mu_bfmee_is_supp;     /* 是否支持多用户beamformee */
+    oal_bool_enum_uint8                     en_su_bfmer_is_supp;     /* ??????????????beamformer */
+    oal_bool_enum_uint8                     en_su_bfmee_is_supp;     /* ??????????????beamformee */
+    oal_bool_enum_uint8                     en_mu_bfmer_is_supp;     /* ??????????????beamformer */
+    oal_bool_enum_uint8                     en_mu_bfmee_is_supp;     /* ??????????????beamformee */
 
     oal_bool_enum_uint8                     en_is_supp_11ax;
     oal_bool_enum_uint8                     en_radar_detector_is_supp;
@@ -3415,13 +3415,13 @@ typedef struct
 
     oal_bool_enum_uint8                     en_11n_sounding;
     oal_bool_enum_uint8                     en_green_field;
-    oal_bool_enum_uint8                     en_txopps_is_supp;        /*是否使能TXOP PS*/
-    oal_bool_enum_uint8                     en_1024qam_is_supp;      /* 支持1024QAM速率 */
-    /* ROM化预留hal device能力 */
+    oal_bool_enum_uint8                     en_txopps_is_supp;        /*????????TXOP PS*/
+    oal_bool_enum_uint8                     en_1024qam_is_supp;      /* ????1024QAM???? */
+    /* ROM??????hal device???? */
     oal_bool_enum_uint8                     en_nb_is_supp;
     oal_uint8                               uc_su_bfee_num;
-    oal_uint8                               uc_phy2dscr_chain;         /* 和uc_phy_chain对应，这里是配置发送描述符 */
-    oal_bool_enum_uint8                     en_11n_txbf_is_supp;       /* 是否支持11n txbf*/
+    oal_uint8                               uc_phy2dscr_chain;         /* ??uc_phy_chain?????????????????????????? */
+    oal_bool_enum_uint8                     en_11n_txbf_is_supp;       /* ????????11n txbf*/
 
     oal_bool_enum_uint8                     en_is_supp_rev4;
     oal_bool_enum_uint8                     en_is_supp_rev5;
@@ -3429,7 +3429,7 @@ typedef struct
     oal_bool_enum_uint8                     en_is_supp_rev7;
 }hal_cfg_cap_info_stru;
 
-/* hal device alg结构体定义 */
+/* hal device alg?????????? */
 typedef enum
 {
     HAL_ALG_DEVICE_STRU_ID_SCHEDULE,
@@ -3439,7 +3439,7 @@ typedef enum
     HAL_ALG_DEVICE_STRU_ID_TXBF,
     HAL_ALG_DEVICE_STRU_ID_ANTI_INTF,
     HAL_ALG_DEVICE_STRU_ID_MWO_DET,
-    HAL_ALG_DEVICE_STRU_ID_TPC,        //TPC结构体
+    HAL_ALG_DEVICE_STRU_ID_TPC,        //TPC??????
     HAL_ALG_DEVICE_STRU_ID_EDCA_OPT,
     HAL_ALG_DEVICE_STRU_ID_CCA_OPT,
     HAL_ALG_DEVICE_STRU_ID_INTF_DET,
@@ -3448,17 +3448,17 @@ typedef enum
 }hal_alg_device_stru_id_enum;
 typedef oal_uint8 hal_alg_device_stru_id_enum_uint8;
 
-/* 挂在各个hal device上的数据结构 */
+/* ????????hal device???????????? */
 typedef struct
 {
     oal_void       *p_alg_info[HAL_ALG_DEVICE_STRU_ID_BUTT];
 }hal_alg_device_stru;
 
 #ifdef _PRE_WLAN_FEATURE_NEGTIVE_DET
-/*干扰检测模块PK模式探测阶段枚举*/
+/*????????????PK????????????????*/
 typedef enum
 {
-    HAL_ALG_INTF_PKADJ_STAGE_INIT      = 0,     /* 用于统计跑流的初始干扰 */
+    HAL_ALG_INTF_PKADJ_STAGE_INIT      = 0,     /* ?????????????????????? */
     HAL_ALG_INTF_PKADJ_STAGE_TXOP      = 1,
     HAL_ALG_INTF_PKADJ_STAGE_AIFSN     = 2,
     HAL_ALG_INTF_PKADJ_STAGE_CW        = 3,
@@ -3468,20 +3468,20 @@ typedef enum
 typedef oal_uint8 hal_alg_pk_intf_stage_enum_uint8;
 #endif
 
-/*干扰检测模块检测到的邻频叠频干扰模式改变时回调函数枚举定义*/
+/*??????????????????????????????????????????????????????????*/
 typedef enum
 {
-    HAL_ALG_INTF_DET_ADJINTF_NO        = 0,    /* 无干扰 */
-    HAL_ALG_INTF_DET_ADJINTF_MEDIUM    = 1,    /* 中等强度干扰 */
-    HAL_ALG_INTF_DET_ADJINTF_STRONG    = 2,    /* 强干扰 */
-    HAL_ALG_INTF_DET_ADJINTF_CERTIFY   = 3,    /* 认证干扰 */
-    HAL_ALG_INTF_DET_STATE_PKADJ       = 4,    /* PK参数调整状态 */
-    HAL_ALG_INTF_DET_STATE_PK          = 5,    /* PK状态 */
+    HAL_ALG_INTF_DET_ADJINTF_NO        = 0,    /* ?????? */
+    HAL_ALG_INTF_DET_ADJINTF_MEDIUM    = 1,    /* ???????????? */
+    HAL_ALG_INTF_DET_ADJINTF_STRONG    = 2,    /* ?????? */
+    HAL_ALG_INTF_DET_ADJINTF_CERTIFY   = 3,    /* ???????? */
+    HAL_ALG_INTF_DET_STATE_PKADJ       = 4,    /* PK???????????? */
+    HAL_ALG_INTF_DET_STATE_PK          = 5,    /* PK???? */
     HAL_ALG_INTF_DET_ADJINTF_BUTT
 }hal_alg_intf_det_mode_enum;
 typedef oal_uint8 hal_alg_intf_det_mode_enum_uint8;
 
-/* 算法使用的用户距离状态 */
+/* ?????????????????????? */
 typedef enum
 {
     HAL_ALG_USER_DISTANCE_NEAR       = 0,
@@ -3492,28 +3492,28 @@ typedef enum
 }hal_alg_user_distance_enum;
 typedef oal_uint8 hal_alg_user_distance_enum_uint8;
 
-/* 设备距离、干扰状态等信息 */
+/* ???????????????????????? */
 typedef struct
 {
-    hal_alg_user_distance_enum_uint8           en_alg_distance_stat;    /* 距离状态  */
-    hal_alg_intf_det_mode_enum_uint8           en_adj_intf_state;       /* 邻频干扰状态 */
-    oal_bool_enum_uint8                        en_co_intf_state;        /* 同频干扰状态 */
+    hal_alg_user_distance_enum_uint8           en_alg_distance_stat;    /* ????????  */
+    hal_alg_intf_det_mode_enum_uint8           en_adj_intf_state;       /* ???????????? */
+    oal_bool_enum_uint8                        en_co_intf_state;        /* ???????????? */
     oal_uint8                                  uc_reserv;
 } hal_alg_stat_info_stru;
 
 typedef struct
 {
-    /* CCA能量门限 */
-    oal_int8                        c_ed_cca_20th;        /* CCA 主辅检测门限 */
-    oal_int8                        c_ed_cca_40th_high;   /* CCA 主40M带宽 */
-    oal_int8                        c_ed_cca_80th_high;   /* CCA 主80M带宽 */
-    oal_bool_enum_uint8             en_cca_reg_is_def;    /* 表明邻频干扰检测到后，cca寄存器是否动作(目前指示主20M) */
+    /* CCA???????? */
+    oal_int8                        c_ed_cca_20th;        /* CCA ???????????? */
+    oal_int8                        c_ed_cca_40th_high;   /* CCA ??40M???? */
+    oal_int8                        c_ed_cca_80th_high;   /* CCA ??80M???? */
+    oal_bool_enum_uint8             en_cca_reg_is_def;    /* ??????????????????????cca??????????????(??????????20M) */
 
-    /* CCA协议门限 */
-    oal_int8                        c_ed_cca_th_dsss;         /* CCA DSSS检测门限 */
-    oal_int8                        c_ed_cca_th_ofdm;         /* CCA OFDM检测门限,主辅20M带宽 */
-    oal_int8                        c_ed_cca_th_40M_high;      /* CCA OFDM检测门限,辅40M带宽 */
-    oal_int8                        c_ed_cca_th_80M_high;      /* CCA OFDM检测门限,辅80M带宽 */
+    /* CCA???????? */
+    oal_int8                        c_ed_cca_th_dsss;         /* CCA DSSS???????? */
+    oal_int8                        c_ed_cca_th_ofdm;         /* CCA OFDM????????,????20M???? */
+    oal_int8                        c_ed_cca_th_40M_high;      /* CCA OFDM????????,??40M???? */
+    oal_int8                        c_ed_cca_th_80M_high;      /* CCA OFDM????????,??80M???? */
 }hal_alg_cca_th_stru;
 
 typedef struct
@@ -3527,14 +3527,14 @@ typedef struct
 
 typedef struct
 {
-    oal_uint8  uc_fe_print_ctrl;      //寄存器输出计数
+    oal_uint8  uc_fe_print_ctrl;      //??????????????
     oal_uint8  auc_rev[3];
 }hal_device_dft_stat_stru;
 
 
 typedef struct
 {
-    oal_uint16  us_last_sn;          //发送失败维测输出控制避免sdt过多打印导致死机
+    oal_uint16  us_last_sn;          //????????????????????????sdt????????????????
     oal_uint8   uc_print_ctl;
     oal_uint8   auc_rev[1];
 }hal_device_sdt_stat_stru;
@@ -3561,17 +3561,17 @@ typedef struct
     oal_int16 as_pow_level_table[HAL_POW_LEVEL_NUM][WLAN_BAND_BUTT];
 }hal_cfg_tpc_lvl_vs_gain_stru;
 
-/* DMAC_VAP发射功率TX功率控制相关的参数结构体 */
+/* DMAC_VAP????????TX???????????????????????? */
 typedef struct
 {
     /* 1) MAX_Power@rate */
     hal_cfg_rate_max_tx_pow_stru          *pst_max_tx_pow_per_rate_ctrl;
 #ifdef _PRE_WLAN_1103_PILOT
     oal_uint16                             aus_resv[NUM_OF_NV_MAX_TXPOWER-3];
-    oal_int16                              s_11b_ofdm_delt_pow;    /* 11b和OFDM在相同upc下的功率差，精度0.01dBm */
+    oal_int16                              s_11b_ofdm_delt_pow;    /* 11b??OFDM??????upc????????????????0.01dBm */
     oal_uint8                              uc_reg_pow;
     oal_uint8                              uc_tx_power;
-    /* PAPR=5.5时的功率偏差值 */
+    /* PAPR=5.5?????????????? */
     oal_uint8                              uc_pwr_compens_val_6m;
     oal_uint8                              uc_pwr_compens_val_mcs0;
 #else
@@ -3581,34 +3581,34 @@ typedef struct
     /* 3) LPF Index@rate */
     oal_uint8                             *puc_lpf_idx_per_rate_ctrl_2g;
     oal_uint8                             *puc_lpf_idx_per_rate_ctrl_5g;
-    /* 4) TPC档位 vs Target Gain表 */
+    /* 4) TPC???? vs Target Gain?? */
     hal_cfg_tpc_lvl_vs_gain_stru  *pst_tpc_lvl_vs_gain_ctrl;
 
     //TODO:
-    /* 5) 各速率DBB scaling增值(两个，最多支持两个VAP共存，Pilot用)
-       6) 各通道DBB scaling增值(两个，最多支持两个VAP共存，Pilot用) */
+    /* 5) ??????DBB scaling????(??????????????????VAP??????Pilot??)
+       6) ??????DBB scaling????(??????????????????VAP??????Pilot??) */
 
-    /* 7)  TPC档位 vs TPC Code/Gain表 */
+    /* 7)  TPC???? vs TPC Code/Gain?? */
     hal_rate_pow_code_gain_table_stru      *pst_rate_pow_table_2g;
     hal_rate_pow_code_gain_table_stru      *pst_rate_pow_table_5g;
 
     //TODO:
-      // 8) TPC档位 vs DPD Code表(两个，最多支持两个VAP共存)
+      // 8) TPC???? vs DPD Code??(??????????????????VAP????)
     oal_void                              *_rom;
 }hal_device_tx_pwr_ctrl_stru;
 
 #endif
 
 #ifdef _PRE_WLAN_FEATURE_BTCOEX
-/* ps mode管理结构体 */
+/* ps mode?????????? */
 typedef struct
 {
-    oal_uint8   bit_ps_on         : 1,        /* ps软件机制: 0=关闭, 1=打开 */
-                bit_delba_on      : 1,        /* 删减聚合逻辑: 0=关闭, 1=打开 */
-                bit_reply_cts     : 1,        /* 是否回复CTS， 0=不回复， 1=回复 */
-                bit_rsp_frame_ps  : 1,        /* resp帧节能位是否设置 0=不设置， 1=设置 */
-                bit_ps_slot_detect  : 1,        /* 是否使能动态slot探测功能，delba逻辑触发速率达到标准时打开vap侧 0=不使能， 1=使能 */
-                bit_btcoex_wl0_tx_slv_on  : 1,         /* btcoex下wl0 tx slv配置开关 */
+    oal_uint8   bit_ps_on         : 1,        /* ps????????: 0=????, 1=???? */
+                bit_delba_on      : 1,        /* ????????????: 0=????, 1=???? */
+                bit_reply_cts     : 1,        /* ????????CTS?? 0=???????? 1=???? */
+                bit_rsp_frame_ps  : 1,        /* resp???????????????? 0=???????? 1=???? */
+                bit_ps_slot_detect  : 1,        /* ????????????slot??????????delba??????????????????????????vap?? 0=???????? 1=???? */
+                bit_btcoex_wl0_tx_slv_on  : 1,         /* btcoex??wl0 tx slv???????? */
                 bit_resv          : 2;
 }hal_coex_sw_preempt_mode_stru;
 
@@ -3617,47 +3617,47 @@ typedef struct
     hal_coex_sw_preempt_mode_stru       st_sw_preempt_mode;
     hal_coex_sw_preempt_type_uint8      en_sw_preempt_type;
     hal_coex_sw_preempt_subtype_uint8   en_sw_preempt_subtype;
-    hal_fcs_protect_coex_pri_enum_uint8 en_protect_coex_pri;      /* one pkt帧发送优先级 */
-    oal_uint16                          us_timeout_ms;            /* ps超时时间，page扫描190slot 音乐和数传30slot */
-    oal_bool_enum_uint8                 en_last_acl_status;       /* 保存上一次acl状态 */
-    oal_bool_enum_uint8                 en_ps_stop;               /* 特定业务下，不需要开启ps，通知蓝牙不要发送ps中断 */
-    oal_uint32                          ul_ps_cur_time;           /* 用于ps中断上下半部执行时间统计 */
-    oal_atomic                          ul_ps_event_num;          /* ps中断event数目 */
-    oal_atomic                          ul_acl_en_cnt;            /* 连续acl cnt的计数，达到一定次数时，可能是蓝牙长时间为恢复 */
-    oal_bool_enum_uint8                 en_ps_pause;              /* 特定业务下，需要暂停ps，不影响ps中断处理，防止和wifi特定业务冲突 */
-    oal_bool_enum_uint8                 en_coex_pri_forbit;       /* coex pri控制开关，ldac下需要关闭该功能 */
+    hal_fcs_protect_coex_pri_enum_uint8 en_protect_coex_pri;      /* one pkt???????????? */
+    oal_uint16                          us_timeout_ms;            /* ps??????????page????190slot ??????????30slot */
+    oal_bool_enum_uint8                 en_last_acl_status;       /* ??????????acl???? */
+    oal_bool_enum_uint8                 en_ps_stop;               /* ??????????????????????ps??????????????????ps???? */
+    oal_uint32                          ul_ps_cur_time;           /* ????ps???????????????????????? */
+    oal_atomic                          ul_ps_event_num;          /* ps????event???? */
+    oal_atomic                          ul_acl_en_cnt;            /* ????acl cnt?????????????????????????????????????????????? */
+    oal_bool_enum_uint8                 en_ps_pause;              /* ????????????????????ps????????ps????????????????wifi???????????? */
+    oal_bool_enum_uint8                 en_coex_pri_forbit;       /* coex pri??????????ldac???????????????? */
     oal_uint8                           _rom[2];
 }hal_device_btcoex_sw_preempt_stru;
 #endif
 
-/*接收端描述符分配算法进行吞吐量统计的结构体*/
+/*??????????????????????????????????????????*/
 typedef struct
 {
-    oal_uint16                      us_rx_dscr_alg_thres;         /* 记录算法门限 */
-    oal_uint16                      us_rx_event_pkts_sum;         /* 记录一个周期(100ms)内接收队列接收帧的数量 */
-    oal_uint16                      us_rx_event_cnt;              /* 记录一个周期(100ms)内接收队列产生isr info数量 */
-    oal_uint16                      us_rx_cur_min_thres;          /* 记录上个周期(100ms)结束队列处于忙闲的状态 */
-    oal_uint16                      us_rx_max_netbuff_used_cnt;   /* 记录一个周期(100ms)内接收队列挂载的资源个数的峰值 */
-    oal_uint16                      us_rx_max_dscr_used_cnt;      /* 记录一个周期(100ms)内接收队列挂载的资源个数的峰值 */
+    oal_uint16                      us_rx_dscr_alg_thres;         /* ???????????? */
+    oal_uint16                      us_rx_event_pkts_sum;         /* ????????????(100ms)?????????????????????? */
+    oal_uint16                      us_rx_event_cnt;              /* ????????????(100ms)??????????????isr info???? */
+    oal_uint16                      us_rx_cur_min_thres;          /* ????????????(100ms)?????????????????????? */
+    oal_uint16                      us_rx_max_netbuff_used_cnt;   /* ????????????(100ms)?????????????????????????????? */
+    oal_uint16                      us_rx_max_dscr_used_cnt;      /* ????????????(100ms)?????????????????????????????? */
     oal_uint8                       uc_resv;
     oal_uint8                       uc_resv1;
-    oal_uint8                       uc_previous_cycle_stats;      /* 记录上个周期(100ms)结束队列处于忙闲的状态 */
-    oal_uint8                       uc_continus_idle_cnt;         /* 连续若干个周期空闲后才恢复接收队列未空闲，防止算法参数太灵敏 */
+    oal_uint8                       uc_previous_cycle_stats;      /* ????????????(100ms)?????????????????????? */
+    oal_uint8                       uc_continus_idle_cnt;         /* ???????????????????????????????????????????????????????????? */
 }alg_rx_dscr_ctl_alg_info_stru;
 
 
-/*接收端描述符分配算法进行吞吐量统计的结构体*/
+/*??????????????????????????????????????????*/
 typedef struct
 {
-    oal_void                       *pst_rx_dscr_ctl;              /* hal dev下保存chip级别描述符管理结构的指针 */
+    oal_void                       *pst_rx_dscr_ctl;              /* hal dev??????chip???????????????????????? */
     alg_rx_dscr_ctl_alg_info_stru  *pst_rx_dscr_ctl_alg_info;
-    oal_uint16                      aus_pending_isr_cnt[HAL_RX_DSCR_QUEUE_ID_BUTT]; /* 记录pinding在乒乓队列里的isr info数量 */
-    oal_uint16                      aus_pending_pkt_cnt[HAL_RX_DSCR_QUEUE_ID_BUTT]; /* 记录pinding在乒乓队列里的帧数量 */
+    oal_uint16                      aus_pending_isr_cnt[HAL_RX_DSCR_QUEUE_ID_BUTT]; /* ????pinding??????????????isr info???? */
+    oal_uint16                      aus_pending_pkt_cnt[HAL_RX_DSCR_QUEUE_ID_BUTT]; /* ????pinding???????????????????? */
 }alg_rx_dscr_ctl_device_info_stru;
 
 typedef struct
 {
-    /* MAC统计 */
+    /* MAC???? */
     oal_uint32 ul_rx_direct_time;
     oal_uint32 ul_rx_nondir_time;
     oal_uint32 ul_tx_time;
@@ -3665,15 +3665,15 @@ typedef struct
 }hal_ch_mac_statics_stru;
 typedef struct
 {
-    /* 干扰相关统计 */
-    oal_uint16 us_duty_cyc_ratio_20;/* 20M干扰繁忙度 */
-    oal_uint16 us_duty_cyc_ratio_40;/* 40M干扰繁忙度 */
-    oal_uint16 us_duty_cyc_ratio_80;/* 80M干扰繁忙度 */
-    oal_uint16 us_sync_err_ratio;   /* 同步错误率 */
-    oal_uint32 ul_rx_time;          /* rx总时间 */
-    oal_uint32 ul_tx_time;          /* tx总时间 */
-    oal_uint32 ul_free_time;        /* 空闲时间 */
-    oal_uint32 ul_abort_time_us;    /* 被打断时间，包括共存和扫描 */
+    /* ???????????? */
+    oal_uint16 us_duty_cyc_ratio_20;/* 20M?????????? */
+    oal_uint16 us_duty_cyc_ratio_40;/* 40M?????????? */
+    oal_uint16 us_duty_cyc_ratio_80;/* 80M?????????? */
+    oal_uint16 us_sync_err_ratio;   /* ?????????? */
+    oal_uint32 ul_rx_time;          /* rx?????? */
+    oal_uint32 ul_tx_time;          /* tx?????? */
+    oal_uint32 ul_free_time;        /* ???????? */
+    oal_uint32 ul_abort_time_us;    /* ?????????????????????????? */
 
 }hal_ch_intf_statics_stru;
 
@@ -3687,38 +3687,38 @@ typedef struct
 
 typedef struct
 {
-    wlan_m2s_mgr_vap_stru             ast_m2s_blacklist[WLAN_M2S_BLACKLIST_MAX_NUM];    /* 处于管理用户时，需要调整action方案 */
-    oal_uint8                         uc_blacklist_bss_index;                       /* 黑名单MAC地址的数组下标 */
-    oal_uint8                         uc_blacklist_bss_cnt;                         /* 黑名单用户个数 */
-    oal_bool_enum_uint8               en_m2s_switch_protect;                        /* 是否使能m2s切换保护，针对sta模式 */
-    oal_bool_enum_uint8               en_delay_swi_miso_hold;  /* 存在关联ap用户是blacklist none的，需要刷新标记为切换保持miso稳定态 */
+    wlan_m2s_mgr_vap_stru             ast_m2s_blacklist[WLAN_M2S_BLACKLIST_MAX_NUM];    /* ????????????????????????action???? */
+    oal_uint8                         uc_blacklist_bss_index;                       /* ??????MAC?????????????? */
+    oal_uint8                         uc_blacklist_bss_cnt;                         /* ?????????????? */
+    oal_bool_enum_uint8               en_m2s_switch_protect;                        /* ????????m2s??????????????sta???? */
+    oal_bool_enum_uint8               en_delay_swi_miso_hold;  /* ????????ap??????blacklist none??????????????????????????miso?????? */
 
-    oal_bool_enum_uint8               en_mss_on;               /* 是否使能mss上报和下发功能 */
-    oal_uint8                         uc_rssi_mgmt_single_txchain;   /* 最近一次cur rssi mgmt逻辑学习到的合适single_txchain */
-    oal_bool_enum_uint8               en_blacklist_assoc_ap_on;      /* 是否sta关联上黑名单ap，和mss功能互斥 */
-    oal_uint8                         uc_mss_scan_opt_chain;    /* 执行扫描mss siso下扫描优化，需要恢复的chain能力 */
+    oal_bool_enum_uint8               en_mss_on;               /* ????????mss?????????????? */
+    oal_uint8                         uc_rssi_mgmt_single_txchain;   /* ????????cur rssi mgmt????????????????single_txchain */
+    oal_bool_enum_uint8               en_blacklist_assoc_ap_on;      /* ????sta????????????ap????mss???????? */
+    oal_uint8                         uc_mss_scan_opt_chain;    /* ????????mss siso??????????????????????chain???? */
 
-    oal_bool_enum_uint8               en_data_rssi_switch_protect_on;      /* 数据帧rssi切换需要等待对端探测稳定才开始执行 */
-    frw_timeout_stru                  st_m2s_data_rssi_switch_protect_timer;    /* 数据帧rssi 切换稳定时间定时器，当前只有master dev才有 */
+    oal_bool_enum_uint8               en_data_rssi_switch_protect_on;      /* ??????rssi?????????????????????????????????? */
+    frw_timeout_stru                  st_m2s_data_rssi_switch_protect_timer;    /* ??????rssi ????????????????????????????master dev???? */
     hal_device_m2s_mgr_cb             st_hal_device_m2s_mgr_cb;
 } hal_device_m2s_mgr_stru;
 #endif
 
 #ifdef _PRE_WLAN_FEATURE_BTCOEX
-/* coex siso业务管理结构体 */
+/* coex siso?????????????? */
 typedef struct
 {
-    oal_uint8   bit_6slot_m2s_on         : 1,        /* 6slot申请siso */
-                bit_ldac_m2s_on          : 1,        /* ldac申请siso */
+    oal_uint8   bit_6slot_m2s_on         : 1,        /* 6slot????siso */
+                bit_ldac_m2s_on          : 1,        /* ldac????siso */
                 bit_m2s_resv             : 6;
 }hal_coex_m2s_mode_bitmap_stru;
 
-/* coex mimo业务管理结构体 */
+/* coex mimo?????????????? */
 typedef struct
 {
-    oal_uint8   bit_6slot_s2m_on         : 1,        /* sco申请回mimo */
-                bit_ldac_s2m_on          : 1,        /* ldac申请回mimo */
-                bit_a2dp_s2m_on          : 1,        /* a2dp申请回mimo */
+    oal_uint8   bit_6slot_s2m_on         : 1,        /* sco??????mimo */
+                bit_ldac_s2m_on          : 1,        /* ldac??????mimo */
+                bit_a2dp_s2m_on          : 1,        /* a2dp??????mimo */
                 bit_s2m_resv             : 5;
 }hal_coex_s2m_mode_bitmap_stru;
 
@@ -3731,39 +3731,39 @@ typedef struct
 
 typedef struct
 {
-    frw_timeout_stru                  st_s2m_resume_timer;                /* 切回mimo状态超时等待定时器 */
-    frw_timeout_stru                  bt_coex_s2m_siso_ap_timer;          /* siso ap切换回mimo探测时间，防止音乐切歌造成太过频繁 */
+    frw_timeout_stru                  st_s2m_resume_timer;                /* ????mimo?????????????????? */
+    frw_timeout_stru                  bt_coex_s2m_siso_ap_timer;          /* siso ap??????mimo?????????????????????????????????? */
 #ifdef _PRE_WLAN_FEATURE_BTCOEX_SLV_TX_BUGFIX
-    frw_timeout_stru                  st_wl0_tx_slv_conf_resume_timer;    /* 动态辅天线发送硬件状态恢复定时器,非周期 */
+    frw_timeout_stru                  st_wl0_tx_slv_conf_resume_timer;    /* ????????????????????????????????,?????? */
 #endif
-    oal_uint16                        us_timeout_ms;                      /* 当前业务下的定时器超时时间 */
-    oal_bool_enum_uint8               en_siso_ap_excute_on;               /* siso ap切换siso执行标志 */
-    oal_bool_enum_uint8               en_timer_need_restart;              /* one pkt之后是否需要恢复定时器 */
+    oal_uint16                        us_timeout_ms;                      /* ?????????????????????????? */
+    oal_bool_enum_uint8               en_siso_ap_excute_on;               /* siso ap????siso???????? */
+    oal_bool_enum_uint8               en_timer_need_restart;              /* one pkt?????????????????????? */
 
-    oal_bool_enum_uint8               en_wl0_tx_slv_allow;                /* 功能暂停开关，主开关是关着，这里必须关 */
-    hal_coex_m2s_mode_bitmap_stru     st_m2s_mode_bitmap;    /* 申请siso切换的业务bitmap，目前是ldac=1 和6slot=2 */
-    hal_coex_s2m_mode_bitmap_stru     st_s2m_mode_bitmap;    /* 申请切换回mimo的业务bitmap，目前是ldac=0 a2dp=0 和6slot=0 3者都满足 */
-    hal_coex_s2m_mode_bitmap_stru     st_s2m_wait_bitmap;    /* 需要切回mimo的超时处理函数里面才用此bit来清m2s标记，防止ldac结束时，6slot来了又切siso流程 */
+    oal_bool_enum_uint8               en_wl0_tx_slv_allow;                /* ?????????????????????????????????????? */
+    hal_coex_m2s_mode_bitmap_stru     st_m2s_mode_bitmap;    /* ????siso??????????bitmap????????ldac=1 ??6slot=2 */
+    hal_coex_s2m_mode_bitmap_stru     st_s2m_mode_bitmap;    /* ??????????mimo??????bitmap????????ldac=0 a2dp=0 ??6slot=0 3???????? */
+    hal_coex_s2m_mode_bitmap_stru     st_s2m_wait_bitmap;    /* ????????mimo????????????????????????bit????m2s??????????ldac????????6slot????????siso???? */
 
-    oal_bool_enum_uint8               en_ps_occu_down_delay;        /* ps帧occu拉低是否需要有动态slot来拉低 */
-    oal_bool_enum_uint8               en_log_print_on;              /* slot detect日志打印是否开启 */
-    oal_uint8                         uc_btcoex_tx_max_aggr_num;    /* 用于c1 siso切换场景下 wifi 上行ldac和6slot下限制聚合个数，提高兼容性 */
-    oal_bool_enum_uint8               en_dynamic_slot_pause;        /* sta出现需要发self-cts时，硬件的此功能暂时pause */
+    oal_bool_enum_uint8               en_ps_occu_down_delay;        /* ps??occu??????????????????slot?????? */
+    oal_bool_enum_uint8               en_log_print_on;              /* slot detect???????????????? */
+    oal_uint8                         uc_btcoex_tx_max_aggr_num;    /* ????c1 siso?????????? wifi ????ldac??6slot?????????????????????????? */
+    oal_bool_enum_uint8               en_dynamic_slot_pause;        /* sta??????????self-cts????????????????????pause */
 
-    oal_bool_enum_uint8               en_rssi_limit_on;     /* 是否开启rssi限制切换功能 */
-    oal_bool_enum_uint8               en_rssi_log_on;       /* slot detect日志打印是否开启 */
-    oal_int8                          c_m2s_threshold;       /* m2s的rssi门限 */
-    oal_int8                          c_s2m_threshold;       /* s2m的rssi门限 */
+    oal_bool_enum_uint8               en_rssi_limit_on;     /* ????????rssi???????????? */
+    oal_bool_enum_uint8               en_rssi_log_on;       /* slot detect???????????????? */
+    oal_int8                          c_m2s_threshold;       /* m2s??rssi???? */
+    oal_int8                          c_s2m_threshold;       /* s2m??rssi???? */
 
-    oal_uint8                         uc_detect_cnt_threshold;  /* 连续rssi满足门限的cnt th */
-    oal_uint8                         uc_rssi_valid_cnt;         /* 连续rssi满足门限的cnt */
-    oal_uint8                         uc_m2s_rssi_det_timeout_cnt;  /* 连续50ms定时器检查次数 */
-    oal_bool_enum_uint8               en_rssi_s2m_on;             /* 只考虑ldac的话，要临时回mimo置标志，也同步认为a2dp结束 */
+    oal_uint8                         uc_detect_cnt_threshold;  /* ????rssi??????????cnt th */
+    oal_uint8                         uc_rssi_valid_cnt;         /* ????rssi??????????cnt */
+    oal_uint8                         uc_m2s_rssi_det_timeout_cnt;  /* ????50ms?????????????? */
+    oal_bool_enum_uint8               en_rssi_s2m_on;             /* ??????ldac??????????????mimo??????????????????a2dp???? */
 
-    oal_bool_enum_uint8               en_bt20dbm_set_rf_on;       /* 蓝牙让出后，重新配置rf是否在执行，此时在上半部操作，需要增加保护 */
-    oal_uint8                         uc_freq_fix_highest;        /* 当前固定最高频状态 */
-    oal_uint8                         uc_sco_fix_rx_ba_win;       /* 电话下约束固定聚合个数，用于调试 */
-    oal_uint8                         bit_m2s_6slot         :1;  /*0: m2s; 1:开m2s */
+    oal_bool_enum_uint8               en_bt20dbm_set_rf_on;       /* ????????????????????rf?????????????????????????????????????????? */
+    oal_uint8                         uc_freq_fix_highest;        /* ?????????????????? */
+    oal_uint8                         uc_sco_fix_rx_ba_win;       /* ???????????????????????????????? */
+    oal_uint8                         bit_m2s_6slot         :1;  /*0: m2s; 1:??m2s */
     oal_uint8                         bit_m2s_ldac          :1;
     oal_uint8                         bit_m2s_siso_ap       :1;
     oal_uint8                         bit_m2s_resv          :5;
@@ -3775,7 +3775,7 @@ typedef struct
 typedef struct
 {
     oal_int16                           s_vdet_val;
-    oal_uint8                           en_ppa_working;  /* 0:PA；1:PPA */
+    oal_uint8                           en_ppa_working;  /* 0:PA??1:PPA */
     oal_uint8                           uc_rsv;
     hal_dyn_cali_record_union           un_record_para;
 }hal_dyn_cali_pa_ppa_asjust_stru;
@@ -3783,28 +3783,28 @@ typedef struct
 
 typedef struct
 {
-    /* 同频干扰算法 */
-    oal_uint32                          ul_duty_ratio;                          /* 占空比统计 */
-    oal_uint32                          ul_tx_ratio_lp;                         /*进入低功耗前发送占空比*/
-    oal_uint32                          ul_rx_nondir_duty_lp;                   /*进入低功耗前接收non-direct包的占空比*/
-    oal_uint32                          ul_rx_dir_duty_lp;                      /*进入低功耗前接收direct包的占空比*/
-    oal_uint32                          ul_tx_sch_enqueue_time;                 /*记录硬件开始发送一个帧的起始时间*/
+    /* ???????????? */
+    oal_uint32                          ul_duty_ratio;                          /* ?????????? */
+    oal_uint32                          ul_tx_ratio_lp;                         /*??????????????????????*/
+    oal_uint32                          ul_rx_nondir_duty_lp;                   /*????????????????non-direct??????????*/
+    oal_uint32                          ul_rx_dir_duty_lp;                      /*????????????????direct??????????*/
+    oal_uint32                          ul_tx_sch_enqueue_time;                 /*????????????????????????????????*/
 
-    /* MAC测量信息 */
+    /* MAC???????? */
     hal_ch_mac_statics_stru             st_mac_ch_stats;
     hal_ch_intf_statics_stru            st_intf_statics_stru;
 #ifdef _PRE_WLAN_FEATURE_M2S
     hal_device_m2s_mgr_stru             st_device_m2s_mgr;
-    hal_rx_ant_rssi_mgmt_stru           st_hal_rx_ant_rssi_mgmt;        /* 管理帧rssi相关 */
+    hal_rx_ant_rssi_mgmt_stru           st_hal_rx_ant_rssi_mgmt;        /* ??????rssi???? */
 #endif
 #ifdef _PRE_WLAN_FIT_BASED_REALTIME_CALI
-    frw_timeout_stru                    st_dyn_cali_per_frame_timer;    /* 动态校准每帧的定时器 */
+    frw_timeout_stru                    st_dyn_cali_per_frame_timer;    /* ???????????????????? */
     hal_dyn_cali_pa_ppa_asjust_stru     st_dyn_cali_vdet_stru;
 #endif
 
 #ifdef _PRE_WLAN_FEATURE_TEMP_PROTECT
-    oal_uint8                           uc_ping_pong_disable;        /* 是否需要减少一次调度,过温保护中添加*/
-    oal_uint8                           uc_temp_pro_aggr_size;       /* 过温度保护中聚合子帧数门限的调整值 */
+    oal_uint8                           uc_ping_pong_disable;        /* ????????????????????,??????????????*/
+    oal_uint8                           uc_temp_pro_aggr_size;       /* ?????????????????????????????????? */
     oal_uint8                           auc_resv[2];
 #endif
 
@@ -3816,7 +3816,7 @@ typedef struct
     oal_uint8                            uc_dfsmode;
     oal_uint8                            auc_resv1[3];
 #endif
-    /* txbf回复sounding帧的速率调整变量 */
+    /* txbf????sounding???????????????? */
     hal_txbf_sounding_rate_enum_uint8    uc_txbf_sounding_report_rate;
     oal_uint8                            uc_is_open_noise_est;
     oal_uint8                            uc_is_close_noise_comb;
@@ -3832,61 +3832,61 @@ typedef struct
     oal_uint8                            uc_hw_txq_stall_det_timeout_cnt;
     oal_uint8                            uc_hw_txq_stall_det_abort_cnt;
 #endif
-    oal_bool_enum_uint8                  en_al_tx_first_frame;          /* 长发第一帧标识，长发需要在第一帧是打印关键信息，比如描述符 */
-    oal_bool_enum_uint8                  en_dyn_complete_print_flag;    /* 动态功率校准完成之后，打印标识 */
+    oal_bool_enum_uint8                  en_al_tx_first_frame;          /* ?????????????????????????????????????????????????????????? */
+    oal_bool_enum_uint8                  en_dyn_complete_print_flag;    /* ?????????????????????????????? */
 }hal_to_dmac_device_rom_stru;
 extern hal_to_dmac_device_rom_stru g_st_hal_to_dmac_device_rom[];
 
 typedef struct tag_hal_to_dmac_device_stru
 {
     oal_uint8                       uc_chip_id;
-    oal_uint8                       uc_device_id;                               /* 此id用来获取hal device */
-    oal_uint8                       uc_mac_device_id;                           /* 此id用来获取mac dmac hmac device */
-    hal_lpm_state_enum_uint8        uc_curr_state;                              /* 当前芯片的低功耗状态*/
+    oal_uint8                       uc_device_id;                               /* ??id????????hal device */
+    oal_uint8                       uc_mac_device_id;                           /* ??id????????mac dmac hmac device */
+    hal_lpm_state_enum_uint8        uc_curr_state;                              /* ????????????????????*/
     oal_uint32                      ul_core_id;
 
     hal_cfg_cap_info_stru           st_cfg_cap_info;
     oal_dlist_head_stru             ast_rx_dscr_hash[HAL_RX_MAX_BUFFS];
 
-    hal_dfr_tx_prot_stru            st_dfr_tx_prot;                             /* 用于无法送完成中断检测及恢复 */
-    hal_dfr_err_opern_stru          st_dfr_err_opern[HAL_MAC_ERROR_TYPE_BUTT];  /* 用于MAC异常中断恢复 */
+    hal_dfr_tx_prot_stru            st_dfr_tx_prot;                             /* ???????????????????????????? */
+    hal_dfr_err_opern_stru          st_dfr_err_opern[HAL_MAC_ERROR_TYPE_BUTT];  /* ????MAC???????????? */
 
     hal_rx_dscr_queue_header_stru   ast_rx_dscr_queue[HAL_RX_QUEUE_NUM];
     hal_tx_dscr_queue_header_stru   ast_tx_dscr_queue[HAL_TX_QUEUE_NUM];
 
-    oal_uint32                      ul_rx_machw_dscr_addr[HAL_RX_DSCR_QUEUE_ID_BUTT]; /* 接收硬件队列状态寄存器 */
+    oal_uint32                      ul_rx_machw_dscr_addr[HAL_RX_DSCR_QUEUE_ID_BUTT]; /* ?????????????????????? */
 
     oal_uint16                      us_rx_normal_dscr_cnt;
     oal_uint16                      us_rx_small_dscr_cnt;
     oal_uint32                      ul_track_stop_flag;
 
-    hal_alg_stat_info_stru          st_hal_alg_stat;       /* 算法使用的统计信息结构体 */
+    hal_alg_stat_info_stru          st_hal_alg_stat;       /* ???????????????????????? */
     hal_compatibility_stat_stru     st_hal_compatibility_stat;
 
     oal_uint8                       uc_al_tx_hw;
     oal_bool_enum_uint8             en_narrow_bw_open;
     oal_uint8                       uc_narrow_bw;
-    oal_bool_enum_uint8             en_is_mac_pa_enabled;      /* pa是否使能 */
+    oal_bool_enum_uint8             en_is_mac_pa_enabled;      /* pa???????? */
 
-    oal_uint32                      bit_al_tx_flag        :3;  /*0: 关闭常发; 1:保留给RF测试; 2: ampdu聚合帧常发; 3:非聚合帧常发*/
-    oal_uint32                      bit_al_rx_flag        :3;  /*0: 关闭常收; 1:保留给RF测试；2: ampdu聚合帧常收; 3:非聚合帧常收*/
-    oal_uint32                      bit_one_packet_st     :1;  /* 0表示DBC结束 1表示DBAC正在执行 */
-    oal_uint32                      bit_clear_fifo_st     :1;  /* 0表示无clear fifo状态，1表示clear fifo状态 */
-    oal_uint32                      bit_mac_phy_freq_down :1;  /* 是否开启MAC/PHY降频特性 */
-    oal_uint32                      bit_al_txrx_ampdu_num :7;  /*指示用于常发常收的聚合帧数目*/
-    oal_uint32                      bit_track_cnt         :8;  /* 遇到qempty 剩余记录条目数 */
-    oal_uint32                      bit_track_cnt_down    :8;  /* 剩余记录条目减少标志 */
-    oal_netbuf_stru                *pst_altx_netbuf;           /* 记录常发时，描述符所共用的内存 */
-    oal_netbuf_stru                *pst_alrx_netbuf;           /* 记录常收时，描述符所共用的内存 */
+    oal_uint32                      bit_al_tx_flag        :3;  /*0: ????????; 1:??????RF????; 2: ampdu??????????; 3:????????????*/
+    oal_uint32                      bit_al_rx_flag        :3;  /*0: ????????; 1:??????RF??????2: ampdu??????????; 3:????????????*/
+    oal_uint32                      bit_one_packet_st     :1;  /* 0????DBC???? 1????DBAC???????? */
+    oal_uint32                      bit_clear_fifo_st     :1;  /* 0??????clear fifo??????1????clear fifo???? */
+    oal_uint32                      bit_mac_phy_freq_down :1;  /* ????????MAC/PHY???????? */
+    oal_uint32                      bit_al_txrx_ampdu_num :7;  /*????????????????????????????*/
+    oal_uint32                      bit_track_cnt         :8;  /* ????qempty ?????????????? */
+    oal_uint32                      bit_track_cnt_down    :8;  /* ???????????????????? */
+    oal_netbuf_stru                *pst_altx_netbuf;           /* ?????????????????????????????? */
+    oal_netbuf_stru                *pst_alrx_netbuf;           /* ?????????????????????????????? */
     oal_uint32                      ul_rx_normal_mdpu_succ_num;
     oal_uint32                      ul_rx_ampdu_succ_num;
     oal_uint32                      ul_tx_ppdu_succ_num;
     oal_uint32                      ul_rx_ppdu_fail_num;
     oal_uint32                      ul_tx_ppdu_fail_num;
 
-    oal_uint8                       uc_reg_info_flag;  /*分两次打印寄存器信息，0:上报soc寄存器的值,1:上报rf寄存器的值,2:上报MAC寄存器的值,3:补充 ABB_CALI_WL_CTRL 信息,4:上报phy寄存器的值*/
+    oal_uint8                       uc_reg_info_flag;  /*??????????????????????0:????soc??????????,1:????rf??????????,2:????MAC??????????,3:???? ABB_CALI_WL_CTRL ????,4:????phy??????????*/
     oal_bool_enum_uint8             en_dync_txpower_flag;
-    oal_bool_enum_uint8             en_dync_pow_debug_switch;   /* 动态校准维测开关 */
+    oal_bool_enum_uint8             en_dync_pow_debug_switch;   /* ???????????????? */
 #ifdef _PRE_WLAN_FEATURE_PACKET_CAPTURE
     oal_uint8                       uc_pkt_cap_flag;
 #else
@@ -3895,19 +3895,19 @@ typedef struct tag_hal_to_dmac_device_stru
 
     oal_dlist_head_stru             ast_rx_isr_info_list[HAL_HW_RX_DSCR_LIST_NUM];
     hal_hw_rx_dscr_info_stru        ast_rx_isr_info_member[HAL_HW_RX_ISR_INFO_MAX_NUMS];
-    oal_dlist_head_stru             st_rx_isr_info_res_list;  /* 接收中断信息存储资源链表 */
+    oal_dlist_head_stru             st_rx_isr_info_res_list;  /* ???????????????????????? */
 
     oal_uint8                       uc_current_rx_list_index;
     oal_uint8                       uc_current_chan_number;
-    wlan_p2p_mode_enum_uint8        en_p2p_mode;                   /* 当前创建的P2P 是处于CL/GO 模式,算法注册中断时调用 */
-    oal_uint8                       uc_p2p_hal_vap_idx;            /* 用于P2P 中断产生后指示对应P2P设备的hal vap */
+    wlan_p2p_mode_enum_uint8        en_p2p_mode;                   /* ??????????P2P ??????CL/GO ????,?????????????????? */
+    oal_uint8                       uc_p2p_hal_vap_idx;            /* ????P2P ??????????????????P2P??????hal vap */
 
     regdomain_enum_uint8            en_regdomain;
-    oal_uint8                       uc_full_phy_freq_user_cnt; //device下需要满频的vap(ap)/sta(user) 个数
+    oal_uint8                       uc_full_phy_freq_user_cnt; //device????????????vap(ap)/sta(user) ????
     oal_uint8                       uc_over_temp;
 #ifdef _PRE_WLAN_FEATURE_PSD_ANALYSIS
     oal_uint8                       uc_psd_status;
-    oal_netbuf_stru *               pst_psd_netbuf;                /* 记录psd采集时，Dmac中分配1k内存暂存数据 */
+    oal_netbuf_stru *               pst_psd_netbuf;                /* ????psd????????Dmac??????1k???????????? */
 #else
     oal_uint8                       auc_resv[1];
 #endif
@@ -3916,11 +3916,11 @@ typedef struct tag_hal_to_dmac_device_stru
 #endif
 
 #ifdef _PRE_DEBUG_MODE
-    /* 记录接收描述符队列中，各个描述符的地址 */
+    /* ?????????????????????????????????????? */
     witp_rx_dscr_recd_stru          st_nor_rx_dscr_recd[HAL_NORMAL_RX_MAX_BUFFS];
     witp_rx_dscr_recd_stru          st_hi_rx_dscr_recd[HAL_HIGH_RX_MAX_BUFFS];
 
-    /* 原始描述符物理地址 */
+    /* ?????????????????? */
     oal_uint32                      aul_nor_rx_dscr[HAL_NORMAL_RX_MAX_BUFFS];
     oal_uint32                      aul_hi_rx_dscr[HAL_HIGH_RX_MAX_BUFFS];
 
@@ -3928,7 +3928,7 @@ typedef struct tag_hal_to_dmac_device_stru
     oal_uint32                      ul_rx_irq_loss_cnt;
     hal_rx_dpart_track_stru         ast_dpart_track[HAL_DOWM_PART_RX_TRACK_MEM];
 
-    /* 描述符异常还回统计 */
+    /* ?????????????????? */
     oal_uint32                      ul_exception_free;
     oal_uint32                      ul_irq_cnt;
 
@@ -3939,7 +3939,7 @@ typedef struct tag_hal_to_dmac_device_stru
 #endif
 
 #ifdef _PRE_WLAN_DFT_REG
-    frw_timeout_stru                st_reg_prd_timer;                       /* 读取寄存器周期定时器 */
+    frw_timeout_stru                st_reg_prd_timer;                       /* ???????????????????? */
 #endif
 
 #ifdef _PRE_WLAN_FEATURE_ALWAYS_TX
@@ -3955,15 +3955,15 @@ typedef struct tag_hal_to_dmac_device_stru
     oal_uint8                       uc_radar_type;
 #endif
 
-    /* hi1103重构出来了rf dev，校准参数全部都从rf dev中获取 */
-    /* 功率相关PHY参数*/
+    /* hi1103??????????rf dev??????????????????rf dev?????? */
+    /* ????????PHY????*/
     hal_phy_pow_param_stru          st_phy_pow_param;
 
-    /* RTS速率相关参数 */
-    wlan_legacy_rate_value_enum_uint8   auc_rts_rate[WLAN_BAND_BUTT][HAL_TX_RATE_MAX_NUM];      /* 两个频段的RTS发送速率 */
-    wlan_phy_protocol_enum_uint8        auc_rts_protocol[WLAN_BAND_BUTT][HAL_TX_RATE_MAX_NUM] ; /* 两个频段的RTS协议模式 */
+    /* RTS???????????? */
+    wlan_legacy_rate_value_enum_uint8   auc_rts_rate[WLAN_BAND_BUTT][HAL_TX_RATE_MAX_NUM];      /* ??????????RTS???????? */
+    wlan_phy_protocol_enum_uint8        auc_rts_protocol[WLAN_BAND_BUTT][HAL_TX_RATE_MAX_NUM] ; /* ??????????RTS???????? */
 
-    /* 字节对齐 */
+    /* ???????? */
     p_hal_alg_isr_func  pa_hal_alg_isr_func_table[HAL_ISR_TYPE_BUTT][HAL_ALG_ISR_NOTIFY_BUTT];
 
     p_hal_gap_isr_func  pa_hal_gap_isr_func_table[HAL_ISR_TYPE_BUTT];
@@ -3971,7 +3971,7 @@ typedef struct tag_hal_to_dmac_device_stru
     oal_uint8                     *puc_mac_reset_reg;
     oal_uint8                     *puc_phy_reset_reg;
 
-    oal_uint16                     uc_cali_check_hw_status;    /*FEM&PA失效检测*/
+    oal_uint16                     uc_cali_check_hw_status;    /*FEM&PA????????*/
     oal_int16                      s_always_rx_rssi;
 
     mac_channel_stru               st_wifi_channel_status;
@@ -3979,9 +3979,9 @@ typedef struct tag_hal_to_dmac_device_stru
 
     hal_rssi_stru                  st_rssi;
 
-    oal_int8                       c_rx_last_rssi;             //保存上次rssi
-    oal_uint8                      uc_fix_adc_en;        /* 测试用固定频率 */
-    oal_uint8                      uc_adc_dac_type;      /* 测试用固定adc dac组合 */
+    oal_int8                       c_rx_last_rssi;             //????????rssi
+    oal_uint8                      uc_fix_adc_en;        /* ?????????????? */
+    oal_uint8                      uc_adc_dac_type;      /* ??????????adc dac???? */
 #if (defined _PRE_WLAN_RF_CALI) || (defined _PRE_WLAN_RF_CALI_1151V2)
     oal_uint8                      uc_cali_type;
 #else
@@ -3990,21 +3990,21 @@ typedef struct tag_hal_to_dmac_device_stru
 
 #if (defined(_PRE_PRODUCT_ID_HI110X_DEV))
     hal_tx_excp_info_stru          st_tx_excp_info;
-    wlan_chan_ratio_stru            st_chan_ratio;                          /* 信道繁忙度相关统计量 */
+    wlan_chan_ratio_stru            st_chan_ratio;                          /* ???????????????????? */
 #endif
-    wlan_scan_chan_stats_stru       st_chan_result;                         /* 扫描时 一个信道的信道测量记录 */
+    wlan_scan_chan_stats_stru       st_chan_result;                         /* ?????? ?????????????????????? */
 
 #ifdef _PRE_WLAN_FEATURE_PF_SCH
-    oal_uint32                     ul_tx_consumed_airtime;        /* 调度算法使用一次发送的空口时间 */
+    oal_uint32                     ul_tx_consumed_airtime;        /* ?????????????????????????????? */
 #endif
 
 #ifdef _PRE_WLAN_FEATURE_DFR
 #ifdef _PRE_DEBUG_MODE
-    oal_uint32                     ul_cfg_loss_tx_comp_cnt;              /* 通过配置命令手动丢失发送完成中断 */
+    oal_uint32                     ul_cfg_loss_tx_comp_cnt;              /* ???????????????????????????????? */
 #endif
 
-    oal_bool_enum_uint8            en_dfr_enable;                        /* dfr是否enable */
-    oal_bool_enum_uint8            en_dfr_hw_reset_enable;               //device侧hw reset的使能开关
+    oal_bool_enum_uint8            en_dfr_enable;                        /* dfr????enable */
+    oal_bool_enum_uint8            en_dfr_hw_reset_enable;               //device??hw reset??????????
     oal_bool_enum_uint8            en_rf_cali_doing;
 #ifdef _PRE_WLAN_FEATURE_CSI
     oal_uint8                      uc_csi_status;
@@ -4013,8 +4013,8 @@ typedef struct tag_hal_to_dmac_device_stru
 #endif
 
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1151)
-    frw_timeout_stru               st_pcie_err_timer;                      /* 检测pcie err_nonfatal 定时器 */
-    oal_uint32                     ul_pcie_err_cnt;                        /* pcie err计数 */
+    frw_timeout_stru               st_pcie_err_timer;                      /* ????pcie err_nonfatal ?????? */
+    oal_uint32                     ul_pcie_err_cnt;                        /* pcie err???? */
 #endif
 #endif
 
@@ -4030,59 +4030,59 @@ typedef struct tag_hal_to_dmac_device_stru
 
 #if defined _PRE_WLAN_ONLINE_DPD || defined _PRE_WLAN_1103_ATE
     oal_uint32                     ul_rsv0;
-    oal_bool_enum_uint8            en_adc_4t01_flag;   /* ADC使用4路80M合成为320M */
+    oal_bool_enum_uint8            en_adc_4t01_flag;   /* ADC????4??80M??????320M */
 #endif
-    hal_dev_fsm_stru               st_hal_dev_fsm;                       /* hal device 状态机结构体 */
-    oal_uint32                     ul_work_vap_bitmap;                   /* 需要在work状态工作的vap的个数 */
+    hal_dev_fsm_stru               st_hal_dev_fsm;                       /* hal device ???????????? */
+    oal_uint32                     ul_work_vap_bitmap;                   /* ??????work??????????vap?????? */
 
-    hal_m2s_fsm_stru               st_hal_m2s_fsm;                       /* hal device m2s状态机 */
+    hal_m2s_fsm_stru               st_hal_m2s_fsm;                       /* hal device m2s?????? */
 
-    oal_bool_enum_uint8            en_is_master_hal_device;              /* 是否是master hal device */
-    oal_bool_enum_uint8            en_rx_intr_fifo_resume_flag;    /* RX INTR FIFO OVERRUN是否恢复标识 */
-    oal_bool_enum_uint8            en_ampdu_tx_hw_en;                     /* AMPDU TX硬化开关 */
-    oal_bool_enum_uint8            en_ampdu_partial_resnd;                /* 硬件聚合时,MAC是否做部分帧重传 */
+    oal_bool_enum_uint8            en_is_master_hal_device;              /* ??????master hal device */
+    oal_bool_enum_uint8            en_rx_intr_fifo_resume_flag;    /* RX INTR FIFO OVERRUN???????????? */
+    oal_bool_enum_uint8            en_ampdu_tx_hw_en;                     /* AMPDU TX???????? */
+    oal_bool_enum_uint8            en_ampdu_partial_resnd;                /* ??????????,MAC???????????????? */
 
-    oal_uint8                      uc_assoc_user_nums;         /* hal device上所有vap上用户数总和，方便统计本hal device上用户数 */
-    oal_uint8                      uc_fix_power_level;                    /* 固定功率等级(取值为0, 1, 2, 3) */
-    oal_uint8                      uc_mag_mcast_frm_power_level;          /* 管理帧的功率等级 */
-    oal_uint8                      uc_control_frm_power_level;            /* 控制帧的功率等级 */
+    oal_uint8                      uc_assoc_user_nums;         /* hal device??????vap????????????????????????hal device???????? */
+    oal_uint8                      uc_fix_power_level;                    /* ????????????(??????0, 1, 2, 3) */
+    oal_uint8                      uc_mag_mcast_frm_power_level;          /* ???????????????? */
+    oal_uint8                      uc_control_frm_power_level;            /* ???????????????? */
 #ifndef _PRE_WLAN_FEATURE_TPC_OPT
-    oal_int16                      s_upc_amend;                           /* UPC修正值 */
+    oal_int16                      s_upc_amend;                           /* UPC?????? */
 #else
     oal_uint8                      auc_rsv[2];
 #endif
     oal_bool_enum_uint8            en_dpd_cali_doing;
     oal_bool_enum_uint8            en_dpd_clk_on;
 
-    oal_bool_enum_uint8            en_pow_rf_reg_ctl_flag;                /* 功率RF寄存器控使能时，固定功率配置不生效 */
-    oal_uint8                      bit_autCG_on : 1,                      /* autoCG开关 */
-                                   bit_l0s_on   : 1,                      /* l0s开关 */
-                                   bit_l1pm_on  : 1,                      /* l1pm开关 */
+    oal_bool_enum_uint8            en_pow_rf_reg_ctl_flag;                /* ????RF?????????????????????????????????? */
+    oal_uint8                      bit_autCG_on : 1,                      /* autoCG???? */
+                                   bit_l0s_on   : 1,                      /* l0s???? */
+                                   bit_l1pm_on  : 1,                      /* l1pm???? */
                                    bit_resv     : 5;
 #ifdef _PRE_WLAN_FEATURE_DBDC
-    oal_bool_enum_uint8            en_wait_for_s2m;       /* 是否等待此路释放rf,另一路siso切回mimo状态 */
+    oal_bool_enum_uint8            en_wait_for_s2m;       /* ????????????????rf,??????siso????mimo???? */
 #else
     oal_uint8                      uc_rsv[1];
 #endif
 #ifdef _PRE_WLAN_FEATURE_M2S
-    oal_bool_enum_uint8            en_m2s_excute_flag;        /* m2s正在执行的标记 */
+    oal_bool_enum_uint8            en_m2s_excute_flag;        /* m2s?????????????? */
 #else
     oal_uint8                      uc_rsv1[1];
 #endif /* #ifdef _PRE_WLAN_FEATURE_M2S */
 
 #ifdef _PRE_WLAN_FEATURE_STA_PM
-    oal_uint8                      uc_service_id;                     /* hal device向平台投票的id，初始化时分配并注册到平台 */
-    oal_bool_enum_uint8            en_intf_det_invalid;               /* 指示当前的检测结果是否有效 */
+    oal_uint8                      uc_service_id;                     /* hal device????????????id?????????????????????????? */
+    oal_bool_enum_uint8            en_intf_det_invalid;               /* ?????????????????????????? */
     oal_uint8                      auc_rev1[2];
 #endif
 
-    oal_void                       *p_alg_priv;                       /* 算法私有结构体 */
+    oal_void                       *p_alg_priv;                       /* ?????????????? */
 
 #if (_PRE_MULTI_CORE_MODE_OFFLOAD_DMAC != _PRE_MULTI_CORE_MODE) && defined(_PRE_FEATURE_WAVEAPP_CLASSIFY)
-    oal_uint32                     ul_rx_mcs_cnt;   /*记录识别仪器场景时的连续MCS计数*/
-    oal_uint16                     us_rx_assoc_id;  /*记录识别仪器场景时的11ac用户的assoc id*/
-    oal_uint8                      uc_rx_expect_mcs;  /*记录识别仪器场景时的预期用户采用的MCS*/
-    oal_bool_enum_uint8            en_test_is_on_waveapp_flag; /*仪器场景标志位*/
+    oal_uint32                     ul_rx_mcs_cnt;   /*????????????????????????MCS????*/
+    oal_uint16                     us_rx_assoc_id;  /*????????????????????11ac??????assoc id*/
+    oal_uint8                      uc_rx_expect_mcs;  /*??????????????????????????????????MCS*/
+    oal_bool_enum_uint8            en_test_is_on_waveapp_flag; /*??????????????*/
 #else
 #ifdef _PRE_WLAN_FEATURE_RX_AGGR_EXTEND
     oal_bool_enum_uint8            en_test_is_on_waveapp_flag;
@@ -4090,7 +4090,7 @@ typedef struct tag_hal_to_dmac_device_stru
 #endif
 #endif
 
-    hal_device_dft_stat_stru       st_hal_dev_dft_stat;                 /* hal device维测结构体 */
+    hal_device_dft_stat_stru       st_hal_dev_dft_stat;                 /* hal device?????????? */
 
     hal_scan_params_stru           st_hal_scan_params;
     hal_device_sdt_stat_stru       st_hal_dev_sdt_stat;
@@ -4119,15 +4119,15 @@ typedef struct tag_hal_to_dmac_device_stru
     oal_uint8                       bit_no_ps_frm_int_switch :1;
     oal_uint8                       bit_pm_switch_resv       :5;
 
-    oal_bool_enum_uint8             en_fix_sifs_resp_rate;   /* 是否限制响应帧速率 */
+    oal_bool_enum_uint8             en_fix_sifs_resp_rate;   /* ?????????????????? */
     oal_uint8                       en_lifetime_chk;
     oal_bool_enum_uint8             en_txbf;
 
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1103_DEV)
     p_tbtt_ap_isr_func                  p_tbtt_update_beacon_func;
 
-    oal_bool_enum_uint8                 aen_last_over_temperature_flag[WLAN_RF_CHANNEL_NUMS];  /* 上一次查询的过温状态 */
-    oal_uint32                          ul_temper_err_cnt;                                     /* 过温err计数 */
+    oal_bool_enum_uint8                 aen_last_over_temperature_flag[WLAN_RF_CHANNEL_NUMS];  /* ???????????????????? */
+    oal_uint32                          ul_temper_err_cnt;                                     /* ????err???? */
 #endif
 
 #if defined(_PRE_PRODUCT_ID_HI110X_DEV)
@@ -4138,34 +4138,34 @@ typedef struct tag_hal_to_dmac_device_stru
     oal_uint64              ull_t4;
 //#endif
 
-    /* ROM化后资源扩展指针 */
+    /* ROM???????????????? */
     oal_void                           *_rom;
     #ifdef _PRE_WLAN_FEATURE_MWO_DET
-    oal_uint32                     ul_tx_comp_mwo_cyc_time; /* 上报微波炉周期寄存器的计数值*/
+    oal_uint32                     ul_tx_comp_mwo_cyc_time; /* ????????????????????????????*/
     #endif
 
     oal_uint8               uc_already_tx_num;
 #if defined(_PRE_WLAN_FEATURE_11AX) || defined(_PRE_WLAN_FEATURE_11AX_ROM)
-    oal_bool_enum_uint8     en_current_11ax_working;     /* 当前hal dev是否有工作的11ax vap */
-    oal_uint8               uc_trig_downlink_delta_pwr;   /* AP侧到STA侧空口功率损耗 */
+    oal_bool_enum_uint8     en_current_11ax_working;     /* ????hal dev????????????11ax vap */
+    oal_uint8               uc_trig_downlink_delta_pwr;   /* AP????STA?????????????? */
     oal_int8                c_trig_frame;              /*  */
 #endif
 } hal_to_dmac_device_stru;
 
-/* HAL模块和DMAC模块共用的WLAN RX结构体 */
+/* HAL??????DMAC??????????WLAN RX?????? */
 typedef struct
 {
-    oal_uint32                 *pul_base_dscr;      /* 描述符基地址 */
-    oal_uint16                  us_dscr_num;        /* 接收到的描述符的个数 */
-    oal_bool_enum_uint8         en_sync_req;        /* 队列同步标识 */
-    oal_uint8                   uc_queue_id;        /* 接收队列号 */
+    oal_uint32                 *pul_base_dscr;      /* ???????????? */
+    oal_uint16                  us_dscr_num;        /* ???????????????????? */
+    oal_bool_enum_uint8         en_sync_req;        /* ???????????? */
+    oal_uint8                   uc_queue_id;        /* ?????????? */
     hal_to_dmac_device_stru    *pst_hal_device;
     oal_uint8                   uc_channel_num;
     oal_uint8                   auc_resv[3];
 }hal_wlan_rx_event_stru;
 
 #ifdef _PRE_WLAN_FEATURE_FTM
-/* HAL模块和DMAC模块共用的FTM TIME RX结构体 */
+/* HAL??????DMAC??????????FTM TIME RX?????? */
 typedef struct
 {
     oal_uint64      ull_t2;
@@ -4176,9 +4176,9 @@ typedef struct
 
 typedef struct
 {
-    hal_tx_dscr_stru        *pst_base_dscr;/* 发送完成中断硬件所上报的描述符指针 */
+    hal_tx_dscr_stru        *pst_base_dscr;/* ?????????????????????????????????? */
     hal_to_dmac_device_stru *pst_hal_device;
-    oal_uint8                uc_dscr_num; /* 硬件一次发送所发出的描述符个数 */
+    oal_uint8                uc_dscr_num; /* ?????????????????????????????? */
 
 #ifdef _PRE_WLAN_FIT_BASED_REALTIME_CALI
     oal_int16                s_pdet_val;
@@ -4192,10 +4192,10 @@ typedef struct
 #endif
 
 //#ifdef _PRE_WLAN_FEATURE_MWO_DET
-    oal_uint32               ul_tx_comp_mwo_cyc_time; /* 上报微波炉周期寄存器的计数值*/
+    oal_uint32               ul_tx_comp_mwo_cyc_time; /* ????????????????????????????*/
 //#endif
 #ifdef _PRE_WLAN_FEATURE_PF_SCH
-    oal_uint32               ul_tx_consumed_airtime;   /* 调度算法使用一次发送的空口时间 */
+    oal_uint32               ul_tx_consumed_airtime;   /* ?????????????????????????????? */
 #endif
 //#ifdef _PRE_WLAN_FEATURE_FTM
     oal_uint64              ull_t1;
@@ -4211,11 +4211,11 @@ typedef struct
 
 typedef struct
 {
-    oal_uint8                       p2p_noa_status; /* 0: 表示noa 定时器停止，1: 表示noa 定时器正在工作 */
+    oal_uint8                       p2p_noa_status; /* 0: ????noa ????????????1: ????noa ?????????????? */
     oal_uint8                       auc_resv[3];
 }hal_p2p_pm_event_stru;
 
-/* 硬件常发配置参数结构体 */
+/* ?????????????????????? */
 typedef struct
 {
     union
@@ -4233,7 +4233,7 @@ typedef struct
 
     oal_uint32                       ul_times;
     oal_uint32                       ul_mpdu_len;
-    oal_uint32                       ul_ifs;        /* 单位0.1us */
+    oal_uint32                       ul_ifs;        /* ????0.1us */
     hal_tx_txop_per_rate_params_union  *pst_rate;
 }hal_al_tx_hw_stru;
 
@@ -4245,25 +4245,25 @@ typedef struct
 #ifdef _PRE_WLAN_1103_CHR
 typedef struct
 {
-    oal_uint32 ul_phy_err_rpt;              /*phy错误上报寄存器的值*/
-    oal_uint32 ul_rx_desc_status;           /*当前帧的接受状态*/
-    oal_uint32 ul_rpt_aver_evm_ant1;        /*平均evm*/
-    oal_uint32 ul_rpt_aver_evm_ant0;        /*平均evm*/
-    oal_uint32 ul_dotb_err_frm_num;         /*接受到错误的11b帧统计*/
-    oal_uint32 ul_ht_err_frm_num;           /*接受到错误的HT帧统计*/
-    oal_uint32 ul_vht_err_frm_num;          /*接受到错误的VHT帧统计*/
-    oal_uint32 ul_lega_err_frm_num;         /*接受到错误的LEGACY帧统计*/
-    oal_uint32 ul_rpt_phase_est;            /*频偏估计角度上报*/
-    oal_uint32 ul_rpt_2x2_chan_cond;        /*2*2频偏估计角度上报*/
-    oal_uint32 ul_rpt_mac_auto_rst_cnt;     /*mac自动自复位次数统计*/
+    oal_uint32 ul_phy_err_rpt;              /*phy??????????????????*/
+    oal_uint32 ul_rx_desc_status;           /*????????????????*/
+    oal_uint32 ul_rpt_aver_evm_ant1;        /*????evm*/
+    oal_uint32 ul_rpt_aver_evm_ant0;        /*????evm*/
+    oal_uint32 ul_dotb_err_frm_num;         /*????????????11b??????*/
+    oal_uint32 ul_ht_err_frm_num;           /*????????????HT??????*/
+    oal_uint32 ul_vht_err_frm_num;          /*????????????VHT??????*/
+    oal_uint32 ul_lega_err_frm_num;         /*????????????LEGACY??????*/
+    oal_uint32 ul_rpt_phase_est;            /*????????????????*/
+    oal_uint32 ul_rpt_2x2_chan_cond;        /*2*2????????????????*/
+    oal_uint32 ul_rpt_mac_auto_rst_cnt;     /*mac??????????????????*/
 }hal_phy_mac_chr_info_stru;
 #endif
 /*****************************************************************************
-  4 函数实现
+  4 ????????
 *****************************************************************************/
 OAL_STATIC OAL_INLINE oal_uint32*  hal_rx_dscr_get_real_addr(oal_uint32 *pul_rx_dscr)
 {
-    /* 注意数字2代表hi1102_rx_buffer_addr_stru结构体中的prev指针，移动到next指针位置 */
+    /* ????????2????hi1102_rx_buffer_addr_stru??????????prev????????????next???????? */
     if (OAL_PTR_NULL == pul_rx_dscr)
     {
         return pul_rx_dscr;
@@ -4273,7 +4273,7 @@ OAL_STATIC OAL_INLINE oal_uint32*  hal_rx_dscr_get_real_addr(oal_uint32 *pul_rx_
 
 OAL_STATIC OAL_INLINE oal_uint32*  hal_rx_dscr_get_sw_addr(oal_uint32 *pul_rx_dscr)
 {
-    /* 注意数字2代表hi1102_rx_buffer_addr_stru结构体中的prev指针，移动到next指针位置 */
+    /* ????????2????hi1102_rx_buffer_addr_stru??????????prev????????????next???????? */
     if (OAL_PTR_NULL == pul_rx_dscr)
     {
         return pul_rx_dscr;
@@ -4282,7 +4282,7 @@ OAL_STATIC OAL_INLINE oal_uint32*  hal_rx_dscr_get_sw_addr(oal_uint32 *pul_rx_ds
 }
 
 /*****************************************************************************
-  10.2 对外暴露的配置接口
+  10.2 ??????????????????
 *****************************************************************************/
 /************************  1151  ********************************************/
 #if (_PRE_PRODUCT_ID == _PRE_PRODUCT_ID_HI1151)
@@ -4651,7 +4651,7 @@ extern oal_void hi1151_delete_smart_antenna_value(hal_to_dmac_device_stru *pst_h
 extern oal_void hi1151_set_smart_antenna_value(hal_to_dmac_device_stru *pst_hal_device, oal_uint8 uc_lut_index, oal_uint16 ul_reg_value);
 extern oal_void hi1151_get_smart_antenna_value(hal_to_dmac_device_stru *pst_hal_device, oal_uint8 uc_lut_index, oal_uint32*  pst_reg_value);
 
-/* 设置phy_debug trailer上报MAC寄存器 */
+/* ????phy_debug trailer????MAC?????? */
 extern oal_void hi1151_rx_set_trlr_report_info(hal_to_dmac_device_stru *pst_hal_device, oal_uint8 *auc_config_val, oal_uint8 uc_trlr_switch);
 #ifdef _PRE_WLAN_FEATURE_ANTI_INTERF
 extern oal_void hi1151_set_weak_intf_rssi_th(hal_to_dmac_device_stru *pst_device, oal_int32 l_reg_val);
@@ -4847,7 +4847,7 @@ extern oal_void  hi1151_config_adc_target(hal_to_dmac_device_stru *pst_hal_devic
 extern oal_void hi1151_check_test_value_reg(hal_to_dmac_device_stru *pst_hal_device, oal_uint16 us_value, oal_uint32 *pul_result);
 extern oal_void hi1151_config_always_rx(hal_to_dmac_device_stru *pst_hal_device_base, oal_uint8 uc_switch);
 extern oal_void hi1151_get_cali_info(hal_to_dmac_device_stru *pst_hal_device, oal_uint8 *puc_param);
-/* 用于产线中的烧片版本设置常收模式 */
+/* ???????????????????????????????? */
 extern oal_void hi1151_config_always_rx_new(hal_to_dmac_device_stru *pst_hal_device_base, oal_uint8 uc_switch);
 
 #ifdef _PRE_PLAT_FEATURE_CUSTOMIZE
@@ -5292,7 +5292,7 @@ extern oal_void hi1102_delete_smart_antenna_value(hal_to_dmac_device_stru *pst_h
 extern oal_void hi1102_set_smart_antenna_value(hal_to_dmac_device_stru *pst_hal_device, oal_uint8 uc_lut_index, oal_uint16 ul_reg_value);
 extern oal_void hi1102_get_smart_antenna_value(hal_to_dmac_device_stru *pst_hal_device, oal_uint8 uc_lut_index, oal_uint32*  pst_reg_value);
 
-/* phy debug信息中trailer信息上报设置寄存器 */
+/* phy debug??????trailer?????????????????? */
 extern oal_void hi1102_rx_set_trlr_report_info(hal_to_dmac_device_stru *pst_hal_device, oal_uint8 *auc_config_val, oal_uint8 uc_trlr_switch);
 #ifdef _PRE_WLAN_FEATURE_ANTI_INTERF
 extern oal_void hi1102_set_weak_intf_rssi_th(hal_to_dmac_device_stru *pst_device, oal_int32 l_reg_val);
@@ -6079,7 +6079,7 @@ extern oal_void hi1103_enable_smart_antenna_gpio_set_default_antenna(hal_to_dmac
 extern oal_void hi1103_delete_smart_antenna_value(hal_to_dmac_device_stru *pst_hal_device, oal_uint8 uc_lut_index);
 extern oal_void hi1103_set_smart_antenna_value(hal_to_dmac_device_stru *pst_hal_device, oal_uint8 uc_lut_index, oal_uint16 ul_reg_value);
 extern oal_void hi1103_get_smart_antenna_value(hal_to_dmac_device_stru *pst_hal_device, oal_uint8 uc_lut_index, oal_uint32*  pst_reg_value);
-/* phy debug信息中trailer信息上报设置寄存器 */
+/* phy debug??????trailer?????????????????? */
 extern oal_void hi1103_rx_set_trlr_report_info(hal_to_dmac_device_stru *pst_hal_device, oal_uint8 *auc_config_val, oal_uint8 uc_trlr_switch);
 extern oal_void hi1103_rf_tone_transmit_entrance(hal_to_dmac_device_stru *pst_hal_device, oal_uint16 us_data_len, oal_uint8 uc_chain_idx);
 extern oal_void hi1103_rf_tone_transmit_exit(hal_to_dmac_device_stru *pst_hal_device);

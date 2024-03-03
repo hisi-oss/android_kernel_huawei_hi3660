@@ -47,7 +47,7 @@
 */
 
 /*****************************************************************************
-   1 头文件包含
+   1 ??????????
 *****************************************************************************/
 #include "ATCmdProc.h"
 #include "AtCheckFunc.h"
@@ -62,15 +62,15 @@
 
 
  /*****************************************************************************
-   2 结构定义
+   2 ????????
  *****************************************************************************/
 
 /*****************************************************************************
-   2 全局变量定义
+   2 ????????????
 *****************************************************************************/
 
 /*****************************************************************************
-    协议栈打印打点方式下的.C文件宏定义
+    ??????????????????????.C??????????
 *****************************************************************************/
 #define    THIS_FILE_ID        PS_FILE_ID_AT_OUTPUTPROC_C
 
@@ -217,7 +217,7 @@ const AT_RETURN_TAB_TYPE_STRU gastAtReturnCodeTab[]=
     {AT_CME_OPERATION_NOT_ALLOWED_IN_CL_MODE,              {(VOS_UINT8*)"718", (VOS_UINT8*)"operation not allowed in CL mode"                }  },
     {AT_CME_ERROR_ENUM_END,                                {TAF_NULL_PTR,       TAF_NULL_PTR                 }  },
 
-    /*装备AT命令错误码提示*/
+    /*????AT??????????????*/
     {AT_DEVICE_ERROR_BEGIN,                                {VOS_NULL_PTR   ,VOS_NULL_PTR                                     }  },
     {AT_DEVICE_MODE_ERROR,                                 {(VOS_UINT8*)"0", (VOS_UINT8*)"Mode Error"                        }  },
     {AT_FCHAN_BAND_NOT_MATCH,                              {(VOS_UINT8*)"1", (VOS_UINT8*)"Band not match"                    }  },
@@ -412,7 +412,7 @@ const AT_RETURN_TAB_TYPE_STRU gastAtReturnCodeTab[]=
 
 };
 
-/*速率气泡显示的速率表数组,由于是遵照CONNECT <Rate>的格式，故预留一个空格*/
+/*????????????????????????,??????????CONNECT <Rate>??????????????????????*/
 const TAF_CHAR   *g_PppDialRateDisplay[] =
 {
     " 9600",
@@ -433,7 +433,7 @@ const TAF_CHAR   *g_PppDialRateDisplay[] =
     " 86400000"
 };
 
-/*速率气泡显示的速率表数组,NV定制值*/
+/*????????????????????????,NV??????*/
 const VOS_CHAR   *g_ucDialRateDisplayNv[] =
 {
     " 53600",
@@ -444,58 +444,58 @@ const VOS_CHAR   *g_ucDialRateDisplayNv[] =
     " 7200000",
 };
 
-/*速率气泡显示的速率表数组,NV定制值*/
+/*????????????????????????,NV??????*/
 const AT_DISPLAY_RATE_PAIR_STRU         g_ucLTERateDisplay[AT_UE_LTE_CATEGORY_NUM_MAX] =
 {
-    {" 1000000",    " 1000000"  },                                              /* category0上下行理论最大速率 */
-    {" 10000000",   " 5000000"  },                                              /* category1上下行理论最大速率 */
-    {" 50000000",   " 25000000" },                                              /* category2上下行理论最大速率 */
-    {" 100000000",  " 50000000" },                                              /* category3上下行理论最大速率 */
-    {" 150000000",  " 50000000" },                                              /* category4上下行理论最大速率 */
-    {" 300000000",  " 75000000" },                                              /* category5上下行理论最大速率 */
-    {" 300000000",  " 50000000" },                                              /* category6上下行理论最大速率 */
-    {" 300000000",  " 100000000"},                                              /* category7上下行理论最大速率 */
-    {" 3000000000", " 1500000000"},                                             /* category8上下行理论最大速率 */
-    {" 450000000",  " 50000000"},                                               /* category9上下行理论最大速率 */
-    {" 450000000",  " 100000000"},                                              /* category10上下行理论最大速率 */
-    {" 600000000",  " 50000000"},                                               /* category11上下行理论最大速率 */
-    {" 600000000",  " 100000000"},                                              /* category12上下行理论最大速率 */
-    {" 390000000",  " 150000000"},                                              /* category13上下行理论最大速率 */
-    {" 3900000000", " 9500000000"},                                             /* category14上下行理论最大速率 */
-    {" 750000000",  " 0"},                                                      /* category15上下行理论最大速率 */
-    {" 980000000",  " 0"},                                                      /* category16上下行理论最大速率 */
-    {" 25000000000"," 0"},                                                      /* category17上下行理论最大速率 */
+    {" 1000000",    " 1000000"  },                                              /* category0?????????????????? */
+    {" 10000000",   " 5000000"  },                                              /* category1?????????????????? */
+    {" 50000000",   " 25000000" },                                              /* category2?????????????????? */
+    {" 100000000",  " 50000000" },                                              /* category3?????????????????? */
+    {" 150000000",  " 50000000" },                                              /* category4?????????????????? */
+    {" 300000000",  " 75000000" },                                              /* category5?????????????????? */
+    {" 300000000",  " 50000000" },                                              /* category6?????????????????? */
+    {" 300000000",  " 100000000"},                                              /* category7?????????????????? */
+    {" 3000000000", " 1500000000"},                                             /* category8?????????????????? */
+    {" 450000000",  " 50000000"},                                               /* category9?????????????????? */
+    {" 450000000",  " 100000000"},                                              /* category10?????????????????? */
+    {" 600000000",  " 50000000"},                                               /* category11?????????????????? */
+    {" 600000000",  " 100000000"},                                              /* category12?????????????????? */
+    {" 390000000",  " 150000000"},                                              /* category13?????????????????? */
+    {" 3900000000", " 9500000000"},                                             /* category14?????????????????? */
+    {" 750000000",  " 0"},                                                      /* category15?????????????????? */
+    {" 980000000",  " 0"},                                                      /* category16?????????????????? */
+    {" 25000000000"," 0"},                                                      /* category17?????????????????? */
 };
 
 
 
 /*****************************************************************************
-   3 函数、变量声明
+   3 ??????????????
 *****************************************************************************/
-/* Modified by L60609 for AT Project，2011-10-20,  Begin*/
-/* Modified by L60609 for AT Project，2011-10-20,  Begin*/
+/* Modified by L60609 for AT Project??2011-10-20,  Begin*/
+/* Modified by L60609 for AT Project??2011-10-20,  Begin*/
 
 
 /*****************************************************************************
-   4 函数实现
+   4 ????????
 *****************************************************************************/
 
 
 TAF_UINT32 At_SendData(TAF_UINT8 ucIndex,TAF_UINT8 ucType,TAF_UINT8* pData,TAF_UINT16 usLen)
 {
 
-    /* Added by L60609 for MUX，2012-08-06,  Begin */
+    /* Added by L60609 for MUX??2012-08-06,  Begin */
     VOS_UINT32                          ulHsicUserFlg;
     VOS_UINT32                          ulMuxUserFlg;
-    /* Added by L60609 for MUX，2012-08-06,  End */
+    /* Added by L60609 for MUX??2012-08-06,  End */
 
-    /* Added by L60609 for MUX，2012-08-06,  Begin */
+    /* Added by L60609 for MUX??2012-08-06,  Begin */
     ulHsicUserFlg = AT_CheckHsicUser(ucIndex);
     ulMuxUserFlg  = AT_CheckMuxUser(ucIndex);
-    /* Added by L60609 for MUX，2012-08-06,  End */
+    /* Added by L60609 for MUX??2012-08-06,  End */
 
-    /* 检查 输入参数，如果失败，返回错误； */
-    /* 根据当前用户业务类型，把数据发送到指定的接口 */
+    /* ???? ?????????????????????????????? */
+    /* ???????????????????????????????????????????? */
     if (AT_MAX_CLIENT_NUM <= ucIndex)
     {
         return AT_FAILURE;
@@ -525,30 +525,30 @@ TAF_UINT32 At_SendData(TAF_UINT8 ucIndex,TAF_UINT8 ucType,TAF_UINT8* pData,TAF_U
     {
         if (AT_USBCOM_USER == gastAtClientTab[ucIndex].UserType)
         {
-            /*向USB COM口发送数据*/
-            /* Modified by L60609 for AT Project，2011-10-15,  Begin*/
+            /*??USB COM??????????*/
+            /* Modified by L60609 for AT Project??2011-10-15,  Begin*/
             DMS_COM_SEND(AT_USB_COM_PORT_NO, pData, usLen);
             AT_MNTN_TraceCmdResult(ucIndex, pData, usLen);
-            /* Modified by L60609 for AT Project，2011-10-15,  End*/
+            /* Modified by L60609 for AT Project??2011-10-15,  End*/
             return AT_SUCCESS;
         }
-        /* 向VCOM口发送数据 */
+        /* ??VCOM?????????? */
         else if (AT_APP_USER == gastAtClientTab[ucIndex].UserType)
         {
-            /* Modified by L60609 for AT Project，2011-10-18,  Begin*/
+            /* Modified by L60609 for AT Project??2011-10-18,  Begin*/
             APP_VCOM_Send(gastAtClientTab[ucIndex].ucPortNo, pData, usLen);
             return AT_SUCCESS;
-            /* Modified by L60609 for AT Project，2011-10-18,  End*/
+            /* Modified by L60609 for AT Project??2011-10-18,  End*/
         }
         else if (AT_SOCK_USER == gastAtClientTab[ucIndex].UserType)
         {
-            /* Modified by L60609 for AT Project，2011-10-18,  Begin*/
+            /* Modified by L60609 for AT Project??2011-10-18,  Begin*/
             if (BSP_MODULE_SUPPORT == mdrv_misc_support_check(BSP_MODULE_TYPE_WIFI))
             {
                 CPM_ComSend(CPM_AT_COMM, pData, VOS_NULL_PTR, usLen);
                 return AT_SUCCESS;
             }
-            /* Modified by L60609 for AT Project，2011-10-18,  End*/
+            /* Modified by L60609 for AT Project??2011-10-18,  End*/
          }
         else if (AT_CTR_USER == gastAtClientTab[ucIndex].UserType)
         {
@@ -563,30 +563,30 @@ TAF_UINT32 At_SendData(TAF_UINT8 ucIndex,TAF_UINT8 ucType,TAF_UINT8* pData,TAF_U
             AT_MNTN_TraceCmdResult(ucIndex, pData, usLen);
             return AT_SUCCESS;
         }
-        /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, begin */
+        /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, begin */
         else if (AT_MODEM_USER == gastAtClientTab[ucIndex].UserType)
         {
-            /* Modified by S62952 for AT Project，2011-10-18,  Begin*/
+            /* Modified by S62952 for AT Project??2011-10-18,  Begin*/
             return AT_SendDataToModem(ucIndex, pData, usLen);
-            /* Modified by S62952 for AT Project，2011-10-18,  END*/
+            /* Modified by S62952 for AT Project??2011-10-18,  END*/
         }
-        /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, end */
+        /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, end */
         else if (AT_NDIS_USER == gastAtClientTab[ucIndex].UserType)
         {
-            /* NDIS AT口目前实现中暂无数据发送,若从该口发送数据,则3直接返回AT_FAILURE */
+            /* NDIS AT????????????????????????,????????????????,??3????????AT_FAILURE */
             return AT_FAILURE;
         }
-        /* Modified by L60609 for MUX，2012-08-13,  Begin */
+        /* Modified by L60609 for MUX??2012-08-13,  Begin */
         else if (VOS_TRUE == ulHsicUserFlg)
-        /* Modified by L60609 for MUX，2012-08-13,  End */
+        /* Modified by L60609 for MUX??2012-08-13,  End */
         {
         }
-        /* Added by L60609 for MUX，2012-08-06,  Begin */
+        /* Added by L60609 for MUX??2012-08-06,  Begin */
         else if (VOS_TRUE == ulMuxUserFlg)
         {
             return AT_SendMuxResultData(ucIndex, pData, usLen);
         }
-        /* Added by L60609 for MUX，2012-08-06,  End */
+        /* Added by L60609 for MUX??2012-08-06,  End */
         else
         {
             return AT_FAILURE;
@@ -605,17 +605,17 @@ VOS_VOID  AT_DisplayResultData (
 )
 {
 
-    /* Added by L60609 for MUX，2012-08-06,  Begin */
+    /* Added by L60609 for MUX??2012-08-06,  Begin */
     VOS_UINT32                          ulHsicUserFlg;
     VOS_UINT32                          ulMuxUserFlg;
-    /* Added by L60609 for MUX，2012-08-06,  End */
+    /* Added by L60609 for MUX??2012-08-06,  End */
 
-    /* Added by L60609 for MUX，2012-08-06,  Begin */
+    /* Added by L60609 for MUX??2012-08-06,  Begin */
     ulHsicUserFlg = AT_CheckHsicUser(ucIndex);
     ulMuxUserFlg  = AT_CheckMuxUser(ucIndex);
-    /* Added by L60609 for MUX，2012-08-06,  End */
+    /* Added by L60609 for MUX??2012-08-06,  End */
 
-    /*如果是数传状态，直接返回*/
+    /*????????????????????????*/
     if (AT_DATA_START_STATE == gastAtClientTab[ucIndex].DataState)
     {
         AT_LOG1("At_SendResultData DataState:",gastAtClientTab[ucIndex].DataState);
@@ -628,14 +628,14 @@ VOS_VOID  AT_DisplayResultData (
         gastAtClientTab[ucIndex].DataState = AT_DATA_START_STATE;
     }
 
-    /*选择PCUI口*/
+    /*????PCUI??*/
     if (AT_USBCOM_USER == gastAtClientTab[ucIndex].UserType)
     {
-        /*向USB COM口发送数据*/
+        /*??USB COM??????????*/
         DMS_COM_SEND(AT_USB_COM_PORT_NO, gstAtSendDataBuffer, usLen);
     }
 
-    /*选择control口*/
+    /*????control??*/
     else if (AT_CTR_USER == gastAtClientTab[ucIndex].UserType)
     {
 
@@ -645,13 +645,13 @@ VOS_VOID  AT_DisplayResultData (
     {
         DMS_COM_SEND(AT_PCUI2_PORT_NO, gstAtSendDataBuffer, usLen);
     }
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, begin */
-    /*选择MODEM口*/
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, begin */
+    /*????MODEM??*/
     else if (AT_MODEM_USER == gastAtClientTab[ucIndex].UserType)
     {
         AT_SendDataToModem(ucIndex, gstAtSendDataBuffer, usLen);
     }
-    /* Modified by s62952 for BalongV300R002 Build优化项目 2012-02-28, end */
+    /* Modified by s62952 for BalongV300R002 Build???????? 2012-02-28, end */
     else if (AT_APP_USER == gastAtClientTab[ucIndex].UserType)
     {
         APP_VCOM_Send(gastAtClientTab[ucIndex].ucPortNo, gstAtSendDataBuffer, usLen);
@@ -671,17 +671,17 @@ VOS_VOID  AT_DisplayResultData (
     {
         AT_UART_SendDlData(ucIndex, gstAtSendDataBuffer, usLen);
     }
-    /* Modified by L60609 for MUX，2012-08-13,  Begin */
+    /* Modified by L60609 for MUX??2012-08-13,  Begin */
     else if(VOS_TRUE == ulHsicUserFlg)
-    /* Modified by L60609 for MUX，2012-08-13,  End */
+    /* Modified by L60609 for MUX??2012-08-13,  End */
     {
     }
-    /* Added by L60609 for MUX，2012-08-06,  Begin */
+    /* Added by L60609 for MUX??2012-08-06,  Begin */
     else if (VOS_TRUE == ulMuxUserFlg)
     {
         AT_SendMuxResultData(ucIndex, gstAtSendDataBuffer, usLen);
     }
-    /* Added by L60609 for MUX，2012-08-06,  End */
+    /* Added by L60609 for MUX??2012-08-06,  End */
     else
     {
         ;
@@ -697,15 +697,15 @@ VOS_VOID AT_DisplaySelResultData(
 )
 {
     VOS_UINT8                           ucLoop;
-    /* Added by L60609 for MUX，2012-08-06,  Begin */
+    /* Added by L60609 for MUX??2012-08-06,  Begin */
     VOS_UINT32                          ulHsicUserFlg;
     VOS_UINT32                          ulMuxUserFlg;
-    /* Added by L60609 for MUX，2012-08-06,  End */
+    /* Added by L60609 for MUX??2012-08-06,  End */
 
-    /* Added by L60609 for MUX，2012-08-06,  Begin */
+    /* Added by L60609 for MUX??2012-08-06,  Begin */
     ulHsicUserFlg = AT_CheckHsicUser(ucIndex);
     ulMuxUserFlg  = AT_CheckMuxUser(ucIndex);
-    /* Added by L60609 for MUX，2012-08-06,  End */
+    /* Added by L60609 for MUX??2012-08-06,  End */
 
     /* Added by S62952 for IPV6, 2011-07-19, begin */
 
@@ -714,7 +714,7 @@ VOS_VOID AT_DisplaySelResultData(
     {
         if (AT_USBCOM_USER == gastAtClientTab[ucIndex].UserType)
         {
-            /* 选择PCUI口 */
+            /* ????PCUI?? */
             if (0 == gucAtPortSel)
             {
                 DMS_COM_SEND(AT_USB_COM_PORT_NO, gstAtSendDataBuffer, usLen);
@@ -723,7 +723,7 @@ VOS_VOID AT_DisplaySelResultData(
         else if (AT_CTR_USER == gastAtClientTab[ucIndex].UserType)
         {
 
-             /* 选择control口 */
+             /* ????control?? */
             if (0 == gucAtPortSel)
             {
                 DMS_COM_SEND(AT_CTR_PORT_NO, gstAtSendDataBuffer, usLen);
@@ -731,7 +731,7 @@ VOS_VOID AT_DisplaySelResultData(
         }
         else if (AT_PCUI2_USER == gastAtClientTab[ucIndex].UserType)
         {
-             /* 选择PCUI2口 */
+             /* ????PCUI2?? */
             if (0 == gucAtPortSel)
             {
                 DMS_COM_SEND(AT_PCUI2_PORT_NO, gstAtSendDataBuffer, usLen);
@@ -739,48 +739,48 @@ VOS_VOID AT_DisplaySelResultData(
         }
         else if (AT_MODEM_USER == gastAtClientTab[ucIndex].UserType)
         {
-            /* 选择modem口 */
+            /* ????modem?? */
             if (1 == gucAtPortSel)
             {
-                /* Modified by S62952 for AT Project，2011-10-18,  Begin*/
+                /* Modified by S62952 for AT Project??2011-10-18,  Begin*/
                 AT_SendDataToModem(ucIndex, gstAtSendDataBuffer, usLen);
-                /* Modified by S62952 for AT Project，2011-10-18,  END*/
+                /* Modified by S62952 for AT Project??2011-10-18,  END*/
             }
         }
         else if (AT_APP_USER == gastAtClientTab[ucIndex].UserType)
         {
-            /* Modified by L60609 for AT Project，2011-10-18,  Begin*/
+            /* Modified by L60609 for AT Project??2011-10-18,  Begin*/
             APP_VCOM_Send(gastAtClientTab[ucIndex].ucPortNo, gstAtSendDataBuffer, usLen);
-            /* Modified by L60609 for AT Project，2011-10-18,  end*/
+            /* Modified by L60609 for AT Project??2011-10-18,  end*/
         }
         else if (AT_SOCK_USER == gastAtClientTab[ucIndex].UserType)
         {
             if (BSP_MODULE_SUPPORT == mdrv_misc_support_check(BSP_MODULE_TYPE_WIFI))
             {
-            /* Modified by L60609 for AT Project，2011-10-18,  Begin*/
+            /* Modified by L60609 for AT Project??2011-10-18,  Begin*/
                 CPM_ComSend(CPM_AT_COMM, gstAtSendDataBuffer, VOS_NULL_PTR, usLen);
-            /* Modified by L60609 for AT Project，2011-10-18,  End*/
+            /* Modified by L60609 for AT Project??2011-10-18,  End*/
             }
         }
         else if (AT_NDIS_USER == gastAtClientTab[ucIndex].UserType)
         {
             DMS_COM_SEND(AT_NDIS_PORT_NO,gstAtSendDataBuffer, (VOS_UINT32)usLen);
         }
-        /* Modified by L60609 for MUX，2012-08-13,  Begin */
+        /* Modified by L60609 for MUX??2012-08-13,  Begin */
         else if (VOS_TRUE == ulHsicUserFlg)
-        /* Modified by L60609 for MUX，2012-08-13,  End */
+        /* Modified by L60609 for MUX??2012-08-13,  End */
         {
-            /* 判断是否允许从该HSIC AT端口主动上报AT命令 */
+            /* ????????????????HSIC AT????????????AT???? */
             for (ucLoop = 0; ucLoop < AT_HSIC_AT_CHANNEL_MAX; ucLoop++)
             {
             }
         }
-        /* Added by L60609 for MUX，2012-08-06,  Begin */
+        /* Added by L60609 for MUX??2012-08-06,  Begin */
         else if (VOS_TRUE == ulMuxUserFlg)
         {
             AT_SendMuxSelResultData(ucIndex, gstAtSendDataBuffer, usLen);
         }
-        /* Added by L60609 for MUX，2012-08-06,  End */
+        /* Added by L60609 for MUX??2012-08-06,  End */
         else
         {
             ;
@@ -807,7 +807,7 @@ VOS_VOID At_BufferorSendResultData(
 
     ulBufferLength = gstAtCombineSendData[ucIndex].usBufLen + usLength;
 
-    /* 若缓冲区存储空间不够用则将当前已缓存信息输出 */
+    /* ???????????????????????????????????????????? */
     /* Modified by f62575 for SS FDN&Call Control, 2013-05-06, begin */
     if (ulBufferLength > AT_CMD_OUTPUT_MAX_LEN)
     /* Modified by f62575 for SS FDN&Call Control, 2013-05-06, end */
@@ -818,7 +818,7 @@ VOS_VOID At_BufferorSendResultData(
         gstAtCombineSendData[ucIndex].usBufLen = 0;
     }
 
-    /* 缓存待输出的新数据 */
+    /* ?????????????????? */
     pBuffer = gstAtCombineSendData[ucIndex].aucBuffer + gstAtCombineSendData[ucIndex].usBufLen;
     TAF_MEM_CPY_S(pBuffer, AT_CMD_MAX_LEN + 20 - gstAtCombineSendData[ucIndex].usBufLen, pucData, usLength);
     gstAtCombineSendData[ucIndex].usBufLen += usLength;
@@ -863,13 +863,13 @@ VOS_VOID AT_SendBroadCastResultData(
         pstAtClientCtx = AT_GetClientCtxAddr(ucCount);
         /* Modified by l60609 for DSDA Phase III, 2013-2-21, End */
 
-        /* 该端口未使用 */
+        /* ???????????? */
         if (AT_CLIENT_NULL == gastAtClientTab[ucCount].ucUsed)
         {
             continue;
         }
 
-        /* 该端口不允许上报 */
+        /* ???????????????? */
         if (VOS_FALSE == pstAtClientCtx->stClientConfiguration.ucReportFlg)
         {
             continue;
@@ -882,7 +882,7 @@ VOS_VOID AT_SendBroadCastResultData(
             continue;
         }
 
-        /* 判断该端口是否属于要广播的Modem */
+        /* ??????????????????????????Modem */
         if (enBroadCastModemId != enCurModemId)
         {
             continue;
@@ -890,7 +890,7 @@ VOS_VOID AT_SendBroadCastResultData(
 
         if (AT_IND_MODE == gastAtClientTab[ucCount].IndMode)
         {
-            /*为了保证发送的数据是4字节对齐格式，故做一次拷贝*/
+            /*????????????????????4??????????????????????????*/
             TAF_MEM_CPY_S(gstAtSendDataBuffer, AT_CMD_MAX_LEN, pData, usLen);
             AT_DisplaySelResultData(usLen, ucCount);
         }
@@ -907,7 +907,7 @@ VOS_VOID At_SendResultData(
 {
     gstAtSendData.usBufLen = 0;
 
-    /* 参数检查 */
+    /* ???????? */
     if ((0 == usLen) || (AT_CMD_MAX_LEN <= usLen))
     {
         AT_LOG1("At_SendResultData usLen:",usLen);
@@ -919,7 +919,7 @@ VOS_VOID At_SendResultData(
     AT_LOG1("At_SendResultData:",usLen);
 
 
-        /* 通过ucIndex获取端口类型 */
+        /* ????ucIndex???????????? */
     AT_MNTN_TraceCmdResult(ucIndex, pData, usLen);
 
     /* Modified by l60609 for DSDA Phase II, 2012-12-17, Begin */
@@ -937,7 +937,7 @@ VOS_VOID At_SendResultData(
             return;
         }
 
-        /* 注意遗留问题: 此处需要增加链路类型判断，数传和命令状态数据不能混在一起 */
+        /* ????????????: ???????????????????????????????????????????????????????? */
         if (AT_CLIENT_NULL == gastAtClientTab[ucIndex].ucUsed)
         {
             AT_LOG1("At_SendResultData ucUsed:",gastAtClientTab[ucIndex].ucUsed);
@@ -945,12 +945,12 @@ VOS_VOID At_SendResultData(
             return;
         }
 
-        /*为了保证发送的数据是4字节对齐格式，故做一次拷贝*/
+        /*????????????????????4??????????????????????????*/
         TAF_MEM_CPY_S(gstAtSendDataBuffer, AT_CMD_MAX_LEN, pData, usLen);
 
         AT_DisplayResultData(ucIndex, usLen);
 
-        /* 判断是否需要Flash 短信,若需要，则将短信flash出去 */
+        /* ????????????Flash ????,????????????????flash???? */
         if (VOS_FALSE == AT_IsClientBlock())
         {
             AT_FlushSmsIndication();
@@ -963,17 +963,17 @@ VOS_VOID At_SendResultData(
 
 TAF_UINT32  At_JudgeCombineCmdSubSequentProcess(TAF_UINT8 ucIndex, TAF_UINT32 ReturnCode)
 {
-    /* 判读是否有未处理完成的命令 */
+    /* ?????????????????????????? */
     if (g_stParseContext[ucIndex].stCombineCmdInfo.usTotalNum == 0)
     {
-        /* 该分支有如下两种情况:
-            1.无待处理命令，属于主动上报
-            2.解析组合AT命令(或仅为独立AT命令)失败
+        /* ????????????????????:
+            1.??????????????????????????
+            2.????????AT????(??????????AT????)????
          */
         return AT_COM_CMD_SUB_PROC_FINISH;
     }
 
-    /* 判断是否为最后一个AT命令 */
+    /* ??????????????????AT???? */
     if ((g_stParseContext[ucIndex].stCombineCmdInfo.usProcNum + 1) == g_stParseContext[ucIndex].stCombineCmdInfo.usTotalNum)
     {
         return AT_COM_CMD_SUB_PROC_FINISH;
@@ -1184,7 +1184,7 @@ VOS_VOID AT_FormatAtAbortResult(
         2);
     usLength += 2;
 
-    /* 获取打断回复 */
+    /* ???????????? */
     ulTmp = VOS_StrLen((VOS_CHAR *)AT_GetAbortRspStr());
     TAF_MEM_CPY_S( (pucDataAt + usLength),
         ulTmp,
@@ -1192,14 +1192,14 @@ VOS_VOID AT_FormatAtAbortResult(
         ulTmp );
     usLength += (VOS_UINT16)ulTmp;
 
-    /* 在打断回复后面，加上回车换行 */
+    /* ???????????????????????????? */
     TAF_MEM_CPY_S((pucDataAt + usLength),
         2,
         (VOS_CHAR *)gaucAtCrLf,
         2);
     usLength += 2;
 
-    /* 把打断回复和回车换行等输出信息保存到全局变量中 */
+    /* ?????????????????????????????????????????????? */
     if ((AT_CMD_MAX_LEN + 20) >= (gstAtCombineSendData[ucIndex].usBufLen + usLength))
     {
         TAF_MEM_CPY_S((gstAtCombineSendData[ucIndex].aucBuffer + gstAtCombineSendData[ucIndex].usBufLen),
@@ -1209,7 +1209,7 @@ VOS_VOID AT_FormatAtAbortResult(
         gstAtCombineSendData[ucIndex].usBufLen += usLength;
     }
 
-    /* 发送AT命令的数据给APP */
+    /* ????AT????????????APP */
     At_SendResultData(ucIndex, gstAtCombineSendData[ucIndex].aucBuffer, gstAtCombineSendData[ucIndex].usBufLen);
 
     return;
@@ -1233,10 +1233,10 @@ VOS_VOID At_FormatResultData(
     VOS_UINT32                          ulNvDialRateIndex;
     VOS_UINT8                           ucSubSysMode;
     VOS_UINT8                           aucDialRateTmp[AT_AP_RATE_STRLEN];
-    /* Added by L60609 for AT Project，2011-10-24,  Begin*/
+    /* Added by L60609 for AT Project??2011-10-24,  Begin*/
     VOS_UINT32                          ulReturnCodeIndex;
     VOS_UINT32                          ulRslt;
-    /*AT_ERROR对应的index值*/
+    /*AT_ERROR??????index??*/
     VOS_UINT32                          ulAtErrIndex;
     VOS_UINT32                          ulAtErrRslt;
 
@@ -1245,7 +1245,7 @@ VOS_VOID At_FormatResultData(
 
     VOS_UINT8                           ucDlCategoryIndex = 0;
 
-    /*变量初始化*/
+    /*??????????*/
     usLength               = gstAtSendData.usBufLen;
     gstAtSendData.usBufLen = 0;
 
@@ -1257,7 +1257,7 @@ VOS_VOID At_FormatResultData(
 
     ulAtErrIndex           = 0;
     ulReturnCodeIndex      = 0;
-    /* Added by L60609 for AT Project，2011-10-24,  End*/
+    /* Added by L60609 for AT Project??2011-10-24,  End*/
 
     TAF_MEM_SET_S(aucDialRateTmp, sizeof(aucDialRateTmp), 0x00, sizeof(aucDialRateTmp));
 
@@ -1272,7 +1272,7 @@ VOS_VOID At_FormatResultData(
 
     if ( AT_CMD_NOT_SUPPORT == ulReturnCode )
     {
-        /* 提取函数降复杂度 */
+        /* ???????????????? */
 
         AT_FormatAtCmdNotSupportResult(ucIndex, (AT_RRETURN_CODE_ENUM_UINT32)ulReturnCode);
 
@@ -1283,7 +1283,7 @@ VOS_VOID At_FormatResultData(
 
     if ( AT_TOO_MANY_PARA == ulReturnCode )
     {
-        /* 提取函数降复杂度 */
+        /* ???????????????? */
 
         AT_FormatAtTooManyParaResult(ucIndex, (AT_RRETURN_CODE_ENUM_UINT32)ulReturnCode);
 
@@ -1299,11 +1299,11 @@ VOS_VOID At_FormatResultData(
         At_ResetCombinParseInfo(ucIndex);
 
         AT_CheckProcBlockCmd();
-        /* 恢复AT端口的全局变量 */
+        /* ????AT?????????????? */
         return;
     }
 
-    /* Added by L60609 for AT Project，2011-10-24,  Begin*/
+    /* Added by L60609 for AT Project??2011-10-24,  Begin*/
     ulRslt = AT_GetReturnCodeId(ulReturnCode, &ulReturnCodeIndex);
 
     if (VOS_OK != ulRslt)
@@ -1311,9 +1311,9 @@ VOS_VOID At_FormatResultData(
         AT_ERR_LOG("At_FormatResultData: result code index is err!");
         return;
     }
-    /* Added by L60609 for AT Project，2011-10-24,  End*/
-    if ((AT_WAIT_SMS_INPUT == ulReturnCode)/* 进入SMS输入模式 */
-        || (AT_WAIT_XML_INPUT == ulReturnCode))/* 进入XML文本输入模式 */
+    /* Added by L60609 for AT Project??2011-10-24,  End*/
+    if ((AT_WAIT_SMS_INPUT == ulReturnCode)/* ????SMS???????? */
+        || (AT_WAIT_XML_INPUT == ulReturnCode))/* ????XML???????????? */
     {
 
         ulTmp = VOS_StrLen((TAF_CHAR *)gastAtReturnCodeTab[ulReturnCodeIndex].Result[gucAtVType]);
@@ -1334,7 +1334,7 @@ VOS_VOID At_FormatResultData(
 
         At_SendResultData(ucIndex,pDataAt3,usLength);
 
-        /* 清除gstAtCombineSendData的内容 */
+        /* ????gstAtCombineSendData?????? */
         TAF_MEM_SET_S(&gstAtCombineSendData[ucIndex], sizeof(AT_SEND_DATA_BUFFER_STRU), 0x00, sizeof(AT_SEND_DATA_BUFFER_STRU));
 
         return;
@@ -1344,7 +1344,7 @@ VOS_VOID At_FormatResultData(
         switch (gucAtCmeeType)
         {
         case AT_CMEE_ONLY_ERROR:
-            /* Added by L60609 for AT Project，2011-10-24,  Begin*/
+            /* Added by L60609 for AT Project??2011-10-24,  Begin*/
             ulAtErrRslt = AT_GetReturnCodeId(AT_ERROR, &ulAtErrIndex);
 
             if(VOS_OK != ulAtErrRslt)
@@ -1352,7 +1352,7 @@ VOS_VOID At_FormatResultData(
                 AT_ERR_LOG("At_FormatResultData: AT ERROR index is err!");
                 return;
             }
-            /* Added by L60609 for AT Project，2011-10-24,  End*/
+            /* Added by L60609 for AT Project??2011-10-24,  End*/
             ulTmp = VOS_StrLen( (TAF_CHAR *)gastAtReturnCodeTab[ulAtErrIndex].Result[gucAtVType] );
             TAF_MEM_CPY_S( pDataAt3 + usLength,
                 ulTmp,
@@ -1412,7 +1412,7 @@ VOS_VOID At_FormatResultData(
         switch(gucAtCmeeType)
         {
             case AT_CMEE_ONLY_ERROR:
-                /* Added by L60609 for AT Project，2011-10-24,  Begin*/
+                /* Added by L60609 for AT Project??2011-10-24,  Begin*/
                 ulAtErrRslt = AT_GetReturnCodeId(AT_ERROR, &ulAtErrIndex);
 
                 if(VOS_OK != ulAtErrRslt)
@@ -1420,7 +1420,7 @@ VOS_VOID At_FormatResultData(
                     AT_ERR_LOG("At_FormatResultData: AT ERROR index is err!");
                     return;
                 }
-                /* Added by L60609 for AT Project，2011-10-24,  End*/
+                /* Added by L60609 for AT Project??2011-10-24,  End*/
 
                 ulTmp = VOS_StrLen( (TAF_CHAR *)gastAtReturnCodeTab[ulAtErrIndex].Result[gucAtVType] );
                 TAF_MEM_CPY_S( pDataAt3 + usLength ,
@@ -1474,12 +1474,12 @@ VOS_VOID At_FormatResultData(
             TAF_MEM_CPY_S(pDataAt1,
                 2,
                 (TAF_CHAR *)gaucAtCrLf,
-                2);/*Text前面加\r\n*/
+                2);/*Text??????\r\n*/
 
             TAF_MEM_CPY_S(pDataAt3 + usLength,
                 2,
                 (TAF_CHAR *)gaucAtCrLf,
-                2);/*Text后面加\r\n*/
+                2);/*Text??????\r\n*/
             usLength += 2;
             usLength += 2;
         }
@@ -1492,7 +1492,7 @@ VOS_VOID At_FormatResultData(
                 TAF_MEM_CPY_S((TAF_CHAR *)(pDataAt1 + usLength),
                     2,
                     (TAF_CHAR *)gaucAtCrLf,
-                    2);/*Code前面加\r\n*/
+                    2);/*Code??????\r\n*/
                 usLength += 2;
 
                 ulTmp = VOS_StrLen((TAF_CHAR *)gastAtReturnCodeTab[ulReturnCodeIndex].Result[gucAtVType]);
@@ -1502,17 +1502,17 @@ VOS_VOID At_FormatResultData(
                     ulTmp);/*Code*/
                 usLength += (TAF_UINT16)ulTmp;
 
-                /*如果是PPP拨号且gucAtXType大于0，则CONNECT返回码需要附上速率信息，格式依照:CONNECT <Rate>*/
+                /*??????PPP??????gucAtXType????0????CONNECT????????????????????????????????:CONNECT <Rate>*/
                 if (AT_CONNECT == ulReturnCode)
                 {
                     if ((AT_DATA_MODE == gastAtClientTab[ucIndex].Mode)
                         && ( (AT_PPP_DATA_MODE == gastAtClientTab[ucIndex].DataMode)
                               || (AT_IP_DATA_MODE == gastAtClientTab[ucIndex].DataMode) ) )
                     {
-                        /* 设置管脚信号标志 */
+                        /* ???????????????? */
                         ulMdmMscFlg = VOS_TRUE;
 
-                        /* 若gucAtXType大于0，在CONNECT后附上速率信息 */
+                        /* ??gucAtXType????0????CONNECT?????????????? */
                         if (gucAtXType > 0)
                         {
 
@@ -1520,7 +1520,7 @@ VOS_VOID At_FormatResultData(
 
                             TAF_MEM_SET_S(&stSysMode, sizeof(stSysMode), 0x00, sizeof(stSysMode));
 
-                            /* 从C核获取ucRatType和ucSysSubMode */
+                            /* ??C??????ucRatType??ucSysSubMode */
                             ulRet = TAF_AGENT_GetSysMode(ucIndex, &stSysMode);
                             if (VOS_OK != ulRet)
                             {
@@ -1584,7 +1584,7 @@ VOS_VOID At_FormatResultData(
                                 TAF_MEM_CPY_S(aucDialRateTmp, sizeof(aucDialRateTmp), g_ucDialRateDisplayNv[ulNvDialRateIndex - 1], ulTmp);
                             }
 
-                            /*在CONNECT后附上速率信息*/
+                            /*??CONNECT??????????????*/
                             TAF_MEM_CPY_S(pDataAt1 + usLength,
                                 ulTmp,
                                 aucDialRateTmp,
@@ -1595,7 +1595,7 @@ VOS_VOID At_FormatResultData(
                     else if ((AT_CSD_DATA_MODE == gastAtClientTab[ucIndex].DataMode)
                           && (AT_MODEM_USER == gastAtClientTab[ucIndex].UserType))
                     {
-                        /* 设置管脚信号标志 */
+                        /* ???????????????? */
                         ulMdmMscFlg = VOS_TRUE;
                     }
                     else
@@ -1615,12 +1615,12 @@ VOS_VOID At_FormatResultData(
                 TAF_MEM_CPY_S(pDataAt1 + usLength,
                     2,
                     (TAF_CHAR *)gaucAtCrLf,
-                    2);/*Code后面加\r\n*/
+                    2);/*Code??????\r\n*/
                 usLength += 2;
 
             }
 
-            /* 拷贝<text>和结果码 */
+            /* ????<text>???????? */
             if ((0 != usLength)
                 && ((AT_CMD_MAX_LEN + 20) >= (gstAtCombineSendData[ucIndex].usBufLen + usLength)))
             {
@@ -1688,7 +1688,7 @@ VOS_VOID At_FormatResultData(
                 TAF_MEM_CPY_S(pDataAt3 + usLength,
                     1,
                     &ucAtS3,
-                    1);/*Code后面加\r*/
+                    1);/*Code??????\r*/
                 usLength += 1;
             }
             else
@@ -2040,13 +2040,13 @@ VOS_VOID AT_ProcFormatResultMsc(
     {
         if (VOS_TRUE == AT_CheckHsUartUser(ucIndex))
         {
-            /* 判断&S并处理DSR管脚  */
+            /* ????&S??????DSR????  */
             if (AT_UART_DSR_MODE_CONNECT_ON == pstUartCtx->stLineCtrl.enDsrMode)
             {
                 AT_CtrlDSR(ucIndex, AT_IO_LEVEL_HIGH);
             }
 
-            /* 判断&C并处理DCD管脚  */
+            /* ????&C??????DCD????  */
             if (AT_UART_DCD_MODE_CONNECT_ON == pstUartCtx->stLineCtrl.enDcdMode)
             {
                 AT_CtrlDCD(ucIndex, AT_IO_LEVEL_HIGH);
@@ -2054,7 +2054,7 @@ VOS_VOID AT_ProcFormatResultMsc(
         }
         else
         {
-            /* 拉高DCD信号 */
+            /* ????DCD???? */
             AT_CtrlDCD(ucIndex, AT_IO_LEVEL_HIGH);
         }
     }
@@ -2062,13 +2062,13 @@ VOS_VOID AT_ProcFormatResultMsc(
     {
         if (VOS_TRUE == AT_CheckHsUartUser(ucIndex))
         {
-           /* 判断&S并处理DSR管脚  */
+           /* ????&S??????DSR????  */
             if (AT_UART_DSR_MODE_CONNECT_ON == pstUartCtx->stLineCtrl.enDsrMode)
             {
                 AT_CtrlDSR(ucIndex, AT_IO_LEVEL_LOW);
             }
 
-            /* 判断&C并处理DCD管脚  */
+            /* ????&C??????DCD????  */
             if (AT_UART_DCD_MODE_CONNECT_ON == pstUartCtx->stLineCtrl.enDcdMode)
             {
                 AT_CtrlDCD(ucIndex, AT_IO_LEVEL_LOW);
@@ -2076,7 +2076,7 @@ VOS_VOID AT_ProcFormatResultMsc(
         }
         else
         {
-            /* 拉低DCD信号 */
+            /* ????DCD???? */
             AT_CtrlDCD(ucIndex, AT_IO_LEVEL_LOW);
             mdelay(30);
         }
