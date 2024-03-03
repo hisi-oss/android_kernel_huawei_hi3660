@@ -1547,14 +1547,24 @@ static struct dentry *ext4_lookup(struct inode *dir, struct dentry *dentry, unsi
 	struct inode *inode;
 	struct ext4_dir_entry_2 *de;
 	struct buffer_head *bh;
-	int err;
 
-	err = fscrypt_prepare_lookup(dir, dentry, flags);
-	if (err)
-		return ERR_PTR(err);
+	if (ext4_encrypted_inode(dir)) {
+		int res = fscrypt_get_encryption_info(dir);
 
-	if (dentry->d_name.len > EXT4_NAME_LEN)
-		return ERR_PTR(-ENAMETOOLONG);
+		/*
+		 * DCACHE_ENCRYPTED_WITH_KEY is set if the dentry is
+		 * created while the directory was encrypted and we
+		 * have access to the key.
+		 */
+		if (fscrypt_has_encryption_key(dir))
+			fscrypt_set_encrypted_dentry(dentry);
+		fscrypt_set_d_op(dentry);
+		if (res && res != -ENOKEY)
+			return ERR_PTR(res);
+	}
+
+       if (dentry->d_name.len > EXT4_NAME_LEN)
+	       return ERR_PTR(-ENAMETOOLONG);
 
 	bh = ext4_find_entry(dir, &dentry->d_name, &de, NULL);
 	if (IS_ERR(bh))
@@ -1716,7 +1726,7 @@ static struct ext4_dir_entry_2 *do_split(handle_t *handle, struct inode *dir,
 			     blocksize, hinfo, map);
 	map -= count;
 	dx_sort_map(map, count);
-	/* Split the existing block in the middle, size-wise */
+	/* Ensure that neither split block is over half full */
 	size = 0;
 	move = 0;
 	for (i = count-1; i >= 0; i--) {
@@ -1726,8 +1736,18 @@ static struct ext4_dir_entry_2 *do_split(handle_t *handle, struct inode *dir,
 		size += map[i].size;
 		move++;
 	}
-	/* map index at which we will split */
-	split = count - move;
+	/*
+	 * map index at which we will split
+	 *
+	 * If the sum of active entries didn't exceed half the block size, just
+	 * split it in half by count; each resulting block will have at least
+	 * half the space free.
+	 */
+	if (i > 0)
+		split = count - move;
+	else
+		split = count/2;
+
 	hash2 = map[split].hash;
 	continued = hash2 == map[split - 1].hash;
 	dxtrace(printk(KERN_INFO "Split block %lu at %x, %i/%i\n",
@@ -2987,18 +3007,17 @@ static int ext4_unlink(struct inode *dir, struct dentry *dentry)
 	if (IS_DIRSYNC(dir))
 		ext4_handle_sync(handle);
 
-	if (inode->i_nlink == 0) {
-		ext4_warning_inode(inode, "Deleting file '%.*s' with no links",
-				   dentry->d_name.len, dentry->d_name.name);
-		set_nlink(inode, 1);
-	}
 	retval = ext4_delete_entry(handle, dir, de, bh);
 	if (retval)
 		goto end_unlink;
 	dir->i_ctime = dir->i_mtime = ext4_current_time(dir);
 	ext4_update_dx_flag(dir);
 	ext4_mark_inode_dirty(handle, dir);
-	drop_nlink(inode);
+	if (inode->i_nlink == 0)
+		ext4_warning_inode(inode, "Deleting file '%.*s' with no links",
+			dentry->d_name.len, dentry->d_name.name);
+	else
+		drop_nlink(inode);
 	if (!inode->i_nlink)
 		ext4_orphan_add(handle, inode);
 	inode->i_ctime = ext4_current_time(inode);
@@ -3019,16 +3038,36 @@ static int ext4_symlink(struct inode *dir,
 	struct inode *inode;
 	int err, len = strlen(symname);
 	int credits;
+	bool encryption_required;
 	struct fscrypt_str disk_link;
+	struct fscrypt_symlink_data *sd = NULL;
 
-	err = fscrypt_prepare_symlink(dir, symname, len, dir->i_sb->s_blocksize,
-				      &disk_link);
-	if (err)
-		return err;
+	disk_link.len = len + 1;
+	disk_link.name = (char *) symname;
+
+	encryption_required = (ext4_encrypted_inode(dir) ||
+			       DUMMY_ENCRYPTION_ENABLED(EXT4_SB(dir->i_sb)));
+	if (encryption_required) {
+		err = fscrypt_get_encryption_info(dir);
+		if (err)
+			return err;
+		if (!fscrypt_has_encryption_key(dir))
+			return -ENOKEY;
+		disk_link.len = (fscrypt_fname_encrypted_size(dir, len) +
+				 sizeof(struct fscrypt_symlink_data));
+		sd = kzalloc(disk_link.len, GFP_KERNEL);
+		if (!sd)
+			return -ENOMEM;
+	}
+
+	if (disk_link.len > dir->i_sb->s_blocksize) {
+		err = -ENAMETOOLONG;
+		goto err_free_sd;
+	}
 
 	err = dquot_initialize(dir);
 	if (err)
-		return err;
+		goto err_free_sd;
 
 	if ((disk_link.len > EXT4_N_BLOCKS * 4)) {
 		/*
@@ -3057,18 +3096,27 @@ static int ext4_symlink(struct inode *dir,
 	if (IS_ERR(inode)) {
 		if (handle)
 			ext4_journal_stop(handle);
-		return PTR_ERR(inode);
+		err = PTR_ERR(inode);
+		goto err_free_sd;
 	}
 
-	if (IS_ENCRYPTED(inode)) {
-		err = fscrypt_encrypt_symlink(inode, symname, len, &disk_link);
+	if (encryption_required) {
+		struct qstr istr;
+		struct fscrypt_str ostr =
+			FSTR_INIT(sd->encrypted_path, disk_link.len);
+
+		istr.name = (const unsigned char *) symname;
+		istr.len = len;
+		err = fscrypt_fname_usr_to_disk(inode, &istr, &ostr);
 		if (err)
 			goto err_drop_inode;
+		sd->len = cpu_to_le16(ostr.len);
+		disk_link.name = (char *) sd;
 		inode->i_op = &ext4_encrypted_symlink_inode_operations;
 	}
 
 	if ((disk_link.len > EXT4_N_BLOCKS * 4)) {
-		if (!IS_ENCRYPTED(inode))
+		if (!encryption_required)
 			inode->i_op = &ext4_symlink_inode_operations;
 		inode_nohighmem(inode);
 		ext4_set_aops(inode);
@@ -3110,7 +3158,7 @@ static int ext4_symlink(struct inode *dir,
 	} else {
 		/* clear the extent format for fast symlink */
 		ext4_clear_inode_flag(inode, EXT4_INODE_EXTENTS);
-		if (!IS_ENCRYPTED(inode)) {
+		if (!encryption_required) {
 			inode->i_op = &ext4_fast_symlink_inode_operations;
 			inode->i_link = (char *)&EXT4_I(inode)->i_data;
 		}
@@ -3125,17 +3173,16 @@ static int ext4_symlink(struct inode *dir,
 
 	if (handle)
 		ext4_journal_stop(handle);
-	goto out_free_encrypted_link;
-
+	kfree(sd);
+	return err;
 err_drop_inode:
 	if (handle)
 		ext4_journal_stop(handle);
 	clear_nlink(inode);
 	unlock_new_inode(inode);
 	iput(inode);
-out_free_encrypted_link:
-	if (disk_link.name != (unsigned char *)symname)
-		kfree(disk_link.name);
+err_free_sd:
+	kfree(sd);
 	return err;
 }
 
