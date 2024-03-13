@@ -67,6 +67,16 @@ static inline void fscrypt_restore_control_page(struct page *page)
 	return;
 }
 
+static inline void fscrypt_set_d_op(struct dentry *dentry)
+{
+	return;
+}
+
+static inline void fscrypt_set_encrypted_dentry(struct dentry *dentry)
+{
+	return;
+}
+
 static inline struct page *fscrypt_encrypt_dio_page(struct inode *inode,
 				      struct page *plaintext_page,
 				      unsigned int len,
