@@ -10,7 +10,9 @@
 #ifndef __F2FS_SDP_H__
 #define __F2FS_SDP_H__
 
-#include <linux/fscrypt_common.h>
+#define __FS_HAS_ENCRYPTION IS_ENABLED(CONFIG_F2FS_FS_ENCRYPTION)
+#include <linux/fscrypt.h>
+
 #include <linux/printk.h>
 #include <linux/types.h>
 #include <crypto/kpp.h>

@@ -3,10 +3,12 @@
 #include <linux/spinlock.h>
 #include <linux/slab.h>
 #include <linux/fs.h>
-#include <linux/fscrypt_common.h>
 #include <linux/rwsem.h>
 #include <uapi/linux/stat.h>
 #include "huawei_platform/hwaa/hwaa_limits.h"
+
+#define __FS_HAS_ENCRYPTION IS_ENABLED(CONFIG_FS_ENCRYPTION)
+#include <linux/fscrypt.h>
 
 #ifdef CONFIG_HWAA
 static DECLARE_RWSEM(g_fs_callbacks_lock);
