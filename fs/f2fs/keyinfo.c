@@ -9,6 +9,7 @@
 #include <keys/user-type.h>
 #include <linux/scatterlist.h>
 #include <uapi/linux/keyctl.h>
+#include <crypto/aead.h>
 #include <crypto/skcipher.h>
 #include <linux/string.h>
 #include <linux/fs.h>

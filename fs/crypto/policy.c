@@ -13,6 +13,7 @@
 #include <keys/user-type.h>
 #include <uapi/linux/keyctl.h>
 #include <linux/mount.h>
+#include <crypto/aead.h>
 #include "fscrypt_private.h"
 
 #ifdef CONFIG_HWAA

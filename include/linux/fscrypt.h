@@ -14,7 +14,6 @@
 #define _LINUX_FSCRYPT_H
 
 #include <linux/fs.h>
-#include <crypto/aead.h>
 
 #define FS_CRYPTO_BLOCK_SIZE		16
 
