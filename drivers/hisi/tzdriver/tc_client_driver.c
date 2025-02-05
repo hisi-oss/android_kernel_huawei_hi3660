@@ -91,7 +91,6 @@
 
 #include <linux/namei.h>
 
-#include <linux/random.h>
 #include <linux/crc32.h>
 #include "security_auth_enhance.h"
 
@@ -101,6 +100,10 @@
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0))
 #include <crypto/skcipher.h>
+#endif
+
+#ifdef CONFIG_TEE_CFC
+#include <linux/random.h>
 #endif
 
 #define TEEC_PARAM_TYPES(param0Type, param1Type, param2Type, param3Type) \
@@ -618,6 +621,7 @@ static int tee_init_crypto(char *hash_type)
 	return 0;
 }
 
+#ifdef CONFIG_TEE_CFC
 static int
 tee_cfc_rehash(struct shash_desc *shash, unsigned char *digest)
 {
@@ -640,6 +644,13 @@ tee_cfc_rehash(struct shash_desc *shash, unsigned char *digest)
 
 	return crypto_shash_final(shash, digest);
 }
+#else
+static inline int
+tee_cfc_rehash(struct shash_desc *shash, unsigned char *digest)
+{
+	return 0;
+}
+#endif
 
 /* Calculate the SHA256 file digest */
 static int tee_calc_task_hash(unsigned char *digest, bool cfc_rehash, struct task_struct *S)

@@ -1477,6 +1477,7 @@ free_mem:
 	g_session_root_key = NULL;
 	return ret;
 }
+#ifdef CONFIG_TEE_CFC
 extern char __cfc_rules_start[];
 extern char __cfc_rules_stop[];
 extern char __cfc_area_start[];
@@ -1521,6 +1522,10 @@ static void smc_get_cfc_info(void)
 		cfc_is_enabled = true;
 }
 
+#else
+static inline void smc_set_cfc_info(void) {}
+static inline void smc_get_cfc_info(void) {}
+#endif
 
 #define compile_time_assert(cond, msg) \
     typedef char ASSERT_##msg[(cond) ? 1 : -1]
