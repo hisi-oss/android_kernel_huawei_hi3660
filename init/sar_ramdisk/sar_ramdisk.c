@@ -21,14 +21,15 @@
 
 extern void clean_rootfs(void);
 extern void flush_delayed_fput(void);
-extern char* unpack_to_rootfs(char *buf, unsigned long len);
+extern char *unpack_to_rootfs(char *buf, unsigned long len);
 
-__init int mount_sar_ramdisk(char* name) {
+__init int mount_sar_ramdisk(char *name)
+{
 	struct boot_img_hdr_v1 header;
 	unsigned int rd_offset;
 	int fd;
 	int res = 0;
-	char* buf;
+	char *buf;
 
 	fd = sys_open(name, O_RDONLY, 0);
 
@@ -37,7 +38,7 @@ __init int mount_sar_ramdisk(char* name) {
 		return 0;
 	}
 
-	if (sys_read(fd, (char*) &header, sizeof(header)) != sizeof(header)) {
+	if (sys_read(fd, (char *)&header, sizeof(header)) != sizeof(header)) {
 		pr_err("SAR_RD: Failed to read bootimage header");
 		goto clean_nobuf;
 	}

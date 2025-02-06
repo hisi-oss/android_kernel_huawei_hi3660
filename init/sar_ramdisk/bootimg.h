@@ -63,7 +63,7 @@ struct boot_img_hdr_v1 {
 	// binary compatibility with older versions of mkbootimg.
 	uint8_t extra_cmdline[BOOT_EXTRA_ARGS_SIZE];
 
-	uint32_t recovery_dtbo_size;   /* size in bytes for recovery DTBO/ACPIO image */
+	uint32_t recovery_dtbo_size; /* size in bytes for recovery DTBO/ACPIO image */
 	uint64_t recovery_dtbo_offset; /* offset to recovery dtbo/acpio in boot image */
 	uint32_t header_size;
 } __attribute__((packed));
