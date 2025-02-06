@@ -351,7 +351,7 @@ void reinit_bg_stats(void)
 }
 
 
-void reinit_fg_stats()
+void reinit_fg_stats(void)
 {
     s_last_fg_time = 0;
     s_cur_fg_index = 0;
