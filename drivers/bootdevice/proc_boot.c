@@ -134,7 +134,7 @@ void set_bootdevice_type(enum bootdevice_type type)
 	bootdevice.type = type;
 }
 
-enum bootdevice_type get_bootdevice_type()
+enum bootdevice_type get_bootdevice_type(void)
 {
 	return bootdevice.type;
 }
