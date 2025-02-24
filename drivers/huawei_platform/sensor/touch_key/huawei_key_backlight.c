@@ -50,7 +50,7 @@ struct huawei_led {
 
 static struct led_classdev huawei_led_ldev=
 {
-	.name = "keyboard-backlight",
+	.name = "button-backlight",
 	.max_brightness = LED_FULL,
 	.brightness_set = huawei_led_set_brightness,
 };

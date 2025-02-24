@@ -367,7 +367,7 @@ static void huawei_led_set_brightness(struct led_classdev *led_ldev,
 
 static struct led_classdev huawei_led_ap_ldev=
 {
-	.name = "keyboard-backlight-ap",
+	.name = "button-backlight-ap",
 	.max_brightness = LED_FULL,
 	.brightness_set = huawei_led_set_brightness,
 };
